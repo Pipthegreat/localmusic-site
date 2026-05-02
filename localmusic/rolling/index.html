@@ -218,7 +218,10 @@ ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
   font: 500 12px/1 var(--mono); color: var(--fg-subtle); letter-spacing: 0.06em;
 }
 .tbl tbody tr:hover .num { color: var(--ember-400); }
-.tbl tbody tr.np .num { color: var(--ember-400); }
+/* Hide the row number on the active row so the play button feels like it
+   replaces the number rather than adding a column of chrome. visibility
+   keeps the cell width so nothing else shifts. */
+.tbl tbody tr.np .num { visibility: hidden; }
 
 .play-cell { width: 56px; padding: 0 !important; }
 .play {
