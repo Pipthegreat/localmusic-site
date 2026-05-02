@@ -428,13 +428,25 @@ document.querySelectorAll('th[data-sort]').forEach(th => {
   th.addEventListener('click', () => sortBy(th.dataset.sort));
 });
 
-// Spotify iFrame API. We DON'T call play() programmatically -- that's what
-// browsers block. We only call loadUri(), which swaps the loaded track in the
-// player. Once the user has clicked play in the player ONCE (initial start),
-// subsequent loadUri calls continue playback automatically. Before they've
-// played, loadUri loads the track but it stays paused -- they hit play.
+// Spotify iFrame API. loadUri() swaps tracks but does NOT auto-play.
+// We follow it with play() to start the new track. Browser autoplay policy
+// blocks programmatic play() until the user has clicked PLAY in the iframe at
+// least once -- so the very first track click may load but not play; press
+// play in the Spotify embed once, then every subsequent row click plays.
 let embedController = null;
 const queuedUri = { value: null };
+let userHasInteracted = false;
+
+function playUri(uri) {
+  if (!embedController) { queuedUri.value = uri; return; }
+  embedController.loadUri(uri);
+  // Try to play. Wait briefly so loadUri has time to swap the track.
+  setTimeout(() => {
+    try { embedController.play(); } catch (e) {}
+    // play() also works as resume() in newer SDK versions
+    try { embedController.resume(); } catch (e) {}
+  }, 250);
+}
 
 window.onSpotifyIframeApiReady = (IFrameAPI) => {
   IFrameAPI.createController(
@@ -442,8 +454,12 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
     { uri: 'spotify:playlist:0wxTLo75bm6BEMndhrFSrr', width: '100%', height: 80 },
     (controller) => {
       embedController = controller;
+      controller.addListener('playback_update', (e) => {
+        // First non-paused state means the user has unlocked autoplay.
+        if (e.data && !e.data.isPaused) userHasInteracted = true;
+      });
       if (queuedUri.value) {
-        controller.loadUri(queuedUri.value);
+        playUri(queuedUri.value);
         queuedUri.value = null;
       }
     }
@@ -459,8 +475,7 @@ playButtons.forEach(btn => {
     e.stopPropagation();
     const uri = btn.dataset.uri;
     highlightRow(uri);
-    if (embedController) embedController.loadUri(uri);
-    else queuedUri.value = uri;
+    playUri(uri);
   });
 });
 </script>
