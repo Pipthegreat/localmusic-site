@@ -214,6 +214,42 @@ ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
 .tbl thead th.sort-asc  .caret::before { content: "▲"; color: var(--ember-400); }
 .tbl thead th.sort-desc .caret::before { content: "▼"; color: var(--ember-400); }
 .t-date { color: var(--peacock); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.t-loading { color: var(--fg-subtle); font-style: italic; opacity: 0.5; }
+
+/* DJ-only rows hidden until the "Add DJs" checkbox is on */
+.tbl tbody tr[data-dj-only="1"] { display: none; }
+.tbl.show-djs tbody tr[data-dj-only="1"] { display: table-row; }
+
+.toggle {
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 500 11px/1 var(--mono); letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--fg-muted);
+  cursor: pointer; user-select: none; padding: 0 4px;
+  white-space: nowrap;
+  transition: color 140ms;
+}
+.toggle:hover { color: var(--ember-300); }
+.toggle input {
+  appearance: none; width: 14px; height: 14px; margin: 0;
+  border: 1px solid var(--border-default); border-radius: 3px;
+  background: var(--slate-850); cursor: pointer;
+  transition: background 140ms, border-color 140ms;
+}
+.toggle input:checked {
+  background: var(--ember-500); border-color: var(--ember-500);
+  box-shadow: 0 0 0 2px var(--ember-wash);
+}
+.toggle input:checked + span { color: var(--ember-300); }
+
+/* "Fund my coffee" — quiet text link, mono caps, peacock to feel like the
+   other meta-links rather than a CTA. Sits right under "Open in Spotify". */
+.coffee {
+  display: inline-block; margin-top: 4px;
+  font: 500 10px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--peacock); text-decoration: none; opacity: 0.65;
+  transition: opacity 160ms, color 160ms;
+}
+.coffee:hover { opacity: 1; color: var(--ember-300); }
 .tbl tbody td {
   padding: 12px 14px; border-bottom: 1px solid var(--border-subtle);
   vertical-align: middle; font: 400 14px/1.4 var(--sans);
@@ -341,7 +377,7 @@ ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
         <span class="ah-pulse" aria-hidden="true"></span>
         Live music · updated monthly
       </div>
-      <a href="https://open.spotify.com/playlist/0wxTLo75bm6BEMndhrFSrr" target="_blank" class="ah-link">Open in Spotify ↗</a>
+      <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0;"><a href="https://open.spotify.com/playlist/0wxTLo75bm6BEMndhrFSrr" target="_blank" class="ah-link">Open in Spotify ↗</a><a href="https://venmo.com/u/Raleigh-J" target="_blank" rel="noopener" class="coffee">fund my coffee here ↗</a></div>
     </div>
 
     <h1 class="ah-title">San Francisco <span class="ah-plus">+</span> Oakland</h1>
@@ -370,6 +406,10 @@ ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
       <option value="">All venues</option>
       <option value="1015 Folsom (San Francisco)">1015 Folsom (San Francisco)</option><option value="1275 Connecticut St (San Francisco)">1275 Connecticut St (San Francisco)</option><option value="554 Fillmore St (San Francisco)">554 Fillmore St (San Francisco)</option><option value="620 Jones (San Francisco)">620 Jones (San Francisco)</option><option value="7th West (Oakland)">7th West (Oakland)</option><option value="888 Garage (San Francisco)">888 Garage (San Francisco)</option><option value="Aracely Cafe (San Francisco)">Aracely Cafe (San Francisco)</option><option value="Arcana (San Francisco)">Arcana (San Francisco)</option><option value="Asiento (San Francisco)">Asiento (San Francisco)</option><option value="Audio (San Francisco)">Audio (San Francisco)</option><option value="Audio Nightclub (San Francisco)">Audio Nightclub (San Francisco)</option><option value="August Hall (San Francisco)">August Hall (San Francisco)</option><option value="Bar Part Time (San Francisco)">Bar Part Time (San Francisco)</option><option value="Bella (San Francisco)">Bella (San Francisco)</option><option value="Berkeley Greek Theatre (Berkeley)">Berkeley Greek Theatre (Berkeley)</option><option value="Bill Graham Civic Auditorium (San Francisco)">Bill Graham Civic Auditorium (San Francisco)</option><option value="Bimbo&#x27;s 365 Club (San Francisco)">Bimbo&#x27;s 365 Club (San Francisco)</option><option value="Bloodhound (San Francisco)">Bloodhound (San Francisco)</option><option value="Bottom of the Hill (San Francisco)">Bottom of the Hill (San Francisco)</option><option value="Brick &amp; Mortar Music Hall (San Francisco)">Brick &amp; Mortar Music Hall (San Francisco)</option><option value="Butter (San Francisco)">Butter (San Francisco)</option><option value="Cafe du Nord (San Francisco)">Cafe du Nord (San Francisco)</option><option value="Castro Theatre (San Francisco)">Castro Theatre (San Francisco)</option><option value="Cat Club (San Francisco)">Cat Club (San Francisco)</option><option value="City Cruises San Francisco (San Francisco)">City Cruises San Francisco (San Francisco)</option><option value="Club Six (San Francisco)">Club Six (San Francisco)</option><option value="Club Waziema (San Francisco)">Club Waziema (San Francisco)</option><option value="Continental Club (Oakland)">Continental Club (Oakland)</option><option value="Cow Palace (San Francisco)">Cow Palace (San Francisco)</option><option value="Cow Palace Warehouse (San Francisco)">Cow Palace Warehouse (San Francisco)</option><option value="DACHA Kitchen and Bar (San Francisco)">DACHA Kitchen and Bar (San Francisco)</option><option value="DNA Lounge (San Francisco)">DNA Lounge (San Francisco)</option><option value="El Chato (San Francisco)">El Chato (San Francisco)</option><option value="El Rio (San Francisco)">El Rio (San Francisco)</option><option value="Embarcadero Plaza (San Francisco)">Embarcadero Plaza (San Francisco)</option><option value="F8 1192 Folsom (San Francisco)">F8 1192 Folsom (San Francisco)</option><option value="Fellowship Hall, Forest Hill Christian Church (San Francisco)">Fellowship Hall, Forest Hill Christian Church (San Francisco)</option><option value="Fluid510 (Oakland)">Fluid510 (Oakland)</option><option value="Fox Theater (Oakland)">Fox Theater (Oakland)</option><option value="Gold Bar Treasure Island (San Francisco)">Gold Bar Treasure Island (San Francisco)</option><option value="Gold Bar Whiskey Distillery Tasting Room (San Francisco)">Gold Bar Whiskey Distillery Tasting Room (San Francisco)</option><option value="Gray Area, SVN West, TBA (San Francisco)">Gray Area, SVN West, TBA (San Francisco)</option><option value="Great American Music Hall (San Francisco)">Great American Music Hall (San Francisco)</option><option value="Greek Theatre (Berkeley)">Greek Theatre (Berkeley)</option><option value="Halcyon (San Francisco)">Halcyon (San Francisco)</option><option value="Hasta Muerte Coffee (Oakland)">Hasta Muerte Coffee (Oakland)</option><option value="Hawthorn (San Francisco)">Hawthorn (San Francisco)</option><option value="Hedge Coffee (San Francisco)">Hedge Coffee (San Francisco)</option><option value="Hotel Utah Saloon (San Francisco)">Hotel Utah Saloon (San Francisco)</option><option value="Hotel Via (San Francisco)">Hotel Via (San Francisco)</option><option value="Hotel Via Rooftop (San Francisco)">Hotel Via Rooftop (San Francisco)</option><option value="Kilowatt (San Francisco)">Kilowatt (San Francisco)</option><option value="Mad Oak Bar (Oakland)">Mad Oak Bar (Oakland)</option><option value="Mad Oak Rooftop (Oakland)">Mad Oak Rooftop (Oakland)</option><option value="Madarae (San Francisco)">Madarae (San Francisco)</option><option value="Make-Out Room (San Francisco)">Make-Out Room (San Francisco)</option><option value="Mayes Oyster House Nightclub (San Francisco)">Mayes Oyster House Nightclub (San Francisco)</option><option value="Miner Auditorium, SFJAZZ Center (San Francisco)">Miner Auditorium, SFJAZZ Center (San Francisco)</option><option value="Monarch (San Francisco)">Monarch (San Francisco)</option><option value="Moonglow (Oakland)">Moonglow (Oakland)</option><option value="Mothership Bar (San Francisco)">Mothership Bar (San Francisco)</option><option value="Mr. Mahjong&#x27;s (San Francisco)">Mr. Mahjong&#x27;s (San Francisco)</option><option value="Neck of the Woods (San Francisco)">Neck of the Woods (San Francisco)</option><option value="Noisebridge (San Francisco)">Noisebridge (San Francisco)</option><option value="Palace Of Fine Arts (San Francisco)">Palace Of Fine Arts (San Francisco)</option><option value="Paname (San Francisco)">Paname (San Francisco)</option><option value="Paris 75 (San Francisco)">Paris 75 (San Francisco)</option><option value="Peacock Lounge (San Francisco)">Peacock Lounge (San Francisco)</option><option value="Phonobar (San Francisco)">Phonobar (San Francisco)</option><option value="Pier 48 (San Francisco)">Pier 48 (San Francisco)</option><option value="Pop&#x27;s Bar (San Francisco)">Pop&#x27;s Bar (San Francisco)</option><option value="Public Works (San Francisco)">Public Works (San Francisco)</option><option value="Public Works Loft (San Francisco)">Public Works Loft (San Francisco)</option><option value="Q Bar (San Francisco)">Q Bar (San Francisco)</option><option value="Regency Ballroom (San Francisco)">Regency Ballroom (San Francisco)</option><option value="Rickshaw Stop (San Francisco)">Rickshaw Stop (San Francisco)</option><option value="SVN West (San Francisco)">SVN West (San Francisco)</option><option value="Stork Club (Oakland)">Stork Club (Oakland)</option><option value="TBA (Oakland)">TBA (Oakland)</option><option value="TBA (San Francisco)">TBA (San Francisco)</option><option value="The Cafe (San Francisco)">The Cafe (San Francisco)</option><option value="The Castro Theatre (San Francisco)">The Castro Theatre (San Francisco)</option><option value="The Chapel (San Francisco)">The Chapel (San Francisco)</option><option value="The Continental Club (Oakland)">The Continental Club (Oakland)</option><option value="The Fillmore (San Francisco)">The Fillmore (San Francisco)</option><option value="The Foundry (San Francisco)">The Foundry (San Francisco)</option><option value="The Gray Area Theatre (San Francisco)">The Gray Area Theatre (San Francisco)</option><option value="The Great Northern (San Francisco)">The Great Northern (San Francisco)</option><option value="The Independent (San Francisco)">The Independent (San Francisco)</option><option value="The Knockout (San Francisco)">The Knockout (San Francisco)</option><option value="The Lawn On Treasure Island (San Francisco)">The Lawn On Treasure Island (San Francisco)</option><option value="The MIdway (San Francisco)">The MIdway (San Francisco)</option><option value="The Masonic (San Francisco)">The Masonic (San Francisco)</option><option value="The Midway (San Francisco)">The Midway (San Francisco)</option><option value="The Midway Terrace (San Francisco)">The Midway Terrace (San Francisco)</option><option value="The Regency Ballroom (San Francisco)">The Regency Ballroom (San Francisco)</option><option value="The Stud (San Francisco)">The Stud (San Francisco)</option><option value="The Warfield (San Francisco)">The Warfield (San Francisco)</option><option value="Township Commons (Oakland)">Township Commons (Oakland)</option><option value="Underground (San Francisco)">Underground (San Francisco)</option><option value="Union Square (San Francisco)">Union Square (San Francisco)</option><option value="Via Hotel Rooftop (San Francisco)">Via Hotel Rooftop (San Francisco)</option><option value="War Memorial Opera House (San Francisco)">War Memorial Opera House (San Francisco)</option><option value="White Horse Inn (Oakland)">White Horse Inn (Oakland)</option><option value="XeX (San Francisco)">XeX (San Francisco)</option>
     </select></div>
+    <label class="toggle">
+      <input type="checkbox" id="dj-toggle">
+      <span>Add DJs</span>
+    </label>
     <div class="count"><b id="count-now">0</b> / <span id="count-total">0</span></div>
   </div>
 
