@@ -261,11 +261,13 @@ ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
 
 .hidden { display: none; }
 
-/* PLAYER BAR */
+/* PLAYER BAR -- Spotify iframe is the actual player (handles play/pause/skip
+   reliably, no autoplay-policy fights). Our custom UI flanks it as decoration:
+   ember-glow album art + serif title/artist on the left, Spotify badge right. */
 .player {
   position: fixed; bottom: 0; left: 0; right: 0;
-  display: grid; grid-template-columns: 320px 1fr 200px;
-  align-items: center; gap: 24px; padding: 14px 32px; z-index: 100;
+  display: grid; grid-template-columns: 280px 1fr 60px;
+  align-items: center; gap: 20px; padding: 12px 32px; z-index: 100;
   background:
     linear-gradient(180deg, transparent, oklch(20% 0.06 38) 40%, oklch(22% 0.08 38)),
     var(--slate-950);
@@ -274,79 +276,37 @@ ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
 }
 .player .nowplaying { display: flex; align-items: center; gap: 14px; min-width: 0; }
 .player .art {
-  width: 56px; height: 56px; border-radius: 4px; flex-shrink: 0; object-fit: cover;
-  background:
-    radial-gradient(circle at 30% 30%, var(--ember-400), var(--ember-700) 60%, var(--ember-900));
-  box-shadow: 0 4px 16px -4px var(--ember-glow);
-}
-.player .art.placeholder {
+  width: 56px; height: 56px; border-radius: 4px; flex-shrink: 0;
   background:
     radial-gradient(circle at 30% 30%, var(--ember-700), var(--ember-900) 70%, var(--slate-900));
-  box-shadow: none;
+  background-size: cover; background-position: center;
 }
-/* Hide alt-text / broken-image icon when src is empty */
-.player .art:not([src]),
-.player .art[src=""] { visibility: visible; }
+.player .art.has-art {
+  box-shadow: 0 4px 16px -4px var(--ember-glow);
+}
 .player .meta-np { min-width: 0; }
 .player .meta-np .title {
-  font: 500 14px/1.3 var(--sans); color: var(--fg-strong);
+  font: 500 italic 15px/1.3 var(--serif); color: var(--fg-strong);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .player .meta-np .artist {
-  font: 400 12px/1.3 var(--sans); color: var(--ember-200); opacity: 0.8;
+  font: 400 12px/1.3 var(--sans); color: var(--ember-200); opacity: 0.85;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.player .scrubber { display: flex; flex-direction: column; gap: 6px; }
-.player .ctrls { display: flex; gap: 16px; justify-content: center; align-items: center; }
-.player .ctrl {
-  background: transparent; border: none; cursor: pointer;
-  color: var(--ember-200); opacity: 0.75;
-  display: inline-flex; align-items: center; justify-content: center;
-  transition: opacity 140ms, color 140ms; padding: 0;
+#embed-iframe-wrap {
+  border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--ember-900);
+  box-shadow: inset 0 0 0 1px oklch(35% 0.10 38 / 0.3);
 }
-.player .ctrl:hover { opacity: 1; color: var(--ember-100); }
-.player .ctrl svg { width: 18px; height: 18px; fill: currentColor; }
-.player .ctrl.main {
-  width: 38px; height: 38px; border-radius: 50%;
-  background: var(--ember-500); color: var(--fg-on-ember); opacity: 1;
-  box-shadow: 0 0 0 0 var(--ember-glow);
-  transition: box-shadow 200ms, transform 80ms;
-}
-.player .ctrl.main:hover { box-shadow: 0 0 0 6px var(--ember-wash); }
-.player .ctrl.main:active { transform: scale(0.96); }
-.player .progress {
-  position: relative; height: 4px; border-radius: 99px;
-  background: oklch(30% 0.04 35); cursor: pointer; overflow: hidden;
-}
-.player .progress .fill {
-  position: absolute; inset: 0 100% 0 0;
-  background: linear-gradient(90deg, var(--ember-700), var(--ember-400));
-  border-radius: 99px; box-shadow: 0 0 8px 0 var(--ember-glow);
-  transition: inset 0.2s linear;
-}
-.player .times {
-  display: flex; justify-content: space-between;
-  font: 500 11px/1 var(--mono); color: var(--ember-200); opacity: 0.65;
-  letter-spacing: 0.05em;
-}
-.player .right { display: flex; align-items: center; justify-content: flex-end; gap: 14px; }
+#embed-iframe { width: 100%; height: 80px; display: block; }
+.player .right { display: flex; align-items: center; justify-content: flex-end; }
 .player .spotify {
-  width: 26px; height: 26px; border-radius: 50%;
+  width: 24px; height: 24px; border-radius: 50%;
   background: oklch(52% 0.13 145);
   display: inline-flex; align-items: center; justify-content: center;
-  color: var(--slate-950); font: 700 13px/1 var(--sans);
-  opacity: 0.85;
+  color: var(--slate-950); font: 700 12px/1 var(--sans);
+  opacity: 0.7;
 }
-/* Spotify embed iframe -- in normal flow but visually invisible.
-   Browser autoplay policies + Spotify's iFrame API both behave better when the
-   iframe is genuinely on-screen, so we put it inside the player bar at full
-   size with opacity 0 instead of `display:none` or off-screen positioning. */
-#embed-iframe-wrap {
-  position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
-  width: 320px; height: 80px;
-  opacity: 0; pointer-events: none; z-index: 99;
-}
-#embed-iframe { width: 100%; height: 100%; }
 
 @media (max-width: 980px) {
   .filter-row { grid-template-columns: 1fr; }
@@ -417,34 +377,17 @@ ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
 
 <div class="player" role="region" aria-label="Player">
   <div class="nowplaying">
-    <div id="np-art" class="art placeholder" role="img" aria-label="Album art"></div>
+    <div id="np-art" class="art" role="img" aria-label="Album art"></div>
     <div class="meta-np">
       <div class="title" id="np-title">Select a track</div>
       <div class="artist" id="np-artist">—</div>
     </div>
   </div>
-  <div class="scrubber">
-    <div class="ctrls">
-      <button class="ctrl" id="btn-prev" aria-label="Previous">
-        <svg viewBox="0 0 24 24"><path d="M19 20L9 12l10-8v16zM5 4h2v16H5z"/></svg>
-      </button>
-      <button class="ctrl main" id="btn-play" aria-label="Play / Pause">
-        <svg id="ico-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        <svg id="ico-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
-      </button>
-      <button class="ctrl" id="btn-next" aria-label="Next">
-        <svg viewBox="0 0 24 24"><path d="M5 4l10 8-10 8V4zM17 4h2v16h-2z"/></svg>
-      </button>
-    </div>
-    <div class="progress" id="progress"><div class="fill" id="progress-fill"></div></div>
-    <div class="times"><span id="t-cur">0:00</span><span id="t-dur">0:00</span></div>
-  </div>
+  <div id="embed-iframe-wrap"><div id="embed-iframe"></div></div>
   <div class="right">
     <span class="spotify" aria-label="Spotify">♫</span>
   </div>
 </div>
-
-<div id="embed-iframe-wrap"><div id="embed-iframe"></div></div>
 
 <script>
 const TRACKS = [{"uri": "spotify:track:1TYO5zMQDclEFJzrlOvxxO", "name": "Darlin'", "artist": "3LH", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02dd4c652e2fe7a543d08a05cd"}, {"uri": "spotify:track:3FmYBJFosrUDrAGGr0547m", "name": "Lonely Hearts", "artist": "3LH", "art": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0208afcfd102816ce7d7dec9ee"}, {"uri": "spotify:track:0ExVr7LuGwknpBL0iyV8hO", "name": "Christine", "artist": "3LH", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0209bab1560de45c019b79c6ef"}, {"uri": "spotify:track:5vbnQr1tWSSREmcIONIUm9", "name": "Backwards Directions", "artist": "Abby Sage", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02fc7404894640cfa39507a287"}, {"uri": "spotify:track:3LbPPqqqmmvEwjHA8YH4Wo", "name": "The Florist", "artist": "Abby Sage", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02fd4baeacb29367832fd6a846"}, {"uri": "spotify:track:6rbVTDom9bD9CVnpWfBHFb", "name": "High Five", "artist": "Abby Sage", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e025261e3b2c22426865a490f9e"}, {"uri": "spotify:track:5AgbD4ZSxrAPkG9YqSbX9B", "name": "Safeword", "artist": "Accessory", "art": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e028d98d7a7a68bb25d5f50e907"}, {"uri": "spotify:track:19swoESh14znOg6WDx3liB", "name": "Sunshine", "artist": "Accessory", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e026732d6c1208166beef73cf55"}, {"uri": "spotify:track:3zonc3ETbpfha6IsNbigeD", "name": "Calcium", "artist": "Accessory", "art": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0202363fb57bc6fce9fec81897"}, {"uri": "spotify:track:5E47rKJbS74jyLZaSgb0kS", "name": "Bloodstains - Original Version", "artist": "Agent Orange", "art": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02d6ea853bfded1299c0e9b47e"}, {"uri": "spotify:track:10A07uxFCtZAu5An5RBiXB", "name": "Everything Turns Grey", "artist": "Agent Orange", "art": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02d6ea853bfded1299c0e9b47e"}, {"uri": "spotify:track:2Bi07aWU3Mhj47r6GmQQ7s", "name": "Bloodstains - Darkness Version", "artist": "Agent Orange", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02d6ea853bfded1299c0e9b47e"}, {"uri": "spotify:track:6ckUX8cgcqjoNGTd2A2Pvd", "name": "Always Alright", "artist": "Alabama Shakes", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02abb06453d6fee09260cfb4ba"}, {"uri": "spotify:track:5cDHV67TxLrdz4ITUVQswH", "name": "Hang Loose", "artist": "Alabama Shakes", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02272ee11b380eed8b82a1c9a4"}, {"uri": "spotify:track:1N3c3dDtbx1OodfkIcxBmy", "name": "I Found You", "artist": "Alabama Shakes", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02272ee11b380eed8b82a1c9a4"}, {"uri": "spotify:track:5CKbUv7zkOdf8X2602qgei", "name": "Joy.", "artist": "Amma", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0297c0928704e5a2bd8d4c5b90"}, {"uri": "spotify:track:2hWcewyA05nR3y8IwnCDcq", "name": "QWERTY", "artist": "AMPRS&ND", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02b13794dc43a48431e14d286d"}, {"uri": "spotify:track:04m2P2PYNxqlcOKDQtbh9f", "name": "Just Fine", "artist": "AMPRS&ND", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02db28af143adf1ddefe44a2e7"}, {"uri": "spotify:track:0uPqCsbbIMuJFVEwAvA0va", "name": "Sorry", "artist": "AMPRS&ND", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e028596ed0e541ab3bd7525590e"}, {"uri": "spotify:track:7umwXBtyRHfXl0UnhsWKRZ", "name": "Immortality", "artist": "Ana Roxanne", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0272b1ad3f87f5520ca249707c"}, {"uri": "spotify:track:1wJl3JYS0rwr6vzghouw43", "name": "I'm Every Sparkly Woman", "artist": "Ana Roxanne", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0272b1ad3f87f5520ca249707c"}, {"uri": "spotify:track:2fvphQzLUCR89aLAwTyDuL", "name": "It's a Rainy Day on the Cosmic Shore", "artist": "Ana Roxanne", "art": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0272b1ad3f87f5520ca249707c"}, {"uri": "spotify:track:4bqN0ipnuiiGvJdhsSQWeM", "name": "Rust & Wire", "artist": "Anjimile", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e029f9d389128d3777ae1a017ce"}, {"uri": "spotify:track:50YFf2wxdUPioeqahWKCl1", "name": "Baby No More", "artist": "Anjimile", "art": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e029f56dfe1cd0585ee2ffb249d"}, {"uri": "spotify:track:1fP6tJr4mC4Mbu8OIvVu3e", "name": "Waits for Me", "artist": "Anjimile", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e022203da4af22f0a3a17c0e66e"}, {"uri": "spotify:track:4uqMriENR0PUmGP17nNFvy", "name": "Arena", "artist": "Applesaucer", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02f1e381fa32bbd52d51a8af38"}, {"uri": "spotify:track:5YLb9EpXzZtBWPAKC3NTua", "name": "There's a Light", "artist": "Applesaucer", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02a2671a6db0fbc1bd203c2aee"}, {"uri": "spotify:track:4CD5RiqXfugVdXoog3smd2", "name": "Sticks", "artist": "Applesaucer", "art": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02f1e381fa32bbd52d51a8af38"}, {"uri": "spotify:track:6CovxOYIe4IDZUCuGh9ePX", "name": "Liability", "artist": "Astyn Turr", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e024b97562891b8cb55490b3ef8"}, {"uri": "spotify:track:3UPkEwUBZBQKjUrE9VV32x", "name": "Better Place", "artist": "Astyn Turr", "art": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0239a8d4f4769c14eb1a18e905"}, {"uri": "spotify:track:6dKstPF4kcF1j0oKAAaAET", "name": "One on One", "artist": "Astyn Turr", "art": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02d886a5f7a7f6d6509aec1a2c"}, {"uri": "spotify:track:694KwHLls5cZF2HvsOIuFA", "name": "Sweat", "artist": "Austin Millz", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02a90562d5d3922fecfce51f92"}, {"uri": "spotify:track:0fs75XwQHj1mdIWUhvNohh", "name": "Hot & Mysterious", "artist": "Austin Millz", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e026cbdec62ded29f68ddca27b6"}, {"uri": "spotify:track:5Dz6wdHlI45KAOBAfMSJRS", "name": "Gold", "artist": "Austin Millz", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e029602f981942e60b3605f7eed"}, {"uri": "spotify:track:67glriijLh7JsXpkLkiwAa", "name": "Autotheist", "artist": "Baby Bugs", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02ae46cd85cefc30da26b82aff"}, {"uri": "spotify:track:2wX6NliowGPUZO8GjoepbJ", "name": "The Dove", "artist": "Baby Bugs", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02b2dd198ab9a6566452af5591"}, {"uri": "spotify:track:5vZ8xvP4q68ZDiAhdOSPJC", "name": "Pure As A Lamb", "artist": "Baby Bugs", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02634fdebeccaa79584b3dd638"}, {"uri": "spotify:track:6FvtSHS3hzjS8itHJPRzoJ", "name": "Diamonds On The Inside", "artist": "Ben Harper", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0232dd150f999aa2b2366ad6b4"}, {"uri": "spotify:track:2QzMJkYUhThZxM94ahgOzN", "name": "Burn One Down", "artist": "Ben Harper", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02fa6ace66cb62060b11fea503"}, {"uri": "spotify:track:3lGqz047x1WtLJjMV0tdA4", "name": "High Tide Or Low Tide", "artist": "Ben Harper", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02c393ce69f90ea98d4f616b44"}, {"uri": "spotify:track:1b4vfO8yBxU0FtFgKmrCmH", "name": "It Makes It Cool - John Levan After Hour Remix", "artist": "Black Gold Sun", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e025960724c8875f8bc07cc0166"}, {"uri": "spotify:track:18IZ6KyB100072lPV6pNNM", "name": "Sun Lips", "artist": "Black Moth Super Rainbow", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02e615ac507053d8a8aa4ef05c"}, {"uri": "spotify:track:5zz7p4jqWNgNugjXWePy3e", "name": "Gangs in the Garden", "artist": "Black Moth Super Rainbow", "art": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02167b208eb24d7a21b0cd9185"}, {"uri": "spotify:track:70PEZ5qdaO5on2NvyA3Rok", "name": "Forever Heavy", "artist": "Black Moth Super Rainbow", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02e615ac507053d8a8aa4ef05c"}, {"uri": "spotify:track:0Z2q5Ee07MXhNBvxlE5wG3", "name": "let me be your man", "artist": "bloodsugar", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0237def20173ee85b70437703a"}, {"uri": "spotify:track:24Mvtg1MZt2T15MLGWxcFv", "name": "conditions", "artist": "bloodsugar", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02d65c7ef7f3d40daca783ff6a"}, {"uri": "spotify:track:3d1KuRowhRvATMaWiUL0GV", "name": "debbie", "artist": "bloodsugar", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02c5d34d640ce1781f5a5c985a"}, {"uri": "spotify:track:5hYUA1pgM4PAnRN5t9Ht7k", "name": "Goo Goo", "artist": "Blous3", "art": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0237548e8c4c047e6b7a76eee3"}, {"uri": "spotify:track:76VrXzOTVhgCftHORtN1FG", "name": "track 76VrXzOT", "artist": "Blous3", "art": ""}, {"uri": "spotify:track:1Af8hyWkcMhvkGcZZlja8u", "name": "track 1Af8hyWk", "artist": "Blous3", "art": ""}, {"uri": "spotify:track:1lqMLr9Wj7SM2F9AikGcxN", "name": "track 1lqMLr9W", "artist": "Bob Dylan", "art": ""}, {"uri": "spotify:track:6HSXNV0b4M4cLJ7ljgVVeh", "name": "track 6HSXNV0b", "artist": "Bob Dylan", "art": ""}, {"uri": "spotify:track:2WOjLF83vqjit2Zh4B69V3", "name": "track 2WOjLF83", "artist": "Bob Dylan", "art": ""}, {"uri": "spotify:track:6idZqzr7uz9h4ts04Tgt0h", "name": "track 6idZqzr7", "artist": "Bob Log III", "art": ""}, {"uri": "spotify:track:1pWhrhExptgFkmZV1ADpUD", "name": "track 1pWhrhEx", "artist": "Bob Log III", "art": ""}, {"uri": "spotify:track:46Z7qQo3QbVbnoT3qzngXG", "name": "track 46Z7qQo3", "artist": "Bob Log III", "art": ""}, {"uri": "spotify:track:6NDt5z8GKIHub37hBQ4x18", "name": "track 6NDt5z8G", "artist": "Bob Moses", "art": ""}, {"uri": "spotify:track:1Aic3Xbzma3Nb0sSwqGCdf", "name": "track 1Aic3Xbz", "artist": "Bob Moses", "art": ""}, {"uri": "spotify:track:5dyUCoAK5epLtg3sej6BSq", "name": "track 5dyUCoAK", "artist": "Bob Moses", "art": ""}, {"uri": "spotify:track:3kbSNJhl1oRRjgX8PBKYAE", "name": "track 3kbSNJhl", "artist": "Brennan Wedl", "art": ""}, {"uri": "spotify:track:2qzyFqMwWUo2Of0yNsYKHT", "name": "track 2qzyFqMw", "artist": "Brennan Wedl", "art": ""}, {"uri": "spotify:track:1JJ8URF52WqIDLMfIppnmF", "name": "track 1JJ8URF5", "artist": "Brennan Wedl", "art": ""}, {"uri": "spotify:track:1uMmKNhMLD9kRuKLFXejcp", "name": "track 1uMmKNhM", "artist": "Brown Horse", "art": ""}, {"uri": "spotify:track:08DrBUaoHXS65X0Zmki4qd", "name": "track 08DrBUao", "artist": "Brown Horse", "art": ""}, {"uri": "spotify:track:29By44i2i7g0m9lb478kEW", "name": "track 29By44i2", "artist": "Brown Horse", "art": ""}, {"uri": "spotify:track:5cF0dROlMOK5uNZtivgu50", "name": "track 5cF0dROl", "artist": "Charlie Puth", "art": ""}, {"uri": "spotify:track:2JzZzZUQj3Qff7wapcbKjc", "name": "track 2JzZzZUQ", "artist": "Charlie Puth", "art": ""}, {"uri": "spotify:track:6wmAHw1szh5RCKSRjiXhPe", "name": "track 6wmAHw1s", "artist": "Charlie Puth", "art": ""}, {"uri": "spotify:track:6BoROgb9XSdfnlp4wU2HYp", "name": "track 6BoROgb9", "artist": "Cheflee", "art": ""}, {"uri": "spotify:track:45PiayvUeFIDX3i9VlBTHb", "name": "track 45PiayvU", "artist": "Cheflee", "art": ""}, {"uri": "spotify:track:76R9Eh3cklXXr9ox2YC3ft", "name": "track 76R9Eh3c", "artist": "Cheflee", "art": ""}, {"uri": "spotify:track:1sWn0eFP8SGuOjR6DjIBsE", "name": "track 1sWn0eFP", "artist": "Chelsea Rose", "art": ""}, {"uri": "spotify:track:1bH2ZOk7TkrCcukxamLGZO", "name": "track 1bH2ZOk7", "artist": "Chelsea Rose", "art": ""}, {"uri": "spotify:track:49KlT1octo72n3b9V7gRWl", "name": "track 49KlT1oc", "artist": "Chelsea Rose", "art": ""}, {"uri": "spotify:track:2u6IAPdDmvp3RPbrGdDX8U", "name": "track 2u6IAPdD", "artist": "Chet Faker", "art": ""}, {"uri": "spotify:track:1Ll09EiN5ffeFl1xNZB2Uk", "name": "track 1Ll09EiN", "artist": "Chet Faker", "art": ""}, {"uri": "spotify:track:3wFFW1B6WAmAFGOwdEOOZR", "name": "track 3wFFW1B6", "artist": "Chet Faker", "art": ""}, {"uri": "spotify:track:1osioxQykglfD6mNLzfwB1", "name": "track 1osioxQy", "artist": "Chinese American Bear", "art": ""}, {"uri": "spotify:track:6pB4kJ4eRa0sJMUtplqekk", "name": "track 6pB4kJ4e", "artist": "Chinese American Bear", "art": ""}, {"uri": "spotify:track:2vRjsevHyCwch58NZYHCR7", "name": "track 2vRjsevH", "artist": "Chinese American Bear", "art": ""}, {"uri": "spotify:track:0mYslGmbnkbxuyr0ISIYtB", "name": "track 0mYslGmb", "artist": "Choker", "art": ""}, {"uri": "spotify:track:6OpU3cvY19M2hFxTbLKy5L", "name": "track 6OpU3cvY", "artist": "Choker", "art": ""}, {"uri": "spotify:track:1Kko3ltWgRT6rWa1Jzfewu", "name": "track 1Kko3ltW", "artist": "Choker", "art": ""}, {"uri": "spotify:track:74nEGIzIefJhJ5qX7NeIAz", "name": "track 74nEGIzI", "artist": "Chris Lake", "art": ""}, {"uri": "spotify:track:2e2yKavdT6WQzzMHwNtPFa", "name": "track 2e2yKavd", "artist": "Chris Lake", "art": ""}, {"uri": "spotify:track:0agQ9vIV7NP4dntGKLcCXO", "name": "track 0agQ9vIV", "artist": "Chris Lake", "art": ""}, {"uri": "spotify:track:2uiO3V8r7DYKk4K9f088zY", "name": "track 2uiO3V8r", "artist": "Chudson", "art": ""}, {"uri": "spotify:track:7nyRvE5rBa0YIHVTdBmu5Y", "name": "track 7nyRvE5r", "artist": "Chudson", "art": ""}, {"uri": "spotify:track:0hqrJ1V039wRhkN1kj5uB7", "name": "track 0hqrJ1V0", "artist": "Chudson", "art": ""}, {"uri": "spotify:track:1nSEAxK0L8z5pJiCnhMMqX", "name": "track 1nSEAxK0", "artist": "Claire Rosinkranz", "art": ""}, {"uri": "spotify:track:1xSmjB0t19q4CSJ0X0ymGB", "name": "track 1xSmjB0t", "artist": "Claire Rosinkranz", "art": ""}, {"uri": "spotify:track:0QpOqKz66ZxHNqj2PPHiFF", "name": "track 0QpOqKz6", "artist": "Claire Rosinkranz", "art": ""}, {"uri": "spotify:track:3y724rQBroUUOfibQcqLnC", "name": "track 3y724rQB", "artist": "Coco & Breezy", "art": ""}, {"uri": "spotify:track:1dHiSGzb9WFtDKnBFJs4KO", "name": "track 1dHiSGzb", "artist": "Coco & Breezy", "art": ""}, {"uri": "spotify:track:0oUnCHrsjhjclb9owm741n", "name": "track 0oUnCHrs", "artist": "Coco & Breezy", "art": ""}, {"uri": "spotify:track:5kSPD3rOo2hGYVwheIxpv8", "name": "track 5kSPD3rO", "artist": "Colt Ford", "art": ""}, {"uri": "spotify:track:2g3JkYiEJ3H1ZlSrY2ShVW", "name": "track 2g3JkYiE", "artist": "Colt Ford", "art": ""}, {"uri": "spotify:track:4C6wFHj4l4an2UCVGXR6c5", "name": "track 4C6wFHj4", "artist": "Colt Ford", "art": ""}, {"uri": "spotify:track:10xQRFrSI6wD8a1uTCSX9U", "name": "track 10xQRFrS", "artist": "Consolidated Electric", "art": ""}, {"uri": "spotify:track:7tD1t7xueQHP9zgfS8WSvx", "name": "track 7tD1t7xu", "artist": "Consolidated Electric", "art": ""}, {"uri": "spotify:track:6WoIVf7CfhnWsKOfxDwMR9", "name": "track 6WoIVf7C", "artist": "Consolidated Electric", "art": ""}, {"uri": "spotify:track:3CtKSQyQPdzA2u7n9tjJw2", "name": "track 3CtKSQyQ", "artist": "Corrosion of Conformity", "art": ""}, {"uri": "spotify:track:6g48vpikqU2atsrDXdGzKo", "name": "track 6g48vpik", "artist": "Corrosion of Conformity", "art": ""}, {"uri": "spotify:track:5Z7U8TRHAlX2uL2lVYv5Wa", "name": "track 5Z7U8TRH", "artist": "Corrosion of Conformity", "art": ""}, {"uri": "spotify:track:2wcNb0PLqmZ8pIwVlCtUXT", "name": "track 2wcNb0PL", "artist": "crash davidian", "art": ""}, {"uri": "spotify:track:0iCfHOkXKfgnqpisDzxMII", "name": "track 0iCfHOkX", "artist": "crash davidian", "art": ""}, {"uri": "spotify:track:2XJvCjcEgZUfOdTFh8Jq2W", "name": "track 2XJvCjcE", "artist": "crash davidian", "art": ""}, {"uri": "spotify:track:7jPKBikUDhNqnPvaQpZDWB", "name": "track 7jPKBikU", "artist": "Cutso", "art": ""}, {"uri": "spotify:track:5N6A0ZSic4ULmlSoPX1SPa", "name": "track 5N6A0ZSi", "artist": "Cutso", "art": ""}, {"uri": "spotify:track:0LeQsrZGlOUTHmUC421TI7", "name": "track 0LeQsrZG", "artist": "Cutso", "art": ""}, {"uri": "spotify:track:5xpFAhYwM5ITYFEW5y5BER", "name": "track 5xpFAhYw", "artist": "Daisy Grenade", "art": ""}, {"uri": "spotify:track:5W3aG3QA2ZVII4MtstSHHf", "name": "track 5W3aG3QA", "artist": "Daisy Grenade", "art": ""}, {"uri": "spotify:track:6lA4txLLHuNQtbAici3K41", "name": "track 6lA4txLL", "artist": "Daisy Grenade", "art": ""}, {"uri": "spotify:track:79WmVVG6KbCecp45eyhbfX", "name": "track 79WmVVG6", "artist": "Daniel Seavey", "art": ""}, {"uri": "spotify:track:67sldfyOCTkXyhqzJTKiDD", "name": "track 67sldfyO", "artist": "Daniel Seavey", "art": ""}, {"uri": "spotify:track:7CMED0vOTDKvJ48xx9BQTR", "name": "track 7CMED0vO", "artist": "Daniel Seavey", "art": ""}, {"uri": "spotify:track:47jgSvqlKwGyBLPnMfeEZN", "name": "track 47jgSvql", "artist": "Daniela Andrade", "art": ""}, {"uri": "spotify:track:2hEQRGEAx4YKGh0Kg7djab", "name": "track 2hEQRGEA", "artist": "Daniela Andrade", "art": ""}, {"uri": "spotify:track:0VxocBntP1XTZRsR9ZURPS", "name": "track 0VxocBnt", "artist": "Daniela Andrade", "art": ""}, {"uri": "spotify:track:2JwkF6Dvmylxe8fCo9WJs7", "name": "track 2JwkF6Dv", "artist": "Dark Satellite", "art": ""}, {"uri": "spotify:track:3B9Ba4pNEBH5lvFyp0u5pe", "name": "track 3B9Ba4pN", "artist": "Dark Satellite", "art": ""}, {"uri": "spotify:track:4WPCBCDdZelzIpwiZ7KL9L", "name": "track 4WPCBCDd", "artist": "Dark Satellite", "art": ""}, {"uri": "spotify:track:0o5le8kH8IqxQG7wy2ifqU", "name": "track 0o5le8kH", "artist": "Dashboard Confessional", "art": ""}, {"uri": "spotify:track:1EotcFbWTbMCXeKFVEtX6Y", "name": "track 1EotcFbW", "artist": "Dashboard Confessional", "art": ""}, {"uri": "spotify:track:1VViTGNqiNV8zwe3b3tE09", "name": "track 1VViTGNq", "artist": "Dashboard Confessional", "art": ""}, {"uri": "spotify:track:5HR0UqvkEL1KhvaRtQVXFr", "name": "track 5HR0Uqvk", "artist": "Dead Meadow", "art": ""}, {"uri": "spotify:track:2HlBvuaKhdftTRb3TCklhQ", "name": "track 2HlBvuaK", "artist": "Dead Meadow", "art": ""}, {"uri": "spotify:track:1QjP6zvfM2jlJ0H82mSqHU", "name": "track 1QjP6zvf", "artist": "Dead Meadow", "art": ""}, {"uri": "spotify:track:494TqZb3FdACMoEcPwBpkn", "name": "track 494TqZb3", "artist": "Devoted Fans", "art": ""}, {"uri": "spotify:track:6wrXql3gWKuHaNprKNDdIM", "name": "track 6wrXql3g", "artist": "Devoted Fans", "art": ""}, {"uri": "spotify:track:5ANiWQ8cDORzGo2GpxEA25", "name": "track 5ANiWQ8c", "artist": "Devoted Fans", "art": ""}, {"uri": "spotify:track:25ma7elpenWbsG9ZrNgCLb", "name": "track 25ma7elp", "artist": "Diggy Graves", "art": ""}, {"uri": "spotify:track:7iX1CIwNgmqs2eMP7xLcB5", "name": "track 7iX1CIwN", "artist": "Diggy Graves", "art": ""}, {"uri": "spotify:track:4pjy393QwkvmRxwmMTUPeQ", "name": "track 4pjy393Q", "artist": "Diggy Graves", "art": ""}, {"uri": "spotify:track:0vkcGf8zIWTSfaCL1g7EZG", "name": "track 0vkcGf8z", "artist": "Disastroid", "art": ""}, {"uri": "spotify:track:73MsMAviVc3rjffOHJ4brN", "name": "track 73MsMAvi", "artist": "Disastroid", "art": ""}, {"uri": "spotify:track:4RgvT0xzcTdGoiNPw1nnwA", "name": "track 4RgvT0xz", "artist": "Disastroid", "art": ""}, {"uri": "spotify:track:3haa0oycXy5ZK8Eq1HRur3", "name": "track 3haa0oyc", "artist": "Diva Bleach", "art": ""}, {"uri": "spotify:track:7fR36vIwfVD0RKGpbYKv1N", "name": "track 7fR36vIw", "artist": "Diva Bleach", "art": ""}, {"uri": "spotify:track:7azypWup43vrXbuKtZempj", "name": "track 7azypWup", "artist": "Diva Bleach", "art": ""}, {"uri": "spotify:track:5WBV6F57DuNzJzW7CzPWK6", "name": "track 5WBV6F57", "artist": "DJ Cutso", "art": ""}, {"uri": "spotify:track:7qfhQwMWUcJMrFJ5QiebOz", "name": "track 7qfhQwMW", "artist": "Dream Arenas", "art": ""}, {"uri": "spotify:track:3Aeefbzmqjq4jHQbaoODnt", "name": "track 3Aeefbzm", "artist": "Dream Arenas", "art": ""}, {"uri": "spotify:track:6PvpPskSgv317Gw8HoRyi2", "name": "track 6PvpPskS", "artist": "Dream Arenas", "art": ""}, {"uri": "spotify:track:5NtATk9xTMCKBlL46IJoXC", "name": "track 5NtATk9x", "artist": "Dry Cleaning", "art": ""}, {"uri": "spotify:track:0L1yjgPN1zIGLYP6TjVgHR", "name": "track 0L1yjgPN", "artist": "Dry Cleaning", "art": ""}, {"uri": "spotify:track:0quJpknjZo8gMmwzMhiHb3", "name": "track 0quJpknj", "artist": "Dry Cleaning", "art": ""}, {"uri": "spotify:track:0tafPB8syuyRqODGoEARlM", "name": "track 0tafPB8s", "artist": "Dying Remains", "art": ""}, {"uri": "spotify:track:4UXu7QeJQHAoNdkKVIFwvo", "name": "track 4UXu7QeJ", "artist": "Dying Remains", "art": ""}, {"uri": "spotify:track:37GYlX6PukECmbOh8salPI", "name": "track 37GYlX6P", "artist": "Dying Remains", "art": ""}, {"uri": "spotify:track:3ZFTP9U14r6QkumhYtrd60", "name": "track 3ZFTP9U1", "artist": "Easy Honey", "art": ""}, {"uri": "spotify:track:2MjVUXgZcEQ2jPoQ8RB0or", "name": "track 2MjVUXgZ", "artist": "Easy Honey", "art": ""}, {"uri": "spotify:track:2zhW8OqnBdm26MOt68tGf8", "name": "track 2zhW8Oqn", "artist": "Easy Honey", "art": ""}, {"uri": "spotify:track:0ML89CeaCLIoh46eelf5m6", "name": "track 0ML89Cea", "artist": "Echos", "art": ""}, {"uri": "spotify:track:7G5xEOORkAAUhx6wjTRb26", "name": "track 7G5xEOOR", "artist": "Electric Six", "art": ""}, {"uri": "spotify:track:2VHfyWLlvCvbkIqtS5tqt3", "name": "track 2VHfyWLl", "artist": "Electric Six", "art": ""}, {"uri": "spotify:track:3A3n0ShUNIrNWwdzkONVAl", "name": "track 3A3n0ShU", "artist": "Electric Six", "art": ""}, {"uri": "spotify:track:7CK4bpTIiYWYp478jgSlgp", "name": "track 7CK4bpTI", "artist": "Elias R\u00f8nnenfelt", "art": ""}, {"uri": "spotify:track:0WbuDhRzi9VQdz1qmUY47l", "name": "track 0WbuDhRz", "artist": "Elias R\u00f8nnenfelt", "art": ""}, {"uri": "spotify:track:6f0QzlymhzFNEm14kw2TDa", "name": "track 6f0Qzlym", "artist": "Elias R\u00f8nnenfelt", "art": ""}, {"uri": "spotify:track:1IbcX5yIsTavsZmZKr2OGR", "name": "track 1IbcX5yI", "artist": "Elujay", "art": ""}, {"uri": "spotify:track:4btQkKhLaYUsYmACjZuDh7", "name": "track 4btQkKhL", "artist": "Elujay", "art": ""}, {"uri": "spotify:track:2HauR0k2KEwPHKE5HTXQKY", "name": "track 2HauR0k2", "artist": "Elujay", "art": ""}, {"uri": "spotify:track:3o9kpgkIcffx0iSwxhuNI2", "name": "track 3o9kpgkI", "artist": "Em Beihold", "art": ""}, {"uri": "spotify:track:1Y3LN4zO1Edc2EluIoSPJN", "name": "track 1Y3LN4zO", "artist": "Em Beihold", "art": ""}, {"uri": "spotify:track:3u2e0jBFHbDT9yPA6vMK1v", "name": "track 3u2e0jBF", "artist": "Em Beihold", "art": ""}, {"uri": "spotify:track:24SQ5VJTemMsgfPcqTJykc", "name": "track 24SQ5VJT", "artist": "Emma Swift", "art": ""}, {"uri": "spotify:track:6x8GZhkP0rOLQJSkhWR27Y", "name": "track 6x8GZhkP", "artist": "Emma Swift", "art": ""}, {"uri": "spotify:track:5aQj28VDmCkioSW3wy0VYA", "name": "track 5aQj28VD", "artist": "Emma Swift", "art": ""}, {"uri": "spotify:track:4JpflbcMZxVHo12zw9yxwr", "name": "track 4JpflbcM", "artist": "Enno Cheng", "art": ""}, {"uri": "spotify:track:382qfPEjghVnFZlot7ZrVn", "name": "track 382qfPEj", "artist": "Enno Cheng", "art": ""}, {"uri": "spotify:track:5U02MVv6SGMigHeyKYC309", "name": "track 5U02MVv6", "artist": "Enno Cheng", "art": ""}, {"uri": "spotify:track:1tvFHuk4qoLouV1DYh7ieW", "name": "track 1tvFHuk4", "artist": "Essenger", "art": ""}, {"uri": "spotify:track:2o7kljiAHz8ypMLVmzmFqg", "name": "track 2o7kljiA", "artist": "Essenger", "art": ""}, {"uri": "spotify:track:6G8qiXDvAFgRJYCIpBodaQ", "name": "track 6G8qiXDv", "artist": "Essenger", "art": ""}, {"uri": "spotify:track:6Q40HIdIAYJqsG5pivlpaR", "name": "track 6Q40HIdI", "artist": "Evanora Unlimited", "art": ""}, {"uri": "spotify:track:4GWeg3bt1TeTSivoXEM8qk", "name": "track 4GWeg3bt", "artist": "Evanora Unlimited", "art": ""}, {"uri": "spotify:track:4SIGxfOZG31QPtE0VxOlXR", "name": "track 4SIGxfOZ", "artist": "Evanora Unlimited", "art": ""}, {"uri": "spotify:track:1EFoahY04VGOqaGl7KWlM8", "name": "track 1EFoahY0", "artist": "Fake Your Own Death", "art": ""}, {"uri": "spotify:track:0ebbJZ8I0aWVab2byV4gYi", "name": "track 0ebbJZ8I", "artist": "Fake Your Own Death", "art": ""}, {"uri": "spotify:track:5E71JOApHBlBh6LripewVP", "name": "track 5E71JOAp", "artist": "Fake Your Own Death", "art": ""}, {"uri": "spotify:track:1hZsWUnLbqRw09jLAMQSsb", "name": "track 1hZsWUnL", "artist": "Feid", "art": ""}, {"uri": "spotify:track:7bywjHOc0wSjGGbj04XbVi", "name": "track 7bywjHOc", "artist": "Feid", "art": ""}, {"uri": "spotify:track:7iQXYTyuG13aoeHxGG28Nh", "name": "track 7iQXYTyu", "artist": "Feid", "art": ""}, {"uri": "spotify:track:0Y1QmrmBgc6H1Kj1clEMvt", "name": "track 0Y1QmrmB", "artist": "Felix Cartal", "art": ""}, {"uri": "spotify:track:0NXwndCm4AUpMyvgr5LRzT", "name": "track 0NXwndCm", "artist": "Felix Cartal", "art": ""}, {"uri": "spotify:track:7Kur4cXMHU8KE1AHKQD7w7", "name": "track 7Kur4cXM", "artist": "Felix Cartal", "art": ""}, {"uri": "spotify:track:7hKUH1NXQXOt6bQjHhRZQg", "name": "track 7hKUH1NX", "artist": "Feng", "art": ""}, {"uri": "spotify:track:0H8jxhMD5p4dOE15REvWak", "name": "track 0H8jxhMD", "artist": "Feng", "art": ""}, {"uri": "spotify:track:0LIEtliIARSvMc5niYy0OX", "name": "track 0LIEtliI", "artist": "Feng", "art": ""}, {"uri": "spotify:track:4UCA1dk4uJlDvAEG6pLcHP", "name": "track 4UCA1dk4", "artist": "Foolish Relics", "art": ""}, {"uri": "spotify:track:2QzJswHLuOcbOu0NNN7qMu", "name": "track 2QzJswHL", "artist": "Foolish Relics", "art": ""}, {"uri": "spotify:track:0mAgt8NFdMiY0OfxxIFDD2", "name": "track 0mAgt8NF", "artist": "Foolish Relics", "art": ""}, {"uri": "spotify:track:5Xwn7YmF5BRCWyBYHXqZGL", "name": "track 5Xwn7YmF", "artist": "Forbidden", "art": ""}, {"uri": "spotify:track:2NnbfST2iUUUQ0ZJJWtcY0", "name": "track 2NnbfST2", "artist": "Forbidden", "art": ""}, {"uri": "spotify:track:3tWkJ2zLklnSF8qDBzTOHX", "name": "track 3tWkJ2zL", "artist": "Forbidden", "art": ""}, {"uri": "spotify:track:7I8KtOFPNmC2ZsiNPCwoS8", "name": "track 7I8KtOFP", "artist": "Fun Lovin' Criminals", "art": ""}, {"uri": "spotify:track:7rcWgxIVJyQDPLeS1NhnXh", "name": "track 7rcWgxIV", "artist": "Fun Lovin' Criminals", "art": ""}, {"uri": "spotify:track:7J8uxQsgkRT3Bkw9CiIt3K", "name": "track 7J8uxQsg", "artist": "Fun Lovin' Criminals", "art": ""}, {"uri": "spotify:track:7H9IZrndTKMwSHSP52rnIe", "name": "track 7H9IZrnd", "artist": "Futurebirds", "art": ""}, {"uri": "spotify:track:2FMuoG8zdNhyfkCI2ZMgFe", "name": "track 2FMuoG8z", "artist": "Futurebirds", "art": ""}, {"uri": "spotify:track:0WkVyhteM9jlVQuKcQHJQg", "name": "track 0WkVyhte", "artist": "Futurebirds", "art": ""}, {"uri": "spotify:track:5QKolgb84zxXPGfv6jNDMT", "name": "track 5QKolgb8", "artist": "Gabe Bondoc", "art": ""}, {"uri": "spotify:track:4L7Mv8ofgxNZ3VskXqBV5Q", "name": "track 4L7Mv8of", "artist": "Gabe Bondoc", "art": ""}, {"uri": "spotify:track:2aozqrjm2nNFwIiRTl9wEf", "name": "track 2aozqrjm", "artist": "Gabe Bondoc", "art": ""}, {"uri": "spotify:track:6Cw0UdjhWGjE9ttMem14yA", "name": "track 6Cw0Udjh", "artist": "Gabriel Bernini", "art": ""}, {"uri": "spotify:track:2bJnGulOnkuIU7jf2LYceE", "name": "track 2bJnGulO", "artist": "Gabriel Bernini", "art": ""}, {"uri": "spotify:track:3Tna3VOX8UXb9Q6HTHl4yG", "name": "track 3Tna3VOX", "artist": "Gabriel Bernini", "art": ""}, {"uri": "spotify:track:6BlEdTeWLngROHBvh1rWaJ", "name": "track 6BlEdTeW", "artist": "Good Kid", "art": ""}, {"uri": "spotify:track:6BJHsLiE47Sk0wQkuppqhr", "name": "track 6BJHsLiE", "artist": "Good Kid", "art": ""}, {"uri": "spotify:track:4Y2uEMxni1MDrcJBDSWULX", "name": "track 4Y2uEMxn", "artist": "Good Kid", "art": ""}, {"uri": "spotify:track:3IU8gx0FlYarKKA4TOgraH", "name": "track 3IU8gx0F", "artist": "Grace Ives", "art": ""}, {"uri": "spotify:track:0PiSok4AgEcnVSWSGiz86p", "name": "track 0PiSok4A", "artist": "Grace Ives", "art": ""}, {"uri": "spotify:track:7vMxPKp4xh7Ii6lQqL6BOS", "name": "track 7vMxPKp4", "artist": "Grace Ives", "art": ""}, {"uri": "spotify:track:0U62uEAcEBfWab5CyQLaEg", "name": "track 0U62uEAc", "artist": "GUDFELLA", "art": ""}, {"uri": "spotify:track:2f2dRxjiUOoV5qhZFbnVO6", "name": "track 2f2dRxji", "artist": "GUDFELLA", "art": ""}, {"uri": "spotify:track:7tZSQgFyzWAAtsb7OUUDbn", "name": "track 7tZSQgFy", "artist": "GUDFELLA", "art": ""}, {"uri": "spotify:track:1OBHZCNyUJud1USA3wd7MA", "name": "track 1OBHZCNy", "artist": "Half Past Two", "art": ""}, {"uri": "spotify:track:152UGVEFKkLpjff84P2bxg", "name": "track 152UGVEF", "artist": "Half Past Two", "art": ""}, {"uri": "spotify:track:21gtTs6NbYDJKicXC1Rsez", "name": "track 21gtTs6N", "artist": "Half Past Two", "art": ""}, {"uri": "spotify:track:0fBcoRZH9xdzdyDmSOKS9m", "name": "track 0fBcoRZH", "artist": "HAMES", "art": ""}, {"uri": "spotify:track:41pp3QOIVnTjSQTos6l1ii", "name": "track 41pp3QOI", "artist": "HAMES", "art": ""}, {"uri": "spotify:track:6OaPwZXYK5MxpyBCTgF5ku", "name": "track 6OaPwZXY", "artist": "HAMES", "art": ""}, {"uri": "spotify:track:7Lk49NYgiiB1Ah5oRm4XIg", "name": "track 7Lk49NYg", "artist": "Hangtown", "art": ""}, {"uri": "spotify:track:7icNaL8m9FFPEjqlBplez7", "name": "track 7icNaL8m", "artist": "Hangtown", "art": ""}, {"uri": "spotify:track:5QooUqyUr1I6ExscdaZfpT", "name": "track 5QooUqyU", "artist": "Hangtown", "art": ""}, {"uri": "spotify:track:5ztym8nwxNrfp0ClyV6l4v", "name": "track 5ztym8nw", "artist": "HAPPY LANDING", "art": ""}, {"uri": "spotify:track:6v2bvRPnLRQHmmTuVEzXKD", "name": "track 6v2bvRPn", "artist": "HAPPY LANDING", "art": ""}, {"uri": "spotify:track:4igcHR4Ou3EadXuOQVveg7", "name": "track 4igcHR4O", "artist": "HAPPY LANDING", "art": ""}, {"uri": "spotify:track:5iALdwbhnUHa8zGStA3h1J", "name": "track 5iALdwbh", "artist": "Hayley Williams", "art": ""}, {"uri": "spotify:track:0X1Bz7NKvIh90nIptl5tlG", "name": "track 0X1Bz7NK", "artist": "Hayley Williams", "art": ""}, {"uri": "spotify:track:3yiWkaQvp8cYt64M1bSVb9", "name": "track 3yiWkaQv", "artist": "Hayley Williams", "art": ""}, {"uri": "spotify:track:0dkvPpC5HFrw0DmfcXFlx3", "name": "track 0dkvPpC5", "artist": "Hazzard's Cure", "art": ""}, {"uri": "spotify:track:3FKLbMoLoSUG3jKMdmrT7H", "name": "track 3FKLbMoL", "artist": "Hazzard's Cure", "art": ""}, {"uri": "spotify:track:44E6sUmgqWFkLxuwTMg172", "name": "track 44E6sUmg", "artist": "Hazzard's Cure", "art": ""}, {"uri": "spotify:track:4IiXEeH2j5FAVfCncumgXw", "name": "track 4IiXEeH2", "artist": "Heavenly", "art": ""}, {"uri": "spotify:track:5GynN0FKm3KfhPjQyJlUxp", "name": "track 5GynN0FK", "artist": "Heavenly", "art": ""}, {"uri": "spotify:track:1wjOdtPwU94DIDb7x982GM", "name": "track 1wjOdtPw", "artist": "Heavenly", "art": ""}, {"uri": "spotify:track:2RCz7D2tqHOrBxAQ8F88iX", "name": "track 2RCz7D2t", "artist": "High Fade", "art": ""}, {"uri": "spotify:track:0GeNRWilwocpbkFSf7uAyr", "name": "track 0GeNRWil", "artist": "High Fade", "art": ""}, {"uri": "spotify:track:2lnXiFWGvgZLtjREZhVAni", "name": "track 2lnXiFWG", "artist": "High Fade", "art": ""}, {"uri": "spotify:track:51WozCH6KrpMsf6MSsftkD", "name": "track 51WozCH6", "artist": "Hiromi", "art": ""}, {"uri": "spotify:track:03IckTW2qNaWUvrOHtuYhL", "name": "track 03IckTW2", "artist": "Hiromi", "art": ""}, {"uri": "spotify:track:1NpTkYFGPrYb9FRNGjLVyJ", "name": "track 1NpTkYFG", "artist": "Hiromi", "art": ""}, {"uri": "spotify:track:5Cfp5xUAfGO2odvrDPTAqR", "name": "track 5Cfp5xUA", "artist": "HLLLYH", "art": ""}, {"uri": "spotify:track:1xYsBL34MBPEqs3azV8UyG", "name": "track 1xYsBL34", "artist": "HLLLYH", "art": ""}, {"uri": "spotify:track:1TftU5f8N02RgE5zNGusvI", "name": "track 1TftU5f8", "artist": "HLLLYH", "art": ""}, {"uri": "spotify:track:3aMIgXaB04SzL68n4lMWLL", "name": "track 3aMIgXaB", "artist": "Holy Fuck", "art": ""}, {"uri": "spotify:track:3xPhdaWsB5UmXQNREJxJxk", "name": "track 3xPhdaWs", "artist": "Holy Fuck", "art": ""}, {"uri": "spotify:track:1WVJXdju6oNlHzo6ZAc4mp", "name": "track 1WVJXdju", "artist": "Holy Fuck", "art": ""}, {"uri": "spotify:track:3L9fuYW7KuzMCy87ROPQPv", "name": "track 3L9fuYW7", "artist": "Honey Run", "art": ""}, {"uri": "spotify:track:5MtgSfeNlQXsYgSqvLBq1b", "name": "track 5MtgSfeN", "artist": "Honey Run", "art": ""}, {"uri": "spotify:track:2xeIr1sepDJZNt8Ylkn3f2", "name": "track 2xeIr1se", "artist": "Honey Run", "art": ""}, {"uri": "spotify:track:4Y23TZTuoRycwxQAQrS9N7", "name": "track 4Y23TZTu", "artist": "HVOB", "art": ""}, {"uri": "spotify:track:2xeNudarMjWk0szAYH7TQ8", "name": "track 2xeNudar", "artist": "HVOB", "art": ""}, {"uri": "spotify:track:2nEMZAY2Hoa4eZwmvvt8vP", "name": "track 2nEMZAY2", "artist": "HVOB", "art": ""}, {"uri": "spotify:track:3vWCKiZLjjFd2ECYl8HVnc", "name": "track 3vWCKiZL", "artist": "Ike Dweck", "art": ""}, {"uri": "spotify:track:0mLB2wh3dZfk0G627hk9A4", "name": "track 0mLB2wh3", "artist": "Ike Dweck", "art": ""}, {"uri": "spotify:track:62cjJAEmEDrfS3rHxxFkPh", "name": "track 62cjJAEm", "artist": "Ike Dweck", "art": ""}, {"uri": "spotify:track:2x6iNna6wQexggFz8smJcB", "name": "track 2x6iNna6", "artist": "INOHA", "art": ""}, {"uri": "spotify:track:2Hm5rPArM5mlSF5bZEzzPT", "name": "track 2Hm5rPAr", "artist": "INOHA", "art": ""}, {"uri": "spotify:track:6WfSQrAPYNLFQICqMhsfhB", "name": "track 6WfSQrAP", "artist": "INOHA", "art": ""}, {"uri": "spotify:track:14yugoFdkgO8ZUxLlX6fpJ", "name": "track 14yugoFd", "artist": "Jackie Hollander", "art": ""}, {"uri": "spotify:track:2NTojmUzspL9vNkOXKqRcV", "name": "track 2NTojmUz", "artist": "Jackie Hollander", "art": ""}, {"uri": "spotify:track:48vSb2Wjw3wD3OFBiqikJb", "name": "track 48vSb2Wj", "artist": "Jackie Hollander", "art": ""}, {"uri": "spotify:track:52T8TTMESX21406wvTdQDY", "name": "track 52T8TTME", "artist": "James Blake", "art": ""}, {"uri": "spotify:track:2IqjKEBiz0CdLKdkXhxw84", "name": "track 2IqjKEBi", "artist": "James Blake", "art": ""}, {"uri": "spotify:track:51rXHuKN8Loc4sUlKPODgH", "name": "track 51rXHuKN", "artist": "James Blake", "art": ""}, {"uri": "spotify:track:4GIRtMKQ8h4OyLugNbz1JX", "name": "track 4GIRtMKQ", "artist": "Jensen McRae", "art": ""}, {"uri": "spotify:track:10eTDWUAyApKsMkHBwZ3Mb", "name": "track 10eTDWUA", "artist": "Jensen McRae", "art": ""}, {"uri": "spotify:track:3yvfF8a3MEpoE58lrIARnX", "name": "track 3yvfF8a3", "artist": "Jensen McRae", "art": ""}, {"uri": "spotify:track:5nJzWhlrBfn3cfDLlaAgAO", "name": "track 5nJzWhlr", "artist": "Jeremy Passion", "art": ""}, {"uri": "spotify:track:4CjGrRGLysTkB2sECV570E", "name": "track 4CjGrRGL", "artist": "Jeremy Passion", "art": ""}, {"uri": "spotify:track:03G92s34DOQCqcVZl0Gaoh", "name": "track 03G92s34", "artist": "Jeremy Passion", "art": ""}, {"uri": "spotify:track:35hW4wWzqzz5OVdqKh0JKG", "name": "track 35hW4wWz", "artist": "Jerry Joseph", "art": ""}, {"uri": "spotify:track:3SlBd4PStlm6POvRiS9cEY", "name": "track 3SlBd4PS", "artist": "Jerry Joseph", "art": ""}, {"uri": "spotify:track:1zjRcBctuZsiTnhIyTsMhk", "name": "track 1zjRcBct", "artist": "Jerry Joseph", "art": ""}, {"uri": "spotify:track:6RnrfRtaigDMqwTH17VM3q", "name": "track 6RnrfRta", "artist": "JLittle", "art": ""}, {"uri": "spotify:track:4crN1JFblX3AKGk9SLBWmr", "name": "track 4crN1JFb", "artist": "JLittle", "art": ""}, {"uri": "spotify:track:2PjJlFuhCTeDxPj7ZqMJWs", "name": "track 2PjJlFuh", "artist": "JLittle", "art": ""}, {"uri": "spotify:track:2UayKZmrsYyjNj6T8frugJ", "name": "track 2UayKZmr", "artist": "Jonathan Richman", "art": ""}, {"uri": "spotify:track:5oOC6EBnSQ3PfRAQyfjAla", "name": "track 5oOC6EBn", "artist": "Jonathan Richman", "art": ""}, {"uri": "spotify:track:4axPxMZwpzQWjcNjv1JOP6", "name": "track 4axPxMZw", "artist": "Jonathan Richman", "art": ""}, {"uri": "spotify:track:5YqpHuXpFjDVZ7tY1ClFll", "name": "track 5YqpHuXp", "artist": "Jos\u00e9 Gonz\u00e1lez", "art": ""}, {"uri": "spotify:track:0P0vjAUzsleEw8X4aZcOrg", "name": "track 0P0vjAUz", "artist": "Jos\u00e9 Gonz\u00e1lez", "art": ""}, {"uri": "spotify:track:0ZNYGrmcehorhh9JOeg5Iv", "name": "track 0ZNYGrmc", "artist": "Jos\u00e9 Gonz\u00e1lez", "art": ""}, {"uri": "spotify:track:1GVkrFVc94CTjm9bdSmGjp", "name": "track 1GVkrFVc", "artist": "Joy Crookes", "art": ""}, {"uri": "spotify:track:3zSwFE91EdwhEwS6vnJohB", "name": "track 3zSwFE91", "artist": "Joy Crookes", "art": ""}, {"uri": "spotify:track:0gZcAOhjbDoLGzCQ0VW2J6", "name": "track 0gZcAOhj", "artist": "Joy Crookes", "art": ""}, {"uri": "spotify:track:223X4tpNyOA99yEmRo65Vr", "name": "track 223X4tpN", "artist": "JoyCut", "art": ""}, {"uri": "spotify:track:31oPq776AnC5BBcyd8jFrA", "name": "track 31oPq776", "artist": "JoyCut", "art": ""}, {"uri": "spotify:track:1iMvxadzH2UWvBwRwq0ikq", "name": "track 1iMvxadz", "artist": "JoyCut", "art": ""}, {"uri": "spotify:track:7JfVH9o5zzVTKy5YcIYlfT", "name": "track 7JfVH9o5", "artist": "Just Mustard", "art": ""}, {"uri": "spotify:track:5clqECdMRwNxSomnKfIYtm", "name": "track 5clqECdM", "artist": "Just Mustard", "art": ""}, {"uri": "spotify:track:4XxcYQq3q2hxjTTKKyiyR4", "name": "track 4XxcYQq3", "artist": "Just Mustard", "art": ""}, {"uri": "spotify:track:2cmtyqW7yIflk6OEQDH2G6", "name": "track 2cmtyqW7", "artist": "Kettama", "art": ""}, {"uri": "spotify:track:6Z3cE0ZK0tmj7131PFIOeZ", "name": "track 6Z3cE0ZK", "artist": "Kettama", "art": ""}, {"uri": "spotify:track:5fEg39wxUxNG9Ig5cFpWlc", "name": "track 5fEg39wx", "artist": "Kettama", "art": ""}, {"uri": "spotify:track:5Z3GHaZ6ec9bsiI5BenrbY", "name": "track 5Z3GHaZ6", "artist": "Khalid", "art": ""}, {"uri": "spotify:track:152lZdxL1OR0ZMW6KquMif", "name": "track 152lZdxL", "artist": "Khalid", "art": ""}, {"uri": "spotify:track:2OpBganfGk2GVdSlRdxzaX", "name": "track 2OpBganf", "artist": "Khalid", "art": ""}, {"uri": "spotify:track:0sSVTKSPiim06zGApr2NC1", "name": "track 0sSVTKSP", "artist": "King Tuff", "art": ""}, {"uri": "spotify:track:4PcaeqHoggBGZwPBAJr5Wg", "name": "track 4PcaeqHo", "artist": "King Tuff", "art": ""}, {"uri": "spotify:track:5nPI6YuVoqxHdqTAtziUBs", "name": "track 5nPI6YuV", "artist": "King Tuff", "art": ""}, {"uri": "spotify:track:0aWvwHwfcH96GzEh4w9Emg", "name": "track 0aWvwHwf", "artist": "King Woman", "art": ""}, {"uri": "spotify:track:2IbbPqpU1uchOWCMULOuJD", "name": "track 2IbbPqpU", "artist": "King Woman", "art": ""}, {"uri": "spotify:track:4q2MvSjiKUkZ500WBMoNIR", "name": "track 4q2MvSji", "artist": "King Woman", "art": ""}, {"uri": "spotify:track:62Da3JOu9H9EIgmqV7DoLG", "name": "track 62Da3JOu", "artist": "Kronos Quartet", "art": ""}, {"uri": "spotify:track:1saCKTst3kjchoiNkwt3el", "name": "track 1saCKTst", "artist": "Kronos Quartet", "art": ""}, {"uri": "spotify:track:2NTQaA3DbYKN6YuOJ0HDOO", "name": "track 2NTQaA3D", "artist": "Kronos Quartet", "art": ""}, {"uri": "spotify:track:1A8j067qyiNwQnZT0bzUpZ", "name": "track 1A8j067q", "artist": "Kungs", "art": ""}, {"uri": "spotify:track:6SqX9J8tXk7rXaspk7GWX1", "name": "track 6SqX9J8t", "artist": "Kungs", "art": ""}, {"uri": "spotify:track:5D1swG82nVVngZLHOLbe0V", "name": "track 5D1swG82", "artist": "Kungs", "art": ""}, {"uri": "spotify:track:3xTFF5pFEYlM0Qg4uUCF6M", "name": "track 3xTFF5pF", "artist": "Laney Tripp", "art": ""}, {"uri": "spotify:track:7jZYsBXE2Ee1KF6QFcwH1a", "name": "track 7jZYsBXE", "artist": "Laney Tripp", "art": ""}, {"uri": "spotify:track:0b9sisoZxJXRZ8LBQalCxd", "name": "track 0b9sisoZ", "artist": "Laney Tripp", "art": ""}, {"uri": "spotify:track:1jXfVzMk8cSbvAXMML4Y4f", "name": "track 1jXfVzMk", "artist": "Lauv", "art": ""}, {"uri": "spotify:track:7LpMG3AEaIJgs62HQhAa91", "name": "track 7LpMG3AE", "artist": "Lauv", "art": ""}, {"uri": "spotify:track:0SccFtYdj75y6lL2OW10Cf", "name": "track 0SccFtYd", "artist": "Lauv", "art": ""}, {"uri": "spotify:track:4HWadIQagwXOjf14aUD6qg", "name": "track 4HWadIQa", "artist": "Le Youth", "art": ""}, {"uri": "spotify:track:53xTITGQAR4vklxEoP6qwZ", "name": "track 53xTITGQ", "artist": "Le Youth", "art": ""}, {"uri": "spotify:track:1VERX83Hgb3gf5CbXkAFKy", "name": "track 1VERX83H", "artist": "Le Youth", "art": ""}, {"uri": "spotify:track:035Gwr2QzjbZIteZldAqUg", "name": "track 035Gwr2Q", "artist": "Levitation Room", "art": ""}, {"uri": "spotify:track:5AOoWMXJAdvK5Ma7OyVGHO", "name": "track 5AOoWMXJ", "artist": "Levitation Room", "art": ""}, {"uri": "spotify:track:0J4t1nNQnDr00TUCnpEy8z", "name": "track 0J4t1nNQ", "artist": "Levitation Room", "art": ""}, {"uri": "spotify:track:4Of7rzpRpV1mWRbhp5rAqG", "name": "track 4Of7rzpR", "artist": "Lewis Capaldi", "art": ""}, {"uri": "spotify:track:7qEHsqek33rTcFNT9PFqLf", "name": "track 7qEHsqek", "artist": "Lewis Capaldi", "art": ""}, {"uri": "spotify:track:2gMXnyrvIjhVBUZwvLZDMP", "name": "track 2gMXnyrv", "artist": "Lewis Capaldi", "art": ""}, {"uri": "spotify:track:1if6EWNR5w3Fay5UajW6uZ", "name": "track 1if6EWNR", "artist": "Local Bylaws", "art": ""}, {"uri": "spotify:track:44CXCFQ8hGy6f571PO57C3", "name": "track 44CXCFQ8", "artist": "Local Bylaws", "art": ""}, {"uri": "spotify:track:14w2akbpHl0sfgwy1igBYZ", "name": "track 14w2akbp", "artist": "Local Bylaws", "art": ""}, {"uri": "spotify:track:6Xve7pWqzW6CQV8mlXzpBe", "name": "track 6Xve7pWq", "artist": "Lostboycrow", "art": ""}, {"uri": "spotify:track:52hSR5CsLyziuwpZQqd9wI", "name": "track 52hSR5Cs", "artist": "Lostboycrow", "art": ""}, {"uri": "spotify:track:7ukG9eYpfJjLMaoAMKJsbn", "name": "track 7ukG9eYp", "artist": "Lostboycrow", "art": ""}];
@@ -478,73 +421,38 @@ function applyFilter() {
 filt.addEventListener('input', applyFilter);
 venueFilt.addEventListener('change', applyFilter);
 
-// Player meta
+// Player metadata UI (decorative -- Spotify iframe is the actual player)
 const npArt = document.getElementById('np-art');
 const npTitle = document.getElementById('np-title');
 const npArtist = document.getElementById('np-artist');
-const fill = document.getElementById('progress-fill');
-const tCur = document.getElementById('t-cur');
-const tDur = document.getElementById('t-dur');
-const icoPlay = document.getElementById('ico-play');
-const icoPause = document.getElementById('ico-pause');
 
-function fmt(ms) {
-  if (!ms || ms < 0) return '0:00';
-  const s = Math.floor(ms / 1000);
-  return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
-}
 function setNowPlaying(idx) {
   currentIdx = idx;
   const t = TRACKS[idx];
   if (!t) return;
   if (t.art) {
-    npArt.classList.remove('placeholder');
+    npArt.classList.add('has-art');
     npArt.style.backgroundImage = `url('${t.art}')`;
-    npArt.style.backgroundSize = 'cover';
-    npArt.style.backgroundPosition = 'center';
   } else {
-    npArt.classList.add('placeholder');
+    npArt.classList.remove('has-art');
     npArt.style.backgroundImage = '';
   }
   npTitle.textContent = t.name;
   npArtist.textContent = t.artist;
   rows.forEach(r => r.classList.toggle('np', parseInt(r.dataset.idx, 10) === idx));
-  // scroll the row into view if not visible
-  const row = rows[idx];
-  if (row) {
-    const rect = row.getBoundingClientRect();
-    if (rect.top < 100 || rect.bottom > window.innerHeight - 110) {
-      row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }
-}
-function setPlaying(p) {
-  isPlaying = p;
-  icoPlay.style.display = p ? 'none' : 'block';
-  icoPause.style.display = p ? 'block' : 'none';
 }
 
-// Spotify iFrame API
 let embedController = null;
 let pendingUri = null;
 window.onSpotifyIframeApiReady = (IFrameAPI) => {
   const initial = TRACKS.length ? TRACKS[0].uri : 'spotify:playlist:0wxTLo75bm6BEMndhrFSrr';
   IFrameAPI.createController(
     document.getElementById('embed-iframe'),
-    { uri: initial, width: 300, height: 80 },
+    { uri: initial, width: '100%', height: 80 },
     (controller) => {
       embedController = controller;
-      controller.addListener('playback_update', (e) => {
-        const d = e.data;
-        durationMs = d.duration || 0;
-        tDur.textContent = fmt(durationMs);
-        tCur.textContent = fmt(d.position);
-        fill.style.inset = `0 ${100 - (durationMs ? (d.position / durationMs) * 100 : 0)}% 0 0`;
-        setPlaying(!d.isPaused);
-      });
       if (pendingUri !== null) {
         controller.loadUri(pendingUri);
-        setTimeout(() => controller.togglePlay(), 100);
         pendingUri = null;
       }
     }
@@ -554,33 +462,14 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
 function playIdx(idx) {
   if (idx < 0 || idx >= TRACKS.length) return;
   setNowPlaying(idx);
-  if (embedController) {
-    // After loadUri the new track is loaded but paused. togglePlay() starts it.
-    embedController.loadUri(TRACKS[idx].uri);
-    setTimeout(() => embedController.togglePlay(), 100);
-  } else {
-    pendingUri = TRACKS[idx].uri;
-  }
+  // loadUri tells the visible Spotify player to load this track. The user
+  // hits play in Spotify's own UI (or it auto-continues if already playing).
+  if (embedController) embedController.loadUri(TRACKS[idx].uri);
+  else pendingUri = TRACKS[idx].uri;
 }
 
 rows.forEach(r => {
   r.addEventListener('click', () => playIdx(parseInt(r.dataset.idx, 10)));
-});
-document.getElementById('btn-prev').addEventListener('click', () => {
-  if (currentIdx > 0) playIdx(currentIdx - 1);
-});
-document.getElementById('btn-next').addEventListener('click', () => {
-  if (currentIdx < TRACKS.length - 1) playIdx(currentIdx + 1);
-});
-document.getElementById('btn-play').addEventListener('click', () => {
-  if (currentIdx < 0) { playIdx(0); return; }
-  if (embedController) embedController.togglePlay();
-});
-document.getElementById('progress').addEventListener('click', (e) => {
-  if (!embedController || !durationMs) return;
-  const rect = e.currentTarget.getBoundingClientRect();
-  const pct = (e.clientX - rect.left) / rect.width;
-  embedController.seek(durationMs * pct / 1000);
 });
 </script>
 </body>
