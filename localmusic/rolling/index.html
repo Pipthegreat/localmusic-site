@@ -288,21 +288,25 @@ ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
 .player-embed iframe {
   width: 100%; height: 80px; display: block; border: 0;
 }
+/* Match the Spotify embed: same dark slate background, same subtle border,
+   same border radius, same neutral icon color. Hover gets a slight Spotify-
+   green hint instead of ember to stay coherent with the embed. */
 .skip {
-  width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
-  background: transparent; border: 1px solid var(--ember-900);
+  width: 80px; height: 80px; border-radius: 12px; flex-shrink: 0;
+  background: var(--slate-900);
+  border: 1px solid var(--ember-900);
+  box-shadow: 0 0 0 1px oklch(35% 0.10 38 / 0.2), 0 8px 24px -8px var(--ember-glow);
   display: inline-flex; align-items: center; justify-content: center;
-  color: var(--ember-200); cursor: pointer; padding: 0;
-  transition: all 160ms;
+  color: var(--fg-muted); cursor: pointer; padding: 0;
+  transition: color 160ms, background 160ms;
 }
 .skip:hover {
-  border-color: var(--ember-500); color: var(--ember-200);
-  background: var(--ember-wash);
-  box-shadow: 0 0 16px -4px var(--ember-glow);
+  color: oklch(70% 0.18 145);     /* Spotify green */
+  background: oklch(15% 0.014 250);
 }
-.skip:disabled { opacity: 0.3; cursor: default; box-shadow: none; }
-.skip:disabled:hover { background: transparent; border-color: var(--ember-900); }
-.skip svg { width: 16px; height: 16px; fill: currentColor; }
+.skip:disabled { opacity: 0.35; cursor: default; }
+.skip:disabled:hover { color: var(--fg-muted); background: var(--slate-900); }
+.skip svg { width: 18px; height: 18px; fill: currentColor; }
 
 @media (max-width: 980px) {
   .filter-row { grid-template-columns: 1fr; }
