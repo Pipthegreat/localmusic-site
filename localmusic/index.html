@@ -186,7 +186,17 @@ ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
 .count b { color: var(--fg-default); }
 
 /* TABLE */
-.tbl { width: 100%; border-collapse: collapse; margin-top: 0; }
+/* table-layout: fixed locks column widths from the <colgroup>/header. Without
+   this, browsers re-flow column widths per-row based on content -- which is
+   what was making the active row's bigger ember play button visually shove
+   the track column right. */
+.tbl { width: 100%; border-collapse: collapse; margin-top: 0; table-layout: fixed; }
+.tbl col.c-num    { width: 56px; }
+.tbl col.c-play   { width: 56px; }
+.tbl col.c-track  { width: auto; }
+.tbl col.c-artist { width: 200px; }
+.tbl col.c-venue  { width: 260px; }
+.tbl col.c-date   { width: 110px; }
 .tbl thead th {
   text-align: left; padding: 18px 14px;
   font: 500 11px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase;
@@ -364,6 +374,10 @@ ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
   </div>
 
   <table class="tbl">
+    <colgroup>
+      <col class="c-num"><col class="c-play"><col class="c-track">
+      <col class="c-artist"><col class="c-venue"><col class="c-date">
+    </colgroup>
     <thead>
       <tr>
         <th data-sort="num">#</th>
