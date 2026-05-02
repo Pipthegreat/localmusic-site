@@ -276,14 +276,33 @@ ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
   box-shadow: 0 -1px 0 var(--ember-800), 0 -20px 60px -20px var(--ember-glow);
 }
 .player-inner {
-  max-width: 720px; margin: 0 auto;
+  max-width: 800px; margin: 0 auto;
+  display: flex; align-items: center; gap: 12px;
+}
+.player-embed {
+  flex: 1; min-width: 0;
   border-radius: 12px; overflow: hidden;
   border: 1px solid var(--ember-900);
   box-shadow: 0 0 0 1px oklch(35% 0.10 38 / 0.2), 0 8px 24px -8px var(--ember-glow);
 }
-.player-inner iframe {
+.player-embed iframe {
   width: 100%; height: 80px; display: block; border: 0;
 }
+.skip {
+  width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+  background: transparent; border: 1px solid var(--ember-900);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ember-200); cursor: pointer; padding: 0;
+  transition: all 160ms;
+}
+.skip:hover {
+  border-color: var(--ember-500); color: var(--ember-200);
+  background: var(--ember-wash);
+  box-shadow: 0 0 16px -4px var(--ember-glow);
+}
+.skip:disabled { opacity: 0.3; cursor: default; box-shadow: none; }
+.skip:disabled:hover { background: transparent; border-color: var(--ember-900); }
+.skip svg { width: 16px; height: 16px; fill: currentColor; }
 
 @media (max-width: 980px) {
   .filter-row { grid-template-columns: 1fr; }
@@ -355,7 +374,13 @@ ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
 
 <div class="player" role="region" aria-label="Player">
   <div class="player-inner">
-    <div id="spotify-embed"></div>
+    <button class="skip" id="btn-prev" aria-label="Previous track">
+      <svg viewBox="0 0 24 24"><path d="M19 20L9 12l10-8v16zM5 4h2v16H5z"/></svg>
+    </button>
+    <div class="player-embed"><div id="spotify-embed"></div></div>
+    <button class="skip" id="btn-next" aria-label="Next track">
+      <svg viewBox="0 0 24 24"><path d="M5 4l10 8-10 8V4zM17 4h2v16h-2z"/></svg>
+    </button>
   </div>
 </div>
 
@@ -447,6 +472,7 @@ function updateRowState() {
     r.classList.toggle('np', np);
     r.classList.toggle('playing', np && !isPaused);
   });
+  if (typeof refreshSkipState === 'function') refreshSkipState();
 }
 
 function loadAndPlay(uri) {
@@ -489,13 +515,44 @@ playButtons.forEach(btn => {
     e.stopPropagation();
     const uri = btn.dataset.uri;
     if (uri === currentUri) {
-      // Same track is loaded -- just pause/resume.
       togglePlay();
     } else {
       loadAndPlay(uri);
     }
   });
 });
+
+// Prev/next walk the table's current display order, skipping hidden (filtered) rows.
+function visibleRows() {
+  return rows.filter(r => !r.classList.contains('hidden'));
+}
+function adjacentUri(direction) {
+  const visible = visibleRows();
+  if (!visible.length) return null;
+  const idx = visible.findIndex(r => r.dataset.uri === currentUri);
+  if (idx === -1) return visible[0].dataset.uri;
+  const nextIdx = idx + direction;
+  if (nextIdx < 0 || nextIdx >= visible.length) return null;
+  return visible[nextIdx].dataset.uri;
+}
+const btnPrev = document.getElementById('btn-prev');
+const btnNext = document.getElementById('btn-next');
+function refreshSkipState() {
+  btnPrev.disabled = adjacentUri(-1) === null;
+  btnNext.disabled = adjacentUri( 1) === null;
+}
+btnPrev.addEventListener('click', () => {
+  const u = adjacentUri(-1);
+  if (u) loadAndPlay(u);
+});
+btnNext.addEventListener('click', () => {
+  const u = adjacentUri( 1);
+  if (u) loadAndPlay(u);
+});
+// Refresh skip-button enabled state whenever the filter changes too.
+filt.addEventListener('input', refreshSkipState);
+venueFilt.addEventListener('change', refreshSkipState);
+refreshSkipState();
 </script>
 </body>
 </html>
