@@ -9,17 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,ital@9..144,300..600,0;9..144,300..600,1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Dawn-terracotta base, but dialed back to 2-3% chroma per Stle §2.8.
-     The page now reads as warm-tinted neutral, not saturated dawn-red. */
-  --dawn-300: oklch(82% 0.022 65);
-  --dawn-400: oklch(70% 0.025 50);
-  --dawn-500: oklch(52% 0.028 40);
-  --dawn-600: oklch(44% 0.028 36);
-  --dawn-700: oklch(35% 0.028 34);
-  --dawn-800: oklch(26% 0.028 34);
-  --dawn-850: oklch(22% 0.026 34);
-  --dawn-900: oklch(18% 0.024 34);
-  --dawn-950: oklch(13% 0.020 34);
+  /* Warm dawn-terracotta canvas. The saturated 7-9% chroma is intentional
+     -- it's the design identity, not a readability bug to neutralize.
+     Foreground colors carry contrast; the canvas just stays warm. */
+  --dawn-300: oklch(75% 0.06 35);
+  --dawn-400: oklch(62% 0.07 33);
+  --dawn-500: oklch(52% 0.08 32);
+  --dawn-600: oklch(44% 0.085 30);
+  --dawn-700: oklch(37% 0.09 30);
+  --dawn-800: oklch(31% 0.085 30);
+  --dawn-850: oklch(28% 0.08 30);
+  --dawn-900: oklch(25% 0.075 32);
+  --dawn-950: oklch(22% 0.07 32);
 
   /* Coral — the single primary accent. Earns every appearance. */
   --coral-300: oklch(82% 0.12 32);
@@ -46,12 +47,12 @@
   --sage: oklch(78% 0.05 75);
   --sage-deep: oklch(58% 0.04 75);
 
-  /* Ivory text, never pure white. Slightly cooler so it sits on the
-     low-chroma dawn canvas without reading yellowed. */
-  --ivory: oklch(95% 0.02 70);
-  --ivory-strong: oklch(98% 0.012 70);
-  --ivory-muted: oklch(78% 0.025 65);
-  --ivory-subtle: oklch(58% 0.022 55);
+  /* Cream-ivory text, never pure white. Warm cream that sits on the dawn
+     canvas as a single continuous tonal family. */
+  --ivory: oklch(96% 0.03 80);
+  --ivory-strong: oklch(98% 0.02 78);
+  --ivory-muted: oklch(86% 0.05 70);
+  --ivory-subtle: oklch(68% 0.05 55);
 
   /* Oakland accents — black + Athletics gold, shared between this page and
      the SF + Oakland page. The Week prefix becomes a gold-on-black pill,
@@ -89,7 +90,7 @@
   --bg-canvas: var(--dawn-900);
   --bg-elevated: var(--dawn-850);
   --bg-row-hover: var(--dawn-800);
-  --bg-row-active: oklch(28% 0.05 38);
+  --bg-row-active: oklch(34% 0.07 38);
   --fg-default: var(--ivory);
   --fg-strong: var(--ivory-strong);
   --fg-muted: var(--ivory-muted);
@@ -114,7 +115,9 @@ body {
   font: 400 15px/1.55 var(--sans);
   -webkit-font-smoothing: antialiased;
   background-image:
-    radial-gradient(ellipse 70% 40% at 70% -10%, oklch(60% 0.14 32 / 0.10), transparent 65%);
+    radial-gradient(ellipse 80% 45% at 70% -10%, oklch(72% 0.18 35 / 0.22), transparent 65%),
+    radial-gradient(ellipse 60% 35% at 10% 0%, oklch(80% 0.14 65 / 0.14), transparent 65%),
+    radial-gradient(ellipse 70% 40% at 50% 110%, oklch(70% 0.10 90 / 0.10), transparent 65%);
   background-attachment: fixed;
   padding-bottom: 110px;
 }
@@ -589,35 +592,35 @@ const DATA = [
   ["Disco Lines", "discolines",             "",                       "Mainstage",       "W1 Fri"],
   ["MATTN",                  "mattn",                   "",                       "Mainstage",       "W1 Fri"],
   ["Henri PFR", "henri-pfr",                "",                       "Mainstage",       "W1 Fri"],
-  ["MC Stretch",             "mcstretch",                      "host",                   "Mainstage",       "W1 Fri"],
+  ["MC Stretch",             "mcstretchofficial",                      "host",                   "Mainstage",       "W1 Fri"],
   ["Halō",                   "halo",                      "",                       "Mainstage",       "W1 Fri"],
   ["Merow",                  "merow",                      "",                       "Mainstage",       "W1 Fri"],
-  ["Omdat Het Kan & Average Rob", "omdathetkan",                 "",                       "Mainstage",       "W1 Fri"],
+  ["Omdat Het Kan & Average Rob", null,                 "",                       "Mainstage",       "W1 Fri"],
   ["David Guetta",           "davidguetta",             "",                       "Mainstage",       "W1 Sat"],
   ["Dimitri Vegas & Like Mike","dimitrivegasandlikemike","",                      "Mainstage",       "W1 Sat"],
   ["Fisher", "fisher",              "",                       "Mainstage",       "W1 Sat"],
   ["Boris Brejcha",          "borisbrejcha",            "",                       "Mainstage",       "W1 Sat"],
   ["Maddix",                 "maddixmusic",             "",                       "Mainstage",       "W1 Sat"],
   ["John Newman",            "johnnewman",              "",                       "Mainstage",       "W1 Sat"],
-  ["Stephani B",             "stephanib",                      "",                       "Mainstage",       "W1 Sat"],
-  ["John Summit",            "john-summit",             "",                       "Mainstage",       "W1 Sun"],
+  ["Stephani B",             "stephanibmusic",                      "",                       "Mainstage",       "W1 Sat"],
+  ["John Summit",            "johnsummit",             "",                       "Mainstage",       "W1 Sun"],
   ["Alesso",                 "alesso",                  "",                       "Mainstage",       "W1 Sun"],
   ["Kevin de Vries",         "kevindevries",            "",                       "Mainstage",       "W1 Sun"],
-  ["B Jones",                "bjonesofficial",          "",                       "Mainstage",       "W1 Sun"],
+  ["B Jones",                "bjonesdj",          "",                       "Mainstage",       "W1 Sun"],
   ["Steve Angello",          "steveangello",            "",                       "Mainstage",       "W2 Fri"],
   ["Hardwell",               "hardwell",                "",                       "Mainstage",       "W2 Fri"],
   ["Indira Paganotto",       "indirapaganotto",         "",                       "Mainstage",       "W2 Fri"],
   ["Miss Monique", "missmonique",      "",                       "Mainstage",       "W2 Fri"],
-  ["Alok",                   "alok",                    "",                       "Mainstage",       "W2 Fri"],
+  ["Alok",                   "alok-music",                    "",                       "Mainstage",       "W2 Fri"],
   ["Nicky Romero",           "nickyromero",             "",                       "Mainstage",       "W2 Fri"],
   ["Yves V",                 "yvesv",                   "",                       "Mainstage",       "W2 Fri"],
   ["Calvin Harris",          "calvinharris",            "Tomorrowland debut",     "Mainstage",       "W2 Sat"],
   ["Armin van Buuren",       "arminvanbuuren",          "",                       "Mainstage",       "W2 Sat"],
   ["Sub Zero Project",       "subzero-project",         "",                       "Mainstage",       "W2 Sat"],
-  ["Agents of Time",         "agentsoftime",            "",                       "Mainstage",       "W2 Sat"],
+  ["Agents of Time",         "agents-of-time",            "",                       "Mainstage",       "W2 Sat"],
   ["Timmy Trumpet",          "timmytrumpet",            "B2B Dimitri Vegas",      "Mainstage",       "W2 Sat"],
   ["Argy",                   "argyofficial",            "",                       "Mainstage",       "W2 Sat"],
-  ["ZHU", "zhumusic",               "",                       "Mainstage",       "W2 Sat"],
+  ["ZHU", "zhu",               "",                       "Mainstage",       "W2 Sat"],
   ["Gorgon City",            "gorgon-city",             "",                       "Mainstage",       "W2 Sat"],
   ["Sonny Fodera",           "sonnyfodera",             "",                       "Mainstage",       "W2 Sat"],
   ["Wilkinson",              "wilkinson",               "",                       "Mainstage",       "W2 Sat"],
@@ -641,7 +644,7 @@ const DATA = [
   ["Amelie Lens",            "amelielens",              "presents Aura",          "Atmosphere",      "W1"   ],
   ["Anetha",                 "anetha",                  "",                       "Atmosphere",      "W1"   ],
   ["Reinier Zonneveld",      "reinier-zonneveld",       "live",                   "Atmosphere",      "W1"   ],
-  ["Ben Klock",              "klockworks",              "",                       "Atmosphere",      "W1"   ],
+  ["Ben Klock",              "ben-klock",              "",                       "Atmosphere",      "W1"   ],
   ["Nico Moreno",            "nicomoreno",              "",                       "Atmosphere",      "W1"   ],
   ["I Hate Models",          "ihatemodels",             "",                       "Atmosphere",      "W1"   ],
   ["Sara Landry", "sara-landry",              "",                       "Atmosphere",      "W1"   ],
@@ -656,24 +659,24 @@ const DATA = [
   ["Charlie Sparks",         "charliesparks",           "B2B Biia",               "Atmosphere",      "W1"   ],
   ["Estella Boersma",        "estellaboersma",          "",                       "Atmosphere",      "W1"   ],
   ["Elli Acula",             "elliacula",               "",                       "Atmosphere",      "W1"   ],
-  ["Marhu",                  "marhu",                      "",                       "Atmosphere",      "W1"   ],
+  ["Marhu",                  "marhu-music",                      "",                       "Atmosphere",      "W1"   ],
   ["Interactive Noise",      "interactivenoise",                      "",                       "Atmosphere",      "W1"   ],
   ["Blondex",                "blondex",                      "",                       "Atmosphere",      "W1"   ],
-  ["Flour",                  "flour",                      "",                       "Atmosphere",      "W1"   ],
-  ["Øtta",                   "tta",                      "",                       "Atmosphere",      "W1"   ],
+  ["Flour",                  "flour-1",                      "",                       "Atmosphere",      "W1"   ],
+  ["Øtta",                   null,                      "",                       "Atmosphere",      "W1"   ],
   ["SHDW",                   "shdw",                    "B2B Überkikz",           "Atmosphere",      "W1"   ],
   ["Ve/Ra",                  "vera",                    "",                       "Atmosphere",      "W1"   ],
   ["NOVAH",                  "novahmusic",              "",                       "Atmosphere",      "W2"   ],
-  ["Shlømo", "shlomo",            "B2B BYORN",              "Atmosphere",      "W2"   ],
+  ["Shlømo", null,            "B2B BYORN",              "Atmosphere",      "W2"   ],
   ["BYORN",                  "byorn",                      "B2B Shlømo",             "Atmosphere",      "W2"   ],
   ["Azyr",                   "azyr",                    "",                       "Atmosphere",      "W2"   ],
-  ["Onlynumbers",            "onlynumbers",                      "",                       "Atmosphere",      "W2"   ],
+  ["Onlynumbers",            "onlynumbers-music",                      "",                       "Atmosphere",      "W2"   ],
   ["Dyen",                   "dyen",                    "B2B Maddix",             "Atmosphere",      "W2"   ],
   ["Mha Iri",                "mhairi",                  "",                       "Atmosphere",      "W2"   ],
   ["Kobosil",                "kobosil",                 "",                       "Atmosphere",      "W2"   ],
   ["Trym",                   "trym",                    "",                       "Atmosphere",      "W2"   ],
   ["Mirage",                 "mirage",                      "",                       "Atmosphere",      "W2"   ],
-  ["Pegassi",                "pegassi",                 "",                       "Atmosphere",      "W2"   ],
+  ["Pegassi",                "pegassimusic",                 "",                       "Atmosphere",      "W2"   ],
   ["Adrián Mills",           "adrian-mills",                      "",                       "Atmosphere",      "W2"   ],
   ["Boy & Girl",             "boyandgirl",                      "",                       "Atmosphere",      "W2"   ],
   ["Callush",                "callush",                      "",                       "Atmosphere",      "W2"   ],
@@ -683,9 +686,9 @@ const DATA = [
 
   // ── CORE (house / electronica) ────────────────────────────────────────
   ["The Blessed Madonna",    "theblessedmadonna",       "B2B HAAi",               "CORE",            "W1"   ],
-  ["HAAi",                   "haaiii",                  "B2B The Blessed Madonna","CORE",            "W1"   ],
+  ["HAAi",                   "haaimusic",                  "B2B The Blessed Madonna","CORE",            "W1"   ],
   ["Modeselektor",           "modeselektor",            "DJ-set",                 "CORE",            "W1"   ],
-  ["Antdot",                 "antdot",                  "",                       "CORE",            "W1"   ],
+  ["Antdot",                 "antdotmusic",                  "",                       "CORE",            "W1"   ],
   ["Avalon Emerson",         "avalonemerson",           "B2B Ben UFO",            "CORE",            "W1"   ],
   ["Ben UFO",                "ben-ufo",                 "B2B Avalon Emerson",     "CORE",            "W1"   ],
   ["DJ Tennis",              "djtennis",                "B2B Vintage Culture",    "CORE",            "W1"   ],
@@ -693,7 +696,7 @@ const DATA = [
   ["Job Jobse",              "jobjobse",                "",                       "CORE",            "W1"   ],
   ["Sasha",                  "sashaofficial",           "B2B Young Marco",        "CORE",            "W1"   ],
   ["Young Marco",            "youngmarco",              "B2B Sasha",              "CORE",            "W1"   ],
-  ["Sally C",                "sally-c",                 "",                       "CORE",            "W1"   ],
+  ["Sally C",                "sallyc-1",                 "",                       "CORE",            "W1"   ],
   ["Bibi Seck", "bibi-seck",                "",                       "CORE",            "W1"   ],
   ["Helena Lauwaert",        "helenalauwaert",          "",                       "CORE",            "W1"   ],
   ["Eileen",                 "eileen",                      "",                       "CORE",            "W1"   ],
@@ -713,7 +716,7 @@ const DATA = [
   ["Catalina",               "catalina",                      "",                       "CORE",            "W2"   ],
   ["Fais Le Beau",           "faislebeau",                      "B2B SixSixSixties",      "CORE",            "W2"   ],
   ["Kamma",                  "kamma",                      "",                       "CORE",            "W2"   ],
-  ["Kellar",                 "kellar",                      "",                       "CORE",            "W2"   ],
+  ["Kellar",                 "kellarmusic",                      "",                       "CORE",            "W2"   ],
   ["Lammer",                 "lammer",                      "",                       "CORE",            "W2"   ],
   ["Malugi",                 "malugi",                  "",                       "CORE",            "W2"   ],
   ["Ogazón",                 "ogazon",                      "",                       "CORE",            "W2"   ],
@@ -738,15 +741,15 @@ const DATA = [
   ["Tomas Grey",             "tomasgrey",               "",                       "The Library",     "W1"   ],
   ["Whisnu Santika", "whisnu-santika",           "",                       "The Library",     "W1"   ],
   ["Andromedik",             "andromedik",              "",                       "The Library",     "W1"   ],
-  ["Ciel.",                  "ciel",                      "",                       "The Library",     "W1"   ],
-  ["Jazzy",                  "jazzyofficial",                      "",                       "The Library",     "W1"   ],
+  ["Ciel.",                  "dj-ciel",                      "",                       "The Library",     "W1"   ],
+  ["Jazzy",                  "iamjazzy",                      "",                       "The Library",     "W1"   ],
   ["Linska",                 "linska",                      "",                       "The Library",     "W1"   ],
   ["Marwan Dua",             "marwan-dua",                      "",                       "The Library",     "W1"   ],
-  ["Diètro",                 "dietro",                      "",                       "The Library",     "W1"   ],
+  ["Diètro",                 "dietro-music",                      "",                       "The Library",     "W1"   ],
   ["James Carter",           "jamescarter",             "",                       "The Library",     "W1"   ],
   ["Kaaze",                  "kaaze",                   "",                       "The Library",     "W1"   ],
   ["DJ Sally",               "djsally",                      "",                       "The Library",     "W1"   ],
-  ["Viktor",                 "viktor",                      "",                       "The Library",     "W1"   ],
+  ["Viktor",                 "viktor-music",                      "",                       "The Library",     "W1"   ],
   ["Blasterjaxx",            "blasterjaxx",             "",                       "The Library",     "W2"   ],
   ["Illenium", "illeniumofficial",                "",                       "The Library",     "W2"   ],
   ["Alan Walker",            "alanwalker",              "",                       "The Library",     "W2"   ],
@@ -756,7 +759,7 @@ const DATA = [
   ["Diego Miranda",          "diegomiranda",            "B2B Jerry Davila",       "The Library",     "W2"   ],
   ["Hypaton",                "hypaton",                      "",                       "The Library",     "W2"   ],
   ["Kaskade",                "kaskade",                 "",                       "The Library",     "W2"   ],
-  ["Mesto",                  "mesto",                   "",                       "The Library",     "W2"   ],
+  ["Mesto",                  "mestomusic",                   "",                       "The Library",     "W2"   ],
   ["Netsky",                 "netsky",                  "",                       "The Library",     "W2"   ],
   ["Nico Moreno",            "nicomoreno",              "",                       "The Library",     "W2"   ],
   ["Nome.",                  "nome",                      "",                       "The Library",     "W2"   ],
@@ -766,7 +769,7 @@ const DATA = [
   ["Meaghan",                "meaghan",                      "",                       "The Library",     "W2"   ],
 
   // ── FREEDOM BY BUD ───────────────────────────────────────────────────
-  ["Pegassi",                "pegassi",                 "audiovisual show",       "Freedom",         "W1"   ],
+  ["Pegassi",                "pegassimusic",                 "audiovisual show",       "Freedom",         "W1"   ],
   ["Meduza",                 "meduzamusic",             "",                       "Freedom",         "W1"   ],
   ["Netsky",                 "netsky",                  "",                       "Freedom",         "W1"   ],
   ["Space 92",               "space-92",                "",                       "Freedom",         "W1"   ],
@@ -778,14 +781,14 @@ const DATA = [
   ["Dave Lambert",           "davelambert",             "",                       "Freedom",         "W1"   ],
   ["Holy Priest",            "holypriest",              "",                       "Freedom",         "W1"   ],
   ["Plastik Funk",           "plastikfunk",             "B2B Olympe",             "Freedom",         "W1"   ],
-  ["Symphony of Unity",      "tomorrowland",            "50-piece orchestra",     "Freedom",         "W1"   ],
+  ["Symphony of Unity",      "symphonyofunity",            "50-piece orchestra",     "Freedom",         "W1"   ],
   ["Chase & Status",         "chaseandstatus",          "",                       "Freedom",         "W1"   ],
   ["I Hate Models",          "ihatemodels",             "",                       "Freedom",         "W1"   ],
   ["Jack Shore",             "jackshore",               "",                       "Freedom",         "W1"   ],
   ["DJ Licious",             "djlicious",               "",                       "Freedom",         "W1"   ],
   ["Neon",                   "neon",                      "",                       "Freedom",         "W1"   ],
   ["Arielle Free",           "ariellefree",             "",                       "Freedom",         "W1"   ],
-  ["Alok",                   "alok",                    "Rave The World",         "Freedom",         "W1"   ],
+  ["Alok",                   "alok-music",                    "Rave The World",         "Freedom",         "W1"   ],
   ["Aaron Hibell",           "aaronhibell",             "",                       "Freedom",         "W2"   ],
   ["Alesso",                 "alesso",                  "",                       "Freedom",         "W2"   ],
   ["Amber Broos",            "amberbroos",              "B2B Juliet Fox",         "Freedom",         "W2"   ],
@@ -808,12 +811,12 @@ const DATA = [
 
   // ── PLANAXIS (psy / bass / Bassrush takeover) ────────────────────────
   ["Subtronics",             "subtronics",              "",                       "Planaxis",        "W1"   ],
-  ["Seven Lions",            "sevenlions",              "",                       "Planaxis",        "W1"   ],
+  ["Seven Lions",            "seven-lions",              "",                       "Planaxis",        "W1"   ],
   ["Liquid Stranger",        "liquidstranger",          "",                       "Planaxis",        "W1"   ],
   ["DVBBS",                  "dvbbs",                   "",                       "Planaxis",        "W1"   ],
   ["Punctual", "punctual",           "",                       "Planaxis",        "W1"   ],
   ["Sabai",                  "sabai",                   "",                       "Planaxis",        "W1"   ],
-  ["Hi Profile",             "hiprofile",               "",                       "Planaxis",        "W1"   ],
+  ["Hi Profile",             "hiprofile-1",               "",                       "Planaxis",        "W1"   ],
   ["John 00 Fleming",        "john00fleming",           "",                       "Planaxis",        "W1"   ],
   ["Mad Maxx",               "madmaxx",                      "",                       "Planaxis",        "W1"   ],
   ["Neelix",                 "neelix",                  "",                       "Planaxis",        "W1"   ],
@@ -825,7 +828,7 @@ const DATA = [
   ["Marnik",                 "marnik",                  "",                       "Planaxis",        "W1"   ],
   ["Yannick Thiry",          "yannick-thiry",                      "",                       "Planaxis",        "W1"   ],
   ["Exception",              "exception",                      "",                       "Planaxis",        "W1"   ],
-  ["Level Up",               "levelupmusic",            "",                       "Planaxis",        "W1"   ],
+  ["Level Up",               "levelupofficial",            "",                       "Planaxis",        "W1"   ],
   ["Malaa's Alter Ego",      null,                      "",                       "Planaxis",        "W1"   ],
   ["Ian Asher",              "ianasher",                "",                       "Planaxis",        "W1"   ],
   ["Lucas & Steve",          "lucasandsteve",           "",                       "Planaxis",        "W1"   ],
@@ -854,7 +857,7 @@ const DATA = [
   // ── CRYSTAL GARDEN ───────────────────────────────────────────────────
   ["MORTEN",                 "morten",                  "B2B Malaa",              "Crystal Garden",  "W1"   ],
   ["Malaa",                  "malaamusic",              "B2B MORTEN",             "Crystal Garden",  "W1"   ],
-  ["Wade",                   "wademusic",               "",                       "Crystal Garden",  "W1"   ],
+  ["Wade",                   "wadeofficial",               "",                       "Crystal Garden",  "W1"   ],
   ["Ben Hemsley",            "benhemsley",              "",                       "Crystal Garden",  "W1"   ],
   ["Cici Daze",              "cicidaze",                      "",                       "Crystal Garden",  "W1"   ],
   ["Dali",                   "dali",                      "",                       "Crystal Garden",  "W1"   ],
@@ -864,7 +867,7 @@ const DATA = [
   ["Camila Jun",             "camilajun",                      "",                       "Crystal Garden",  "W1"   ],
   ["DJ Gigola",              "djgigola",                "",                       "Crystal Garden",  "W1"   ],
   ["Elfigo",                 "elfigo",                      "",                       "Crystal Garden",  "W1"   ],
-  ["Marsolo",                "marsolo",                      "",                       "Crystal Garden",  "W1"   ],
+  ["Marsolo",                "marsolomusic",                      "",                       "Crystal Garden",  "W1"   ],
   ["Eridu",                  "eridu",                      "",                       "Crystal Garden",  "W1"   ],
   ["Nosi",                   "nosi",                      "",                       "Crystal Garden",  "W1"   ],
   ["Bhaskar", "bhaskar",            "",                       "Crystal Garden",  "W2"   ],
@@ -875,7 +878,7 @@ const DATA = [
   ["Guz",                    "guz",                      "",                       "Crystal Garden",  "W2"   ],
   ["HUGEL",                  "hugel",                   "",                       "Crystal Garden",  "W2"   ],
   ["Joezi",                  "joezi",                   "",                       "Crystal Garden",  "W2"   ],
-  ["John Summit",            "john-summit",             "",                       "Crystal Garden",  "W2"   ],
+  ["John Summit",            "johnsummit",             "",                       "Crystal Garden",  "W2"   ],
   ["Kevin de Vries",         "kevindevries",            "B2B Meduza",             "Crystal Garden",  "W2"   ],
   ["Kitty Amor",             "kittyamor",               "B2B Curol",              "Crystal Garden",  "W2"   ],
   ["Like Mike", "likemike",            "",                       "Crystal Garden",  "W2"   ],
@@ -893,14 +896,14 @@ const DATA = [
   ["Sub Zero Project",       "subzero-project",         "",                       "The Rose Garden", "W1"   ],
   ["Rooler",                 "rooler",                  "",                       "The Rose Garden", "W1"   ],
   ["A Little Sound",         "alittlesound",            "",                       "The Rose Garden", "W1"   ],
-  ["Aeon Mode",              "aeonmode",                "",                       "The Rose Garden", "W1"   ],
-  ["Kanine",                 "kanine",                  "",                       "The Rose Garden", "W1"   ],
+  ["Aeon Mode",              null,                "",                       "The Rose Garden", "W1"   ],
+  ["Kanine",                 "djkanine",                  "",                       "The Rose Garden", "W1"   ],
   ["Primate",                "primate",                      "",                       "The Rose Garden", "W1"   ],
   ["Stoog3s",                null,                      "",                       "The Rose Garden", "W1"   ],
-  ["Blvckprint",             "blvckprint",                      "",                       "The Rose Garden", "W1"   ],
+  ["Blvckprint",             "blvckprintofficial",                      "",                       "The Rose Garden", "W1"   ],
   ["Bonzai All Stars",       "bonzai-all-stars",                      "",                       "The Rose Garden", "W1"   ],
   ["DJ Furax",               "djfurax",                 "",                       "The Rose Garden", "W1"   ],
-  ["DJ Ghost",               "djghost",                      "",                       "The Rose Garden", "W1"   ],
+  ["DJ Ghost",               "djghostofficial",                      "",                       "The Rose Garden", "W1"   ],
   ["Franky Kloeck", "franky-kloeck",            "",                       "The Rose Garden", "W1"   ],
   ["Jan Vervloet",           "janvervloet",                      "",                       "The Rose Garden", "W1"   ],
   ["Jente",                  "jente",                      "B2B Neall",              "The Rose Garden", "W1"   ],
@@ -915,7 +918,7 @@ const DATA = [
   ["The Saints",             "thesaints",                      "",                       "The Rose Garden", "W1"   ],
   ["The Z.",                 "thez",                      "",                       "The Rose Garden", "W1"   ],
   ["TNT",                    "tnt",                      "",                       "The Rose Garden", "W1"   ],
-  ["Villain",                "villain",                 "",                       "The Rose Garden", "W1"   ],
+  ["Villain",                "djvillain",                 "",                       "The Rose Garden", "W1"   ],
   ["Greg S.",                "gregs",                      "",                       "The Rose Garden", "W1"   ],
   ["AlleyCvt",               "alleycvt",                "",                       "The Rose Garden", "W2"   ],
   ["Bassbrain",              "bassbrain",                      "",                       "The Rose Garden", "W2"   ],
@@ -939,7 +942,7 @@ const DATA = [
   ["Riot Ten",               "riotten",                 "",                       "The Rose Garden", "W2"   ],
   ["Sound Rush",             "soundrush",               "",                       "The Rose Garden", "W2"   ],
   ["Sullivan King",          "sullivanking",            "",                       "The Rose Garden", "W2"   ],
-  ["The Purge",              "thepurge",                "",                       "The Rose Garden", "W2"   ],
+  ["The Purge",              "thepurgedj",                "",                       "The Rose Garden", "W2"   ],
   ["The Straikerz",          "thestraikerz",            "",                       "The Rose Garden", "W2"   ],
   ["Warface",                "warface",                 "",                       "The Rose Garden", "W2"   ],
   ["Youri Parker",           "youriparker",                      "",                       "The Rose Garden", "W2"   ],
@@ -950,7 +953,7 @@ const DATA = [
   ["Enoo Napa",              "enoonapa",                "B2B Da Capo B2B Caiiro", "Melodia",         "W2"   ],
   ["Thakzin",                "thakzin",                 "",                       "Melodia",         "W2"   ],
   ["Vanco", "vanco",                "",                       "Melodia",         "W2"   ],
-  ["AWEN",                   "awenmusic",               "",                       "Melodia",         "W1"   ],
+  ["AWEN",                   "awen",               "",                       "Melodia",         "W1"   ],
   ["Danni Gato",             "dannigato",               "",                       "Melodia",         "W1"   ],
   ["Lerato Tsotetsi",        "leratotsotetsi",          "",                       "Melodia",         "W1"   ],
   ["Rosey Gold",             "roseygold",               "",                       "Melodia",         "W1"   ],
@@ -962,7 +965,7 @@ const DATA = [
   ["Hermanos Inglesos", "hermanos-inglesos",        "",                       "Melodia",         "W1"   ],
   ["Chinonegro",             "chinonegro",                      "",                       "Melodia",         "W1"   ],
   ["Emiliano Demarco",       "emilianodemarco",                      "",                       "Melodia",         "W1"   ],
-  ["Christian82",            "christian82",                      "",                       "Melodia",         "W1"   ],
+  ["Christian82",            "djchristian82",                      "",                       "Melodia",         "W1"   ],
   ["Cris Tosio",             null,                      "",                       "Melodia",         "W1"   ],
   ["Cristina Tosio",         "cristinatosio",                      "",                       "Melodia",         "W1"   ],
   ["Dave Hang",              "davehang",                      "",                       "Melodia",         "W1"   ],
@@ -976,10 +979,10 @@ const DATA = [
   ["Arado",                  "arado",                   "",                       "Melodia",         "W1"   ],
   ["Alex Kennon", null,              "",                       "Melodia",         "W2"   ],
   ["Bobbi Antonni",          null,                      "",                       "Melodia",         "W2"   ],
-  ["Cristiano da Silva",     "cristianodasilva",                      "",                       "Melodia",         "W2"   ],
+  ["Cristiano da Silva",     null,                      "",                       "Melodia",         "W2"   ],
   ["Delafino & Luna Fino",   "delafino",                      "",                       "Melodia",         "W2"   ],
   ["Dominico",               "dominico",                      "",                       "Melodia",         "W2"   ],
-  ["Eli Rojas",              "elirojas",                      "",                       "Melodia",         "W2"   ],
+  ["Eli Rojas",              "elirojasdj",                      "",                       "Melodia",         "W2"   ],
   ["Emilia de la Paz",       "emilia-de-la-paz",                      "",                       "Melodia",         "W2"   ],
   ["Geheimzinnig Soundsystem", null,                    "",                       "Melodia",         "W2"   ],
   ["Jeroen Delodder",        null,                      "",                       "Melodia",         "W2"   ],
@@ -998,7 +1001,7 @@ const DATA = [
 
   // ── CAGE (hard techno / industrial) ──────────────────────────────────
   ["Sandy Warez",            "sandywarez",              "B2B Revenja",            "Cage",            "W1"   ],
-  ["Dither", "dither",             "",                       "Cage",            "W1"   ],
+  ["Dither", null,             "",                       "Cage",            "W1"   ],
   ["Mind Compressor",        "mindcompressor",                      "",                       "Cage",            "W1"   ],
   ["Rayzen",                 "rayzen",                      "",                       "Cage",            "W1"   ],
   ["Elmefti",                "elmefti",                      "",                       "Cage",            "W1"   ],
@@ -1008,7 +1011,7 @@ const DATA = [
   ["GPF",                    "gpf",                      "B2B Dr Donk",            "Cage",            "W1"   ],
   ["Vernex",                 "vernex",                      "B2B NRKI",               "Cage",            "W1"   ],
   ["Sacha Malice",           "sachamalice",                      "",                       "Cage",            "W1"   ],
-  ["Shlømo", "shlomo",            "",                       "Cage",            "W1"   ],
+  ["Shlømo", null,            "",                       "Cage",            "W1"   ],
   ["Luna Fields",            "lunafields",                      "",                       "Cage",            "W1"   ],
   ["Maike Depas",            "maikedepas",                      "",                       "Cage",            "W1"   ],
   ["Vieze Asbak",            "vieze-asbak",                      "",                       "Cage",            "W1"   ],
@@ -1040,7 +1043,7 @@ const DATA = [
   ["Toxic Twins",            "toxictwins",                      "",                       "Cage",            "W2"   ],
   ["Uberjak'd",              "uberjakd",                "feat Ella Young",        "Cage",            "W2"   ],
   ["X&Trick",                null,                      "",                       "Cage",            "W2"   ],
-  ["Yoshiko",                "yoshiko",                      "",                       "Cage",            "W2"   ],
+  ["Yoshiko",                "yoshiko-music",                      "",                       "Cage",            "W2"   ],
 
   // ── ELIXIR (sound-system tents) ──────────────────────────────────────
   ["Audiowave",              "audiowave",                      "",                       "Elixir",          "W1"   ],
@@ -1053,7 +1056,7 @@ const DATA = [
   ["Rick & James 80's Party",null,                      "",                       "Elixir",          "W1"   ],
   ["Soul Shakers",           "soul-shakers",                      "",                       "Elixir",          "W1"   ],
   ["Tola OG",                "tola_og",                      "",                       "Elixir",          "W1"   ],
-  ["Unregular",              "unregular",                      "",                       "Elixir",          "W1"   ],
+  ["Unregular",              null,                      "",                       "Elixir",          "W1"   ],
   ["Tribal Kush",            "tribalkush",                      "",                       "Elixir",          "W1"   ],
   ["Lordesius & Anders",     "lordesius",                      "",                       "Elixir",          "W1"   ],
   ["Kurashi Soundsystem",    "kurashisoundsystem",                      "",                       "Elixir",          "W1"   ],
@@ -1075,14 +1078,14 @@ const DATA = [
   ["Sako Glitch",            null,                      "",                       "Elixir",          "W1"   ],
   ["Team Damp",              "teamdamp",                      "",                       "Elixir",          "W1"   ],
   ["Sleazy Stereo",          "sleazystereo",                      "",                       "Elixir",          "W1"   ],
-  ["Noah",                   "noah",                      "",                       "Elixir",          "W1"   ],
+  ["Noah",                   "djnoah",                      "",                       "Elixir",          "W1"   ],
   ["Favella Som Sistema",    null,                      "",                       "Elixir",          "W1"   ],
-  ["$hirak",                 "hirak",                      "",                       "Elixir",          "W2"   ],
+  ["$hirak",                 "hirakofficial",                      "",                       "Elixir",          "W2"   ],
   ["Annabel Stop It",        "annabelstopit",                      "",                       "Elixir",          "W2"   ],
-  ["Brooke Bailey",          "brookebailey",                      "B2B Taliyah Ayana",      "Elixir",          "W2"   ],
-  ["Cham",                   "cham",                      "B2B Uneak",              "Elixir",          "W2"   ],
+  ["Brooke Bailey",          "brooke-bailey",                      "B2B Taliyah Ayana",      "Elixir",          "W2"   ],
+  ["Cham",                   "cham-official",                      "B2B Uneak",              "Elixir",          "W2"   ],
   ["Dany Neville",           "danyneville",                      "",                       "Elixir",          "W2"   ],
-  ["Dino",                   "dino",                      "",                       "Elixir",          "W2"   ],
+  ["Dino",                   "dinoofficial",                      "",                       "Elixir",          "W2"   ],
   ["DJ Art",                 "djart",                      "",                       "Elixir",          "W2"   ],
   ["Eimco",                  "eimco",                      "",                       "Elixir",          "W2"   ],
   ["Flash",                  "flash",                      "",                       "Elixir",          "W2"   ],
@@ -1098,7 +1101,7 @@ const DATA = [
   ["Nems",                   "nems",                      "",                       "Elixir",          "W2"   ],
   ["Nina Black",             "nina-black",                      "",                       "Elixir",          "W2"   ],
   ["Reeze",                  "reeze",                      "",                       "Elixir",          "W2"   ],
-  ["Rosh",                   "rosh",                      "",                       "Elixir",          "W2"   ],
+  ["Rosh",                   "djrosh",                      "",                       "Elixir",          "W2"   ],
   ["Ruby XX",                "rubyxx",                      "",                       "Elixir",          "W2"   ],
   ["Sandersville",           "djsandersville",                      "",                       "Elixir",          "W2"   ],
   ["Shoarma Soundsystem",    null,                      "",                       "Elixir",          "W2"   ],
@@ -1113,7 +1116,7 @@ const DATA = [
   ["Will Sparks",            "willsparks",              "",                       "Rise",            "W1"   ],
   ["Diego Miranda",          "diegomiranda",            "",                       "Rise",            "W1"   ],
   ["Dimitri Vangelis & Wyman","dimitrivangeliswyman",   "",                       "Rise",            "W1"   ],
-  ["DJ Nano",                "djnano",                  "",                       "Rise",            "W1"   ],
+  ["DJ Nano",                "iamdjnano",                  "",                       "Rise",            "W1"   ],
   ["Helsloot",               "helsloot",                "",                       "Rise",            "W1"   ],
   ["Cyria",                  "cyria",                      "hybrid",                 "Rise",            "W1"   ],
   ["Mxgpu",                  "mxgpu",                      "hybrid",                 "Rise",            "W1"   ],
@@ -1130,25 +1133,25 @@ const DATA = [
   ["Dannic",                 "dannic",                  "B2B Dyro",               "Rise",            "W2"   ],
   ["Gissa",                  "gissa",                      "",                       "Rise",            "W2"   ],
   ["Gregor Salto",           "gregorsalto",             "",                       "Rise",            "W2"   ],
-  ["Hu",                     "hu-official",                      "",                       "Rise",            "W2"   ],
+  ["Hu",                     "hu-music",                      "",                       "Rise",            "W2"   ],
   ["Kyle Starkey", "kyle-starkey",             "",                       "Rise",            "W2"   ],
   ["Lisa Korver",            "lisakorver",                      "",                       "Rise",            "W2"   ],
-  ["Mendosa",                "mendosa",                      "",                       "Rise",            "W2"   ],
+  ["Mendosa",                "mendosamusic",                      "",                       "Rise",            "W2"   ],
   ["Mr. Belt & Wezol", "mrbeltandwezol",             "",                       "Rise",            "W2"   ],
   ["Newtone",                "newtone",                      "",                       "Rise",            "W2"   ],
   ["Odssey",                 "odssey",                      "",                       "Rise",            "W2"   ],
-  ["Ruze",                   "ruze",                      "B2B Ranger Trucco",      "Rise",            "W2"   ],
+  ["Ruze",                   "theruze",                      "B2B Ranger Trucco",      "Rise",            "W2"   ],
   ["Saar Kuus",              null,                      "",                       "Rise",            "W2"   ],
   ["Sander van Doorn",       "sandervandoorn",          "",                       "Rise",            "W2"   ],
   ["Swanky Tunes",           "swankytunes",             "",                       "Rise",            "W2"   ],
-  ["Yamo",                   "yamo",                      "",                       "Rise",            "W2"   ],
+  ["Yamo",                   "djyamo",                      "",                       "Rise",            "W2"   ],
 
   // ── THE RAVE CAVE ────────────────────────────────────────────────────
   ["Ben Malone",             "benmalone",                      "",                       "The Rave Cave",   "W1"   ],
   ["Aghatixx",               "aghatixx",                      "",                       "The Rave Cave",   "W1"   ],
   ["Godtripper",             "godtripper",                      "",                       "The Rave Cave",   "W1"   ],
   ["Coco Bevan",             "cocobevan",                      "",                       "The Rave Cave",   "W1"   ],
-  ["Dries Smet",             "driessmet",                      "",                       "The Rave Cave",   "W1"   ],
+  ["Dries Smet",             "dries-smet",                      "",                       "The Rave Cave",   "W1"   ],
   ["Foxed Up",               "foxedup",                      "",                       "The Rave Cave",   "W1"   ],
   ["Mella Tierra",           null,                      "",                       "The Rave Cave",   "W1"   ],
   ["Mitched",                "mitched",                      "",                       "The Rave Cave",   "W1"   ],
@@ -1172,7 +1175,7 @@ const DATA = [
   ["Kriss Reeve",            "krissreeve",                      "",                       "The Rave Cave",   "W2"   ],
   ["Lou8",                   "lou8",                      "",                       "The Rave Cave",   "W2"   ],
   ["Mairee",                 "mairee",                      "",                       "The Rave Cave",   "W2"   ],
-  ["Mr. Joy",                "mrjoy",                      "",                       "The Rave Cave",   "W2"   ],
+  ["Mr. Joy",                "mrjoyofficial",                      "",                       "The Rave Cave",   "W2"   ],
   ["Mr. Rewind",             "mrrewind",                      "",                       "The Rave Cave",   "W2"   ],
   ["Muze",                   "muze",                      "",                       "The Rave Cave",   "W2"   ],
   ["Roma",                   "roma",                      "",                       "The Rave Cave",   "W2"   ],
@@ -1180,12 +1183,12 @@ const DATA = [
   ["Yerun",                  "yerun",                      "",                       "The Rave Cave",   "W2"   ],
 
   // ── HOUSE OF FORTUNE BY JBL ──────────────────────────────────────────
-  ["Adam K",                 "adamkmusic",              "",                       "House of Fortune","W1"   ],
+  ["Adam K",                 "adamk",              "",                       "House of Fortune","W1"   ],
   ["Fonsi Nieto",             "fonsinieto",                     "",                       "House of Fortune","W1"   ],
-  ["Krevix",                 "krevix",                      "",                       "House of Fortune","W1"   ],
+  ["Krevix",                 "krevix-music",                      "",                       "House of Fortune","W1"   ],
   ["Mark Roma",              "markroma",                "",                       "House of Fortune","W1"   ],
   ["Sofia Cristo",           "sofiacristo",                      "",                       "House of Fortune","W1"   ],
-  ["Alan Alvarez",           "alanalvarez",                      "& Crazy Sir-G",          "House of Fortune","W2"   ],
+  ["Alan Alvarez",           "alan-alvarez",                      "& Crazy Sir-G",          "House of Fortune","W2"   ],
   ["Carly Wilford",          "carlywilford",            "",                       "House of Fortune","W2"   ],
   ["DJ Lex",                 "djlex",                      "",                       "House of Fortune","W2"   ],
   ["Martin Trevy",           "martintrevy",                      "",                       "House of Fortune","W2"   ],
@@ -1200,7 +1203,7 @@ const DATA = [
   ["Funkhauser",             "funkhauser",                      "",                       "Moose Bar",       "W1"   ],
   ["Funktastix",             "funktastix",                      "",                       "Moose Bar",       "W1"   ],
   ["Jelle DK",               "jelledk",                      "",                       "Moose Bar",       "W1"   ],
-  ["Jeroen Visser",          "jeroenvisser",                      "",                       "Moose Bar",       "W1"   ],
+  ["Jeroen Visser",          "jeroen-visser",                      "",                       "Moose Bar",       "W1"   ],
   ["Les Mecs Eclectics",     "lesmecseclectics",                      "",                       "Moose Bar",       "W1"   ],
   ["Rino",                   "rino",                      "",                       "Moose Bar",       "W1"   ],
   ["Tom Cosyns",             "tom-cosyns",                      "",                       "Moose Bar",       "W1"   ],
@@ -1208,7 +1211,7 @@ const DATA = [
   ["Brian",                  "brian",                      "",                       "Moose Bar",       "W2"   ],
   ["Jan V",                  "janv",                      "",                       "Moose Bar",       "W2"   ],
   ["Jo Cox",                 "jocox",                      "",                       "Moose Bar",       "W2"   ],
-  ["Kurt Verheyen",          "kurtverheyen",                      "",                       "Moose Bar",       "W2"   ],
+  ["Kurt Verheyen",          "kurt-verheyen",                      "",                       "Moose Bar",       "W2"   ],
   ["Mobius One",             "mobiusone",                      "",                       "Moose Bar",       "W2"   ],
   ["Mr E.",                  "mre",                      "",                       "Moose Bar",       "W2"   ],
   ["Prosit",                 "prosit",                      "",                       "Moose Bar",       "W2"   ],
