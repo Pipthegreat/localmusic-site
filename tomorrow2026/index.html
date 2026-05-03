@@ -55,6 +55,14 @@
   --ivory-muted: oklch(82% 0.05 65);
   --ivory-subtle: oklch(65% 0.05 55);
 
+  /* Oakland accents — black + Athletics gold, shared between this page and
+     the SF + Oakland page. The Week prefix becomes a gold-on-black pill,
+     and the Fri/Sat/Sun (formerly green) becomes black-with-white-outline
+     jersey text. */
+  --oakland-yellow: oklch(82% 0.17 90);
+  --oakland-yellow-soft: oklch(74% 0.13 88);
+  --oakland-black: oklch(8% 0 0);
+
   /* Compatibility aliases so the rest of the stylesheet keeps its old token
      names while we shift the palette underneath. */
   --wine-300: var(--dawn-300);
@@ -342,8 +350,40 @@ details.ms[open] > summary {
 .t-set { color: var(--fg-muted); font-size: 13px; font-style: italic; }
 .t-set.solo { color: var(--fg-subtle); font-style: normal; opacity: 0.55; }
 .t-stage { color: var(--fg-default); font-size: 13px; }
-.t-day { color: var(--teal); white-space: nowrap; font-variant-numeric: tabular-nums; font: 500 13px/1 var(--mono); letter-spacing: 0.04em; }
-.t-day .week { color: var(--gold-400); margin-right: 4px; }
+/* Day cell -- jersey treatment matching the SF + Oakland page.
+   Bare day-of-week text (Fri/Sat/Sun) renders black-fill + 1px white outline.
+   The .week prefix (W1 / W2 / "Week 1" / "Week 2") becomes a gold-on-black
+   Oakland pill so both pages share the same Oakland visual language. */
+.t-day {
+  color: var(--oakland-black);
+  white-space: nowrap; font-variant-numeric: tabular-nums;
+  font: 600 13px/1 var(--mono); letter-spacing: 0.06em;
+  text-shadow:
+    -1px 0 0 #fff,
+     1px 0 0 #fff,
+     0 -1px 0 #fff,
+     0  1px 0 #fff;
+}
+.t-day .week {
+  display: inline-block;
+  background: var(--oakland-black);
+  color: var(--oakland-yellow);
+  border: 1px solid var(--oakland-yellow);
+  border-radius: 3px;
+  padding: 2px 6px; margin-right: 6px;
+  font: 600 11px/1 var(--mono); letter-spacing: 0.10em; text-transform: uppercase;
+  text-shadow:
+    -1px 0 0 var(--oakland-black),
+     1px 0 0 var(--oakland-black),
+     0 -1px 0 var(--oakland-black),
+     0  1px 0 var(--oakland-black);
+}
+/* Active row inverts the Week pill so the playing track's pill pops gold. */
+.tbl tbody tr.np .t-day .week {
+  background: var(--oakland-yellow);
+  color: var(--oakland-black);
+  text-shadow: none;
+}
 
 .play-cell { width: 56px; padding: 0 !important; text-align: center; }
 .play {

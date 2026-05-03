@@ -226,7 +226,31 @@ ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
 .tbl thead th.sort-desc .caret { opacity: 1; }
 .tbl thead th.sort-asc  .caret::before { content: "▲"; color: var(--ember-400); }
 .tbl thead th.sort-desc .caret::before { content: "▼"; color: var(--ember-400); }
-.t-date { color: var(--peacock); white-space: nowrap; font-variant-numeric: tabular-nums; }
+/* Date "rest" text (e.g. "May 30") -- jersey treatment to match the
+   black-and-gold dow badge: black fill + 1px white outline via
+   text-shadow. The .t-dow rule below overrides on the day-of-week pill. */
+.t-date {
+  color: var(--oakland-black);
+  white-space: nowrap; font-variant-numeric: tabular-nums;
+  font-weight: 600; letter-spacing: 0.04em;
+  text-shadow:
+    -1px 0 0 #fff,
+     1px 0 0 #fff,
+     0 -1px 0 #fff,
+     0  1px 0 #fff;
+}
+/* Same treatment for the mobile-meta date that appears under the track on
+   small screens. */
+.t-mobile-meta .m-date {
+  color: var(--oakland-black);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600; letter-spacing: 0.04em;
+  text-shadow:
+    -1px 0 0 #fff,
+     1px 0 0 #fff,
+     0 -1px 0 #fff,
+     0  1px 0 #fff;
+}
 /* Day-of-week badge (the "Fri" / "Sat" / "Sun" prefix) — Oakland sports
    jersey treatment: bright Oakland gold on solid black, with a 1px black
    text-shadow so the gold letters carry a thin dark outline. Lives inline
@@ -357,7 +381,8 @@ ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
 .t-mobile-meta .m-venue { color: var(--fg-muted); }
 .t-mobile-meta .m-venue .vname { color: var(--fg-default); }
 .t-mobile-meta .m-venue .city { color: var(--fg-subtle); }
-.t-mobile-meta .m-date { color: var(--peacock); font-variant-numeric: tabular-nums; }
+/* m-date is styled jersey-black further up next to .t-date; this rule
+   stays declared (legacy) but no longer overrides the color. */
 
 .hidden { display: none; }
 
