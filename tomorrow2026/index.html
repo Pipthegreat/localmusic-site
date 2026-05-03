@@ -9,91 +9,119 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,ital@9..144,300..600,0;9..144,300..600,1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Dawn-terracotta base — lifted significantly from the prior near-black,
-     same warm 30° hue family as the accents so surfaces, links, and accents
-     read as one continuous gradient from pre-dawn to first-light. */
-  --dawn-300: oklch(75% 0.06 35);
-  --dawn-400: oklch(62% 0.07 33);
-  --dawn-500: oklch(52% 0.08 32);
-  --dawn-600: oklch(44% 0.085 30);
-  --dawn-700: oklch(37% 0.09 30);
-  --dawn-800: oklch(31% 0.085 30);
-  --dawn-850: oklch(28% 0.08 30);
-  --dawn-900: oklch(25% 0.075 32);
-  --dawn-950: oklch(22% 0.07 32);
+  /* Slate base — cool blue-gray neutrals borrowed from SF + Oakland.
+     The whole palette is built on this cool foundation; warm accents
+     (ember, gold) ride against it instead of fighting it. */
+  --slate-300: oklch(72% 0.012 248);
+  --slate-400: oklch(58% 0.013 248);
+  --slate-500: oklch(46% 0.014 248);
+  --slate-600: oklch(36% 0.015 248);
+  --slate-700: oklch(26% 0.014 248);
+  --slate-800: oklch(20% 0.014 250);
+  --slate-850: oklch(17% 0.014 250);
+  --slate-900: oklch(13% 0.013 250);
+  --slate-950: oklch(9%  0.011 250);
 
-  /* Coral — primary action / pulse / active glow. Warmer than copper, a
-     cleaner red-orange that matches the sunrise base. */
-  --coral-300: oklch(82% 0.12 32);
-  --coral-400: oklch(76% 0.16 30);
-  --coral-500: oklch(70% 0.18 28);
-  --coral-600: oklch(62% 0.17 28);
-  --coral-700: oklch(52% 0.15 28);
-  --coral-800: oklch(42% 0.12 28);
-  --coral-glow: oklch(76% 0.20 30 / 0.45);
-  --coral-wash: oklch(74% 0.18 30 / 0.12);
+  /* Ember — primary action / pulse / active glow. Same warm red-orange the
+     SF + Oakland page uses; reads as the lit-coal glow against cool slate. */
+  --ember-100: oklch(94% 0.04 44);
+  --ember-200: oklch(88% 0.08 44);
+  --ember-300: oklch(80% 0.13 42);
+  --ember-400: oklch(74% 0.17 41);
+  --ember-500: oklch(62% 0.17 40);
+  --ember-600: oklch(60% 0.17 39);
+  --ember-700: oklch(50% 0.15 38);
+  --ember-800: oklch(40% 0.12 36);
+  --ember-900: oklch(28% 0.08 35);
+  --ember-glow: oklch(72% 0.20 42 / 0.45);
+  --ember-wash: oklch(68% 0.18 40 / 0.10);
 
-  /* Goldenrod / saffron — stat numerals, dates, highlights. */
-  --gold-300: oklch(86% 0.13 82);
-  --gold-400: oklch(80% 0.14 78);
-  --gold-500: oklch(72% 0.13 75);
+  /* Plum — DJ name links (deep velvet, lifts under hover toward ember). */
+  --plum-base: oklch(47% 0.13 316);
+  /* Peacock — dates, external links (deep teal). */
+  --peacock-base: oklch(47% 0.095 200);
+  --peacock-bright: oklch(60% 0.10 200);
 
-  /* Apricot — DJ name links. Replaces plum: warm dusty-rose that lives
-     inside the sunrise hue family and harmonizes with coral + gold instead
-     of fighting them like the prior plum did. */
-  --apricot: oklch(78% 0.12 50);
-  --apricot-deep: oklch(64% 0.13 48);
+  /* Gold — stat numerals + Oakland accent. Pulled brighter than before so
+     it lives squarely in the Oakland yellow lane against the slate. */
+  --gold-300: oklch(88% 0.14 88);
+  --gold-400: oklch(82% 0.17 90);
+  --gold-500: oklch(74% 0.16 88);
 
-  /* Sage-olive — secondary accent (was the cool teal). Warm desaturated
-     green reading as the first hint of fields catching morning light. */
-  --sage: oklch(75% 0.07 110);
-  --sage-deep: oklch(55% 0.08 115);
+  /* Oakland accents — black + Athletics gold, used only on day badges to
+     keep the reference loud-but-rare. */
+  --oakland-yellow: oklch(82% 0.17 90);
+  --oakland-yellow-soft: oklch(74% 0.13 88);
+  --oakland-black: oklch(8% 0 0);
 
-  /* Cream-ivory text, never pure white. Slightly warmer cream now. */
-  --ivory: oklch(96% 0.03 80);
-  --ivory-strong: oklch(98% 0.02 78);
-  --ivory-muted: oklch(82% 0.05 65);
-  --ivory-subtle: oklch(65% 0.05 55);
+  /* Ivory text — slightly cooler now to sit on the slate canvas without
+     reading yellowed. Never pure white. */
+  --ivory: oklch(96% 0.005 250);
+  --ivory-strong: oklch(99% 0.003 250);
+  --ivory-muted: oklch(72% 0.012 248);
+  --ivory-subtle: oklch(58% 0.013 248);
 
-  /* Compatibility aliases so the rest of the stylesheet keeps its old token
-     names while we shift the palette underneath. */
-  --wine-300: var(--dawn-300);
-  --wine-400: var(--dawn-400);
-  --wine-500: var(--dawn-500);
-  --wine-600: var(--dawn-600);
-  --wine-700: var(--dawn-700);
-  --wine-800: var(--dawn-800);
-  --wine-850: var(--dawn-850);
-  --wine-900: var(--dawn-900);
-  --wine-950: var(--dawn-950);
-  --copper-300: var(--coral-300);
-  --copper-400: var(--coral-400);
-  --copper-500: var(--coral-500);
-  --copper-600: var(--coral-600);
-  --copper-700: var(--coral-700);
-  --copper-800: var(--coral-800);
-  --copper-glow: var(--coral-glow);
-  --copper-wash: var(--coral-wash);
-  --plum: var(--apricot);
-  --plum-hover: var(--coral-400);
-  --teal: var(--sage);
-  --teal-deep: var(--sage-deep);
+  /* Compatibility aliases — the rest of the stylesheet still uses
+     --dawn-*, --wine-*, --coral-*, --copper-*, --apricot, --sage, --teal.
+     Re-pointed at the new SF + Oakland palette underneath. */
+  --dawn-300: var(--slate-300);
+  --dawn-400: var(--slate-400);
+  --dawn-500: var(--slate-500);
+  --dawn-600: var(--slate-600);
+  --dawn-700: var(--slate-700);
+  --dawn-800: var(--slate-800);
+  --dawn-850: var(--slate-850);
+  --dawn-900: var(--slate-900);
+  --dawn-950: var(--slate-950);
+  --wine-300: var(--slate-300);
+  --wine-400: var(--slate-400);
+  --wine-500: var(--slate-500);
+  --wine-600: var(--slate-600);
+  --wine-700: var(--slate-700);
+  --wine-800: var(--slate-800);
+  --wine-850: var(--slate-850);
+  --wine-900: var(--slate-900);
+  --wine-950: var(--slate-950);
+  --coral-300: var(--ember-300);
+  --coral-400: var(--ember-400);
+  --coral-500: var(--ember-500);
+  --coral-600: var(--ember-600);
+  --coral-700: var(--ember-700);
+  --coral-800: var(--ember-800);
+  --coral-glow: var(--ember-glow);
+  --coral-wash: var(--ember-wash);
+  --copper-300: var(--ember-300);
+  --copper-400: var(--ember-400);
+  --copper-500: var(--ember-500);
+  --copper-600: var(--ember-600);
+  --copper-700: var(--ember-700);
+  --copper-800: var(--ember-800);
+  --copper-glow: var(--ember-glow);
+  --copper-wash: var(--ember-wash);
+  --apricot: var(--plum-base);
+  --apricot-deep: var(--plum-base);
+  --plum: var(--plum-base);
+  --plum-hover: var(--ember-400);
+  --sage: var(--peacock-base);
+  --sage-deep: var(--peacock-base);
+  --teal: var(--peacock-base);
+  --teal-deep: var(--peacock-base);
 
   /* Semantic */
-  --bg-canvas: var(--dawn-900);
-  --bg-elevated: var(--dawn-850);
-  --bg-row-hover: var(--dawn-800);
-  --bg-row-active: oklch(40% 0.13 38);
+  --bg-canvas: var(--slate-950);
+  --bg-elevated: var(--slate-900);
+  --bg-row-hover: var(--slate-850);
+  --bg-row-active: oklch(20% 0.04 38);
   --fg-default: var(--ivory);
   --fg-strong: var(--ivory-strong);
   --fg-muted: var(--ivory-muted);
   --fg-subtle: var(--ivory-subtle);
-  --fg-on-copper: var(--dawn-950);
-  --border-subtle: var(--dawn-800);
-  --border-default: var(--dawn-700);
-  --border-strong: var(--dawn-600);
-  --link: var(--apricot);
-  --link-hover: var(--coral-400);
+  --fg-on-copper: var(--slate-950);
+  --border-subtle: var(--slate-800);
+  --border-default: var(--slate-700);
+  --border-strong: var(--slate-600);
+  --link: var(--plum-base);
+  --link-hover: var(--ember-400);
 
   --serif: 'Fraunces', Georgia, serif;
   --sans: 'Inter', system-ui, sans-serif;
@@ -108,9 +136,9 @@ body {
   font: 400 15px/1.55 var(--sans);
   -webkit-font-smoothing: antialiased;
   background-image:
-    radial-gradient(ellipse 80% 45% at 70% -10%, oklch(72% 0.18 35 / 0.22), transparent 65%),
-    radial-gradient(ellipse 60% 35% at 10% 0%, oklch(80% 0.14 65 / 0.14), transparent 65%),
-    radial-gradient(ellipse 70% 40% at 50% 110%, oklch(70% 0.10 90 / 0.10), transparent 65%);
+    radial-gradient(ellipse 70% 40% at 70% -10%, oklch(50% 0.15 38 / 0.18), transparent 60%),
+    radial-gradient(ellipse 50% 30% at 10% 0%, oklch(52% 0.13 318 / 0.10), transparent 60%),
+    radial-gradient(ellipse 70% 40% at 50% 110%, oklch(70% 0.16 90 / 0.06), transparent 65%);
   background-attachment: fixed;
   padding-bottom: 110px;
 }
@@ -342,8 +370,48 @@ details.ms[open] > summary {
 .t-set { color: var(--fg-muted); font-size: 13px; font-style: italic; }
 .t-set.solo { color: var(--fg-subtle); font-style: normal; opacity: 0.55; }
 .t-stage { color: var(--fg-default); font-size: 13px; }
-.t-day { color: var(--teal); white-space: nowrap; font-variant-numeric: tabular-nums; font: 500 13px/1 var(--mono); letter-spacing: 0.04em; }
-.t-day .week { color: var(--gold-400); margin-right: 4px; }
+/* Day badge — Oakland sports-jersey treatment: black bg + gold border, with
+   the W1/W2 prefix in gold-on-black behind a thin gold rule, and the day-of-
+   week (Fri/Sat/Sun) rendered in bright Oakland gold with a subtle dark
+   text-shadow so the letterforms read against bright gold like an outline. */
+.t-day {
+  display: inline-flex; align-items: stretch;
+  background: var(--oakland-black);
+  color: var(--oakland-yellow);
+  border: 1px solid var(--oakland-yellow);
+  border-radius: 3px;
+  padding: 0; overflow: hidden;
+  font: 600 11px/1 var(--mono); letter-spacing: 0.10em; text-transform: uppercase;
+  white-space: nowrap; font-variant-numeric: tabular-nums;
+  /* The dark "outline" effect on the gold text — four 1px shadows around
+     each glyph in oakland-black, soft but visible at this size. */
+  text-shadow:
+    -1px 0 0 var(--oakland-black),
+     1px 0 0 var(--oakland-black),
+     0 -1px 0 var(--oakland-black),
+     0  1px 0 var(--oakland-black);
+  padding: 4px 8px 4px 0;
+}
+.t-day .week {
+  color: var(--oakland-yellow-soft);
+  border-right: 1px solid var(--oakland-yellow);
+  padding: 4px 8px 4px 8px; margin: -4px 8px -4px 0;
+  background: var(--oakland-black);
+  font-weight: 500; opacity: 0.95;
+}
+/* On the active row, invert: gold body with black text, so the playing row
+   pops the badge the same way the SF + Oakland page pops the play button. */
+.tbl tbody tr.np .t-day {
+  background: var(--oakland-yellow);
+  color: var(--oakland-black);
+  text-shadow: none;
+}
+.tbl tbody tr.np .t-day .week {
+  background: var(--oakland-yellow);
+  color: var(--oakland-black);
+  border-right-color: var(--oakland-black);
+  opacity: 1;
+}
 
 .play-cell { width: 56px; padding: 0 !important; text-align: center; }
 .play {
