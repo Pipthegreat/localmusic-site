@@ -539,6 +539,9 @@ details.ms[open] > summary {
   .skip { display: none; }
 }
 </style>
+<!-- SoundCloud Widget API -- lets us bind PLAY / ERROR events on the embed
+     iframe so we can auto-skip tracks that never start playing. -->
+<script src="https://w.soundcloud.com/player/api.js" defer></script>
 </head>
 <body>
 <div class="shell">
@@ -1113,7 +1116,7 @@ const DATA = [
   ["DRS",                    "drs-1",                      "B2B Sandy Warez",        "Cage",            "W2"   ],
   ["Freddy K",               "freddykmusic",                 "",                       "Cage",            "W2"   ],
   ["IMHAPPY",                null,                      "",                       "Cage",            "W2"   ],
-  ["Iosio",                  "iosio",                      "",                       "Cage",            "W2"   ],
+  ["Iosio",                  null,                      "",                       "Cage",            "W2"   ],
   ["Lekkerfaces",            "lekkerfaces",                      "",                       "Cage",            "W2"   ],
   ["Macon", null,           "",                       "Cage",            "W2"   ],
   ["Mero",                   "mero",                      "B2B Daire",              "Cage",            "W2"   ],
@@ -1654,15 +1657,49 @@ document.querySelectorAll('thead th[data-sort]').forEach(th => {
 
 // ── Player ─────────────────────────────────────────────────────────────────
 let nowPlayingRow = null;
+// Auto-skip plumbing: if a SoundCloud embed doesn't actually start playing
+// within LOAD_TIMEOUT_MS (track 404, geo-blocked, non-SC handle, etc.) we
+// click "next" automatically. Cleared the moment PLAY fires.
+const LOAD_TIMEOUT_MS = 15000;
+let loadTimer = null;
 
 function loadSoundCloud(handle, artist) {
+  // Cancel any pending auto-skip from a previous load.
+  if (loadTimer) { clearTimeout(loadTimer); loadTimer = null; }
+
   const profileUrl = `https://soundcloud.com/${handle}`;
   const widgetUrl  = `https://w.soundcloud.com/player/?url=${encodeURIComponent(profileUrl)}`
                    + `&color=%23b97a3a&auto_play=true&hide_related=true&show_comments=false`
                    + `&show_user=true&show_reposts=false&show_teaser=false&visual=false`;
   playerEmbed.innerHTML = `
-    <iframe title="${artist} on SoundCloud" allow="autoplay" scrolling="no" frameborder="no"
+    <iframe id="sc-iframe" title="${artist} on SoundCloud" allow="autoplay" scrolling="no" frameborder="no"
             src="${widgetUrl}"></iframe>`;
+
+  // Bind to the SC Widget API so PLAY = success (clear timer) and ERROR =
+  // immediate skip. Falls back to the timeout-only path if the API hasn't
+  // loaded yet (rare; <script defer> finishes before any user click).
+  const iframe = document.getElementById('sc-iframe');
+  let resolved = false;
+  const settle = () => {
+    resolved = true;
+    if (loadTimer) { clearTimeout(loadTimer); loadTimer = null; }
+  };
+  if (window.SC && SC.Widget) {
+    try {
+      const widget = SC.Widget(iframe);
+      widget.bind(SC.Widget.Events.PLAY, settle);
+      widget.bind(SC.Widget.Events.ERROR, () => {
+        if (resolved) return;
+        settle();
+        if (btnNext && !btnNext.disabled) btnNext.click();
+      });
+    } catch (_) { /* fall through to the timeout */ }
+  }
+  loadTimer = setTimeout(() => {
+    loadTimer = null;
+    if (resolved) return;
+    if (btnNext && !btnNext.disabled) btnNext.click();
+  }, LOAD_TIMEOUT_MS);
 }
 
 function activateRow(tr) {
