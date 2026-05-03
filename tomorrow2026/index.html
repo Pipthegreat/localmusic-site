@@ -199,10 +199,13 @@ body {
   color: var(--fg-subtle);
 }
 
-/* FILTER ROW */
+/* FILTER ROW
+   Grid: search · stages · days · genres · "suckers" toggle · count.
+   Widths picked to keep all widgets aligned and the search input flexible. */
 .filter-row {
-  display: grid; grid-template-columns: 1fr 240px 220px auto;
-  gap: 14px; align-items: start;
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) 200px 180px 200px auto auto;
+  gap: 12px; align-items: start;
   margin-top: 28px; padding: 16px 0;
   border-bottom: 1px solid var(--border-subtle);
 }
@@ -311,12 +314,35 @@ details.ms[open] > summary {
 }
 .ms-section:first-of-type { padding-top: 6px; }
 
+/* "Mainstage is for suckers" — opinionated toggle button. Sits in the
+   filter row; sticks `.hide-mainstage` on the table when active. */
+.suckers-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--dawn-850); border: 1px solid var(--border-default);
+  color: var(--fg-muted); font: 500 11px/1 var(--mono);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 11px 14px; border-radius: 4px; cursor: pointer;
+  transition: all 160ms; white-space: nowrap; height: 40px;
+}
+.suckers-btn:hover { border-color: var(--coral-700); color: var(--coral-300); background: var(--dawn-800); }
+.suckers-btn.on {
+  background: var(--coral-wash); border-color: var(--coral-500);
+  color: var(--coral-300); box-shadow: 0 0 0 3px var(--coral-wash);
+}
+.suckers-btn .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--border-strong); transition: background 160ms, box-shadow 160ms;
+}
+.suckers-btn.on .dot { background: var(--coral-400); box-shadow: 0 0 8px 0 var(--coral-glow); }
+.tbl.hide-mainstage tbody tr[data-stage="Mainstage"] { display: none !important; }
+
 /* TABLE */
 .tbl { width: 100%; border-collapse: collapse; margin-top: 0; table-layout: fixed; }
 .tbl col.c-play   { width: 56px; }
-.tbl col.c-artist { width: 28%; }
-.tbl col.c-set    { width: 22%; }
-.tbl col.c-stage  { width: 26%; }
+.tbl col.c-artist { width: 22%; }
+.tbl col.c-genre  { width: 16%; }
+.tbl col.c-set    { width: 16%; }
+.tbl col.c-stage  { width: 22%; }
 .tbl col.c-day    { width: 130px; }
 .tbl thead th {
   text-align: left; padding: 18px 14px;
@@ -349,6 +375,16 @@ details.ms[open] > summary {
 .t-set { color: var(--fg-muted); font-size: 13px; font-style: italic; }
 .t-set.solo { color: var(--fg-subtle); font-style: normal; opacity: 0.55; }
 .t-stage { color: var(--fg-default); font-size: 13px; }
+.t-genre {
+  color: var(--apricot); font-size: 12px;
+  font: 500 12px/1.3 var(--mono); letter-spacing: 0.04em;
+  opacity: 0.85;
+}
+.tbl tbody tr:hover .t-genre { color: var(--coral-300); opacity: 1; }
+.t-day .all-days {
+  color: var(--fg-subtle); font-style: italic; opacity: 0.7;
+  font: 400 italic 12px/1 var(--serif); letter-spacing: 0;
+}
 /* Day cell -- the Oakland accent earns its appearance only on the
    .week pill below; the rest of the date is restraint, plain readable
    cream. (Stle/CLAUDE.md §1.) */
@@ -446,6 +482,12 @@ details.ms[open] > summary {
 .skip:disabled:hover { background: transparent; }
 .skip svg { width: 22px; height: 22px; fill: currentColor; }
 
+@media (max-width: 1100px) {
+  .shell { padding: 28px 24px 28px; }
+  .filter-row { grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .filter-row .suckers-btn { grid-column: 1 / -1; justify-self: start; }
+  .filter-row .count { display: none; }
+}
 @media (max-width: 980px) {
   .shell { padding: 24px 20px 28px; }
   .ah-title { font-size: 38px; }
@@ -454,8 +496,15 @@ details.ms[open] > summary {
   .filter-row .count { display: none; }
   .tbl col.c-set { width: 0; }
   .t-set { display: none; }
+  .tbl col.c-artist { width: 28%; }
+  .tbl col.c-genre  { width: 22%; }
+  .tbl col.c-stage  { width: 28%; }
+}
+@media (max-width: 740px) {
+  .tbl col.c-genre { width: 0; }
+  .t-genre { display: none; }
   .tbl col.c-artist { width: 36%; }
-  .tbl col.c-stage  { width: 38%; }
+  .tbl col.c-stage  { width: 40%; }
 }
 @media (max-width: 640px) {
   .tbl col.c-stage { width: 0; }
@@ -524,30 +573,48 @@ details.ms[open] > summary {
           <button type="button" class="ms-clear" data-target="day" disabled>Clear</button>
         </div>
         <div class="ms-section">Week 1 · Jul 17–19</div>
-        <label class="ms-opt"><input type="checkbox" data-day="W1 Fri"><span>Fri Jul 17</span><span class="ms-count" data-day-count="W1 Fri"></span></label>
-        <label class="ms-opt"><input type="checkbox" data-day="W1 Sat"><span>Sat Jul 18</span><span class="ms-count" data-day-count="W1 Sat"></span></label>
-        <label class="ms-opt"><input type="checkbox" data-day="W1 Sun"><span>Sun Jul 19</span><span class="ms-count" data-day-count="W1 Sun"></span></label>
-        <label class="ms-opt"><input type="checkbox" data-day="W1*"><span>Anywhere on Week 1</span><span class="ms-count" data-day-count="W1*"></span></label>
+        <label class="ms-opt"><input type="checkbox" data-day="W1 Fri"><span>Fri · Jul 17</span><span class="ms-count" data-day-count="W1 Fri"></span></label>
+        <label class="ms-opt"><input type="checkbox" data-day="W1 Sat"><span>Sat · Jul 18</span><span class="ms-count" data-day-count="W1 Sat"></span></label>
+        <label class="ms-opt"><input type="checkbox" data-day="W1 Sun"><span>Sun · Jul 19</span><span class="ms-count" data-day-count="W1 Sun"></span></label>
+        <label class="ms-opt"><input type="checkbox" data-day="W1*"><span>Anywhere on W1</span><span class="ms-count" data-day-count="W1*"></span></label>
         <div class="ms-section">Week 2 · Jul 24–26</div>
-        <label class="ms-opt"><input type="checkbox" data-day="W2 Fri"><span>Fri Jul 24</span><span class="ms-count" data-day-count="W2 Fri"></span></label>
-        <label class="ms-opt"><input type="checkbox" data-day="W2 Sat"><span>Sat Jul 25</span><span class="ms-count" data-day-count="W2 Sat"></span></label>
-        <label class="ms-opt"><input type="checkbox" data-day="W2 Sun"><span>Sun Jul 26</span><span class="ms-count" data-day-count="W2 Sun"></span></label>
-        <label class="ms-opt"><input type="checkbox" data-day="W2*"><span>Anywhere on Week 2</span><span class="ms-count" data-day-count="W2*"></span></label>
+        <label class="ms-opt"><input type="checkbox" data-day="W2 Fri"><span>Fri · Jul 24</span><span class="ms-count" data-day-count="W2 Fri"></span></label>
+        <label class="ms-opt"><input type="checkbox" data-day="W2 Sat"><span>Sat · Jul 25</span><span class="ms-count" data-day-count="W2 Sat"></span></label>
+        <label class="ms-opt"><input type="checkbox" data-day="W2 Sun"><span>Sun · Jul 26</span><span class="ms-count" data-day-count="W2 Sun"></span></label>
+        <label class="ms-opt"><input type="checkbox" data-day="W2*"><span>Anywhere on W2</span><span class="ms-count" data-day-count="W2*"></span></label>
       </div>
     </details>
+
+    <details class="ms" id="ms-genre">
+      <summary><span class="ms-summary-text empty" data-empty="All genres">All genres</span></summary>
+      <div class="ms-panel">
+        <div class="ms-panel-head">
+          <span>Genre</span>
+          <button type="button" class="ms-clear" data-target="genre" disabled>Clear</button>
+        </div>
+        <div id="genre-options"></div>
+      </div>
+    </details>
+
+    <button type="button" class="suckers-btn" id="btn-suckers" aria-pressed="false"
+            title="Hide every Mainstage row — go find the underground">
+      <span class="dot" aria-hidden="true"></span>
+      <span>Mainstage is for suckers</span>
+    </button>
 
     <div class="count"><b id="count-now">0</b> / <span id="count-total">0</span></div>
   </div>
 
-  <table class="tbl">
+  <table class="tbl" id="tbl">
     <colgroup>
       <col class="c-play"><col class="c-artist">
-      <col class="c-set"><col class="c-stage"><col class="c-day">
+      <col class="c-genre"><col class="c-set"><col class="c-stage"><col class="c-day">
     </colgroup>
     <thead>
       <tr>
         <th></th>
         <th data-sort="artist">DJ <span class="caret"></span></th>
+        <th data-sort="genre">Genre <span class="caret"></span></th>
         <th data-sort="set">Set <span class="caret"></span></th>
         <th data-sort="stage">Stage <span class="caret"></span></th>
         <th data-sort="day">Day <span class="caret"></span></th>
@@ -710,7 +777,7 @@ const DATA = [
   ["Sedef Adası",            "sedefadasi",                      "",                       "CORE",            "W1"   ],
   ["Ineffekt",               "ineffekt",                      "",                       "CORE",            "W1"   ],
   ["Fafi Abdel Nour",        "fafi_abdel_nour",                      "",                       "CORE",            "W1"   ],
-  ["Massignan.Y",            null,                      "",                       "CORE",            "W1"   ],
+  ["Massignan.Y",            "massignan-y",                      "",                       "CORE",            "W1"   ],
   ["Mall Grab",              "mallgrab",                "",                       "CORE",            "W2"   ],
   ["Bullet Tooth",           "bullettooth",                      "",                       "CORE",            "W2"   ],
   ["Catalina",               "catalina",                      "",                       "CORE",            "W2"   ],
@@ -1218,21 +1285,106 @@ const DATA = [
   ["The Bobmeister",         "the-bobmeister",                      "",                       "Moose Bar",       "W2"   ],
 ];
 
+// ── Genre estimation ──────────────────────────────────────────────────────
+// Each row gets an "estimated genre" derived from its stage (default) with
+// per-artist overrides for ones whose vibe doesn't match the stage label.
+// These are estimates, not gospel — the filter is for navigation, not a
+// musicology claim.
+const STAGE_GENRE = {
+  "Mainstage":        "Big Room / Mixed",
+  "Atmosphere":       "Techno",
+  "CORE":             "House / Electronic",
+  "The Library":      "EDM / Various",
+  "Freedom":          "Mixed",
+  "Crystal Garden":   "Tech House",
+  "The Rose Garden":  "DnB / Hardstyle",
+  "Cage":             "Hard Techno",
+  "Elixir":           "Reggae / Sound System",
+  "Planaxis":         "Psy / Bass",
+  "Melodia":          "Afro House",
+  "Rise":             "House",
+  "The Rave Cave":    "Various",
+  "House of Fortune": "House",
+  "Moose Bar":        "Lounge",
+};
+const ARTIST_GENRE = {
+  "Calvin Harris":"Pop EDM","David Guetta":"Pop EDM","The Chainsmokers":"Pop EDM",
+  "Hardwell":"Big Room","Martin Garrix":"Big Room","Steve Aoki":"Big Room",
+  "Dimitri Vegas & Like Mike":"Big Room","Steve Angello":"House","Sebastian Ingrosso":"House",
+  "Alesso":"Big Room","Afrojack":"Big Room","Nicky Romero":"Big Room","Yves V":"Big Room",
+  "Bassjackers":"Big Room","Maddix":"Tech / Big Room","NERVO":"Big Room",
+  "Mike Williams":"Big Room","MORTEN":"Future Rave","Malaa":"G-House",
+  "Boris Brejcha":"Minimal Techno","Sara Landry":"Hard Techno","Nico Moreno":"Hard Techno",
+  "I Hate Models":"Hard Techno","Reinier Zonneveld":"Techno","Amelie Lens":"Techno",
+  "Indira Paganotto":"Techno","Anetha":"Techno","Ben Klock":"Techno","Kobosil":"Techno",
+  "Trym":"Techno","Mha Iri":"Techno","Charlotte de Witte":"Techno","Holy Priest":"Hard Techno",
+  "Subtronics":"Dubstep","Seven Lions":"Melodic Dubstep","Liquid Stranger":"Dubstep",
+  "Illenium":"Melodic Dubstep","REZZ":"Mid-Tempo","DVBBS":"EDM Trap","Punctual":"Future Bass",
+  "Sabai":"Future Bass","Riot Ten":"Bass","Sullivan King":"Metalstep",
+  "Jessica Audiffred":"Bass","Bountyhunter":"Frenchcore",
+  "Chase & Status":"Drum & Bass","Netsky":"Drum & Bass","Wilkinson":"Drum & Bass",
+  "Camo & Krooked":"Drum & Bass","Andromedik":"Drum & Bass","Murdock":"Drum & Bass",
+  "Bou":"Drum & Bass","Basstripper":"Drum & Bass","AlleyCvt":"Drum & Bass",
+  "A Little Sound":"Drum & Bass","Kanine":"Drum & Bass","Aeon Mode":"Drum & Bass",
+  "Sub Zero Project":"Hardstyle","Da Tweekaz":"Hardstyle","Brennan Heart":"Hardstyle",
+  "Coone":"Hardstyle","Sound Rush":"Hardstyle","Adrenalize":"Hardstyle",
+  "Rebelion":"Raw Hardstyle","Rooler":"Uptempo / Frenchcore","Warface":"Hardstyle",
+  "The Purge":"Hardstyle","Hard Driver":"Hardstyle","The Straikerz":"Raw Hardstyle",
+  "DA Tweekaz":"Hardstyle",
+  "Lost Frequencies":"Tropical House","Meduza":"House","Joel Corry":"House",
+  "James Hype":"Tech House","Sonny Fodera":"House","Gorgon City":"House",
+  "John Summit":"Tech House","Fisher":"Tech House","Vintage Culture":"House",
+  "Argy":"Melodic House","ZHU":"Deep House","Modeselektor":"IDM / Electronic",
+  "Mahmut Orhan":"Tropical / Ethnic","HUGEL":"Tech House","Will Sparks":"Mainstage / Bounce",
+  "Da Capo":"Afro House","Caiiro":"Afro House","Enoo Napa":"Afro House",
+  "Thakzin":"Afro House","Vanco":"Afro House","Shimza":"Afro Tech","Joezi":"Afro House",
+  "AWEN":"Afro House","Danni Gato":"Afro House","Sam Shure":"Afro House",
+  "Hermanos Inglesos":"Afro House","Kölsch":"Melodic Techno","Mind Against":"Melodic Techno",
+  "Job Jobse":"Melodic Techno","Korolova":"Melodic House","Massano":"Melodic House",
+  "Miss Monique":"Melodic House","Artbat":"Melodic House","Fideles":"Melodic House",
+  "Joris Voorn":"Tech House","Sasha":"Progressive House","Young Marco":"Progressive",
+  "Avalon Emerson":"Electronic","Ben UFO":"Electronic","DJ Tennis":"Electronic",
+  "The Blessed Madonna":"House","HAAi":"Electronic","Mall Grab":"House",
+  "Sally C":"Tech House","Henri PFR":"Big Room","ANGEMI":"Tech / Big Room",
+  "Lucas & Steve":"Future House","Mosimann":"House","Disco Lines":"Disco / House",
+  "Marlon Hoffstadt":"Tech House","Timmy Trumpet":"Big Room","Argy":"Melodic House",
+  "Hi Profile":"Psytrance","Neelix":"Psytrance","Omiki":"Psytrance",
+  "John 00 Fleming":"Psytrance","Trip-Tamine":"Psytrance","Phaxe":"Psytrance",
+  "Blastoyz":"Psytrance","Electric Universe":"Psytrance","Marnik":"Psytrance",
+  "Symphony of Unity":"Orchestral",
+};
+function genreFor(artist, stage) {
+  return ARTIST_GENRE[artist] || STAGE_GENRE[stage] || "Various";
+}
+
+// Day-tag → readable label. Single source of truth so the cell + filter
+// summary + sort all agree.
+const DAY_LABEL = {
+  "W1 Fri": "Fri · Jul 17",  "W1 Sat": "Sat · Jul 18",  "W1 Sun": "Sun · Jul 19",
+  "W2 Fri": "Fri · Jul 24",  "W2 Sat": "Sat · Jul 25",  "W2 Sun": "Sun · Jul 26",
+};
+
 // ── Render + interactivity ────────────────────────────────────────────────
 const tbody         = document.getElementById('dj-rows');
+const tbl           = document.getElementById('tbl');
 const filterInput   = document.getElementById('filter');
 const countNow      = document.getElementById('count-now');
 const countTotal    = document.getElementById('count-total');
 const playerEmbed   = document.getElementById('player-embed');
 const btnPrev       = document.getElementById('btn-prev');
 const btnNext       = document.getElementById('btn-next');
+const btnSuckers    = document.getElementById('btn-suckers');
 const msStage       = document.getElementById('ms-stage');
 const msDay         = document.getElementById('ms-day');
+const msGenre       = document.getElementById('ms-genre');
 const msStageSummary = msStage.querySelector('.ms-summary-text');
 const msDaySummary   = msDay.querySelector('.ms-summary-text');
+const msGenreSummary = msGenre.querySelector('.ms-summary-text');
 const stageOptionsEl = document.getElementById('stage-options');
+const genreOptionsEl = document.getElementById('genre-options');
 const clearStageBtn  = msStage.querySelector('.ms-clear');
 const clearDayBtn    = msDay.querySelector('.ms-clear');
+const clearGenreBtn  = msGenre.querySelector('.ms-clear');
 
 // Stage list — preserve appearance order, not alphabetical, so the famous
 // stages (Mainstage, Atmosphere…) stay at the top.
@@ -1260,6 +1412,23 @@ for (const el of msDay.querySelectorAll('[data-day-count]')) {
   }
 }
 
+// Genre list — derived from each row, deduped, count rows per genre.
+const genreCount = new Map();
+for (const d of DATA) {
+  const g = genreFor(d[0], d[3]);
+  genreCount.set(g, (genreCount.get(g) || 0) + 1);
+}
+const genres = [...genreCount.keys()].sort();
+for (const g of genres) {
+  const lbl = document.createElement('label');
+  lbl.className = 'ms-opt';
+  lbl.innerHTML = `
+    <input type="checkbox" data-genre="${g.replace(/"/g, '&quot;')}">
+    <span>${g}</span>
+    <span class="ms-count">${genreCount.get(g)}</span>`;
+  genreOptionsEl.appendChild(lbl);
+}
+
 document.getElementById('stat-djs').textContent    = new Set(DATA.map(d => d[0])).size;
 document.getElementById('stat-stages').textContent = stages.length;
 
@@ -1271,6 +1440,7 @@ function renderRows() {
   const frag = document.createDocumentFragment();
   DATA.forEach((row, idx) => {
     const [artist, handle, setType, stage, day] = row;
+    const genre = genreFor(artist, stage);
     const tr = document.createElement('tr');
     tr.dataset.idx     = idx;
     tr.dataset.artist  = artist;
@@ -1278,14 +1448,18 @@ function renderRows() {
     tr.dataset.set     = setType || '';
     tr.dataset.stage   = stage;
     tr.dataset.day     = day;
+    tr.dataset.genre   = genre;
     tr.dataset.mode    = handle ? 'embed' : 'search';
 
-    const dayParts = day.split(' ');
-    const week = dayParts[0]; // W1 or W2
-    const dow  = dayParts[1] || ''; // Fri Sat Sun (or blank)
-    const dayCell = dow
-      ? `<span class="week">${week}</span>${dow}`
-      : `<span class="week">${week === 'W1' ? 'Week 1' : 'Week 2'}</span>`;
+    // Day cell: pill always shows W1/W2; suffix is the specific date when
+    // we have one, otherwise an "all days" hint. Single style across the
+    // whole column — no more W1 vs Week 1 mixed-mode shouting.
+    const week = day.startsWith('W2') ? 'W2' : 'W1';
+    const dateText = DAY_LABEL[day];
+    const daySuffix = dateText
+      ? dateText
+      : `<span class="all-days">all days</span>`;
+    const dayCell = `<span class="week">${week}</span>${daySuffix}`;
 
     const artistHref = handle ? `https://soundcloud.com/${handle}` : searchUrl(artist);
     const ariaLabel  = handle
@@ -1301,6 +1475,7 @@ function renderRows() {
         </button>
       </td>
       <td><a class="t-artist" href="${artistHref}" target="_blank" rel="noopener" title="${handle ? 'Open profile on SoundCloud' : 'Search SoundCloud for ' + artist}">${artist}${handle ? '' : '<span class="ext">↗</span>'}</a></td>
+      <td><span class="t-genre">${genre}</span></td>
       <td><span class="t-set ${setType ? '' : 'solo'}">${setType || '— solo'}</span></td>
       <td><span class="t-stage">${stage}</span></td>
       <td><span class="t-day">${dayCell}</span></td>
@@ -1317,6 +1492,9 @@ function selectedStages() {
 }
 function selectedDayTags() {
   return [...msDay.querySelectorAll('input:checked')].map(i => i.dataset.day);
+}
+function selectedGenres() {
+  return [...genreOptionsEl.querySelectorAll('input:checked')].map(i => i.dataset.genre);
 }
 // A row's day matches if ANY selected day-tag matches it. "W1*" / "W2*" act
 // as week-wildcards and match anything starting with that week prefix.
@@ -1348,13 +1526,16 @@ function applyFilters() {
   const q       = filterInput.value.trim().toLowerCase();
   const stages_ = selectedStages();
   const days_   = selectedDayTags();
+  const genres_ = selectedGenres();
   let visible = 0, total = 0;
   for (const tr of tbody.children) {
     total++;
-    const matchesQ     = !q || (tr.dataset.artist + ' ' + tr.dataset.stage + ' ' + tr.dataset.set).toLowerCase().includes(q);
+    const matchesQ     = !q || (tr.dataset.artist + ' ' + tr.dataset.stage + ' '
+                                + tr.dataset.set + ' ' + tr.dataset.genre).toLowerCase().includes(q);
     const matchesStage = !stages_.length || stages_.includes(tr.dataset.stage);
     const matchesDay   = dayMatchesAny(tr.dataset.day, days_);
-    const show = matchesQ && matchesStage && matchesDay;
+    const matchesGenre = !genres_.length || genres_.includes(tr.dataset.genre);
+    const show = matchesQ && matchesStage && matchesDay && matchesGenre;
     tr.style.display = show ? '' : 'none';
     if (show) visible++;
   }
@@ -1363,19 +1544,21 @@ function applyFilters() {
 
   updateMsSummary(msStage, msStageSummary, stages_, 'All stages', s => s);
   const dayLabel = t => {
-    if (t === 'W1*') return 'Week 1 · all days';
-    if (t === 'W2*') return 'Week 2 · all days';
-    const [w, d] = t.split(' ');
-    return `${w} · ${d}`;
+    if (t === 'W1*') return 'W1 · all days';
+    if (t === 'W2*') return 'W2 · all days';
+    return DAY_LABEL[t] || t;
   };
   updateMsSummary(msDay, msDaySummary, days_, 'All days', dayLabel);
+  updateMsSummary(msGenre, msGenreSummary, genres_, 'All genres', g => g);
   clearStageBtn.disabled = stages_.length === 0;
   clearDayBtn.disabled   = days_.length === 0;
+  clearGenreBtn.disabled = genres_.length === 0;
 }
 
 filterInput.addEventListener('input',  applyFilters);
 stageOptionsEl.addEventListener('change', applyFilters);
 msDay.addEventListener('change', applyFilters);
+genreOptionsEl.addEventListener('change', applyFilters);
 
 clearStageBtn.addEventListener('click', e => {
   e.stopPropagation();
@@ -1387,18 +1570,37 @@ clearDayBtn.addEventListener('click', e => {
   for (const i of msDay.querySelectorAll('input:checked')) i.checked = false;
   applyFilters();
 });
+clearGenreBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  for (const i of genreOptionsEl.querySelectorAll('input:checked')) i.checked = false;
+  applyFilters();
+});
 
-// Click-outside closes either popover, like a real <select> dropdown would.
+// Click-outside closes any open popover, like a real <select> dropdown would.
 document.addEventListener('click', e => {
-  for (const d of [msStage, msDay]) {
+  for (const d of [msStage, msDay, msGenre]) {
     if (d.open && !d.contains(e.target)) d.removeAttribute('open');
   }
 });
 
+// "Mainstage is for suckers" — toggle a class on the table; persist across
+// reloads so the user's stance on Mainstage is honored.
+const SUCKERS_KEY = 'tomorrow2026.mainstage_is_for_suckers';
+function setSuckers(on) {
+  btnSuckers.classList.toggle('on', on);
+  btnSuckers.setAttribute('aria-pressed', on ? 'true' : 'false');
+  tbl.classList.toggle('hide-mainstage', on);
+  try { localStorage.setItem(SUCKERS_KEY, on ? '1' : '0'); } catch {}
+}
+btnSuckers.addEventListener('click', () => setSuckers(!btnSuckers.classList.contains('on')));
+try { setSuckers(localStorage.getItem(SUCKERS_KEY) === '1'); } catch {}
+
 applyFilters();
 
 // ── Sort ───────────────────────────────────────────────────────────────────
-const sortMap = { artist: 1, set: 2, stage: 3, day: 4 };
+// Column indices match the rendered <td>s: play=0, artist=1, genre=2,
+// set=3, stage=4, day=5. Keep this in sync with renderRows.
+const sortMap = { artist: 1, genre: 2, set: 3, stage: 4, day: 5 };
 let sortState = { col: null, dir: null };
 document.querySelectorAll('thead th[data-sort]').forEach(th => {
   th.addEventListener('click', () => {
