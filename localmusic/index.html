@@ -447,7 +447,7 @@ ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
     <h1 class="ah-title">San Francisco <span class="ah-plus">+</span> Oakland</h1>
 
     <div class="ah-sub">
-      <span class="ah-sub-lead">Upcoming live music: <em>next 90 days</em></span>
+      <span class="ah-sub-lead">Next <em>90 days</em></span>
       <span class="ah-rule" aria-hidden="true"></span>
       <details class="ah-time-menu">
         <summary><time datetime="2026-05-02/2026-07-30">May 02 → Jul 30, 2026</time></summary>
@@ -545,12 +545,15 @@ filt.addEventListener('input', applyFilter);
 venueFilt.addEventListener('change', applyFilter);
 
 const djToggle = document.getElementById('dj-toggle');
-const tableEl = document.getElementById('tracks');
+const tableEl = document.querySelector('.tbl');
 djToggle.addEventListener('change', () => {
   tableEl.classList.toggle('show-djs', djToggle.checked);
   applyFilter();
   if (djToggle.checked) loadMoreEdmFromWorker();
 });
+// Run once on load so the count reflects the 27 DJ-only rows that are
+// CSS-hidden by default (otherwise initial display reads 536/536).
+applyFilter();
 
 // =====================================================================
 // LIVE SEARCH via Cloudflare Worker
