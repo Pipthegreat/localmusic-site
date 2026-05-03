@@ -372,6 +372,26 @@ details.ms[open] > summary {
 .t-artist:hover { color: var(--copper-400); text-decoration: underline; text-decoration-color: var(--copper-700); text-underline-offset: 3px; }
 .tbl tbody tr:hover .t-artist { color: var(--copper-400); }
 .t-artist .ext { font-size: 10px; color: var(--teal); margin-left: 4px; opacity: 0.55; vertical-align: 1px; }
+/* Multi-platform fallback badges — shown next to artist name on rows where
+   we couldn't find a working SoundCloud handle. SC link is the artist
+   name itself; the badges expose Spotify and YouTube too so the user can
+   pick whichever platform they prefer. */
+.t-platforms { display: inline-flex; gap: 4px; margin-left: 8px; vertical-align: 1px; }
+.t-platforms a {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 16px; min-width: 22px; padding: 0 4px;
+  border: 1px solid var(--border-default); border-radius: 3px;
+  font: 600 9px/1 var(--mono); letter-spacing: 0.06em;
+  color: var(--fg-subtle); text-decoration: none;
+  transition: all 140ms;
+}
+.t-platforms a:hover {
+  border-color: var(--coral-600); color: var(--coral-300);
+  background: var(--coral-wash);
+}
+.t-platforms a.sc:hover { border-color: oklch(58% 0.16 30); color: oklch(78% 0.16 30); }
+.t-platforms a.sp:hover { border-color: oklch(58% 0.18 145); color: oklch(78% 0.18 145); }
+.t-platforms a.yt:hover { border-color: oklch(58% 0.20 25); color: oklch(78% 0.20 25); }
 .t-set { color: var(--fg-muted); font-size: 13px; font-style: italic; }
 .t-set.solo { color: var(--fg-subtle); font-style: normal; opacity: 0.55; }
 .t-stage { color: var(--fg-default); font-size: 13px; }
@@ -1435,6 +1455,17 @@ document.getElementById('stat-stages').textContent = stages.length;
 function searchUrl(artist) {
   return `https://soundcloud.com/search/people?q=${encodeURIComponent(artist)}`;
 }
+// Multi-platform search URLs. Used on rows where no working SoundCloud
+// handle could be found — show all three so the user can pick whichever
+// platform they actually use.
+function platformLinks(artist) {
+  const q  = encodeURIComponent(artist);
+  return `<span class="t-platforms" aria-label="Find ${artist} on">`
+       + `<a class="sc" href="https://soundcloud.com/search/people?q=${q}" target="_blank" rel="noopener" title="Search ${artist} on SoundCloud">SC</a>`
+       + `<a class="sp" href="https://open.spotify.com/search/${q}" target="_blank" rel="noopener" title="Search ${artist} on Spotify">SP</a>`
+       + `<a class="yt" href="https://www.youtube.com/results?search_query=${q}" target="_blank" rel="noopener" title="Search ${artist} on YouTube">YT</a>`
+       + `</span>`;
+}
 
 function renderRows() {
   const frag = document.createDocumentFragment();
@@ -1474,7 +1505,7 @@ function renderRows() {
           <svg class="ico-search" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
         </button>
       </td>
-      <td><a class="t-artist" href="${artistHref}" target="_blank" rel="noopener" title="${handle ? 'Open profile on SoundCloud' : 'Search SoundCloud for ' + artist}">${artist}${handle ? '' : '<span class="ext">↗</span>'}</a></td>
+      <td><a class="t-artist" href="${artistHref}" target="_blank" rel="noopener" title="${handle ? 'Open profile on SoundCloud' : 'Search SoundCloud for ' + artist}">${artist}</a>${handle ? '' : platformLinks(artist)}</td>
       <td><span class="t-genre">${genre}</span></td>
       <td><span class="t-set ${setType ? '' : 'solo'}">${setType || '— solo'}</span></td>
       <td><span class="t-stage">${stage}</span></td>
@@ -1661,8 +1692,10 @@ function playRow(tr) {
 }
 
 tbody.addEventListener('click', e => {
-  // The artist name is a real <a> link; let the browser handle it.
+  // The artist name and the SC/SP/YT platform badges are real <a> links;
+  // let the browser handle them rather than triggering row playback.
   if (e.target.closest('.t-artist')) return;
+  if (e.target.closest('.t-platforms')) return;
   const tr = e.target.closest('tr');
   if (!tr) return;
   if (tr === nowPlayingRow && tr.dataset.mode === 'embed' && e.target.closest('.play')) {
