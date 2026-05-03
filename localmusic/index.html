@@ -9,19 +9,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,ital@9..144,300..600,0;9..144,300..600,1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Tomorrowland's warm dawn-terracotta base, dropped onto the SF + Oakland
-     page. Token names below stay slate-*/ember-*/plum/peacock so the rest of
-     the stylesheet keeps resolving — only the values are warm now. */
-  --slate-300: oklch(82% 0.05 65);
-  --slate-400: oklch(75% 0.06 35);
-  --slate-500: oklch(52% 0.08 32);
-  --slate-600: oklch(44% 0.085 30);
-  --slate-700: oklch(37% 0.09 30);
-  --slate-800: oklch(31% 0.085 30);
-  --slate-850: oklch(28% 0.08 30);
-  --slate-900: oklch(25% 0.075 32);
-  --slate-950: oklch(22% 0.07 32);
-  /* Coral remapped onto ember-* */
+  /* Per Stle/CLAUDE.md §2.8 -- neutrals tinted 2-4% toward the accent,
+     not 7-9% as the prior pass had it. The result is a quiet warm-tinted
+     dark canvas that lets ember + Oakland gold do all the talking instead
+     of competing with a saturated dawn-red surface. */
+  --slate-300: oklch(82% 0.022 65);
+  --slate-400: oklch(70% 0.025 50);
+  --slate-500: oklch(52% 0.028 40);
+  --slate-600: oklch(44% 0.028 36);
+  --slate-700: oklch(35% 0.028 34);
+  --slate-800: oklch(26% 0.028 34);
+  --slate-850: oklch(22% 0.026 34);
+  --slate-900: oklch(18% 0.024 34);
+  --slate-950: oklch(13% 0.020 34);
+  /* Ember -- the single primary accent. Earns every appearance. */
   --ember-100: oklch(94% 0.04 30);
   --ember-200: oklch(88% 0.08 30);
   --ember-300: oklch(82% 0.12 32);
@@ -31,20 +32,22 @@
   --ember-700: oklch(52% 0.15 28);
   --ember-800: oklch(42% 0.12 28);
   --ember-900: oklch(30% 0.08 28);
-  --ember-glow: oklch(76% 0.20 30 / 0.45);
-  --ember-wash: oklch(74% 0.18 30 / 0.12);
-  /* Apricot in plum's slot — warm dusty-rose for artist links. */
-  --plum: oklch(64% 0.13 48);
+  --ember-glow: oklch(76% 0.20 30 / 0.40);
+  --ember-wash: oklch(74% 0.18 30 / 0.10);
+  /* Plum -- artist links. Pulled to a low-chroma warm rose so it doesn't
+     fight ember; reads as "tinted neutral, not a second accent." */
+  --plum: oklch(74% 0.06 50);
   --plum-hover: var(--ember-400);
-  /* Sage-olive in peacock's slot — warm secondary for dates / external. */
-  --peacock: oklch(55% 0.08 115);
-  /* Goldenrod — stat numerals + Oakland accent. */
+  /* Peacock -- legacy alias kept for any holdouts. Demoted to a quiet
+     supporting cream; not used on dates anymore. */
+  --peacock: oklch(78% 0.05 75);
+  /* Goldenrod scale -- only used now where the design genuinely wants
+     gold weight (the Oakland day pill). Stat numerals moved to ivory. */
   --gold-300: oklch(86% 0.13 82);
   --gold-400: oklch(80% 0.14 78);
   --gold-500: oklch(72% 0.13 75);
-  /* Oakland accents — black + Athletics gold. Used on the day-of-week
-     badge in the Date column to drop a "Fri/Sat/Sun" Oakland flag onto
-     each row, loud-but-rare against the warm dawn palette. */
+  /* Oakland accent -- black + Athletics gold. Loud-but-rare, used only
+     on the day-of-week pill. This is the supporting hue per Stle §2.1. */
   --oakland-yellow: oklch(82% 0.17 90);
   --oakland-yellow-soft: oklch(74% 0.13 88);
   --oakland-black: oklch(8% 0 0);
@@ -52,11 +55,11 @@
   --bg-canvas: var(--slate-900);
   --bg-elevated: var(--slate-850);
   --bg-row-hover: var(--slate-800);
-  --bg-row-active: oklch(40% 0.13 38);
-  --fg-default: oklch(96% 0.03 80);
-  --fg-strong: oklch(98% 0.02 78);
-  --fg-muted: oklch(82% 0.05 65);
-  --fg-subtle: oklch(65% 0.05 55);
+  --bg-row-active: oklch(28% 0.05 38);
+  --fg-default: oklch(95% 0.02 70);
+  --fg-strong: oklch(98% 0.012 70);
+  --fg-muted: oklch(78% 0.025 65);
+  --fg-subtle: oklch(58% 0.022 55);
   --fg-on-ember: var(--slate-950);
   --border-subtle: var(--slate-800);
   --border-default: var(--slate-700);
@@ -76,9 +79,7 @@ body {
   font: 400 15px/1.55 var(--sans);
   -webkit-font-smoothing: antialiased;
   background-image:
-    radial-gradient(ellipse 80% 45% at 70% -10%, oklch(72% 0.18 35 / 0.22), transparent 65%),
-    radial-gradient(ellipse 60% 35% at 10% 0%, oklch(80% 0.14 65 / 0.14), transparent 65%),
-    radial-gradient(ellipse 70% 40% at 50% 110%, oklch(70% 0.10 90 / 0.10), transparent 65%);
+    radial-gradient(ellipse 70% 40% at 70% -10%, oklch(60% 0.14 32 / 0.10), transparent 65%);
   background-attachment: fixed;
   padding-bottom: 110px;
 }
@@ -226,30 +227,18 @@ ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
 .tbl thead th.sort-desc .caret { opacity: 1; }
 .tbl thead th.sort-asc  .caret::before { content: "▲"; color: var(--ember-400); }
 .tbl thead th.sort-desc .caret::before { content: "▼"; color: var(--ember-400); }
-/* Date "rest" text (e.g. "May 30") -- jersey treatment to match the
-   black-and-gold dow badge: black fill + 1px white outline via
-   text-shadow. The .t-dow rule below overrides on the day-of-week pill. */
+/* Date "rest" text (e.g. "May 30") -- plain readable cream. The Oakland
+   accent earns its appearance only on the .t-dow pill below; the rest of
+   the date is restraint, not ornament. (Stle/CLAUDE.md §1.) */
 .t-date {
-  color: var(--oakland-black);
+  color: var(--fg-muted);
   white-space: nowrap; font-variant-numeric: tabular-nums;
-  font-weight: 600; letter-spacing: 0.04em;
-  text-shadow:
-    -1px 0 0 rgba(239,178,30,0.32),
-     1px 0 0 rgba(239,178,30,0.32),
-     0 -1px 0 rgba(239,178,30,0.32),
-     0  1px 0 rgba(239,178,30,0.32);
+  font: 500 13px/1 var(--mono); letter-spacing: 0.04em;
 }
-/* Same treatment for the mobile-meta date that appears under the track on
-   small screens. */
 .t-mobile-meta .m-date {
-  color: var(--oakland-black);
+  color: var(--fg-muted);
   font-variant-numeric: tabular-nums;
-  font-weight: 600; letter-spacing: 0.04em;
-  text-shadow:
-    -1px 0 0 rgba(239,178,30,0.32),
-     1px 0 0 rgba(239,178,30,0.32),
-     0 -1px 0 rgba(239,178,30,0.32),
-     0  1px 0 rgba(239,178,30,0.32);
+  font: 500 12px/1 var(--mono); letter-spacing: 0.04em;
 }
 /* Day-of-week badge (the "Fri" / "Sat" / "Sun" prefix) — Oakland sports
    jersey treatment: bright Oakland gold on solid black, with a 1px black

@@ -9,51 +9,49 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,ital@9..144,300..600,0;9..144,300..600,1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Dawn-terracotta base — lifted significantly from the prior near-black,
-     same warm 30° hue family as the accents so surfaces, links, and accents
-     read as one continuous gradient from pre-dawn to first-light. */
-  --dawn-300: oklch(75% 0.06 35);
-  --dawn-400: oklch(62% 0.07 33);
-  --dawn-500: oklch(52% 0.08 32);
-  --dawn-600: oklch(44% 0.085 30);
-  --dawn-700: oklch(37% 0.09 30);
-  --dawn-800: oklch(31% 0.085 30);
-  --dawn-850: oklch(28% 0.08 30);
-  --dawn-900: oklch(25% 0.075 32);
-  --dawn-950: oklch(22% 0.07 32);
+  /* Dawn-terracotta base, but dialed back to 2-3% chroma per Stle §2.8.
+     The page now reads as warm-tinted neutral, not saturated dawn-red. */
+  --dawn-300: oklch(82% 0.022 65);
+  --dawn-400: oklch(70% 0.025 50);
+  --dawn-500: oklch(52% 0.028 40);
+  --dawn-600: oklch(44% 0.028 36);
+  --dawn-700: oklch(35% 0.028 34);
+  --dawn-800: oklch(26% 0.028 34);
+  --dawn-850: oklch(22% 0.026 34);
+  --dawn-900: oklch(18% 0.024 34);
+  --dawn-950: oklch(13% 0.020 34);
 
-  /* Coral — primary action / pulse / active glow. Warmer than copper, a
-     cleaner red-orange that matches the sunrise base. */
+  /* Coral — the single primary accent. Earns every appearance. */
   --coral-300: oklch(82% 0.12 32);
   --coral-400: oklch(76% 0.16 30);
   --coral-500: oklch(70% 0.18 28);
   --coral-600: oklch(62% 0.17 28);
   --coral-700: oklch(52% 0.15 28);
   --coral-800: oklch(42% 0.12 28);
-  --coral-glow: oklch(76% 0.20 30 / 0.45);
-  --coral-wash: oklch(74% 0.18 30 / 0.12);
+  --coral-glow: oklch(76% 0.20 30 / 0.40);
+  --coral-wash: oklch(74% 0.18 30 / 0.10);
 
-  /* Goldenrod / saffron — stat numerals, dates, highlights. */
+  /* Goldenrod scale — used now only where the design genuinely wants gold
+     weight (the Oakland Week pill). Stat numerals moved to ivory. */
   --gold-300: oklch(86% 0.13 82);
   --gold-400: oklch(80% 0.14 78);
   --gold-500: oklch(72% 0.13 75);
 
-  /* Apricot — DJ name links. Replaces plum: warm dusty-rose that lives
-     inside the sunrise hue family and harmonizes with coral + gold instead
-     of fighting them like the prior plum did. */
-  --apricot: oklch(78% 0.12 50);
-  --apricot-deep: oklch(64% 0.13 48);
+  /* Apricot — DJ name links. Pulled to a low-chroma warm rose so it
+     doesn't fight coral; reads as "tinted neutral, not a second accent." */
+  --apricot: oklch(74% 0.06 50);
+  --apricot-deep: oklch(64% 0.06 48);
 
-  /* Sage-olive — secondary accent (was the cool teal). Warm desaturated
-     green reading as the first hint of fields catching morning light. */
-  --sage: oklch(75% 0.07 110);
-  --sage-deep: oklch(55% 0.08 115);
+  /* Sage — legacy alias only (no longer used on dates). */
+  --sage: oklch(78% 0.05 75);
+  --sage-deep: oklch(58% 0.04 75);
 
-  /* Cream-ivory text, never pure white. Slightly warmer cream now. */
-  --ivory: oklch(96% 0.03 80);
-  --ivory-strong: oklch(98% 0.02 78);
-  --ivory-muted: oklch(82% 0.05 65);
-  --ivory-subtle: oklch(65% 0.05 55);
+  /* Ivory text, never pure white. Slightly cooler so it sits on the
+     low-chroma dawn canvas without reading yellowed. */
+  --ivory: oklch(95% 0.02 70);
+  --ivory-strong: oklch(98% 0.012 70);
+  --ivory-muted: oklch(78% 0.025 65);
+  --ivory-subtle: oklch(58% 0.022 55);
 
   /* Oakland accents — black + Athletics gold, shared between this page and
      the SF + Oakland page. The Week prefix becomes a gold-on-black pill,
@@ -91,7 +89,7 @@
   --bg-canvas: var(--dawn-900);
   --bg-elevated: var(--dawn-850);
   --bg-row-hover: var(--dawn-800);
-  --bg-row-active: oklch(40% 0.13 38);
+  --bg-row-active: oklch(28% 0.05 38);
   --fg-default: var(--ivory);
   --fg-strong: var(--ivory-strong);
   --fg-muted: var(--ivory-muted);
@@ -116,9 +114,7 @@ body {
   font: 400 15px/1.55 var(--sans);
   -webkit-font-smoothing: antialiased;
   background-image:
-    radial-gradient(ellipse 80% 45% at 70% -10%, oklch(72% 0.18 35 / 0.22), transparent 65%),
-    radial-gradient(ellipse 60% 35% at 10% 0%, oklch(80% 0.14 65 / 0.14), transparent 65%),
-    radial-gradient(ellipse 70% 40% at 50% 110%, oklch(70% 0.10 90 / 0.10), transparent 65%);
+    radial-gradient(ellipse 70% 40% at 70% -10%, oklch(60% 0.14 32 / 0.10), transparent 65%);
   background-attachment: fixed;
   padding-bottom: 110px;
 }
@@ -350,19 +346,13 @@ details.ms[open] > summary {
 .t-set { color: var(--fg-muted); font-size: 13px; font-style: italic; }
 .t-set.solo { color: var(--fg-subtle); font-style: normal; opacity: 0.55; }
 .t-stage { color: var(--fg-default); font-size: 13px; }
-/* Day cell -- jersey treatment matching the SF + Oakland page.
-   Bare day-of-week text (Fri/Sat/Sun) renders black-fill + 1px white outline.
-   The .week prefix (W1 / W2 / "Week 1" / "Week 2") becomes a gold-on-black
-   Oakland pill so both pages share the same Oakland visual language. */
+/* Day cell -- the Oakland accent earns its appearance only on the
+   .week pill below; the rest of the date is restraint, plain readable
+   cream. (Stle/CLAUDE.md §1.) */
 .t-day {
-  color: var(--oakland-black);
+  color: var(--fg-muted);
   white-space: nowrap; font-variant-numeric: tabular-nums;
-  font: 600 13px/1 var(--mono); letter-spacing: 0.06em;
-  text-shadow:
-    -1px 0 0 rgba(239,178,30,0.32),
-     1px 0 0 rgba(239,178,30,0.32),
-     0 -1px 0 rgba(239,178,30,0.32),
-     0  1px 0 rgba(239,178,30,0.32);
+  font: 500 13px/1 var(--mono); letter-spacing: 0.04em;
 }
 .t-day .week {
   display: inline-block;
@@ -372,17 +362,11 @@ details.ms[open] > summary {
   border-radius: 3px;
   padding: 2px 6px; margin-right: 6px;
   font: 600 11px/1 var(--mono); letter-spacing: 0.10em; text-transform: uppercase;
-  text-shadow:
-    -1px 0 0 var(--oakland-black),
-     1px 0 0 var(--oakland-black),
-     0 -1px 0 var(--oakland-black),
-     0  1px 0 var(--oakland-black);
 }
 /* Active row inverts the Week pill so the playing track's pill pops gold. */
 .tbl tbody tr.np .t-day .week {
   background: var(--oakland-yellow);
   color: var(--oakland-black);
-  text-shadow: none;
 }
 
 .play-cell { width: 56px; padding: 0 !important; text-align: center; }
