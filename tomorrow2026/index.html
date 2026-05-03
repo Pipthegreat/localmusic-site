@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tomorrowland 2026 — Boom, Belgium · Jul 17–19 + 24–26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,ital@9..144,300..600,0;9..144,300..600,1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Mulled-wine base — warm dark burgundy, not black. */
+  --wine-300: oklch(72% 0.05 28);
+  --wine-400: oklch(58% 0.06 28);
+  --wine-500: oklch(46% 0.07 28);
+  --wine-600: oklch(36% 0.07 26);
+  --wine-700: oklch(28% 0.07 25);
+  --wine-800: oklch(22% 0.06 24);
+  --wine-850: oklch(19% 0.055 23);
+  --wine-900: oklch(17% 0.05 22);
+  --wine-950: oklch(15% 0.045 22);
+
+  /* Copper — primary action / pulse / active glow. */
+  --copper-100: oklch(94% 0.04 55);
+  --copper-200: oklch(88% 0.08 55);
+  --copper-300: oklch(80% 0.13 53);
+  --copper-400: oklch(74% 0.17 52);
+  --copper-500: oklch(66% 0.18 50);
+  --copper-600: oklch(58% 0.17 48);
+  --copper-700: oklch(48% 0.15 45);
+  --copper-800: oklch(38% 0.12 42);
+  --copper-900: oklch(28% 0.08 38);
+  --copper-glow: oklch(72% 0.20 52 / 0.45);
+  --copper-wash: oklch(70% 0.18 50 / 0.10);
+
+  /* Goldenrod — stat numerals, highlights. */
+  --gold-300: oklch(82% 0.13 88);
+  --gold-400: oklch(76% 0.14 86);
+  --gold-500: oklch(68% 0.13 84);
+
+  /* Plum — DJ name links (echoes localmusic's plum but a touch warmer). */
+  --plum: oklch(55% 0.13 348);
+  --plum-hover: var(--copper-400);
+
+  /* Mossy teal — dates, external links. Forest counterweight to the warm copper. */
+  --teal: oklch(55% 0.085 195);
+  --teal-deep: oklch(38% 0.07 198);
+
+  /* Cream-ivory text, never pure white. */
+  --ivory: oklch(95% 0.025 75);
+  --ivory-strong: oklch(97% 0.018 75);
+  --ivory-muted: oklch(78% 0.04 60);
+  --ivory-subtle: oklch(60% 0.045 55);
+
+  /* Semantic */
+  --bg-canvas: var(--wine-900);
+  --bg-elevated: var(--wine-850);
+  --bg-row-hover: var(--wine-800);
+  --bg-row-active: oklch(26% 0.10 38);
+  --fg-default: var(--ivory);
+  --fg-strong: var(--ivory-strong);
+  --fg-muted: var(--ivory-muted);
+  --fg-subtle: var(--ivory-subtle);
+  --fg-on-copper: var(--wine-950);
+  --border-subtle: var(--wine-800);
+  --border-default: var(--wine-700);
+  --border-strong: var(--wine-600);
+  --link: var(--plum);
+  --link-hover: var(--copper-400);
+
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg-canvas);
+  color: var(--fg-default);
+  font: 400 15px/1.55 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse 70% 40% at 70% -10%, oklch(55% 0.18 48 / 0.20), transparent 60%),
+    radial-gradient(ellipse 50% 30% at 10% 0%, oklch(50% 0.12 350 / 0.12), transparent 60%),
+    radial-gradient(ellipse 60% 35% at 50% 110%, oklch(48% 0.10 195 / 0.10), transparent 60%);
+  background-attachment: fixed;
+  padding-bottom: 110px;
+}
+.shell { max-width: 1180px; margin: 0 auto; padding: 36px 32px 28px; }
+
+/* HEADER */
+.app-header { position: relative; padding-bottom: 28px; }
+.app-header::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--copper-800) 35%, var(--copper-700) 50%, var(--copper-800) 65%, transparent 100%);
+  opacity: 0.65;
+}
+.ah-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+.ah-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font: 500 11px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.ah-pulse {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--copper-400);
+  position: relative; flex-shrink: 0; box-shadow: 0 0 10px 0 var(--copper-glow);
+}
+.ah-pulse::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  animation: ah-pulse 2.4s ease-out infinite;
+}
+@keyframes ah-pulse {
+  0%   { box-shadow: 0 0 0 0 oklch(72% 0.20 52 / 0.5); }
+  70%  { box-shadow: 0 0 0 10px oklch(72% 0.20 52 / 0); }
+  100% { box-shadow: 0 0 0 0 oklch(72% 0.20 52 / 0); }
+}
+.ah-link {
+  font: 500 16px/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--teal); text-decoration: none;
+  border-bottom: 1px solid var(--teal-deep); padding-bottom: 3px;
+  transition: color 160ms, border-color 160ms;
+}
+.ah-link:hover { color: var(--copper-300); border-bottom-color: var(--copper-700); }
+
+.coffee {
+  display: inline-block; margin-top: 4px;
+  font: 500 10px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--teal); text-decoration: none; opacity: 0.7;
+  transition: opacity 160ms, color 160ms;
+}
+.coffee:hover { opacity: 1; color: var(--copper-300); }
+
+.ah-title {
+  font: 400 clamp(40px, 5vw, 56px)/1.0 var(--serif);
+  margin: 0; letter-spacing: -0.020em; color: var(--fg-strong);
+}
+.ah-amp { color: var(--copper-400); font-style: italic; margin: 0 0.04em; display: inline-block; }
+
+.ah-sub { display: flex; align-items: center; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
+.ah-sub-lead { font: 400 italic 18px/1.2 var(--serif); color: var(--fg-muted); }
+.ah-sub-lead em { font-style: italic; color: var(--copper-300); }
+.ah-rule { flex-shrink: 0; width: 28px; height: 1px; background: var(--border-default); }
+.ah-meta {
+  font: 500 11px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--teal); font-variant-numeric: tabular-nums;
+}
+.ah-theme {
+  font: 500 italic 13px/1.2 var(--serif); color: var(--gold-400);
+  letter-spacing: 0.02em;
+}
+.ah-theme::before { content: "·"; margin-right: 10px; color: var(--border-strong); font-style: normal; }
+
+.ah-stats {
+  display: flex; gap: 56px; margin-top: 30px; padding-top: 22px;
+  border-top: 1px solid var(--border-subtle); align-items: baseline;
+}
+.ah-stat { display: flex; align-items: baseline; gap: 12px; }
+.ah-stat .num {
+  font: 400 italic 30px/1 var(--serif); color: var(--gold-400);
+  font-feature-settings: "tnum","lnum"; letter-spacing: -0.02em;
+}
+.ah-stat .lbl {
+  font: 500 10px/1 var(--mono); letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+/* FILTER ROW */
+.filter-row {
+  display: grid; grid-template-columns: 1fr 220px 200px auto;
+  gap: 14px; align-items: center;
+  margin-top: 28px; padding: 16px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.input, .select select {
+  background: var(--wine-850); border: 1px solid var(--border-default);
+  color: var(--fg-default); font: 400 14px/1 var(--sans);
+  padding: 11px 14px; border-radius: 4px;
+  transition: border-color 160ms, box-shadow 160ms, background 160ms;
+}
+.input::placeholder { color: var(--fg-subtle); }
+.input:hover, .select select:hover { border-color: var(--border-strong); background: var(--wine-800); }
+.input:focus, .select select:focus {
+  outline: none; border-color: var(--copper-600); box-shadow: 0 0 0 3px var(--copper-wash);
+  background: var(--wine-800);
+}
+.select { position: relative; }
+.select select { width: 100%; appearance: none; padding-right: 36px; cursor: pointer; }
+.select::after {
+  content: "▾"; position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  color: var(--fg-subtle); pointer-events: none; font-size: 12px;
+}
+.count { font: 500 13px/1 var(--mono); color: var(--fg-muted); white-space: nowrap; }
+.count b { color: var(--fg-default); }
+
+/* TABLE */
+.tbl { width: 100%; border-collapse: collapse; margin-top: 0; table-layout: fixed; }
+.tbl col.c-play   { width: 56px; }
+.tbl col.c-artist { width: 28%; }
+.tbl col.c-set    { width: 22%; }
+.tbl col.c-stage  { width: 26%; }
+.tbl col.c-day    { width: 130px; }
+.tbl thead th {
+  text-align: left; padding: 18px 14px;
+  font: 500 11px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--fg-subtle); border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-canvas); position: sticky; top: 0;
+}
+.tbl thead th:first-child { width: 56px; padding: 0; }
+.tbl thead th[data-sort] { cursor: pointer; user-select: none; transition: color 140ms; }
+.tbl thead th[data-sort]:hover { color: var(--copper-300); }
+.tbl thead th .caret { display: inline-block; width: 8px; opacity: 0; margin-left: 4px; font-size: 9px; }
+.tbl thead th.sort-asc, .tbl thead th.sort-desc { color: var(--fg-default); }
+.tbl thead th.sort-asc  .caret { opacity: 1; }
+.tbl thead th.sort-desc .caret { opacity: 1; }
+.tbl thead th.sort-asc  .caret::before { content: "▲"; color: var(--copper-400); }
+.tbl thead th.sort-desc .caret::before { content: "▼"; color: var(--copper-400); }
+
+.tbl tbody td {
+  padding: 12px 14px; border-bottom: 1px solid var(--border-subtle);
+  vertical-align: middle; font: 400 14px/1.4 var(--sans);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.tbl tbody tr { transition: background 140ms; cursor: pointer; }
+.tbl tbody tr:hover { background: var(--bg-row-hover); }
+
+.t-artist { font: 500 14px/1.3 var(--sans); color: var(--plum); transition: color 160ms; }
+.tbl tbody tr:hover .t-artist { color: var(--copper-400); }
+.t-set { color: var(--fg-muted); font-size: 13px; font-style: italic; }
+.t-set.solo { color: var(--fg-subtle); font-style: normal; opacity: 0.6; }
+.t-stage { color: var(--fg-default); font-size: 13px; }
+.t-stage .city { color: var(--fg-subtle); margin-left: 6px; }
+.t-day { color: var(--teal); white-space: nowrap; font-variant-numeric: tabular-nums; font: 500 13px/1 var(--mono); letter-spacing: 0.04em; }
+
+.play-cell { width: 56px; padding: 0 !important; text-align: center; }
+.play {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: transparent; border: 1px solid var(--border-default);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--fg-muted); transition: all 160ms;
+  cursor: pointer; padding: 0;
+}
+.play svg { width: 12px; height: 12px; fill: currentColor; }
+.play .ico-play  { transform: translateX(1px); }
+.play .ico-pause { display: none; transform: translateX(0); }
+.tbl tbody tr:hover .play {
+  border-color: var(--copper-600); color: var(--copper-400); background: var(--copper-wash);
+}
+.tbl tbody tr.np .play {
+  background: var(--copper-500); border-color: var(--copper-500);
+  color: var(--fg-on-copper);
+  box-shadow: 0 0 0 4px var(--copper-wash), 0 0 24px -4px var(--copper-glow);
+}
+.tbl tbody tr.np.playing .play .ico-play { display: none; }
+.tbl tbody tr.np.playing .play .ico-pause { display: block; }
+.tbl tbody tr.np { background: var(--bg-row-active); }
+.tbl tbody tr.np td.play-cell {
+  box-shadow: inset 2px 0 0 var(--copper-500), inset 22px 0 22px -18px var(--copper-glow);
+}
+
+.t-mobile-meta { display: none; }
+
+/* PLAYER BAR — SoundCloud widget */
+.player {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  padding: 14px 24px 16px; z-index: 100;
+  background:
+    linear-gradient(180deg, transparent 0%, var(--wine-950) 30%,
+                    color-mix(in oklch, var(--copper-800) 25%, var(--wine-950))),
+    var(--wine-950);
+  box-shadow: 0 -30px 80px -30px var(--copper-glow);
+  transition: background 320ms, box-shadow 320ms;
+}
+.player-inner {
+  max-width: 800px; margin: 0 auto;
+  display: flex; align-items: center; gap: 12px;
+}
+.player-embed {
+  flex: 1; min-width: 0;
+  border-radius: 12px; overflow: hidden;
+  background: var(--wine-950);
+  isolation: isolate;
+}
+.player-embed iframe {
+  width: 100%; height: 120px; display: block; border: 0;
+  background: transparent;
+}
+.player-empty {
+  padding: 22px 18px; text-align: center;
+  color: var(--fg-subtle); font: 500 11px/1.4 var(--mono);
+  letter-spacing: 0.16em; text-transform: uppercase;
+}
+.player-empty em { font-style: normal; color: var(--copper-400); }
+.skip {
+  width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+  background: transparent; border: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--copper-400);
+  cursor: pointer; padding: 0;
+  transition: background 160ms, transform 80ms, color 220ms;
+}
+.skip:hover { background: var(--copper-wash); }
+.skip:active { transform: scale(0.94); }
+.skip:disabled { opacity: 0.30; cursor: default; }
+.skip:disabled:hover { background: transparent; }
+.skip svg { width: 22px; height: 22px; fill: currentColor; }
+
+@media (max-width: 980px) {
+  .shell { padding: 24px 20px 28px; }
+  .ah-title { font-size: 38px; }
+  .ah-stats { gap: 28px; }
+  .filter-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .filter-row .count { display: none; }
+  .tbl col.c-set { width: 0; }
+  .t-set { display: none; }
+  .tbl col.c-artist { width: 36%; }
+  .tbl col.c-stage  { width: 38%; }
+}
+@media (max-width: 640px) {
+  .tbl col.c-stage { width: 0; }
+  .t-stage { display: none; }
+  .tbl col.c-artist { width: 60%; }
+  .tbl col.c-day { width: 110px; }
+}
+@media (max-width: 480px) {
+  .tbl col.c-day { width: 0; }
+  .t-day { display: none; }
+  .tbl col.c-artist { width: 80%; }
+  .skip { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <header class="app-header">
+    <div class="ah-top">
+      <div class="ah-eyebrow">
+        <span class="ah-pulse" aria-hidden="true"></span>
+        Lineup · sourced from SoundCloud
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0;">
+        <a href="https://soundcloud.com/tomorrowland" target="_blank" rel="noopener" class="ah-link">Tomorrowland on SoundCloud ↗</a>
+        <a href="https://venmo.com/u/Raleigh-J" target="_blank" rel="noopener" class="coffee">fund more projects ↗</a>
+      </div>
+    </div>
+
+    <h1 class="ah-title">Tomorrowland <span class="ah-amp">·</span> 2026</h1>
+
+    <div class="ah-sub">
+      <span class="ah-sub-lead">Boom, <em>Belgium</em></span>
+      <span class="ah-rule" aria-hidden="true"></span>
+      <span class="ah-meta"><time datetime="2026-07-17/2026-07-26">Jul 17–19 · Jul 24–26</time></span>
+      <span class="ah-theme">Consciencia</span>
+    </div>
+
+    <div class="ah-stats">
+      <div class="ah-stat"><span class="num" id="stat-djs">—</span><span class="lbl">DJs</span></div>
+      <div class="ah-stat"><span class="num" id="stat-stages">—</span><span class="lbl">Stages</span></div>
+      <div class="ah-stat"><span class="num">6</span><span class="lbl">Days</span></div>
+    </div>
+  </header>
+
+  <div class="filter-row">
+    <input class="input" id="filter" type="search" placeholder="Filter by DJ, stage, or set…">
+    <div class="select"><select id="stage-filter">
+      <option value="">All stages</option>
+    </select></div>
+    <div class="select"><select id="day-filter">
+      <option value="">All days</option>
+      <option value="W1 Fri">W1 · Fri Jul 17</option>
+      <option value="W1 Sat">W1 · Sat Jul 18</option>
+      <option value="W1 Sun">W1 · Sun Jul 19</option>
+      <option value="W2 Fri">W2 · Fri Jul 24</option>
+      <option value="W2 Sat">W2 · Sat Jul 25</option>
+      <option value="W2 Sun">W2 · Sun Jul 26</option>
+    </select></div>
+    <div class="count"><b id="count-now">0</b> / <span id="count-total">0</span></div>
+  </div>
+
+  <table class="tbl">
+    <colgroup>
+      <col class="c-play"><col class="c-artist">
+      <col class="c-set"><col class="c-stage"><col class="c-day">
+    </colgroup>
+    <thead>
+      <tr>
+        <th></th>
+        <th data-sort="artist">DJ <span class="caret"></span></th>
+        <th data-sort="set">Set <span class="caret"></span></th>
+        <th data-sort="stage">Stage <span class="caret"></span></th>
+        <th data-sort="day">Day <span class="caret"></span></th>
+      </tr>
+    </thead>
+    <tbody id="dj-rows"></tbody>
+  </table>
+
+</div><!-- /.shell -->
+
+<div class="player" role="region" aria-label="Player">
+  <div class="player-inner">
+    <button class="skip" id="btn-prev" aria-label="Previous DJ" disabled>
+      <svg viewBox="0 0 24 24"><path d="M19 20L9 12l10-8v16zM5 4h2v16H5z"/></svg>
+    </button>
+    <div class="player-embed" id="player-embed">
+      <div class="player-empty">Select a DJ — stream loads from <em>SoundCloud</em></div>
+    </div>
+    <button class="skip" id="btn-next" aria-label="Next DJ" disabled>
+      <svg viewBox="0 0 24 24"><path d="M5 4l10 8-10 8V4zM17 4h2v16h-2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+// ── Lineup data ────────────────────────────────────────────────────────────
+// Each row: [artist, soundcloud_handle, set_type, stage, day]
+// soundcloud_handle is the path after soundcloud.com/ — e.g. "martingarrix".
+// set_type: "" for solo, otherwise "B2B X" / "presents Y".
+// day: "W1 Fri" "W1 Sat" "W1 Sun" "W2 Fri" "W2 Sat" "W2 Sun".
+const DATA = [
+  // ── MAINSTAGE ────────────────────────────────────────────────────────
+  ["Martin Garrix",          "martingarrix",            "",                       "Mainstage",       "W1 Fri"],
+  ["The Chainsmokers",       "the-chainsmokers",        "",                       "Mainstage",       "W1 Fri"],
+  ["Sebastian Ingrosso",     "sebastianingrosso",       "",                       "Mainstage",       "W1 Fri"],
+  ["Marlon Hoffstadt",       "marlonhoffstadt",         "",                       "Mainstage",       "W1 Fri"],
+  ["Bassjackers",            "bassjackers",             "",                       "Mainstage",       "W1 Fri"],
+  ["NERVO",                  "nervomusic",              "",                       "Mainstage",       "W1 Fri"],
+  ["David Guetta",           "davidguetta",             "",                       "Mainstage",       "W1 Sat"],
+  ["Dimitri Vegas & Like Mike","dimitrivegasandlikemike","",                      "Mainstage",       "W1 Sat"],
+  ["Fisher",                 "fisher-ftw",              "",                       "Mainstage",       "W1 Sat"],
+  ["Boris Brejcha",          "borisbrejcha",            "",                       "Mainstage",       "W1 Sat"],
+  ["Maddix",                 "maddixmusic",             "",                       "Mainstage",       "W1 Sat"],
+  ["John Newman",            "johnnewman",              "",                       "Mainstage",       "W1 Sat"],
+  ["John Summit",            "john-summit",             "",                       "Mainstage",       "W1 Sun"],
+  ["Alesso",                 "alesso",                  "",                       "Mainstage",       "W1 Sun"],
+  ["Kevin de Vries",         "kevindevries",            "",                       "Mainstage",       "W1 Sun"],
+  ["Steve Angello",          "steveangello",            "",                       "Mainstage",       "W2 Fri"],
+  ["Hardwell",               "hardwell",                "",                       "Mainstage",       "W2 Fri"],
+  ["Indira Paganotto",       "indirapaganotto",         "",                       "Mainstage",       "W2 Fri"],
+  ["Miss Monique",           "miss_monique_music",      "",                       "Mainstage",       "W2 Fri"],
+  ["Alok",                   "alok",                    "",                       "Mainstage",       "W2 Fri"],
+  ["Nicky Romero",           "nickyromero",             "",                       "Mainstage",       "W2 Fri"],
+  ["Yves V",                 "yvesv",                   "",                       "Mainstage",       "W2 Fri"],
+  ["Calvin Harris",          "calvinharris",            "Tomorrowland debut",     "Mainstage",       "W2 Sat"],
+  ["Armin van Buuren",       "arminvanbuuren",          "",                       "Mainstage",       "W2 Sat"],
+  ["Sub Zero Project",       "subzero-project",         "",                       "Mainstage",       "W2 Sat"],
+  ["Agents of Time",         "agentsoftime",            "",                       "Mainstage",       "W2 Sat"],
+  ["Timmy Trumpet",          "timmytrumpet",            "B2B Dimitri Vegas",      "Mainstage",       "W2 Sat"],
+  ["Argy",                   "argyofficial",            "",                       "Mainstage",       "W2 Sat"],
+  ["ZHU",                    "zhu_music",               "",                       "Mainstage",       "W2 Sat"],
+  ["Gorgon City",            "gorgon-city",             "",                       "Mainstage",       "W2 Sat"],
+  ["Sonny Fodera",           "sonnyfodera",             "",                       "Mainstage",       "W2 Sat"],
+  ["Wilkinson",              "wilkinson",               "",                       "Mainstage",       "W2 Sat"],
+  ["Sara Landry",            "saralandry",              "",                       "Mainstage",       "W2 Sun"],
+  ["Chase & Status",         "chaseandstatus",          "",                       "Mainstage",       "W2 Sun"],
+  ["Steve Aoki",             "steveaoki",               "",                       "Mainstage",       "W2 Sun"],
+  ["Lost Frequencies",       "lostfrequencies",         "",                       "Mainstage",       "W2 Sun"],
+  ["Afrojack",               "afrojack",                "B2B R3HAB",              "Mainstage",       "W2 Sun"],
+
+  // ── ATMOSPHERE ───────────────────────────────────────────────────────
+  ["Amelie Lens",            "amelielens",              "presents Aura",          "Atmosphere",      "W1 Fri"],
+  ["Anetha",                 "anetha",                  "",                       "Atmosphere",      "W1 Fri"],
+  ["Reinier Zonneveld",      "reinier-zonneveld",       "live",                   "Atmosphere",      "W1 Fri"],
+  ["Ben Klock",              "klockworks",              "",                       "Atmosphere",      "W1 Fri"],
+  ["Nico Moreno",            "nicomoreno",              "",                       "Atmosphere",      "W1 Sat"],
+  ["I Hate Models",          "ihatemodels",             "",                       "Atmosphere",      "W1 Sat"],
+  ["Sara Landry",            "saralandry",              "",                       "Atmosphere",      "W1 Sun"],
+  ["Holy Priest",            "holypriest",              "",                       "Atmosphere",      "W1 Sun"],
+  ["Indira Paganotto",       "indirapaganotto",         "",                       "Atmosphere",      "W1 Sun"],
+  ["NOVAH",                  "novahmusic",              "",                       "Atmosphere",      "W2 Fri"],
+  ["Shlømo",                 "shlomotechno",            "B2B BYORN",              "Atmosphere",      "W2 Sat"],
+  ["Azyr",                   "azyr",                    "",                       "Atmosphere",      "W2 Sun"],
+
+  // ── CORE ─────────────────────────────────────────────────────────────
+  ["The Blessed Madonna",    "theblessedmadonna",       "B2B HAAi",               "CORE",            "W1 Fri"],
+  ["Modeselektor",           "modeselektor",            "DJ-set",                 "CORE",            "W1 Fri"],
+  ["Antdot",                 "antdot",                  "",                       "CORE",            "W1 Fri"],
+  ["Avalon Emerson",         "avalonemerson",           "B2B Ben UFO",            "CORE",            "W1 Sat"],
+  ["DJ Tennis",              "djtennis",                "B2B Vintage Culture",    "CORE",            "W1 Sat"],
+  ["Vintage Culture",        "vintageculture",          "B2B DJ Tennis",          "CORE",            "W1 Sat"],
+  ["Job Jobse",              "jobjobse",                "",                       "CORE",            "W1 Sun"],
+  ["Sasha",                  "sashaofficial",           "B2B Young Marco",        "CORE",            "W1 Sun"],
+  ["Young Marco",            "youngmarco",              "B2B Sasha",              "CORE",            "W1 Sun"],
+  ["Sally C",                "sally-c",                 "",                       "CORE",            "W2 Fri"],
+  ["Bibi Seck",              "bibiseck",                "",                       "CORE",            "W2 Sat"],
+
+  // ── THE LIBRARY ──────────────────────────────────────────────────────
+  ["Hardwell",               "hardwell",                "B2B Sub Zero Project (premiere)","The Library", "W1 Fri"],
+  ["Artbat",                 "artbat",                  "",                       "The Library",     "W1 Fri"],
+  ["R3HAB",                  "r3hab",                   "",                       "The Library",     "W1 Fri"],
+  ["Sam Feldt",              "samfeldt",                "",                       "The Library",     "W1 Fri"],
+  ["Ofenbach",               "ofenbachmusic",           "",                       "The Library",     "W1 Sat"],
+  ["Mike Williams",          "mikewilliamsmusic",       "",                       "The Library",     "W1 Sat"],
+  ["Oliver Heldens",         "oliverheldens",           "",                       "The Library",     "W1 Sat"],
+  ["Joel Corry",             "joelcorrydj",             "",                       "The Library",     "W1 Sat"],
+  ["Gryffin",                "gryffin",                 "",                       "The Library",     "W1 Sun"],
+  ["Vini Vici",              "vinivici",                "",                       "The Library",     "W1 Sun"],
+  ["Gabry Ponte",            "gabryponte",              "",                       "The Library",     "W1 Sun"],
+  ["Blasterjaxx",            "blasterjaxx",             "",                       "The Library",     "W2 Fri"],
+  ["Da Tweekaz",             "datweekaz",               "",                       "The Library",     "W2 Sat"],
+  ["Illenium",               "illenium",                "",                       "The Library",     "W2 Sun"],
+
+  // ── FREEDOM BY BUD ───────────────────────────────────────────────────
+  ["Pegassi",                "pegassi",                 "audiovisual show",       "Freedom",         "W1 Fri"],
+  ["Meduza",                 "meduzamusic",             "",                       "Freedom",         "W1 Sat"],
+  ["Netsky",                 "netsky",                  "",                       "Freedom",         "W1 Sat"],
+  ["Space 92",               "space-92",                "",                       "Freedom",         "W1 Sun"],
+  ["Symphony of Unity",      "tomorrowland",            "50-piece orchestra",     "Freedom",         "W2 Sat"],
+  ["Alok",                   "alok",                    "Rave the World",         "Freedom",         "W2 Sun"],
+
+  // ── PLANAXIS (incl. Bassrush) ────────────────────────────────────────
+  ["Subtronics",             "subtronics",              "",                       "Planaxis",        "W1 Sat"],
+  ["Seven Lions",            "sevenlions",              "",                       "Planaxis",        "W1 Sat"],
+  ["Liquid Stranger",        "liquidstranger",          "",                       "Planaxis",        "W1 Sun"],
+  ["DVBBS",                  "dvbbs",                   "",                       "Planaxis",        "W1 Sun"],
+  ["Neelix",                 "neelix",                  "",                       "Planaxis",        "W2 Fri"],
+  ["Omiki",                  "omikimusic",              "",                       "Planaxis",        "W2 Fri"],
+  ["Lucas & Steve",          "lucasandsteve",           "",                       "Planaxis",        "W2 Sat"],
+
+  // ── CRYSTAL GARDEN ───────────────────────────────────────────────────
+  ["MORTEN",                 "morten",                  "B2B Malaa",              "Crystal Garden",  "W1 Fri"],
+  ["Malaa",                  "malaamusic",              "B2B MORTEN",             "Crystal Garden",  "W1 Fri"],
+  ["Wade",                   "wademusic",               "",                       "Crystal Garden",  "W1 Sat"],
+  ["Mind Against",           "mind-against",            "",                       "Crystal Garden",  "W1 Sun"],
+  ["Ben Hemsley",            "benhemsley",              "",                       "Crystal Garden",  "W2 Fri"],
+  ["Bhaskar",                "bhaskarmusic",            "",                       "Crystal Garden",  "W2 Sat"],
+
+  // ── ROSE GARDEN ──────────────────────────────────────────────────────
+  ["Camo & Krooked",         "camoandkrooked",          "",                       "The Rose Garden", "W1 Fri"],
+  ["Murdock",                "murdock",                 "",                       "The Rose Garden", "W1 Fri"],
+  ["Adrenalize",             "djadrenalize",            "",                       "The Rose Garden", "W1 Sat"],
+  ["Rebelion",               "rebelion-official",       "",                       "The Rose Garden", "W1 Sat"],
+  ["Sub Zero Project",       "subzero-project",         "",                       "The Rose Garden", "W1 Sat"],
+  ["Rooler",                 "rooler",                  "",                       "The Rose Garden", "W1 Sun"],
+  ["Pat B",                  "pat-b",                   "",                       "The Rose Garden", "W2 Sat"],
+
+  // ── MELODIA BY CORONA (Afro-house — new for 2026) ────────────────────
+  ["Da Capo",                "dacapo-sa",               "B2B Caiiro B2B Enoo Napa","Melodia",        "W2 Sat"],
+  ["Caiiro",                 "caiiro",                  "B2B Da Capo B2B Enoo Napa","Melodia",       "W2 Sat"],
+  ["Enoo Napa",              "enoonapa",                "B2B Da Capo B2B Caiiro", "Melodia",         "W2 Sat"],
+  ["Thakzin",                "thakzin",                 "",                       "Melodia",         "W2 Sun"],
+  ["Vanco",                  "vanco-sa",                "",                       "Melodia",         "W2 Sun"],
+  ["Sam Shure",              "samshure",                "",                       "Melodia",         "W1 Sat"],
+
+  // ── CAGE (hard techno) ───────────────────────────────────────────────
+  ["Sandy Warez",            "sandywarez",              "B2B Revenja",            "Cage",            "W1 Sat"],
+  ["Dither",                 "dithersound",             "",                       "Cage",            "W1 Sun"],
+
+  // ── RAVE CAVE ────────────────────────────────────────────────────────
+  ["Henri PFR",              "henripfr",                "",                       "Mainstage",       "W1 Fri"],
+  ["Dimitri Vangelis & Wyman","dimitrivangeliswyman",   "",                       "Rise",            "W2 Sat"],
+  ["Matisse & Sadko",        "matissesadko",            "",                       "Rise",            "W1 Fri"],
+];
+
+// ── Build table ────────────────────────────────────────────────────────────
+const tbody       = document.getElementById('dj-rows');
+const stageSelect = document.getElementById('stage-filter');
+const dayFilter   = document.getElementById('day-filter');
+const filterInput = document.getElementById('filter');
+const countNow    = document.getElementById('count-now');
+const countTotal  = document.getElementById('count-total');
+const playerEmbed = document.getElementById('player-embed');
+const btnPrev     = document.getElementById('btn-prev');
+const btnNext     = document.getElementById('btn-next');
+
+const stages = [...new Set(DATA.map(d => d[3]))].sort();
+for (const s of stages) {
+  const opt = document.createElement('option');
+  opt.value = s; opt.textContent = s;
+  stageSelect.appendChild(opt);
+}
+
+// Stats
+document.getElementById('stat-djs').textContent = new Set(DATA.map(d => d[0])).size;
+document.getElementById('stat-stages').textContent = stages.length;
+
+// Render rows
+function renderRows() {
+  const frag = document.createDocumentFragment();
+  DATA.forEach((row, idx) => {
+    const [artist, handle, setType, stage, day] = row;
+    const tr = document.createElement('tr');
+    tr.dataset.idx     = idx;
+    tr.dataset.artist  = artist;
+    tr.dataset.handle  = handle;
+    tr.dataset.set     = setType || '';
+    tr.dataset.stage   = stage;
+    tr.dataset.day     = day;
+
+    const dayParts = day.split(' ');
+    const week = dayParts[0]; // W1 or W2
+    const dow  = dayParts[1]; // Fri Sat Sun
+
+    tr.innerHTML = `
+      <td class="play-cell">
+        <button class="play" type="button" aria-label="Play ${artist} on SoundCloud">
+          <svg class="ico-play"  viewBox="0 0 24 24"><path d="M8 5v14l11-7L8 5z"/></svg>
+          <svg class="ico-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        </button>
+      </td>
+      <td><span class="t-artist">${artist}</span></td>
+      <td><span class="t-set ${setType ? '' : 'solo'}">${setType || '— solo set'}</span></td>
+      <td><span class="t-stage">${stage}</span></td>
+      <td><span class="t-day">${week} · ${dow}</span></td>
+    `;
+    frag.appendChild(tr);
+  });
+  tbody.appendChild(frag);
+}
+renderRows();
+
+// ── Filtering ──────────────────────────────────────────────────────────────
+function applyFilters() {
+  const q     = filterInput.value.trim().toLowerCase();
+  const stage = stageSelect.value;
+  const day   = dayFilter.value;
+  let visible = 0, total = 0;
+  for (const tr of tbody.children) {
+    total++;
+    const matchesQ     = !q || (tr.dataset.artist + ' ' + tr.dataset.stage + ' ' + tr.dataset.set).toLowerCase().includes(q);
+    const matchesStage = !stage || tr.dataset.stage === stage;
+    const matchesDay   = !day || tr.dataset.day === day;
+    const show = matchesQ && matchesStage && matchesDay;
+    tr.style.display = show ? '' : 'none';
+    if (show) visible++;
+  }
+  countNow.textContent   = visible;
+  countTotal.textContent = total;
+}
+filterInput.addEventListener('input',  applyFilters);
+stageSelect.addEventListener('change', applyFilters);
+dayFilter.addEventListener('change',   applyFilters);
+applyFilters();
+
+// ── Sort ───────────────────────────────────────────────────────────────────
+const sortMap = { artist: 1, set: 2, stage: 3, day: 4 };
+let sortState = { col: null, dir: null };
+document.querySelectorAll('thead th[data-sort]').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.sort;
+    let dir = 'asc';
+    if (sortState.col === col && sortState.dir === 'asc') dir = 'desc';
+    document.querySelectorAll('thead th').forEach(t => t.classList.remove('sort-asc','sort-desc'));
+    th.classList.add(dir === 'asc' ? 'sort-asc' : 'sort-desc');
+    sortState = { col, dir };
+    const idx = sortMap[col];
+    const rows = Array.from(tbody.children);
+    rows.sort((a, b) => {
+      const av = a.children[idx].innerText.toLowerCase();
+      const bv = b.children[idx].innerText.toLowerCase();
+      return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+    });
+    rows.forEach(r => tbody.appendChild(r));
+  });
+});
+
+// ── Player ─────────────────────────────────────────────────────────────────
+let nowPlayingRow = null;
+
+function loadSoundCloud(handle, artist) {
+  const profileUrl = `https://soundcloud.com/${handle}`;
+  const widgetUrl  = `https://w.soundcloud.com/player/?url=${encodeURIComponent(profileUrl)}`
+                   + `&color=%23b97a3a&auto_play=true&hide_related=true&show_comments=false`
+                   + `&show_user=true&show_reposts=false&show_teaser=false&visual=false`;
+  playerEmbed.innerHTML = `
+    <iframe title="${artist} on SoundCloud" allow="autoplay" scrolling="no" frameborder="no"
+            src="${widgetUrl}"></iframe>`;
+}
+
+function playRow(tr) {
+  if (!tr) return;
+  if (nowPlayingRow) {
+    nowPlayingRow.classList.remove('np','playing');
+  }
+  tr.classList.add('np','playing');
+  nowPlayingRow = tr;
+  loadSoundCloud(tr.dataset.handle, tr.dataset.artist);
+  btnPrev.disabled = false;
+  btnNext.disabled = false;
+  // Scroll into view if off-screen
+  const r = tr.getBoundingClientRect();
+  if (r.top < 80 || r.bottom > window.innerHeight - 140) {
+    tr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+tbody.addEventListener('click', e => {
+  const tr = e.target.closest('tr');
+  if (!tr) return;
+  // If clicking the play button on the currently-playing row, treat as toggle.
+  if (tr === nowPlayingRow && e.target.closest('.play')) {
+    // Reload to restart, since we don't talk to the widget API.
+    loadSoundCloud(tr.dataset.handle, tr.dataset.artist);
+    return;
+  }
+  playRow(tr);
+});
+
+function visibleRows() {
+  return Array.from(tbody.children).filter(r => r.style.display !== 'none');
+}
+btnNext.addEventListener('click', () => {
+  const vis = visibleRows();
+  if (!vis.length) return;
+  const i = nowPlayingRow ? vis.indexOf(nowPlayingRow) : -1;
+  playRow(vis[(i + 1) % vis.length]);
+});
+btnPrev.addEventListener('click', () => {
+  const vis = visibleRows();
+  if (!vis.length) return;
+  const i = nowPlayingRow ? vis.indexOf(nowPlayingRow) : 0;
+  playRow(vis[(i - 1 + vis.length) % vis.length]);
+});
+</script>
+</body>
+</html>
