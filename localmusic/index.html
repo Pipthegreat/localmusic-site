@@ -22,6 +22,15 @@
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
+/* Same iPhone-mobile defenses we apply to the venue/festival pages: lock
+   text-size-adjust so iOS doesn't auto-bump fonts in narrow viewports,
+   and overflow-x:hidden as a safety net against single-element overflow
+   producing a horizontal scrollbar. */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: hidden;
+}
 html, body { margin: 0; padding: 0; }
 body {
   font: 400 16px/1.55 var(--sans);
