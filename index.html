@@ -2,21 +2,132 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>customprojects.info</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Custom Projects — Live Music Companions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-         background: #121212; color: #eee;
-         display: flex; align-items: center; justify-content: center;
-         min-height: 100vh; margin: 0; }
-  .card { text-align: center; padding: 32px; }
-  a { color: #1ed760; }
+:root {
+--slate-300: oklch(82% 0.045 60.0);
+  --slate-500: oklch(52% 0.075 60.0);
+  --slate-700: oklch(37% 0.075 60.0);
+  --slate-900: oklch(25% 0.064 60.0);
+  --accent:    oklch(70% 0.075 30.0);
+  --accent-soft: oklch(78% 0.060 30.0);
+  --fg-default: oklch(96% 0.03 60.0);
+  --fg-muted:   oklch(82% 0.04 60.0);
+  --serif: 'Fraunces', Georgia, serif;
+  --sans:  'Inter', system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font: 400 16px/1.55 var(--sans);
+  color: var(--fg-default);
+  background: var(--slate-900);
+  background-image:
+    radial-gradient(ellipse 80% 45% at 70% -10%, oklch(72% 0.07 60.0 / 0.18), transparent 65%),
+    radial-gradient(ellipse 60% 35% at 10% 0%, oklch(80% 0.07 30.0 / 0.10), transparent 65%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+.shell { max-width: 880px; margin: 0 auto; padding: 56px 28px 80px; }
+.eyebrow {
+  font: 500 11px/1 'JetBrains Mono', ui-monospace, monospace;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 14px;
+}
+h1 {
+  font: 400 44px/1.1 var(--serif);
+  margin: 0 0 14px; letter-spacing: -0.01em;
+}
+.lede { color: var(--fg-muted); margin: 0 0 40px; max-width: 56ch; }
+.cards {
+  display: grid; gap: 14px;
+  grid-template-columns: 1fr;
+  margin-bottom: 48px;
+}
+@media (min-width: 640px) {
+  .cards { grid-template-columns: 1fr 1fr; }
+}
+.card {
+  display: block; text-decoration: none;
+  padding: 22px 22px 18px;
+  background: var(--slate-700);
+  border: 1px solid var(--slate-500);
+  border-radius: 10px;
+  color: var(--fg-default);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.card-label {
+  font: 500 10px/1 'JetBrains Mono', ui-monospace, monospace;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent-soft);
+}
+.card-title {
+  font: 400 22px/1.25 var(--serif);
+  margin: 8px 0 14px;
+}
+.card-go { font-size: 13px; color: var(--fg-muted); }
+.card:hover .card-go { color: var(--accent); }
+.request {
+  border-top: 1px solid var(--slate-500); padding-top: 28px;
+}
+.request h3 { font: 400 20px/1.2 var(--serif); margin: 0 0 8px; }
+.request p { color: var(--fg-muted); margin: 0 0 14px; max-width: 56ch; }
+.btn {
+  display: inline-block; padding: 10px 16px;
+  background: var(--accent); color: var(--slate-900);
+  border-radius: 6px; text-decoration: none; font-weight: 500;
+}
+.btn:hover { filter: brightness(1.05); }
+.foot {
+  margin-top: 56px; padding-top: 18px;
+  border-top: 1px solid var(--slate-500);
+  font-size: 13px; color: var(--fg-muted);
+}
+.foot a { color: var(--fg-muted); }
 </style>
 </head>
 <body>
-<div class="card">
-  <h1>customprojects.info</h1>
-  <p><a href="/localmusic/">SF + Oakland Live Music Companion →</a></p>
-  <p><a href="/tomorrow2026/">Tomorrowland 2026 — DJs by Stage →</a></p>
+<div class="shell">
+  <div class="eyebrow">Custom Projects</div>
+  <h1>Custom Projects — Live Music Companions</h1>
+  <p class="lede">A directory of music companions. Each page picks its own
+     hue from the festival or region — same warm chroma family across
+     pages, different identity per place.</p>
+
+  <section class="cards">
+    <a class="card" href="/localmusic/">
+  <span class="card-label">Live shows</span>
+  <h2 class="card-title">SF + Oakland Live Music Companion</h2>
+  <span class="card-go">Open →</span>
+</a>
+<a class="card" href="/tomorrow2026/">
+  <span class="card-label">Festival lineup</span>
+  <h2 class="card-title">Tomorrowland 2026 — DJs by Stage</h2>
+  <span class="card-go">Open →</span>
+</a>
+  </section>
+
+  
+<section class="request">
+  <h3>Don't see your city or festival?</h3>
+  <p>Open a request — it pre-fills a GitHub issue with the fields we need
+     to bring up a new page. We'll match the palette to the festival's
+     branding or the region's identity.</p>
+  <p><a class="btn" href="https://github.com/mr-raleigh-j/customprojects/issues/new?title=New%20page%20request%3A%20&amp;body=%2A%2ASlug%2A%2A%20%28URL%20path%20component%2C%20e.g.%20%60london%60%20or%20%60coachella-2026%60%29%3A%0A%3C%21--%20one%20short%20token%2C%20lowercase-with-dashes%20--%3E%0A%0A%2A%2AMode%2A%2A%20%28venue%20or%20festival%29%3A%0A%3C%21--%20venue%20%3D%20recurring%20shows%20in%20a%20city/region%3B%20festival%20%3D%20single%20event%20with%20a%20fixed%20lineup%20--%3E%0A%0A%2A%2ATitle%2A%2A%20%28shown%20as%20the%20page%20heading%29%3A%0A%3C%21--%20e.g.%20%22London%20Live%20Music%20Companion%22%20or%20%22Coachella%202026%20%E2%80%94%20Artists%20by%20Stage%22%20--%3E%0A%0A%2A%2AScope%20/%20lineup%20source%2A%2A%3A%0A%3C%21--%20venue%3A%20list%202-5%20city%20tokens%20we%20should%20match%20%28e.g.%20%5B%22london%22%2C%20%22shoreditch%22%5D%29%0A%20%20%20%20%20festival%3A%20link%20to%20the%20lineup%20page%20or%20attach%20a%20CSV%20--%3E%0A%0A%2A%2ABrand%20/%20regional%20color%2A%2A%20%28anything%20we%20can%20sample%20a%20hue%20from%29%3A%0A%3C%21--%20e.g.%20festival%20logo%2C%20city%20flag%2C%20signature%20landscape%3B%20we%27ll%20desaturate%0A%20%20%20%20%20into%20the%20warm-canvas%20chroma%20band%20--%3E%0A%0A%2A%2AAnything%20else%2A%2A%3A%0A" target="_blank" rel="noopener">
+       Request a page →
+     </a></p>
+</section>
+
+
+  <p class="foot">Want to fund more projects? <a href="https://venmo.com/u/Raleigh-J" target="_blank" rel="noopener">Tip jar →</a></p>
 </div>
 </body>
 </html>
