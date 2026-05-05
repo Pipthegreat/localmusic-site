@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connecting Spotify…</title>
+<style>
+:root {
+  --bg-canvas: oklch(25% 0.075 32);
+  --fg:        oklch(96% 0.03 80);
+  --fg-muted:  oklch(82% 0.05 70);
+  --ember:     oklch(76% 0.16 30);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100vh; overflow-x: hidden;
+  background: var(--bg-canvas); color: var(--fg);
+  font: 400 16px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  display: grid; place-items: center; padding: 24px;
+}
+.box { max-width: 460px; text-align: center; }
+h1 { font: 600 22px/1.2 Georgia, "Times New Roman", serif; margin: 0 0 12px; }
+p  { color: var(--fg-muted); margin: 0 0 14px; }
+.err { color: var(--ember); }
+a  { color: var(--ember); }
+</style>
+</head>
+<body>
+<div class="box">
+  <h1 id="title">Connecting Spotify…</h1>
+  <p id="msg">Finishing sign-in. You'll bounce back to the page in a moment.</p>
+  <p id="err" class="err" hidden></p>
+  <p id="back" hidden><a href="/localmusic/sfoak/rolling/">← Back to the music page</a></p>
+</div>
+<script>
+// PKCE callback handler. Reads ?code= from the URL, pairs it with the
+// code_verifier we stashed in sessionStorage before redirecting to Spotify,
+// posts both to the Cloudflare Worker (which adds the client_secret server-side
+// and finishes the exchange), saves the tokens to localStorage, and bounces the
+// user back to whichever page kicked off login.
+const WORKER_URL = 'https://localmusic-search.mr-raleigh-j.workers.dev';
+const RETURN_DEFAULT = '/localmusic/sfoak/rolling/';
+
+function fail(text) {
+  document.getElementById('title').textContent = 'Sign-in failed';
+  document.getElementById('msg').textContent = '';
+  const err = document.getElementById('err');
+  err.textContent = text;
+  err.hidden = false;
+  document.getElementById('back').hidden = false;
+}
+
+(async () => {
+  const params = new URLSearchParams(location.search);
+  const code = params.get('code');
+  const state = params.get('state');
+  const errorParam = params.get('error');
+
+  if (errorParam) { fail('Spotify returned: ' + errorParam); return; }
+  if (!code) { fail('No authorization code in URL.'); return; }
+
+  const expectedState = sessionStorage.getItem('sp_oauth_state');
+  const verifier      = sessionStorage.getItem('sp_oauth_verifier');
+  const redirectUri   = sessionStorage.getItem('sp_oauth_redirect_uri');
+  const returnTo      = sessionStorage.getItem('sp_oauth_return_to') || RETURN_DEFAULT;
+
+  if (!expectedState || !verifier || !redirectUri) {
+    fail('Sign-in session missing. Please try again from the page.');
+    return;
+  }
+  if (state !== expectedState) {
+    fail('State mismatch — possible CSRF. Aborted for safety.');
+    return;
+  }
+
+  let res, data;
+  try {
+    res = await fetch(WORKER_URL + '/api/auth/exchange', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code, code_verifier: verifier, redirect_uri: redirectUri }),
+    });
+    data = await res.json();
+  } catch (e) {
+    fail('Network error during token exchange.');
+    return;
+  }
+
+  if (!res.ok || !data.access_token) {
+    fail(data.error_description || data.error || 'Token exchange failed.');
+    return;
+  }
+
+  // Persist tokens. The page reads these on load; refresh happens lazily
+  // via the worker when the access token nears expiry.
+  const expiresAt = Date.now() + (data.expires_in - 60) * 1000;
+  localStorage.setItem('sp_access_token', data.access_token);
+  localStorage.setItem('sp_expires_at', String(expiresAt));
+  if (data.refresh_token) {
+    localStorage.setItem('sp_refresh_token', data.refresh_token);
+  }
+  // Clean up one-shot session items so a stale verifier can't be reused.
+  sessionStorage.removeItem('sp_oauth_state');
+  sessionStorage.removeItem('sp_oauth_verifier');
+  sessionStorage.removeItem('sp_oauth_redirect_uri');
+  sessionStorage.removeItem('sp_oauth_return_to');
+
+  location.replace(returnTo);
+})();
+</script>
+</body>
+</html>
