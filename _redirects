@@ -1,0 +1,14 @@
+# Cloudflare Pages redirects.
+# Files-first: a path that resolves to a file is served before these rules.
+# Source patterns are matched top-to-bottom; first match wins.
+
+# Old SF page archives → new sfoak path
+/localmusic/2026-*    /localmusic/sfoak/2026-:splat    301
+/localmusic/2027-*    /localmusic/sfoak/2027-:splat    301
+/localmusic/rolling   /localmusic/sfoak/rolling/       301
+/localmusic/rolling/  /localmusic/sfoak/rolling/       301
+
+# Old Tomorrowland → new path under /localmusic/
+/tomorrow2026         /localmusic/tomorrow2026/        301
+/tomorrow2026/        /localmusic/tomorrow2026/        301
+/tomorrow2026/*       /localmusic/tomorrow2026/:splat  301
