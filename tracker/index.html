@@ -442,12 +442,25 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
   'use strict';
 
   // ----- API helper -----
+  const API_BASE = 'https://tracker-api.mr-raleigh-j.workers.dev/api';
+  const TOKEN_KEY = 'tracker_token_v1';
+
+  function getToken() {
+    try { return localStorage.getItem(TOKEN_KEY) || null; } catch (e) { return null; }
+  }
+  function setToken(t) {
+    try {
+      if (t) localStorage.setItem(TOKEN_KEY, t);
+      else localStorage.removeItem(TOKEN_KEY);
+    } catch (e) { /* ignore */ }
+  }
+
   async function api(path, options = {}) {
-    const res = await fetch('/api' + path, {
-      credentials: 'same-origin',
-      headers: options.body ? { 'Content-Type': 'application/json' } : {},
-      ...options
-    });
+    const headers = {};
+    if (options.body) headers['Content-Type'] = 'application/json';
+    const token = getToken();
+    if (token) headers['Authorization'] = 'Bearer ' + token;
+    const res = await fetch(API_BASE + path, { ...options, headers });
     let body;
     try { body = await res.json(); } catch (e) { body = {}; }
     if (!res.ok) {
@@ -531,6 +544,7 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
         method: 'POST',
         body: JSON.stringify({ username, password })
       });
+      setToken(r.token);
       session = { user: r.user, mode: r.mode };
       loginForm.reset();
       await refreshState();
@@ -541,7 +555,7 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
   });
 
   document.getElementById('signout-btn').addEventListener('click', async () => {
-    try { await api('/logout', { method: 'POST' }); } catch (e) { /* ignore */ }
+    setToken(null);
     session = null;
     state = { projects: [], events: [] };
     showLogin();
@@ -1044,12 +1058,15 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
 
   // ----- Boot -----
   (async () => {
+    if (!getToken()) { showLogin(); return; }
     try {
       await refreshState();
       showApp();
     } catch (err) {
-      // 401 = not signed in (expected). 500 = server config error — surface it.
-      if (err.status && err.status !== 401) {
+      // Token bad / expired / IP mismatch → drop it and show login.
+      if (err.status === 401 || err.status === 403) {
+        setToken(null);
+      } else if (err.status && err.status !== 401) {
         loginError.textContent = err.message;
       }
       showLogin();
