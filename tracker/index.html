@@ -60,7 +60,6 @@ h3 { font: 500 13px/1 var(--mono); margin: 0; letter-spacing: 0.14em;
      text-transform: uppercase; color: var(--accent-soft); }
 .lede { color: var(--fg-muted); margin: 0 0 32px; max-width: 56ch; }
 
-/* --- Login screen --- */
 #login-screen {
   min-height: 100vh; display: flex; align-items: center; justify-content: center;
   padding: 24px;
@@ -96,6 +95,7 @@ h3 { font: 500 13px/1 var(--mono); margin: 0; letter-spacing: 0.14em;
   border: 0; font: 500 14px/1 var(--sans); cursor: pointer;
 }
 .btn:hover { filter: brightness(1.05); }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
 .btn-ghost {
   background: transparent; color: var(--fg-default);
   border: 1px solid var(--slate-500);
@@ -103,7 +103,6 @@ h3 { font: 500 13px/1 var(--mono); margin: 0; letter-spacing: 0.14em;
 .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 .btn-sm { padding: 6px 10px; font-size: 13px; border-radius: 5px; }
 
-/* --- App shell --- */
 .app-header {
   display: flex; flex-wrap: wrap; gap: 12px;
   align-items: baseline; justify-content: space-between;
@@ -136,7 +135,6 @@ h3 { font: 500 13px/1 var(--mono); margin: 0; letter-spacing: 0.14em;
 }
 .toolbar { display: flex; gap: 8px; flex-wrap: wrap; }
 
-/* --- Project cards --- */
 .category { margin-bottom: 28px; }
 .category-head {
   display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
@@ -183,6 +181,7 @@ h3 { font: 500 13px/1 var(--mono); margin: 0; letter-spacing: 0.14em;
 }
 .btn-pm.plus:hover { background: var(--plus); color: var(--slate-900); border-color: var(--plus); }
 .btn-pm.minus:hover { background: var(--minus); color: var(--slate-900); border-color: var(--minus); }
+.btn-pm:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn-icon {
   width: 32px; height: 32px; padding: 0;
   background: transparent; color: var(--fg-dim);
@@ -192,7 +191,6 @@ h3 { font: 500 13px/1 var(--mono); margin: 0; letter-spacing: 0.14em;
 .btn-icon:hover { color: var(--fg-default); border-color: var(--slate-500); }
 .btn-icon.active { color: var(--star); }
 
-/* --- Daily view --- */
 .day-block { margin-bottom: 28px; }
 .day-head {
   display: flex; align-items: baseline; gap: 12px;
@@ -240,7 +238,6 @@ h3 { font: 500 13px/1 var(--mono); margin: 0; letter-spacing: 0.14em;
 }
 .event .actions { display: flex; gap: 4px; }
 
-/* --- Reports view --- */
 .report-grid {
   display: grid; gap: 14px;
   grid-template-columns: 1fr;
@@ -282,7 +279,6 @@ h3 { font: 500 13px/1 var(--mono); margin: 0; letter-spacing: 0.14em;
 .report-table td.num.plus { color: var(--plus-soft); }
 .report-table td.num.minus { color: var(--minus-soft); }
 
-/* --- Modal --- */
 dialog {
   border: 1px solid var(--slate-500);
   background: var(--slate-800);
@@ -302,7 +298,7 @@ dialog .target {
 dialog label { font: 500 11px/1 var(--mono);
                letter-spacing: 0.14em; text-transform: uppercase;
                color: var(--fg-muted); margin-top: 4px; }
-dialog textarea, dialog input[type="text"] {
+dialog textarea, dialog input[type="text"], dialog input[type="password"] {
   width: 100%; padding: 10px 12px;
   background: var(--slate-700); color: var(--fg-default);
   border: 1px solid var(--slate-500); border-radius: 6px;
@@ -323,6 +319,14 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
 .section-note {
   color: var(--fg-dim); font-size: 13px; margin: -4px 0 16px;
 }
+.toast {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  padding: 10px 16px;
+  background: var(--slate-800); border: 1px solid var(--minus);
+  color: var(--fg-default); border-radius: 8px;
+  font-size: 13px; z-index: 1000;
+  max-width: 90%;
+}
 [hidden] { display: none !important; }
 </style>
 </head>
@@ -341,8 +345,33 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
       <button type="submit" class="btn" style="margin-top:8px;">Sign in</button>
       <p class="login-error" id="login-error" aria-live="polite"></p>
     </form>
+    <p style="margin: 16px 0 0; font-size: 13px; color: var(--fg-muted);">
+      <a href="#" id="unlock-link" style="color: var(--accent-soft); text-decoration: none;">
+        Locked out from a new device? Unlock with both passwords →
+      </a>
+    </p>
   </div>
 </div>
+
+<dialog id="unlock-modal">
+  <form id="unlock-form" method="dialog">
+    <h2>Clear IP binding</h2>
+    <p style="margin: 0; color: var(--fg-muted); font-size: 13px;">
+      The first device to use a password locks that account to its IP. Enter
+      <strong>both</strong> passwords to clear all bindings so the next sign-in
+      from any device re-binds.
+    </p>
+    <label for="unlock-pw-skye">mr.skye password</label>
+    <input id="unlock-pw-skye" type="password" autocomplete="off">
+    <label for="unlock-pw-whoever">whoever password</label>
+    <input id="unlock-pw-whoever" type="password" autocomplete="off">
+    <p class="login-error" id="unlock-error" aria-live="polite" style="margin: 0;"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-ghost btn-sm" id="unlock-cancel">Cancel</button>
+      <button type="submit" class="btn btn-sm">Unlock</button>
+    </div>
+  </form>
+</dialog>
 
 <div id="app" hidden>
   <div class="shell">
@@ -403,7 +432,7 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
            placeholder="https://… or C:\path\to\file">
     <div class="actions">
       <button type="button" class="btn btn-ghost btn-sm" id="entry-cancel">Cancel</button>
-      <button type="submit" class="btn btn-sm">Submit</button>
+      <button type="submit" class="btn btn-sm" id="entry-submit">Submit</button>
     </div>
   </form>
 </dialog>
@@ -412,82 +441,44 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
 (() => {
   'use strict';
 
-  // ----- Auth -----
-  const ACCOUNTS = {
-    'mr.skye':   { password: 'isleofskye1!', mode: 'normal' },
-    'whoever':   { password: 'dad95070',     mode: 'power'  }
-  };
-  const SESSION_KEY = 'tracker_session_v1';
-  const STORAGE_KEY = 'tracker_state_v1';
-
-  // ----- Default project seeds -----
-  const DEFAULT_PROJECTS = [
-    { category: 'Aggregating', name: 'Property Damage Reporting as a Service' },
-    { category: 'Aggregating', name: 'Local Music Live' },
-    { category: 'Rotomolds',   name: 'Building a Kiln' },
-    { category: 'Rotomolds',   name: 'Building a Mold' },
-    { category: 'Rotomolds',   name: 'Selling Specialty Car Parts' },
-    { category: '3D Printing', name: 'Etsy Store' },
-    { category: '3D Printing', name: 'Prototypes for Manufacturing' },
-    { category: '3D Printing', name: 'Roll-out bed for car' },
-    { category: '3D Printing', name: 'Furniture Company' },
-    { category: 'Games',       name: 'Research' },
-    { category: 'Games',       name: 'Storyboarding' },
-    { category: 'Games',       name: 'Final Designs' },
-  ];
-
-  function slug(s) {
-    return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  }
-  function makeId() {
-    return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
-  }
-  function seedProjects() {
-    return DEFAULT_PROJECTS.map(p => ({
-      id: slug(p.category) + ':' + slug(p.name),
-      category: p.category,
-      name: p.name,
-      done: false,
-      doneAt: null,
-      starred: false,
-      starredAt: null,
-      createdAt: new Date().toISOString()
-    }));
+  // ----- API helper -----
+  async function api(path, options = {}) {
+    const res = await fetch('/api' + path, {
+      credentials: 'same-origin',
+      headers: options.body ? { 'Content-Type': 'application/json' } : {},
+      ...options
+    });
+    let body;
+    try { body = await res.json(); } catch (e) { body = {}; }
+    if (!res.ok) {
+      const err = new Error(body.error || ('Request failed: ' + res.status));
+      err.status = res.status;
+      throw err;
+    }
+    return body;
   }
 
-  // ----- State load/save -----
-  function loadState() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const s = JSON.parse(raw);
-        if (s && Array.isArray(s.projects) && Array.isArray(s.events)) {
-          // Make sure new default projects get added if missing.
-          const existingIds = new Set(s.projects.map(p => p.id));
-          for (const seed of seedProjects()) {
-            if (!existingIds.has(seed.id)) s.projects.push(seed);
-          }
-          return s;
-        }
-      }
-    } catch (e) { /* fall through */ }
-    return { projects: seedProjects(), events: [] };
-  }
-  function saveState() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  function toast(msg, ms = 3500) {
+    const el = document.createElement('div');
+    el.className = 'toast';
+    el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), ms);
   }
 
-  let state = loadState();
-  let session = null;
-  try {
-    const raw = sessionStorage.getItem(SESSION_KEY);
-    if (raw) session = JSON.parse(raw);
-  } catch (e) { session = null; }
+  // ----- App state mirror (filled from the server) -----
+  let state = { projects: [], events: [] };
+  let session = null; // { user, mode }
 
   // ----- DOM refs -----
   const loginScreen = document.getElementById('login-screen');
   const loginForm = document.getElementById('login-form');
   const loginError = document.getElementById('login-error');
+  const unlockLink = document.getElementById('unlock-link');
+  const unlockModal = document.getElementById('unlock-modal');
+  const unlockForm = document.getElementById('unlock-form');
+  const unlockError = document.getElementById('unlock-error');
+  const unlockCancel = document.getElementById('unlock-cancel');
   const app = document.getElementById('app');
   const whoUser = document.getElementById('who-username');
   const whoBadge = document.getElementById('who-badge');
@@ -507,15 +498,14 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
   const entryTarget = document.getElementById('entry-target');
   const entryReason = document.getElementById('entry-reason');
   const entryEvidence = document.getElementById('entry-evidence');
+  const entrySubmit = document.getElementById('entry-submit');
 
-  // ----- Login flow -----
+  // ----- View switching -----
   function showApp() {
     loginScreen.hidden = true;
     app.hidden = false;
-    whoUser.textContent = session.username;
+    whoUser.textContent = session.user;
     whoBadge.textContent = session.mode === 'power' ? 'power user' : 'user';
-    // Reset to projects tab on each sign-in so the visible view always
-    // matches the freshly-signed-in user's permissions.
     tabs.forEach(x => x.classList.remove('active'));
     const projectsTab = [...tabs].find(b => b.dataset.view === 'projects');
     if (projectsTab) projectsTab.classList.add('active');
@@ -530,27 +520,63 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
     document.getElementById('login-username').focus();
   }
 
-  loginForm.addEventListener('submit', e => {
+  // ----- Auth flows -----
+  loginForm.addEventListener('submit', async e => {
     e.preventDefault();
-    const u = document.getElementById('login-username').value.trim();
-    const p = document.getElementById('login-password').value;
-    const acct = ACCOUNTS[u.toLowerCase()];
-    if (acct && acct.password === p) {
-      session = { username: u, mode: acct.mode, signedInAt: new Date().toISOString() };
-      sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
-      loginError.textContent = '';
+    loginError.textContent = '';
+    const username = document.getElementById('login-username').value.trim();
+    const password = document.getElementById('login-password').value;
+    try {
+      const r = await api('/login', {
+        method: 'POST',
+        body: JSON.stringify({ username, password })
+      });
+      session = { user: r.user, mode: r.mode };
       loginForm.reset();
+      await refreshState();
       showApp();
-    } else {
-      loginError.textContent = 'Wrong username or password.';
+    } catch (err) {
+      loginError.textContent = err.message || 'Login failed.';
     }
   });
 
-  document.getElementById('signout-btn').addEventListener('click', () => {
-    sessionStorage.removeItem(SESSION_KEY);
+  document.getElementById('signout-btn').addEventListener('click', async () => {
+    try { await api('/logout', { method: 'POST' }); } catch (e) { /* ignore */ }
     session = null;
+    state = { projects: [], events: [] };
     showLogin();
   });
+
+  unlockLink.addEventListener('click', e => {
+    e.preventDefault();
+    unlockError.textContent = '';
+    document.getElementById('unlock-pw-skye').value = '';
+    document.getElementById('unlock-pw-whoever').value = '';
+    if (typeof unlockModal.showModal === 'function') unlockModal.showModal();
+  });
+  unlockCancel.addEventListener('click', () => unlockModal.close());
+  unlockForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    unlockError.textContent = '';
+    const skye = document.getElementById('unlock-pw-skye').value;
+    const whoever = document.getElementById('unlock-pw-whoever').value;
+    try {
+      await api('/admin/unbind', {
+        method: 'POST',
+        body: JSON.stringify({ 'mr.skye': skye, 'whoever': whoever })
+      });
+      unlockModal.close();
+      toast('Bindings cleared. Sign in from this device to re-bind.');
+    } catch (err) {
+      unlockError.textContent = err.message || 'Unlock failed.';
+    }
+  });
+
+  async function refreshState() {
+    const r = await api('/state');
+    session = r.session;
+    state = r.state;
+  }
 
   // ----- Tabs -----
   tabs.forEach(b => {
@@ -561,13 +587,11 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
       viewProjects.hidden = v !== 'projects';
       viewDaily.hidden = v !== 'daily';
       viewReports.hidden = v !== 'reports';
-      if (v === 'daily') renderDaily();
-      if (v === 'reports') renderReports();
-      if (v === 'projects') renderProjects();
+      render();
     });
   });
 
-  // ----- Modal -----
+  // ----- Modal entry flow -----
   let pendingEntry = null;
 
   function openEntry(projectId, type) {
@@ -578,15 +602,10 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
     entryTarget.textContent = p.category + ' — ' + p.name;
     entryReason.value = '';
     entryEvidence.value = '';
+    entrySubmit.disabled = false;
     if (typeof modal.showModal === 'function') {
       modal.showModal();
       setTimeout(() => entryReason.focus(), 50);
-    } else {
-      // very old browser fallback
-      const reason = window.prompt('Why? (' + entryTitle.textContent + ')');
-      if (!reason) { pendingEntry = null; return; }
-      const evidence = window.prompt('Evidence URL or path (optional)') || '';
-      commitEntry(reason, evidence);
     }
   }
 
@@ -595,60 +614,57 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
     modal.close();
   });
 
-  entryForm.addEventListener('submit', e => {
+  entryForm.addEventListener('submit', async e => {
     e.preventDefault();
     if (!pendingEntry) { modal.close(); return; }
     const reason = entryReason.value.trim();
     if (!reason) { entryReason.focus(); return; }
     const evidence = entryEvidence.value.trim();
-    commitEntry(reason, evidence);
-    modal.close();
+    entrySubmit.disabled = true;
+    try {
+      const r = await api('/event', {
+        method: 'POST',
+        body: JSON.stringify({
+          projectId: pendingEntry.projectId,
+          type: pendingEntry.type,
+          reason, evidence
+        })
+      });
+      state = r.state;
+      pendingEntry = null;
+      modal.close();
+      render();
+    } catch (err) {
+      entrySubmit.disabled = false;
+      toast(err.message || 'Save failed. Try again.');
+    }
   });
 
-  function commitEntry(reason, evidence) {
-    if (!pendingEntry) return;
-    state.events.push({
-      id: makeId(),
-      projectId: pendingEntry.projectId,
-      type: pendingEntry.type,
-      reason,
-      evidence,
-      timestamp: new Date().toISOString(),
-      author: session ? session.username : 'unknown'
-    });
-    pendingEntry = null;
-    saveState();
-    render();
-  }
-
   // ----- Power-user actions -----
-  function toggleDone(projectId) {
-    if (!session || session.mode !== 'power') return;
-    const p = state.projects.find(x => x.id === projectId);
-    if (!p) return;
-    p.done = !p.done;
-    p.doneAt = p.done ? new Date().toISOString() : null;
-    saveState();
-    render();
+  async function toggleStar(projectId) {
+    try {
+      const r = await api('/project/' + encodeURIComponent(projectId) + '/star', { method: 'POST' });
+      state = r.state;
+      render();
+    } catch (err) { toast(err.message); }
   }
-  function toggleStar(projectId) {
-    if (!session || session.mode !== 'power') return;
-    const p = state.projects.find(x => x.id === projectId);
-    if (!p) return;
-    p.starred = !p.starred;
-    p.starredAt = p.starred ? new Date().toISOString() : null;
-    saveState();
-    render();
+  async function toggleDone(projectId) {
+    try {
+      const r = await api('/project/' + encodeURIComponent(projectId) + '/done', { method: 'POST' });
+      state = r.state;
+      render();
+    } catch (err) { toast(err.message); }
   }
-  function deleteEvent(eventId) {
-    if (!session || session.mode !== 'power') return;
+  async function deleteEvent(eventId) {
     if (!window.confirm('Delete this entry? This can\'t be undone.')) return;
-    state.events = state.events.filter(e => e.id !== eventId);
-    saveState();
-    render();
+    try {
+      const r = await api('/event/' + encodeURIComponent(eventId), { method: 'DELETE' });
+      state = r.state;
+      render();
+    } catch (err) { toast(err.message); }
   }
 
-  // ----- Rendering -----
+  // ----- Helpers -----
   function projectStats(projectId) {
     let plus = 0, minus = 0, last = null;
     for (const e of state.events) {
@@ -659,7 +675,6 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
     }
     return { plus, minus, last };
   }
-
   function dateKey(iso) {
     const d = new Date(iso);
     const y = d.getFullYear();
@@ -684,7 +699,6 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
     if (days === 1) return 'yesterday';
     return days + 'd ago';
   }
-
   function el(tag, attrs = {}, ...children) {
     const e = document.createElement(tag);
     for (const [k, v] of Object.entries(attrs)) {
@@ -703,6 +717,15 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
     return e;
   }
 
+  // ----- Renderers -----
+  function render() {
+    const active = document.querySelector('.tabs button.active');
+    const v = active ? active.dataset.view : 'projects';
+    if (v === 'projects') renderProjects();
+    else if (v === 'daily') renderDaily();
+    else if (v === 'reports') renderReports();
+  }
+
   function renderProjects() {
     categoriesEl.innerHTML = '';
     const isPower = session && session.mode === 'power';
@@ -710,7 +733,6 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
       ? 'Power user: click ★ to highlight, ✓ to mark done. Click + or − to log entries.'
       : 'Click + to log progress, − to log a setback. Each entry needs a reason.';
 
-    // Group by category, preserve original ordering of categories.
     const order = [];
     const groups = new Map();
     for (const p of state.projects) {
@@ -723,7 +745,6 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
 
     for (const cat of order) {
       const items = groups.get(cat);
-      // Within a category: starred first, then active, then done.
       items.sort((a, b) => {
         if (a.done !== b.done) return a.done ? 1 : -1;
         if (a.starred !== b.starred) return a.starred ? -1 : 1;
@@ -784,6 +805,15 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
     }
   }
 
+  function evidenceLink(raw) {
+    const trimmed = raw.trim();
+    const isUrl = /^(https?:\/\/|\/\/)/i.test(trimmed);
+    if (isUrl) {
+      return el('a', { href: trimmed, target: '_blank', rel: 'noopener noreferrer' }, trimmed);
+    }
+    return document.createTextNode(trimmed);
+  }
+
   function renderDaily() {
     dailyEl.innerHTML = '';
     if (state.events.length === 0) {
@@ -822,14 +852,7 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
         const evidenceEl = e.evidence
           ? el('div', { class: 'evidence' }, evidenceLink(e.evidence))
           : null;
-        const actions = el('div', { class: 'actions' });
-        if (isPower) {
-          actions.appendChild(el('button', {
-            class: 'btn-icon', title: 'Delete entry (power user)',
-            onclick: () => deleteEvent(e.id)
-          }, '×'));
-        }
-        list.appendChild(el('div', { class: 'event ' + (e.type === '+' ? 'plus' : 'minus') },
+        const eventCard = el('div', { class: 'event ' + (e.type === '+' ? 'plus' : 'minus') },
           el('span', { class: 'badge' }, e.type === '+' ? '+' : '−'),
           el('div', { class: 'body' },
             el('span', { class: 'project' }, projName),
@@ -837,20 +860,19 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
             evidenceEl
           ),
           el('span', { class: 'ts' }, fmtTime(e.timestamp))
-        ));
-        if (isPower) list.lastChild.appendChild(actions);
+        );
+        if (isPower) {
+          const actions = el('div', { class: 'actions' });
+          actions.appendChild(el('button', {
+            class: 'btn-icon', title: 'Delete entry (power user)',
+            onclick: () => deleteEvent(e.id)
+          }, '×'));
+          eventCard.appendChild(actions);
+        }
+        list.appendChild(eventCard);
       }
       dailyEl.appendChild(el('div', { class: 'day-block' }, head, list));
     }
-  }
-
-  function evidenceLink(raw) {
-    const trimmed = raw.trim();
-    const isUrl = /^(https?:\/\/|\/\/)/i.test(trimmed);
-    if (isUrl) {
-      return el('a', { href: trimmed, target: '_blank', rel: 'noopener noreferrer' }, trimmed);
-    }
-    return document.createTextNode(trimmed);
   }
 
   function renderReports() {
@@ -868,7 +890,6 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
     const doneProjects = state.projects.filter(p => p.done).length;
     const starredProjects = state.projects.filter(p => p.starred).length;
 
-    // Streak: consecutive days ending today with at least 1 event.
     const days = new Set(state.events.map(e => dateKey(e.timestamp)));
     let streak = 0;
     for (let i = 0; ; i++) {
@@ -881,8 +902,7 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
     }
 
     metricsEl.appendChild(metric('Total entries',
-      totalEvents.toString(),
-      '+' + plus + ' / −' + minus));
+      totalEvents.toString(), '+' + plus + ' / −' + minus));
     metricsEl.appendChild(metric('Active projects',
       activeProjects.toString(),
       doneProjects + ' done · ' + starredProjects + ' highlighted'));
@@ -890,7 +910,6 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
       streak.toString() + (streak === 1 ? ' day' : ' days'),
       streak ? 'consecutive days ending today' : 'log something today to start one'));
 
-    // Per-project table.
     const stats = state.projects.map(p => {
       const s = projectStats(p.id);
       return { p, ...s, score: s.plus - s.minus };
@@ -929,7 +948,6 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
     table.appendChild(tbody);
     tableWrapEl.appendChild(table);
 
-    // Recent activity (last 7 days).
     const cutoff = Date.now() - 7 * 86400000;
     const recent = state.events.filter(e => new Date(e.timestamp).getTime() >= cutoff);
     if (recent.length === 0) {
@@ -976,14 +994,6 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
     );
   }
 
-  function render() {
-    const active = document.querySelector('.tabs button.active');
-    const v = active ? active.dataset.view : 'projects';
-    if (v === 'projects') renderProjects();
-    else if (v === 'daily') renderDaily();
-    else if (v === 'reports') renderReports();
-  }
-
   // ----- Export / import -----
   document.getElementById('export-btn').addEventListener('click', () => {
     const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
@@ -999,23 +1009,33 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
 
   const importBtn = document.getElementById('import-btn');
   const importFile = document.getElementById('import-file');
-  importBtn.addEventListener('click', () => importFile.click());
+  importBtn.addEventListener('click', () => {
+    if (!session || session.mode !== 'power') {
+      toast('Import is power-user only.');
+      return;
+    }
+    importFile.click();
+  });
   importFile.addEventListener('change', e => {
     const file = e.target.files && e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = () => {
+    reader.onload = async () => {
       try {
         const parsed = JSON.parse(reader.result);
         if (!parsed || !Array.isArray(parsed.projects) || !Array.isArray(parsed.events)) {
           throw new Error('Bad shape');
         }
-        if (!window.confirm('Replace current data with imported file? Export first if you want a backup.')) return;
-        state = parsed;
-        saveState();
+        if (!window.confirm('Replace ALL server data with imported file? Export first if you want a backup.')) return;
+        const r = await api('/state', {
+          method: 'POST',
+          body: JSON.stringify({ projects: parsed.projects, events: parsed.events })
+        });
+        state = r.state;
         render();
+        toast('Import successful.');
       } catch (err) {
-        window.alert('Import failed: ' + err.message);
+        toast('Import failed: ' + err.message);
       }
       importFile.value = '';
     };
@@ -1023,11 +1043,18 @@ dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top
   });
 
   // ----- Boot -----
-  if (session && ACCOUNTS[session.username && session.username.toLowerCase()]) {
-    showApp();
-  } else {
-    showLogin();
-  }
+  (async () => {
+    try {
+      await refreshState();
+      showApp();
+    } catch (err) {
+      // 401 = not signed in (expected). 500 = server config error — surface it.
+      if (err.status && err.status !== 401) {
+        loginError.textContent = err.message;
+      }
+      showLogin();
+    }
+  })();
 })();
 </script>
 
