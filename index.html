@@ -2,20 +2,115 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>customprojects.info</title>
-<meta http-equiv="refresh" content="0; url=/localmusic/">
-<link rel="canonical" href="https://customprojects.info/localmusic/">
+<meta name="description" content="A small set of independent web projects — a live-music companion, a fabrication studio site, and a personal tracker.">
+<link rel="canonical" href="https://customprojects.info/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-         background: #1a1310; color: #eee;
-         display: flex; align-items: center; justify-content: center;
-         min-height: 100vh; margin: 0; }
-  a { color: oklch(76% 0.16 30); text-decoration: none; }
-  a:hover { text-decoration: underline; }
+:root {
+  --slate-300: oklch(82% 0.045 60);
+  --slate-500: oklch(52% 0.075 60);
+  --slate-700: oklch(37% 0.075 60);
+  --slate-900: oklch(25% 0.064 60);
+  --accent:    oklch(70% 0.075 30);
+  --accent-soft: oklch(78% 0.060 30);
+  --fg-default: oklch(96% 0.03 60);
+  --fg-muted:   oklch(82% 0.04 60);
+  --serif: 'Fraunces', Georgia, serif;
+  --sans:  'Inter', system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+html, body { margin: 0; padding: 0; }
+body {
+  font: 400 16px/1.55 var(--sans);
+  color: var(--fg-default);
+  background: var(--slate-900);
+  background-image:
+    radial-gradient(ellipse 80% 45% at 70% -10%, oklch(72% 0.07 60 / 0.18), transparent 65%),
+    radial-gradient(ellipse 60% 35% at 10% 0%, oklch(80% 0.07 30 / 0.10), transparent 65%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+.shell { max-width: 880px; margin: 0 auto; padding: 56px 28px 80px; }
+.eyebrow {
+  font: 500 11px/1 'JetBrains Mono', ui-monospace, monospace;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 14px;
+}
+h1 {
+  font: 400 44px/1.1 var(--serif);
+  margin: 0 0 14px; letter-spacing: -0.01em;
+}
+.lede { color: var(--fg-muted); margin: 0 0 40px; max-width: 56ch; }
+.cards {
+  display: grid; gap: 14px;
+  grid-template-columns: 1fr;
+  margin-bottom: 48px;
+}
+@media (min-width: 640px) {
+  .cards { grid-template-columns: 1fr 1fr; }
+}
+.card {
+  display: block; text-decoration: none;
+  padding: 22px 22px 18px;
+  background: var(--slate-700);
+  border: 1px solid var(--slate-500);
+  border-radius: 10px;
+  color: var(--fg-default);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.card-label {
+  font: 500 10px/1 'JetBrains Mono', ui-monospace, monospace;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent-soft);
+}
+.card-title {
+  font: 400 22px/1.25 var(--serif);
+  margin: 8px 0 10px;
+}
+.card-desc { font-size: 14px; color: var(--fg-muted); margin: 0 0 14px; }
+.card-go { font-size: 13px; color: var(--fg-muted); }
+.card:hover .card-go { color: var(--accent); }
 </style>
 </head>
 <body>
-<p>Redirecting to <a href="/localmusic/">customprojects.info/localmusic/</a>…</p>
-<script>location.replace('/localmusic/');</script>
+<div class="shell">
+  <div class="eyebrow">Custom Projects</div>
+  <h1>customprojects.info</h1>
+  <p class="lede">A small set of independent web projects.</p>
+
+  <section class="cards">
+    <a class="card" href="/localmusic/">
+      <span class="card-label">Live music</span>
+      <h2 class="card-title">Live Music Companions</h2>
+      <p class="card-desc">A directory of city and festival music pages — daily-updated lineups paired with Spotify playlists.</p>
+      <span class="card-go">Open →</span>
+    </a>
+    <a class="card" href="/kestralfabrications/">
+      <span class="card-label">Studio</span>
+      <h2 class="card-title">Kestral Fabrications</h2>
+      <p class="card-desc">Design studio producing custom industrial work through in-house build and a vetted fabrication-partner network.</p>
+      <span class="card-go">Open →</span>
+    </a>
+    <a class="card" href="/tracker/">
+      <span class="card-label">Tracker</span>
+      <h2 class="card-title">Tracker</h2>
+      <p class="card-desc">Personal tracking page.</p>
+      <span class="card-go">Open →</span>
+    </a>
+  </section>
+</div>
 </body>
 </html>
