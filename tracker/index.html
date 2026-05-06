@@ -407,14 +407,14 @@ a:hover { color: var(--accent-100); }
 }
 @media (min-width: 720px) {
   .category {
-    grid-template-columns: 96px minmax(0, 1fr);
-    column-gap: var(--s-32);
+    grid-template-columns: 168px minmax(0, 1fr);
+    column-gap: var(--s-40);
   }
 }
 .category-head {
   display: grid;
   align-content: start;
-  gap: var(--s-4);
+  gap: var(--s-8);
 }
 @media (min-width: 720px) {
   .category-head {
@@ -425,23 +425,62 @@ a:hover { color: var(--accent-100); }
 }
 .category-head::before {
   content: counter(category, decimal-leading-zero);
-  font: 300 var(--t-72)/1 var(--serif);
+  font: 300 var(--t-72)/0.9 var(--serif);
   font-variation-settings: "opsz" 144;
   color: var(--accent-500);
   letter-spacing: -0.04em;
   display: block;
   font-feature-settings: "tnum";
+  margin-bottom: var(--s-4);
 }
 .category-head h3 {
-  font: 500 var(--t-12)/1.2 var(--mono);
+  font: 500 var(--t-14)/1.15 var(--mono);
   letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--fg-muted);
+  color: var(--fg-default);
   margin: 0;
 }
 .category-head .count {
   font: 400 var(--t-12)/1 var(--mono);
   color: var(--fg-faint);
   letter-spacing: 0.05em;
+}
+/* Category-level summary block — sits below name/count, above a hairline */
+.category-head .cat-rule {
+  height: 1px;
+  background: var(--border-subtle);
+  width: 56px;
+  margin: var(--s-8) 0 var(--s-4);
+}
+.category-head .cat-stats {
+  display: grid;
+  gap: var(--s-12);
+  font-family: var(--mono);
+  font-feature-settings: "tnum";
+}
+.category-head .cat-row {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: var(--s-12);
+  align-items: baseline;
+}
+.category-head .cat-row .label {
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--fg-faint);
+}
+.category-head .cat-row .v {
+  font: 500 var(--t-16)/1 var(--mono);
+  color: var(--fg-default);
+  font-feature-settings: "tnum";
+  text-align: right;
+  justify-self: end;
+}
+.category-head .cat-row .v.plus  { color: var(--plus-300); }
+.category-head .cat-row .v.minus { color: var(--minus-300); }
+.category-head .cat-last {
+  font: 400 var(--t-12)/1.4 var(--sans);
+  color: var(--fg-muted);
+  margin-top: var(--s-4);
 }
 .project-list {
   display: grid;
@@ -486,17 +525,57 @@ a:hover { color: var(--accent-100); }
   margin: 0;
   letter-spacing: -0.005em;
 }
+/* Project meta — labeled data spec, not a runt-text strip.
+   Mobile: 2-column flow. Desktop: tight horizontal row. */
 .project-meta {
-  margin-top: var(--s-8);
-  font: 400 var(--t-12)/1.4 var(--mono);
-  color: var(--fg-faint);
-  display: flex; flex-wrap: wrap;
-  gap: var(--s-16);
+  margin-top: var(--s-12);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--s-16);
+  row-gap: var(--s-12);
+  font-family: var(--mono);
   font-feature-settings: "tnum";
 }
-.project-meta .stat { display: inline-flex; align-items: center; gap: var(--s-4); }
-.project-meta .stat.plus { color: var(--plus-300); }
-.project-meta .stat.minus { color: var(--minus-300); }
+@media (min-width: 560px) {
+  .project-meta {
+    grid-template-columns: repeat(auto-fit, minmax(72px, max-content));
+    column-gap: var(--s-32);
+  }
+}
+.project-meta .stat {
+  display: grid;
+  gap: 2px;
+  min-width: 56px;
+}
+.project-meta .stat-label {
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--fg-faint);
+}
+.project-meta .stat-value {
+  font: 500 var(--t-18)/1.1 var(--mono);
+  color: var(--fg-default);
+  letter-spacing: -0.005em;
+  font-feature-settings: "tnum";
+}
+.project-meta .stat.net.pos .stat-value { color: var(--plus-300); }
+.project-meta .stat.net.neg .stat-value { color: var(--minus-300); }
+.project-meta .stat.net.zero .stat-value { color: var(--fg-faint); }
+.project-meta .stat.plus  .stat-value { color: var(--plus-300); }
+.project-meta .stat.minus .stat-value { color: var(--minus-300); }
+.project-meta .stat.last .stat-value {
+  font-size: var(--t-14);
+  font-family: var(--sans);
+  font-weight: 400;
+  color: var(--fg-muted);
+  letter-spacing: 0;
+}
+.project-meta .stat.flag .stat-value {
+  font-size: var(--t-12);
+  color: var(--accent-500);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
 
 .project-controls {
   display: flex; align-items: center; gap: var(--s-4);
@@ -1321,22 +1400,71 @@ dialog p { color: var(--fg-muted); font-size: var(--t-14); line-height: 1.5; mar
         return a.name.localeCompare(b.name);
       });
 
-      const block = el('div', { class: 'category' });
-      block.appendChild(el('div', { class: 'category-head' },
+      // Category-level totals
+      let catPlus = 0, catMinus = 0, catLast = null;
+      for (const p of items) {
+        const s = projectStats(p.id);
+        catPlus += s.plus;
+        catMinus += s.minus;
+        if (s.last && (!catLast || s.last > catLast)) catLast = s.last;
+      }
+
+      const head = el('div', { class: 'category-head' },
         el('h3', {}, cat),
         el('span', { class: 'count' },
           items.length + ' project' + (items.length === 1 ? '' : 's'))
+      );
+      head.appendChild(el('div', { class: 'cat-rule' }));
+      const catStats = el('div', { class: 'cat-stats' });
+      catStats.appendChild(el('div', { class: 'cat-row' },
+        el('span', { class: 'label' }, 'Entries'),
+        el('span', { class: 'v plus' }, '+' + catPlus)
       ));
+      catStats.appendChild(el('div', { class: 'cat-row' },
+        el('span', { class: 'label' }, 'Setbacks'),
+        el('span', { class: 'v minus' }, '−' + catMinus)
+      ));
+      catStats.appendChild(el('div', { class: 'cat-last' }, 'Last activity ' + relativeDays(catLast)));
+      head.appendChild(catStats);
+
+      const block = el('div', { class: 'category' });
+      block.appendChild(head);
       const list = el('div', { class: 'project-list' });
       for (const p of items) {
         const stats = projectStats(p.id);
-        const meta = el('div', { class: 'project-meta' },
-          el('span', { class: 'stat plus' }, '+ ' + stats.plus),
-          el('span', { class: 'stat minus' }, '− ' + stats.minus),
-          el('span', { class: 'stat' }, 'last: ' + relativeDays(stats.last))
-        );
-        if (p.done) meta.appendChild(el('span', { class: 'stat' }, '✓ done ' + relativeDays(p.doneAt)));
-        if (p.starred) meta.appendChild(el('span', { class: 'stat' }, '★ highlighted'));
+        const score = stats.plus - stats.minus;
+        const netClass = score > 0 ? 'pos' : score < 0 ? 'neg' : 'zero';
+        const netStr = score > 0 ? '+' + score : score < 0 ? '−' + Math.abs(score) : '0';
+
+        const meta = el('div', { class: 'project-meta' });
+        meta.appendChild(el('span', { class: 'stat net ' + netClass },
+          el('span', { class: 'stat-label' }, 'Net'),
+          el('span', { class: 'stat-value' }, netStr)
+        ));
+        meta.appendChild(el('span', { class: 'stat plus' },
+          el('span', { class: 'stat-label' }, '+ Entries'),
+          el('span', { class: 'stat-value' }, stats.plus.toString())
+        ));
+        meta.appendChild(el('span', { class: 'stat minus' },
+          el('span', { class: 'stat-label' }, '− Setbacks'),
+          el('span', { class: 'stat-value' }, stats.minus.toString())
+        ));
+        meta.appendChild(el('span', { class: 'stat last' },
+          el('span', { class: 'stat-label' }, 'Last'),
+          el('span', { class: 'stat-value' }, relativeDays(stats.last))
+        ));
+        if (p.done) {
+          meta.appendChild(el('span', { class: 'stat flag' },
+            el('span', { class: 'stat-label' }, 'Done'),
+            el('span', { class: 'stat-value' }, relativeDays(p.doneAt))
+          ));
+        }
+        if (p.starred) {
+          meta.appendChild(el('span', { class: 'stat flag' },
+            el('span', { class: 'stat-label' }, 'Status'),
+            el('span', { class: 'stat-value' }, '★ Highlighted')
+          ));
+        }
 
         const controls = el('div', { class: 'project-controls' });
         if (isPower) {
