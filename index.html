@@ -11,14 +11,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --slate-300: oklch(82% 0.045 60);
-  --slate-500: oklch(52% 0.075 60);
-  --slate-700: oklch(37% 0.075 60);
-  --slate-900: oklch(25% 0.064 60);
-  --accent:    oklch(70% 0.075 30);
-  --accent-soft: oklch(78% 0.060 30);
-  --fg-default: oklch(96% 0.03 60);
-  --fg-muted:   oklch(82% 0.04 60);
+  /* Autumn palette: warm cinnamon canvas + mossy sage accent. Replaces
+     the prior cream/peach (hue 60 + 30) which read as monochromatic
+     and pinkish. The contrast between the warm canvas hue (45) and the
+     cool sage accent (130) is what gives this page its "autumn leaves"
+     feel — earth tones with one cool counterpoint, not a single
+     orange family blurring together. Chroma stays in the 0.07–0.085
+     band per the project-wide palette feedback. */
+  --slate-300: oklch(82% 0.050 45);
+  --slate-500: oklch(52% 0.080 45);
+  --slate-700: oklch(36% 0.080 40);
+  --slate-800: oklch(30% 0.075 40);
+  --slate-900: oklch(23% 0.060 40);
+  --accent:      oklch(72% 0.085 130);
+  --accent-soft: oklch(80% 0.065 130);
+  --fg-default:  oklch(96% 0.030 60);
+  --fg-muted:    oklch(83% 0.045 55);
+  --bubble-shadow: oklch(12% 0.035 40 / 0.55);
   --serif: 'Fraunces', Georgia, serif;
   --sans:  'Inter', system-ui, sans-serif;
   color-scheme: dark;
@@ -35,13 +44,17 @@ body {
   color: var(--fg-default);
   background: var(--slate-900);
   background-image:
-    radial-gradient(ellipse 80% 45% at 70% -10%, oklch(72% 0.07 60 / 0.18), transparent 65%),
-    radial-gradient(ellipse 60% 35% at 10% 0%, oklch(80% 0.07 30 / 0.10), transparent 65%);
+    /* Warm cinnamon glow top-right */
+    radial-gradient(ellipse 80% 45% at 75% -8%, oklch(60% 0.10 38 / 0.30), transparent 62%),
+    /* Sage accent glow top-left */
+    radial-gradient(ellipse 55% 35% at 8% 4%, oklch(60% 0.08 130 / 0.18), transparent 62%),
+    /* Deep warm undertone bottom */
+    radial-gradient(ellipse 90% 35% at 50% 105%, oklch(28% 0.07 40 / 0.45), transparent 70%);
   background-attachment: fixed;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
-.shell { max-width: 880px; margin: 0 auto; padding: 56px 28px 80px; }
+.shell { max-width: 600px; margin: 0 auto; padding: 56px 24px 80px; }
 .eyebrow {
   font: 500 11px/1 'JetBrains Mono', ui-monospace, monospace;
   letter-spacing: 0.18em; text-transform: uppercase;
@@ -52,37 +65,77 @@ h1 {
   font: 400 44px/1.1 var(--serif);
   margin: 0 0 14px; letter-spacing: -0.01em;
 }
-.lede { color: var(--fg-muted); margin: 0 0 40px; max-width: 56ch; }
+.lede { color: var(--fg-muted); margin: 0 0 40px; max-width: 52ch; }
+
+/* Bubble stack — vertical column, no two-up grid. Each project gets
+   its own line so the page reads like a list of distinct things,
+   not a wall of equally-weighted tiles. */
 .cards {
-  display: grid; gap: 14px;
-  grid-template-columns: 1fr;
-  margin-bottom: 48px;
+  display: flex; flex-direction: column; gap: 16px;
+  margin: 0 0 48px;
 }
-@media (min-width: 640px) {
-  .cards { grid-template-columns: 1fr 1fr; }
-}
+
+/* Bubble — soft rounded shape with a gradient fill and lift shadow.
+   Big border-radius (28px) + the gradient + the shadow are what sells
+   the "bubble" read; the content inside is laid out as a 2-col grid so
+   the title+description sit on the left and the open arrow rides the
+   right edge centered to the bubble. */
 .card {
-  display: block; text-decoration: none;
-  padding: 22px 22px 18px;
-  background: var(--slate-700);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 26px;
+  background: linear-gradient(135deg,
+              oklch(38% 0.080 40),
+              oklch(31% 0.070 40));
   border: 1px solid var(--slate-500);
-  border-radius: 10px;
+  border-radius: 28px;
   color: var(--fg-default);
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  text-decoration: none;
+  box-shadow: 0 6px 24px var(--bubble-shadow);
+  transition: transform 200ms ease, border-color 200ms ease,
+              box-shadow 200ms ease, background 200ms ease;
 }
-.card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px var(--bubble-shadow),
+              0 0 0 4px oklch(72% 0.085 130 / 0.10);
+  background: linear-gradient(135deg,
+              oklch(40% 0.085 40),
+              oklch(33% 0.075 40));
+}
+.card-content { display: flex; flex-direction: column; min-width: 0; }
 .card-label {
   font: 500 10px/1 'JetBrains Mono', ui-monospace, monospace;
   letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--accent-soft);
+  margin-bottom: 6px;
 }
 .card-title {
-  font: 400 22px/1.25 var(--serif);
-  margin: 8px 0 10px;
+  font: 400 22px/1.2 var(--serif);
+  margin: 2px 0 6px;
 }
-.card-desc { font-size: 14px; color: var(--fg-muted); margin: 0 0 14px; }
-.card-go { font-size: 13px; color: var(--fg-muted); }
-.card:hover .card-go { color: var(--accent); }
+.card-desc { font-size: 13.5px; color: var(--fg-muted); margin: 0; }
+
+/* Right-edge arrow rendered as a small circular chip — feels like the
+   bubble's own "go" affordance rather than a generic link. */
+.card-arrow {
+  flex-shrink: 0;
+  width: 38px; height: 38px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px;
+  background: oklch(42% 0.075 40);
+  color: var(--fg-default);
+  font: 500 18px/1 var(--sans);
+  transition: background 200ms ease, color 200ms ease, transform 200ms ease;
+}
+.card:hover .card-arrow {
+  background: var(--accent);
+  color: oklch(20% 0.06 130);
+  transform: translateX(2px);
+}
 </style>
 </head>
 <body>
@@ -93,22 +146,28 @@ h1 {
 
   <section class="cards">
     <a class="card" href="/localmusic/">
-      <span class="card-label">Live music</span>
-      <h2 class="card-title">Live Music Companions</h2>
-      <p class="card-desc">A directory of city and festival music pages — daily-updated lineups paired with Spotify playlists.</p>
-      <span class="card-go">Open →</span>
+      <div class="card-content">
+        <span class="card-label">Live music</span>
+        <h2 class="card-title">Live Music Companions</h2>
+        <p class="card-desc">A directory of city and festival music pages — daily-updated lineups paired with Spotify playlists.</p>
+      </div>
+      <span class="card-arrow" aria-hidden="true">→</span>
     </a>
     <a class="card" href="/kestralfabrications/">
-      <span class="card-label">Studio</span>
-      <h2 class="card-title">Kestral Fabrications</h2>
-      <p class="card-desc">Design studio producing custom industrial work through in-house build and a vetted fabrication-partner network.</p>
-      <span class="card-go">Open →</span>
+      <div class="card-content">
+        <span class="card-label">Studio</span>
+        <h2 class="card-title">Kestral Fabrications</h2>
+        <p class="card-desc">Design studio producing custom industrial work through in-house build and a vetted fabrication-partner network.</p>
+      </div>
+      <span class="card-arrow" aria-hidden="true">→</span>
     </a>
     <a class="card" href="/tracker/">
-      <span class="card-label">Tracker</span>
-      <h2 class="card-title">Tracker</h2>
-      <p class="card-desc">Personal tracking page.</p>
-      <span class="card-go">Open →</span>
+      <div class="card-content">
+        <span class="card-label">Tracker</span>
+        <h2 class="card-title">Tracker</h2>
+        <p class="card-desc">Personal tracking page.</p>
+      </div>
+      <span class="card-arrow" aria-hidden="true">→</span>
     </a>
   </section>
 </div>
