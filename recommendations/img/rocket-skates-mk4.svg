@@ -1,0 +1,9 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagonal motion streaks">
+  <g stroke="oklch(62% 0.17 40)" stroke-linecap="round" fill="none">
+    <line x1="60"  y1="220" x2="180" y2="100" stroke-width="2.5" opacity="0.25"/>
+    <line x1="100" y1="240" x2="240" y2="100" stroke-width="4"   opacity="0.45"/>
+    <line x1="150" y1="230" x2="320" y2="70"  stroke-width="9"   opacity="0.9"/>
+    <line x1="210" y1="210" x2="350" y2="70"  stroke-width="3"   opacity="0.4"/>
+    <line x1="250" y1="230" x2="360" y2="120" stroke-width="2"   opacity="0.25"/>
+  </g>
+</svg>

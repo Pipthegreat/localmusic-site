@@ -1,0 +1,9 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Capsule with concentric ripples">
+  <g stroke="oklch(60% 0.10 200)" fill="none">
+    <ellipse cx="200" cy="150" rx="180" ry="100" stroke-width="1" opacity="0.14"/>
+    <ellipse cx="200" cy="150" rx="140" ry="78"  stroke-width="1" opacity="0.24"/>
+    <ellipse cx="200" cy="150" rx="100" ry="58"  stroke-width="1" opacity="0.40"/>
+  </g>
+  <rect x="156" y="134" width="88" height="32" rx="16" fill="oklch(60% 0.10 200)"/>
+  <line x1="200" y1="134" x2="200" y2="166" stroke="oklch(13% 0.013 250)" stroke-width="1.5" opacity="0.6"/>
+</svg>

@@ -708,7 +708,9 @@ button:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--bg-canvas), 0 
      purchased:    YYYY-MM (date you bought)
      repurchased:  true | false | null  (null = not yet a repeat candidate)
      affiliateUrl: the link that pays us
-     image:        URL or null (cards render an editorial placeholder when null)
+     image:        URL string, or null/undefined (auto-derives `img/${id}.svg`,
+                                                  the project convention),
+                   or literal `false` to render the editorial glyph placeholder.
      ownership:    null OR { from, to, year, note }  — surfaces a plum pill
                                                       when company changes hands
    }
@@ -936,8 +938,13 @@ function renderCard(p) {
 
   const blurbBlock = p.blurb ? `<p class="blurb">${escapeHtml(p.blurb)}</p>` : "";
 
-  const imageBlock = p.image
-    ? `<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" loading="lazy" />`
+  // Image source rules:
+  //   - explicit string (`image: "path.png"`) → use it
+  //   - null / undefined → auto-derive `img/${id}.svg` (the convention)
+  //   - explicit `false` → fall back to the editorial glyph (no image)
+  const imageSrc = p.image === false ? null : (p.image || `img/${p.id}.svg`);
+  const imageBlock = imageSrc
+    ? `<img src="${escapeHtml(imageSrc)}" alt="" loading="lazy" />`
     : `<span class="glyph">${escapeHtml(p.broad.charAt(0))}</span>`;
 
   const theirCount = p.theirCount && !sourceUnavailable

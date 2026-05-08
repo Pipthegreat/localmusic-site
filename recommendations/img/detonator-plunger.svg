@@ -1,0 +1,13 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Radial burst from center">
+  <g stroke="oklch(62% 0.17 40)" stroke-linecap="round" stroke-width="3.5" fill="none">
+    <line x1="200" y1="40"  x2="200" y2="92"/>
+    <line x1="296" y1="68"  x2="252" y2="112"/>
+    <line x1="104" y1="68"  x2="148" y2="112"/>
+    <line x1="340" y1="150" x2="280" y2="150"/>
+    <line x1="60"  y1="150" x2="120" y2="150"/>
+    <line x1="296" y1="232" x2="252" y2="188"/>
+    <line x1="104" y1="232" x2="148" y2="188"/>
+    <line x1="200" y1="260" x2="200" y2="208"/>
+  </g>
+  <circle cx="200" cy="150" r="22" fill="oklch(62% 0.17 40)"/>
+</svg>

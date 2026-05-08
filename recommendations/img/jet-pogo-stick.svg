@@ -1,0 +1,5 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vertical stick with arc trajectory">
+  <path d="M 60 240 Q 200 30, 340 240" stroke="oklch(62% 0.17 40)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="4 9" opacity="0.45"/>
+  <line x1="200" y1="60" x2="200" y2="240" stroke="oklch(62% 0.17 40)" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="200" cy="60" r="9" fill="oklch(62% 0.17 40)"/>
+</svg>

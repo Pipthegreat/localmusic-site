@@ -1,0 +1,7 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stacked weight bars">
+  <g fill="oklch(50% 0.014 60)">
+    <rect x="100" y="76"  width="200" height="18" opacity="0.32"/>
+    <rect x="80"  y="116" width="240" height="38" opacity="0.55"/>
+    <rect x="60"  y="180" width="280" height="56" opacity="0.92"/>
+  </g>
+</svg>
