@@ -1,0 +1,1118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Recommendations · customprojects.info</title>
+<meta name="description" content="A small, opinionated catalogue of things worth buying. Single-item recommendations, tested in personal use." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   customprojects.info — Recommendations
+   Built on the Stle "Ember on Slate" token system.
+     - Slate carries trust (cool, deep, low-chroma foundation).
+     - Ember carries action (price, CTA, primary affordance).
+     - Peacock carries positive ownership state (re-purchased).
+     - Plum carries secondary links / future ownership-change state.
+     - Ash carries muted structural moments.
+   Palette source: ../Stle/tokens.json
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Slate — trust foundation */
+  --slate-50:  oklch(98%  0.005 250);
+  --slate-100: oklch(94%  0.008 250);
+  --slate-200: oklch(86%  0.010 250);
+  --slate-300: oklch(72%  0.012 248);
+  --slate-400: oklch(58%  0.013 248);
+  --slate-500: oklch(46%  0.014 248);
+  --slate-600: oklch(36%  0.015 248);
+  --slate-700: oklch(26%  0.014 248);
+  --slate-800: oklch(20%  0.014 250);
+  --slate-850: oklch(17%  0.014 250);
+  --slate-900: oklch(13%  0.013 250);
+  --slate-950: oklch(9%   0.011 250);
+
+  /* Ember — the only warm; reserved for action/price/CTA */
+  --ember-100: oklch(94%  0.04  44);
+  --ember-200: oklch(88%  0.08  44);
+  --ember-300: oklch(80%  0.13  42);
+  --ember-400: oklch(74%  0.17  41);
+  --ember-500: oklch(62%  0.17  40);
+  --ember-600: oklch(54%  0.16  39);
+  --ember-700: oklch(46%  0.14  38);
+  --ember-glow: oklch(72% 0.20 42 / 0.45);
+  --ember-wash: oklch(62% 0.17 40 / 0.10);
+
+  /* Plum — secondary action / future ownership-change marker */
+  --plum-300:  oklch(76% 0.10 320);
+  --plum-500:  oklch(60% 0.13 318);
+  --plum-700:  oklch(47% 0.13 316);
+  --plum-wash: oklch(60% 0.13 318 / 0.12);
+
+  /* Peacock — positive ownership state (re-purchased) */
+  --peacock-300: oklch(78% 0.07 200);
+  --peacock-500: oklch(60% 0.10 200);
+  --peacock-700: oklch(44% 0.09 200);
+  --peacock-wash: oklch(60% 0.10 200 / 0.12);
+
+  /* Ash — warm-tinted neutral bridge */
+  --ash-700: oklch(32% 0.012 55);
+
+  /* Semantic — components consume these */
+  --bg-canvas:    var(--slate-950);
+  --bg-elevated:  var(--slate-900);
+  --bg-row-hover: var(--slate-850);
+  --bg-popover:   var(--slate-800);
+
+  --fg-default: var(--slate-50);
+  --fg-strong:  oklch(99% 0.003 250);
+  --fg-muted:   var(--slate-300);
+  --fg-subtle:  var(--slate-400);
+  --fg-on-ember: var(--slate-950);
+
+  --border-subtle:  var(--slate-800);
+  --border-default: var(--slate-700);
+  --border-strong:  var(--slate-600);
+  --border-interactive: var(--ember-600);
+
+  --link:        var(--plum-500);
+  --link-hover:  var(--ember-400);
+
+  --ring:        var(--ember-500);
+  --ring-halo:   var(--ember-glow);
+
+  /* Type */
+  --serif: 'Fraunces', Georgia, serif;
+  --sans:  'Inter', system-ui, sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, monospace;
+
+  /* Motion (Stle §5.1) */
+  --ease-out:    cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --t-fast:    120ms;
+  --t-default: 200ms;
+  --t-slow:    400ms;
+
+  /* Space (powers-of-2 ladder, Stle §8) */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px;
+  --s-5: 20px; --s-6: 24px; --s-7: 32px; --s-8: 40px;
+  --s-9: 48px; --s-10: 64px; --s-11: 80px; --s-12: 96px;
+}
+
+/* Light mode — re-authored, not inverted (Stle §2.7) */
+:root[data-theme="light"] {
+  --bg-canvas:    oklch(98.5% 0.006 60);
+  --bg-elevated:  oklch(99.7% 0.003 60);
+  --bg-row-hover: oklch(95.5% 0.012 60);
+  --bg-popover:   oklch(99% 0.005 60);
+
+  --fg-default: oklch(20% 0.014 250);
+  --fg-strong:  oklch(13% 0.013 250);
+  --fg-muted:   oklch(46% 0.014 248);
+  --fg-subtle:  oklch(58% 0.013 248);
+  --fg-on-ember: oklch(98% 0.005 60);
+
+  --border-subtle:  oklch(92% 0.010 60);
+  --border-default: oklch(86% 0.012 60);
+  --border-strong:  oklch(72% 0.012 60);
+  --border-interactive: oklch(50% 0.16 38);
+
+  --link:       oklch(40% 0.14 316);
+  --link-hover: oklch(46% 0.18 38);
+
+  --ring:      oklch(54% 0.17 38);
+  --ring-halo: oklch(60% 0.18 40 / 0.32);
+
+  /* in light mode the ember swatch shifts down for legibility */
+  --ember-500: oklch(54% 0.17 38);
+  --ember-400: oklch(60% 0.18 40);
+}
+
+/* ── Reset / base ─────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html {
+  color-scheme: dark;
+  /* iPhone-rendering invariants enforced by deploy.py audit. Without
+     text-size-adjust iOS Safari can auto-bump fonts in narrow viewports
+     and crush card metadata. overflow-x: hidden is the safety net so a
+     single overflowing element can't introduce a horizontal scrollbar. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+:root[data-theme="light"] { color-scheme: light; }
+
+body {
+  background: var(--bg-canvas);
+  color: var(--fg-default);
+  font: 400 15px/1.55 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01", "cv11";
+  /* ambient warmth top-right; cool bottom-left — venue light */
+  background-image:
+    radial-gradient(ellipse 80% 50% at 85% -10%, oklch(50% 0.15 38 / 0.14), transparent 60%),
+    radial-gradient(ellipse 60% 35% at 5% 110%, oklch(52% 0.13 318 / 0.08), transparent 60%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+:root[data-theme="light"] body {
+  background-image:
+    radial-gradient(ellipse 80% 50% at 85% -10%, oklch(70% 0.12 38 / 0.10), transparent 60%),
+    radial-gradient(ellipse 60% 35% at 5% 110%, oklch(60% 0.10 318 / 0.06), transparent 60%);
+}
+
+a { color: var(--link); text-decoration: none; transition: color var(--t-fast) var(--ease-out); }
+a:hover { color: var(--link-hover); }
+a:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--bg-canvas), 0 0 0 4px var(--ring); border-radius: 2px; }
+
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+button:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--bg-canvas), 0 0 0 4px var(--ring); border-radius: 2px; }
+
+::selection { background: var(--ember-wash); color: var(--fg-strong); }
+
+/* ── Shell ────────────────────────────────────────────────────── */
+.shell {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: var(--s-10) var(--s-7) var(--s-12);
+}
+@media (max-width: 720px) {
+  .shell { padding: var(--s-9) var(--s-5) var(--s-11); }
+}
+
+/* ── Theme toggle ─────────────────────────────────────────────── */
+.theme-toggle {
+  position: fixed; top: 20px; right: 24px; z-index: 50;
+  font: 500 11px/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--fg-default); background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle); border-radius: 999px;
+  padding: 9px 16px;
+  transition: border-color var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out);
+}
+.theme-toggle:hover { border-color: var(--border-interactive); color: var(--ember-400); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   MASTHEAD — asymmetric editorial hero
+   Big italic display-serif title left, editorial blurb sits at right.
+   ═══════════════════════════════════════════════════════════════════ */
+.masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--s-9);
+  align-items: end;
+  padding-bottom: var(--s-9);
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: var(--s-9);
+}
+@media (max-width: 920px) {
+  .masthead { grid-template-columns: 1fr; gap: var(--s-7); }
+}
+
+.eyebrow {
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+.eyebrow .dot {
+  display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--ember-500); box-shadow: 0 0 8px var(--ember-glow);
+  vertical-align: middle; margin-right: 10px; transform: translateY(-1px);
+}
+
+.masthead h1 {
+  font-family: var(--serif);
+  font-weight: 400; font-style: italic;
+  font-size: clamp(44px, 7vw, 92px);
+  line-height: 1.02; letter-spacing: -0.02em;
+  margin: var(--s-5) 0 0;
+  font-variation-settings: "opsz" 96;
+}
+.masthead h1 em {
+  font-style: normal; font-weight: 400;
+  color: var(--ember-400);
+}
+
+.masthead .blurb {
+  font-family: var(--serif);
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 300; line-height: 1.55;
+  color: var(--fg-muted);
+  max-width: 42ch;
+  font-variation-settings: "opsz" 14;
+}
+.masthead .blurb strong {
+  font-weight: 500; color: var(--fg-default); font-style: italic;
+}
+
+.masthead .meta {
+  grid-column: 1 / -1;
+  display: flex; flex-wrap: wrap; gap: var(--s-7);
+  margin-top: var(--s-7);
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--fg-subtle);
+  font-feature-settings: "tnum";
+}
+.masthead .meta b { color: var(--fg-default); font-weight: 500; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   FILTER BAR
+   ═══════════════════════════════════════════════════════════════════ */
+.filters {
+  display: flex; flex-wrap: wrap; gap: var(--s-3);
+  align-items: center;
+  padding: var(--s-5) 0 var(--s-3);
+  margin-bottom: var(--s-7);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.filters .label {
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--fg-subtle);
+  margin-right: var(--s-3);
+}
+.chip {
+  font: 500 12px/1 var(--mono);
+  letter-spacing: 0.10em; text-transform: uppercase;
+  color: var(--fg-muted);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-feature-settings: "tnum";
+  transition: color var(--t-fast) var(--ease-out),
+              border-color var(--t-fast) var(--ease-out),
+              background var(--t-fast) var(--ease-out);
+}
+.chip:hover { color: var(--fg-default); border-color: var(--border-default); }
+.chip[aria-pressed="true"] {
+  color: var(--fg-on-ember);
+  background: var(--ember-500);
+  border-color: var(--ember-500);
+}
+.chip .count {
+  margin-left: 8px;
+  color: inherit;
+  opacity: 0.6;
+  font-weight: 400;
+}
+.filters .clear {
+  margin-left: auto;
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+.filters .clear:hover { color: var(--ember-400); }
+.filters .clear[hidden] { display: none; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   CARD GRID
+   ═══════════════════════════════════════════════════════════════════ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--s-6);
+}
+
+.card {
+  display: flex; flex-direction: column;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color var(--t-default) var(--ease-out),
+              transform var(--t-default) var(--ease-out);
+}
+.card:hover { border-color: var(--border-default); }
+.card.is-hidden { display: none; }
+
+/* image / placeholder area */
+.card .frame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background:
+    radial-gradient(circle at 30% 30%, oklch(20% 0.014 250 / 0.6), transparent 60%),
+    linear-gradient(135deg, var(--slate-900), var(--slate-850));
+  border-bottom: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+:root[data-theme="light"] .card .frame {
+  background:
+    radial-gradient(circle at 30% 30%, oklch(94% 0.012 60 / 0.8), transparent 60%),
+    linear-gradient(135deg, oklch(96% 0.008 60), oklch(92% 0.010 60));
+}
+.card .frame img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block;
+}
+.card .frame .glyph {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font: 300 italic clamp(40px, 8vw, 96px)/1 var(--serif);
+  color: var(--fg-subtle); opacity: 0.18;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144;
+  user-select: none;
+}
+
+/* card body */
+.card .body {
+  display: flex; flex-direction: column; gap: var(--s-4);
+  padding: var(--s-6);
+  flex: 1;
+}
+
+.card .specific {
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ember-400);
+}
+:root[data-theme="light"] .card .specific { color: var(--ember-700); }
+
+.card h2 {
+  font-family: var(--serif);
+  font-weight: 400; font-style: italic;
+  font-size: 26px; line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0;
+  font-variation-settings: "opsz" 36;
+}
+.card .brand {
+  font-size: 13px;
+  color: var(--fg-muted);
+  margin-top: -8px;
+}
+.card .brand em { font-style: italic; color: var(--fg-subtle); }
+
+.card .blurb {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--fg-muted);
+  margin: 0;
+}
+
+/* ratings row */
+.card .ratings {
+  display: flex; flex-direction: column; gap: var(--s-2);
+  padding: var(--s-3) 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.card .rating-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--s-3);
+  font: 500 12px/1 var(--mono);
+  letter-spacing: 0.04em;
+  font-feature-settings: "tnum";
+}
+.card .rating-row .label {
+  color: var(--fg-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 10px;
+}
+.card .rating-row .value {
+  color: var(--fg-strong);
+  font-weight: 600;
+}
+.card .rating-row .value .num { font-weight: 700; }
+
+/* star track — width-based fill, supports half-stars */
+.stars {
+  --pct: 100%;
+  position: relative;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 1px;
+  color: var(--slate-700);
+}
+:root[data-theme="light"] .stars { color: var(--border-default); }
+.stars::before { content: "★★★★★"; }
+.stars > span {
+  position: absolute; inset: 0;
+  width: var(--pct);
+  overflow: hidden;
+  color: var(--ember-500);
+  white-space: nowrap;
+}
+.stars > span::before { content: "★★★★★"; }
+
+/* metadata row */
+.card .meta {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--s-2) var(--s-4);
+  font: 500 11px/1.2 var(--mono);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+  font-feature-settings: "tnum";
+}
+.card .meta dt { font-weight: 500; opacity: 0.7; }
+.card .meta dd { margin: 0; color: var(--fg-strong); font-weight: 600; display: flex; align-items: center; gap: 6px; }
+
+.dot {
+  display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+}
+.dot--peacock { background: var(--peacock-500); box-shadow: 0 0 0 2px var(--peacock-wash); }
+.dot--muted   { background: var(--slate-600); }
+.dot--plum    { background: var(--plum-500); box-shadow: 0 0 0 2px var(--plum-wash); }
+
+/* ownership-change pill (renders only when present) */
+.card .ownership {
+  display: inline-flex; align-items: center; gap: 8px;
+  align-self: flex-start;
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--plum-300);
+  background: var(--plum-wash);
+  border: 1px solid var(--plum-700);
+  border-radius: 999px;
+  padding: 6px 10px;
+}
+:root[data-theme="light"] .card .ownership {
+  color: var(--plum-700);
+  border-color: var(--plum-500);
+}
+
+/* CTA */
+.card .cta {
+  display: inline-flex; align-items: center; justify-content: space-between;
+  gap: var(--s-3);
+  margin-top: auto;
+  padding: var(--s-4) 0 0;
+  font: 500 12px/1 var(--mono);
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--fg-default);
+  border-top: 1px solid transparent;
+  transition: color var(--t-fast) var(--ease-out);
+}
+.card .cta .arrow {
+  display: inline-block;
+  transition: transform var(--t-default) var(--ease-out);
+}
+.card .cta:hover { color: var(--ember-400); }
+.card .cta:hover .arrow { transform: translateX(4px); }
+
+.card .cta--disabled {
+  color: var(--fg-subtle);
+  cursor: not-allowed;
+}
+.card .cta--disabled:hover { color: var(--fg-subtle); }
+.card .cta--disabled:hover .arrow { transform: none; }
+.card .cta--disabled .arrow { opacity: 0.5; }
+
+/* empty state */
+.empty {
+  grid-column: 1 / -1;
+  padding: var(--s-11) var(--s-6);
+  text-align: center;
+  color: var(--fg-muted);
+  border: 1px dashed var(--border-subtle);
+  border-radius: 6px;
+}
+.empty .label {
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--fg-subtle);
+  display: block; margin-bottom: var(--s-3);
+}
+.empty p {
+  font-family: var(--serif); font-style: italic;
+  font-size: 22px; margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FOOTER — designed surface, not sitemap dump
+   ═══════════════════════════════════════════════════════════════════ */
+.footer {
+  margin-top: var(--s-12);
+  padding-top: var(--s-9);
+  border-top: 1px solid var(--border-subtle);
+}
+.footer .closer {
+  font-family: var(--serif);
+  font-weight: 300; font-style: italic;
+  font-size: clamp(36px, 6vw, 80px);
+  line-height: 1.05; letter-spacing: -0.02em;
+  color: var(--fg-default);
+  margin: 0 0 var(--s-9);
+  max-width: 18ch;
+  font-variation-settings: "opsz" 96;
+}
+.footer .closer em { color: var(--ember-400); font-style: normal; }
+
+.footer .strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--s-7);
+  padding-top: var(--s-7);
+  border-top: 1px solid var(--border-subtle);
+}
+@media (max-width: 720px) {
+  .footer .strip { grid-template-columns: 1fr; gap: var(--s-6); }
+}
+.footer .strip .col h3 {
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--fg-subtle);
+  margin: 0 0 var(--s-3);
+}
+.footer .strip .col p {
+  font-size: 13px; line-height: 1.6;
+  color: var(--fg-muted);
+  margin: 0;
+}
+.footer .disclosure p {
+  font-size: 12px; line-height: 1.55;
+  color: var(--fg-subtle);
+}
+.footer .meta-line {
+  display: flex; flex-wrap: wrap; gap: var(--s-7);
+  padding: var(--s-7) 0 var(--s-4);
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--fg-subtle);
+  font-feature-settings: "tnum";
+}
+.footer .wordmark {
+  font-family: var(--serif);
+  font-weight: 300; font-style: italic;
+  font-size: clamp(48px, 12vw, 180px);
+  line-height: 1; letter-spacing: -0.04em;
+  color: var(--fg-default);
+  margin: var(--s-7) 0 0;
+  user-select: none;
+  font-variation-settings: "opsz" 144;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+.footer .wordmark .dim { color: var(--fg-subtle); opacity: 0.4; }
+.footer .wordmark em { font-style: normal; color: var(--ember-500); }
+
+/* ── Reduced motion (Stle §5.2) ───────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ── Print ────────────────────────────────────────────────────── */
+@media print {
+  .theme-toggle, .filters { display: none; }
+  body { background: white; color: black; }
+}
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">Light</button>
+
+<main class="shell">
+
+  <!-- ─── MASTHEAD ─────────────────────────────────────────── -->
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><span class="dot"></span>Recommendations · curated</div>
+      <h1>Things <em>worth</em> buying.</h1>
+    </div>
+    <div class="blurb">
+      A small, opinionated catalogue of single items.
+      Each one is something <strong>I bought, kept using, and would pay for again</strong>.
+      No top-ten lists, no comparison sprawl, no sponsored placements.
+    </div>
+    <div class="meta">
+      <span><b id="meta-count">—</b> items</span>
+      <span><b id="meta-broad">—</b> broad categories</span>
+      <span><b id="meta-specific">—</b> specific categories</span>
+      <span>Updated <b id="meta-updated">—</b></span>
+    </div>
+  </header>
+
+  <!-- ─── FILTERS ──────────────────────────────────────────── -->
+  <nav class="filters" id="filters" aria-label="Filter by category">
+    <span class="label">Filter</span>
+    <!-- chips injected by JS -->
+    <button class="clear" id="clear" hidden>Clear ×</button>
+  </nav>
+
+  <!-- ─── GRID ─────────────────────────────────────────────── -->
+  <section class="grid" id="grid" aria-live="polite">
+    <!-- cards injected by JS -->
+  </section>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────── -->
+  <footer class="footer">
+    <p class="closer">Recommendations, <em>not</em> rankings.</p>
+
+    <div class="strip">
+      <div class="col">
+        <h3>About</h3>
+        <p>
+          Every item on this page is something I personally bought with my own money.
+          If a product changes ownership, formula, or quality, the card is updated to say so.
+        </p>
+      </div>
+      <div class="col">
+        <h3>Tracking</h3>
+        <p>
+          I'm building a watch on when a product's parent company changes hands.
+          In my experience it's the single best leading indicator of quality decline —
+          formulas drift, factories move, support narrows.
+          The ownership pill on a card is a yellow light, not a verdict.
+        </p>
+      </div>
+      <div class="col disclosure">
+        <h3>Disclosure</h3>
+        <p>
+          Revenue on this page is generated through affiliate links only.
+          Affiliate compensation does not influence ratings, inclusion, or order.
+        </p>
+      </div>
+    </div>
+
+    <div class="meta-line">
+      <span>customprojects.info</span>
+      <span>Built on the <em>Stle</em> token system</span>
+      <span id="footer-updated">Updated —</span>
+    </div>
+
+    <div class="wordmark"><span class="dim">customprojects</span><em>.info</em></div>
+  </footer>
+
+</main>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   PRODUCT DATA
+   Replace with real items. Each entry shape:
+   {
+     id:           stable slug (used for URL fragments)
+     name:         product name (displayed as the headline)
+     brand:        maker / company
+     broad:        one of the broad categories (drives top-level filter)
+     specific:     specific category (free-form, displayed on card)
+     ourRating:    0–5, allows .5 increments
+     theirRating:  number, e.g. 4.6
+     theirSource:  where 'theirRating' was sourced, e.g. "Amazon"
+     theirCount:   review count on linked retailer (optional)
+     purchased:    YYYY-MM (date you bought)
+     repurchased:  true | false | null  (null = not yet a repeat candidate)
+     affiliateUrl: the link that pays us
+     image:        URL or null (cards render an editorial placeholder when null)
+     ownership:    null OR { from, to, year, note }  — surfaces a plum pill
+                                                      when company changes hands
+   }
+   ═══════════════════════════════════════════════════════════════════ */
+const products = [
+  {
+    id: "rocket-skates-mk4",
+    name: "Rocket Skates, Mark IV",
+    brand: "Acme",
+    broad: "Outdoor",
+    specific: "Personal Transport",
+    blurb: "Twin solid-fuel thrusters, foot-mounted. Ignition is irreversible; brake is theoretical.",
+    ourRating: 4,
+    theirRating: 4.2,
+    theirSource: "unavailable",
+    theirCount: 820,
+    purchased: "2022-07",
+    repurchased: false,
+    affiliateUrl: "https://unavailable/rocket-skates-mk4",
+    image: null,
+    ownership: null,
+  },
+  {
+    id: "iron-anvil-50",
+    name: "Iron Anvil, 50 lb",
+    brand: "Acme",
+    broad: "Tools",
+    specific: "Workshop Anvil",
+    blurb: "Cast iron, no proof markings. Drop-tested by gravity; arrives intact every time.",
+    ourRating: 5,
+    theirRating: 4.9,
+    theirSource: "unavailable",
+    theirCount: 3120,
+    purchased: "2020-03",
+    repurchased: true,
+    affiliateUrl: "https://unavailable/iron-anvil-50",
+    image: null,
+    ownership: { from: "Acme Industries", to: "Acme Holdings", year: "2021", note: "casting unchanged" },
+  },
+  {
+    id: "detonator-plunger",
+    name: "Detonator with Plunger",
+    brand: "Acme",
+    broad: "Tools",
+    specific: "Demolition",
+    blurb: "Wooden T-handle plunger with twenty feet of fuse cable. Click is satisfying.",
+    ourRating: 4.5,
+    theirRating: 4.7,
+    theirSource: "unavailable",
+    theirCount: 660,
+    purchased: "2023-06",
+    repurchased: true,
+    affiliateUrl: "https://unavailable/detonator",
+    image: null,
+    ownership: null,
+  },
+  {
+    id: "giant-rubber-band-12",
+    name: "Giant Rubber Band, 12 ft",
+    brand: "Acme",
+    broad: "Outdoor",
+    specific: "Slingshot Supply",
+    blurb: "Hand-wrapped natural latex. Holds tension well past the point of common sense.",
+    ourRating: 3.5,
+    theirRating: 4.1,
+    theirSource: "unavailable",
+    theirCount: 210,
+    purchased: "2024-01",
+    repurchased: false,
+    affiliateUrl: "https://unavailable/rubber-band-12",
+    image: null,
+    ownership: null,
+  },
+  {
+    id: "earthquake-pills",
+    name: "Earthquake Pills, 30-count",
+    brand: "Acme",
+    broad: "Wellness",
+    specific: "Specialty Supplement",
+    blurb: "Take one and stand still. Reformulated since 2023; results vary by patient.",
+    ourRating: 3,
+    theirRating: 3.8,
+    theirSource: "unavailable",
+    theirCount: 4400,
+    purchased: "2024-08",
+    repurchased: false,
+    affiliateUrl: "https://unavailable/earthquake-pills",
+    image: null,
+    ownership: { from: "Acme Pharma", to: "Acme Wellness Co.", year: "2023", note: "formula reformulated" },
+  },
+  {
+    id: "dehydrated-boulders",
+    name: "Dehydrated Boulders, 6-pack",
+    brand: "Acme",
+    broad: "Outdoor",
+    specific: "Field Supply",
+    blurb: "Just add water. Compact in storage; full mass on contact with moisture.",
+    ourRating: 4,
+    theirRating: 4.4,
+    theirSource: "unavailable",
+    theirCount: 1800,
+    purchased: "2021-09",
+    repurchased: true,
+    affiliateUrl: "https://unavailable/dehydrated-boulders",
+    image: null,
+    ownership: null,
+  },
+  {
+    id: "jet-pogo-stick",
+    name: "Jet-Propelled Pogo Stick",
+    brand: "Acme",
+    broad: "Outdoor",
+    specific: "Personal Transport",
+    blurb: "Solid-fuel pogo. Two seconds of vertical, then a long unsupervised arc.",
+    ourRating: 4.5,
+    theirRating: 4.3,
+    theirSource: "unavailable",
+    theirCount: 480,
+    purchased: "2023-11",
+    repurchased: null,
+    affiliateUrl: "https://unavailable/jet-pogo",
+    image: null,
+    ownership: null,
+  },
+  {
+    id: "premium-bird-seed-10",
+    name: "Premium Bird Seed, 10 lb",
+    brand: "Acme",
+    broad: "Outdoor",
+    specific: "Bird Feeding",
+    blurb: "Hard, small, faintly magnetic. Birds locate it from improbable distances.",
+    ourRating: 5,
+    theirRating: 4.8,
+    theirSource: "unavailable",
+    theirCount: 12000,
+    purchased: "2019-05",
+    repurchased: true,
+    affiliateUrl: "https://unavailable/bird-seed-10",
+    image: null,
+    ownership: null,
+  },
+  {
+    id: "armor-plate",
+    name: "Triple-Strength Steel Armor Plate",
+    brand: "Acme",
+    broad: "Tools",
+    specific: "Safety Gear",
+    blurb: "Battleship-grade alloy at one-tenth the thickness. Heavy enough to count as exercise.",
+    ourRating: 4,
+    theirRating: 4.5,
+    theirSource: "unavailable",
+    theirCount: 340,
+    purchased: "2024-04",
+    repurchased: null,
+    affiliateUrl: "https://unavailable/armor-plate",
+    image: null,
+    ownership: null,
+  },
+  {
+    id: "spring-shoes",
+    name: "Spring-Powered Shoes",
+    brand: "Acme",
+    broad: "Apparel",
+    specific: "Footwear",
+    blurb: "Calibrated coil-springs in the heel. The first step is always a launch.",
+    ourRating: 3.5,
+    theirRating: 4,
+    theirSource: "unavailable",
+    theirCount: 920,
+    purchased: "2024-12",
+    repurchased: false,
+    affiliateUrl: "https://unavailable/spring-shoes",
+    image: null,
+    ownership: null,
+  },
+];
+
+/* ═══════════════════════════════════════════════════════════════════ */
+
+const state = {
+  active: null, // null = "All"
+};
+
+const $grid = document.getElementById("grid");
+const $filters = document.getElementById("filters");
+const $clear = document.getElementById("clear");
+const $themeToggle = document.getElementById("theme-toggle");
+
+/* ── Render helpers ─────────────────────────────────────────────── */
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[c]);
+}
+
+function fmtCount(n) {
+  if (n == null) return "";
+  if (n >= 1000) return (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, "") + "k";
+  return String(n);
+}
+
+function fmtPurchased(yyyymm) {
+  if (!yyyymm) return "—";
+  const [y, m] = yyyymm.split("-");
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return `${months[parseInt(m, 10) - 1]} ${y}`;
+}
+
+function repurchasedRow(rp) {
+  if (rp === true)  return `<dd><span class="dot dot--peacock"></span>yes</dd>`;
+  if (rp === false) return `<dd><span class="dot dot--muted"></span>no</dd>`;
+  return `<dd><span class="dot dot--muted"></span>n/a</dd>`;
+}
+
+function renderCard(p) {
+  const pct = (p.ourRating / 5) * 100;
+  const sourceUnavailable = !p.theirSource || p.theirSource === "unavailable";
+
+  const ownershipPill = p.ownership
+    ? `<div class="ownership">
+         <span class="dot dot--plum"></span>
+         Ownership · ${escapeHtml(p.ownership.from)} → ${escapeHtml(p.ownership.to)} · ${escapeHtml(p.ownership.year)}
+       </div>`
+    : "";
+
+  const blurbBlock = p.blurb ? `<p class="blurb">${escapeHtml(p.blurb)}</p>` : "";
+
+  const imageBlock = p.image
+    ? `<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" loading="lazy" />`
+    : `<span class="glyph">${escapeHtml(p.broad.charAt(0))}</span>`;
+
+  const theirCount = p.theirCount && !sourceUnavailable
+    ? ` <span style="font-weight:500;color:var(--fg-muted)">(${fmtCount(p.theirCount)})</span>`
+    : "";
+
+  const ratedLine = sourceUnavailable
+    ? `<span class="num">${p.theirRating.toFixed(1)}</span> · <span style="color:var(--fg-subtle);font-weight:500">source unavailable</span>`
+    : `<span class="num">${p.theirRating.toFixed(1)}</span> on ${escapeHtml(p.theirSource)}${theirCount}`;
+
+  const ctaBlock = sourceUnavailable
+    ? `<span class="cta cta--disabled" aria-disabled="true">
+         <span>Link unavailable</span>
+         <span class="arrow">—</span>
+       </span>`
+    : `<a class="cta" href="${escapeHtml(p.affiliateUrl)}" rel="sponsored noopener" target="_blank">
+         <span>View on ${escapeHtml(p.theirSource)}</span>
+         <span class="arrow">→</span>
+       </a>`;
+
+  return `
+    <article class="card" data-broad="${escapeHtml(p.broad)}" data-specific="${escapeHtml(p.specific)}" id="${escapeHtml(p.id)}">
+      <div class="frame">${imageBlock}</div>
+      <div class="body">
+        <div class="specific">${escapeHtml(p.broad)} · ${escapeHtml(p.specific)}</div>
+        <h2>${escapeHtml(p.name)}</h2>
+        <div class="brand">by <em>${escapeHtml(p.brand)}</em></div>
+        ${blurbBlock}
+
+        ${ownershipPill}
+
+        <div class="ratings">
+          <div class="rating-row">
+            <span class="label">Our rating</span>
+            <span class="value">
+              <span class="stars" style="--pct:${pct}%"><span></span></span>
+              &nbsp;<span class="num">${p.ourRating.toFixed(1)}</span> / 5
+            </span>
+          </div>
+          <div class="rating-row">
+            <span class="label">Rated</span>
+            <span class="value">${ratedLine}</span>
+          </div>
+        </div>
+
+        <dl class="meta">
+          <dt>Purchased</dt>     <dd>${fmtPurchased(p.purchased)}</dd>
+          <dt>Re-purchased</dt>  ${repurchasedRow(p.repurchased)}
+        </dl>
+
+        ${ctaBlock}
+      </div>
+    </article>
+  `;
+}
+
+/* ── Filtering ──────────────────────────────────────────────────── */
+function getBroadCategories() {
+  const counts = {};
+  for (const p of products) counts[p.broad] = (counts[p.broad] || 0) + 1;
+  return Object.entries(counts).sort((a, b) => a[0].localeCompare(b[0]));
+}
+
+function getSpecificCount() {
+  return new Set(products.map(p => p.specific)).size;
+}
+
+function applyFilter() {
+  const cards = $grid.querySelectorAll(".card");
+  let visible = 0;
+  cards.forEach(c => {
+    const match = !state.active || c.dataset.broad === state.active;
+    c.classList.toggle("is-hidden", !match);
+    if (match) visible++;
+  });
+
+  // empty state
+  let $empty = $grid.querySelector(".empty");
+  if (visible === 0) {
+    if (!$empty) {
+      $empty = document.createElement("div");
+      $empty.className = "empty";
+      $empty.innerHTML = `<span class="label">Nothing here yet</span><p>No items in this category.</p>`;
+      $grid.appendChild($empty);
+    }
+  } else if ($empty) {
+    $empty.remove();
+  }
+
+  $clear.hidden = !state.active;
+  $filters.querySelectorAll(".chip").forEach(b => {
+    b.setAttribute("aria-pressed", b.dataset.broad === (state.active || ""));
+  });
+}
+
+function setFilter(broad) {
+  state.active = broad || null;
+  applyFilter();
+  // url hash for sharable filtered views
+  if (broad) {
+    history.replaceState(null, "", `#category=${encodeURIComponent(broad)}`);
+  } else {
+    history.replaceState(null, "", location.pathname);
+  }
+}
+
+/* ── Boot ───────────────────────────────────────────────────────── */
+function buildFilters() {
+  const broads = getBroadCategories();
+  const all = `<button class="chip" data-broad="" aria-pressed="true">All <span class="count">${products.length}</span></button>`;
+  const rest = broads.map(([name, n]) =>
+    `<button class="chip" data-broad="${escapeHtml(name)}" aria-pressed="false">${escapeHtml(name)} <span class="count">${n}</span></button>`
+  ).join("");
+  $clear.insertAdjacentHTML("beforebegin", all + rest);
+
+  $filters.addEventListener("click", e => {
+    const chip = e.target.closest(".chip");
+    if (chip) setFilter(chip.dataset.broad || null);
+    if (e.target === $clear) setFilter(null);
+  });
+}
+
+function buildGrid() {
+  $grid.innerHTML = products.map(renderCard).join("");
+}
+
+function buildMeta() {
+  document.getElementById("meta-count").textContent = String(products.length).padStart(2, "0");
+  document.getElementById("meta-broad").textContent = String(getBroadCategories().length).padStart(2, "0");
+  document.getElementById("meta-specific").textContent = String(getSpecificCount()).padStart(2, "0");
+  const today = new Date().toISOString().slice(0, 10);
+  document.getElementById("meta-updated").textContent = today;
+  document.getElementById("footer-updated").textContent = "Updated " + today;
+}
+
+/* ── Theme ──────────────────────────────────────────────────────── */
+function initTheme() {
+  const saved = localStorage.getItem("theme");
+  if (saved === "light") document.documentElement.setAttribute("data-theme", "light");
+  updateToggleLabel();
+
+  $themeToggle.addEventListener("click", () => {
+    const isLight = document.documentElement.getAttribute("data-theme") === "light";
+    if (isLight) {
+      document.documentElement.removeAttribute("data-theme");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+      localStorage.setItem("theme", "light");
+    }
+    updateToggleLabel();
+  });
+}
+function updateToggleLabel() {
+  const isLight = document.documentElement.getAttribute("data-theme") === "light";
+  $themeToggle.textContent = isLight ? "Dark" : "Light";
+}
+
+/* ── Hash deep-link ─────────────────────────────────────────────── */
+function applyHash() {
+  const m = location.hash.match(/category=([^&]+)/);
+  if (m) {
+    const cat = decodeURIComponent(m[1]);
+    if (products.some(p => p.broad === cat)) state.active = cat;
+  }
+}
+
+/* ── Go ─────────────────────────────────────────────────────────── */
+applyHash();
+buildFilters();
+buildGrid();
+buildMeta();
+applyFilter();
+initTheme();
+</script>
+
+</body>
+</html>
