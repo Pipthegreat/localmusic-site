@@ -649,6 +649,19 @@ body.play-stalled .play-stall-notice { display: block; }
   max-width: 800px; margin: 0 auto;
   display: flex; align-items: center; gap: 12px;
 }
+/* Disabled state — no Spotify playlist has been created yet. Hide the
+   broken iframe + skip buttons, surface a clear "coming soon" message.
+   Without this the bar reads as a dead UI element. */
+.player.player-disabled .skip,
+.player.player-disabled .player-embed,
+.player.player-disabled .mini-player { display: none !important; }
+.player.player-disabled .player-inner { justify-content: center; }
+.player-pending {
+  font: 500 italic 13px/1.4 var(--mono);
+  letter-spacing: 0.04em;
+  color: var(--fg-muted); text-align: center;
+  padding: 8px 4px;
+}
 /* No border, no inset ring -- the iframe owns its corners. We just clip to a
    matching radius. The dark background fills any sub-pixel gap left by the
    browser's antialiasing of the rounded corners against the (transparent)
@@ -1012,8 +1025,8 @@ body.is-playing .mini-toggle .ico-pause { display: block; }
 
 </div><!-- /.shell -->
 
-<div class="player" role="region" aria-label="Player">
-  <div class="player-inner">
+<div class="player player-disabled" role="region" aria-label="Player">
+  <div class="player-inner"><div class="player-pending">Spotify playlist is being assembled — first sync hasn't completed yet. Check back after the next nightly build.</div>
     <button class="skip" id="btn-prev" aria-label="Previous track">
       <svg viewBox="0 0 24 24"><path d="M19 20L9 12l10-8v16zM5 4h2v16H5z"/></svg>
     </button>
