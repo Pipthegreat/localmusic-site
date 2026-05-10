@@ -1593,6 +1593,36 @@ function clearPlayStallCheck() {
   document.body.classList.remove('play-stalled');
 }
 
+// Spotify's iFrame controller often drops the first play()/resume() call
+// after loadUri() — the URI swap inside the embed iframe is asynchronous
+// and play() before it lands is a no-op. The original code waited a flat
+// 250ms and gave up, which is exactly the "first row click loads the
+// track but doesn't start audio; second click works" bug. Fix: schedule
+// a backoff series of play attempts, each one bailing the moment a real
+// playback_update confirms audio is flowing. The targetUri capture stops
+// retries from racing with a fast user-triggered track change.
+function attemptPlayWithRetries() {
+  if (!embedController) return;
+  const targetUri = currentUri;
+  if (!targetUri) return;
+  const tryOnce = () => {
+    if (currentUri !== targetUri) return;                  // moved on; let new track's retry chain take over
+    if (lastEndedUri === targetUri) return;                // auto-advance has retired this URI
+    // Already actually playing — bail to avoid stuttering the audio
+    // with a redundant play() that Spotify sometimes treats as a seek.
+    if (lastPlaybackUpdateAt > 0 && !isPaused && currentPositionMs > 0) return;
+    try { embedController.play(); } catch (e) {}
+    try { embedController.resume(); } catch (e) {}
+  };
+  // 250ms catches the lucky case; 800/1700ms cover the iframe-load-race
+  // case the user reported. 3s outer bound stays well inside the
+  // PLAY_STALL_MS (3500ms) banner so a true stall still surfaces.
+  setTimeout(tryOnce, 250);
+  setTimeout(tryOnce, 800);
+  setTimeout(tryOnce, 1700);
+  setTimeout(tryOnce, 3000);
+}
+
 const TRACK_TINTS = {"spotify:track:0BXzLyIdYDtG4Nv0ddyB93": "rgb(224,228,223)", "spotify:track:4XGQUYPYfHpCMrO8BKOk5F": "rgb(115,115,115)", "spotify:track:59rWOvuBELmfqvVBI9NiWf": "rgb(122,122,122)", "spotify:track:5F7dkkzWdHWPpn9zOYu8Ng": "rgb(226,177,160)", "spotify:track:6yBVp6DFh899CRaKww95Hr": "rgb(182,166,143)", "spotify:track:0P8hP2O5hEVdAvnr0q2c8q": "rgb(178,208,213)", "spotify:track:7KDYinGJSpr5UbOL4Qzpxe": "rgb(223,215,198)", "spotify:track:2uWJ7SZfaTHkGAGPLvngNh": "rgb(234,233,228)", "spotify:track:5NkqaMOyY36DIgSp1mKCjj": "rgb(250,220,138)", "spotify:track:1WxF4gMsFXnKCyh48CW2RI": "rgb(124,65,125)", "spotify:track:3bAoghFUTVwGYXYnzRqhCf": "rgb(47,34,49)", "spotify:track:6BD9XMxKnjL6dCJbxXAPUa": "rgb(101,106,112)", "spotify:track:1nSEAxK0L8z5pJiCnhMMqX": "rgb(97,54,60)", "spotify:track:1xSmjB0t19q4CSJ0X0ymGB": "rgb(83,58,51)", "spotify:track:0QpOqKz66ZxHNqj2PPHiFF": "rgb(108,100,80)", "spotify:track:5Zl2RWTjTQlIvDKVVtNoX6": "rgb(86,125,159)", "spotify:track:0bmVH05tjN9jVh3kB1TfpR": "rgb(0,0,0)", "spotify:track:4E2j6b0NrYXnlypn9sMiOu": "rgb(29,29,27)", "spotify:track:4JpflbcMZxVHo12zw9yxwr": "rgb(214,214,214)", "spotify:track:382qfPEjghVnFZlot7ZrVn": "rgb(237,132,133)", "spotify:track:5U02MVv6SGMigHeyKYC309": "rgb(94,94,95)", "spotify:track:3IU8gx0FlYarKKA4TOgraH": "rgb(61,41,36)", "spotify:track:0PiSok4AgEcnVSWSGiz86p": "rgb(36,53,64)", "spotify:track:7vMxPKp4xh7Ii6lQqL6BOS": "rgb(61,41,36)", "spotify:track:3cbTV3IZZvSBYVcl0xuZbY": "rgb(236,127,72)", "spotify:track:0cGvHzeVPpH511QtO9wSY5": "rgb(236,127,72)", "spotify:track:0zz4FPbgPdufz8Fnmaicib": "rgb(225,189,75)", "spotify:track:7JfVH9o5zzVTKy5YcIYlfT": "rgb(88,102,117)", "spotify:track:5clqECdMRwNxSomnKfIYtm": "rgb(14,43,43)", "spotify:track:4XxcYQq3q2hxjTTKKyiyR4": "rgb(211,21,47)", "spotify:track:6Jvw27YA7tG7NpsXP9TuP2": "rgb(142,176,218)", "spotify:track:1Glv5YBwYlfwZYxtFJFtTP": "rgb(60,37,17)", "spotify:track:0QZbFeeu4r3JO7GKoU71pq": "rgb(142,176,218)", "spotify:track:1WOMvLTxNyayalobISQKPA": "rgb(108,76,71)", "spotify:track:1cM1snkcQwkdMnCHlFSAOU": "rgb(254,127,61)", "spotify:track:2EWhT6sApw6LSZi9ECKsjk": "rgb(106,65,52)", "spotify:track:3F2biaPqxg6glYqh4z6LDZ": "rgb(43,115,182)", "spotify:track:6fro51Ke7UTJXZNrRUzHdY": "rgb(43,115,182)", "spotify:track:5mg9TnSnfc89gcYStpOsVL": "rgb(249,97,54)", "spotify:track:4HWadIQagwXOjf14aUD6qg": "rgb(40,50,44)", "spotify:track:53xTITGQAR4vklxEoP6qwZ": "rgb(22,22,22)", "spotify:track:1VERX83Hgb3gf5CbXkAFKy": "rgb(207,213,183)", "spotify:track:7I8KtOFPNmC2ZsiNPCwoS8": "rgb(205,198,172)", "spotify:track:7rcWgxIVJyQDPLeS1NhnXh": "rgb(205,198,172)", "spotify:track:7J8uxQsgkRT3Bkw9CiIt3K": "rgb(218,131,52)", "spotify:track:74nEGIzIefJhJ5qX7NeIAz": "rgb(72,46,24)", "spotify:track:2e2yKavdT6WQzzMHwNtPFa": "rgb(93,147,175)", "spotify:track:0agQ9vIV7NP4dntGKLcCXO": "rgb(8,18,38)"};
 const PLAYLIST_ID = '6xW0juAKPOKPgOmpqQgQTu';
 // Track-name cache: uri -> name. Populated from server-side meta and
@@ -1961,15 +1991,10 @@ function loadAndPlayRow(row, trackIdx) {
   document.body.classList.remove('play-stalled');
   armPlayStallCheck();
   // Defer play() until the iframe has had a chance to ingest the new
-  // URI. Calling play() in the same tick as loadUri() races the
-  // embed's internal load and reliably fails on the first track of
-  // the session — the user sees the row flip to "playing" but no
-  // audio starts. Same 250ms beat the queuedUri path uses for the
-  // controller-just-created case.
-  setTimeout(() => {
-    try { embedController.play(); } catch (e) {}
-    try { embedController.resume(); } catch (e) {}
-  }, 250);
+  // URI. Retry on a backoff because the first play() reliably drops on
+  // a cold session — was the "first click loads track but doesn't start
+  // audio; second click works" bug.
+  attemptPlayWithRetries();
 }
 
 function togglePlay() {
@@ -2056,12 +2081,10 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
       });
       if (queuedUri.value) {
         // The queued URI was set by loadAndPlayRow before the controller
-        // was ready; just kick off the actual load now.
+        // was ready; just kick off the actual load now. Same retrying
+        // play helper so the cold-session bug fix applies here too.
         embedController.loadUri(queuedUri.value);
-        setTimeout(() => {
-          try { embedController.play(); } catch (e) {}
-          try { embedController.resume(); } catch (e) {}
-        }, 250);
+        attemptPlayWithRetries();
         queuedUri.value = null;
       }
 
