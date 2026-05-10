@@ -9,47 +9,47 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,ital@9..144,300..600,0;9..144,300..600,1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Canvas — derived from ctx.palette (chroma 0.075 at hue 215). */
-  --slate-300: oklch(82% 0.045 215.0);
-  --slate-400: oklch(75% 0.052 215.0);
-  --slate-500: oklch(52% 0.075 215.0);
-  --slate-600: oklch(44% 0.075 215.0);
-  --slate-700: oklch(37% 0.075 215.0);
-  --slate-800: oklch(31% 0.075 215.0);
-  --slate-850: oklch(28% 0.071 215.0);
-  --slate-900: oklch(25% 0.066 215.0);
-  --slate-950: oklch(22% 0.061 215.0);
+  /* Canvas — derived from ctx.palette (chroma 0.085 at hue 330). */
+  --slate-300: oklch(82% 0.051 330.0);
+  --slate-400: oklch(75% 0.059 330.0);
+  --slate-500: oklch(52% 0.085 330.0);
+  --slate-600: oklch(44% 0.085 330.0);
+  --slate-700: oklch(37% 0.085 330.0);
+  --slate-800: oklch(31% 0.085 330.0);
+  --slate-850: oklch(28% 0.081 330.0);
+  --slate-900: oklch(25% 0.075 330.0);
+  --slate-950: oklch(22% 0.070 330.0);
   /* Primary accent — earns every appearance. */
-  --ember-100: oklch(94% 0.036 215.0);
-  --ember-200: oklch(88% 0.073 215.0);
-  --ember-300: oklch(82% 0.109 215.0);
-  --ember-400: oklch(76% 0.145 215.0);
-  --ember-500: oklch(70% 0.165 215.0);
-  --ember-600: oklch(62% 0.157 215.0);
-  --ember-700: oklch(52% 0.137 215.0);
-  --ember-800: oklch(42% 0.109 215.0);
-  --ember-900: oklch(30% 0.073 215.0);
-  --ember-glow: oklch(76% 0.182 215.0 / 0.40);
-  --ember-wash: oklch(74% 0.165 215.0 / 0.10);
-  --plum: oklch(74% 0.052 235.0);
+  --ember-100: oklch(94% 0.040 330.0);
+  --ember-200: oklch(88% 0.079 330.0);
+  --ember-300: oklch(82% 0.119 330.0);
+  --ember-400: oklch(76% 0.158 330.0);
+  --ember-500: oklch(70% 0.180 330.0);
+  --ember-600: oklch(62% 0.171 330.0);
+  --ember-700: oklch(52% 0.149 330.0);
+  --ember-800: oklch(42% 0.119 330.0);
+  --ember-900: oklch(30% 0.079 330.0);
+  --ember-glow: oklch(76% 0.198 330.0 / 0.40);
+  --ember-wash: oklch(74% 0.180 330.0 / 0.10);
+  --plum: oklch(74% 0.059 350.0);
   --plum-hover: var(--ember-400);
-  --peacock: oklch(78% 0.045 325.0);
+  --peacock: oklch(78% 0.051 190.0);
   /* Secondary accent — same role as gold/Oakland-yellow on SF, hue from config. */
-  --gold-300: oklch(79% 0.119 325.0);
-  --gold-400: oklch(71% 0.135 325.0);
-  --gold-500: oklch(63% 0.127 325.0);
-  --oakland-yellow: oklch(71% 0.135 325.0);
-  --oakland-yellow-soft: oklch(63% 0.112 325.0);
+  --gold-300: oklch(79% 0.135 190.0);
+  --gold-400: oklch(71% 0.153 190.0);
+  --gold-500: oklch(63% 0.144 190.0);
+  --oakland-yellow: oklch(71% 0.153 190.0);
+  --oakland-yellow-soft: oklch(63% 0.127 190.0);
   --oakland-black: oklch(8% 0 0);
   /* Semantic */
   --bg-canvas: var(--slate-900);
   --bg-elevated: var(--slate-850);
   --bg-row-hover: var(--slate-800);
-  --bg-row-active: oklch(34% 0.064 215.0);
-  --fg-default: oklch(96% 0.03 215.0);
-  --fg-strong: oklch(98% 0.02 215.0);
-  --fg-muted: oklch(86% 0.045 215.0);
-  --fg-subtle: oklch(68% 0.045 215.0);
+  --bg-row-active: oklch(34% 0.072 330.0);
+  --fg-default: oklch(96% 0.03 330.0);
+  --fg-strong: oklch(98% 0.02 330.0);
+  --fg-muted: oklch(86% 0.051 330.0);
+  --fg-subtle: oklch(68% 0.051 330.0);
   --fg-on-ember: var(--slate-950);
   --border-subtle: var(--slate-800);
   --border-default: var(--slate-700);
