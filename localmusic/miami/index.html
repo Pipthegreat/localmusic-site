@@ -1,0 +1,2332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Miami Live Music — Next 61 days (May 10 – Jul 10)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,ital@9..144,300..600,0;9..144,300..600,1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Canvas — derived from ctx.palette (chroma 0.075 at hue 215). */
+  --slate-300: oklch(82% 0.045 215.0);
+  --slate-400: oklch(75% 0.052 215.0);
+  --slate-500: oklch(52% 0.075 215.0);
+  --slate-600: oklch(44% 0.075 215.0);
+  --slate-700: oklch(37% 0.075 215.0);
+  --slate-800: oklch(31% 0.075 215.0);
+  --slate-850: oklch(28% 0.071 215.0);
+  --slate-900: oklch(25% 0.066 215.0);
+  --slate-950: oklch(22% 0.061 215.0);
+  /* Primary accent — earns every appearance. */
+  --ember-100: oklch(94% 0.036 215.0);
+  --ember-200: oklch(88% 0.073 215.0);
+  --ember-300: oklch(82% 0.109 215.0);
+  --ember-400: oklch(76% 0.145 215.0);
+  --ember-500: oklch(70% 0.165 215.0);
+  --ember-600: oklch(62% 0.157 215.0);
+  --ember-700: oklch(52% 0.137 215.0);
+  --ember-800: oklch(42% 0.109 215.0);
+  --ember-900: oklch(30% 0.073 215.0);
+  --ember-glow: oklch(76% 0.182 215.0 / 0.40);
+  --ember-wash: oklch(74% 0.165 215.0 / 0.10);
+  --plum: oklch(74% 0.052 235.0);
+  --plum-hover: var(--ember-400);
+  --peacock: oklch(78% 0.045 325.0);
+  /* Secondary accent — same role as gold/Oakland-yellow on SF, hue from config. */
+  --gold-300: oklch(79% 0.119 325.0);
+  --gold-400: oklch(71% 0.135 325.0);
+  --gold-500: oklch(63% 0.127 325.0);
+  --oakland-yellow: oklch(71% 0.135 325.0);
+  --oakland-yellow-soft: oklch(63% 0.112 325.0);
+  --oakland-black: oklch(8% 0 0);
+  /* Semantic */
+  --bg-canvas: var(--slate-900);
+  --bg-elevated: var(--slate-850);
+  --bg-row-hover: var(--slate-800);
+  --bg-row-active: oklch(34% 0.064 215.0);
+  --fg-default: oklch(96% 0.03 215.0);
+  --fg-strong: oklch(98% 0.02 215.0);
+  --fg-muted: oklch(86% 0.045 215.0);
+  --fg-subtle: oklch(68% 0.045 215.0);
+  --fg-on-ember: var(--slate-950);
+  --border-subtle: var(--slate-800);
+  --border-default: var(--slate-700);
+  --border-strong: var(--slate-600);
+  --link: var(--plum);
+  --link-hover: var(--ember-400);
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+/* iOS Safari: lock text-size-adjust at 100% so the OS does not silently
+   bump font sizes (e.g. on rotation or in narrow split-screen). Without
+   this, mobile rows that already share a row with the gold day-of-week
+   pill would shove the artist span to 0-width and the date number off
+   the right edge — exactly the failure mode seen in the iPhone bug
+   report (empty artist column, clipped "May ?" date). overflow-x:hidden
+   on the html element is a safety net so any single overflowing element
+   can't introduce a horizontal scrollbar that compounds the clipping. */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg-canvas);
+  color: var(--fg-default);
+  font: 400 15px/1.55 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(ellipse 80% 45% at 70% -10%, oklch(72% 0.18 35 / 0.22), transparent 65%),
+    radial-gradient(ellipse 60% 35% at 10% 0%, oklch(80% 0.14 65 / 0.14), transparent 65%),
+    radial-gradient(ellipse 70% 40% at 50% 110%, oklch(70% 0.10 90 / 0.10), transparent 65%);
+  background-attachment: fixed;
+  padding-bottom: 110px;
+}
+.shell { max-width: 1180px; margin: 0 auto; padding: 36px 32px 28px; }
+
+/* HEADER */
+.app-header { position: relative; padding-bottom: 28px; }
+.app-header::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--ember-800) 35%, var(--ember-700) 50%, var(--ember-800) 65%, transparent 100%);
+  opacity: 0.6;
+}
+.ah-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+.eyebrow-mobile { display: none; }
+.ah-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font: 500 11px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.ah-pulse {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--ember-400);
+  position: relative; flex-shrink: 0; box-shadow: 0 0 10px 0 var(--ember-glow);
+}
+.ah-pulse::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  animation: ah-pulse 2.4s ease-out infinite;
+}
+@keyframes ah-pulse {
+  0%   { box-shadow: 0 0 0 0 oklch(72% 0.20 42 / 0.5); }
+  70%  { box-shadow: 0 0 0 10px oklch(72% 0.20 42 / 0); }
+  100% { box-shadow: 0 0 0 0 oklch(72% 0.20 42 / 0); }
+}
+.ah-link {
+  font: 500 16px/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--peacock); text-decoration: none;
+  border-bottom: 1px solid oklch(36% 0.08 200); padding-bottom: 3px;
+  transition: color 160ms, border-color 160ms;
+}
+.ah-link:hover { color: var(--ember-300); border-bottom-color: var(--ember-700); }
+/* CTA cluster: current month's playlist + secondary "all months" link.
+   Right-aligned column on desktop, stacks neatly on mobile. */
+.ah-cta { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; text-align: right; }
+.ah-link-secondary {
+  font-size: 11px; letter-spacing: 0.14em; opacity: 0.7;
+  border-bottom-color: transparent; padding-bottom: 1px;
+}
+.ah-link-secondary:hover { opacity: 1; }
+
+.ah-title {
+  font: 400 clamp(40px, 5vw, 56px)/1.0 var(--serif);
+  margin: 0; letter-spacing: -0.020em; color: var(--fg-strong);
+}
+.ah-plus { color: var(--gold-400); font-style: italic; margin: 0 0.04em; display: inline-block; }
+
+.ah-sub { display: flex; align-items: center; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
+.ah-sub-lead { font: 400 italic 18px/1.2 var(--serif); color: var(--fg-muted); }
+.ah-sub-lead em { font-style: italic; color: var(--gold-400); }
+.ah-rule { flex-shrink: 0; width: 28px; height: 1px; background: var(--border-default); }
+
+/* Date / month switcher button */
+details.ah-time-menu { position: relative; display: inline-block; }
+details.ah-time-menu > summary {
+  list-style: none; cursor: pointer; user-select: none;
+  background: transparent; border: none;
+  font: 500 11px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--peacock); font-variant-numeric: tabular-nums;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 8px; margin: -4px -8px; border-radius: 3px;
+  transition: color 140ms, background 140ms;
+}
+details.ah-time-menu > summary::-webkit-details-marker { display: none; }
+details.ah-time-menu > summary::after { content: "▾"; font-size: 9px; opacity: 0.6; transform: translateY(1px); }
+details.ah-time-menu > summary:hover { color: var(--ember-300); background: var(--ember-wash); }
+ul.month-menu {
+  list-style: none; padding: 6px 0; margin: 8px 0 0;
+  background: var(--slate-800); border: 1px solid var(--border-subtle); border-radius: 4px;
+  min-width: 280px; position: absolute; z-index: 30;
+  box-shadow: 0 12px 32px -8px rgba(0,0,0,0.6);
+}
+ul.month-menu a {
+  display: block; padding: 9px 14px; color: var(--fg-default); text-decoration: none;
+  font: 400 13px/1.3 var(--sans); letter-spacing: normal; text-transform: none;
+}
+ul.month-menu a:hover { background: var(--bg-row-hover); color: var(--ember-300); }
+ul.month-menu .dot { color: var(--ember-400); margin-left: 6px; }
+
+.ah-stats {
+  display: flex; gap: 56px; margin-top: 30px; padding-top: 22px;
+  border-top: 1px solid var(--border-subtle); align-items: baseline;
+}
+.ah-stat { display: flex; align-items: baseline; gap: 12px; }
+.ah-stat .num {
+  font: 400 italic 30px/1 var(--serif); color: var(--fg-strong);
+  font-feature-settings: "tnum","lnum"; letter-spacing: -0.02em;
+}
+.ah-stat .lbl {
+  font: 500 10px/1 var(--mono); letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+/* FILTER ROW */
+.filter-row {
+  display: grid; grid-template-columns: 1fr 280px auto;
+  gap: 14px; align-items: center;
+  margin-top: 28px; padding: 16px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.input, .select select {
+  background: var(--slate-850); border: 1px solid var(--border-default);
+  color: var(--fg-default); font: 400 14px/1 var(--sans);
+  padding: 11px 14px; border-radius: 4px;
+  transition: border-color 160ms, box-shadow 160ms, background 160ms;
+}
+.input::placeholder { color: var(--fg-subtle); }
+.input:hover, .select select:hover { border-color: var(--border-strong); background: var(--slate-800); }
+.input:focus, .select select:focus {
+  outline: none; border-color: var(--ember-600); box-shadow: 0 0 0 3px var(--ember-wash);
+  background: var(--slate-800);
+}
+.select { position: relative; }
+.select select { width: 100%; appearance: none; padding-right: 36px; cursor: pointer; }
+.select::after {
+  content: "▾"; position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  color: var(--fg-subtle); pointer-events: none; font-size: 12px;
+}
+.count { font: 500 13px/1 var(--mono); color: var(--fg-muted); white-space: nowrap; }
+/* Mobile preview-mode notice. Sits in the gap above the table once
+   playback starts; warm muted ember so it shares the page's palette
+   without competing with active-row content. Hidden on desktop;
+   gated on body.preview-mode so it only surfaces when Spotify has
+   actually confirmed 30-sec mode (mobile-mode browsers). */
+.mobile-preview-notice {
+  display: none;
+  margin: 0; padding: 8px 4px 6px;
+  font: 500 italic 12px/1.35 var(--mono); letter-spacing: 0.06em;
+  color: var(--ember-200); opacity: 0.72;
+}
+/* Play-stall notice. Fires when the user taps play/skip but the Spotify
+   iframe never produces a playback_update — most commonly because the
+   user is already playing audio on another Spotify device (Spotify
+   Connect only allows one active session). Shown until either a real
+   playback_update arrives or the user dismisses it. */
+.play-stall-notice {
+  display: none;
+  margin: 8px 0 0; padding: 10px 12px;
+  background: var(--ember-wash);
+  border: 1px solid var(--ember-700);
+  border-radius: 6px;
+  color: var(--ember-200);
+  font: 500 13px/1.4 var(--sans);
+}
+body.play-stalled .play-stall-notice { display: block; }
+.play-stall-notice b { color: var(--fg-strong); font-weight: 600; }
+.play-stall-notice a {
+  color: var(--ember-300); text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.play-stall-notice a:hover { color: var(--ember-100); }
+.play-stall-dismiss {
+  margin-left: 8px; padding: 2px 8px;
+  background: transparent; border: 1px solid var(--ember-700);
+  color: var(--ember-200); border-radius: 4px; cursor: pointer;
+  font: 500 12px/1 var(--mono);
+}
+.play-stall-dismiss:hover { background: var(--ember-wash); color: var(--fg-strong); }
+.count b { color: var(--fg-default); }
+
+/* Multi-select venue dropdown — replaces the native <select> with a
+   button + checkbox panel so users can filter by more than one venue. */
+.venue-multi { position: relative; }
+.venue-trigger {
+  width: 100%; padding: 11px 14px;
+  background: var(--slate-850);
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  color: var(--fg-default);
+  font: 400 14px/1 var(--sans);
+  cursor: pointer; text-align: left;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: border-color 160ms, background 160ms, box-shadow 160ms;
+}
+.venue-trigger:hover { border-color: var(--border-strong); background: var(--slate-800); }
+.venue-trigger:focus {
+  outline: none; border-color: var(--ember-600);
+  box-shadow: 0 0 0 3px var(--ember-wash);
+  background: var(--slate-800);
+}
+.venue-trigger-label {
+  flex: 1; min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.venue-trigger-caret {
+  color: var(--fg-subtle); font-size: 12px; margin-left: 10px;
+  transition: transform 160ms;
+}
+.venue-trigger[aria-expanded="true"] .venue-trigger-caret { transform: rotate(180deg); }
+.venue-panel {
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+  z-index: 50;
+  max-height: 320px; overflow-y: auto;
+  background: var(--slate-850);
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
+  padding: 6px;
+  box-shadow: 0 16px 40px -12px oklch(8% 0 0 / 0.7);
+}
+.venue-panel[hidden] { display: none; }
+.venue-option {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px;
+  font: 400 13px/1.3 var(--sans);
+  color: var(--fg-default);
+  cursor: pointer; border-radius: 4px;
+  user-select: none;
+}
+.venue-option:hover { background: var(--bg-row-hover); }
+.venue-option input[type="checkbox"] {
+  margin: 0; flex-shrink: 0;
+  accent-color: var(--ember-500);
+  width: 16px; height: 16px; cursor: pointer;
+}
+.venue-option span {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+/* Clear-all chip pinned at the top of the panel when any venue is
+   selected — quick reset to "All venues" state. */
+.venue-clear {
+  display: none;
+  margin: 0 4px 4px;
+  padding: 6px 10px;
+  font: 500 11px/1 var(--mono); letter-spacing: 0.10em; text-transform: uppercase;
+  color: var(--ember-300);
+  background: var(--ember-wash);
+  border: 1px solid transparent; border-radius: 4px;
+  cursor: pointer; text-align: center;
+}
+.venue-multi.has-selection .venue-clear { display: block; }
+.venue-clear:hover { background: var(--ember-wash); border-color: var(--ember-700); }
+
+/* TABLE */
+/* table-layout: fixed locks column widths from the <colgroup>/header. Without
+   this, browsers re-flow column widths per-row based on content -- which is
+   what was making the active row's bigger ember play button visually shove
+   the track column right. */
+.tbl { width: 100%; border-collapse: collapse; margin-top: 0; table-layout: fixed; }
+/* Every column gets an explicit width -- 'auto' on a column with table-layout:
+   fixed can re-flow when sibling cells have wildly different content heights. */
+.tbl col.c-play    { width: 110px; }    /* fits 3 controls on active row */
+.tbl col.c-primary { width: 32%; }      /* artist + active track */
+.tbl col.c-venue   { width: 32%; }
+.tbl col.c-date    { width: 140px; }
+.tbl thead th {
+  text-align: left; padding: 18px 14px;
+  font: 500 11px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--fg-subtle); border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-canvas); position: sticky; top: 0;
+}
+.tbl thead th:first-child { width: 56px; padding: 0; }
+/* Header label swap: desktop has separate Venue + Date columns so the
+   primary header just says "Artist / Track". On mobile the venue
+   collapses into the primary cell on the active row, so the header
+   advertises that — "Artist / Track / Venue". Same hide/show pattern as
+   the .eyebrow-desktop / .eyebrow-mobile swap higher up. */
+.th-desktop { display: inline; }
+.th-mobile  { display: none; }
+.tbl thead th[data-sort] { cursor: pointer; user-select: none; transition: color 140ms; }
+.tbl thead th[data-sort]:hover { color: var(--ember-300); }
+/* Mobile-only inline Date button. Lives inside the artist <th>. Hidden
+   on desktop (where Date has its own column header). On mobile the
+   parent <th> becomes flex so the button rides the right edge, lining up
+   visually with the date pills in the body rows. */
+.th-mobile-date-btn {
+  display: none;
+  background: transparent; border: 0; padding: 0; margin: 0; cursor: pointer;
+  font: inherit; color: inherit; letter-spacing: inherit; text-transform: inherit;
+}
+.th-mobile-date-btn:hover { color: var(--ember-300); }
+/* Caret sort indicators. Targets `[data-sort]` (not just `th[data-sort]`)
+   so the mobile-only inline Date button inside the artist <th> gets its
+   own independent caret. Direct-child selector (`>`) so the th's sort
+   state doesn't leak its caret into the button (or vice-versa) when both
+   share the same DOM ancestry. */
+.tbl thead .caret { display: inline-block; width: 8px; opacity: 0; margin-left: 4px; font-size: 9px; }
+.tbl thead [data-sort].sort-asc, .tbl thead [data-sort].sort-desc { color: var(--fg-default); }
+.tbl thead [data-sort].sort-asc  > .caret { opacity: 1; }
+.tbl thead [data-sort].sort-desc > .caret { opacity: 1; }
+.tbl thead [data-sort].sort-asc  > .caret::before { content: "▲"; color: var(--ember-400); }
+.tbl thead [data-sort].sort-desc > .caret::before { content: "▼"; color: var(--ember-400); }
+/* Date "rest" text (e.g. "May 30") -- plain readable cream. The Oakland
+   accent earns its appearance only on the .t-dow pill below; the rest of
+   the date is restraint, not ornament. (Stle/CLAUDE.md §1.) */
+.t-date {
+  color: var(--fg-muted);
+  white-space: nowrap; font-variant-numeric: tabular-nums;
+  font: 500 13px/1 var(--mono); letter-spacing: 0.04em;
+}
+.t-mobile-meta .m-date {
+  color: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
+  font: 500 12px/1 var(--mono); letter-spacing: 0.04em;
+}
+/* Day-of-week badge (the "Fri" / "Sat" / "Sun" prefix) -- Oakland sports
+   jersey treatment: bright Oakland gold on solid black, with a 1px black
+   text-shadow so the gold letters carry a thin dark outline. Lives inline
+   with the rest of the date so the row layout stays the same. */
+.t-dow {
+  display: inline-block;
+  background: var(--oakland-black);
+  color: var(--oakland-yellow);
+  border: 1px solid var(--oakland-yellow);
+  border-radius: 3px;
+  padding: 2px 6px; margin-right: 6px;
+  /* Idle rows: regular weight. Active row gets weight bumped below for
+     emphasis. Was 600 before — too aggressive on long lists. */
+  font: 400 11px/1 var(--mono); letter-spacing: 0.10em; text-transform: uppercase;
+  text-shadow:
+    -1px 0 0 var(--oakland-black),
+     1px 0 0 var(--oakland-black),
+     0 -1px 0 var(--oakland-black),
+     0  1px 0 var(--oakland-black);
+}
+.t-mobile-meta .m-date .t-dow {
+  font-size: 10px; padding: 1px 5px; margin-right: 5px;
+}
+/* Active row inverts the badge AND bumps weight so the playing track's
+   "Fri" pops gold and feels strong. */
+.tbl tbody tr.np .t-dow {
+  background: var(--oakland-yellow);
+  color: var(--oakland-black);
+  text-shadow: none;
+  font-weight: 600;
+}
+.t-loading { color: var(--fg-subtle); font-style: italic; opacity: 0.5; }
+
+/* DJ-only rows hidden until the "Add DJs" checkbox is on */
+.tbl tbody tr[data-dj-only="1"] { display: none; }
+/* When the toggle is on, show DJ rows — but still let .hidden (search /
+   venue filter) override. The `:not(.hidden)` keeps the filter working
+   on DJ rows, otherwise a search like 'cafe' wouldn't actually narrow
+   them down. */
+.tbl.show-djs tbody tr[data-dj-only="1"]:not(.hidden) { display: table-row; }
+
+.toggle {
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 500 11px/1 var(--mono); letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--fg-muted);
+  cursor: pointer; user-select: none; padding: 0 4px;
+  white-space: nowrap;
+  transition: color 140ms;
+}
+.toggle:hover { color: var(--ember-300); }
+.toggle input {
+  appearance: none; width: 14px; height: 14px; margin: 0;
+  border: 1px solid var(--border-default); border-radius: 3px;
+  background: var(--slate-850); cursor: pointer;
+  transition: background 140ms, border-color 140ms;
+}
+.toggle input:checked {
+  background: var(--ember-500); border-color: var(--ember-500);
+  box-shadow: 0 0 0 2px var(--ember-wash);
+}
+.toggle input:checked + span { color: var(--ember-300); }
+
+/* .coffee — secondary meta-link styling. Currently unused (the link
+   that consumed it was removed). Kept for any future quiet meta-link
+   sitting under the Spotify CTA. */
+.coffee {
+  display: inline-block; margin-top: 4px;
+  font: 500 10px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--peacock); text-decoration: none; opacity: 0.65;
+  transition: opacity 160ms, color 160ms;
+}
+.coffee:hover { opacity: 1; color: var(--ember-300); }
+.tbl tbody td {
+  padding: 12px 14px; border-bottom: 1px solid var(--border-subtle);
+  vertical-align: middle; font: 400 14px/1.4 var(--sans);
+  /* Single-line rows: clip + ellipsize anything too long. Prevents one cell's
+     wrapping from changing row height (which used to nudge other cells). */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tbl tbody tr { transition: background 140ms; cursor: pointer; }
+.tbl tbody tr:hover { background: var(--bg-row-hover); }
+/* Empty-state row — used when the scrape window has zero artists.
+   Non-clickable, takes the full table width, sits in the ember
+   accent so it reads as informational rather than broken. */
+.tbl tbody tr.row-empty { cursor: default; background: transparent; }
+.tbl tbody tr.row-empty:hover { background: transparent; }
+.tbl tbody tr.row-empty td {
+  padding: 36px 22px; border-bottom: none;
+}
+.empty-headline {
+  font: 500 italic 17px/1.35 var(--serif);
+  color: var(--fg-default); margin-bottom: 6px;
+}
+.empty-sub {
+  font: 400 13px/1.5 var(--sans);
+  color: var(--fg-muted); max-width: 56ch;
+}
+.tbl tbody a.row-link {
+  color: inherit; text-decoration: none; display: contents;
+}
+
+.play-cell {
+  width: 110px; padding: 0 6px !important; text-align: left;
+  vertical-align: middle;
+}
+/* Idle rows: play button left-aligned so the artist text starts close
+   to it (no big empty middle). Active rows recenter the controls so
+   skip-back/play/skip-fwd are balanced as a triplet. */
+.play-controls {
+  display: flex; align-items: center; justify-content: flex-start; gap: 6px;
+}
+.tbl tbody tr.np .play-controls { justify-content: center; }
+.play {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: transparent; border: 1px solid var(--border-default);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--fg-muted); transition: all 160ms;
+  cursor: pointer; padding: 0; flex-shrink: 0;
+}
+/* In-row skip controls — hidden until the row is the active (.np) one,
+   then they flank the play button. Forward stays generously sized;
+   back is 2/3 size since playlist nav is mostly forward, and the smaller
+   back button fits the row better. */
+.row-skip {
+  display: none;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: transparent; border: 1px solid transparent;
+  align-items: center; justify-content: center;
+  color: var(--fg-muted); cursor: pointer; padding: 0;
+  transition: all 160ms; flex-shrink: 0;
+}
+.row-skip svg { width: 11px; height: 11px; fill: currentColor; }
+.row-skip.back { width: 25px; height: 25px; }
+.row-skip.back svg { width: 9px; height: 9px; }
+.tbl tbody tr.np .row-skip { display: inline-flex; }
+.row-skip:hover {
+  border-color: var(--ember-600);
+  color: var(--ember-300);
+  background: var(--ember-wash);
+}
+.row-skip:disabled {
+  opacity: 0.25; cursor: not-allowed;
+}
+.row-skip:disabled:hover {
+  border-color: transparent; background: transparent; color: var(--fg-muted);
+}
+.play svg { width: 12px; height: 12px; fill: currentColor; }
+.play .ico-play  { transform: translateX(1px); }
+.play .ico-pause { display: none; transform: translateX(0); }
+.tbl tbody tr:hover .play {
+  border-color: var(--ember-600); color: var(--ember-400); background: var(--ember-wash);
+}
+.tbl tbody tr.np .play {
+  background: var(--ember-500); border-color: var(--ember-500);
+  color: var(--fg-on-ember);
+  box-shadow: 0 0 0 4px var(--ember-wash), 0 0 24px -4px var(--ember-glow);
+}
+.tbl tbody tr.np.playing .play .ico-play { display: none; }
+.tbl tbody tr.np.playing .play .ico-pause { display: block; }
+/* Active row marker via inset box-shadow on the FIRST cell only.
+   The ::before + position:relative pattern apparently nudged content right in
+   some browsers (table-layout interactions); inset shadows on a cell don't
+   affect any layout and stay inside the cell's box. */
+.tbl tbody tr.np { background: var(--bg-row-active); }
+.tbl tbody tr.np td.play-cell {
+  box-shadow: inset 2px 0 0 var(--ember-500), inset 22px 0 22px -18px var(--ember-glow);
+}
+
+/* PRIMARY CELL — one cell per row holds artist + active track + (mobile)
+   date inline. Idle: just artist (and mobile date). Active (.np): the
+   currently-playing track name appears under the artist; mobile also
+   reveals venue underneath. Cell is overflow:visible so wrapped lines
+   don't clip; sibling cells still ellipsize via .tbl tbody td above. */
+.t-primary-cell {
+  overflow: visible;
+  white-space: normal;
+}
+.primary-line {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px;
+}
+.primary-artist {
+  font: 500 14px/1.3 var(--sans); color: var(--plum);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  transition: color 160ms; flex: 1; min-width: 0;
+}
+.tbl tbody tr:hover .primary-artist { color: var(--ember-400); }
+.tbl tbody tr.np .primary-artist { color: var(--ember-300); }
+/* Date inline in the primary cell — desktop hides this (it has its own
+   c-date column); mobile reveals it. */
+.primary-date {
+  display: none;
+  font: 500 13px/1 var(--mono); color: var(--fg-muted);
+  letter-spacing: 0.04em; white-space: nowrap; flex-shrink: 0;
+}
+.primary-date .t-dow {
+  display: inline-block; padding: 2px 6px; border-radius: 3px;
+  background: var(--oakland-yellow); color: var(--oakland-black);
+  font-weight: 700; font-size: 10px; margin-right: 4px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+/* Track name under the artist — visible on desktop always (idle = track 1,
+   active = currently playing), mobile only when row is .np. */
+.primary-track {
+  display: block; margin-top: 3px;
+  font: 400 13px/1.35 var(--sans); color: var(--fg-muted);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.tbl tbody tr.np .primary-track { color: var(--fg-default); }
+/* Mobile-only venue line — hidden on desktop (which has c-venue column). */
+.primary-venue {
+  display: none;
+  margin-top: 3px;
+  font: 400 13px/1.35 var(--sans); color: var(--fg-muted);
+}
+.primary-venue .vname { color: var(--fg-default); }
+.primary-venue .city { color: var(--fg-subtle); }
+
+.t-venue { color: var(--fg-muted); font-size: 13px; }
+.t-venue .vname { color: var(--fg-default); }
+.t-venue .city { color: var(--fg-subtle); }
+.t-venue .vsep { color: var(--slate-700); margin: 0 4px; }
+.t-venue .semi { color: var(--slate-700); margin: 0 8px; }
+
+/* Play button + 1/3 badge stacked vertically as a unit. Sits between
+   the in-row skip buttons (when active) and centers play on top of
+   1/3 so the badge always tracks the button — no off-center drift. */
+.play-stack {
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  flex-shrink: 0;
+}
+.row-progress {
+  display: block;
+  font: 600 11px/1 var(--mono); letter-spacing: 0.08em;
+  color: var(--fg-subtle);
+  font-variant-numeric: tabular-nums;
+}
+.tbl tbody tr.np .row-progress { color: var(--ember-400); }
+
+.hidden { display: none; }
+
+/* PLAYER BAR -- one plain Spotify iframe, no IFrame API, no custom controls.
+   Reliability beats cleverness: Spotify owns playback, we own the data. */
+.player {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  padding: 14px 24px 16px; z-index: 100;
+  /* Soft fade into the page above; warm wash below. No hard top border --
+     the gradient itself does the separation. */
+  background:
+    linear-gradient(180deg, transparent 0%, oklch(13% 0.013 250) 30%,
+                    color-mix(in oklch, var(--track-tint, oklch(20% 0.06 38)) 18%, var(--slate-950))),
+    var(--slate-950);
+  box-shadow: 0 -30px 80px -30px color-mix(in oklch,
+              var(--track-tint, oklch(60% 0.16 40)) 35%, transparent);
+  transition: background 320ms, box-shadow 320ms;
+}
+.player-inner {
+  max-width: 800px; margin: 0 auto;
+  display: flex; align-items: center; gap: 12px;
+}
+/* No border, no inset ring -- the iframe owns its corners. We just clip to a
+   matching radius. The dark background fills any sub-pixel gap left by the
+   browser's antialiasing of the rounded corners against the (transparent)
+   iframe interior, which was showing as faint white slivers. */
+.player-embed {
+  flex: 1; min-width: 0;
+  border-radius: 12px; overflow: hidden;
+  background: var(--slate-950);
+  isolation: isolate;
+}
+.player-embed iframe {
+  width: 100%; height: 80px; display: block; border: 0;
+  background: transparent;
+}
+/* Borderless circle buttons. Color follows --track-tint (set by JS from the
+   currently-playing track's album art); falls back to Spotify green when
+   nothing is playing. The whole player bar takes the tint too -- glow + top
+   rule -- so the buttons always feel native to whatever's playing. */
+.skip {
+  width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+  background: transparent; border: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--track-tint, oklch(70% 0.18 145));
+  cursor: pointer; padding: 0;
+  transition: background 160ms, transform 80ms, color 220ms;
+}
+.skip:hover { background: color-mix(in oklch, var(--track-tint, oklch(70% 0.18 145)) 12%, transparent); }
+.skip:active { transform: scale(0.94); }
+.skip:disabled { opacity: 0.30; cursor: default; }
+.skip:disabled:hover { background: transparent; }
+.skip svg { width: 22px; height: 22px; fill: currentColor; }
+
+/* DESKTOP DEFAULT (no media query): primary cell hides .primary-date and
+   .primary-venue (they live in their own columns). Track name lives
+   under the artist always — idle = track 1, active = currently playing. */
+
+/* MOBILE breakpoints — collapse the c-venue and c-date columns; reveal
+   the inline date inside the primary cell; expand the row when active
+   to show track + venue. The previous "track name as default cell text"
+   model is gone — under the new one-row-per-artist layout, idle mobile
+   shows just artist + date and only the playing row reveals more. */
+/* Single mobile breakpoint at 900px. Below this, the page drops the
+   desktop columns + outer skip buttons and switches to the stacked
+   mobile layout (mini-player, expand-on-active row, etc.). The old
+   in-between 980px tier was making the responsive transition look
+   broken — narrow desktop felt cramped before mobile kicked in. */
+@media (max-width: 900px) {
+  /* Tighter padding so the page goes edge-to-edge on phone-class
+     viewports. The 32px desktop padding × 2 was the 'wiggle room'.
+     ALSO cap shell width at 560px and center it — at mid-tier widths
+     (700-900px tablets/narrow desktops) the mobile rows were stretching
+     across the full viewport with empty middle, looking sparse. The
+     cap makes rows feel cohesive on tablets while still going edge-to-
+     edge on actual phones (which are < 560px wide so the cap is moot). */
+  .shell { padding: 16px 12px 24px; max-width: 560px; margin: 0 auto; }
+  .player-inner { max-width: 560px; }
+  /* Eyebrow swap: mobile says "two months" (the display window),
+     desktop says "updated daily" (the refresh cadence). Both are true;
+     mobile gets the more informative one given limited screen width.
+     Two lines so the words don't break mid-phrase — "two months"
+     stays together, indented under "Live music ·". */
+  .eyebrow-desktop { display: none; }
+  .eyebrow-mobile { display: inline-flex; flex-direction: column; line-height: 1.3; }
+  .eyebrow-line { white-space: nowrap; }
+  .ah-eyebrow { align-items: flex-start; }
+  .ah-pulse { margin-top: 4px; }    /* drop dot to first-line baseline */
+  .ah-title { font-size: 30px; line-height: 1.05; }
+  .ah-sub-lead { font-size: 16px; }
+  .ah-stats { gap: 20px; padding-top: 16px; margin-top: 18px; }
+  .ah-stat .num { font-size: 24px; }
+  .ah-stat .lbl { font-size: 10px; }
+  /* Mobile: drop the Tracks card. The number is mostly redundant with
+     Artists × 3 and eats horizontal space on phone-class viewports. */
+  .ah-stat-tracks { display: none; }
+  .filter-row { grid-template-columns: 1fr; padding: 10px 0; }
+
+  /* Collapse the per-column venue + date; both move into the primary
+     cell. The c-primary column expands to fill the freed width. The
+     <th> headers must hide too — a 0-width <col> still has the <th>
+     text, which renders as vertical clipped letters ("DDWBF"). */
+  .tbl col.c-venue, .tbl col.c-date { width: 0; }
+  .t-venue, .t-date { display: none; }
+  /* Surface the "samples-only" notice once the Spotify iframe confirms
+     30-sec preview mode. Only the Spotify iframe's playback_update sets
+     body.preview-mode, so this stays Spotify-specific even if other
+     audio sources (SoundCloud, etc.) are wired in later. */
+  body.preview-mode .mobile-preview-notice { display: block; }
+  .tbl thead th[data-sort="venue"],
+  .tbl thead th[data-sort="date"] { display: none; }
+  /* Artist <th> becomes a flex container on mobile so the inline Date
+     button can sit on the right, mirroring the body row's
+     artist-on-left / date-on-right layout. `display: flex` on a <th> is
+     well-supported in modern browsers and our column widths are already
+     auto on mobile (.c-venue + .c-date are width:0), so no layout issue.
+     Inner spans flow as flex children; the button is pushed right with
+     margin-left: auto. */
+  .tbl thead th[data-sort="artist"] {
+    display: flex; align-items: center; gap: 4px;
+  }
+  .tbl thead th[data-sort="artist"] > .th-mobile-date-btn {
+    display: inline-flex; align-items: center; margin-left: auto;
+  }
+  /* Mobile primary-column header: advertise the venue (which collapses
+     into the primary cell on the active row at this breakpoint). */
+  .th-desktop { display: none; }
+  .th-mobile  { display: inline; }
+  .tbl col.c-primary { width: auto; }
+  .tbl thead th { padding: 12px 10px; font-size: 11px; }
+  .tbl tbody td { padding: 12px 10px; font-size: 14px; }
+  .play-cell { width: 100px; padding: 0 4px !important; }
+  .play { width: 38px; height: 38px; }    /* bigger touch target */
+  .row-skip { width: 40px; height: 40px; } /* generous for thumbs */
+  .row-skip svg { width: 12px; height: 12px; }
+  .row-skip.back { width: 27px; height: 27px; }     /* 2/3 size */
+  .row-skip.back svg { width: 10px; height: 10px; }
+  /* Idle row: center the play button in the cell so it sits at the
+     same x as the active row's play button (which is centered between
+     skip-back and skip-fwd). Without this, idle play hugs the left
+     edge while the active play sits in the middle — visually
+     inconsistent column. Mobile-only; desktop keeps flex-start. */
+  .play-controls { gap: 4px; justify-content: center; }
+  /* Hide 1/3 on idle mobile rows (visual noise on every line for no
+     useful info — every idle row would just say "1/3"). Active row
+     reveals it so the user can see they're on track 2/3 etc. */
+  .row-progress { display: none; font-size: 11px; }
+  .tbl tbody tr.np .row-progress { display: block; margin-top: 2px; }
+  /* Drop the 4-direction text-shadow on day-of-week pills on mobile.
+     The outline was visually thickening the letters on phone-class
+     viewports — looked aggressive and "bold" even at font-weight 400. */
+  .t-dow { text-shadow: none; }
+
+  /* Idle row on mobile: artist (left) + date (right) on a single line.
+     Hide the track name so we don't get visual noise on every row.
+     Track + venue appear only on the active (.np) row.
+
+     Why the min-width: 0 (also on .primary-line and .primary-artist):
+     iOS Safari and certain Android Chromium versions, when a flex item
+     contains text with `text-overflow: ellipsis`, only honor the
+     ellipsis when min-width is *explicitly* 0 on every flex ancestor.
+     Without it the artist span hugs its intrinsic content width on the
+     phone and shoves the date pill past the right edge — which is the
+     "May ?" clipping seen in the iPhone bug report. Belt-and-braces
+     here is cheap, so we set min-width: 0 redundantly.
+
+     Why the artist color override:
+     desktop's --plum (oklch 74%, low chroma) drifts toward the warm
+     canvas on wide-gamut iPhone screens, especially at small sizes
+     under thumb shadows. Bumping to --fg-default (oklch 96%) on mobile
+     keeps the desktop hierarchy intact (date stays muted, track stays
+     ember on .np) while making the artist row legible on a phone. */
+  .primary-line { flex-wrap: nowrap; min-width: 0; }
+  .primary-artist {
+    font-size: 15px;
+    min-width: 0;
+    color: var(--fg-default);
+  }
+  .primary-date {
+    display: inline-flex; align-items: center;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  /* Drop the bold weight on mobile — the day-of-week pill was reading
+     too aggressive next to the gold background on phone-class layouts. */
+  .primary-date .t-dow { font-size: 11px; padding: 3px 7px; font-weight: 500; }
+  .primary-track { display: none; }
+  .tbl tbody tr.np .primary-track {
+    display: block; margin-top: 6px;
+    color: var(--ember-200); font-weight: 500; font-size: 14px;
+  }
+  .tbl tbody tr.np .primary-venue {
+    display: block; margin-top: 5px; font-size: 13px;
+  }
+
+  /* Player bar on mobile:
+     - Hide our outer skip buttons (within-row skip handles navigation).
+     - SHOW the Spotify iframe directly. Earlier we hid it via off-screen
+       positioning + custom mini-player, but that broke audio on iOS
+       Safari (off-screen iframes get throttled). Visible iframe is the
+       reliable choice; the custom mini-player is hidden. Music wins
+       over mini-UI. */
+  .player { padding: 8px 8px 10px; }
+  .player-inner { gap: 0; overflow: hidden; }
+  .player .skip { display: none; }
+  .player-embed { flex: 1; }
+  .mini-player { display: none !important; }
+}
+/* Mini-player layout — hidden by default; the mobile media query above
+   sets display:flex so it's only visible on phone-class viewports. */
+.mini-player {
+  display: none;
+  flex: 1; min-width: 0;
+  align-items: center; gap: 10px;
+  padding: 6px 8px; border-radius: 12px;
+  background: var(--slate-950);
+  isolation: isolate;
+}
+.mini-art {
+  width: 44px; height: 44px; border-radius: 6px;
+  background: var(--slate-800);
+  background-size: cover; background-position: center;
+  flex-shrink: 0;
+}
+.mini-text { flex: 1; min-width: 0; line-height: 1.2; }
+.mini-track {
+  font: 500 13px/1.25 var(--sans); color: var(--fg-default);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.mini-artist {
+  font: 400 11px/1.25 var(--sans); color: var(--fg-muted);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+/* Tiny Spotify hand-off link — appears once the JS detects we're
+   getting 30-sec previews (i.e. the user isn't authenticated for
+   full tracks). Lets them escape to Spotify's app where their
+   account works. Hidden until the .preview-mode flag fires. */
+.mini-spotify-link {
+  display: none;
+  font: 500 10px/1.2 'JetBrains Mono', ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  color: var(--ember-300);
+  text-decoration: none;
+  margin-top: 2px;
+}
+.mini-spotify-link:hover { color: var(--ember-400); }
+body.preview-mode .mini-spotify-link { display: inline-block; }
+body.preview-mode .mini-artist { display: none; }
+.mini-toggle {
+  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+  background: var(--track-tint, oklch(70% 0.18 145));
+  border: 0; padding: 0; cursor: pointer;
+  color: var(--slate-950);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: filter 160ms;
+}
+.mini-toggle:hover { filter: brightness(1.05); }
+.mini-toggle svg { width: 14px; height: 14px; fill: currentColor; }
+.mini-toggle .ico-play { transform: translateX(1px); }
+.mini-toggle .ico-pause { display: none; }
+body.is-playing .mini-toggle .ico-play { display: none; }
+body.is-playing .mini-toggle .ico-pause { display: block; }
+@media (max-width: 420px) {
+  .ah-title { font-size: 26px; }
+  /* Slightly tighter side padding on the smallest phones, but still
+     comfortable for thumb-reach on the play column. */
+  .shell { padding: 14px 10px 20px; }
+  /* Trim the play column so the artist text doesn't get crushed. */
+  .play-cell { width: 120px; padding: 0 2px !important; }
+  .play { width: 36px; height: 36px; }
+  .row-skip { width: 36px; height: 36px; }
+  .row-skip.back { width: 24px; height: 24px; }    /* 2/3 size */
+  .play-controls { gap: 2px; }
+  .row-progress { font-size: 10px; }
+  .primary-artist { font-size: 14px; }
+  .player { padding: 6px 6px 8px; }
+}
+</style>
+</head>
+<body>
+<!-- Icon sprite. Defined once and referenced from every row via <use> —
+     saves ~37KB of repeated SVG markup across 372 rows. The sprite is
+     visually hidden but stays in the DOM so external <use> refs resolve. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-skip-back" viewBox="0 0 12 12"><path d="M2 1v10h2V1zM11 1L4 6l7 5z"/></symbol>
+    <symbol id="i-skip-fwd"  viewBox="0 0 12 12"><path d="M8 1v10h2V1zM1 1l7 5-7 5z"/></symbol>
+    <symbol id="i-play"      viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z"/></symbol>
+    <symbol id="i-pause"     viewBox="0 0 12 12"><rect x="2" y="2" width="3" height="8"/><rect x="7" y="2" width="3" height="8"/></symbol>
+  </defs>
+</svg>
+<div class="shell">
+
+  <header class="app-header">
+    <div class="ah-top">
+      <div class="ah-eyebrow">
+        <span class="ah-pulse" aria-hidden="true"></span>
+        <span class="eyebrow-desktop">Live music · updated daily</span>
+        <span class="eyebrow-mobile">
+          <span class="eyebrow-line">Live music ·</span>
+          <span class="eyebrow-line">two months</span>
+        </span>
+      </div>
+      
+    </div>
+
+    <h1 class="ah-title">Miami Live Music</h1>
+
+    <div class="ah-sub">
+      <span class="ah-sub-lead"><em>are you living?</em></span>
+      <span class="ah-rule" aria-hidden="true"></span>
+      <details class="ah-time-menu">
+        <summary><time datetime="2026-05-10/2026-07-10">May 10 → Jul 10, 2026</time></summary>
+        <ul class="month-menu">
+<li><a href="/localmusic/miami/">Next 61 days (May 10 – Jul 10) <span class="dot">●</span></a></li>
+</ul>
+      </details>
+    </div>
+
+    <div class="ah-stats">
+      <div class="ah-stat ah-stat-artists"><span class="num" id="stat-artists">0</span><span class="lbl">Artists</span></div>
+      <div class="ah-stat ah-stat-tracks"><span class="num" id="stat-tracks">0</span><span class="lbl">Tracks</span></div>
+      <div class="ah-stat ah-stat-venues"><span class="num" id="stat-venues">0</span><span class="lbl">Venues</span></div>
+    </div>
+  </header>
+
+  <div class="filter-row">
+    <input class="input" id="filter" type="search" placeholder="Filter by track, artist, or venue…">
+    <div class="venue-multi" id="venue-multi">
+      <button type="button" class="venue-trigger" id="venue-trigger"
+              aria-haspopup="listbox" aria-expanded="false">
+        <span class="venue-trigger-label">All venues</span>
+        <span class="venue-trigger-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="venue-panel" id="venue-panel" role="listbox" aria-multiselectable="true" hidden>
+        <button type="button" class="venue-clear" id="venue-clear">Clear all</button>
+        
+      </div>
+    </div>
+    <label class="toggle">
+      <input type="checkbox" id="dj-toggle">
+      <span>Load DJ&#x27;s (+<span id="dj-resolved-count">0</span>, ~<span id="dj-pending-count">0</span> more loading)</span>
+    </label>
+    <div class="count"><b id="count-now">0</b> / <span id="count-total">0</span></div>
+  </div>
+
+  <!-- Mobile-only notice that appears once the iframe confirms it's
+       in 30-sec preview mode (the only mode mobile gets). Mentions
+       desktop as the path to full-length playback so users know there's
+       a better experience available without us being pushy about it. -->
+  <p class="mobile-preview-notice" id="mobile-preview-notice">Spotify only allows samples on mobile · better on desktop</p>
+
+  <!-- Play-stall notice. Hidden until JS adds body.play-stalled — happens
+       when a play/skip attempt produces no playback_update from the
+       Spotify iframe within a few seconds. Most common cause: the
+       visitor is already playing audio on another Spotify Connect
+       device. -->
+  <p class="play-stall-notice" id="play-stall-notice" role="status" aria-live="polite">
+    <b>No audio.</b> Spotify didn't start playback —
+    if you're listening on another device (phone, desktop app),
+    pause it there or
+    <a href="https://open.spotify.com" target="_blank" rel="noopener">open this playlist in Spotify ↗</a>.
+    <button type="button" class="play-stall-dismiss" id="play-stall-dismiss" aria-label="Dismiss notice">Dismiss</button>
+  </p>
+
+  <table class="tbl">
+    <colgroup>
+      <col class="c-play"><col class="c-primary">
+      <col class="c-venue"><col class="c-date">
+    </colgroup>
+    <thead>
+      <tr>
+        <th></th>
+        <th data-sort="artist"><span class="th-desktop">Artist / Track</span><span class="th-mobile">Artist / Track / Venue</span> <span class="caret"></span><button type="button" class="th-mobile-date-btn" data-sort="date">Date <span class="caret"></span></button></th>
+        <th data-sort="venue">Venue <span class="caret"></span></th>
+        <th data-sort="date" class="sort-asc">Date <span class="caret"></span></th>
+      </tr>
+    </thead>
+    <tbody id="track-rows">
+<tr class="row-empty"><td colspan="4"><div class="empty-headline">No upcoming Miami shows in this window yet.</div><div class="empty-sub">The scraper checks daily — once new dates publish, they'll appear here automatically. Bookmark this page or check back soon.</div></td></tr>
+    </tbody>
+  </table>
+
+</div><!-- /.shell -->
+
+<div class="player" role="region" aria-label="Player">
+  <div class="player-inner">
+    <button class="skip" id="btn-prev" aria-label="Previous track">
+      <svg viewBox="0 0 24 24"><path d="M19 20L9 12l10-8v16zM5 4h2v16H5z"/></svg>
+    </button>
+    <!-- Mobile mini-player UI: shown only on phone-class viewports.
+         Audio still plays from the (hidden) Spotify iframe via the
+         IFrame API; this UI is just visual + tap-to-toggle. If audio
+         doesn't actually start within ~5s of the first play, JS adds
+         the .audio-fallback class to <body> which reveals the iframe
+         and hides this mini-player. -->
+    <div class="mini-player" id="mini-player">
+      <div class="mini-art" id="mini-art"></div>
+      <div class="mini-text">
+        <div class="mini-track" id="mini-track">Tap a row to start</div>
+        <div class="mini-artist" id="mini-artist"></div>
+        <a class="mini-spotify-link" id="mini-spotify-link"
+           href="https://open.spotify.com"
+           target="_blank" rel="noopener">Open in Spotify ↗</a>
+      </div>
+      <button class="mini-toggle" id="mini-toggle" aria-label="Play / Pause">
+        <svg class="ico-play" viewBox="0 0 14 14"><path d="M3 1l10 6-10 6z"/></svg>
+        <svg class="ico-pause" viewBox="0 0 14 14">
+          <rect x="3" y="2" width="3" height="10"/><rect x="8" y="2" width="3" height="10"/>
+        </svg>
+      </button>
+    </div>
+    <div class="player-embed"><div id="spotify-embed"></div></div>
+    <button class="skip" id="btn-next" aria-label="Next track">
+      <svg viewBox="0 0 24 24"><path d="M5 4l10 8-10 8V4zM17 4h2v16h-2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+<script>
+const rowsContainer = document.getElementById('track-rows');
+const rows = Array.from(rowsContainer.querySelectorAll('tr'));
+const playButtons = Array.from(document.querySelectorAll('.play'));
+const countNow = document.getElementById('count-now');
+const countTotal = document.getElementById('count-total');
+countTotal.textContent = rows.length;
+countNow.textContent = rows.length;
+// Schedule the first counts recomputation once the rest of init is done
+// (recomputeCounts is defined further down).
+queueMicrotask(() => { try { recomputeCounts(); } catch (e) {} });
+
+// =====================================================================
+// CLIENT-SIDE ROLLING WINDOW
+// The HTML ships every row inside the cache window (3 calendar months
+// for sfoak). The user only ever sees the display window (2 calendar
+// months). At local midnight the window slides forward: the day that
+// just ended drops out, the day on the far edge of the display window
+// appears from the buffered third month. No server rebuild required
+// for the rollover, so the page keeps "updating daily" even on days
+// the build pipeline didn't run. DISPLAY_MONTHS takes priority;
+// DISPLAY_DAYS is the fallback for legacy day-based configs.
+// =====================================================================
+const DISPLAY_DAYS = 0;
+const DISPLAY_MONTHS = 2;
+const ROLLING_ENABLED = DISPLAY_DAYS > 0 || DISPLAY_MONTHS > 0;
+const eyebrowTimeEl = document.querySelector('details.ah-time-menu > summary > time');
+function _isoFromLocal(d) {
+  return d.getFullYear() + '-' +
+         String(d.getMonth() + 1).padStart(2, '0') + '-' +
+         String(d.getDate()).padStart(2, '0');
+}
+function _todayIsoLocal() { return _isoFromLocal(new Date()); }
+function _isoPlusDays(iso, days) {
+  const d = new Date(iso + 'T00:00:00');   // local midnight, not UTC
+  d.setDate(d.getDate() + days);
+  return _isoFromLocal(d);
+}
+function _isoPlusMonths(iso, months) {
+  // "today + N calendar months" with day-clamping: May 31 + 1 month →
+  // June 30 (June has 30 days), not July 1. Mirrors python's
+  // config.add_months so server + client agree on the boundary.
+  const d = new Date(iso + 'T00:00:00');
+  const targetMonth = d.getMonth() + months;
+  const firstOfTarget = new Date(d.getFullYear(), targetMonth, 1);
+  const lastDayOfTarget = new Date(firstOfTarget.getFullYear(),
+                                    firstOfTarget.getMonth() + 1, 0).getDate();
+  firstOfTarget.setDate(Math.min(d.getDate(), lastDayOfTarget));
+  return _isoFromLocal(firstOfTarget);
+}
+function _displayEndIso(startIso) {
+  if (DISPLAY_MONTHS > 0) return _isoPlusMonths(startIso, DISPLAY_MONTHS);
+  if (DISPLAY_DAYS > 0)   return _isoPlusDays(startIso, DISPLAY_DAYS);
+  return startIso;
+}
+function _humanShort(iso) {
+  const d = new Date(iso + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: '2-digit' });
+}
+// '0000-01-01'/'9999-12-31' bounds when rolling is off so applyFilter's
+// inWindow check is a no-op for fixed-month snapshot pages.
+let displayWindowStart = ROLLING_ENABLED ? _todayIsoLocal() : '0000-01-01';
+let displayWindowEnd   = ROLLING_ENABLED ? _displayEndIso(displayWindowStart) : '9999-12-31';
+function updateDisplayWindow() {
+  if (!ROLLING_ENABLED) return;
+  displayWindowStart = _todayIsoLocal();
+  displayWindowEnd   = _displayEndIso(displayWindowStart);
+  if (eyebrowTimeEl) {
+    const endYear = new Date(displayWindowEnd + 'T00:00:00').getFullYear();
+    eyebrowTimeEl.textContent =
+      _humanShort(displayWindowStart) + ' → ' +
+      _humanShort(displayWindowEnd) + ', ' + endYear;
+    eyebrowTimeEl.setAttribute('datetime',
+      displayWindowStart + '/' + displayWindowEnd);
+  }
+}
+updateDisplayWindow();
+function _msUntilNextLocalMidnight() {
+  const now = new Date();
+  // 30s past midnight: small cushion so we don't fire on the same date
+  // the user opened the tab on if their clock is a hair fast.
+  const next = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1,
+                         0, 0, 30, 0);
+  return Math.max(60_000, next.getTime() - now.getTime());
+}
+function scheduleMidnightRollover() {
+  if (!ROLLING_ENABLED) return;
+  setTimeout(() => {
+    updateDisplayWindow();
+    if (typeof applyFilter === 'function') applyFilter();
+    if (typeof refreshSkipState === 'function') refreshSkipState();
+    scheduleMidnightRollover();
+  }, _msUntilNextLocalMidnight());
+}
+scheduleMidnightRollover();
+
+const filt = document.getElementById('filter');
+// Multi-select venue state. Empty Set = "All venues" (no filter).
+const selectedVenues = new Set();
+
+// Recompute the page's running totals so they always match what the
+// user actually sees. The top stats (Tracks/Artists/Venues) and the
+// "N / total" denominator only count rows that are NOT hidden by:
+//   (a) the "Load DJs" toggle being off (DJ-only rows hidden by CSS), or
+//   (b) the search/venue filter setting `.hidden` on rows.
+// The +N / ~M toggle counter still tracks the DJ-resolution lifecycle
+// (resolved-but-collapsed vs unresolved-pending-worker).
+const INITIAL_PENDING_EDM = 0;
+function recomputeCounts() {
+  const showDjs = document.getElementById('dj-toggle').checked;
+  let totalTracks = 0;
+  const venues = new Set();
+  let djResolvedTotal = 0;
+  let visibleArtists = 0;
+  rows.forEach(r => {
+    const isDj = r.dataset.djOnly === '1';
+    if (isDj) djResolvedTotal++;
+    // Hidden by DJ toggle?
+    if (isDj && !showDjs) return;
+    // Hidden by search/venue filter?
+    if (r.classList.contains('hidden')) return;
+    visibleArtists++;
+    totalTracks += parseInt(r.dataset.nTracks || '1', 10) || 1;
+    if (r.dataset.venue) venues.add(r.dataset.venue);
+  });
+  const elTracks  = document.getElementById('stat-tracks');
+  const elArtists = document.getElementById('stat-artists');
+  const elVenues  = document.getElementById('stat-venues');
+  if (elTracks)  elTracks.textContent  = totalTracks;
+  if (elArtists) elArtists.textContent = visibleArtists;
+  if (elVenues)  elVenues.textContent  = venues.size;
+  const elDjRes = document.getElementById('dj-resolved-count');
+  const elDjPen = document.getElementById('dj-pending-count');
+  if (elDjRes) elDjRes.textContent = djResolvedTotal;
+  if (elDjPen) {
+    const newlyAdded = Math.max(0, djResolvedTotal - 0);
+    elDjPen.textContent = Math.max(0, INITIAL_PENDING_EDM - newlyAdded);
+  }
+  // Denominator now reflects "rows the page is currently showing" —
+  // matches the visibleArtists count, so 'N / total' is honest.
+  countTotal.textContent = visibleArtists;
+}
+const venueMulti = document.getElementById('venue-multi');
+const venueTrigger = document.getElementById('venue-trigger');
+const venuePanel   = document.getElementById('venue-panel');
+const venueLabel   = venueTrigger.querySelector('.venue-trigger-label');
+const venueClear   = document.getElementById('venue-clear');
+
+function applyFilter() {
+  const q = filt.value.toLowerCase();
+  const showDjs = document.getElementById('dj-toggle').checked;
+  let n = 0;
+  rows.forEach(r => {
+    if (r.dataset.djOnly === '1' && !showDjs) {
+      r.classList.add('hidden');
+      return;
+    }
+    // Filter haystack: artist + venue + every track name in the row.
+    // Reading innerText alone misses tracks 1+ since they're hidden in
+    // a data-attr; the data-tracks attribute carries all 3 names.
+    let matchesText = !q;
+    if (q) {
+      const haystack = (r.dataset.artist || '') + ' '
+                    + (r.dataset.venue || '').toLowerCase() + ' '
+                    + (r.dataset.tracks || '');
+      matchesText = haystack.includes(q);
+    }
+    // Empty selectedVenues = no venue filter (i.e. "All venues").
+    const matchesVenue = selectedVenues.size === 0 || selectedVenues.has(r.dataset.venue);
+    // Display window: row's date must fall within [today, today+DISPLAY_DAYS].
+    // Past shows are always hidden; rows beyond the window are present in
+    // the DOM but kept out of view until their day rolls around.
+    const dateIso = r.dataset.date || '';
+    const inWindow = !dateIso || (dateIso >= displayWindowStart && dateIso <= displayWindowEnd);
+    const visible = matchesText && matchesVenue && inWindow;
+    r.classList.toggle('hidden', !visible);
+    if (visible) n++;
+  });
+  countNow.textContent = n;
+  // Recompute top stats too — they should always reflect what the
+  // user is currently seeing, not what's in the DOM.
+  if (typeof recomputeCounts === 'function') recomputeCounts();
+}
+filt.addEventListener('input', applyFilter);
+
+// Multi-select venue dropdown plumbing.
+function updateVenueLabel() {
+  if (selectedVenues.size === 0) {
+    venueLabel.textContent = 'All venues';
+    venueMulti.classList.remove('has-selection');
+  } else if (selectedVenues.size === 1) {
+    venueLabel.textContent = [...selectedVenues][0];
+    venueMulti.classList.add('has-selection');
+  } else {
+    venueLabel.textContent = selectedVenues.size + ' venues';
+    venueMulti.classList.add('has-selection');
+  }
+}
+
+venueTrigger.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const open = !venuePanel.hasAttribute('hidden');
+  if (open) {
+    venuePanel.setAttribute('hidden', '');
+    venueTrigger.setAttribute('aria-expanded', 'false');
+  } else {
+    venuePanel.removeAttribute('hidden');
+    venueTrigger.setAttribute('aria-expanded', 'true');
+  }
+});
+// Clicking outside the dropdown closes it.
+document.addEventListener('click', (e) => {
+  if (e.target.closest('.venue-multi')) return;
+  venuePanel.setAttribute('hidden', '');
+  venueTrigger.setAttribute('aria-expanded', 'false');
+});
+// Each checkbox toggle updates the set + re-runs the filter.
+venuePanel.addEventListener('change', (e) => {
+  const cb = e.target.closest('input[type="checkbox"]');
+  if (!cb) return;
+  if (cb.checked) selectedVenues.add(cb.value);
+  else selectedVenues.delete(cb.value);
+  updateVenueLabel();
+  applyFilter();
+  refreshSkipState();
+});
+// "Clear all" chip — wipe selection and resync UI.
+venueClear.addEventListener('click', (e) => {
+  e.stopPropagation();
+  selectedVenues.clear();
+  venuePanel.querySelectorAll('input[type="checkbox"]').forEach(cb => { cb.checked = false; });
+  updateVenueLabel();
+  applyFilter();
+  refreshSkipState();
+});
+
+const djToggle = document.getElementById('dj-toggle');
+const tableEl = document.querySelector('.tbl');
+djToggle.addEventListener('change', () => {
+  tableEl.classList.toggle('show-djs', djToggle.checked);
+  applyFilter();
+  if (djToggle.checked) loadMoreEdmFromWorker();
+});
+// Run once on load so the count reflects the DJ-only rows that are
+// CSS-hidden by default (otherwise initial display reads NNN/NNN).
+applyFilter();
+
+// =====================================================================
+// LIVE SEARCH via Cloudflare Worker
+// When "More EDM" is checked, batch-resolve the unresolved EDM artists
+// against Spotify (via the Worker, which holds our app credentials and
+// runs from Cloudflare's edge -- our server never touches Spotify).
+// Each resolved artist appears as a new playable row.
+// =====================================================================
+const WORKER_URL = null;
+const UNRESOLVED_EDM = [];
+const LIVE_LS_KEY = 'sfo-live-';      // localStorage cache for live results
+let edmLoadTriggered = false;
+
+async function workerSearch(artist) {
+  // No worker configured for this page → live resolve is a no-op.
+  if (!WORKER_URL) return null;
+  const cached = localStorage.getItem(LIVE_LS_KEY + artist);
+  if (cached) {
+    try { return JSON.parse(cached); } catch {}
+  }
+  try {
+    const r = await fetch(WORKER_URL + '/api/search', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ artist }),
+    });
+    if (!r.ok) return null;
+    const data = await r.json();
+    localStorage.setItem(LIVE_LS_KEY + artist, JSON.stringify(data));
+    return data;
+  } catch { return null; }
+}
+
+function makeRow(artist, tracks, edmMeta) {
+  // Build ONE <tr> for a freshly-resolved artist with up to 3 tracks
+  // (matching the new server-rendered row model). The previous code
+  // emitted N rows per artist; this one matches the consolidated layout.
+  const frag = document.createDocumentFragment();
+  const top = (tracks || []).slice(0, 3);
+  if (!top.length) return frag;
+
+  const uris      = top.map(t => t.uri);
+  const trackIds  = uris.map(u => u.split(':').pop());
+  const thumbs    = top.map(t => t.thumb || '');
+  const names     = top.map(t => (t.name || '').toLowerCase());
+  const tr = document.createElement('tr');
+  tr.className = 'row';
+  tr.dataset.djOnly = '1';
+  tr.dataset.uri = uris[0];
+  tr.dataset.uris = uris.join(',');
+  tr.dataset.trackIds = trackIds.join(',');
+  tr.dataset.thumbs = thumbs.join(',');
+  tr.dataset.tracks = names.join('|');
+  tr.dataset.nTracks = String(top.length);
+  tr.dataset.artist = artist.toLowerCase();
+  tr.dataset.venue = `${edmMeta.venue} (${edmMeta.city})`;
+  tr.dataset.venueSort = edmMeta.venue.toLowerCase();
+  tr.dataset.date = edmMeta.date;
+  tr.dataset.num = '';
+
+  // Day-of-week pill split (same as server-side rows).
+  const _dateRaw = edmMeta.date_human || '';
+  const _spIdx = _dateRaw.indexOf(' ');
+  const _dateHtml = _spIdx > 0
+    ? `<span class="t-dow">${escapeHtml(_dateRaw.slice(0, _spIdx))}</span> ${escapeHtml(_dateRaw.slice(_spIdx + 1))}`
+    : escapeHtml(_dateRaw);
+
+  const firstTrackName = top[0].name || '';
+  tr.innerHTML = `
+    <td class="play-cell">
+      <div class="play-controls">
+        <button class="row-skip back" aria-label="Previous track" tabindex="-1">
+          <svg><use href="#i-skip-back"/></svg>
+        </button>
+        <div class="play-stack">
+          <button class="play" aria-label="Play tracks for ${escapeHtml(artist)}">
+            <svg class="ico-play"><use href="#i-play"/></svg>
+            <svg class="ico-pause"><use href="#i-pause"/></svg>
+          </button>
+          <span class="row-progress" aria-hidden="true">1/${top.length}</span>
+        </div>
+        <button class="row-skip fwd" aria-label="Next track" tabindex="-1">
+          <svg><use href="#i-skip-fwd"/></svg>
+        </button>
+      </div>
+    </td>
+    <td class="t-primary-cell">
+      <div class="primary-line">
+        <span class="primary-artist">${escapeHtml(artist)}</span>
+        <span class="primary-date">${_dateHtml}</span>
+      </div>
+      <span class="primary-track">${escapeHtml(firstTrackName)}</span>
+      <span class="primary-venue">
+        <span class="vname">${escapeHtml(edmMeta.venue)}</span>
+        <span class="city">(${escapeHtml(edmMeta.city)})</span>
+      </span>
+    </td>
+    <td class="t-venue">
+      <span class="vname">${escapeHtml(edmMeta.venue)}</span>
+      <span class="city">(${escapeHtml(edmMeta.city)})</span>
+    </td>
+    <td class="t-date">${_dateHtml}</td>`;
+  // Seed TRACK_NAMES so updateRowState() can render the active track.
+  uris.forEach((u, i) => { if (top[i].name) TRACK_NAMES[u] = top[i].name; });
+  frag.appendChild(tr);
+  return frag;
+}
+
+function escapeHtml(s) {
+  return (s || '').replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  })[c]);
+}
+
+async function loadMoreEdmFromWorker() {
+  if (edmLoadTriggered) return;
+  edmLoadTriggered = true;
+  if (!WORKER_URL) return;
+  if (!UNRESOLVED_EDM.length) return;
+  const tbody = document.getElementById('track-rows');
+  // Resolve in chunks of 5 in parallel so progress is visible
+  const CHUNK = 5;
+  for (let i = 0; i < UNRESOLVED_EDM.length; i += CHUNK) {
+    const chunk = UNRESOLVED_EDM.slice(i, i + CHUNK);
+    const results = await Promise.all(chunk.map(meta => workerSearch(meta.artist).then(d => [meta, d])));
+    for (const [meta, data] of results) {
+      if (!data || !data.tracks || !data.tracks.length) continue;
+      const newRows = makeRow(meta.artist, data.tracks, meta);
+      // Wire play buttons on the new rows so the existing player picks
+      // them up. Worker-resolved rows use the same one-row-per-artist
+      // shape, so they share the rowClickHandler logic.
+      newRows.querySelectorAll('.play').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const tr = btn.closest('tr');
+          rowClickHandler(tr);
+        });
+      });
+      tbody.appendChild(newRows);
+      // The dropdown is server-rendered from venues with at least one row.
+      // Worker-resolved DJ rows can introduce new venues; add them on the fly
+      // so the venue filter can target them.
+      ensureVenueOption(`${meta.venue} (${meta.city})`);
+    }
+    // Refresh the rows array BEFORE applyFilter so the new DJ rows actually
+    // get filtered. (Previously applyFilter ran against the stale array, so
+    // any active venue filter was effectively bypassed for new rows.)
+    rows.length = 0;
+    document.querySelectorAll('#track-rows tr').forEach(r => rows.push(r));
+    // Cache .row-progress on the freshly-added rows so updateRowState()
+    // doesn't pay a querySelector each tick on them.
+    rows.forEach(r => { if (!r._cachedProgress) r._cachedProgress = r.querySelector('.row-progress'); });
+    recomputeCounts();
+    applyFilter();
+  }
+}
+
+function ensureVenueOption(value) {
+  // Worker-resolved DJ rows can introduce new venues at runtime. Insert
+  // a fresh <label>+<checkbox> into the multi-select panel, alphabetized
+  // among the existing rows (skipping the .venue-clear chip at index 0).
+  const panel = document.getElementById('venue-panel');
+  const existing = panel.querySelectorAll('.venue-option');
+  for (const lbl of existing) {
+    const cb = lbl.querySelector('input[type="checkbox"]');
+    if (cb && cb.value === value) return;
+  }
+  const label = document.createElement('label');
+  label.className = 'venue-option';
+  const safe = value.replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  label.innerHTML = `<input type="checkbox" value="${safe}"><span>${safe}</span>`;
+  // Insert alphabetically among existing .venue-option labels.
+  let inserted = false;
+  for (const lbl of existing) {
+    const v = lbl.querySelector('input').value;
+    if (value.localeCompare(v) < 0) {
+      panel.insertBefore(label, lbl);
+      inserted = true;
+      break;
+    }
+  }
+  if (!inserted) panel.appendChild(label);
+}
+
+// Sortable columns. Click toggles asc -> desc -> off (back to the
+// initial date-asc render). Python pre-sorts rows by date ascending,
+// so sortState mirrors that — keeps the caret + cycle in agreement.
+const tbody = rowsContainer;
+const originalOrder = rows.slice();
+let sortState = { key: 'date', dir: 1 };
+function sortBy(key) {
+  let dir;
+  if (sortState.key === key) {
+    dir = sortState.dir === 1 ? -1 : (sortState.dir === -1 ? 0 : 1);
+  } else {
+    dir = 1;
+  }
+  sortState = { key, dir };
+  // [data-sort] (not th[data-sort]) so the mobile Date button inside the
+  // artist <th> updates its own caret independently of the th's caret.
+  document.querySelectorAll('.tbl thead [data-sort]').forEach(el => {
+    el.classList.remove('sort-asc', 'sort-desc');
+    if (el.dataset.sort === key && dir !== 0) {
+      el.classList.add(dir === 1 ? 'sort-asc' : 'sort-desc');
+    }
+  });
+  let order;
+  if (dir === 0) {
+    order = originalOrder;
+  } else {
+    const attr = {
+      artist: 'artist', venue: 'venueSort', date: 'date',
+    }[key];
+    if (!attr) return;  // unknown sort key (legacy 'track' header is gone)
+    order = rows.slice().sort((a, b) => {
+      let av = a.dataset[attr] || '';
+      let bv = b.dataset[attr] || '';
+      if (av < bv) return -dir;
+      if (av > bv) return dir;
+      return 0;
+    });
+  }
+  const frag = document.createDocumentFragment();
+  order.forEach(r => frag.appendChild(r));
+  tbody.appendChild(frag);
+}
+document.querySelectorAll('th[data-sort]').forEach(th => {
+  th.addEventListener('click', () => sortBy(th.dataset.sort));
+});
+// Mobile-only Date button lives inside the artist <th>, so its click
+// would bubble to the th's listener (sorting by artist) without
+// stopPropagation. Bind separately and stop the bubble.
+const _mobileDateBtn = document.querySelector('.th-mobile-date-btn');
+if (_mobileDateBtn) {
+  _mobileDateBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    sortBy(_mobileDateBtn.dataset.sort);
+  });
+}
+
+// Spotify iFrame API. loadUri() swaps tracks but does not auto-play; we
+// follow with play() (or resume() on newer SDK builds). Browser autoplay
+// policy blocks programmatic play() until the user has interacted with the
+// embed once -- press the embed's play button once, then row clicks work.
+let embedController = null;
+let currentRow = null;       // DOM <tr> being played, or null
+let currentTrackIdx = 0;     // 0/1/2 — which of the row's tracks is loaded
+let currentUri = null;       // mirrors currentRow.dataset.uris[currentTrackIdx]
+let isPaused = true;
+let currentPositionMs = 0;
+let lastDurationMs = 0;      // last reported track duration (preview ≈ 30000)
+let lastEndedUri = null;     // guards auto-advance from re-firing on the same URI
+let lastPlaybackUpdateAt = 0; // ms timestamp of most recent playback_update event
+const queuedUri = { value: null };
+
+// Play-stall detection. Each time the user taps play or skip, we arm
+// a one-shot timer; if no "actually playing" playback_update arrives
+// within PLAY_STALL_MS, we surface a notice. Cleared by either a
+// real play tick (position advancing while !isPaused) or by the user
+// dismissing the notice. This catches the common case where the
+// visitor is already playing Spotify on another device, so Connect
+// silently rejects our embed's play() and no update ever fires.
+const PLAY_STALL_MS = 3500;
+let playStallTimer = null;
+let playStallDismissedAt = 0;     // ms; suppresses re-show for 60s after dismiss
+function armPlayStallCheck() {
+  if (playStallTimer) { clearTimeout(playStallTimer); }
+  const armedFor = currentUri;
+  playStallTimer = setTimeout(() => {
+    playStallTimer = null;
+    if (!currentUri || currentUri !== armedFor) return;          // moved on
+    if (Date.now() - playStallDismissedAt < 60_000) return;      // recently dismissed
+    const tickedRecently = lastPlaybackUpdateAt
+      && (Date.now() - lastPlaybackUpdateAt) < 2000;
+    const reallyPlaying = !isPaused && tickedRecently && currentPositionMs > 0;
+    if (reallyPlaying) return;
+    document.body.classList.add('play-stalled');
+    console.warn('[player] play stalled: no playback after',
+                 PLAY_STALL_MS, 'ms — likely Spotify Connect conflict.');
+  }, PLAY_STALL_MS);
+}
+function clearPlayStallCheck() {
+  if (playStallTimer) { clearTimeout(playStallTimer); playStallTimer = null; }
+  document.body.classList.remove('play-stalled');
+}
+
+const TRACK_TINTS = {};
+const PLAYLIST_ID = '';
+// Track-name cache: uri -> name. Populated from server-side meta and
+// the oEmbed enrichment path. Used when updating the .primary-track
+// display as the active track changes.
+const TRACK_NAMES = {};
+
+// Helpers to read multi-track row attributes.
+function rowUris(row)     { return (row.dataset.uris || '').split(',').filter(Boolean); }
+function rowTrackIds(row) { return (row.dataset.trackIds || '').split(',').filter(Boolean); }
+function rowThumbs(row)   { return (row.dataset.thumbs || '').split(',').map(s => s.trim()); }
+function rowTrackNames(row) { return (row.dataset.tracks || '').split('|'); }
+function rowNumTracks(row) { return parseInt(row.dataset.nTracks || '1', 10) || 1; }
+
+// =====================================================================
+// CLIENT-SIDE METADATA ENRICHMENT
+// Server-side oEmbed gets rate-limited under bulk fetch. Each visitor
+// fetching only what they look at distributes the load across many IPs;
+// localStorage avoids re-fetching across visits.
+// =====================================================================
+const LS_KEY_PREFIX = 'sfo-tm-';   // localStorage cache key per track
+const TINT_PALETTE_FALLBACK = 'oklch(70% 0.18 145)'; // Spotify green
+
+function lsGet(trackId) {
+  try { return JSON.parse(localStorage.getItem(LS_KEY_PREFIX + trackId) || 'null'); }
+  catch { return null; }
+}
+function lsSet(trackId, obj) {
+  try { localStorage.setItem(LS_KEY_PREFIX + trackId, JSON.stringify(obj)); } catch {}
+}
+
+async function fetchOembed(trackId) {
+  try {
+    const url = `https://open.spotify.com/oembed?url=https://open.spotify.com/track/${trackId}`;
+    const r = await fetch(url);
+    if (!r.ok) return null;
+    const d = await r.json();
+    return { name: d.title || '', thumb: d.thumbnail_url || '' };
+  } catch { return null; }
+}
+
+function extractTintFromImage(imgUrl) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onerror = () => resolve('');
+    img.onload = () => {
+      try {
+        const c = document.createElement('canvas');
+        c.width = c.height = 32;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0, 32, 32);
+        const data = ctx.getImageData(0, 0, 32, 32).data;
+        let bestR = 0, bestG = 0, bestB = 0, bestScore = -1;
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i], g = data[i+1], b = data[i+2];
+          const avg = (r + g + b) / 3;
+          if (avg < 30 || avg > 225) continue;
+          const spread = Math.max(r,g,b) - Math.min(r,g,b);
+          if (spread < 25) continue;
+          if (spread > bestScore) { bestScore = spread; bestR=r; bestG=g; bestB=b; }
+        }
+        if (bestScore < 0) resolve('');
+        else resolve(`rgb(${bestR},${bestG},${bestB})`);
+      } catch { resolve(''); }
+    };
+    img.src = imgUrl;
+  });
+}
+
+// Seed TRACK_NAMES from server-rendered names so the active-track
+// display has something to show before any oEmbed fetch resolves.
+rows.forEach(row => {
+  const uris  = rowUris(row);
+  const names = rowTrackNames(row);
+  uris.forEach((u, i) => {
+    if (names[i]) TRACK_NAMES[u] = names[i];
+  });
+});
+
+// Re-evaluated each enrichment so a desktop user resizing narrow
+// gets the same lighter behavior as a phone.
+const isMobileNow = () => window.matchMedia('(max-width: 900px)').matches;
+
+// Enrich a single track (oEmbed → name + thumb → tint extraction).
+// Multi-track rows enrich track 0 lazily via the queue below; tracks
+// 1+ get enriched on-demand when the user skips into them.
+//
+// Mobile perf: skip the Canvas+crossOrigin tint extraction entirely
+// on phone-class viewports. The decode + getImageData loop is the
+// single biggest source of main-thread jank during the play tap; the
+// page falls back to the static Spotify-green tint and looks fine.
+async function enrichTrack(uri, trackId, isPrimary, row) {
+  if (!trackId) return;
+  const lsKey = trackId;
+  let cached = lsGet(lsKey);
+  let needsName = !TRACK_NAMES[uri];
+  let needsTint = !isMobileNow() && !TRACK_TINTS[uri];
+
+  if (cached) {
+    if (needsName && cached.name)  { TRACK_NAMES[uri] = cached.name; }
+    if (needsTint && cached.tint)  TRACK_TINTS[uri] = cached.tint;
+    needsName = needsName && !cached.name;
+    needsTint = needsTint && !cached.tint;
+  }
+
+  let thumb = '';
+  if (needsName || needsTint) {
+    const data = await fetchOembed(trackId);
+    if (data) {
+      cached = cached || {};
+      if (data.name)  { cached.name  = data.name;  TRACK_NAMES[uri] = data.name; }
+      if (data.thumb) { cached.thumb = data.thumb; thumb = data.thumb; }
+      lsSet(lsKey, cached);
+    }
+  }
+  if (cached && cached.thumb) thumb = cached.thumb;
+
+  if (needsTint && thumb) {
+    const tint = await extractTintFromImage(thumb);
+    if (tint) {
+      TRACK_TINTS[uri] = tint;
+      cached = cached || {};
+      cached.tint = tint;
+      lsSet(lsKey, cached);
+    }
+  }
+
+  if (isPrimary && row && TRACK_NAMES[uri]) {
+    paintPrimaryTrack(row, TRACK_NAMES[uri]);
+  }
+  if (uri === currentUri) {
+    updateRowState();
+  }
+}
+
+function paintPrimaryTrack(row, name) {
+  const span = row.querySelector('.primary-track');
+  if (span) span.textContent = name;
+}
+
+// Concurrency-capped enrichment queue. Without this, the
+// IntersectionObserver fires for every visible row at startup and we
+// run 8-12 simultaneous fetches + Canvas reads — exactly during the
+// window where the user is most likely to tap play. Cap to MAX in
+// flight so the main thread stays responsive.
+const MAX_ENRICH_CONCURRENT = 2;
+const ENRICH_QUEUE = [];
+let   ENRICH_ACTIVE  = 0;
+function queueEnrich(uri, trackId, isPrimary, row) {
+  if (!uri || !trackId) return;
+  ENRICH_QUEUE.push([uri, trackId, isPrimary, row]);
+  drainEnrichQueue();
+}
+function drainEnrichQueue() {
+  while (ENRICH_ACTIVE < MAX_ENRICH_CONCURRENT && ENRICH_QUEUE.length) {
+    const [uri, trackId, isPrimary, row] = ENRICH_QUEUE.shift();
+    ENRICH_ACTIVE++;
+    enrichTrack(uri, trackId, isPrimary, row).finally(() => {
+      ENRICH_ACTIVE--;
+      drainEnrichQueue();
+    });
+  }
+}
+
+// Defer initial lazy enrichment so the first paint completes uninterrupted.
+// Without the delay the IntersectionObserver wakes during initial layout
+// and queues a wave of enrichments right when the user is most likely
+// tapping play. 600ms gives the page time to settle.
+function startLazyEnrichment() {
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const row = e.target;
+        const uris = rowUris(row);
+        const ids  = rowTrackIds(row);
+        queueEnrich(uris[0], ids[0], true, row);
+      });
+    }, { rootMargin: '600px' });
+    rows.forEach(r => io.observe(r));
+  } else {
+    rows.forEach((r) => {
+      const uris = rowUris(r);
+      const ids  = rowTrackIds(r);
+      queueEnrich(uris[0], ids[0], true, r);
+    });
+  }
+}
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(startLazyEnrichment, { timeout: 1500 });
+} else {
+  setTimeout(startLazyEnrichment, 600);
+}
+// Cache the .row-progress span on each row at init so updateRowState
+// doesn't pay a querySelector per row per state change. This + the
+// prevActiveRow optimization below takes per-tap work from O(n) to O(1).
+rows.forEach(r => {
+  r._cachedProgress = r.querySelector('.row-progress');
+});
+
+let prevActiveRow = null;
+let lastUpdateState = '';
+
+function updateRowState() {
+  // Guard: skip if nothing visibly changed. playback_update fires
+  // multiple times per second; without this we'd thrash the DOM.
+  const stateKey = (currentRow ? currentRow.dataset.uri : '')
+                 + '|' + currentTrackIdx + '|' + (isPaused ? '1' : '0');
+  if (stateKey === lastUpdateState) {
+    if (typeof refreshSkipState === 'function') refreshSkipState();
+    return;
+  }
+  lastUpdateState = stateKey;
+
+  // Demote previous active row (if any and different).
+  if (prevActiveRow && prevActiveRow !== currentRow) {
+    prevActiveRow.classList.remove('np', 'playing');
+    const pProg = prevActiveRow._cachedProgress;
+    if (pProg) {
+      const n = parseInt(prevActiveRow.dataset.nTracks || '1', 10) || 1;
+      pProg.textContent = '1/' + n;
+    }
+  }
+  // Promote current row.
+  if (currentRow) {
+    currentRow.classList.add('np');
+    currentRow.classList.toggle('playing', !isPaused);
+    const cProg = currentRow._cachedProgress;
+    if (cProg) {
+      const n = parseInt(currentRow.dataset.nTracks || '1', 10) || 1;
+      cProg.textContent = (currentTrackIdx + 1) + '/' + n;
+    }
+    if (currentUri) {
+      const name = TRACK_NAMES[currentUri];
+      if (name) paintPrimaryTrack(currentRow, name);
+    }
+  }
+  prevActiveRow = currentRow;
+
+  // --track-tint follows the active URI.
+  const tint = currentUri && TRACK_TINTS[currentUri];
+  if (tint) document.documentElement.style.setProperty('--track-tint', tint);
+  else      document.documentElement.style.removeProperty('--track-tint');
+  // Mobile mini-player sync.
+  document.body.classList.toggle('is-playing', !isPaused && currentUri != null);
+  syncMiniPlayer();
+  // Push current track to Media Session + acquire/release wake lock.
+  // Both help keep auto-advance alive when the phone is locked or the
+  // tab is backgrounded (iOS Safari otherwise suspends JS, which kills
+  // our queue-progression).
+  if (typeof _updateMediaSessionMetadata === 'function') _updateMediaSessionMetadata();
+  if (typeof _syncWakeLock === 'function') _syncWakeLock();
+  if (typeof refreshSkipState === 'function') refreshSkipState();
+}
+
+// Mobile mini-player display state. Reads from currentRow + currentUri
+// + TRACK_NAMES + the row's data-thumbs. Cheap; safe to call often.
+function syncMiniPlayer() {
+  const art    = document.getElementById('mini-art');
+  const trackEl  = document.getElementById('mini-track');
+  const artistEl = document.getElementById('mini-artist');
+  const linkEl   = document.getElementById('mini-spotify-link');
+  if (!art || !trackEl || !artistEl) return;
+  if (!currentRow) {
+    trackEl.textContent = 'Tap a row to start';
+    artistEl.textContent = '';
+    art.style.backgroundImage = '';
+    if (linkEl) linkEl.href = `https://open.spotify.com/playlist/${PLAYLIST_ID}`;
+    return;
+  }
+  const thumbs = (currentRow.dataset.thumbs || '').split(',');
+  const thumb = thumbs[currentTrackIdx] || thumbs[0] || '';
+  art.style.backgroundImage = thumb ? `url(${thumb})` : '';
+  const name = (currentUri && TRACK_NAMES[currentUri]) || '';
+  trackEl.textContent = name || '…';
+  // Artist is on the row's data-artist (lowercased) — pull the rendered
+  // form from the primary-artist span for proper casing.
+  const ren = currentRow.querySelector('.primary-artist');
+  artistEl.textContent = ren ? ren.textContent : (currentRow.dataset.artist || '');
+  // Hand-off link tracks the active URI so a tap drops the user into
+  // their Spotify app at the song they're previewing on the page.
+  if (linkEl) {
+    if (currentUri) {
+      const trackId = currentUri.split(':').pop();
+      linkEl.href = `https://open.spotify.com/track/${trackId}`;
+    } else {
+      linkEl.href = `https://open.spotify.com/playlist/${PLAYLIST_ID}`;
+    }
+  }
+}
+
+// Tracks whether the iframe has produced a playback_update event since
+// the first play attempt. Used by the mobile mini-player auto-fallback:
+// if no event arrives within ~5s of the first user-initiated play, the
+// iframe likely isn't audible (some browsers suspend audio in
+// display:none iframes), so we restore the visible iframe.
+let playbackEverReported = false;
+let firstPlayAttemptedAt = 0;
+function maybeArmFallback() {
+  if (firstPlayAttemptedAt) return;          // armed once, ever
+  firstPlayAttemptedAt = Date.now();
+  setTimeout(() => {
+    if (!playbackEverReported && document.body.matches(':not(.audio-fallback)')) {
+      // No playback_update fired — assume hidden iframe isn't producing
+      // audio on this device. Reveal the iframe; mini-player hides via
+      // the body.audio-fallback CSS rule.
+      document.body.classList.add('audio-fallback');
+      console.warn('[player] no playback signal in 5s; falling back to visible iframe.');
+    }
+  }, 5000);
+}
+
+// Load the row's track at trackIdx and start playing.
+function loadAndPlayRow(row, trackIdx) {
+  if (!row) return;
+  const uris = rowUris(row);
+  if (!uris.length) return;
+  trackIdx = Math.max(0, Math.min(trackIdx, uris.length - 1));
+  const uri = uris[trackIdx];
+  currentRow = row;
+  currentTrackIdx = trackIdx;
+  currentUri = uri;
+  // Eager preview-mode flag so the "samples only on mobile" notice
+  // appears the instant the user taps play — not ~500ms later when the
+  // iframe round-trips with duration metadata. Set whenever the
+  // viewport is mobile-sized; the iframe's playback_update either
+  // confirms (≤35s, leaves flag) or corrects (≥35s, clears it via the
+  // branch below). So a desktop user with a narrow window briefly
+  // sees the notice, then it disappears once the iframe reports full
+  // duration. Acceptable trade-off vs. the ~500ms delay for the actual
+  // mobile case the user experiences daily.
+  if (matchMedia('(max-width: 900px)').matches) {
+    document.body.classList.add('preview-mode');
+  }
+  // New URI loaded → reset the auto-advance guard so when this track
+  // ends naturally we'll advance again.
+  lastEndedUri = null;
+  // Reset position/duration state too. Any in-flight playback_update
+  // from the previous track that arrives after we've swapped currentUri
+  // would otherwise be attributed to the new URI, with stale near-end
+  // position values potentially re-triggering auto-advance immediately.
+  currentPositionMs = 0;
+  lastDurationMs = 0;
+  lastPlaybackUpdateAt = 0;
+  // Optimistic: assume playback starts. The first playback_update will
+  // either confirm (no-op) or correct us. This is what makes the play
+  // icon flip the instant the user taps, instead of after the iframe
+  // round-trips ~300ms later.
+  isPaused = false;
+  // Kick off enrichment for this track via the throttled queue. On
+  // mobile this is mostly a no-op (TRACK_NAMES is server-seeded, tint
+  // extraction is skipped) so it doesn't compete with the play tap.
+  const ids = rowTrackIds(row);
+  queueEnrich(uri, ids[trackIdx], trackIdx === 0, row);
+  updateRowState();
+  if (!embedController) {
+    queuedUri.value = uri;
+    return;
+  }
+  embedController.loadUri(uri);
+  maybeArmFallback();
+  // Arm the stall watcher: if no real playback_update arrives within
+  // PLAY_STALL_MS, surface a notice to the user. Clears the existing
+  // stall banner first since the user is making a fresh attempt.
+  document.body.classList.remove('play-stalled');
+  armPlayStallCheck();
+  // Defer play() until the iframe has had a chance to ingest the new
+  // URI. Calling play() in the same tick as loadUri() races the
+  // embed's internal load and reliably fails on the first track of
+  // the session — the user sees the row flip to "playing" but no
+  // audio starts. Same 250ms beat the queuedUri path uses for the
+  // controller-just-created case.
+  setTimeout(() => {
+    try { embedController.play(); } catch (e) {}
+    try { embedController.resume(); } catch (e) {}
+  }, 250);
+}
+
+function togglePlay() {
+  if (!embedController) return;
+  // Resuming from paused → arm the stall watcher in case Connect has
+  // since handed audio to another device. No-op when going *into*
+  // pause: the watcher's "really playing" check would clear quickly
+  // anyway, but skipping the arm avoids a 3.5s race where pausing
+  // briefly looks like a stall.
+  const wasPaused = isPaused;
+  try { embedController.togglePlay(); } catch (e) {}
+  if (wasPaused && currentUri) {
+    document.body.classList.remove('play-stalled');
+    armPlayStallCheck();
+  }
+}
+
+window.onSpotifyIframeApiReady = (IFrameAPI) => {
+  IFrameAPI.createController(
+    document.getElementById('spotify-embed'),
+    { uri: 'spotify:playlist:', width: '100%', height: 80 },
+    (controller) => {
+      embedController = controller;
+      controller.addListener('playback_update', (e) => {
+        if (!e || !e.data) return;
+        // First playback signal flips the fallback off — proves audio
+        // is actually flowing through the (hidden-on-mobile) iframe.
+        playbackEverReported = true;
+        lastPlaybackUpdateAt = Date.now();   // for the stall watcher below
+        const wasPlaying = !isPaused;
+        isPaused = !!e.data.isPaused;
+        const prevPos = currentPositionMs;
+        currentPositionMs = e.data.position || 0;
+        const duration = e.data.duration || 0;
+        if (duration > 0) lastDurationMs = duration;
+
+        // Real-playback signal clears the start-stall watcher. We require
+        // both !isPaused and position > 0 — Spotify Connect conflicts
+        // typically yield a single isPaused=true tick at position 0
+        // immediately after our play() call, which we want to treat as
+        // "still stalled."
+        if (!isPaused && currentPositionMs > 0) {
+          clearPlayStallCheck();
+        }
+
+        // Detect 30-second-preview mode (Spotify caps mobile playback).
+        // Eager-set was done in loadAndPlayRow; this confirms or
+        // corrects: if the iframe reports a full-length track, clear
+        // the eager flag so the notice doesn't show for users on
+        // desktop or in mobile-desktop-mode.
+        if (duration > 0 && duration < 35000) {
+          document.body.classList.add('preview-mode');
+        } else if (duration >= 35000) {
+          document.body.classList.remove('preview-mode');
+        }
+
+        // Auto-advance on natural track end. Triggers when:
+        //   - a track was playing,
+        //   - it just transitioned to paused,
+        //   - and we were near the end of the (preview or full) duration.
+        // Guarded by lastEndedUri so we don't loop on the same URI.
+        //
+        // Why two thresholds: full tracks reliably tick to within ~1s of
+        // duration before flipping isPaused, but 30-sec preview tracks
+        // sometimes pause with prevPos as low as ~27s — Spotify's iframe
+        // doesn't always emit a final tick at the cap. A 6s tolerance in
+        // preview mode catches those without misfiring on user-paused
+        // mid-track playback (people rarely pause inside the last 20% of
+        // a 30-sec preview intentionally).
+        const endTolerance = (duration > 0 && duration < 35000) ? 6000 : 1500;
+        if (wasPlaying && isPaused && duration > 0
+            && prevPos >= duration - endTolerance
+            && lastEndedUri !== currentUri
+            && currentUri) {
+          lastEndedUri = currentUri;
+          const target = adjacent(1);
+          if (target) {
+            // Defer slightly so the iframe finishes its end-of-track
+            // teardown before we hand it a new URI.
+            setTimeout(() => loadAndPlayRow(target.row, target.trackIdx), 50);
+          }
+        }
+        updateRowState();
+      });
+      if (queuedUri.value) {
+        // The queued URI was set by loadAndPlayRow before the controller
+        // was ready; just kick off the actual load now.
+        embedController.loadUri(queuedUri.value);
+        setTimeout(() => {
+          try { embedController.play(); } catch (e) {}
+          try { embedController.resume(); } catch (e) {}
+        }, 250);
+        queuedUri.value = null;
+      }
+
+      // Stall watcher: handles the mobile-Spotify-iframe quirk where the
+      // 30-second preview cap halts audio without emitting an isPaused
+      // transition. The pause-event-based auto-advance above never fires
+      // in that case, so we poll here as a fallback.
+      //
+      // Trigger conditions (all must hold):
+      //   - we have a current URI and haven't already advanced from it
+      //   - last seen state was *playing* (not user-paused)
+      //   - the iframe hasn't sent a playback_update in 1.5+ seconds
+      //   - position was past the danger zone (> 50% of last known
+      //     duration, with a 12s floor so very short tracks still trigger)
+      //
+      // The "still playing" gate is the key safeguard — when a user
+      // taps pause manually, isPaused flips to true and the gate blocks
+      // us from misfiring. When the cap silently halts the iframe,
+      // isPaused stays false, updates just stop, and we advance.
+      setInterval(() => {
+        if (!currentUri) return;
+        if (lastEndedUri === currentUri) return;
+        if (isPaused) return;                       // user paused; let them
+        if (!lastPlaybackUpdateAt) return;          // never started
+        const sinceUpdate = Date.now() - lastPlaybackUpdateAt;
+        if (sinceUpdate < 1500) return;             // still receiving ticks
+        if (lastDurationMs <= 0) return;            // no duration yet
+        const halfMark = Math.max(12000, lastDurationMs * 0.5);
+        if (currentPositionMs < halfMark) return;   // not far enough in
+        // Stalled while nominally playing past midpoint of a (likely
+        // preview) track. Treat as natural end and advance.
+        lastEndedUri = currentUri;
+        const target = adjacent(1);
+        if (target) loadAndPlayRow(target.row, target.trackIdx);
+      }, 1000);
+    }
+  );
+};
+
+// Click the row (or its play button): if it's the active row, toggle.
+// Otherwise, start the row from track 0.
+function rowClickHandler(row) {
+  if (!row) return;
+  if (row === currentRow) {
+    togglePlay();
+  } else {
+    loadAndPlayRow(row, 0);
+  }
+}
+playButtons.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const tr = btn.closest('tr');
+    rowClickHandler(tr);
+  });
+});
+// In-row skip buttons (active row only). Reuse the existing adjacent()
+// walker — back goes 3→2→1 within row then to prev row's last track,
+// fwd goes 1→2→3 then to next row's first.
+rowsContainer.addEventListener('click', (e) => {
+  const skipBtn = e.target.closest('.row-skip');
+  if (!skipBtn) return;
+  e.stopPropagation();
+  if (skipBtn.disabled) return;
+  const dir = skipBtn.classList.contains('fwd') ? 1 : -1;
+  const target = adjacent(dir);
+  if (target) loadAndPlayRow(target.row, target.trackIdx);
+});
+// Whole-row click also plays/pauses, except clicks on links/buttons.
+rowsContainer.addEventListener('click', (e) => {
+  if (e.target.closest('a, button')) return;
+  const tr = e.target.closest('tr');
+  if (!tr || !tr.classList.contains('row')) return;
+  rowClickHandler(tr);
+});
+
+// Prev/next walk:
+//   - Within the active row's tracks (1→2→3 forward, 3→2→1 back).
+//   - Crossing a row boundary advances to the next/prev visible row.
+function visibleRows() {
+  return rows.filter(r => !r.classList.contains('hidden'));
+}
+function adjacent(direction) {
+  const visible = visibleRows();
+  if (!visible.length) return null;
+  if (!currentRow) return { row: visible[0], trackIdx: 0 };
+  const n = rowNumTracks(currentRow);
+  // Within-row stepping.
+  if (direction === 1 && currentTrackIdx + 1 < n) {
+    return { row: currentRow, trackIdx: currentTrackIdx + 1 };
+  }
+  if (direction === -1 && currentTrackIdx > 0) {
+    return { row: currentRow, trackIdx: currentTrackIdx - 1 };
+  }
+  // Cross-row stepping.
+  const idx = visible.indexOf(currentRow);
+  if (idx === -1) return null;
+  const nextIdx = idx + direction;
+  if (nextIdx < 0 || nextIdx >= visible.length) return null;
+  const nextRow = visible[nextIdx];
+  // Forward to a new row → start at track 0. Backward → start at the
+  // last track of the previous row so the user can sweep back through.
+  return {
+    row: nextRow,
+    trackIdx: direction === 1 ? 0 : (rowNumTracks(nextRow) - 1),
+  };
+}
+const btnPrev = document.getElementById('btn-prev');
+const btnNext = document.getElementById('btn-next');
+function refreshSkipState() {
+  const back = adjacent(-1);
+  const fwd  = adjacent( 1);
+  btnPrev.disabled = back === null;
+  btnNext.disabled = fwd  === null;
+  // Mirror to the active row's in-row skip buttons.
+  if (currentRow) {
+    const rb = currentRow.querySelector('.row-skip.back');
+    const rf = currentRow.querySelector('.row-skip.fwd');
+    if (rb) rb.disabled = back === null;
+    if (rf) rf.disabled = fwd  === null;
+  }
+}
+btnPrev.addEventListener('click', () => {
+  // > 1s into the current track = restart it; < 1s = previous step.
+  if (currentUri && currentPositionMs >= 1000) {
+    if (embedController) { try { embedController.seek(0); } catch (e) {} }
+    return;
+  }
+  const target = adjacent(-1);
+  if (target) loadAndPlayRow(target.row, target.trackIdx);
+});
+btnNext.addEventListener('click', () => {
+  const target = adjacent( 1);
+  if (target) loadAndPlayRow(target.row, target.trackIdx);
+});
+// Stall-notice dismiss: hide the banner and suppress it for 60s so a
+// quick re-arm from another skip doesn't immediately re-show it.
+const stallDismiss = document.getElementById('play-stall-dismiss');
+if (stallDismiss) {
+  stallDismiss.addEventListener('click', () => {
+    playStallDismissedAt = Date.now();
+    clearPlayStallCheck();
+  });
+}
+
+// Refresh skip-button enabled state whenever the filter changes too.
+filt.addEventListener('input', refreshSkipState);
+// (Multi-select venue dropdown's own change handler already calls
+// refreshSkipState; no separate listener needed.)
+refreshSkipState();
+
+// Mobile mini-player play/pause button: forwards to the same
+// togglePlay() the iframe controls would call. If nothing is loaded
+// yet, tap the first visible row instead.
+const miniToggle = document.getElementById('mini-toggle');
+if (miniToggle) {
+  miniToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (!currentRow) {
+      const v = visibleRows();
+      if (v.length) loadAndPlayRow(v[0], 0);
+      return;
+    }
+    togglePlay();
+  });
+}
+// Initial mini-player paint (idle prompt).
+syncMiniPlayer();
+
+// =====================================================================
+// Background-playback resilience
+//
+// iOS Safari aggressively suspends JS in backgrounded tabs (locked phone,
+// switched-away tab). The currently-playing audio keeps going because
+// the OS owns the audio pipeline once it's started, but our
+// playback_update handler doesn't run when the song ends — so the next
+// track in our queue never gets loaded and playback dies after one song.
+//
+// Three best-effort mitigations layered together:
+//   1. Media Session API — declares this tab as media-active. iOS's
+//      throttling is materially less aggressive for media-active tabs,
+//      and lock-screen / Bluetooth Next/Prev buttons route to our
+//      handlers (which advance through OUR row order, not the iframe's
+//      internal queue).
+//   2. Wake Lock API — keeps the screen on while playback is active so
+//      idle auto-lock doesn't interrupt. Doesn't override an explicit
+//      user lock; that's not a thing pages can do.
+//   3. visibilitychange recovery — when the tab returns to foreground
+//      after suspension, check whether the previous track ended while
+//      we were asleep, and advance to the next track on return. So
+//      worst case the queue resumes the moment the user looks at the
+//      page again, instead of sitting silent.
+//
+// Caveat: none of this fully bypasses iOS's lock-screen JS suspension.
+// True unattended background playback would require native app
+// integration (Spotify Connect API + OAuth), which is a separate path.
+// =====================================================================
+
+function _setupMediaSession() {
+  if (!('mediaSession' in navigator)) return;
+  try {
+    navigator.mediaSession.setActionHandler('nexttrack', () => {
+      const target = adjacent(1);
+      if (target) loadAndPlayRow(target.row, target.trackIdx);
+    });
+    navigator.mediaSession.setActionHandler('previoustrack', () => {
+      const target = adjacent(-1);
+      if (target) loadAndPlayRow(target.row, target.trackIdx);
+    });
+    navigator.mediaSession.setActionHandler('play', () => {
+      if (currentRow) togglePlay();
+      else { const v = visibleRows(); if (v.length) loadAndPlayRow(v[0], 0); }
+    });
+    navigator.mediaSession.setActionHandler('pause', () => togglePlay());
+  } catch (e) {}
+}
+
+function _updateMediaSessionMetadata() {
+  if (!('mediaSession' in navigator) || typeof MediaMetadata === 'undefined') return;
+  try {
+    if (!currentRow || !currentUri) {
+      navigator.mediaSession.metadata = null;
+      return;
+    }
+    const title = TRACK_NAMES[currentUri] || 'Now playing';
+    const artistEl = currentRow.querySelector('.primary-artist');
+    const artist = artistEl ? artistEl.textContent : (currentRow.dataset.artist || '');
+    const thumbs = (currentRow.dataset.thumbs || '').split(',');
+    const thumb = thumbs[currentTrackIdx] || thumbs[0] || '';
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: title,
+      artist: artist,
+      album: 'SF + Oakland Live Music',
+      artwork: thumb ? [{ src: thumb, sizes: '300x300', type: 'image/jpeg' }] : [],
+    });
+    navigator.mediaSession.playbackState = isPaused ? 'paused' : 'playing';
+  } catch (e) {}
+}
+
+let _wakeLock = null;
+async function _acquireWakeLock() {
+  if (!('wakeLock' in navigator) || _wakeLock) return;
+  try {
+    _wakeLock = await navigator.wakeLock.request('screen');
+    _wakeLock.addEventListener('release', () => { _wakeLock = null; });
+  } catch (e) {}
+}
+async function _releaseWakeLock() {
+  if (!_wakeLock) return;
+  try { await _wakeLock.release(); } catch (e) {}
+  _wakeLock = null;
+}
+// Acquire when audio is meant to be playing; release when paused/idle.
+function _syncWakeLock() {
+  if (currentUri && !isPaused) _acquireWakeLock();
+  else _releaseWakeLock();
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) return;
+  // Coming back to foreground. Reacquire wake lock if we should be
+  // playing — the browser may have released it on suspension.
+  if (currentUri && !isPaused) _acquireWakeLock();
+  // Rescue the queue if the previous track ended while we were
+  // suspended: position is at/past duration but lastEndedUri hasn't
+  // been advanced. Advance now so the user doesn't see silence after
+  // unlocking.
+  if (currentUri && lastDurationMs > 0
+      && currentPositionMs >= lastDurationMs - 1500
+      && lastEndedUri !== currentUri) {
+    lastEndedUri = currentUri;
+    const target = adjacent(1);
+    if (target) loadAndPlayRow(target.row, target.trackIdx);
+  }
+});
+
+_setupMediaSession();
+
+</script>
+</body>
+</html>
