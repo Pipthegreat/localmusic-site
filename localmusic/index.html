@@ -63,27 +63,37 @@ h1 {
 @media (min-width: 640px) {
   .cards { grid-template-columns: 1fr 1fr; }
 }
+/* Each .card has its own --card-* variables inlined per element, derived
+   from that destination page's palette. The rules below consume those
+   vars so the card previews the page it links to — no per-card class
+   needed, scales as configs/ grows. Fallbacks point at the page-level
+   slate palette so a card without inline vars still renders. */
 .card {
   display: block; text-decoration: none;
   padding: 22px 22px 18px;
-  background: var(--slate-700);
-  border: 1px solid var(--slate-500);
+  background: var(--card-bg, var(--slate-700));
+  border: 1px solid var(--card-border, var(--slate-500));
   border-radius: 10px;
   color: var(--fg-default);
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  transition: transform 0.15s ease, border-color 0.15s ease,
+              background 0.15s ease;
 }
-.card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.card:hover {
+  border-color: var(--card-accent, var(--accent));
+  background: var(--card-bg-hi, var(--slate-700));
+  transform: translateY(-1px);
+}
 .card-label {
   font: 500 10px/1 'JetBrains Mono', ui-monospace, monospace;
   letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--accent-soft);
+  color: var(--card-accent-soft, var(--accent-soft));
 }
 .card-title {
   font: 400 22px/1.25 var(--serif);
   margin: 8px 0 14px;
 }
 .card-go { font-size: 13px; color: var(--fg-muted); }
-.card:hover .card-go { color: var(--accent); }
+.card:hover .card-go { color: var(--card-accent, var(--accent)); }
 .request {
   border-top: 1px solid var(--slate-500); padding-top: 28px;
 }
@@ -132,27 +142,32 @@ h1 {
      pages, different identity per place.</p>
 
   <section class="cards">
-    <a class="card" href="/localmusic/cdmx/">
+    <a class="card" href="/localmusic/cdmx/" style="--card-bg: oklch(37% 0.085 18.0);--card-bg-hi: oklch(42% 0.085 18.0);--card-border: oklch(52% 0.085 18.0);--card-accent: oklch(70% 0.085 350.0);--card-accent-soft: oklch(78% 0.068 350.0);">
   <span class="card-label">Live shows</span>
   <h2 class="card-title">Mexico City Live Music</h2>
   <span class="card-go">Open →</span>
 </a>
-<a class="card" href="/localmusic/miami/">
+<a class="card" href="/localmusic/miami/" style="--card-bg: oklch(37% 0.085 330.0);--card-bg-hi: oklch(42% 0.085 330.0);--card-border: oklch(52% 0.085 330.0);--card-accent: oklch(70% 0.085 190.0);--card-accent-soft: oklch(78% 0.068 190.0);">
   <span class="card-label">Live shows</span>
   <h2 class="card-title">Miami Live Music</h2>
   <span class="card-go">Open →</span>
 </a>
-<a class="card" href="/localmusic/nyc/">
+<a class="card" href="/localmusic/nyc/" style="--card-bg: oklch(37% 0.070 42.0);--card-bg-hi: oklch(42% 0.070 42.0);--card-border: oklch(52% 0.070 42.0);--card-accent: oklch(70% 0.070 250.0);--card-accent-soft: oklch(78% 0.056 250.0);">
   <span class="card-label">Live shows</span>
   <h2 class="card-title">New York Live Music</h2>
   <span class="card-go">Open →</span>
 </a>
-<a class="card" href="/localmusic/sfoak/">
+<a class="card" href="/localmusic/outsidelands2026/" style="--card-bg: oklch(37% 0.080 145.0);--card-bg-hi: oklch(42% 0.080 145.0);--card-border: oklch(52% 0.080 145.0);--card-accent: oklch(70% 0.080 60.0);--card-accent-soft: oklch(78% 0.064 60.0);">
+  <span class="card-label">Festival lineup</span>
+  <h2 class="card-title">Outside Lands 2026 — Lineup by Stage</h2>
+  <span class="card-go">Open →</span>
+</a>
+<a class="card" href="/localmusic/sfoak/" style="--card-bg: oklch(37% 0.085 30.0);--card-bg-hi: oklch(42% 0.085 30.0);--card-border: oklch(52% 0.085 30.0);--card-accent: oklch(70% 0.085 65.0);--card-accent-soft: oklch(78% 0.068 65.0);">
   <span class="card-label">Live shows</span>
   <h2 class="card-title">SF + Oakland Live Music</h2>
   <span class="card-go">Open →</span>
 </a>
-<a class="card" href="/localmusic/tomorrow2026/">
+<a class="card" href="/localmusic/tomorrow2026/" style="--card-bg: oklch(37% 0.085 285.0);--card-bg-hi: oklch(42% 0.085 285.0);--card-border: oklch(52% 0.085 285.0);--card-accent: oklch(70% 0.085 25.0);--card-accent-soft: oklch(78% 0.068 25.0);">
   <span class="card-label">Festival lineup</span>
   <h2 class="card-title">Tomorrowland 2026 — DJs by Stage</h2>
   <span class="card-go">Open →</span>
