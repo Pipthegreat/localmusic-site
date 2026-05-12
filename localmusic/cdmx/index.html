@@ -1245,13 +1245,13 @@ filt.addEventListener('input', applyFilter);
 // Multi-select venue dropdown plumbing.
 function updateVenueLabel() {
   if (selectedVenues.size === 0) {
-    venueLabel.textContent = 'All venues';
+    venueLabel.textContent = "Todos los foros";
     venueMulti.classList.remove('has-selection');
   } else if (selectedVenues.size === 1) {
     venueLabel.textContent = [...selectedVenues][0];
     venueMulti.classList.add('has-selection');
   } else {
-    venueLabel.textContent = selectedVenues.size + ' venues';
+    venueLabel.textContent = selectedVenues.size + " foros";
     venueMulti.classList.add('has-selection');
   }
 }
@@ -1885,7 +1885,7 @@ function syncMiniPlayer() {
   const linkEl   = document.getElementById('mini-spotify-link');
   if (!art || !trackEl || !artistEl) return;
   if (!currentRow) {
-    trackEl.textContent = 'Tap a row to start';
+    trackEl.textContent = "Toca una fila para empezar";
     artistEl.textContent = '';
     art.style.backgroundImage = '';
     if (linkEl) linkEl.href = `https://open.spotify.com/playlist/${PLAYLIST_ID}`;
