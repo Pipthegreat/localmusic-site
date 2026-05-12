@@ -200,6 +200,20 @@
     display: flex; flex-wrap: wrap; gap: 6px;
     margin: 0 0 var(--space-4);
   }
+  .card-corpus {
+    font-family: var(--font-mono); font-size: 10.5px;
+    color: var(--fg-subtle); letter-spacing: 0.04em;
+    line-height: 1.7; margin: 0 0 var(--space-4);
+  }
+  .card-corpus b {
+    color: var(--fg-muted); font-weight: 600; text-transform: uppercase;
+    font-size: 9.5px; letter-spacing: 0.16em; display: block; margin-bottom: 4px;
+  }
+  .card-corpus em {
+    font-family: var(--font-display); font-style: italic; font-weight: 400;
+    font-variation-settings: "opsz" 18;
+    font-size: 12.5px; color: var(--fg-default); letter-spacing: 0;
+  }
   .tag {
     font-family: var(--font-mono); font-size: 10px;
     color: var(--fg-subtle); letter-spacing: 0.08em; text-transform: uppercase;
@@ -270,25 +284,19 @@
 <header class="hero">
   <div>
     <div class="eyebrow">localmusic / playertests</div>
-    <h1 class="title">Five players,<br><em>one corpus</em>.</h1>
+    <h1 class="title">Five players,<br><em>five rooms</em>.</h1>
     <p class="lede">
       The player on sfoak got noisy — each iteration made the same idea more elaborate
-      and less reliable. These five are a reset: <em>five distinct architectures</em>, not
-      five styles. Same 15 songs across all of them. The variable is the player.
+      and less reliable. These five are a reset: <em>five distinct architectures</em>, each
+      with a thematic corpus matched to its palette. 75 tracks across 25 artists, no overlap.
     </p>
   </div>
   <div class="hero-side">
-    <b>corpus</b>5 artists · 3 tracks each
-    <div class="corpus">
-      <span>Alabama Shakes</span>
-      <span>The xx</span>
-      <span>James Blake</span>
-      <span>Khalid</span>
-      <span>Iron &amp; Wine</span>
-    </div>
+    <b>corpora</b>15 tracks per variant · 25 artists in total
+    <b>themes</b>slow burn · hip-hop · electronic · folk · indie rock
     <b>palettes</b>ember · plum · peacock · ash · slate
     <b>type</b>fraunces · inter · jetbrains&nbsp;mono
-    <b>fixed since v0</b>auto-advance · play/pause sync · single play()
+    <b>fixed since v0</b>auto-advance · play/pause sync · retry-chain play()
   </div>
 </header>
 
@@ -304,11 +312,15 @@
     <a class="card v1" href="v1-embed-only/">
       <div class="card-num"><span>V1 · Setlist</span><span class="swatch"></span></div>
       <h3 class="card-name">Plays itself.</h3>
-      <div class="card-palette">ember on slate</div>
+      <div class="card-palette">ember on slate · <em>slow burn</em></div>
       <p class="card-thesis">
         A single Spotify embed at the bottom. Fifteen tracks above. Hit play once;
         the page walks the room <em>top to bottom</em> and lands at the end.
       </p>
+      <div class="card-corpus">
+        <b>corpus</b>
+        <em>Alabama Shakes · The xx · James Blake · Chet Faker · HONNE</em>
+      </div>
       <div class="card-tags">
         <span class="tag sp">Spotify iframe-API</span>
       </div>
@@ -318,11 +330,15 @@
     <a class="card v2" href="v2-dual-stack/">
       <div class="card-num"><span>V2 · Splits</span><span class="swatch"></span></div>
       <h3 class="card-name">Two stacks.</h3>
-      <div class="card-palette">plum on slate</div>
+      <div class="card-palette">plum on slate · <em>hip-hop &amp; r&amp;b</em></div>
       <p class="card-thesis">
         Each row offers <em>both</em> services. SP plays inline through the iframe API.
         SC opens a SoundCloud <em>search</em> in a new tab — always a working link.
       </p>
+      <div class="card-corpus">
+        <b>corpus</b>
+        <em>A$AP Rocky · Baby Keem · Smino · KOTA The Friend · Khalid</em>
+      </div>
       <div class="card-tags">
         <span class="tag sp">Spotify</span>
         <span class="tag sc">SoundCloud search</span>
@@ -333,11 +349,15 @@
     <a class="card v3" href="v3-auto-failover/">
       <div class="card-num"><span>V3 · Tonight</span><span class="swatch"></span></div>
       <h3 class="card-name">Self-healing.</h3>
-      <div class="card-palette">peacock on slate</div>
+      <div class="card-palette">peacock on slate · <em>late-night dance</em></div>
       <p class="card-thesis">
         NTS-style now-playing. Spotify is primary. If the embed stalls for 3.5s —
         Connect conflict, ad-block — a <em>quiet banner</em> offers SoundCloud search.
       </p>
+      <div class="card-corpus">
+        <b>corpus</b>
+        <em>Bob Moses · Honey Dijon · Sofia Kourtesis · Elderbrook · HVOB</em>
+      </div>
       <div class="card-tags">
         <span class="tag sp">Spotify (primary)</span>
         <span class="tag sc">SC search fallback</span>
@@ -348,11 +368,15 @@
     <a class="card v4" href="v4-native-audio/">
       <div class="card-num"><span>V4 · Editorial</span><span class="swatch"></span></div>
       <h3 class="card-name">Liner notes.</h3>
-      <div class="card-palette">ash on slate</div>
+      <div class="card-palette">ash on slate · <em>folk &amp; americana</em></div>
       <p class="card-thesis">
         The page <em>is</em> the player. Cover art from Spotify oEmbed, 30s preview
         from iTunes, custom progress bar, hand-off links to Spotify and SoundCloud.
       </p>
+      <div class="card-corpus">
+        <b>corpus</b>
+        <em>Iron &amp; Wine · Andrew Bird · Kevin Morby · Bob Dylan · Aoife O'Donovan</em>
+      </div>
       <div class="card-tags">
         <span class="tag html">HTML5 audio</span>
         <span class="tag">iTunes previews</span>
@@ -363,11 +387,15 @@
     <a class="card v5" href="v5-stacked-cards/">
       <div class="card-num"><span>V5 · Mixtape</span><span class="swatch"></span></div>
       <h3 class="card-name">Side A, side B.</h3>
-      <div class="card-palette">slate-only</div>
+      <div class="card-palette">slate-only · <em>indie &amp; alt-rock</em></div>
       <p class="card-thesis">
         Eight tracks on side A, seven on side B. One tap and the tape <em>plays through</em>
         — Spotify cycles, spools turn, no warm accent because the paper carries it.
       </p>
+      <div class="card-corpus">
+        <b>corpus</b>
+        <em>Snail Mail · Joyce Manor · Mt. Joy · Cat Power · Belle &amp; Sebastian</em>
+      </div>
       <div class="card-tags">
         <span class="tag sp">Spotify · single embed</span>
       </div>
