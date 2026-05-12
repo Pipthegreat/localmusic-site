@@ -3,24 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Outside Lands 2026 — Lineup by Stage</title>
+<title>Outside Lands 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Outside Lands palette — deep pine canopy + warm redwood bark.
-     Derived from configs/outsidelands2026.yaml (hue_primary 145,
-     hue_accent 60, chroma 0.080) using the same lightness curve as
-     every other localmusic page so the family stays consistent. */
-  --slate-300: oklch(82% 0.048 145);
-  --slate-500: oklch(52% 0.080 145);
-  --slate-700: oklch(37% 0.080 145);
-  --slate-900: oklch(25% 0.068 145);
-  --accent:      oklch(70% 0.080 60);
-  --accent-soft: oklch(78% 0.064 60);
-  --fg-default:  oklch(96% 0.03 145);
-  --fg-muted:    oklch(82% 0.04 145);
+--slate-300: oklch(82% 0.048 145.0);
+  --slate-500: oklch(52% 0.080 145.0);
+  --slate-700: oklch(37% 0.080 145.0);
+  --slate-900: oklch(25% 0.068 145.0);
+  --accent:      oklch(70% 0.080 60.0);
+  --accent-soft: oklch(78% 0.064 60.0);
+  --fg-default: oklch(96% 0.03 145.0);
+  --fg-muted:   oklch(82% 0.04 145.0);
   --serif: 'Fraunces', Georgia, serif;
   --sans:  'Inter', system-ui, sans-serif;
   color-scheme: dark;
@@ -37,17 +33,14 @@ body {
   color: var(--fg-default);
   background: var(--slate-900);
   background-image:
-    /* Pine canopy glow top-right — the dominant forest green. */
-    radial-gradient(ellipse 80% 45% at 70% -10%, oklch(60% 0.085 145 / 0.30), transparent 65%),
-    /* Redwood-bark warm wash top-left — the late-afternoon-sun accent. */
-    radial-gradient(ellipse 60% 35% at 8% 4%, oklch(60% 0.080 60 / 0.18), transparent 65%),
-    /* Deep undergrowth bottom. */
-    radial-gradient(ellipse 90% 35% at 50% 105%, oklch(28% 0.07 145 / 0.45), transparent 70%);
+    radial-gradient(ellipse 80% 45% at 70% -10%, oklch(60% 0.080 145.0 / 0.30), transparent 65%),
+    radial-gradient(ellipse 60% 35% at 8% 4%, oklch(60% 0.080 60.0 / 0.18), transparent 65%),
+    radial-gradient(ellipse 90% 35% at 50% 105%, oklch(28% 0.068 145.0 / 0.45), transparent 70%);
   background-attachment: fixed;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
-.shell { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
+.shell { max-width: 880px; margin: 0 auto; padding: 56px 24px 80px; }
 .eyebrow {
   font: 500 11px/1 'JetBrains Mono', ui-monospace, monospace;
   letter-spacing: 0.18em; text-transform: uppercase;
@@ -58,13 +51,12 @@ h1 {
   font: 400 44px/1.1 var(--serif);
   margin: 0 0 14px; letter-spacing: -0.01em;
 }
-.dates {
+.subhead {
   font: 500 13px/1 'JetBrains Mono', ui-monospace, monospace;
   letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--accent-soft);
   margin: 0 0 28px;
 }
-.lede { color: var(--fg-muted); margin: 0 0 36px; max-width: 56ch; }
 .panel {
   padding: 22px 24px;
   background: var(--slate-700);
@@ -72,28 +64,51 @@ h1 {
   border-radius: 12px;
   margin-bottom: 16px;
 }
-.panel h2 {
-  font: 400 20px/1.25 var(--serif);
-  margin: 0 0 8px;
-}
-.panel p { color: var(--fg-muted); margin: 0; font-size: 14.5px; }
-.stages {
-  display: flex; flex-wrap: wrap; gap: 8px;
-  margin-top: 12px;
-}
+.panel h2 { font: 400 20px/1.25 var(--serif); margin: 0 0 8px; }
+.panel p  { color: var(--fg-muted); margin: 0; font-size: 14.5px; }
+.panel.coming-soon { border-style: dashed; }
+.stages { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 .stage-pill {
   font: 500 11px/1 'JetBrains Mono', ui-monospace, monospace;
   letter-spacing: 0.14em; text-transform: uppercase;
   padding: 7px 12px;
   border-radius: 999px;
-  background: oklch(32% 0.080 145);
+  background: var(--slate-700);
   color: var(--accent-soft);
   border: 1px solid var(--slate-500);
 }
+.stage-block {
+  margin: 24px 0;
+}
+.stage-name {
+  font: 400 22px/1.2 var(--serif);
+  margin: 0 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--slate-500);
+}
+.acts { display: grid; gap: 6px; }
+.act {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--slate-700);
+  border: 1px solid var(--slate-500);
+}
+.act-name { color: var(--fg-default); font-weight: 500; }
+.act-day {
+  display: inline-block;
+  margin-left: 10px;
+  font: 500 10px/1 'JetBrains Mono', ui-monospace, monospace;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent-soft);
+}
+.act-note {
+  display: inline-block; margin-left: 10px;
+  font-size: 12px; color: var(--fg-muted);
+  font-style: italic;
+}
 .back {
   display: inline-block; margin-top: 28px;
-  font-size: 14px; color: var(--accent);
-  text-decoration: none;
+  font-size: 14px; color: var(--accent); text-decoration: none;
 }
 .back:hover { filter: brightness(1.1); }
 </style>
@@ -102,24 +117,14 @@ h1 {
 <div class="shell">
   <div class="eyebrow">Festival lineup</div>
   <h1>Outside Lands 2026</h1>
-  <p class="dates">Golden Gate Park · San Francisco</p>
-  <p class="lede">Lineup-by-stage page, with each act paired to a Spotify
-     handle and a short description. Page coming up — once the official
-     lineup posts, this will fill in the same way the Tomorrowland page
-     does: stages, acts, playlist.</p>
+  <p class="subhead">Golden Gate Park, San Francisco · 2026-08-07 to 2026-08-09</p>
 
-  <section class="panel">
-    <h2>Planned stages</h2>
-    <p>Subject to the official lineup. Stage names from past editions:</p>
-    <div class="stages">
-      <span class="stage-pill">Lands End</span>
-      <span class="stage-pill">Twin Peaks</span>
-      <span class="stage-pill">Sutro</span>
-      <span class="stage-pill">Panhandle</span>
-      <span class="stage-pill">The Barbary</span>
-      <span class="stage-pill">Dolores</span>
-      <span class="stage-pill">House by Heineken</span>
-    </div>
+  
+  <section class="panel coming-soon">
+    <h2>Lineup</h2>
+    <p>Page ready — full lineup-by-stage will fill in once the
+       official announcement drops, the same way the Tomorrowland
+       page does (stages, acts, playlist).</p>
   </section>
 
   <a class="back" href="/localmusic/">← Back to Live Music Companions</a>
