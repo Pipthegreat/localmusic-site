@@ -482,7 +482,6 @@ let activeFlat = -1, activeUri = null, controller = null;
 let isPaused = true, lastPosition = 0, lastIsPaused = true, lastDuration = 0;
 let endFiredFor = null;
 let lastUpdateAt = 0;
-let runtimeAccumMs = 0;
 
 window.onSpotifyIframeApiReady = (API) => { window._spAPI = API; };
 
@@ -539,6 +538,14 @@ function syncPlayState() {
   document.querySelector('#ctrl-play .ico-play').style.display  = isPaused ? 'block' : 'none';
   document.querySelector('#ctrl-play .ico-pause').style.display = isPaused ? 'none'  : 'block';
   document.getElementById('elapsed').textContent = fmt(lastPosition / 1000);
+  if (lastDuration > 0) {
+    document.getElementById('total').textContent = fmt(lastDuration / 1000);
+    const t = FLAT[activeFlat];
+    if (t) {
+      document.getElementById('label-time').textContent =
+        `${fmt(lastDuration / 1000)} · ${t.artist}`;
+    }
+  }
 }
 
 function setActive(flat) {

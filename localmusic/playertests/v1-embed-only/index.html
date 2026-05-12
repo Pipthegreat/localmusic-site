@@ -434,8 +434,6 @@ const ARTISTS = [
 ];
 const FLAT = [];
 ARTISTS.forEach(a => a.tracks.forEach(t => FLAT.push({ artist: a.name, ...t })));
-const scSearch = (artist, track) =>
-  `https://soundcloud.com/search/sounds?q=${encodeURIComponent(artist + ' ' + track)}`;
 
 // ============================================================
 // RENDER
@@ -489,22 +487,23 @@ function esc(s) { return String(s).replace(/[&<>"']/g, c =>
   ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 // ============================================================
-// PLAYER CORE — bug-fixed Spotify iframe-API controller.
+// PLAYER CORE — Spotify iframe-API controller.
 //
-// What's different from v0:
-//   (1) SINGLE deferred play(). No retry chain firing play() four
-//       times — that was the "skips on first play" bug; subsequent
-//       play() calls re-seek the track inside the embed.
-//   (2) TRACK-END detection on a real state transition, not a
-//       position threshold during playback. We watch for
-//       isPaused going false→true *while position was near the
-//       end of the previous tick* — that's the only signal that
-//       reliably fires when Spotify auto-pauses on track end.
-//   (3) PLAY/PAUSE icon mirrored from the controller's actual
-//       isPaused, not from button-press optimism.
-//   (4) AUTO-ADVANCE wrapped in setTimeout(0) so loadUri runs in
-//       a fresh tick — Spotify drops loadUri calls made inside
-//       the playback_update handler.
+// Three things this gets right (and earlier iterations didn't):
+//   (1) play() RETRIES with a bail-on-confirmed-playback guard.
+//       Spotify drops play() calls made before the new URI loads
+//       inside the embed; a single timeout works on fast networks
+//       and silently no-ops on slow ones. The cascade catches both.
+//       Each attempt aborts once a playback_update reports real
+//       audio flowing — that prevents the second/third call from
+//       re-seeking a playing track (the "skip on first play" bug).
+//   (2) TRACK-END detected via state transition + position reset:
+//       was-playing → paused AND position rolled back from near
+//       duration to near zero. The roll-back is the unambiguous
+//       signal; any other pause (Connect conflict, buffering,
+//       user tap) leaves position in place.
+//   (3) PLAY/PAUSE icon mirrors the controller's actual isPaused,
+//       not button-press optimism.
 // ============================================================
 let activeFlat = -1;
 let activeUri = null;
