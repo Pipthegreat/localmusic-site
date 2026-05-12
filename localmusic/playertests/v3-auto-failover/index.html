@@ -3,345 +3,523 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Player Test V3 — Auto-Failover · Peacock</title>
-<meta name="description" content="Player test variant 3 — Spotify primary, SoundCloud takes over on stall." />
+<title>V3 — Tonight · Peacock</title>
+<meta name="description" content="Player test variant 3 — NTS-style now-playing with auto-advance and SoundCloud escape." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
-  /* ============ PALETTE: Peacock on Slate ============
-     Thesis: peacock is the "positive recovery" hue — exactly what we want for
-     a player that quietly self-heals when Spotify Connect rejects play(). */
+  /* ============================================================
+     PALETTE — Peacock on Slate. Peacock is the "positive ownership
+     state" in the Stle system — what we want for an "if it stalls
+     we recover" UX. Cool blue-green is anti-anxiety: the player
+     stays calm when Spotify Connect says no.
+     ============================================================ */
   :root {
-    --bg-canvas:    oklch(11% 0.013 250);
-    --bg-elevated:  oklch(15% 0.014 250);
-    --bg-row-hover: oklch(19% 0.014 250);
-    --bg-row-active: oklch(22% 0.045 200);
-    --fg-default: oklch(98% 0.005 250);
-    --fg-muted:   oklch(74% 0.012 248);
-    --fg-subtle:  oklch(58% 0.013 248);
-    --border-subtle: oklch(22% 0.014 250);
+    --bg-canvas:     oklch(10% 0.012 250);
+    --bg-elevated:   oklch(13% 0.014 250);
+    --bg-row-hover:  oklch(17% 0.014 250);
+    --bg-row-active: oklch(20% 0.04 200);
+    --fg-default:    oklch(98% 0.005 250);
+    --fg-strong:     oklch(99% 0.003 250);
+    --fg-muted:      oklch(72% 0.012 248);
+    --fg-subtle:     oklch(58% 0.013 248);
+    --border-subtle: oklch(20% 0.014 250);
     --border-default: oklch(28% 0.015 248);
-    --peacock:    oklch(60% 0.10 200);
-    --peacock-2:  oklch(78% 0.07 200);
+    --peacock-300: oklch(78% 0.07 200);
+    --peacock-500: oklch(60% 0.10 200);
+    --peacock-700: oklch(44% 0.09 200);
     --peacock-wash: oklch(60% 0.10 200 / 0.14);
-    --peacock-glow: oklch(72% 0.12 200 / 0.45);
+    --peacock-glow: oklch(72% 0.13 200 / 0.45);
+    --warn:        oklch(72% 0.16 50);
+    --warn-wash:   oklch(72% 0.16 50 / 0.10);
+
+    --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+    --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+    --space-12: 48px; --space-16: 64px; --space-20: 80px;
+
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --dur-fast: 120ms; --dur-default: 200ms; --dur-slow: 400ms;
+
+    --font-display: "Fraunces", "Georgia", ui-serif, serif;
+    --font-body:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   }
-  * { box-sizing: border-box; }
+
+  *, *::before, *::after { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   html, body { margin: 0; padding: 0; background: var(--bg-canvas); color: var(--fg-default);
                overflow-x: hidden; }
-  body { font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
-         padding-bottom: 200px; }
-  header { padding: 28px 24px 16px; max-width: 880px; margin: 0 auto; }
-  .eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-             color: var(--peacock-2); font-weight: 600; }
-  h1 { font: 600 28px/1.2 inherit; margin: 6px 0 4px; letter-spacing: -0.01em; }
-  .lede { color: var(--fg-muted); margin: 0; max-width: 60ch; }
-  .thesis { margin-top: 14px; padding: 12px 14px; background: var(--bg-elevated);
-            border-left: 2px solid var(--peacock); border-radius: 0 6px 6px 0;
-            color: var(--fg-muted); font-size: 13.5px; }
-  .thesis b { color: var(--fg-default); font-weight: 600; }
-  main { max-width: 880px; margin: 0 auto; padding: 0 24px; }
-  .artist-block { margin: 28px 0; }
-  .artist-name { font: 600 17px/1.2 inherit; margin: 0 0 8px; letter-spacing: -0.005em; }
-  table { width: 100%; border-collapse: collapse; }
-  tr { border-top: 1px solid var(--border-subtle); transition: background .12s ease; }
-  tr:first-child { border-top: 0; }
-  tr:hover { background: var(--bg-row-hover); }
-  tr.active { background: var(--bg-row-active); }
-  tr.active .track { color: var(--peacock-2); }
-  td { padding: 11px 8px; vertical-align: middle; }
-  td.idx { width: 26px; color: var(--fg-subtle); font-variant-numeric: tabular-nums; text-align: right; }
-  td.track { color: var(--fg-default); }
-  td.actions { width: 40px; text-align: right; }
-  .play-btn {
-    width: 32px; height: 32px; border-radius: 50%;
-    background: transparent; border: 1px solid var(--border-default);
-    color: var(--fg-muted); cursor: pointer; display: inline-flex;
-    align-items: center; justify-content: center; padding: 0;
-    transition: all .15s ease;
+  body {
+    font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+    background-image: radial-gradient(ellipse 1100px 600px at 100% 0%, var(--peacock-wash), transparent 65%);
+    background-attachment: fixed;
   }
-  .play-btn:hover { border-color: var(--peacock); color: var(--peacock-2); }
-  tr.active .play-btn { background: var(--peacock); border-color: var(--peacock); color: oklch(12% 0.02 200); }
-  .play-btn svg { width: 11px; height: 11px; fill: currentColor; }
-  /* ============ PLAYER BAR ============ */
-  .player-bar {
-    position: fixed; left: 0; right: 0; bottom: 0;
-    background: var(--bg-elevated);
+  ::selection { background: var(--peacock-500); color: var(--bg-canvas); }
+
+  /* ====== TWO-COLUMN LAYOUT ====== */
+  .shell {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1.05fr 0.95fr;
+  }
+  .stage {
+    padding: var(--space-12) var(--space-8) var(--space-10) var(--space-10);
+    border-right: 1px solid var(--border-subtle);
+    position: sticky; top: 0; align-self: start;
+    height: 100vh; display: flex; flex-direction: column;
+  }
+  .queue { padding: var(--space-12) var(--space-10) 100px var(--space-8); }
+
+  /* ====== STAGE (left) ====== */
+  .eyebrow {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--peacock-300); font-weight: 500;
+    display: flex; align-items: center; gap: var(--space-3);
+  }
+  .eyebrow .pulse {
+    width: 8px; height: 8px; border-radius: 99px; background: var(--peacock-300);
+    box-shadow: 0 0 0 0 var(--peacock-glow);
+    animation: pulse 1800ms ease-out infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 var(--peacock-glow); }
+    70%  { box-shadow: 0 0 0 14px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+  }
+
+  h1.now-block {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144;
+    font-weight: 400; font-style: italic;
+    font-size: clamp(56px, 7.6vw, 124px);
+    line-height: 0.92; letter-spacing: -0.035em;
+    color: var(--fg-strong); margin: var(--space-3) 0;
+    transition: opacity var(--dur-slow) var(--ease-out-quart);
+    word-wrap: break-word;
+  }
+  .now-artist {
+    font-family: var(--font-mono); font-size: 14px;
+    color: var(--peacock-300); letter-spacing: 0.06em;
+    text-transform: uppercase; font-weight: 500;
+    margin: 0 0 var(--space-6);
+  }
+  .now-meta {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 24;
+    font-style: italic; font-size: 18px; line-height: 1.5;
+    color: var(--fg-muted); max-width: 38ch; margin: 0;
+  }
+
+  .stage-progress {
+    margin-top: auto; padding-top: var(--space-6);
     border-top: 1px solid var(--border-subtle);
-    padding: 10px 16px;
-    box-shadow: 0 -8px 24px -12px rgba(0,0,0,.6);
-    transition: box-shadow .3s ease;
   }
-  .player-bar.playing-sp {
-    box-shadow: 0 -8px 28px -12px var(--peacock-glow), 0 -1px 0 var(--peacock-wash);
+  .progress-row {
+    display: grid; grid-template-columns: auto 1fr auto;
+    gap: var(--space-3); align-items: center;
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--fg-subtle); letter-spacing: 0.04em;
+    margin-bottom: var(--space-3);
   }
-  .player-bar.playing-sc {
-    box-shadow: 0 -8px 28px -12px oklch(72% 0.18 50 / 0.45), 0 -1px 0 oklch(72% 0.18 50 / 0.10);
+  .progress-bar {
+    height: 2px; background: var(--border-subtle); border-radius: 2px;
+    overflow: hidden; position: relative;
   }
-  .player-inner { max-width: 880px; margin: 0 auto; width: 100%; }
-  .player-status {
-    display: flex; gap: 10px; align-items: center; margin-bottom: 8px;
-    font: 600 11px/1 inherit; letter-spacing: 0.12em; text-transform: uppercase;
+  .progress-fill {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: var(--peacock-500); width: 0;
+    transition: width 200ms linear;
+  }
+
+  /* ====== STALL BANNER ====== */
+  .stall-banner {
+    margin-top: var(--space-6); padding: var(--space-4) var(--space-5);
+    background: var(--warn-wash);
+    border: 1px solid oklch(72% 0.16 50 / 0.4);
+    border-radius: 10px;
+    display: none; gap: var(--space-4); align-items: center;
+    font-size: 13.5px;
+  }
+  .stall-banner.show { display: flex; }
+  .stall-icon {
+    width: 24px; height: 24px; border-radius: 99px; background: var(--warn);
+    color: oklch(15% 0.05 50); flex-shrink: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-weight: 700; font-size: 14px;
+  }
+  .stall-msg b { color: var(--fg-strong); font-weight: 600; }
+  .stall-msg { color: var(--fg-muted); flex: 1; }
+  .stall-link {
+    font-family: var(--font-mono); font-size: 11.5px; font-weight: 600;
+    color: var(--warn); text-decoration: none;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    border-bottom: 1px dashed var(--warn);
+    padding-bottom: 1px; white-space: nowrap;
+  }
+
+  /* ====== QUEUE (right) ====== */
+  .queue-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: var(--space-6);
+    border-bottom: 1px solid var(--border-subtle); padding-bottom: var(--space-3);
+  }
+  .queue-title {
+    font-family: var(--font-display); font-style: italic; font-weight: 300;
+    font-variation-settings: "opsz" 72;
+    font-size: 44px; line-height: 1; letter-spacing: -0.02em;
+    margin: 0; color: var(--fg-muted);
+  }
+  .queue-count {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--fg-subtle); letter-spacing: 0.1em;
+  }
+  .artist-section { margin-bottom: var(--space-8); }
+  .artist-header {
+    display: flex; align-items: baseline; gap: var(--space-3);
+    margin-bottom: var(--space-3); padding-bottom: var(--space-2);
+  }
+  .artist-num {
+    font-family: var(--font-mono); font-size: 10.5px;
+    color: var(--fg-subtle); letter-spacing: 0.12em;
+  }
+  .artist-name {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 36;
+    font-size: 22px; font-weight: 500; letter-spacing: -0.01em;
+    margin: 0; color: var(--fg-strong);
+  }
+  .track-list { list-style: none; padding: 0; margin: 0; }
+  .track-row {
+    display: grid;
+    grid-template-columns: 24px 1fr auto;
+    align-items: center; gap: var(--space-3);
+    padding: var(--space-3) var(--space-2);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease-out-quart);
+    margin-left: -8px;
+  }
+  .track-row:hover { background: var(--bg-row-hover); }
+  .track-row.active { background: var(--bg-row-active); }
+  .track-num {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--fg-subtle); font-variant-numeric: tabular-nums;
+  }
+  .track-row.active .track-num { color: var(--peacock-300); }
+  .track-name {
+    font-family: var(--font-body); font-weight: 500; font-size: 15px;
+    color: var(--fg-default); letter-spacing: -0.005em;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .track-row.active .track-name { color: var(--peacock-300); }
+  .track-state {
+    width: 20px; height: 12px;
     color: var(--fg-subtle);
+    display: inline-flex; align-items: end; justify-content: end; gap: 2px;
   }
-  .status-pill {
-    padding: 3px 8px; border-radius: 99px;
-    border: 1px solid var(--border-default);
+  .track-row.active .track-state { color: var(--peacock-300); }
+  .track-state .bar {
+    width: 2px; background: currentColor; border-radius: 1px;
+    height: 35%; display: block;
+  }
+  .track-row.active.playing .track-state .bar {
+    animation: bars 1100ms ease-in-out infinite;
+  }
+  .track-row.active.playing .track-state .bar:nth-child(1) { animation-delay: -200ms; }
+  .track-row.active.playing .track-state .bar:nth-child(2) { animation-delay: -700ms; }
+  .track-row.active.playing .track-state .bar:nth-child(3) { animation-delay: -400ms; }
+  @keyframes bars {
+    0%, 100% { height: 25%; }
+    50%      { height: 100%; }
+  }
+
+  /* ====== HIDDEN SPOTIFY MOUNT ====== */
+  #spotify-mount {
+    position: fixed; left: var(--space-10); bottom: var(--space-6);
+    width: 360px; height: 80px;
+    border-radius: 12px; overflow: hidden;
+    box-shadow: 0 16px 36px -16px var(--peacock-glow);
+    z-index: 30;
+    transition: transform var(--dur-default) var(--ease-out-quart),
+                opacity var(--dur-default) var(--ease-out-quart);
+  }
+  #spotify-mount:empty { display: none; }
+
+  /* ====== FOOTER ====== */
+  footer.colophon {
+    grid-column: 1 / -1;
+    padding: var(--space-12) var(--space-10) var(--space-16);
+    border-top: 1px solid var(--border-subtle);
+  }
+  .colophon h2 {
+    font-family: var(--font-display); font-style: italic; font-weight: 300;
+    font-variation-settings: "opsz" 96;
+    font-size: clamp(40px, 6vw, 80px); line-height: 0.95;
+    letter-spacing: -0.025em; margin: 0 0 var(--space-6);
     color: var(--fg-muted);
-    transition: all .25s ease;
   }
-  .status-pill.on {
-    color: oklch(12% 0.02 200); background: var(--peacock-2);
-    border-color: transparent;
+  .colophon h2 em { color: var(--peacock-300); }
+  .colophon-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8); font-family: var(--font-mono);
+    font-size: 11.5px; line-height: 1.7; color: var(--fg-subtle);
+    letter-spacing: 0.04em;
   }
-  .status-pill.sc.on {
-    color: oklch(12% 0.02 50); background: oklch(72% 0.18 50);
+  .colophon-grid dt { color: var(--fg-default); text-transform: uppercase;
+                      font-size: 10.5px; letter-spacing: 0.14em; margin-bottom: 4px; }
+  .colophon-grid a { color: var(--peacock-300); text-decoration: none;
+                     border-bottom: 1px dashed transparent; }
+  .colophon-grid a:hover { border-bottom-color: var(--peacock-300); }
+
+  @media (max-width: 900px) {
+    .shell { grid-template-columns: 1fr; }
+    .stage {
+      border-right: 0; border-bottom: 1px solid var(--border-subtle);
+      position: static; height: auto;
+      padding: var(--space-8) var(--space-4) var(--space-6);
+    }
+    .queue { padding: var(--space-8) var(--space-4) 100px; }
+    h1.now-block { font-size: clamp(48px, 11vw, 80px); }
+    #spotify-mount { left: var(--space-4); right: var(--space-4); width: auto; }
+    .colophon-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+    footer.colophon { padding: var(--space-10) var(--space-4); }
   }
-  .status-arrow { color: var(--fg-subtle); }
-  .player-mount { min-height: 80px; position: relative; }
-  #spotify-mount, #sc-mount {
-    position: absolute; inset: 0;
-    transition: opacity .35s ease;
-  }
-  #spotify-mount { opacity: 1; }
-  #sc-mount { opacity: 0; pointer-events: none; }
-  body.failover-active #spotify-mount { opacity: 0; pointer-events: none; }
-  body.failover-active #sc-mount { opacity: 1; pointer-events: auto; }
-  .empty {
-    color: var(--fg-subtle); font-size: 13px; padding: 14px 18px;
-    background: var(--bg-canvas); border-radius: 6px;
-    border: 1px dashed var(--border-default); text-align: center;
-  }
-  .failover-notice {
-    margin-top: 6px; font: 500 12px/1.4 inherit;
-    color: var(--fg-subtle); opacity: 0; transition: opacity .3s ease;
-  }
-  .failover-notice.show { opacity: 1; }
-  .failover-notice b { color: var(--peacock-2); font-weight: 600; }
-  footer { max-width: 880px; margin: 32px auto 0; padding: 0 24px;
-           color: var(--fg-subtle); font-size: 12.5px; }
-  footer a { color: var(--fg-muted); }
-  @media (max-width: 640px) {
-    header { padding: 20px 16px 12px; }
-    main { padding: 0 16px; }
-    h1 { font-size: 24px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important;
+                              transition-duration: 0.01ms !important; }
+    .eyebrow .pulse { animation: none; box-shadow: 0 0 0 4px var(--peacock-wash); }
   }
 </style>
 </head>
 <body>
-<header>
-  <div class="eyebrow">Player test · V3</div>
-  <h1>Auto-Failover</h1>
-  <p class="lede">Spotify is primary. The page arms a stall timer on every play tap — if no <code>playback_update</code> arrives within 3s (Spotify Connect conflict, ad-blocker, blocked iframe), the SoundCloud widget loads the artist's profile and starts the top track. Visitor sees one player; the source quietly swaps.</p>
-  <div class="thesis">
-    <b>Thesis:</b> Cross-source resilience is a UX, not a settings toggle. Pick a primary, and degrade silently.
-    <b>Trade:</b> The SoundCloud fallback isn't track-perfect — it plays the artist's top SC track, which may not match what was tapped. Honest about the swap via a small notice.
-  </div>
-</header>
-<main id="artist-list"></main>
-<footer>
-  <a href="../">← back to player tests</a> ·
-  palette: <a href="#" title="Peacock 700 — positive recovery">Peacock on Slate</a>
-</footer>
+<div class="shell">
 
-<div class="player-bar" id="player-bar" role="region" aria-label="Player">
-  <div class="player-inner">
-    <div class="player-status">
-      <span class="status-pill" id="pill-sp">Spotify</span>
-      <span class="status-arrow" id="status-arrow">·</span>
-      <span class="status-pill sc" id="pill-sc">SoundCloud</span>
+  <!-- ===== LEFT: STAGE / NOW PLAYING ===== -->
+  <aside class="stage">
+    <div class="eyebrow"><span class="pulse"></span>v3 · tonight</div>
+    <h1 class="now-block" id="now-block">Hit play.</h1>
+    <p class="now-artist" id="now-artist">— · — · —</p>
+    <p class="now-meta">
+      Spotify plays. If the embed stalls — Connect conflict, another tab is hogging it,
+      an ad-blocker is in the way — we surface a search-for-this-track link on SoundCloud.
+      The page keeps reading even when audio doesn't.
+    </p>
+
+    <div class="stall-banner" id="stall-banner" role="status" aria-live="polite">
+      <span class="stall-icon">!</span>
+      <span class="stall-msg"><b>Spotify is silent.</b> Probably playing on another device.</span>
+      <a class="stall-link" id="stall-link" href="#" target="_blank" rel="noopener">Try SoundCloud ↗</a>
     </div>
-    <div class="player-mount">
-      <div id="empty" class="empty">Tap a track — Spotify is primary, SoundCloud auto-fallback if it stalls</div>
-      <div id="spotify-mount"></div>
-      <div id="sc-mount"></div>
+
+    <div class="stage-progress">
+      <div class="progress-row">
+        <span id="time-cur">0:00</span>
+        <span></span>
+        <span id="time-tot">0:00</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
     </div>
-    <div class="failover-notice" id="failover-notice">
-      <b>Spotify stalled.</b> Switched to SoundCloud — playing artist top track.
+  </aside>
+
+  <!-- ===== RIGHT: QUEUE ===== -->
+  <section class="queue">
+    <div class="queue-head">
+      <h2 class="queue-title">Up next.</h2>
+      <span class="queue-count">15 · plays through</span>
     </div>
-  </div>
+    <div id="artist-list"></div>
+  </section>
+
+  <footer class="colophon">
+    <h2>One <em>fallback</em>.<br>Quiet.</h2>
+    <dl class="colophon-grid">
+      <div><dt>back to</dt><dd><a href="../">all player tests</a></dd></div>
+      <div><dt>palette</dt><dd>Stle · Peacock on Slate</dd></div>
+      <div><dt>variant</dt><dd>03 / 05 — auto-failover</dd></div>
+    </dl>
+  </footer>
+
 </div>
+
+<div id="spotify-mount"></div>
 
 <script>
 const ARTISTS = [
-  { name: "Alabama Shakes", soundcloud: "alabamashakes", tracks: [
-    { name: "Always Alright",  id: "6ckUX8cgcqjoNGTd2A2Pvd" },
-    { name: "Hang Loose",      id: "5cDHV67TxLrdz4ITUVQswH" },
-    { name: "I Found You",     id: "1N3c3dDtbx1OodfkIcxBmy" }]},
-  { name: "The xx", soundcloud: "thexx", tracks: [
-    { name: "Crystalised",     id: "5UBBJnFxsfjFxfrtvErQoH" },
-    { name: "Intro",           id: "2usrT8QIbIk9y0NEtQwS4j" },
-    { name: "Angels",          id: "3zsRP8rH1kaIAo9fmiP4El" }]},
-  { name: "James Blake", soundcloud: "jamesblakeproduction", tracks: [
-    { name: "Trying Times",    id: "52T8TTMESX21406wvTdQDY" },
-    { name: "Retrograde",      id: "2IqjKEBiz0CdLKdkXhxw84" },
-    { name: "King's Dead",     id: "51rXHuKN8Loc4sUlKPODgH" }]},
-  { name: "Khalid", soundcloud: "thegreatkhalid", tracks: [
-    { name: "Young Dumb & Broke", id: "5Z3GHaZ6ec9bsiI5BenrbY" },
-    { name: "Location",        id: "152lZdxL1OR0ZMW6KquMif" },
-    { name: "Better",          id: "2OpBganfGk2GVdSlRdxzaX" }]},
-  { name: "Iron & Wine", soundcloud: "iron-and-wine", tracks: [
-    { name: "Such Great Heights", id: "6dDxgfvM8pJm7AzmLZB1nN" },
+  { name: "Alabama Shakes", tracks: [
+    { name: "Always Alright",                  id: "6ckUX8cgcqjoNGTd2A2Pvd" },
+    { name: "Hang Loose",                      id: "5cDHV67TxLrdz4ITUVQswH" },
+    { name: "I Found You",                     id: "1N3c3dDtbx1OodfkIcxBmy" }]},
+  { name: "The xx", tracks: [
+    { name: "Crystalised",                     id: "5UBBJnFxsfjFxfrtvErQoH" },
+    { name: "Intro",                           id: "2usrT8QIbIk9y0NEtQwS4j" },
+    { name: "Angels",                          id: "3zsRP8rH1kaIAo9fmiP4El" }]},
+  { name: "James Blake", tracks: [
+    { name: "Trying Times",                    id: "52T8TTMESX21406wvTdQDY" },
+    { name: "Retrograde",                      id: "2IqjKEBiz0CdLKdkXhxw84" },
+    { name: "King's Dead",                     id: "51rXHuKN8Loc4sUlKPODgH" }]},
+  { name: "Khalid", tracks: [
+    { name: "Young Dumb & Broke",              id: "5Z3GHaZ6ec9bsiI5BenrbY" },
+    { name: "Location",                        id: "152lZdxL1OR0ZMW6KquMif" },
+    { name: "Better",                          id: "2OpBganfGk2GVdSlRdxzaX" }]},
+  { name: "Iron & Wine", tracks: [
+    { name: "Such Great Heights",              id: "6dDxgfvM8pJm7AzmLZB1nN" },
     { name: "Flightless Bird, American Mouth", id: "1fEGtTZjrjJW8eUeewnNJR" },
-    { name: "Time After Time", id: "5JEM7lT9uSyhUsKFXwGfSm" }]},
+    { name: "Time After Time",                 id: "5JEM7lT9uSyhUsKFXwGfSm" }]},
 ];
-
 const FLAT = [];
-ARTISTS.forEach(a => a.tracks.forEach(t => FLAT.push({ artist: a.name, sc: a.soundcloud, ...t })));
+ARTISTS.forEach(a => a.tracks.forEach(t => FLAT.push({ artist: a.name, ...t })));
+const scSearch = (artist, track) =>
+  `https://soundcloud.com/search/sounds?q=${encodeURIComponent(artist + ' ' + track)}`;
 
-const list = document.getElementById('artist-list');
-ARTISTS.forEach(artist => {
-  const block = document.createElement('section');
-  block.className = 'artist-block';
-  const h = document.createElement('h2');
-  h.className = 'artist-name';
-  h.textContent = artist.name;
-  block.appendChild(h);
-  const table = document.createElement('table');
-  const tbody = document.createElement('tbody');
+// ====== RENDER ======
+const listEl = document.getElementById('artist-list');
+let aIdx = 0;
+ARTISTS.forEach((artist) => {
+  aIdx += 1;
+  const section = document.createElement('section');
+  section.className = 'artist-section';
+  section.innerHTML = `
+    <div class="artist-header">
+      <span class="artist-num">${String(aIdx).padStart(2, '0')}</span>
+      <h3 class="artist-name">${esc(artist.name)}</h3>
+    </div>`;
+  const ul = document.createElement('ul');
+  ul.className = 'track-list';
   artist.tracks.forEach((t, i) => {
-    const flatIdx = FLAT.findIndex(f => f.id === t.id);
-    const tr = document.createElement('tr');
-    tr.dataset.flatIdx = flatIdx;
-    tr.innerHTML = `
-      <td class="idx">${i + 1}</td>
-      <td class="track">${t.name}</td>
-      <td class="actions">
-        <button class="play-btn" aria-label="Play ${t.name}">
-          <svg viewBox="0 0 14 14"><path d="M3 1l10 6-10 6z"/></svg>
-        </button>
-      </td>`;
-    tr.addEventListener('click', () => playTrack(flatIdx));
-    tbody.appendChild(tr);
+    const flat = FLAT.findIndex(f => f.id === t.id);
+    const li = document.createElement('li');
+    li.className = 'track-row';
+    li.dataset.flat = flat;
+    li.innerHTML = `
+      <span class="track-num">${i + 1}</span>
+      <span class="track-name">${esc(t.name)}</span>
+      <span class="track-state"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>`;
+    li.addEventListener('click', () => onRowClick(flat));
+    ul.appendChild(li);
   });
-  table.appendChild(tbody);
-  block.appendChild(table);
-  list.appendChild(block);
+  section.appendChild(ul);
+  listEl.appendChild(section);
 });
 
-// ============================================================
-// AUTO-FAILOVER CONTROLLER
-// Primary path: Spotify iframe-API. Each play() call arms a 3s
-// stall timer. If no playback_update arrives in that window, we
-// assume Connect rejected (most common reason) and bring up the
-// SoundCloud widget loaded with the artist's profile URL.
-// ============================================================
-let spController = null;
-let scWidget = null;
-let activeIdx = -1;
-let activeUri = null;
-let lastPlaybackUpdateAt = 0;
-let stallTimer = null;
-const STALL_MS = 3000;
+function esc(s) { return String(s).replace(/[&<>"']/g, c =>
+  ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-window.onSpotifyIframeApiReady = (IFrameAPI) => { window._spotifyAPI = IFrameAPI; };
+function fmtTime(ms) {
+  if (!ms || ms < 0) return '0:00';
+  const s = Math.floor(ms / 1000);
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+}
 
-function ensureSpotify(initialUri, onReady) {
-  if (spController) { onReady(); return; }
+// ====== PLAYER CORE + STALL DETECTOR ======
+let activeFlat = -1, activeUri = null, controller = null;
+let isPaused = true, lastPosition = 0, lastIsPaused = true, lastDuration = 0;
+let endFiredFor = null, lastUpdateAt = 0, stallTimer = null;
+const STALL_MS = 3500;
+
+window.onSpotifyIframeApiReady = (API) => { window._spAPI = API; };
+
+function ensureController(initialUri, ready) {
+  if (controller) { ready(); return; }
   const mount = document.getElementById('spotify-mount');
-  mount.innerHTML = '<div id="spotify-embed"></div>';
-  const tryMount = () => {
-    if (!window._spotifyAPI) { setTimeout(tryMount, 80); return; }
-    window._spotifyAPI.createController(
-      document.getElementById('spotify-embed'),
-      { uri: initialUri, width: '100%', height: 80 },
+  mount.innerHTML = '<div id="sp-embed"></div>';
+  const tryInit = () => {
+    if (!window._spAPI) { setTimeout(tryInit, 60); return; }
+    window._spAPI.createController(
+      document.getElementById('sp-embed'),
+      { uri: initialUri, width: 360, height: 80 },
       (c) => {
-        spController = c;
-        c.addListener('playback_update', (e) => {
-          lastPlaybackUpdateAt = Date.now();
-          if (!e.data.isPaused && e.data.position > 0) {
-            // Real playback confirmed — clear stall timer + paint Spotify pill.
-            clearStallTimer();
-            setStatus('sp');
-          }
-        });
-        c.addListener('ready', () => onReady());
-      });
+        controller = c;
+        c.addListener('ready', () => ready());
+        c.addListener('playback_update', onPlaybackUpdate);
+      }
+    );
   };
-  tryMount();
+  tryInit();
 }
 
-function ensureSoundCloud(initialUrl) {
-  const mount = document.getElementById('sc-mount');
-  mount.innerHTML = `<iframe id="sc-iframe" allow="autoplay" frameborder="0"
-    width="100%" height="100"
-    src="https://w.soundcloud.com/player/?url=${encodeURIComponent(initialUrl)}&auto_play=true&visual=false&show_artwork=true&color=%234a8b9e"></iframe>`;
-  const wireUp = () => {
-    if (!window.SC || !window.SC.Widget) { setTimeout(wireUp, 80); return; }
-    scWidget = window.SC.Widget(document.getElementById('sc-iframe'));
-  };
-  wireUp();
+function onPlaybackUpdate(e) {
+  const { position, duration, isPaused: paused } = e.data;
+  lastUpdateAt = Date.now();
+  const justEnded =
+    !lastIsPaused && paused &&
+    duration > 0 && lastPosition >= duration - 1500 &&
+    endFiredFor !== activeUri;
+  lastPosition = position; lastDuration = duration;
+  lastIsPaused = paused; isPaused = paused;
+  // Real playback confirmed — clear any stall banner.
+  if (!paused && position > 0) {
+    document.getElementById('stall-banner').classList.remove('show');
+    if (stallTimer) { clearTimeout(stallTimer); stallTimer = null; }
+  }
+  syncPlayState();
+  if (justEnded) { endFiredFor = activeUri; setTimeout(skipNext, 60); }
 }
 
-function loadSoundCloud(url) {
-  if (!scWidget) ensureSoundCloud(url);
-  else scWidget.load(url, { auto_play: true });
+function syncPlayState() {
+  document.querySelectorAll('.track-row').forEach(r => {
+    r.classList.toggle('playing', !isPaused && parseInt(r.dataset.flat, 10) === activeFlat);
+  });
+  document.getElementById('time-cur').textContent = fmtTime(lastPosition);
+  document.getElementById('time-tot').textContent = fmtTime(lastDuration);
+  const pct = lastDuration > 0 ? (lastPosition / lastDuration) * 100 : 0;
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+function setActive(flat) {
+  activeFlat = flat;
+  document.querySelectorAll('.track-row').forEach(r => {
+    r.classList.toggle('active', parseInt(r.dataset.flat, 10) === flat);
+  });
+  const t = FLAT[flat];
+  document.getElementById('now-block').textContent = t.name;
+  document.getElementById('now-artist').textContent = t.artist;
+  document.getElementById('stall-link').href = scSearch(t.artist, t.name);
 }
 
 function armStallCheck() {
-  clearStallTimer();
+  if (stallTimer) clearTimeout(stallTimer);
   const armedForUri = activeUri;
   stallTimer = setTimeout(() => {
     if (activeUri !== armedForUri) return;
-    const tickedRecently = lastPlaybackUpdateAt > 0 && (Date.now() - lastPlaybackUpdateAt) < 1500;
-    if (tickedRecently) return;  // false alarm
-    failoverToSoundCloud();
+    const tickedRecently = lastUpdateAt > 0 && (Date.now() - lastUpdateAt) < 1500;
+    const reallyPlaying = !isPaused && lastPosition > 0 && tickedRecently;
+    if (reallyPlaying) return;
+    document.getElementById('stall-banner').classList.add('show');
   }, STALL_MS);
 }
 
-function clearStallTimer() {
-  if (stallTimer) { clearTimeout(stallTimer); stallTimer = null; }
-}
-
-function failoverToSoundCloud() {
-  if (activeIdx < 0) return;
-  const track = FLAT[activeIdx];
-  document.body.classList.add('failover-active');
-  document.getElementById('failover-notice').classList.add('show');
-  if (spController) { try { spController.pause(); } catch (e) {} }
-  loadSoundCloud(`https://soundcloud.com/${track.sc}`);
-  setStatus('sc');
-}
-
-function setStatus(which) {
-  document.getElementById('pill-sp').classList.toggle('on', which === 'sp');
-  document.getElementById('pill-sc').classList.toggle('on', which === 'sc');
-  document.getElementById('status-arrow').textContent = which === 'sc' ? '→' : '·';
-  document.getElementById('player-bar').classList.toggle('playing-sp', which === 'sp');
-  document.getElementById('player-bar').classList.toggle('playing-sc', which === 'sc');
-}
-
-function playTrack(idx) {
-  if (idx < 0 || idx >= FLAT.length) return;
-  const track = FLAT[idx];
-  activeIdx = idx;
-  activeUri = 'spotify:track:' + track.id;
-  document.getElementById('empty').style.display = 'none';
-  // Reset to Spotify-primary on every new tap. The visitor may have
-  // resolved the conflict that caused last failover.
-  document.body.classList.remove('failover-active');
-  document.getElementById('failover-notice').classList.remove('show');
-  markActive();
-  setStatus(null);  // neutral until something starts
-  if (!spController) {
-    ensureSpotify(activeUri, () => {
-      try { spController.play(); } catch (e) {}
+function playByFlat(flat) {
+  if (flat < 0 || flat >= FLAT.length) return;
+  const t = FLAT[flat];
+  const uri = 'spotify:track:' + t.id;
+  activeUri = uri; endFiredFor = null;
+  lastPosition = 0; lastIsPaused = true;
+  setActive(flat);
+  document.getElementById('stall-banner').classList.remove('show');
+  if (!controller) {
+    ensureController(uri, () => {
+      setTimeout(() => { try { controller.play(); } catch(e){} }, 280);
       armStallCheck();
     });
   } else {
-    spController.loadUri(activeUri);
-    setTimeout(() => { try { spController.play(); } catch (e) {} }, 250);
-    setTimeout(() => { try { spController.resume(); } catch (e) {} }, 800);
+    controller.loadUri(uri);
+    setTimeout(() => { try { controller.play(); } catch(e){} }, 280);
     armStallCheck();
   }
 }
 
-function markActive() {
-  document.querySelectorAll('tr').forEach(tr => {
-    tr.classList.toggle('active', parseInt(tr.dataset.flatIdx, 10) === activeIdx);
-  });
+function onRowClick(flat) {
+  if (flat === activeFlat && controller) {
+    if (isPaused) controller.resume(); else controller.pause();
+  } else {
+    playByFlat(flat);
+  }
 }
+
+function skipNext() { playByFlat((activeFlat + 1) % FLAT.length); }
+function skipPrev() { playByFlat((activeFlat - 1 + FLAT.length) % FLAT.length); }
 </script>
 <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
-<script src="https://w.soundcloud.com/player/api.js" async></script>
 </body>
 </html>

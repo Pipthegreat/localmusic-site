@@ -3,164 +3,572 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Player Test V5 — Stacked Cards · Slate-only</title>
-<meta name="description" content="Player test variant 5 — every track gets its own Spotify embed. No global controller, no cross-iframe coordination." />
+<title>V5 — Mixtape · Slate-only</title>
+<meta name="description" content="Player test variant 5 — a mixtape: side A, side B, one tap to play it through." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
-  /* ============ PALETTE: Slate-only (no accent) ============
-     Thesis: restraint over abundance. When the page is literally just
-     15 embedded players, the only accent is the embed itself — bring
-     no other color into it. The neutrals are warm-tinted toward ember
-     anyway, so warmth is present without competing. */
+  /* ============================================================
+     PALETTE — Slate-only, no warm accent. Restraint over abundance.
+     A mixtape doesn't need a logo colour; it needs the *paper*
+     to feel handled. Warm-tinted neutrals carry texture; the
+     accent is intentionally absent.
+     ============================================================ */
   :root {
     --bg-canvas:    oklch(9% 0.011 250);
     --bg-elevated:  oklch(13% 0.013 250);
-    --bg-card:      oklch(15% 0.014 250);
+    --bg-tape:      oklch(15% 0.015 248);
     --bg-row-hover: oklch(17% 0.014 250);
-    --fg-default: oklch(98% 0.005 250);
-    --fg-muted:   oklch(74% 0.012 248);
-    --fg-subtle:  oklch(58% 0.013 248);
+    --bg-row-active: oklch(22% 0.018 250);
+    --fg-default:   oklch(98% 0.005 250);
+    --fg-strong:    oklch(99% 0.003 250);
+    --fg-muted:     oklch(72% 0.012 248);
+    --fg-subtle:    oklch(58% 0.013 248);
     --border-subtle: oklch(20% 0.014 250);
     --border-default: oklch(26% 0.014 248);
-    --slate-accent: oklch(72% 0.012 248);
+    --paper:        oklch(86% 0.010 60);
+    --paper-strong: oklch(98% 0.006 60);
+    --ink-warm:     oklch(20% 0.012 50);
+    --slate-300:    oklch(72% 0.012 248);
+
+    --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+    --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+    --space-12: 48px; --space-16: 64px; --space-20: 80px;
+
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --dur-fast: 120ms; --dur-default: 200ms; --dur-slow: 400ms;
+
+    --font-display: "Fraunces", "Georgia", ui-serif, serif;
+    --font-body:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   }
-  * { box-sizing: border-box; }
+
+  *, *::before, *::after { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   html, body { margin: 0; padding: 0; background: var(--bg-canvas); color: var(--fg-default);
                overflow-x: hidden; }
-  body { font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif; }
-  header { padding: 28px 24px 16px; max-width: 880px; margin: 0 auto; }
-  .eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-             color: var(--fg-muted); font-weight: 600; }
-  h1 { font: 600 28px/1.2 inherit; margin: 6px 0 4px; letter-spacing: -0.01em; }
-  .lede { color: var(--fg-muted); margin: 0; max-width: 60ch; }
-  .thesis { margin-top: 14px; padding: 12px 14px; background: var(--bg-elevated);
-            border-left: 2px solid var(--slate-accent); border-radius: 0 6px 6px 0;
-            color: var(--fg-muted); font-size: 13.5px; }
-  .thesis b { color: var(--fg-default); font-weight: 600; }
-  main { max-width: 880px; margin: 0 auto; padding: 0 24px 40px; }
-  .artist-block { margin: 28px 0; }
-  .artist-head {
-    display: flex; align-items: baseline; gap: 12px;
-    margin: 0 0 12px; padding-bottom: 8px;
-    border-bottom: 1px solid var(--border-subtle);
+  body {
+    font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+    padding-bottom: 132px;
   }
-  .artist-name { font: 600 18px/1.2 inherit; margin: 0; letter-spacing: -0.005em; }
-  .artist-sc {
-    font: 500 11px/1 inherit; color: var(--fg-subtle); text-decoration: none;
-    letter-spacing: 0.06em; padding: 4px 8px; border-radius: 4px;
-    border: 1px solid var(--border-subtle); transition: all .12s ease;
+  ::selection { background: var(--paper); color: var(--ink-warm); }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--space-6); }
+
+  /* ====== HEADER ====== */
+  header.hero {
+    padding: var(--space-12) 0 var(--space-8);
+    display: grid; grid-template-columns: 1fr 320px;
+    gap: var(--space-10); align-items: end;
   }
-  .artist-sc:hover { color: var(--fg-default); border-color: var(--border-default); }
-  .cards { display: grid; grid-template-columns: 1fr; gap: 10px; }
-  .card {
-    background: var(--bg-card); border-radius: 10px;
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--fg-muted); font-weight: 500;
+  }
+  h1.masthead {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+    font-weight: 300; font-style: italic;
+    font-size: clamp(64px, 11vw, 160px);
+    line-height: 0.86; letter-spacing: -0.04em;
+    margin: var(--space-2) 0; color: var(--fg-strong);
+  }
+  h1.masthead .underline {
+    text-decoration: underline; text-decoration-thickness: 3px;
+    text-underline-offset: 12px; text-decoration-color: var(--paper);
+  }
+  .hero-side {
+    font-family: var(--font-mono); font-size: 11.5px; line-height: 1.8;
+    color: var(--fg-subtle); letter-spacing: 0.04em;
+    padding-left: var(--space-6); border-left: 1px solid var(--border-subtle);
+  }
+  .hero-side b { color: var(--fg-default); font-weight: 600; text-transform: uppercase;
+                 font-size: 10.5px; letter-spacing: 0.14em; display: block; margin-top: var(--space-3); }
+  .hero-side b:first-child { margin-top: 0; }
+
+  /* ====== TAPE LINER NOTES ====== */
+  .tape {
+    background: var(--bg-tape);
     border: 1px solid var(--border-subtle);
-    padding: 8px; overflow: hidden;
-    transition: border-color .12s ease;
+    border-radius: 4px;
+    margin: var(--space-10) 0 var(--space-12);
+    overflow: hidden;
+    position: relative;
   }
-  .card:hover { border-color: var(--border-default); }
-  .card iframe {
-    display: block; width: 100%; height: 80px;
-    border: 0; border-radius: 6px;
-  }
-  .card-meta {
+  .tape-label {
+    background: var(--paper); color: var(--ink-warm);
+    padding: var(--space-4) var(--space-6);
     display: flex; align-items: center; justify-content: space-between;
-    padding: 6px 8px 2px;
-    font: 500 12px/1.3 inherit; color: var(--fg-subtle);
+    gap: var(--space-4);
+    font-family: var(--font-mono);
+    border-bottom: 1px solid var(--ink-warm);
   }
-  .card-track-name { color: var(--fg-muted); }
-  .card-num { font-variant-numeric: tabular-nums; }
-  footer { max-width: 880px; margin: 0 auto 32px; padding: 0 24px;
-           color: var(--fg-subtle); font-size: 12.5px; }
-  footer a { color: var(--fg-muted); }
-  @media (max-width: 640px) {
-    header { padding: 20px 16px 12px; }
-    main, footer { padding-left: 16px; padding-right: 16px; }
-    h1 { font-size: 24px; }
-    .card iframe { height: 80px; }
+  .tape-label .label-id {
+    font-family: var(--font-mono); font-weight: 700; font-size: 12px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .tape-label .label-title {
+    font-family: var(--font-display); font-style: italic; font-weight: 400;
+    font-variation-settings: "opsz" 48;
+    font-size: 22px; letter-spacing: -0.015em; line-height: 1;
+    color: var(--ink-warm);
+  }
+  .tape-label .label-time {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+
+  /* The two sides — side A on left, side B on right */
+  .sides {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .side {
+    padding: var(--space-6) var(--space-6) var(--space-8);
+    position: relative;
+  }
+  .side + .side {
+    border-left: 1px dashed var(--border-subtle);
+  }
+  .side-tag {
+    display: flex; align-items: baseline; gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+  .side-letter {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-style: italic; font-weight: 300;
+    font-size: 84px; line-height: 0.85; letter-spacing: -0.03em;
+    color: var(--paper); margin: 0;
+  }
+  .side-letter::after {
+    content: "."; color: var(--fg-muted);
+  }
+  .side-label {
+    font-family: var(--font-mono); font-size: 10.5px;
+    color: var(--fg-subtle); letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .side-len {
+    margin-left: auto; font-family: var(--font-mono); font-size: 10.5px;
+    color: var(--fg-subtle); letter-spacing: 0.1em;
+  }
+
+  /* ====== TRACK LIST (per side) ====== */
+  .track-list { list-style: none; padding: 0; margin: 0; }
+  .track-row {
+    display: grid;
+    grid-template-columns: 26px 1fr auto;
+    align-items: baseline; gap: var(--space-3);
+    padding: var(--space-3) var(--space-2);
+    border-top: 1px dashed var(--border-subtle);
+    cursor: pointer; position: relative;
+    transition: background var(--dur-fast) var(--ease-out-quart);
+  }
+  .track-row:first-child { border-top: 0; }
+  .track-row:hover { background: var(--bg-row-hover); }
+  .track-row.active { background: var(--bg-row-active); }
+  .track-row.active::before {
+    content: "▸"; position: absolute; left: -6px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--paper-strong); font-family: var(--font-mono); font-size: 14px;
+  }
+  .track-num {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--fg-subtle); font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+  }
+  .track-row.active .track-num { color: var(--paper-strong); }
+  .track-text { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .track-name {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 18;
+    font-weight: 500; font-size: 15.5px; line-height: 1.25;
+    color: var(--fg-default); letter-spacing: -0.005em;
+  }
+  .track-row.active .track-name { color: var(--paper-strong); }
+  .track-artist {
+    font-family: var(--font-mono); font-size: 10.5px;
+    color: var(--fg-subtle); letter-spacing: 0.06em; text-transform: uppercase;
+    line-height: 1;
+  }
+  .track-state {
+    width: 16px; height: 12px; color: var(--fg-subtle);
+    display: inline-flex; align-items: end; justify-content: center; gap: 1.5px;
+  }
+  .track-state .bar {
+    width: 2px; background: currentColor; border-radius: 1px;
+    height: 30%; display: block;
+  }
+  .track-row.active .track-state { color: var(--paper-strong); }
+  .track-row.active.playing .track-state .bar {
+    animation: bars 1100ms ease-in-out infinite;
+  }
+  .track-row.active.playing .track-state .bar:nth-child(1) { animation-delay: -200ms; }
+  .track-row.active.playing .track-state .bar:nth-child(2) { animation-delay: -700ms; }
+  .track-row.active.playing .track-state .bar:nth-child(3) { animation-delay: -400ms; }
+  @keyframes bars {
+    0%, 100% { height: 20%; }
+    50% { height: 100%; }
+  }
+
+  /* ====== SPINE / SPOOLS — purely decorative tape feel ====== */
+  .tape-spine {
+    background: var(--ink-warm); color: var(--paper);
+    padding: var(--space-3) var(--space-6);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--space-4); border-top: 1px solid oklch(35% 0.015 50);
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .spool { display: inline-flex; align-items: center; gap: var(--space-3); }
+  .spool .wheel {
+    width: 28px; height: 28px; border-radius: 99px;
+    border: 2px solid var(--paper); position: relative;
+  }
+  .spool .wheel::before {
+    content: ""; position: absolute; top: 50%; left: 50%;
+    width: 6px; height: 6px; border-radius: 99px; background: var(--paper);
+    transform: translate(-50%, -50%);
+  }
+  .spool .wheel::after {
+    content: ""; position: absolute; top: 50%; left: 50%;
+    width: 18px; height: 2px; background: var(--paper);
+    transform: translate(-50%, -50%);
+    transition: transform var(--dur-slow) var(--ease-out-quart);
+  }
+  body.playing .spool.left .wheel::after  { animation: spin 1.8s linear infinite; }
+  body.playing .spool.right .wheel::after { animation: spin 1.8s linear infinite; }
+  @keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(0); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  .tape-spine .runtime { font-weight: 600; }
+
+  /* ====== PLAYER BAR ====== */
+  .player-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    background: oklch(11% 0.013 250 / 0.94);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-subtle);
+  }
+  .player-inner {
+    max-width: 1180px; margin: 0 auto;
+    padding: var(--space-3) var(--space-6);
+    display: grid; grid-template-columns: 1fr auto auto;
+    gap: var(--space-4); align-items: center;
+  }
+  .player-now { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .now-track {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 24;
+    font-weight: 500; font-size: 16px; letter-spacing: -0.01em;
+    color: var(--fg-strong);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .now-artist {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--fg-subtle); letter-spacing: 0.06em; text-transform: uppercase;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .player-now.empty .now-track { color: var(--fg-subtle); font-style: italic; }
+  #spotify-mount { width: 360px; height: 80px; display: block; }
+  #spotify-mount:empty { display: none; }
+  .ctrls { display: flex; gap: var(--space-1); }
+  .ctrl-btn {
+    width: 36px; height: 36px; border-radius: 99px;
+    background: transparent; border: 1px solid var(--border-default);
+    color: var(--fg-muted); cursor: pointer; padding: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: all var(--dur-fast) var(--ease-out-quart);
+  }
+  .ctrl-btn:hover { border-color: var(--paper); color: var(--paper-strong); }
+  .ctrl-btn:focus-visible { outline: 2px solid var(--paper); outline-offset: 2px;
+                             border-color: transparent; }
+  .ctrl-btn.primary {
+    background: var(--paper); border-color: var(--paper); color: var(--ink-warm);
+  }
+  .ctrl-btn.primary:hover { background: var(--paper-strong); border-color: var(--paper-strong); }
+  .ctrl-btn svg { width: 14px; height: 14px; fill: currentColor; }
+
+  /* ====== FOOTER ====== */
+  footer.colophon {
+    margin-top: var(--space-16); padding: var(--space-12) 0 var(--space-16);
+    border-top: 1px solid var(--border-subtle);
+  }
+  .colophon h2 {
+    font-family: var(--font-display); font-style: italic; font-weight: 300;
+    font-variation-settings: "opsz" 144, "SOFT" 60;
+    font-size: clamp(48px, 8vw, 120px); line-height: 0.92;
+    letter-spacing: -0.035em; margin: 0 0 var(--space-6);
+    color: var(--fg-muted);
+  }
+  .colophon h2 em { color: var(--paper); font-style: italic; }
+  .colophon-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8); font-family: var(--font-mono);
+    font-size: 11.5px; line-height: 1.7; color: var(--fg-subtle);
+    letter-spacing: 0.04em;
+  }
+  .colophon-grid dt { color: var(--fg-default); text-transform: uppercase;
+                      font-size: 10.5px; letter-spacing: 0.14em; margin-bottom: 4px; }
+  .colophon-grid a { color: var(--paper); text-decoration: none;
+                     border-bottom: 1px dashed transparent; }
+  .colophon-grid a:hover { border-bottom-color: var(--paper); }
+
+  @media (max-width: 760px) {
+    body { padding-bottom: 116px; }
+    .wrap { padding: 0 var(--space-4); }
+    header.hero { grid-template-columns: 1fr; gap: var(--space-4);
+                  padding-top: var(--space-8); }
+    .hero-side { border-left: 0; border-top: 1px solid var(--border-subtle);
+                  padding: var(--space-4) 0 0; }
+    .sides { grid-template-columns: 1fr; }
+    .side + .side { border-left: 0; border-top: 1px dashed var(--border-subtle); }
+    .side-letter { font-size: 56px; }
+    .tape-spine { flex-wrap: wrap; gap: var(--space-2); }
+    .player-inner { grid-template-columns: 1fr auto;
+                    padding: var(--space-3) var(--space-4); }
+    #spotify-mount { display: none; }
+    .player-bar .ctrl-btn:not(.primary) { display: none; }
+    .colophon-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important;
+                              transition-duration: 0.01ms !important; }
+    body.playing .spool .wheel::after { animation: none; }
   }
 </style>
 </head>
 <body>
-<header>
-  <div class="eyebrow">Player test · V5</div>
-  <h1>Stacked Cards</h1>
-  <p class="lede">Every track gets its own Spotify embed. Fifteen independent iframes, no IFrame-API controller, no <code>loadUri()</code> juggling, no stall detection. Each card has its own play button — the visitor manages their own audio.</p>
-  <div class="thesis">
-    <b>Thesis:</b> Spotify's own embed is good. Don't wrap it. Don't coordinate across instances. Stop trying to be a player and become a list of players.
-    <b>Trade:</b> 15 iframes is real weight (~6MB+ first paint). Mitigated by <code>loading="lazy"</code> — embeds below the fold don't initialize until scrolled. No skip-next, no auto-advance.
+<div class="wrap">
+
+<header class="hero">
+  <div>
+    <div class="eyebrow">player test · v5 · mixtape</div>
+    <h1 class="masthead">Side <span class="underline">A</span>,<br>side <span class="underline">B</span>.</h1>
+  </div>
+  <div class="hero-side">
+    <b>palette</b>slate-only, no warm accent
+    <b>typography</b>fraunces · inter · jetbrains mono
+    <b>audio</b>spotify iframe-api, single embed
+    <b>order</b>track 01 → 15, then loops
+    <b>thesis</b>one tap, plays through
   </div>
 </header>
-<main id="artist-list"></main>
-<footer>
-  <a href="../">← back to player tests</a> ·
-  palette: <a href="#" title="Slate 950 + slate-300 accent only — no warm">Slate-only</a>
+
+<!-- ===== TAPE ===== -->
+<section class="tape" aria-label="Mixtape">
+  <div class="tape-label">
+    <span class="label-id">SFOAK · 002 · 2026</span>
+    <span class="label-title">a setlist for a long afternoon</span>
+    <span class="label-time" id="label-time">— · 15 tracks</span>
+  </div>
+  <div class="sides" id="sides"><!-- filled by JS --></div>
+  <div class="tape-spine">
+    <span class="spool left"><span class="wheel"></span><span>side a</span></span>
+    <span class="runtime"><span id="elapsed">0:00</span> / <span id="total">—</span></span>
+    <span class="spool right"><span>side b</span><span class="wheel"></span></span>
+  </div>
+</section>
+
+<footer class="colophon">
+  <h2>One tap.<br>Plays <em>through</em>.</h2>
+  <dl class="colophon-grid">
+    <div><dt>back to</dt><dd><a href="../">all player tests</a></dd></div>
+    <div><dt>palette</dt><dd>Stle · Slate-only</dd></div>
+    <div><dt>variant</dt><dd>05 / 05 — mixtape</dd></div>
+  </dl>
 </footer>
+
+</div>
+
+<!-- ===== PLAYER BAR ===== -->
+<div class="player-bar" role="region" aria-label="Audio player">
+  <div class="player-inner">
+    <div class="player-now empty" id="player-now">
+      <div class="now-track">No track loaded</div>
+      <div class="now-artist">Press play to start the tape</div>
+    </div>
+    <div id="spotify-mount"></div>
+    <div class="ctrls">
+      <button class="ctrl-btn" id="ctrl-prev" aria-label="Previous track">
+        <svg viewBox="0 0 24 24"><path d="M19 4l-10 8 10 8V4zM7 4H5v16h2z"/></svg>
+      </button>
+      <button class="ctrl-btn primary" id="ctrl-play" aria-label="Play / pause">
+        <svg class="ico-play" viewBox="0 0 24 24"><path d="M6 3l16 9-16 9z"/></svg>
+        <svg class="ico-pause" viewBox="0 0 24 24" style="display:none;"><rect x="5" y="3" width="5" height="18"/><rect x="14" y="3" width="5" height="18"/></svg>
+      </button>
+      <button class="ctrl-btn" id="ctrl-next" aria-label="Next track">
+        <svg viewBox="0 0 24 24"><path d="M5 4l10 8-10 8V4zM17 4h2v16h-2z"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
 
 <script>
 const ARTISTS = [
-  { name: "Alabama Shakes", soundcloud: "alabamashakes", tracks: [
-    { name: "Always Alright",  id: "6ckUX8cgcqjoNGTd2A2Pvd" },
-    { name: "Hang Loose",      id: "5cDHV67TxLrdz4ITUVQswH" },
-    { name: "I Found You",     id: "1N3c3dDtbx1OodfkIcxBmy" }]},
-  { name: "The xx", soundcloud: "thexx", tracks: [
-    { name: "Crystalised",     id: "5UBBJnFxsfjFxfrtvErQoH" },
-    { name: "Intro",           id: "2usrT8QIbIk9y0NEtQwS4j" },
-    { name: "Angels",          id: "3zsRP8rH1kaIAo9fmiP4El" }]},
-  { name: "James Blake", soundcloud: "jamesblakeproduction", tracks: [
-    { name: "Trying Times",    id: "52T8TTMESX21406wvTdQDY" },
-    { name: "Retrograde",      id: "2IqjKEBiz0CdLKdkXhxw84" },
-    { name: "King's Dead",     id: "51rXHuKN8Loc4sUlKPODgH" }]},
-  { name: "Khalid", soundcloud: "thegreatkhalid", tracks: [
-    { name: "Young Dumb & Broke", id: "5Z3GHaZ6ec9bsiI5BenrbY" },
-    { name: "Location",        id: "152lZdxL1OR0ZMW6KquMif" },
-    { name: "Better",          id: "2OpBganfGk2GVdSlRdxzaX" }]},
-  { name: "Iron & Wine", soundcloud: "iron-and-wine", tracks: [
-    { name: "Such Great Heights", id: "6dDxgfvM8pJm7AzmLZB1nN" },
+  { name: "Alabama Shakes", tracks: [
+    { name: "Always Alright",                  id: "6ckUX8cgcqjoNGTd2A2Pvd" },
+    { name: "Hang Loose",                      id: "5cDHV67TxLrdz4ITUVQswH" },
+    { name: "I Found You",                     id: "1N3c3dDtbx1OodfkIcxBmy" }]},
+  { name: "The xx", tracks: [
+    { name: "Crystalised",                     id: "5UBBJnFxsfjFxfrtvErQoH" },
+    { name: "Intro",                           id: "2usrT8QIbIk9y0NEtQwS4j" },
+    { name: "Angels",                          id: "3zsRP8rH1kaIAo9fmiP4El" }]},
+  { name: "James Blake", tracks: [
+    { name: "Trying Times",                    id: "52T8TTMESX21406wvTdQDY" },
+    { name: "Retrograde",                      id: "2IqjKEBiz0CdLKdkXhxw84" },
+    { name: "King's Dead",                     id: "51rXHuKN8Loc4sUlKPODgH" }]},
+  { name: "Khalid", tracks: [
+    { name: "Young Dumb & Broke",              id: "5Z3GHaZ6ec9bsiI5BenrbY" },
+    { name: "Location",                        id: "152lZdxL1OR0ZMW6KquMif" },
+    { name: "Better",                          id: "2OpBganfGk2GVdSlRdxzaX" }]},
+  { name: "Iron & Wine", tracks: [
+    { name: "Such Great Heights",              id: "6dDxgfvM8pJm7AzmLZB1nN" },
     { name: "Flightless Bird, American Mouth", id: "1fEGtTZjrjJW8eUeewnNJR" },
-    { name: "Time After Time", id: "5JEM7lT9uSyhUsKFXwGfSm" }]},
+    { name: "Time After Time",                 id: "5JEM7lT9uSyhUsKFXwGfSm" }]},
 ];
+const FLAT = [];
+ARTISTS.forEach(a => a.tracks.forEach(t => FLAT.push({ artist: a.name, ...t })));
+// Split into two sides — 8 on A, 7 on B.
+const SIDE_A = FLAT.slice(0, 8);
+const SIDE_B = FLAT.slice(8);
 
-const list = document.getElementById('artist-list');
-let trackNum = 0;
-ARTISTS.forEach((artist) => {
-  const block = document.createElement('section');
-  block.className = 'artist-block';
-  const head = document.createElement('div');
-  head.className = 'artist-head';
-  head.innerHTML = `
-    <h2 class="artist-name">${escapeHtml(artist.name)}</h2>
-    <a class="artist-sc" href="https://soundcloud.com/${artist.soundcloud}"
-       target="_blank" rel="noopener">SoundCloud ↗</a>`;
-  block.appendChild(head);
-  const cards = document.createElement('div');
-  cards.className = 'cards';
-  artist.tracks.forEach((t) => {
-    trackNum += 1;
-    const card = document.createElement('div');
-    card.className = 'card';
-    // loading="lazy" means iframes below the fold don't init until
-    // they scroll into view — keeps initial paint under control even
-    // with 15 embeds. The visitor pays for what they look at.
-    card.innerHTML = `
-      <div class="card-meta">
-        <span class="card-track-name">${escapeHtml(t.name)}</span>
-        <span class="card-num">${String(trackNum).padStart(2, '0')} / 15</span>
-      </div>
-      <iframe
-        src="https://open.spotify.com/embed/track/${t.id}?utm_source=playertest"
-        loading="lazy"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        title="${escapeHtml(artist.name)} — ${escapeHtml(t.name)}">
-      </iframe>`;
-    cards.appendChild(card);
-  });
-  block.appendChild(cards);
-  list.appendChild(block);
-});
-
-function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c =>
+function esc(s) { return String(s).replace(/[&<>"']/g, c =>
   ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function fmt(t) {
+  if (!isFinite(t) || t < 0) return '0:00';
+  return Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0');
+}
+
+// ====== RENDER ======
+const sidesEl = document.getElementById('sides');
+function renderSide(letter, label, tracks, offset) {
+  const sec = document.createElement('div');
+  sec.className = 'side';
+  sec.innerHTML = `
+    <div class="side-tag">
+      <span class="side-letter">${letter}</span>
+      <span class="side-label">${label}</span>
+      <span class="side-len">${tracks.length} tracks</span>
+    </div>`;
+  const ul = document.createElement('ul');
+  ul.className = 'track-list';
+  tracks.forEach((t, i) => {
+    const flat = offset + i;
+    const li = document.createElement('li');
+    li.className = 'track-row';
+    li.dataset.flat = flat;
+    li.innerHTML = `
+      <span class="track-num">${String(flat + 1).padStart(2, '0')}</span>
+      <div class="track-text">
+        <span class="track-name">${esc(t.name)}</span>
+        <span class="track-artist">${esc(t.artist)}</span>
+      </div>
+      <span class="track-state"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>`;
+    li.addEventListener('click', () => onRowClick(flat));
+    ul.appendChild(li);
+  });
+  sec.appendChild(ul);
+  return sec;
+}
+sidesEl.appendChild(renderSide('A', 'opener · daylight', SIDE_A, 0));
+sidesEl.appendChild(renderSide('B', 'flip · evening',    SIDE_B, SIDE_A.length));
+
+// ====== PLAYER CORE — same bug-fixed core as V1/V2/V3 ======
+let activeFlat = -1, activeUri = null, controller = null;
+let isPaused = true, lastPosition = 0, lastIsPaused = true, lastDuration = 0;
+let endFiredFor = null;
+let runtimeAccumMs = 0;
+
+window.onSpotifyIframeApiReady = (API) => { window._spAPI = API; };
+
+function ensureController(initialUri, ready) {
+  if (controller) { ready(); return; }
+  const mount = document.getElementById('spotify-mount');
+  mount.innerHTML = '<div id="sp-embed"></div>';
+  const tryInit = () => {
+    if (!window._spAPI) { setTimeout(tryInit, 60); return; }
+    window._spAPI.createController(
+      document.getElementById('sp-embed'),
+      { uri: initialUri, width: 360, height: 80 },
+      (c) => {
+        controller = c;
+        c.addListener('ready', () => ready());
+        c.addListener('playback_update', onPlaybackUpdate);
+      }
+    );
+  };
+  tryInit();
+}
+
+function onPlaybackUpdate(e) {
+  const { position, duration, isPaused: paused } = e.data;
+  const justEnded =
+    !lastIsPaused && paused &&
+    duration > 0 && lastPosition >= duration - 1500 &&
+    endFiredFor !== activeUri;
+  lastPosition = position; lastDuration = duration;
+  lastIsPaused = paused; isPaused = paused;
+  syncPlayState();
+  if (justEnded) { endFiredFor = activeUri; setTimeout(skipNext, 60); }
+}
+
+function syncPlayState() {
+  document.body.classList.toggle('playing', !isPaused);
+  document.querySelectorAll('.track-row').forEach(r => {
+    r.classList.toggle('playing', !isPaused && parseInt(r.dataset.flat, 10) === activeFlat);
+  });
+  document.querySelector('#ctrl-play .ico-play').style.display  = isPaused ? 'block' : 'none';
+  document.querySelector('#ctrl-play .ico-pause').style.display = isPaused ? 'none'  : 'block';
+  document.getElementById('elapsed').textContent = fmt(lastPosition / 1000);
+}
+
+function setActive(flat) {
+  activeFlat = flat;
+  document.querySelectorAll('.track-row').forEach(r => {
+    r.classList.toggle('active', parseInt(r.dataset.flat, 10) === flat);
+  });
+  const t = FLAT[flat];
+  const now = document.getElementById('player-now');
+  now.classList.remove('empty');
+  now.querySelector('.now-track').textContent = t.name;
+  now.querySelector('.now-artist').textContent = t.artist;
+}
+
+function playByFlat(flat) {
+  if (flat < 0 || flat >= FLAT.length) return;
+  const t = FLAT[flat];
+  const uri = 'spotify:track:' + t.id;
+  activeUri = uri; endFiredFor = null; lastPosition = 0; lastIsPaused = true;
+  setActive(flat);
+  if (!controller) {
+    ensureController(uri, () =>
+      setTimeout(() => { try { controller.play(); } catch(e){} }, 280));
+  } else {
+    controller.loadUri(uri);
+    setTimeout(() => { try { controller.play(); } catch(e){} }, 280);
+  }
+}
+
+function onRowClick(flat) {
+  if (flat === activeFlat && controller) {
+    if (isPaused) controller.resume(); else controller.pause();
+  } else {
+    playByFlat(flat);
+  }
+}
+function skipNext() { playByFlat((activeFlat + 1) % FLAT.length); }
+function skipPrev() { playByFlat((activeFlat - 1 + FLAT.length) % FLAT.length); }
+document.getElementById('ctrl-next').addEventListener('click', skipNext);
+document.getElementById('ctrl-prev').addEventListener('click', skipPrev);
+document.getElementById('ctrl-play').addEventListener('click', () => {
+  if (!controller) { if (activeFlat < 0) playByFlat(0); return; }
+  if (isPaused) controller.resume(); else controller.pause();
+});
 </script>
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 </body>
 </html>
