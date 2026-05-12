@@ -345,27 +345,29 @@
 <div id="spotify-mount"></div>
 
 <script>
+// TONIGHT — late-night dance, house, electronic. The genre most likely
+// to be playing somewhere else when you tap play; the failover earns it.
 const ARTISTS = [
-  { name: "Alabama Shakes", tracks: [
-    { name: "Always Alright",                  id: "6ckUX8cgcqjoNGTd2A2Pvd" },
-    { name: "Hang Loose",                      id: "5cDHV67TxLrdz4ITUVQswH" },
-    { name: "I Found You",                     id: "1N3c3dDtbx1OodfkIcxBmy" }]},
-  { name: "The xx", tracks: [
-    { name: "Crystalised",                     id: "5UBBJnFxsfjFxfrtvErQoH" },
-    { name: "Intro",                           id: "2usrT8QIbIk9y0NEtQwS4j" },
-    { name: "Angels",                          id: "3zsRP8rH1kaIAo9fmiP4El" }]},
-  { name: "James Blake", tracks: [
-    { name: "Trying Times",                    id: "52T8TTMESX21406wvTdQDY" },
-    { name: "Retrograde",                      id: "2IqjKEBiz0CdLKdkXhxw84" },
-    { name: "King's Dead",                     id: "51rXHuKN8Loc4sUlKPODgH" }]},
-  { name: "Khalid", tracks: [
-    { name: "Young Dumb & Broke",              id: "5Z3GHaZ6ec9bsiI5BenrbY" },
-    { name: "Location",                        id: "152lZdxL1OR0ZMW6KquMif" },
-    { name: "Better",                          id: "2OpBganfGk2GVdSlRdxzaX" }]},
-  { name: "Iron & Wine", tracks: [
-    { name: "Such Great Heights",              id: "6dDxgfvM8pJm7AzmLZB1nN" },
-    { name: "Flightless Bird, American Mouth", id: "1fEGtTZjrjJW8eUeewnNJR" },
-    { name: "Time After Time",                 id: "5JEM7lT9uSyhUsKFXwGfSm" }]},
+  { name: "Bob Moses", tracks: [
+    { name: "Tearing Me Up",          id: "6NDt5z8GKIHub37hBQ4x18" },
+    { name: "Afterglow",              id: "1Aic3Xbzma3Nb0sSwqGCdf" },
+    { name: "Love Brand New",         id: "5dyUCoAK5epLtg3sej6BSq" }]},
+  { name: "Honey Dijon", tracks: [
+    { name: "Satisfied",              id: "4J40gFNhRlukzy1MgLjeNt" },
+    { name: "Just Friends",           id: "16vvU2dfM73xN57mFlQ9FF" },
+    { name: "Slight Werk - Club Mix", id: "3AenQimpj4gFY3e0CnsbD1" }]},
+  { name: "Sofia Kourtesis", tracks: [
+    { name: "Madres",                 id: "0nMVtLxgC3NdnhGamj6cS5" },
+    { name: "La Perla - Edit",        id: "6CldyxMa4XuHWAhAlaPWmt" },
+    { name: "Corazón",                id: "5A6SU4vLMAJZbkTy7C7xXJ" }]},
+  { name: "Elderbrook", tracks: [
+    { name: "Inner Light",            id: "40tPP3K10yMZxwnT65REKj" },
+    { name: "Numb",                   id: "2cdCC1aCXbvz9tXFOR6CxR" },
+    { name: "The End",                id: "7tu4R4fQFRH5iG8BvVVPjS" }]},
+  { name: "HVOB", tracks: [
+    { name: "A List",                 id: "4Y23TZTuoRycwxQAQrS9N7" },
+    { name: "Azrael",                 id: "2xeNudarMjWk0szAYH7TQ8" },
+    { name: "Bones",                  id: "2nEMZAY2Hoa4eZwmvvt8vP" }]},
 ];
 const FLAT = [];
 ARTISTS.forEach(a => a.tracks.forEach(t => FLAT.push({ artist: a.name, ...t })));

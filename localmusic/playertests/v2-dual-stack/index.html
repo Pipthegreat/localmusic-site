@@ -372,27 +372,29 @@
 </div>
 
 <script>
+// SPLITS — hip-hop and R&B. Dual-source feels right when the genre
+// itself lives on both Spotify (mastered) and SoundCloud (versions).
 const ARTISTS = [
-  { name: "Alabama Shakes", tracks: [
-    { name: "Always Alright",                  id: "6ckUX8cgcqjoNGTd2A2Pvd" },
-    { name: "Hang Loose",                      id: "5cDHV67TxLrdz4ITUVQswH" },
-    { name: "I Found You",                     id: "1N3c3dDtbx1OodfkIcxBmy" }]},
-  { name: "The xx", tracks: [
-    { name: "Crystalised",                     id: "5UBBJnFxsfjFxfrtvErQoH" },
-    { name: "Intro",                           id: "2usrT8QIbIk9y0NEtQwS4j" },
-    { name: "Angels",                          id: "3zsRP8rH1kaIAo9fmiP4El" }]},
-  { name: "James Blake", tracks: [
-    { name: "Trying Times",                    id: "52T8TTMESX21406wvTdQDY" },
-    { name: "Retrograde",                      id: "2IqjKEBiz0CdLKdkXhxw84" },
-    { name: "King's Dead",                     id: "51rXHuKN8Loc4sUlKPODgH" }]},
+  { name: "A$AP Rocky", tracks: [
+    { name: "Sundress",               id: "2aPTvyE09vUCRwVvj0I8WK" },
+    { name: "F**kin' Problems",       id: "4X5f3vT8MRuXF68pfjNte5" },
+    { name: "Everyday",               id: "2N3U8uTYhjX2KwGT0pf5x0" }]},
+  { name: "Baby Keem", tracks: [
+    { name: "Ca$ino",                 id: "3VW6HJYa5l0uzGcCRA222P" },
+    { name: "HONEST",                 id: "58k32my5lKofeZRtIvBDg9" },
+    { name: "family ties",            id: "3QFInJAm9eyaho5vBzxInN" }]},
+  { name: "Smino", tracks: [
+    { name: "No L's",                 id: "12CNybio0Bxean3F3uYugU" },
+    { name: "Backstage Pass",         id: "4LLNd36WeJKv8pzjGeoMXZ" },
+    { name: "Wild Irish Roses",       id: "6efkcs2aUBMFKxl0cl2JWQ" }]},
+  { name: "KOTA The Friend", tracks: [
+    { name: "Outside",                id: "2i40wZkiPAGIFudrGH99nx" },
+    { name: "Long Beach",             id: "6tqIes4TjudsjfIpK4P2Jh" },
+    { name: "Colorado",               id: "3DbBgbnDUOml329rAp2Tbr" }]},
   { name: "Khalid", tracks: [
-    { name: "Young Dumb & Broke",              id: "5Z3GHaZ6ec9bsiI5BenrbY" },
-    { name: "Location",                        id: "152lZdxL1OR0ZMW6KquMif" },
-    { name: "Better",                          id: "2OpBganfGk2GVdSlRdxzaX" }]},
-  { name: "Iron & Wine", tracks: [
-    { name: "Such Great Heights",              id: "6dDxgfvM8pJm7AzmLZB1nN" },
-    { name: "Flightless Bird, American Mouth", id: "1fEGtTZjrjJW8eUeewnNJR" },
-    { name: "Time After Time",                 id: "5JEM7lT9uSyhUsKFXwGfSm" }]},
+    { name: "Young Dumb & Broke",     id: "5Z3GHaZ6ec9bsiI5BenrbY" },
+    { name: "Location",               id: "152lZdxL1OR0ZMW6KquMif" },
+    { name: "Better",                 id: "2OpBganfGk2GVdSlRdxzaX" }]},
 ];
 const FLAT = [];
 ARTISTS.forEach(a => a.tracks.forEach(t => FLAT.push({ artist: a.name, ...t })));
