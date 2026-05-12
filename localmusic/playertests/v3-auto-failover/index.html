@@ -441,10 +441,13 @@ function ensureController(initialUri, ready) {
 function onPlaybackUpdate(e) {
   const { position, duration, isPaused: paused } = e.data;
   lastUpdateAt = Date.now();
+  // Track-end: was playing → paused, AND position rolled back
+  // from near-end to near-zero. The roll-back is the unambiguous
+  // signal — pauses for any other reason leave position alone.
   const justEnded =
-    !lastIsPaused && paused &&
-    duration > 0 && lastPosition >= duration - 1500 &&
-    endFiredFor !== activeUri;
+    endFiredFor !== activeUri &&
+    duration > 0 && !lastIsPaused && paused &&
+    lastPosition >= duration - 1500 && position < 1500;
   lastPosition = position; lastDuration = duration;
   lastIsPaused = paused; isPaused = paused;
   // Real playback confirmed — clear any stall banner.
@@ -453,7 +456,20 @@ function onPlaybackUpdate(e) {
     if (stallTimer) { clearTimeout(stallTimer); stallTimer = null; }
   }
   syncPlayState();
-  if (justEnded) { endFiredFor = activeUri; setTimeout(skipNext, 60); }
+  if (justEnded) { endFiredFor = activeUri; setTimeout(skipNext, 80); }
+}
+
+function attemptPlay(targetUri) {
+  const tryOnce = () => {
+    if (activeUri !== targetUri) return;
+    if (lastUpdateAt > 0 && !isPaused && lastPosition > 0) return;
+    try { controller.play(); } catch (e) {}
+    try { controller.resume(); } catch (e) {}
+  };
+  setTimeout(tryOnce, 320);
+  setTimeout(tryOnce, 900);
+  setTimeout(tryOnce, 1800);
+  setTimeout(tryOnce, 3200);
 }
 
 function syncPlayState() {
@@ -495,16 +511,14 @@ function playByFlat(flat) {
   const uri = 'spotify:track:' + t.id;
   activeUri = uri; endFiredFor = null;
   lastPosition = 0; lastIsPaused = true;
+  lastUpdateAt = 0;
   setActive(flat);
   document.getElementById('stall-banner').classList.remove('show');
   if (!controller) {
-    ensureController(uri, () => {
-      setTimeout(() => { try { controller.play(); } catch(e){} }, 280);
-      armStallCheck();
-    });
+    ensureController(uri, () => { attemptPlay(uri); armStallCheck(); });
   } else {
     controller.loadUri(uri);
-    setTimeout(() => { try { controller.play(); } catch(e){} }, 280);
+    attemptPlay(uri);
     armStallCheck();
   }
 }

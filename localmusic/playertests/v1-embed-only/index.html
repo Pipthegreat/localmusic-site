@@ -513,6 +513,9 @@ let isPaused = true;
 let lastPosition = 0;
 let lastIsPaused = true;
 let endFiredFor = null;     // URI we already fired track-end for
+let lastUpdateAt = 0;       // ms timestamp of the most recent playback_update —
+                            // lets the play() retry chain bail once Spotify
+                            // confirms real audio is flowing.
 
 window.onSpotifyIframeApiReady = (API) => { window._spAPI = API; };
 
@@ -537,23 +540,43 @@ function ensureController(initialUri, ready) {
 
 function onPlaybackUpdate(e) {
   const { position, duration, isPaused: paused } = e.data;
-  // Track-end detection: was playing → just paused, AND position
-  // was previously near the end. Spotify emits one final
-  // playback_update with isPaused=true when a track completes;
-  // the position may be near `duration` OR reset to 0 by then —
-  // we use the *previous* position as the reliable signal.
+  lastUpdateAt = Date.now();
+  // Track-end signal: was playing → paused, AND position rolled
+  // back from near-end to near-zero. The roll-back is what makes
+  // this unambiguous — pauses for any other reason (user tap,
+  // Connect conflict, buffering) leave position where it was.
   const justEnded =
-    !lastIsPaused && paused &&
-    duration > 0 && lastPosition >= duration - 1500 &&
-    endFiredFor !== activeUri;
+    endFiredFor !== activeUri &&
+    duration > 0 && !lastIsPaused && paused &&
+    lastPosition >= duration - 1500 && position < 1500;
   lastPosition = position;
   lastIsPaused = paused;
   isPaused = paused;
   syncPlayState();
   if (justEnded) {
     endFiredFor = activeUri;
-    setTimeout(skipNext, 60);
+    setTimeout(skipNext, 80);
   }
+}
+
+// Retry-chain play(). Spotify's iframe drops play() calls made
+// before the new URI finishes loading inside the embed; a single
+// timeout works on a fast connection and silently fails on a
+// slow one. The cascade catches both. Each attempt bails the
+// moment a playback_update confirms audio is actually flowing
+// — that's what keeps the second/third attempts from re-seeking
+// a playing track (which is what caused "skips on first play").
+function attemptPlay(targetUri) {
+  const tryOnce = () => {
+    if (activeUri !== targetUri) return;
+    if (lastUpdateAt > 0 && !isPaused && lastPosition > 0) return;
+    try { controller.play(); } catch (e) {}
+    try { controller.resume(); } catch (e) {}
+  };
+  setTimeout(tryOnce, 320);
+  setTimeout(tryOnce, 900);
+  setTimeout(tryOnce, 1800);
+  setTimeout(tryOnce, 3200);
 }
 
 function syncPlayState() {
@@ -588,16 +611,13 @@ function playByFlat(flat) {
   endFiredFor = null;
   lastPosition = 0;
   lastIsPaused = true;
+  lastUpdateAt = 0;
   setActive(flat);
   if (!controller) {
-    ensureController(uri, () => {
-      // Slight delay lets the iframe finish wiring the initial uri,
-      // then a single play() call. No retry storm.
-      setTimeout(() => { try { controller.play(); } catch(e) {} }, 280);
-    });
+    ensureController(uri, () => attemptPlay(uri));
   } else {
     controller.loadUri(uri);
-    setTimeout(() => { try { controller.play(); } catch(e) {} }, 280);
+    attemptPlay(uri);
   }
 }
 

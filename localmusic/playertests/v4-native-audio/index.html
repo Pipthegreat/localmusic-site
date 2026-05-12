@@ -658,8 +658,18 @@ function setStage(track, info) {
   if (row && info.dur) row.querySelector('[data-dur]').textContent = fmt(info.dur / 1000);
 }
 
-async function playByFlat(flat) {
+async function playByFlat(flat, _skips) {
   if (flat < 0 || flat >= FLAT.length) return;
+  // Guard against infinite skip loops if iTunes has zero previews
+  // for the entire corpus (offline, blocked, etc.) — stop after a
+  // full lap rather than spinning the request loop forever.
+  const skipped = _skips || 0;
+  if (skipped >= FLAT.length) {
+    document.getElementById('stage-artist').textContent =
+      'no previews available — open any track in Spotify or SoundCloud';
+    syncIcon(true);
+    return;
+  }
   activeFlat = flat;
   const track = FLAT[flat];
   // Update stage immediately for responsiveness (cover async).
@@ -673,9 +683,9 @@ async function playByFlat(flat) {
   const info = await enrich(track);
   setStage(track, info);
   if (!info.previewUrl) {
-    document.getElementById('stage-artist').textContent =
-      `${track.artist} · no preview available — open in Spotify or SoundCloud`;
-    return;
+    // Skip forward rather than dead-ending. The hand-off links on
+    // the current row still work; the queue keeps moving.
+    return playByFlat((flat + 1) % FLAT.length, skipped + 1);
   }
   audio.src = info.previewUrl;
   try { await audio.play(); } catch (e) { syncIcon(true); }

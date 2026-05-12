@@ -451,6 +451,7 @@ let isPaused = true;
 let lastPosition = 0;
 let lastIsPaused = true;
 let endFiredFor = null;
+let lastUpdateAt = 0;
 
 window.onSpotifyIframeApiReady = (API) => { window._spAPI = API; };
 
@@ -475,18 +476,32 @@ function ensureController(initialUri, ready) {
 
 function onPlaybackUpdate(e) {
   const { position, duration, isPaused: paused } = e.data;
+  lastUpdateAt = Date.now();
   const justEnded =
-    !lastIsPaused && paused &&
-    duration > 0 && lastPosition >= duration - 1500 &&
-    endFiredFor !== activeUri;
+    endFiredFor !== activeUri &&
+    duration > 0 && !lastIsPaused && paused &&
+    lastPosition >= duration - 1500 && position < 1500;
   lastPosition = position;
   lastIsPaused = paused;
   isPaused = paused;
   syncPlayState();
   if (justEnded) {
     endFiredFor = activeUri;
-    setTimeout(skipNext, 60);
+    setTimeout(skipNext, 80);
   }
+}
+
+function attemptPlay(targetUri) {
+  const tryOnce = () => {
+    if (activeUri !== targetUri) return;
+    if (lastUpdateAt > 0 && !isPaused && lastPosition > 0) return;
+    try { controller.play(); } catch (e) {}
+    try { controller.resume(); } catch (e) {}
+  };
+  setTimeout(tryOnce, 320);
+  setTimeout(tryOnce, 900);
+  setTimeout(tryOnce, 1800);
+  setTimeout(tryOnce, 3200);
 }
 
 function syncPlayState() {
@@ -517,12 +532,13 @@ function playByFlat(flat) {
   const t = FLAT[flat];
   const uri = 'spotify:track:' + t.id;
   activeUri = uri; endFiredFor = null; lastPosition = 0; lastIsPaused = true;
+  lastUpdateAt = 0;
   setActive(flat);
   if (!controller) {
-    ensureController(uri, () => setTimeout(() => { try { controller.play(); } catch(e){} }, 280));
+    ensureController(uri, () => attemptPlay(uri));
   } else {
     controller.loadUri(uri);
-    setTimeout(() => { try { controller.play(); } catch(e){} }, 280);
+    attemptPlay(uri);
   }
 }
 
