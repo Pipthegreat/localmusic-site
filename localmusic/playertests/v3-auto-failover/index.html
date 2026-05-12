@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Player Test V3 — Auto-Failover · Peacock</title>
+<meta name="description" content="Player test variant 3 — Spotify primary, SoundCloud takes over on stall." />
+<style>
+  /* ============ PALETTE: Peacock on Slate ============
+     Thesis: peacock is the "positive recovery" hue — exactly what we want for
+     a player that quietly self-heals when Spotify Connect rejects play(). */
+  :root {
+    --bg-canvas:    oklch(11% 0.013 250);
+    --bg-elevated:  oklch(15% 0.014 250);
+    --bg-row-hover: oklch(19% 0.014 250);
+    --bg-row-active: oklch(22% 0.045 200);
+    --fg-default: oklch(98% 0.005 250);
+    --fg-muted:   oklch(74% 0.012 248);
+    --fg-subtle:  oklch(58% 0.013 248);
+    --border-subtle: oklch(22% 0.014 250);
+    --border-default: oklch(28% 0.015 248);
+    --peacock:    oklch(60% 0.10 200);
+    --peacock-2:  oklch(78% 0.07 200);
+    --peacock-wash: oklch(60% 0.10 200 / 0.14);
+    --peacock-glow: oklch(72% 0.12 200 / 0.45);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  html, body { margin: 0; padding: 0; background: var(--bg-canvas); color: var(--fg-default);
+               overflow-x: hidden; }
+  body { font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+         padding-bottom: 200px; }
+  header { padding: 28px 24px 16px; max-width: 880px; margin: 0 auto; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+             color: var(--peacock-2); font-weight: 600; }
+  h1 { font: 600 28px/1.2 inherit; margin: 6px 0 4px; letter-spacing: -0.01em; }
+  .lede { color: var(--fg-muted); margin: 0; max-width: 60ch; }
+  .thesis { margin-top: 14px; padding: 12px 14px; background: var(--bg-elevated);
+            border-left: 2px solid var(--peacock); border-radius: 0 6px 6px 0;
+            color: var(--fg-muted); font-size: 13.5px; }
+  .thesis b { color: var(--fg-default); font-weight: 600; }
+  main { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  .artist-block { margin: 28px 0; }
+  .artist-name { font: 600 17px/1.2 inherit; margin: 0 0 8px; letter-spacing: -0.005em; }
+  table { width: 100%; border-collapse: collapse; }
+  tr { border-top: 1px solid var(--border-subtle); transition: background .12s ease; }
+  tr:first-child { border-top: 0; }
+  tr:hover { background: var(--bg-row-hover); }
+  tr.active { background: var(--bg-row-active); }
+  tr.active .track { color: var(--peacock-2); }
+  td { padding: 11px 8px; vertical-align: middle; }
+  td.idx { width: 26px; color: var(--fg-subtle); font-variant-numeric: tabular-nums; text-align: right; }
+  td.track { color: var(--fg-default); }
+  td.actions { width: 40px; text-align: right; }
+  .play-btn {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: transparent; border: 1px solid var(--border-default);
+    color: var(--fg-muted); cursor: pointer; display: inline-flex;
+    align-items: center; justify-content: center; padding: 0;
+    transition: all .15s ease;
+  }
+  .play-btn:hover { border-color: var(--peacock); color: var(--peacock-2); }
+  tr.active .play-btn { background: var(--peacock); border-color: var(--peacock); color: oklch(12% 0.02 200); }
+  .play-btn svg { width: 11px; height: 11px; fill: currentColor; }
+  /* ============ PLAYER BAR ============ */
+  .player-bar {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border-subtle);
+    padding: 10px 16px;
+    box-shadow: 0 -8px 24px -12px rgba(0,0,0,.6);
+    transition: box-shadow .3s ease;
+  }
+  .player-bar.playing-sp {
+    box-shadow: 0 -8px 28px -12px var(--peacock-glow), 0 -1px 0 var(--peacock-wash);
+  }
+  .player-bar.playing-sc {
+    box-shadow: 0 -8px 28px -12px oklch(72% 0.18 50 / 0.45), 0 -1px 0 oklch(72% 0.18 50 / 0.10);
+  }
+  .player-inner { max-width: 880px; margin: 0 auto; width: 100%; }
+  .player-status {
+    display: flex; gap: 10px; align-items: center; margin-bottom: 8px;
+    font: 600 11px/1 inherit; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--fg-subtle);
+  }
+  .status-pill {
+    padding: 3px 8px; border-radius: 99px;
+    border: 1px solid var(--border-default);
+    color: var(--fg-muted);
+    transition: all .25s ease;
+  }
+  .status-pill.on {
+    color: oklch(12% 0.02 200); background: var(--peacock-2);
+    border-color: transparent;
+  }
+  .status-pill.sc.on {
+    color: oklch(12% 0.02 50); background: oklch(72% 0.18 50);
+  }
+  .status-arrow { color: var(--fg-subtle); }
+  .player-mount { min-height: 80px; position: relative; }
+  #spotify-mount, #sc-mount {
+    position: absolute; inset: 0;
+    transition: opacity .35s ease;
+  }
+  #spotify-mount { opacity: 1; }
+  #sc-mount { opacity: 0; pointer-events: none; }
+  body.failover-active #spotify-mount { opacity: 0; pointer-events: none; }
+  body.failover-active #sc-mount { opacity: 1; pointer-events: auto; }
+  .empty {
+    color: var(--fg-subtle); font-size: 13px; padding: 14px 18px;
+    background: var(--bg-canvas); border-radius: 6px;
+    border: 1px dashed var(--border-default); text-align: center;
+  }
+  .failover-notice {
+    margin-top: 6px; font: 500 12px/1.4 inherit;
+    color: var(--fg-subtle); opacity: 0; transition: opacity .3s ease;
+  }
+  .failover-notice.show { opacity: 1; }
+  .failover-notice b { color: var(--peacock-2); font-weight: 600; }
+  footer { max-width: 880px; margin: 32px auto 0; padding: 0 24px;
+           color: var(--fg-subtle); font-size: 12.5px; }
+  footer a { color: var(--fg-muted); }
+  @media (max-width: 640px) {
+    header { padding: 20px 16px 12px; }
+    main { padding: 0 16px; }
+    h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">Player test · V3</div>
+  <h1>Auto-Failover</h1>
+  <p class="lede">Spotify is primary. The page arms a stall timer on every play tap — if no <code>playback_update</code> arrives within 3s (Spotify Connect conflict, ad-blocker, blocked iframe), the SoundCloud widget loads the artist's profile and starts the top track. Visitor sees one player; the source quietly swaps.</p>
+  <div class="thesis">
+    <b>Thesis:</b> Cross-source resilience is a UX, not a settings toggle. Pick a primary, and degrade silently.
+    <b>Trade:</b> The SoundCloud fallback isn't track-perfect — it plays the artist's top SC track, which may not match what was tapped. Honest about the swap via a small notice.
+  </div>
+</header>
+<main id="artist-list"></main>
+<footer>
+  <a href="../">← back to player tests</a> ·
+  palette: <a href="#" title="Peacock 700 — positive recovery">Peacock on Slate</a>
+</footer>
+
+<div class="player-bar" id="player-bar" role="region" aria-label="Player">
+  <div class="player-inner">
+    <div class="player-status">
+      <span class="status-pill" id="pill-sp">Spotify</span>
+      <span class="status-arrow" id="status-arrow">·</span>
+      <span class="status-pill sc" id="pill-sc">SoundCloud</span>
+    </div>
+    <div class="player-mount">
+      <div id="empty" class="empty">Tap a track — Spotify is primary, SoundCloud auto-fallback if it stalls</div>
+      <div id="spotify-mount"></div>
+      <div id="sc-mount"></div>
+    </div>
+    <div class="failover-notice" id="failover-notice">
+      <b>Spotify stalled.</b> Switched to SoundCloud — playing artist top track.
+    </div>
+  </div>
+</div>
+
+<script>
+const ARTISTS = [
+  { name: "Alabama Shakes", soundcloud: "alabamashakes", tracks: [
+    { name: "Always Alright",  id: "6ckUX8cgcqjoNGTd2A2Pvd" },
+    { name: "Hang Loose",      id: "5cDHV67TxLrdz4ITUVQswH" },
+    { name: "I Found You",     id: "1N3c3dDtbx1OodfkIcxBmy" }]},
+  { name: "The xx", soundcloud: "thexx", tracks: [
+    { name: "Crystalised",     id: "5UBBJnFxsfjFxfrtvErQoH" },
+    { name: "Intro",           id: "2usrT8QIbIk9y0NEtQwS4j" },
+    { name: "Angels",          id: "3zsRP8rH1kaIAo9fmiP4El" }]},
+  { name: "James Blake", soundcloud: "jamesblakeproduction", tracks: [
+    { name: "Trying Times",    id: "52T8TTMESX21406wvTdQDY" },
+    { name: "Retrograde",      id: "2IqjKEBiz0CdLKdkXhxw84" },
+    { name: "King's Dead",     id: "51rXHuKN8Loc4sUlKPODgH" }]},
+  { name: "Khalid", soundcloud: "thegreatkhalid", tracks: [
+    { name: "Young Dumb & Broke", id: "5Z3GHaZ6ec9bsiI5BenrbY" },
+    { name: "Location",        id: "152lZdxL1OR0ZMW6KquMif" },
+    { name: "Better",          id: "2OpBganfGk2GVdSlRdxzaX" }]},
+  { name: "Iron & Wine", soundcloud: "iron-and-wine", tracks: [
+    { name: "Such Great Heights", id: "6dDxgfvM8pJm7AzmLZB1nN" },
+    { name: "Flightless Bird, American Mouth", id: "1fEGtTZjrjJW8eUeewnNJR" },
+    { name: "Time After Time", id: "5JEM7lT9uSyhUsKFXwGfSm" }]},
+];
+
+const FLAT = [];
+ARTISTS.forEach(a => a.tracks.forEach(t => FLAT.push({ artist: a.name, sc: a.soundcloud, ...t })));
+
+const list = document.getElementById('artist-list');
+ARTISTS.forEach(artist => {
+  const block = document.createElement('section');
+  block.className = 'artist-block';
+  const h = document.createElement('h2');
+  h.className = 'artist-name';
+  h.textContent = artist.name;
+  block.appendChild(h);
+  const table = document.createElement('table');
+  const tbody = document.createElement('tbody');
+  artist.tracks.forEach((t, i) => {
+    const flatIdx = FLAT.findIndex(f => f.id === t.id);
+    const tr = document.createElement('tr');
+    tr.dataset.flatIdx = flatIdx;
+    tr.innerHTML = `
+      <td class="idx">${i + 1}</td>
+      <td class="track">${t.name}</td>
+      <td class="actions">
+        <button class="play-btn" aria-label="Play ${t.name}">
+          <svg viewBox="0 0 14 14"><path d="M3 1l10 6-10 6z"/></svg>
+        </button>
+      </td>`;
+    tr.addEventListener('click', () => playTrack(flatIdx));
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  block.appendChild(table);
+  list.appendChild(block);
+});
+
+// ============================================================
+// AUTO-FAILOVER CONTROLLER
+// Primary path: Spotify iframe-API. Each play() call arms a 3s
+// stall timer. If no playback_update arrives in that window, we
+// assume Connect rejected (most common reason) and bring up the
+// SoundCloud widget loaded with the artist's profile URL.
+// ============================================================
+let spController = null;
+let scWidget = null;
+let activeIdx = -1;
+let activeUri = null;
+let lastPlaybackUpdateAt = 0;
+let stallTimer = null;
+const STALL_MS = 3000;
+
+window.onSpotifyIframeApiReady = (IFrameAPI) => { window._spotifyAPI = IFrameAPI; };
+
+function ensureSpotify(initialUri, onReady) {
+  if (spController) { onReady(); return; }
+  const mount = document.getElementById('spotify-mount');
+  mount.innerHTML = '<div id="spotify-embed"></div>';
+  const tryMount = () => {
+    if (!window._spotifyAPI) { setTimeout(tryMount, 80); return; }
+    window._spotifyAPI.createController(
+      document.getElementById('spotify-embed'),
+      { uri: initialUri, width: '100%', height: 80 },
+      (c) => {
+        spController = c;
+        c.addListener('playback_update', (e) => {
+          lastPlaybackUpdateAt = Date.now();
+          if (!e.data.isPaused && e.data.position > 0) {
+            // Real playback confirmed — clear stall timer + paint Spotify pill.
+            clearStallTimer();
+            setStatus('sp');
+          }
+        });
+        c.addListener('ready', () => onReady());
+      });
+  };
+  tryMount();
+}
+
+function ensureSoundCloud(initialUrl) {
+  const mount = document.getElementById('sc-mount');
+  mount.innerHTML = `<iframe id="sc-iframe" allow="autoplay" frameborder="0"
+    width="100%" height="100"
+    src="https://w.soundcloud.com/player/?url=${encodeURIComponent(initialUrl)}&auto_play=true&visual=false&show_artwork=true&color=%234a8b9e"></iframe>`;
+  const wireUp = () => {
+    if (!window.SC || !window.SC.Widget) { setTimeout(wireUp, 80); return; }
+    scWidget = window.SC.Widget(document.getElementById('sc-iframe'));
+  };
+  wireUp();
+}
+
+function loadSoundCloud(url) {
+  if (!scWidget) ensureSoundCloud(url);
+  else scWidget.load(url, { auto_play: true });
+}
+
+function armStallCheck() {
+  clearStallTimer();
+  const armedForUri = activeUri;
+  stallTimer = setTimeout(() => {
+    if (activeUri !== armedForUri) return;
+    const tickedRecently = lastPlaybackUpdateAt > 0 && (Date.now() - lastPlaybackUpdateAt) < 1500;
+    if (tickedRecently) return;  // false alarm
+    failoverToSoundCloud();
+  }, STALL_MS);
+}
+
+function clearStallTimer() {
+  if (stallTimer) { clearTimeout(stallTimer); stallTimer = null; }
+}
+
+function failoverToSoundCloud() {
+  if (activeIdx < 0) return;
+  const track = FLAT[activeIdx];
+  document.body.classList.add('failover-active');
+  document.getElementById('failover-notice').classList.add('show');
+  if (spController) { try { spController.pause(); } catch (e) {} }
+  loadSoundCloud(`https://soundcloud.com/${track.sc}`);
+  setStatus('sc');
+}
+
+function setStatus(which) {
+  document.getElementById('pill-sp').classList.toggle('on', which === 'sp');
+  document.getElementById('pill-sc').classList.toggle('on', which === 'sc');
+  document.getElementById('status-arrow').textContent = which === 'sc' ? '→' : '·';
+  document.getElementById('player-bar').classList.toggle('playing-sp', which === 'sp');
+  document.getElementById('player-bar').classList.toggle('playing-sc', which === 'sc');
+}
+
+function playTrack(idx) {
+  if (idx < 0 || idx >= FLAT.length) return;
+  const track = FLAT[idx];
+  activeIdx = idx;
+  activeUri = 'spotify:track:' + track.id;
+  document.getElementById('empty').style.display = 'none';
+  // Reset to Spotify-primary on every new tap. The visitor may have
+  // resolved the conflict that caused last failover.
+  document.body.classList.remove('failover-active');
+  document.getElementById('failover-notice').classList.remove('show');
+  markActive();
+  setStatus(null);  // neutral until something starts
+  if (!spController) {
+    ensureSpotify(activeUri, () => {
+      try { spController.play(); } catch (e) {}
+      armStallCheck();
+    });
+  } else {
+    spController.loadUri(activeUri);
+    setTimeout(() => { try { spController.play(); } catch (e) {} }, 250);
+    setTimeout(() => { try { spController.resume(); } catch (e) {} }, 800);
+    armStallCheck();
+  }
+}
+
+function markActive() {
+  document.querySelectorAll('tr').forEach(tr => {
+    tr.classList.toggle('active', parseInt(tr.dataset.flatIdx, 10) === activeIdx);
+  });
+}
+</script>
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+<script src="https://w.soundcloud.com/player/api.js" async></script>
+</body>
+</html>

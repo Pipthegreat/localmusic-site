@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Player Tests — localmusic</title>
+<meta name="description" content="Five player builds, five palettes, one test corpus (5 artists × 3 tracks). Pick one." />
+<style>
+  /* ============ INDEX PALETTE: Ember on Slate (canonical) ============ */
+  :root {
+    --bg-canvas:   oklch(9% 0.011 250);
+    --bg-elevated: oklch(13% 0.013 250);
+    --bg-card-hover: oklch(17% 0.014 250);
+    --fg-default: oklch(98% 0.005 250);
+    --fg-muted:   oklch(72% 0.012 248);
+    --fg-subtle:  oklch(58% 0.013 248);
+    --border-subtle: oklch(20% 0.014 250);
+    --border-default: oklch(26% 0.014 248);
+    --ember:    oklch(62% 0.17 40);
+    --ember-2:  oklch(74% 0.17 41);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  html, body { margin: 0; padding: 0; background: var(--bg-canvas); color: var(--fg-default);
+               overflow-x: hidden; }
+  body { font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif; }
+  header { padding: 40px 24px 20px; max-width: 980px; margin: 0 auto; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+             color: var(--ember); font-weight: 600; }
+  h1 { font: 600 36px/1.15 inherit; margin: 6px 0 8px; letter-spacing: -0.015em; }
+  .lede { color: var(--fg-muted); margin: 0; max-width: 64ch; font-size: 16px; }
+  .corpus {
+    margin-top: 16px; padding: 12px 16px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle); border-radius: 8px;
+    color: var(--fg-muted); font-size: 13px;
+  }
+  .corpus b { color: var(--fg-default); font-weight: 600; }
+  .corpus .artists {
+    display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 4px;
+  }
+  .corpus .artists span {
+    padding: 2px 8px; border-radius: 99px;
+    background: var(--bg-card-hover); color: var(--fg-default);
+    font-weight: 500; font-size: 12.5px;
+  }
+  main { max-width: 980px; margin: 24px auto 0; padding: 0 24px 60px; }
+  .grid {
+    display: grid; gap: 14px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  .card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 18px 18px 16px;
+    text-decoration: none;
+    color: inherit;
+    display: flex; flex-direction: column;
+    transition: all .15s ease;
+    position: relative; overflow: hidden;
+  }
+  .card::before {
+    content: ''; position: absolute; left: 0; right: 0; top: 0; height: 3px;
+    background: var(--card-accent, var(--ember));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .2s ease;
+  }
+  .card:hover { border-color: var(--border-default); transform: translateY(-1px); background: var(--bg-card-hover); }
+  .card:hover::before { transform: scaleX(1); }
+  .card-num {
+    font: 600 11px/1 inherit; letter-spacing: 0.16em;
+    color: var(--card-accent, var(--ember));
+  }
+  .card-title {
+    font: 600 19px/1.2 inherit; margin: 6px 0 4px;
+    letter-spacing: -0.01em; color: var(--fg-default);
+  }
+  .card-palette {
+    font: 500 11.5px/1 inherit; color: var(--fg-subtle);
+    letter-spacing: 0.04em; margin-bottom: 12px;
+  }
+  .card-palette .swatch {
+    display: inline-block; width: 9px; height: 9px; border-radius: 99px;
+    background: var(--card-accent, var(--ember)); margin-right: 6px;
+    vertical-align: middle;
+  }
+  .card-thesis {
+    color: var(--fg-muted); font-size: 13.5px; line-height: 1.45;
+    margin: 4px 0 12px; flex: 1;
+  }
+  .card-arch {
+    font: 500 12px/1.3 inherit; color: var(--fg-subtle);
+    border-top: 1px solid var(--border-subtle); padding-top: 10px; margin-top: auto;
+  }
+  .card-arch b { color: var(--fg-muted); font-weight: 600; }
+  /* per-card accent overrides driven by --card-accent inline */
+  .card.v1 { --card-accent: oklch(62% 0.17 40); }        /* ember */
+  .card.v2 { --card-accent: oklch(60% 0.13 318); }       /* plum */
+  .card.v3 { --card-accent: oklch(60% 0.10 200); }       /* peacock */
+  .card.v4 { --card-accent: oklch(72% 0.012 60); }       /* ash */
+  .card.v5 { --card-accent: oklch(72% 0.012 248); }      /* slate-only */
+  .meta-strip {
+    display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 12px;
+  }
+  .meta {
+    font: 500 11px/1 inherit; letter-spacing: 0.04em;
+    padding: 4px 7px; border-radius: 4px;
+    border: 1px solid var(--border-subtle);
+    color: var(--fg-subtle);
+  }
+  .meta.sp { color: oklch(72% 0.18 145); border-color: oklch(35% 0.10 145); }
+  .meta.sc { color: oklch(72% 0.18 50); border-color: oklch(35% 0.10 50); }
+  .meta.native { color: oklch(78% 0.07 200); border-color: oklch(30% 0.05 200); }
+  footer { max-width: 980px; margin: 0 auto 40px; padding: 0 24px;
+           color: var(--fg-subtle); font-size: 12.5px; }
+  footer a { color: var(--fg-muted); }
+  @media (max-width: 640px) {
+    header { padding: 24px 16px 12px; }
+    main, footer { padding-left: 16px; padding-right: 16px; }
+    h1 { font-size: 28px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">localmusic / playertests</div>
+  <h1>Five player builds. Pick one.</h1>
+  <p class="lede">The player on sfoak got noisy. Same idea each iteration, more code, less reliable. These five pages are clean rebuilds — five distinct architectures rather than five styles. Each runs against the same 15-song corpus so the variable is the player, not the data.</p>
+  <div class="corpus">
+    <b>Test corpus:</b> 5 artists × 3 tracks ·
+    <span class="artists">
+      <span>Alabama Shakes</span>
+      <span>The xx</span>
+      <span>James Blake</span>
+      <span>Khalid</span>
+      <span>Iron &amp; Wine</span>
+    </span>
+  </div>
+</header>
+<main>
+  <div class="grid">
+
+    <a class="card v1" href="v1-embed-only/">
+      <div class="card-num">V1</div>
+      <h2 class="card-title">Embed-Only</h2>
+      <div class="card-palette"><span class="swatch"></span>Ember on Slate</div>
+      <div class="meta-strip"><span class="meta sp">Spotify iframe-API</span></div>
+      <p class="card-thesis">A single Spotify iframe at the bottom, controlled via <code>loadUri()</code> + retry. Closest in spirit to the current sfoak player — but with all the accumulated cruft stripped.</p>
+      <div class="card-arch"><b>Architecture:</b> one controller, one iframe, retry backoff</div>
+    </a>
+
+    <a class="card v2" href="v2-dual-stack/">
+      <div class="card-num">V2</div>
+      <h2 class="card-title">Dual Stack</h2>
+      <div class="card-palette"><span class="swatch"></span>Plum on Slate</div>
+      <div class="meta-strip">
+        <span class="meta sp">Spotify</span>
+        <span class="meta sc">SoundCloud</span>
+      </div>
+      <p class="card-thesis">Each row has SP / SC buttons. Pick a source per tap; the other mount hides. Two API connections live in the page; one is always paused.</p>
+      <div class="card-arch"><b>Architecture:</b> two iframes, visitor picks source</div>
+    </a>
+
+    <a class="card v3" href="v3-auto-failover/">
+      <div class="card-num">V3</div>
+      <h2 class="card-title">Auto-Failover</h2>
+      <div class="card-palette"><span class="swatch"></span>Peacock on Slate</div>
+      <div class="meta-strip">
+        <span class="meta sp">Spotify (primary)</span>
+        <span class="meta sc">SoundCloud (fallback)</span>
+      </div>
+      <p class="card-thesis">Spotify plays. If no <code>playback_update</code> arrives in 3s — Connect conflict, blocked iframe, ad-block — the SoundCloud widget quietly takes over.</p>
+      <div class="card-arch"><b>Architecture:</b> Spotify primary, stall-timer → SC swap</div>
+    </a>
+
+    <a class="card v4" href="v4-native-audio/">
+      <div class="card-num">V4</div>
+      <h2 class="card-title">Native Audio</h2>
+      <div class="card-palette"><span class="swatch"></span>Ash on Slate</div>
+      <div class="meta-strip">
+        <span class="meta native">HTML5 audio</span>
+        <span class="meta">iTunes previews</span>
+      </div>
+      <p class="card-thesis">No iframe. The page fetches 30s preview MP3s from the iTunes Search API and plays them in <code>&lt;audio&gt;</code>. Hand-off links cover full tracks.</p>
+      <div class="card-arch"><b>Architecture:</b> page owns audio, services are escape hatches</div>
+    </a>
+
+    <a class="card v5" href="v5-stacked-cards/">
+      <div class="card-num">V5</div>
+      <h2 class="card-title">Stacked Cards</h2>
+      <div class="card-palette"><span class="swatch"></span>Slate-only</div>
+      <div class="meta-strip">
+        <span class="meta sp">Spotify × 15 embeds</span>
+      </div>
+      <p class="card-thesis">Every track is its own embed. Fifteen iframes, lazy-loaded. No controller, no <code>loadUri</code>, no coordination. The page stops trying to be a player.</p>
+      <div class="card-arch"><b>Architecture:</b> one embed per track, no cross-iframe state</div>
+    </a>
+
+  </div>
+</main>
+<footer>
+  <a href="../">← localmusic hub</a> ·
+  five palettes from <span style="font-family: ui-monospace, Menlo, monospace; font-size: 12px;">style mcp</span>:
+  <span style="color: oklch(62% 0.17 40);">●</span> ember
+  <span style="color: oklch(60% 0.13 318);">●</span> plum
+  <span style="color: oklch(60% 0.10 200);">●</span> peacock
+  <span style="color: oklch(72% 0.012 60);">●</span> ash
+  <span style="color: oklch(72% 0.012 248);">●</span> slate-only
+</footer>
+</body>
+</html>

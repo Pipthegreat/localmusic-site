@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Player Test V1 — Embed-Only · Ember</title>
+<meta name="description" content="Player test variant 1 — single Spotify iframe controller, the canonical approach." />
+<style>
+  /* ============ PALETTE: Ember on Slate (the canonical Stle accent) ============
+     Thesis: ember is "the only warm" — reserved for action. Slate carries
+     the calm; ember picks out the now-playing surface only. */
+  :root {
+    --bg-canvas:   oklch(9% 0.011 250);
+    --bg-elevated: oklch(13% 0.013 250);
+    --bg-row-hover: oklch(17% 0.014 250);
+    --bg-row-active: oklch(20% 0.04 38);
+    --fg-default: oklch(98% 0.005 250);
+    --fg-muted:   oklch(72% 0.012 248);
+    --fg-subtle:  oklch(58% 0.013 248);
+    --border-subtle: oklch(20% 0.014 250);
+    --border-default: oklch(26% 0.014 248);
+    --accent:     oklch(62% 0.17 40);
+    --accent-glow: oklch(72% 0.20 42 / 0.45);
+    --accent-wash: oklch(62% 0.17 40 / 0.10);
+    --on-accent:  oklch(9% 0.011 250);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  html, body { margin: 0; padding: 0; background: var(--bg-canvas); color: var(--fg-default);
+               overflow-x: hidden; }
+  body { font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+         padding-bottom: 120px; }
+  header { padding: 28px 24px 16px; max-width: 880px; margin: 0 auto; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+             color: var(--accent); font-weight: 600; }
+  h1 { font: 600 28px/1.2 inherit; margin: 6px 0 4px; letter-spacing: -0.01em; }
+  .lede { color: var(--fg-muted); margin: 0; max-width: 60ch; }
+  .thesis { margin-top: 14px; padding: 12px 14px; background: var(--bg-elevated);
+            border-left: 2px solid var(--accent); border-radius: 0 6px 6px 0;
+            color: var(--fg-muted); font-size: 13.5px; }
+  .thesis b { color: var(--fg-default); font-weight: 600; }
+  main { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  .artist-block { margin: 28px 0; }
+  .artist-name { font: 600 17px/1.2 inherit; margin: 0 0 8px; letter-spacing: -0.005em; }
+  table { width: 100%; border-collapse: collapse; }
+  tr { border-top: 1px solid var(--border-subtle); transition: background .12s ease; }
+  tr:first-child { border-top: 0; }
+  tr:hover { background: var(--bg-row-hover); }
+  tr.active { background: var(--bg-row-active); }
+  tr.active .track { color: var(--accent); }
+  td { padding: 11px 8px; vertical-align: middle; }
+  td.idx { width: 26px; color: var(--fg-subtle); font-variant-numeric: tabular-nums; text-align: right; }
+  td.track { color: var(--fg-default); }
+  td.actions { width: 40px; text-align: right; }
+  .play-btn {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: transparent; border: 1px solid var(--border-default);
+    color: var(--fg-muted); cursor: pointer; display: inline-flex;
+    align-items: center; justify-content: center; padding: 0;
+    transition: all .15s ease;
+  }
+  .play-btn:hover { border-color: var(--accent); color: var(--accent); }
+  tr.active .play-btn { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .play-btn svg { width: 11px; height: 11px; fill: currentColor; }
+  /* ============ PLAYER BAR ============ */
+  .player-bar {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border-subtle);
+    padding: 10px 16px; display: flex; gap: 12px; align-items: center;
+    box-shadow: 0 -8px 24px -12px rgba(0,0,0,.6);
+  }
+  .player-bar.tinted {
+    box-shadow: 0 -8px 24px -10px var(--accent-glow), 0 -1px 0 var(--accent-wash);
+  }
+  .player-inner { max-width: 880px; margin: 0 auto; width: 100%;
+                  display: flex; gap: 10px; align-items: center; }
+  #spotify-mount { flex: 1; max-width: 600px; min-height: 80px; }
+  .skip-btn {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: transparent; border: 1px solid var(--border-default);
+    color: var(--fg-muted); cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center; padding: 0;
+    transition: all .15s ease;
+  }
+  .skip-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .skip-btn svg { width: 16px; height: 16px; fill: currentColor; }
+  .empty {
+    color: var(--fg-subtle); font-size: 13px; padding: 14px 18px;
+    background: var(--bg-canvas); border-radius: 6px;
+    border: 1px dashed var(--border-default);
+    flex: 1; text-align: center;
+  }
+  footer { max-width: 880px; margin: 32px auto 0; padding: 0 24px;
+           color: var(--fg-subtle); font-size: 12.5px; }
+  footer a { color: var(--fg-muted); }
+  @media (max-width: 640px) {
+    header { padding: 20px 16px 12px; }
+    main { padding: 0 16px; }
+    h1 { font-size: 24px; }
+    #spotify-mount { min-height: 80px; }
+    .skip-btn { display: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">Player test · V1</div>
+  <h1>Embed-Only</h1>
+  <p class="lede">A single Spotify iframe, controlled by the iframe-API. Row taps call <code>loadUri()</code> then a backoff retry on <code>play()</code>. Mobile keeps the iframe visible — visibility is non-negotiable for iOS audio autoplay.</p>
+  <div class="thesis">
+    <b>Thesis:</b> Spotify owns playback. We own data. The page never tries to be cleverer than the embed.
+    <b>Trade:</b> If the visitor is already playing Spotify elsewhere, Connect silently rejects play() — and we surface a stall banner. No fallback.
+  </div>
+</header>
+<main id="artist-list"></main>
+<footer>
+  <a href="../">← back to player tests</a> ·
+  palette: <a href="#" title="Ember 500 on Slate 950">Ember on Slate</a>
+</footer>
+
+<div class="player-bar" id="player-bar" role="region" aria-label="Player">
+  <div class="player-inner">
+    <div id="spotify-mount"><div class="empty">Tap a track to start playing</div></div>
+    <button class="skip-btn" id="skip-btn" aria-label="Next track">
+      <svg viewBox="0 0 24 24"><path d="M5 4l10 8-10 8V4zM17 4h2v16h-2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// SHARED DATA — 5 artists × 3 tracks (verified Spotify URIs)
+// ============================================================
+const ARTISTS = [
+  { name: "Alabama Shakes", soundcloud: "alabamashakes", tracks: [
+    { name: "Always Alright",  id: "6ckUX8cgcqjoNGTd2A2Pvd" },
+    { name: "Hang Loose",      id: "5cDHV67TxLrdz4ITUVQswH" },
+    { name: "I Found You",     id: "1N3c3dDtbx1OodfkIcxBmy" }]},
+  { name: "The xx", soundcloud: "thexx", tracks: [
+    { name: "Crystalised",     id: "5UBBJnFxsfjFxfrtvErQoH" },
+    { name: "Intro",           id: "2usrT8QIbIk9y0NEtQwS4j" },
+    { name: "Angels",          id: "3zsRP8rH1kaIAo9fmiP4El" }]},
+  { name: "James Blake", soundcloud: "jamesblakeproduction", tracks: [
+    { name: "Trying Times",    id: "52T8TTMESX21406wvTdQDY" },
+    { name: "Retrograde",      id: "2IqjKEBiz0CdLKdkXhxw84" },
+    { name: "King's Dead",     id: "51rXHuKN8Loc4sUlKPODgH" }]},
+  { name: "Khalid", soundcloud: "thegreatkhalid", tracks: [
+    { name: "Young Dumb & Broke", id: "5Z3GHaZ6ec9bsiI5BenrbY" },
+    { name: "Location",        id: "152lZdxL1OR0ZMW6KquMif" },
+    { name: "Better",          id: "2OpBganfGk2GVdSlRdxzaX" }]},
+  { name: "Iron & Wine", soundcloud: "iron-and-wine", tracks: [
+    { name: "Such Great Heights", id: "6dDxgfvM8pJm7AzmLZB1nN" },
+    { name: "Flightless Bird, American Mouth", id: "1fEGtTZjrjJW8eUeewnNJR" },
+    { name: "Time After Time", id: "5JEM7lT9uSyhUsKFXwGfSm" }]},
+];
+
+// Flat list for skip/next traversal.
+const FLAT = [];
+ARTISTS.forEach(a => a.tracks.forEach(t => FLAT.push({ artist: a.name, ...t })));
+
+// ============================================================
+// RENDER ROWS
+// ============================================================
+const list = document.getElementById('artist-list');
+ARTISTS.forEach(artist => {
+  const block = document.createElement('section');
+  block.className = 'artist-block';
+  const h = document.createElement('h2');
+  h.className = 'artist-name';
+  h.textContent = artist.name;
+  block.appendChild(h);
+  const table = document.createElement('table');
+  const tbody = document.createElement('tbody');
+  artist.tracks.forEach((t, i) => {
+    const tr = document.createElement('tr');
+    tr.dataset.trackId = t.id;
+    tr.dataset.flatIdx = FLAT.findIndex(f => f.id === t.id);
+    tr.innerHTML = `
+      <td class="idx">${i + 1}</td>
+      <td class="track">${t.name}</td>
+      <td class="actions">
+        <button class="play-btn" aria-label="Play ${t.name}">
+          <svg viewBox="0 0 14 14"><path d="M3 1l10 6-10 6z"/></svg>
+        </button>
+      </td>`;
+    tr.addEventListener('click', () => playTrack(parseInt(tr.dataset.flatIdx, 10)));
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  block.appendChild(table);
+  list.appendChild(block);
+});
+
+// ============================================================
+// SPOTIFY IFRAME-API CONTROLLER
+// Single embed mounted on first play. We pass uri changes via
+// loadUri + play; retries handle the iframe-load race that
+// causes "first click silent, second works" bugs.
+// ============================================================
+let embedController = null;
+let activeIdx = -1;
+let activeUri = null;
+let lastPlaybackUpdateAt = 0;
+let isPaused = true;
+
+window.onSpotifyIframeApiReady = (IFrameAPI) => {
+  // Lazy: we don't mount until first row click so the bar shows
+  // the "Tap a track" hint until the user picks one.
+  window._spotifyAPI = IFrameAPI;
+};
+
+function ensureMounted(initialUri, onReady) {
+  if (embedController) { onReady(); return; }
+  const mount = document.getElementById('spotify-mount');
+  mount.innerHTML = '<div id="spotify-embed"></div>';
+  const tryMount = () => {
+    if (!window._spotifyAPI) { setTimeout(tryMount, 80); return; }
+    const target = document.getElementById('spotify-embed');
+    window._spotifyAPI.createController(target, {
+      uri: initialUri, width: '100%', height: 80,
+    }, (c) => {
+      embedController = c;
+      c.addListener('playback_update', (e) => {
+        lastPlaybackUpdateAt = Date.now();
+        isPaused = !!e.data.isPaused;
+        document.getElementById('player-bar').classList.toggle('tinted', !isPaused);
+        // Auto-advance: track ended (position resets near track length).
+        if (e.data.position >= e.data.duration - 250 && e.data.duration > 0) {
+          skipNext();
+        }
+      });
+      c.addListener('ready', () => onReady());
+    });
+  };
+  tryMount();
+}
+
+function playTrack(idx) {
+  if (idx < 0 || idx >= FLAT.length) return;
+  const track = FLAT[idx];
+  const uri = 'spotify:track:' + track.id;
+  activeIdx = idx;
+  activeUri = uri;
+  markActive();
+  if (!embedController) {
+    ensureMounted(uri, () => attemptPlayWithRetries(uri));
+  } else {
+    embedController.loadUri(uri);
+    attemptPlayWithRetries(uri);
+  }
+}
+
+function attemptPlayWithRetries(targetUri) {
+  // Mirror the proven retry chain from sfoak's companion.py. The
+  // 250/800/1700/3000 ms cascade catches both fast-path and
+  // slow-iframe-load cases without over-spamming play().
+  const tryOnce = () => {
+    if (activeUri !== targetUri) return;
+    if (lastPlaybackUpdateAt > 0 && !isPaused) return;
+    try { embedController.play(); } catch (e) {}
+    try { embedController.resume(); } catch (e) {}
+  };
+  setTimeout(tryOnce, 250);
+  setTimeout(tryOnce, 800);
+  setTimeout(tryOnce, 1700);
+  setTimeout(tryOnce, 3000);
+}
+
+function markActive() {
+  document.querySelectorAll('tr').forEach(tr => {
+    tr.classList.toggle('active', parseInt(tr.dataset.flatIdx, 10) === activeIdx);
+  });
+}
+
+function skipNext() {
+  if (activeIdx < 0) playTrack(0);
+  else playTrack((activeIdx + 1) % FLAT.length);
+}
+document.getElementById('skip-btn').addEventListener('click', skipNext);
+</script>
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+</body>
+</html>

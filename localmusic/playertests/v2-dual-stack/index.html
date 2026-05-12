@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Player Test V2 — Dual Stack · Plum</title>
+<meta name="description" content="Player test variant 2 — explicit Spotify or SoundCloud, the visitor picks." />
+<style>
+  /* ============ PALETTE: Plum on Slate ============
+     Thesis: plum is the "secondary action / state-of-pending-handoff" color.
+     This player asks the visitor to make a handoff choice every track,
+     so the whole UI lives in plum. */
+  :root {
+    --bg-canvas:    oklch(11% 0.013 250);
+    --bg-elevated:  oklch(15% 0.014 250);
+    --bg-row-hover: oklch(19% 0.014 250);
+    --bg-row-active: oklch(22% 0.045 318);
+    --fg-default: oklch(98% 0.005 250);
+    --fg-muted:   oklch(74% 0.012 248);
+    --fg-subtle:  oklch(58% 0.013 248);
+    --border-subtle: oklch(22% 0.014 250);
+    --border-default: oklch(28% 0.015 248);
+    --plum:    oklch(60% 0.13 318);
+    --plum-2:  oklch(76% 0.10 320);
+    --plum-wash: oklch(60% 0.13 318 / 0.14);
+    --spotify-green: oklch(72% 0.18 145);
+    --sc-orange:     oklch(72% 0.18 50);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  html, body { margin: 0; padding: 0; background: var(--bg-canvas); color: var(--fg-default);
+               overflow-x: hidden; }
+  body { font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+         padding-bottom: 200px; }
+  header { padding: 28px 24px 16px; max-width: 880px; margin: 0 auto; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+             color: var(--plum-2); font-weight: 600; }
+  h1 { font: 600 28px/1.2 inherit; margin: 6px 0 4px; letter-spacing: -0.01em; }
+  .lede { color: var(--fg-muted); margin: 0; max-width: 60ch; }
+  .thesis { margin-top: 14px; padding: 12px 14px; background: var(--bg-elevated);
+            border-left: 2px solid var(--plum); border-radius: 0 6px 6px 0;
+            color: var(--fg-muted); font-size: 13.5px; }
+  .thesis b { color: var(--fg-default); font-weight: 600; }
+  main { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  .artist-block { margin: 28px 0; }
+  .artist-name { font: 600 17px/1.2 inherit; margin: 0 0 8px; letter-spacing: -0.005em;
+                 display: flex; align-items: center; gap: 10px; }
+  .artist-name .sc-hint {
+    font: 400 11.5px/1 inherit; color: var(--fg-subtle);
+    padding: 3px 7px; border: 1px solid var(--border-default); border-radius: 99px;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  tr { border-top: 1px solid var(--border-subtle); transition: background .12s ease; }
+  tr:first-child { border-top: 0; }
+  tr:hover { background: var(--bg-row-hover); }
+  tr.active { background: var(--bg-row-active); }
+  tr.active .track { color: var(--plum-2); }
+  td { padding: 11px 8px; vertical-align: middle; }
+  td.idx { width: 26px; color: var(--fg-subtle); font-variant-numeric: tabular-nums; text-align: right; }
+  td.track { color: var(--fg-default); }
+  td.actions { width: 168px; text-align: right; white-space: nowrap; }
+  .src-btn {
+    height: 28px; padding: 0 10px; border-radius: 6px;
+    background: transparent; border: 1px solid var(--border-default);
+    color: var(--fg-muted); cursor: pointer;
+    font: 600 11.5px/1 inherit; letter-spacing: 0.03em;
+    transition: all .15s ease; margin-left: 6px;
+  }
+  .src-btn:hover { border-color: var(--plum); color: var(--plum-2); }
+  .src-btn.active-sp { background: var(--spotify-green); color: oklch(12% 0.02 145); border-color: transparent; }
+  .src-btn.active-sc { background: var(--sc-orange); color: oklch(12% 0.02 50); border-color: transparent; }
+  .src-btn .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+                  background: currentColor; opacity: 0.6; margin-right: 6px;
+                  vertical-align: middle; }
+  /* ============ PLAYER BAR — stacked dual-mount ============ */
+  .player-bar {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border-subtle);
+    padding: 10px 16px;
+    box-shadow: 0 -8px 24px -12px rgba(0,0,0,.6);
+  }
+  .player-inner { max-width: 880px; margin: 0 auto; width: 100%; }
+  .player-which {
+    display: flex; gap: 6px; align-items: center; margin-bottom: 8px;
+    font: 600 11px/1 inherit; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--fg-subtle);
+  }
+  .player-which .now { color: var(--plum-2); }
+  .player-mount { min-height: 80px; }
+  /* Only one mount is visible at a time. */
+  #spotify-mount, #sc-mount { display: none; }
+  body.src-sp #spotify-mount { display: block; }
+  body.src-sc #sc-mount { display: block; }
+  .empty {
+    color: var(--fg-subtle); font-size: 13px; padding: 14px 18px;
+    background: var(--bg-canvas); border-radius: 6px;
+    border: 1px dashed var(--border-default); text-align: center;
+  }
+  footer { max-width: 880px; margin: 32px auto 0; padding: 0 24px;
+           color: var(--fg-subtle); font-size: 12.5px; }
+  footer a { color: var(--fg-muted); }
+  @media (max-width: 640px) {
+    header { padding: 20px 16px 12px; }
+    main { padding: 0 16px; }
+    h1 { font-size: 24px; }
+    td.actions { width: 130px; }
+    .src-btn { padding: 0 7px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">Player test · V2</div>
+  <h1>Dual Stack</h1>
+  <p class="lede">Two iframes mounted side by side, one Spotify, one SoundCloud. Each row exposes <code>SP</code> / <code>SC</code> buttons — the visitor chooses the source for each track. Only one mount renders at a time; the other hides.</p>
+  <div class="thesis">
+    <b>Thesis:</b> Don't guess what the visitor wants. Give them the choice and remember it.
+    <b>Trade:</b> Two iframes in the page mean two API connections and bigger memory footprint. The friction of "pick a source" is real on first interaction.
+  </div>
+</header>
+<main id="artist-list"></main>
+<footer>
+  <a href="../">← back to player tests</a> ·
+  palette: <a href="#" title="Plum 500 — secondary action">Plum on Slate</a>
+</footer>
+
+<div class="player-bar" id="player-bar" role="region" aria-label="Player">
+  <div class="player-inner">
+    <div class="player-which">
+      <span>Now playing on</span>
+      <span class="now" id="now-source">—</span>
+    </div>
+    <div class="player-mount">
+      <div id="spotify-mount"></div>
+      <div id="sc-mount"></div>
+      <div id="empty" class="empty">Pick a track and a source to start</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const ARTISTS = [
+  { name: "Alabama Shakes", soundcloud: "alabamashakes", tracks: [
+    { name: "Always Alright",  id: "6ckUX8cgcqjoNGTd2A2Pvd" },
+    { name: "Hang Loose",      id: "5cDHV67TxLrdz4ITUVQswH" },
+    { name: "I Found You",     id: "1N3c3dDtbx1OodfkIcxBmy" }]},
+  { name: "The xx", soundcloud: "thexx", tracks: [
+    { name: "Crystalised",     id: "5UBBJnFxsfjFxfrtvErQoH" },
+    { name: "Intro",           id: "2usrT8QIbIk9y0NEtQwS4j" },
+    { name: "Angels",          id: "3zsRP8rH1kaIAo9fmiP4El" }]},
+  { name: "James Blake", soundcloud: "jamesblakeproduction", tracks: [
+    { name: "Trying Times",    id: "52T8TTMESX21406wvTdQDY" },
+    { name: "Retrograde",      id: "2IqjKEBiz0CdLKdkXhxw84" },
+    { name: "King's Dead",     id: "51rXHuKN8Loc4sUlKPODgH" }]},
+  { name: "Khalid", soundcloud: "thegreatkhalid", tracks: [
+    { name: "Young Dumb & Broke", id: "5Z3GHaZ6ec9bsiI5BenrbY" },
+    { name: "Location",        id: "152lZdxL1OR0ZMW6KquMif" },
+    { name: "Better",          id: "2OpBganfGk2GVdSlRdxzaX" }]},
+  { name: "Iron & Wine", soundcloud: "iron-and-wine", tracks: [
+    { name: "Such Great Heights", id: "6dDxgfvM8pJm7AzmLZB1nN" },
+    { name: "Flightless Bird, American Mouth", id: "1fEGtTZjrjJW8eUeewnNJR" },
+    { name: "Time After Time", id: "5JEM7lT9uSyhUsKFXwGfSm" }]},
+];
+
+const FLAT = [];
+ARTISTS.forEach(a => a.tracks.forEach(t => FLAT.push({ artist: a.name, sc: a.soundcloud, ...t })));
+
+// ============================================================
+// RENDER — each row gets BOTH source buttons. Visitor picks.
+// ============================================================
+const list = document.getElementById('artist-list');
+ARTISTS.forEach(artist => {
+  const block = document.createElement('section');
+  block.className = 'artist-block';
+  const h = document.createElement('h2');
+  h.className = 'artist-name';
+  h.innerHTML = `${artist.name} <span class="sc-hint">SC: @${artist.soundcloud}</span>`;
+  block.appendChild(h);
+  const table = document.createElement('table');
+  const tbody = document.createElement('tbody');
+  artist.tracks.forEach((t, i) => {
+    const flatIdx = FLAT.findIndex(f => f.id === t.id);
+    const tr = document.createElement('tr');
+    tr.dataset.flatIdx = flatIdx;
+    tr.innerHTML = `
+      <td class="idx">${i + 1}</td>
+      <td class="track">${t.name}</td>
+      <td class="actions">
+        <button class="src-btn" data-src="sp" data-idx="${flatIdx}">
+          <span class="dot"></span>SP
+        </button>
+        <button class="src-btn" data-src="sc" data-idx="${flatIdx}">
+          <span class="dot"></span>SC
+        </button>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  block.appendChild(table);
+  list.appendChild(block);
+});
+
+document.querySelectorAll('.src-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const idx = parseInt(btn.dataset.idx, 10);
+    const src = btn.dataset.src;
+    playTrack(idx, src);
+  });
+});
+
+// ============================================================
+// DUAL SOURCE CONTROLLER
+// Two iframes live in the page: Spotify (iframe API) + SoundCloud
+// (widget API). Each is mounted lazily on first use. We swap which
+// is visible based on the last button the user pressed.
+// ============================================================
+let spController = null;
+let scWidget = null;
+let activeIdx = -1;
+let activeSrc = null;   // 'sp' | 'sc'
+
+window.onSpotifyIframeApiReady = (IFrameAPI) => { window._spotifyAPI = IFrameAPI; };
+
+function ensureSpotify(initialUri, onReady) {
+  if (spController) { onReady(); return; }
+  const mount = document.getElementById('spotify-mount');
+  mount.innerHTML = '<div id="spotify-embed"></div>';
+  const tryMount = () => {
+    if (!window._spotifyAPI) { setTimeout(tryMount, 80); return; }
+    window._spotifyAPI.createController(
+      document.getElementById('spotify-embed'),
+      { uri: initialUri, width: '100%', height: 80 },
+      (c) => {
+        spController = c;
+        c.addListener('ready', () => onReady());
+      });
+  };
+  tryMount();
+}
+
+function ensureSoundCloud(initialUrl, onReady) {
+  if (scWidget) { onReady(); return; }
+  const mount = document.getElementById('sc-mount');
+  // SoundCloud widget is just an iframe pointing at the player URL.
+  // The Widget API gives us load() to swap tracks without remounting.
+  mount.innerHTML = `<iframe id="sc-iframe" allow="autoplay" frameborder="0"
+    width="100%" height="100"
+    src="https://w.soundcloud.com/player/?url=${encodeURIComponent(initialUrl)}&auto_play=true&visual=false&show_artwork=true&color=%23a060c0"></iframe>`;
+  // Load the widget API once.
+  const wireUp = () => {
+    if (!window.SC || !window.SC.Widget) { setTimeout(wireUp, 80); return; }
+    scWidget = window.SC.Widget(document.getElementById('sc-iframe'));
+    scWidget.bind(SC.Widget.Events.READY, () => onReady());
+  };
+  wireUp();
+}
+
+function playTrack(idx, src) {
+  if (idx < 0 || idx >= FLAT.length) return;
+  const track = FLAT[idx];
+  activeIdx = idx;
+  activeSrc = src;
+  document.getElementById('empty').style.display = 'none';
+  document.body.classList.toggle('src-sp', src === 'sp');
+  document.body.classList.toggle('src-sc', src === 'sc');
+  document.getElementById('now-source').textContent =
+    src === 'sp' ? 'Spotify' : 'SoundCloud · @' + track.sc;
+  markActive();
+  if (src === 'sp') {
+    const uri = 'spotify:track:' + track.id;
+    if (!spController) ensureSpotify(uri, () => spController.play());
+    else { spController.loadUri(uri); setTimeout(() => spController.play(), 300); }
+    // Pause the other source so we don't have two audio streams.
+    if (scWidget) scWidget.pause();
+  } else {
+    const url = `https://soundcloud.com/${track.sc}`;
+    if (!scWidget) ensureSoundCloud(url, () => {});
+    else scWidget.load(url, { auto_play: true });
+    if (spController) spController.pause();
+  }
+}
+
+function markActive() {
+  document.querySelectorAll('tr').forEach(tr => {
+    tr.classList.toggle('active', parseInt(tr.dataset.flatIdx, 10) === activeIdx);
+  });
+  document.querySelectorAll('.src-btn').forEach(b => {
+    const on = parseInt(b.dataset.idx, 10) === activeIdx && b.dataset.src === activeSrc;
+    b.classList.toggle('active-sp', on && activeSrc === 'sp');
+    b.classList.toggle('active-sc', on && activeSrc === 'sc');
+  });
+}
+</script>
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+<script src="https://w.soundcloud.com/player/api.js" async></script>
+</body>
+</html>
