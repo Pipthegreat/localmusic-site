@@ -562,18 +562,20 @@ function onPlaybackUpdate(e) {
   const { position, duration, isPaused: paused } = e.data;
   lastUpdateAt = Date.now();
   lastDuration = duration;
-  // Track-end detection — Spotify emits the end-state in several
-  // shapes depending on track length, network, and embed version:
-  //   (A) final tick has position ≈ duration, isPaused = true
-  //   (B) final tick has position = 0, isPaused = true (reset)
-  //   (C) one tick of (A) then one tick of (B)
-  // Fire on any of: paused AND (was at the end OR is at the end).
-  // endFiredFor guards against re-firing for the same URI when (C)
-  // emits two qualifying ticks in a row.
+  // Track-end detection — covers all observed Spotify end-state shapes
+  // (position-at-duration, position-reset-to-zero, transition between
+  // them). endFiredFor guards against re-firing per URI.
   const justEnded =
     endFiredFor !== activeUri &&
     duration > 0 && paused &&
     (lastPosition >= duration - 1500 || position >= duration - 200);
+  // Single-shot play() trigger. The first update with duration > 0,
+  // paused, and position near 0 means the new track is loaded and
+  // ready. firePendingPlay nulls pendingPlayForUri so we can never
+  // call play() twice and re-seek to start (root of the stutter).
+  if (pendingPlayForUri === activeUri && duration > 0 && paused && position < 1500) {
+    firePendingPlay(activeUri);
+  }
   lastPosition = position;
   lastIsPaused = paused;
   isPaused = paused;
@@ -584,24 +586,23 @@ function onPlaybackUpdate(e) {
   }
 }
 
-// Retry-chain play(). Spotify's iframe drops play() calls made
-// before the new URI finishes loading inside the embed; a single
-// timeout works on a fast connection and silently fails on a
-// slow one. The cascade catches both. Each attempt bails the
-// moment a playback_update confirms audio is actually flowing
-// — that's what keeps the second/third attempts from re-seeking
-// a playing track (which is what caused "skips on first play").
-function attemptPlay(targetUri) {
-  const tryOnce = () => {
-    if (activeUri !== targetUri) return;
-    if (lastUpdateAt > 0 && !isPaused && lastPosition > 0) return;
-    try { controller.play(); } catch (e) {}
-    try { controller.resume(); } catch (e) {}
-  };
-  setTimeout(tryOnce, 320);
-  setTimeout(tryOnce, 900);
-  setTimeout(tryOnce, 1800);
-  setTimeout(tryOnce, 3200);
+// Single-shot play(). The previous retry chain (320/900/1800/3200ms)
+// was the source of the stutter: each call to controller.play() seeks
+// the track to position 0. If two retries fired before Spotify
+// confirmed playback, the user heard "track starts, restart, restart."
+//
+// New behaviour: pendingPlayForUri tags the URI we want to play.
+// onPlaybackUpdate fires play() exactly once, as soon as the embed
+// reports the new track is loaded (duration known, paused, at start).
+// A 1200ms fallback timer covers the case where playback_update
+// never reaches a "ready" state.
+let pendingPlayForUri = null;
+function firePendingPlay(uri) {
+  if (activeUri !== uri) return;           // moved on to another track
+  if (pendingPlayForUri !== uri) return;   // already fired
+  if (!controller) return;
+  pendingPlayForUri = null;
+  try { controller.play(); } catch (e) {}
 }
 
 function syncPlayState() {
@@ -633,16 +634,21 @@ function playByFlat(flat) {
   const t = FLAT[flat];
   const uri = 'spotify:track:' + t.id;
   activeUri = uri;
+  pendingPlayForUri = uri;
   endFiredFor = null;
   lastPosition = 0;
   lastIsPaused = true;
   lastUpdateAt = 0;
   setActive(flat);
   if (!controller) {
-    ensureController(uri, () => attemptPlay(uri));
+    ensureController(uri, () => {
+      // First mount — fallback play() at 1200ms if onPlaybackUpdate
+      // hasn't triggered it (slow network, throttled tab, etc.).
+      setTimeout(() => firePendingPlay(uri), 1200);
+    });
   } else {
     controller.loadUri(uri);
-    attemptPlay(uri);
+    setTimeout(() => firePendingPlay(uri), 1200);
   }
 }
 

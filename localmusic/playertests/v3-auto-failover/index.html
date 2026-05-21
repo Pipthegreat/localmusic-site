@@ -443,16 +443,15 @@ function ensureController(initialUri, ready) {
 function onPlaybackUpdate(e) {
   const { position, duration, isPaused: paused } = e.data;
   lastUpdateAt = Date.now();
-  // Track-end: fires on any of:
-  //   - paused-at-end (position ≈ duration, isPaused = true)
-  //   - paused-after-end-reset (position = 0 after near-end tick)
-  //   - paused-with-prev-tick-near-end
-  // Multi-signal coverage required because Spotify's end-state shape
-  // varies across track length, network, and embed version.
+  // Track-end: multi-signal coverage of Spotify's end-state shapes.
   const justEnded =
     endFiredFor !== activeUri &&
     duration > 0 && paused &&
     (lastPosition >= duration - 1500 || position >= duration - 200);
+  // Single-shot play() trigger — fires once the new track is loaded.
+  if (pendingPlayForUri === activeUri && duration > 0 && paused && position < 1500) {
+    firePendingPlay(activeUri);
+  }
   lastPosition = position; lastDuration = duration;
   lastIsPaused = paused; isPaused = paused;
   // Real playback confirmed — clear any stall banner.
@@ -479,17 +478,15 @@ setInterval(() => {
   }
 }, 1200);
 
-function attemptPlay(targetUri) {
-  const tryOnce = () => {
-    if (activeUri !== targetUri) return;
-    if (lastUpdateAt > 0 && !isPaused && lastPosition > 0) return;
-    try { controller.play(); } catch (e) {}
-    try { controller.resume(); } catch (e) {}
-  };
-  setTimeout(tryOnce, 320);
-  setTimeout(tryOnce, 900);
-  setTimeout(tryOnce, 1800);
-  setTimeout(tryOnce, 3200);
+// Single-shot play() — see V1. Multiple play() calls re-seek to 0
+// and produced an audible stutter on first tap.
+let pendingPlayForUri = null;
+function firePendingPlay(uri) {
+  if (activeUri !== uri) return;
+  if (pendingPlayForUri !== uri) return;
+  if (!controller) return;
+  pendingPlayForUri = null;
+  try { controller.play(); } catch (e) {}
 }
 
 function syncPlayState() {
@@ -529,16 +526,19 @@ function playByFlat(flat) {
   if (flat < 0 || flat >= FLAT.length) return;
   const t = FLAT[flat];
   const uri = 'spotify:track:' + t.id;
-  activeUri = uri; endFiredFor = null;
-  lastPosition = 0; lastIsPaused = true;
+  activeUri = uri; pendingPlayForUri = uri;
+  endFiredFor = null; lastPosition = 0; lastIsPaused = true;
   lastUpdateAt = 0;
   setActive(flat);
   document.getElementById('stall-banner').classList.remove('show');
   if (!controller) {
-    ensureController(uri, () => { attemptPlay(uri); armStallCheck(); });
+    ensureController(uri, () => {
+      setTimeout(() => firePendingPlay(uri), 1200);
+      armStallCheck();
+    });
   } else {
     controller.loadUri(uri);
-    attemptPlay(uri);
+    setTimeout(() => firePendingPlay(uri), 1200);
     armStallCheck();
   }
 }

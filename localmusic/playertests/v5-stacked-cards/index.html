@@ -509,13 +509,15 @@ function ensureController(initialUri, ready) {
 function onPlaybackUpdate(e) {
   const { position, duration, isPaused: paused } = e.data;
   lastUpdateAt = Date.now();
-  // Multi-signal track-end detection — see V1 for full rationale.
-  // Mixtape mode needs this airtight: the whole UX is "press play
-  // and let the tape ride." A single failed advance ruins the demo.
+  // Multi-signal track-end detection — see V1.
   const justEnded =
     endFiredFor !== activeUri &&
     duration > 0 && paused &&
     (lastPosition >= duration - 1500 || position >= duration - 200);
+  // Single-shot play() trigger.
+  if (pendingPlayForUri === activeUri && duration > 0 && paused && position < 1500) {
+    firePendingPlay(activeUri);
+  }
   lastPosition = position; lastDuration = duration;
   lastIsPaused = paused; isPaused = paused;
   syncPlayState();
@@ -536,17 +538,16 @@ setInterval(() => {
   }
 }, 1200);
 
-function attemptPlay(targetUri) {
-  const tryOnce = () => {
-    if (activeUri !== targetUri) return;
-    if (lastUpdateAt > 0 && !isPaused && lastPosition > 0) return;
-    try { controller.play(); } catch (e) {}
-    try { controller.resume(); } catch (e) {}
-  };
-  setTimeout(tryOnce, 320);
-  setTimeout(tryOnce, 900);
-  setTimeout(tryOnce, 1800);
-  setTimeout(tryOnce, 3200);
+// Single-shot play() — see V1 for full rationale. The cassette UX
+// especially needed this fix: stuttering at the start of a side
+// breaks the "press play, let it ride" experience.
+let pendingPlayForUri = null;
+function firePendingPlay(uri) {
+  if (activeUri !== uri) return;
+  if (pendingPlayForUri !== uri) return;
+  if (!controller) return;
+  pendingPlayForUri = null;
+  try { controller.play(); } catch (e) {}
 }
 
 function syncPlayState() {
@@ -583,14 +584,15 @@ function playByFlat(flat) {
   if (flat < 0 || flat >= FLAT.length) return;
   const t = FLAT[flat];
   const uri = 'spotify:track:' + t.id;
-  activeUri = uri; endFiredFor = null; lastPosition = 0; lastIsPaused = true;
+  activeUri = uri; pendingPlayForUri = uri;
+  endFiredFor = null; lastPosition = 0; lastIsPaused = true;
   lastUpdateAt = 0;
   setActive(flat);
   if (!controller) {
-    ensureController(uri, () => attemptPlay(uri));
+    ensureController(uri, () => setTimeout(() => firePendingPlay(uri), 1200));
   } else {
     controller.loadUri(uri);
-    attemptPlay(uri);
+    setTimeout(() => firePendingPlay(uri), 1200);
   }
 }
 

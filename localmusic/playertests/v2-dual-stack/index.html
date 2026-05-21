@@ -481,14 +481,15 @@ function onPlaybackUpdate(e) {
   const { position, duration, isPaused: paused } = e.data;
   lastUpdateAt = Date.now();
   lastDuration = duration;
-  // Track-end detection — fires on any of: paused-at-end, paused-after-end,
-  // or paused-with-prev-tick-at-end. Spotify's iframe emits the end-state
-  // in inconsistent shapes; multi-signal coverage is required to play
-  // through reliably. endFiredFor guards repeat-firing per URI.
+  // Track-end detection — multi-signal, see V1.
   const justEnded =
     endFiredFor !== activeUri &&
     duration > 0 && paused &&
     (lastPosition >= duration - 1500 || position >= duration - 200);
+  // Single-shot play() trigger: fires once the new track is loaded.
+  if (pendingPlayForUri === activeUri && duration > 0 && paused && position < 1500) {
+    firePendingPlay(activeUri);
+  }
   lastPosition = position;
   lastIsPaused = paused;
   isPaused = paused;
@@ -514,17 +515,15 @@ setInterval(() => {
   }
 }, 1200);
 
-function attemptPlay(targetUri) {
-  const tryOnce = () => {
-    if (activeUri !== targetUri) return;
-    if (lastUpdateAt > 0 && !isPaused && lastPosition > 0) return;
-    try { controller.play(); } catch (e) {}
-    try { controller.resume(); } catch (e) {}
-  };
-  setTimeout(tryOnce, 320);
-  setTimeout(tryOnce, 900);
-  setTimeout(tryOnce, 1800);
-  setTimeout(tryOnce, 3200);
+// Single-shot play() — see V1 for full rationale. The retry chain
+// was re-seeking to track-start each call; users heard a stutter.
+let pendingPlayForUri = null;
+function firePendingPlay(uri) {
+  if (activeUri !== uri) return;
+  if (pendingPlayForUri !== uri) return;
+  if (!controller) return;
+  pendingPlayForUri = null;
+  try { controller.play(); } catch (e) {}
 }
 
 function syncPlayState() {
@@ -554,14 +553,15 @@ function playByFlat(flat) {
   if (flat < 0 || flat >= FLAT.length) return;
   const t = FLAT[flat];
   const uri = 'spotify:track:' + t.id;
-  activeUri = uri; endFiredFor = null; lastPosition = 0; lastIsPaused = true;
+  activeUri = uri; pendingPlayForUri = uri;
+  endFiredFor = null; lastPosition = 0; lastIsPaused = true;
   lastUpdateAt = 0;
   setActive(flat);
   if (!controller) {
-    ensureController(uri, () => attemptPlay(uri));
+    ensureController(uri, () => setTimeout(() => firePendingPlay(uri), 1200));
   } else {
     controller.loadUri(uri);
-    attemptPlay(uri);
+    setTimeout(() => firePendingPlay(uri), 1200);
   }
 }
 
