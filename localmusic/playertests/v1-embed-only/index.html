@@ -511,11 +511,31 @@ let activeUri = null;
 let controller = null;
 let isPaused = true;
 let lastPosition = 0;
+let lastDuration = 0;
 let lastIsPaused = true;
 let endFiredFor = null;     // URI we already fired track-end for
 let lastUpdateAt = 0;       // ms timestamp of the most recent playback_update —
                             // lets the play() retry chain bail once Spotify
                             // confirms real audio is flowing.
+
+// Safety-net poll. Even with the multi-signal track-end check in
+// onPlaybackUpdate, Spotify occasionally just stops emitting events
+// near the end of a track (mobile Safari, throttled tabs, etc.).
+// Every 1.2s we ask: are we within 1.5s of duration, was the last
+// update >2.5s ago, and we haven't fired end for this URI yet? If
+// so, fire end. The condition is narrow enough that it can't fire
+// on a paused-in-the-middle track.
+setInterval(() => {
+  if (!controller || activeFlat < 0 || activeUri == null) return;
+  if (endFiredFor === activeUri) return;
+  if (lastDuration <= 0) return;
+  const sinceUpdate = Date.now() - lastUpdateAt;
+  const nearEnd = lastPosition >= lastDuration - 1500;
+  if (nearEnd && sinceUpdate > 2500) {
+    endFiredFor = activeUri;
+    skipNext();
+  }
+}, 1200);
 
 window.onSpotifyIframeApiReady = (API) => { window._spAPI = API; };
 
@@ -541,14 +561,19 @@ function ensureController(initialUri, ready) {
 function onPlaybackUpdate(e) {
   const { position, duration, isPaused: paused } = e.data;
   lastUpdateAt = Date.now();
-  // Track-end signal: was playing → paused, AND position rolled
-  // back from near-end to near-zero. The roll-back is what makes
-  // this unambiguous — pauses for any other reason (user tap,
-  // Connect conflict, buffering) leave position where it was.
+  lastDuration = duration;
+  // Track-end detection — Spotify emits the end-state in several
+  // shapes depending on track length, network, and embed version:
+  //   (A) final tick has position ≈ duration, isPaused = true
+  //   (B) final tick has position = 0, isPaused = true (reset)
+  //   (C) one tick of (A) then one tick of (B)
+  // Fire on any of: paused AND (was at the end OR is at the end).
+  // endFiredFor guards against re-firing for the same URI when (C)
+  // emits two qualifying ticks in a row.
   const justEnded =
     endFiredFor !== activeUri &&
-    duration > 0 && !lastIsPaused && paused &&
-    lastPosition >= duration - 1500 && position < 1500;
+    duration > 0 && paused &&
+    (lastPosition >= duration - 1500 || position >= duration - 200);
   lastPosition = position;
   lastIsPaused = paused;
   isPaused = paused;

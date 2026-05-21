@@ -451,6 +451,7 @@ let activeUri = null;
 let controller = null;
 let isPaused = true;
 let lastPosition = 0;
+let lastDuration = 0;
 let lastIsPaused = true;
 let endFiredFor = null;
 let lastUpdateAt = 0;
@@ -479,10 +480,15 @@ function ensureController(initialUri, ready) {
 function onPlaybackUpdate(e) {
   const { position, duration, isPaused: paused } = e.data;
   lastUpdateAt = Date.now();
+  lastDuration = duration;
+  // Track-end detection — fires on any of: paused-at-end, paused-after-end,
+  // or paused-with-prev-tick-at-end. Spotify's iframe emits the end-state
+  // in inconsistent shapes; multi-signal coverage is required to play
+  // through reliably. endFiredFor guards repeat-firing per URI.
   const justEnded =
     endFiredFor !== activeUri &&
-    duration > 0 && !lastIsPaused && paused &&
-    lastPosition >= duration - 1500 && position < 1500;
+    duration > 0 && paused &&
+    (lastPosition >= duration - 1500 || position >= duration - 200);
   lastPosition = position;
   lastIsPaused = paused;
   isPaused = paused;
@@ -492,6 +498,21 @@ function onPlaybackUpdate(e) {
     setTimeout(skipNext, 80);
   }
 }
+
+// Safety-net poll for the case where Spotify just stops emitting near
+// the end (mobile, throttled tabs). Tight window: must be within 1.5s
+// of duration AND no update in 2.5s. Can't fire on mid-track pause.
+setInterval(() => {
+  if (!controller || activeFlat < 0 || activeUri == null) return;
+  if (endFiredFor === activeUri) return;
+  if (lastDuration <= 0) return;
+  const sinceUpdate = Date.now() - lastUpdateAt;
+  const nearEnd = lastPosition >= lastDuration - 1500;
+  if (nearEnd && sinceUpdate > 2500) {
+    endFiredFor = activeUri;
+    skipNext();
+  }
+}, 1200);
 
 function attemptPlay(targetUri) {
   const tryOnce = () => {

@@ -509,15 +509,32 @@ function ensureController(initialUri, ready) {
 function onPlaybackUpdate(e) {
   const { position, duration, isPaused: paused } = e.data;
   lastUpdateAt = Date.now();
+  // Multi-signal track-end detection — see V1 for full rationale.
+  // Mixtape mode needs this airtight: the whole UX is "press play
+  // and let the tape ride." A single failed advance ruins the demo.
   const justEnded =
     endFiredFor !== activeUri &&
-    duration > 0 && !lastIsPaused && paused &&
-    lastPosition >= duration - 1500 && position < 1500;
+    duration > 0 && paused &&
+    (lastPosition >= duration - 1500 || position >= duration - 200);
   lastPosition = position; lastDuration = duration;
   lastIsPaused = paused; isPaused = paused;
   syncPlayState();
   if (justEnded) { endFiredFor = activeUri; setTimeout(skipNext, 80); }
 }
+
+// Safety-net poll. Mobile Safari and throttled tabs sometimes stop
+// emitting playback_update before the end; this catches that case.
+setInterval(() => {
+  if (!controller || activeFlat < 0 || activeUri == null) return;
+  if (endFiredFor === activeUri) return;
+  if (lastDuration <= 0) return;
+  const sinceUpdate = Date.now() - lastUpdateAt;
+  const nearEnd = lastPosition >= lastDuration - 1500;
+  if (nearEnd && sinceUpdate > 2500) {
+    endFiredFor = activeUri;
+    skipNext();
+  }
+}, 1200);
 
 function attemptPlay(targetUri) {
   const tryOnce = () => {
