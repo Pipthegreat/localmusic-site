@@ -611,6 +611,43 @@ document.getElementById('ctrl-play').addEventListener('click', () => {
   if (!controller) { if (activeFlat < 0) playByFlat(0); return; }
   if (isPaused) controller.resume(); else controller.pause();
 });
+
+// ============================================================
+// MEDIA SESSION — see V1 for full notes. Critical for mixtape
+// mode: visitors put it on and walk away — Bluetooth/headphone
+// pause needs to actually pause, not orphan the audio.
+// ============================================================
+function _msSync() {
+  if (!('mediaSession' in navigator)) return;
+  try {
+    if (activeFlat < 0) { navigator.mediaSession.metadata = null; return; }
+    const t = FLAT[activeFlat];
+    if (typeof MediaMetadata !== 'undefined') {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: t.name, artist: t.artist,
+        album: 'V5 · Mixtape · Indie & alt-rock',
+      });
+    }
+    navigator.mediaSession.playbackState = isPaused ? 'paused' : 'playing';
+  } catch (e) {}
+}
+if ('mediaSession' in navigator) {
+  try {
+    navigator.mediaSession.setActionHandler('nexttrack', skipNext);
+    navigator.mediaSession.setActionHandler('previoustrack', skipPrev);
+    navigator.mediaSession.setActionHandler('play', () => {
+      if (!controller) { if (activeFlat < 0) playByFlat(0); return; }
+      if (isPaused) controller.resume();
+    });
+    navigator.mediaSession.setActionHandler('pause', () => {
+      if (controller && !isPaused) controller.pause();
+    });
+  } catch (e) {}
+}
+const _origSync = syncPlayState;
+syncPlayState = function() { _origSync.apply(this, arguments); _msSync(); };
+const _origSetActive = setActive;
+setActive = function() { _origSetActive.apply(this, arguments); _msSync(); };
 </script>
 <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 </body>

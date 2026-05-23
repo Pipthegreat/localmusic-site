@@ -713,6 +713,49 @@ document.getElementById('ctrl-play').addEventListener('click', () => {
   else audio.pause();
 });
 
+// ============================================================
+// MEDIA SESSION — Even though HTML5 audio sets some MediaSession
+// state implicitly, browsers ignore the handlers unless we set them
+// explicitly. Without these, headphone next/prev buttons do nothing.
+// ============================================================
+function _msSync() {
+  if (!('mediaSession' in navigator)) return;
+  try {
+    if (activeFlat < 0) { navigator.mediaSession.metadata = null; return; }
+    const t = FLAT[activeFlat];
+    const info = meta.get(t.id) || {};
+    if (typeof MediaMetadata !== 'undefined') {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: t.name, artist: t.artist,
+        album: 'V4 · Editorial · Folk & Americana',
+        artwork: info.coverUrl ? [{ src: info.coverUrl, sizes: '600x600', type: 'image/jpeg' }] : [],
+      });
+    }
+    navigator.mediaSession.playbackState = audio.paused ? 'paused' : 'playing';
+  } catch (e) {}
+}
+if ('mediaSession' in navigator) {
+  try {
+    navigator.mediaSession.setActionHandler('nexttrack', () =>
+      playByFlat(activeFlat < 0 ? 0 : (activeFlat + 1) % FLAT.length));
+    navigator.mediaSession.setActionHandler('previoustrack', () =>
+      playByFlat(activeFlat <= 0 ? FLAT.length - 1 : activeFlat - 1));
+    navigator.mediaSession.setActionHandler('play', () => {
+      if (activeFlat < 0) { playByFlat(0); return; }
+      if (audio.paused) audio.play().catch(() => {});
+    });
+    navigator.mediaSession.setActionHandler('pause', () => {
+      if (!audio.paused) audio.pause();
+    });
+  } catch (e) {}
+}
+audio.addEventListener('play',  _msSync);
+audio.addEventListener('pause', _msSync);
+const _origSyncIcon = syncIcon;
+syncIcon = function() { _origSyncIcon.apply(this, arguments); _msSync(); };
+const _origSetStage = setStage;
+setStage = function() { _origSetStage.apply(this, arguments); _msSync(); };
+
 // Prefetch durations for all 15 tracks so the table looks fully
 // populated even before the user plays anything. Sequenced with
 // 120ms stagger to be polite to iTunes.
