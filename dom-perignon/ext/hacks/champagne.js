@@ -10,7 +10,8 @@
 
   const SPAWN_INTERVAL_MS = 90;     // how often a new bubble appears
   const MAX_BUBBLES       = 70;
-  const CORK_INTERVAL_MS  = 28000;
+  // Cork shows up roughly 12% as often as before (was every 28s).
+  const CORK_INTERVAL_MS  = 240000; // ~4 minutes
 
   let styleEl = null;
   let spawnT = null, corkT = null, raf = null;
@@ -77,23 +78,11 @@
     const vh = window.innerHeight;
     const fromLeft = Math.random() < 0.5;
 
+    // 🍾 emoji replaces the hand-drawn cork SVG — reads instantly and
+    // matches the brand cue without rendering bespoke artwork.
     const el = document.createElement('div');
     el.className = 'dp-cork';
-    el.innerHTML = `
-      <svg viewBox="0 0 60 38" xmlns="http://www.w3.org/2000/svg">
-        <!-- wire cage (top of bottle, faint) -->
-        <rect x="2" y="10" width="20" height="18" rx="3" fill="#3a2412" stroke="#1a0e08" stroke-width="1"/>
-        <line x1="6"  y1="12" x2="6"  y2="26" stroke="#8b6a3e" stroke-width="0.6"/>
-        <line x1="12" y1="12" x2="12" y2="26" stroke="#8b6a3e" stroke-width="0.6"/>
-        <line x1="18" y1="12" x2="18" y2="26" stroke="#8b6a3e" stroke-width="0.6"/>
-        <!-- cork body -->
-        <rect x="22" y="6"  width="36" height="26" rx="6" fill="#c08855" stroke="#7a4b22" stroke-width="1.2"/>
-        <rect x="22" y="14" width="36" height="3"  fill="#a06632"/>
-        <rect x="22" y="22" width="36" height="3"  fill="#a06632"/>
-        <!-- highlight -->
-        <rect x="24" y="8" width="4" height="22" rx="2" fill="#e6b07c" opacity="0.7"/>
-      </svg>
-    `;
+    el.textContent = '🍾';
     root.appendChild(el);
 
     const startX = fromLeft ? -120 : vw + 120;

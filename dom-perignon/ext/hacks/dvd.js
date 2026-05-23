@@ -77,8 +77,6 @@
   let styleEl = null;
   let logo = null;
   let cornerFlash = null;
-  let cornerCount = 0;
-  let counterEl = null;
   let x, y, vx, vy, colorIdx;
 
   async function loadCSS() {
@@ -97,11 +95,8 @@
   }
 
   function celebrateCorner() {
-    cornerCount++;
-    counterEl.textContent = `CORNER HIT × ${cornerCount}`;
-    counterEl.classList.remove('dp-dvd-corner-flash');
-    void counterEl.offsetWidth; // restart animation
-    counterEl.classList.add('dp-dvd-corner-flash');
+    // Counter removed in v1.1.9; the screen-wide flash alone marks the
+    // moment without the HUD chip in the corner.
     cornerFlash.classList.remove('dp-dvd-flash');
     void cornerFlash.offsetWidth;
     cornerFlash.classList.add('dp-dvd-flash');
@@ -128,7 +123,6 @@
 
   async function init(root) {
     await loadCSS();
-    cornerCount = 0;
 
     // Scale once at activation based on current viewport — small iframes
     // and mobile screens get a proportionally smaller DVD.
@@ -146,11 +140,6 @@
     cornerFlash = document.createElement('div');
     cornerFlash.className = 'dp-dvd-flash-layer';
     root.appendChild(cornerFlash);
-
-    counterEl = document.createElement('div');
-    counterEl.className = 'dp-dvd-corner-counter';
-    counterEl.textContent = 'CORNER HIT × 0';
-    root.appendChild(counterEl);
 
     const vw = window.innerWidth;
     const vh = window.innerHeight;
@@ -170,7 +159,6 @@
     raf = null;
     logo = null;
     cornerFlash = null;
-    counterEl = null;
     if (styleEl) { styleEl.remove(); styleEl = null; }
   }
 

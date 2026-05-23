@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DOM Perignon — a collection of UI hijinks for Chrome</title>
-<meta name="description" content="The DOM is every web page's live structure. DOM Perignon takes that unlock to the next level with eight different hijinks. Live previews and install.">
+<meta name="description" content="The DOM (Document Object Model) is the live tree of every web page's elements. DOM Perignon uses that for eight different perspectives. Live previews and install.">
 <link rel="canonical" href="https://customprojects.info/dom-perignon/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -165,6 +165,21 @@ h1 em {
   height: 100%;
   border: 0;
   display: block;
+}
+/* "Preview unavailable" placeholder — used for Gravity Well, whose
+   in-iframe behavior doesn't translate to the small preview tile. */
+.preview-unavailable {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font: italic 300 22px/1.2 'Fraunces', Georgia, serif;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  letter-spacing: -0.005em;
+  user-select: none;
 }
 /* Faint top-edge gradient hints "this is a window" */
 .preview-frame::after {
@@ -360,9 +375,9 @@ footer {
   <header class="masthead">
     <div>
       <h1><em>DOM</em> Perignon</h1>
-      <p class="lede">The <strong>DOM</strong> is every web page's live structure. DOM Perignon takes that unlock to the next level with eight different hijinks. Live previews below — each tile runs the actual hijink against a sample Kestral Fabrications page.</p>
+      <p class="lede">The <strong>DOM</strong> (Document Object Model) is the live tree of every web page's elements — the structure browsers build from HTML so scripts can read and reshape it. DOM Perignon uses that for eight different perspectives. Live previews below — each tile runs the actual hijink against a sample Kestral Fabrications page.</p>
     </div>
-    <span class="version-chip">v1.1.8</span>
+    <span class="version-chip">v1.1.9</span>
   </header>
 
   <div class="section-label">The collection</div>
@@ -412,7 +427,7 @@ footer {
 
     <div class="hack-card">
       <div class="preview-frame">
-        <iframe src="demo.html?hack=gravity-well" loading="lazy" title="Gravity Well preview"></iframe>
+        <div class="preview-unavailable">Preview unavailable</div>
       </div>
       <div class="hack-meta">
         <h2 class="hack-name"><span class="num">05</span> Gravity Well</h2>
@@ -458,9 +473,9 @@ footer {
 
       <div class="download-card">
         <span class="download-meta">Latest release</span>
-        <h3 class="download-title">dom-perignon-v1.1.8.zip</h3>
+        <h3 class="download-title">dom-perignon-v1.1.9.zip</h3>
         <p class="hack-desc">A self-contained Chrome extension. ~44 KB. Manifest V3. No network calls, no telemetry — it only paints over the pages you open.</p>
-        <a class="download-btn" href="downloads/dom-perignon-v1.1.8.zip" download>↓ Download zip</a>
+        <a class="download-btn" href="downloads/dom-perignon-v1.1.9.zip" download>↓ Download zip</a>
       </div>
 
       <div class="install-steps">
@@ -483,7 +498,7 @@ footer {
 
   <footer>
     <span>© 2026 · customprojects.info</span>
-    <span>DOM Perignon v1.1.8</span>
+    <span>DOM Perignon v1.1.9</span>
   </footer>
 </div>
 </body>

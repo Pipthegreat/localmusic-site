@@ -5,8 +5,8 @@
 (function () {
   const NS = (window.__DOMPerignon = window.__DOMPerignon || { hacks: {} });
 
-  const MAX_PAIRS    = 440;  // twice as many — whimsy through volume
-  const MIN_SIZE     = 36;   // catch smaller elements too
+  const MAX_PAIRS    = 440;
+  const MIN_SIZE     = 20;   // catch small headings, capability labels, eyebrows, etc.
   const REFRESH_MS   = 1500; // re-scan for new candidates this often
 
   let styleEl = null;
@@ -147,7 +147,9 @@
       'img, [role="img"], picture, video, ' +
       'button, [role="button"], a.btn, ' +
       '.avatar, [class*="avatar" i], [class*="profile" i] img, ' +
-      'h1, h2'
+      'h1, h2, h3, p, ' +
+      // Common pattern blocks worth ogling in editorial-style pages
+      '.eyebrow, .capability-label, .capability, .material-name, .step-num, blockquote'
     );
 
     for (const el of candidates) {
