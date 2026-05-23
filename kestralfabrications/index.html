@@ -121,11 +121,8 @@ a:active { color: var(--accent-active); }
   gap: 12px;
 }
 .wordmark .glyph {
-  width: 20px; height: 20px;
+  width: 22px; height: 22px;
   display: inline-block;
-  background: var(--accent);
-  /* Asymmetric notch to read as a fold, not a square. */
-  clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
 }
 .nav {
   display: flex; gap: 28px;
@@ -439,7 +436,7 @@ footer .meta span + span::before {
 
   <header class="masthead">
     <div class="wordmark">
-      <span class="glyph" aria-hidden="true"></span>
+      <img class="glyph" src="kf-logo.svg" alt="" width="22" height="22">
       <span>Kestral Fabrications</span>
     </div>
     <nav class="nav" aria-label="Primary">
