@@ -2,11 +2,11 @@
 # Files-first: a path that resolves to a file is served before these rules.
 # Source patterns are matched top-to-bottom; first match wins.
 
-# Old SF page archives → new sfoak path
-/localmusic/2026-*    /localmusic/sfoak/2026-:splat    301
-/localmusic/2027-*    /localmusic/sfoak/2027-:splat    301
-/localmusic/rolling   /localmusic/sfoak/rolling/       301
-/localmusic/rolling/  /localmusic/sfoak/rolling/       301
+# Old SF page archives used to redirect to /localmusic/sfoak/2026-.../
+# and /localmusic/sfoak/rolling/. Those destinations no longer exist —
+# only the canonical city roots are published — so the redirects were
+# pointing at 404s. Removed 2026-05-23. Old bookmarks now 404 directly
+# instead of misleading the user with a 301.
 
 # Old Tomorrowland → new path under /localmusic/
 /tomorrow2026         /localmusic/tomorrow2026/        301
