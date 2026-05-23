@@ -87,7 +87,11 @@
     const vh = window.innerHeight;
     const scale = (NS.getScale && NS.getScale()) || 1;
     const minDim = Math.max(14, Math.round(28 * scale));
-    const maxDim = Math.max(120, Math.round(420 * scale));
+    // Hard cap on candidate size: product cards / hero images that are
+    // 200px+ dominate the viewport when they fall and read as broken.
+    // 150px at desktop / 75px floor at small viewports captures logos,
+    // avatars, header icons, and buttons but excludes large media.
+    const maxDim = Math.max(75, Math.round(150 * scale));
     const out = [];
     const seen = new Set();
     function consider(el) {
