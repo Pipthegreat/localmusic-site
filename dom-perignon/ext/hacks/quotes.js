@@ -70,6 +70,67 @@
     'Soft eyes, steady heart',
   ];
 
+  // Reflective pool added in v1.2.3 - outward-facing observations about
+  // healthier ways to live, not direct quotes from any source. Each of
+  // these fires half as often as each primary quote (see pickQuote()
+  // below).
+  const QUOTES_REFLECTIVE = [
+    'Slowness is a discipline',
+    'Sleep is a craft',
+    'Walks have always been the answer',
+    'Quiet rooms make quiet minds',
+    'Sunlight before screens',
+    'Water first, coffee second',
+    'Mornings hold their own light',
+    'Slow food is faster in the long run',
+    'Boredom is fertile soil',
+    'Curiosity outlives ambition',
+    'Books are quiet teachers',
+    'Patience is a form of attention',
+    'Small kindnesses ripple outward',
+    'Cooking is a meditation',
+    'Less is the discipline of more',
+    'Silence makes room for thought',
+    'Rested hands work better',
+    'Hands at work, mind at ease',
+    'Old friendships compound',
+    'Wandering has its own logic',
+    'Nature does not hurry',
+    'Long meals build long memories',
+    'Music outlasts the moment',
+    'Routines hold space for spontaneity',
+    'Sleep is the foundation, not the reward',
+    'Conversation is a craft',
+    'The slow path is often the only path',
+    'Stillness is a competency',
+    'Walking is thinking with the feet',
+    'Tea is a pause made tangible',
+    "Daylight has a value coffee can't replace",
+    'Friendship outlasts almost everything',
+    'Gardens are slow theatre',
+    'Trees know things words do not',
+    'A long walk solves most short problems',
+    'Memory grows in the company of others',
+    'Saying no is a quiet art',
+    'The road is part of the destination',
+    'Daydreams have their own work to do',
+    'Hospitality is a small revolution',
+  ];
+
+  // Weighted picker. Each primary quote has weight 1, each reflective
+  // quote has weight 0.5 - so within the rotation, a reflective quote
+  // fires half as often as a primary one. Aggregate spawn share:
+  // primary ~75%, reflective ~25%.
+  function pickQuote() {
+    const primaryWeight = QUOTES.length;                  // 60 * 1.0
+    const reflectiveWeight = QUOTES_REFLECTIVE.length * 0.5; // 40 * 0.5 = 20
+    const r = Math.random() * (primaryWeight + reflectiveWeight);
+    if (r < primaryWeight) {
+      return QUOTES[Math.floor(Math.random() * QUOTES.length)];
+    }
+    return QUOTES_REFLECTIVE[Math.floor(Math.random() * QUOTES_REFLECTIVE.length)];
+  }
+
   // Autumn / desert palette - PALE versions. Lightness pushed to 88-95%,
   // chroma reduced to 0.04-0.08. Each colour reads as a near-white wash
   // hinting at the hue, so when paired with the black character outline
@@ -118,7 +179,7 @@
 
   function spawnQuote() {
     if (!root) return;
-    const text = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+    const text = pickQuote();
     const node = document.createElement('div');
     node.className = 'dp-quote';
     node.textContent = text;
@@ -180,8 +241,8 @@
     quoteScale = (NS.getScale && NS.getScale()) || 1;
     // Initial burst: spawn 3 quotes immediately so the page isn't empty
     for (let i = 0; i < 3; i++) setTimeout(spawnQuote, i * 800);
-    // Then continue spawning at intervals
-    spawnTimer = setInterval(spawnQuote, 2800);
+    // Then continue spawning at intervals (15% slower in v1.2.3)
+    spawnTimer = setInterval(spawnQuote, 3300);
   }
 
   function teardown() {
