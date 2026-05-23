@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DOM Perignon - a collection of UI hijinks for Chrome</title>
-<meta name="description" content="A Chrome extension named after the innovator Dom Pierre Pérignon. The DOM (Document Object Model) is the live tree of every web page's elements. DOM Perignon uses that for eight different perspectives. Live previews and install.">
+<meta name="description" content="A Chrome extension named after the innovator Dom Pierre Pérignon. The DOM (Document Object Model) is the underlying structure of every web page's elements. DOM Perignon uses that for eight different perspectives. Live previews and install.">
 <link rel="canonical" href="https://customprojects.info/dom-perignon/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -83,10 +83,12 @@ h1 em {
   color: var(--ember);
 }
 .subheader {
-  font: 400 22px/1.35 var(--serif);
-  font-style: italic;
+  /* Header-family Fraunces, NOT italic (8% larger than the v1.1.12
+     subheader for more presence). Echoes h1's font but smaller. */
+  font: 300 24px/1.3 var(--serif);
+  font-variation-settings: "opsz" 144;
   color: var(--fg-default);
-  margin: 14px 0 4px;
+  margin: 18px 0 22px;
   letter-spacing: -0.005em;
   max-width: 60ch;
 }
@@ -98,12 +100,48 @@ h1 em {
   text-decoration-thickness: 1px;
 }
 .subheader a:hover { text-decoration-color: var(--ember); }
-.lede {
-  color: var(--fg-muted);
+
+/* Lede as a bulleted list rather than a single paragraph — easier to scan,
+   and lets "DOM Perignon" inside bullet 2 wear its own brand styling. */
+.lede-bullets {
+  list-style: none;
   margin: 4px 0 0;
+  padding: 0;
   max-width: 60ch;
+}
+.lede-bullets li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 10px;
+  color: var(--fg-default);
   font-size: 16px;
   line-height: 1.55;
+}
+.lede-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  background: var(--ember);
+  border-radius: 50%;
+}
+/* Inline "DOM Perignon" that mirrors the h1 styling — italic Fraunces
+   light with ember "DOM" — but at body size, so it pops without
+   dominating the bullet. */
+.brand-inline {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-variation-settings: "opsz" 24;
+  letter-spacing: -0.005em;
+  font-size: 1.05em;
+}
+.brand-inline em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--ember);
 }
 .version-chip {
   font: 500 10px/1 var(--mono);
@@ -392,9 +430,13 @@ footer {
     <div>
       <h1><em>DOM</em> Perignon</h1>
       <p class="subheader">A Chrome extension named after the innovator <a href="https://en.wikipedia.org/wiki/Dom_P%C3%A9rignon_(monk)" target="_blank" rel="noopener">Dom Pierre Pérignon</a>.</p>
-      <p class="lede">The <strong>DOM</strong> (Document Object Model) is the live tree of every web page's elements. DOM Perignon uses that for eight different perspectives. Live previews below, each tile runs the actual hijink against a sample Kestral Fabrications page.</p>
+      <ul class="lede-bullets">
+        <li>The DOM (Document Object Model) is the underlying structure of every web page's elements.</li>
+        <li><span class="brand-inline"><em>DOM</em> Perignon</span> uses that for eight different perspectives.</li>
+        <li>Live previews below against a sample 'Kestral Fabrications' page.</li>
+      </ul>
     </div>
-    <span class="version-chip">v1.1.13</span>
+    <span class="version-chip">v1.2.1</span>
   </header>
 
   <div class="section-label">The collection</div>
@@ -490,9 +532,9 @@ footer {
 
       <div class="download-card">
         <span class="download-meta">Latest release</span>
-        <h3 class="download-title">dom-perignon-v1.1.13.zip</h3>
+        <h3 class="download-title">dom-perignon-v1.2.1.zip</h3>
         <p class="hack-desc">A self-contained Chrome extension. ~44 KB. Manifest V3. No network calls, no telemetry - it only paints over the pages you open.</p>
-        <a class="download-btn" href="downloads/dom-perignon-v1.1.13.zip" download>↓ Download zip</a>
+        <a class="download-btn" href="downloads/dom-perignon-v1.2.1.zip" download>↓ Download zip</a>
       </div>
 
       <div class="install-steps">
@@ -515,7 +557,7 @@ footer {
 
   <footer>
     <span>© 2026 · customprojects.info</span>
-    <span>DOM Perignon v1.1.13</span>
+    <span>DOM Perignon v1.2.1</span>
   </footer>
 </div>
 </body>
