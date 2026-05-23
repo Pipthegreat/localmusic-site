@@ -1,6 +1,6 @@
-/* You Got This — drifting Fraunces italic text in a desert/autumn palette
-   on a solid black backdrop. The backdrop guarantees the colored text
-   reads on any page background (dark, light, photo, gradient). */
+/* You Got This — drifting Fraunces italic text in a desert/autumn palette.
+   Each character carries a crisp black outline so the colored letterforms
+   read on any page background (dark, light, photo, gradient). */
 
 .dp-quote {
   position: fixed;
@@ -14,13 +14,26 @@
   letter-spacing: -0.005em;
   white-space: nowrap;
   /* The fill color is set inline by the JS — one of seven autumn/desert
-     hues picked randomly per quote. The backdrop is what makes the color
-     legible against any page underneath. */
-  background: rgba(0, 0, 0, 0.88);
-  padding: 6px 14px;
-  border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+     hues picked randomly per quote. */
+  /* Primary technique: -webkit-text-stroke + paint-order so the stroke
+     renders BEHIND the fill, preserving the colored letterform shape
+     while adding a clean black halo around each character. */
+  -webkit-text-stroke: 2.5px #000;
+  paint-order: stroke fill;
+  /* Fallback for browsers that don't yet honour paint-order on HTML text
+     (older Safari). The 8-direction text-shadow stack also gives the
+     outline some visual depth — a tiny shadow blur underneath the
+     stroke softens the contact with the page. */
+  text-shadow:
+    -1.5px -1.5px 0 #000,
+     1.5px -1.5px 0 #000,
+    -1.5px  1.5px 0 #000,
+     1.5px  1.5px 0 #000,
+     0    -1.5px 0 #000,
+     0     1.5px 0 #000,
+    -1.5px  0    0 #000,
+     1.5px  0    0 #000,
+     0     2px   4px rgba(0,0,0,0.45);
   will-change: transform, opacity;
   user-select: none;
   -webkit-font-smoothing: antialiased;
