@@ -217,8 +217,23 @@
     root.appendChild(node);
 
     // Wait a frame so the start position is committed, then animate to
-    // the opposite edge over a long duration.
-    const duration = 14000 + Math.random() * 10000; // 14-24s
+    // the opposite edge over a fontSize-linked duration:
+    //   smallest fontSize → 24s (slowest)
+    //   largest  fontSize → 14s (fastest)
+    // Inverse mapping because smaller text exposes more sub-pixel
+    // rendering artefacts as it moves, so slow it down to mask them;
+    // larger text composites cleanly and can fly through quickly.
+    // Envelope (14s-24s) unchanged from previous versions.
+    const FONT_MIN_FOR_SPEED = 16;
+    const FONT_MAX_FOR_SPEED = 39;
+    const DUR_AT_SMALLEST = 24000;
+    const DUR_AT_LARGEST  = 14000;
+    const sizeFrac = Math.max(0, Math.min(1,
+      (fontSize - FONT_MIN_FOR_SPEED) /
+      (FONT_MAX_FOR_SPEED - FONT_MIN_FOR_SPEED)
+    ));
+    const duration = DUR_AT_SMALLEST - sizeFrac * (DUR_AT_SMALLEST - DUR_AT_LARGEST);
+
     requestAnimationFrame(() => {
       node.style.transition = `transform ${duration}ms linear, opacity 1800ms ease-in-out`;
       node.style.opacity = String(opacity);
@@ -226,7 +241,12 @@
       const yDrift = (Math.random() - 0.5) * 80;
       const endX = dirLR ? vw + 400 : -node.offsetWidth - 40;
       const startX = dirLR ? -360 : vw + 40;
-      node.style.transform = `translate(${endX - startX}px, ${yDrift}px)`;
+      // translate3d (not translate) forces the browser to promote this
+      // element to a GPU compositor layer. The bitmap (including the
+      // expensive 9-offset text-shadow outline) is cached once and the
+      // GPU composites each frame instead of re-rasterising. Removes
+      // the small-text stutter that users see at slow speeds.
+      node.style.transform = `translate3d(${endX - startX}px, ${yDrift}px, 0)`;
     });
 
     // Fade out then remove

@@ -40,4 +40,11 @@
   will-change: transform, opacity;
   user-select: none;
   -webkit-font-smoothing: antialiased;
+  /* Force GPU compositor layer on spawn. Paired with translate3d() in the
+     JS animation transform, this caches the text+shadow bitmap so the
+     GPU just composites the cached layer each frame instead of re-
+     rasterising the 9-offset outline. Kills slow-text stutter. */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
