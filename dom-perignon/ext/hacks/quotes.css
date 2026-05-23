@@ -9,8 +9,10 @@
   pointer-events: none;
   font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
   font-style: italic;
-  font-weight: 600;
-  font-variation-settings: "opsz" 144;
+  /* Weight 700 reads with motivational authority now that the real
+     italic weights are actually loaded by the parent doc's font link. */
+  font-weight: 700;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
   letter-spacing: -0.01em;
   white-space: nowrap;
   /* The fill color is set inline by the JS — one of seven autumn/desert

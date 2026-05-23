@@ -106,8 +106,11 @@
     fontLink = document.createElement('link');
     fontLink.id = '__dp-quotes-font';
     fontLink.rel = 'stylesheet';
+    // Load Fraunces with full italic axis + weight range so we get real
+    // italic at weight 600+, not a browser-synthesized slant on the
+    // regular file (which renders weak/boring).
     fontLink.href =
-      'https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,1,300;9..144,1,400&display=swap';
+      'https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,1,100..900&display=swap';
     (document.head || document.documentElement).appendChild(fontLink);
   }
 
