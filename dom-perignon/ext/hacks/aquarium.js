@@ -125,6 +125,7 @@
   let fishes = [];
   let bubbles = [];
   let fishIdCounter = 0;
+  let scale = 1;  // set on init from getScale()
 
   async function loadCSS() {
     if (document.getElementById('__dp-aqua-style')) return;
@@ -144,10 +145,11 @@
     const species = FISH[Math.floor(Math.random() * FISH.length)];
     const id = ++fishIdCounter;
 
-    // 20% smaller than before — scale range 0.56x-1.12x of base
-    const scale = (0.7 + Math.random() * 0.7) * 0.8;
-    const w = species.w * scale;
-    const h = species.h * scale;
+    // Per-fish size jitter (0.56x-1.12x of base) × viewport scale so fish
+    // are proportional to the iframe / screen
+    const fishScale = (0.7 + Math.random() * 0.7) * 0.8 * scale;
+    const w = species.w * fishScale;
+    const h = species.h * fishScale;
 
     const fromLeft = Math.random() < 0.5;
     const y = vh * (0.1 + Math.random() * 0.75);
@@ -192,7 +194,7 @@
     const ox = 60 + Math.random() * (vw - 120);
     const n = 5 + Math.floor(Math.random() * 6);
     for (let i = 0; i < n; i++) {
-      const size = 4 + Math.random() * 10;
+      const size = (4 + Math.random() * 10) * scale;
       const el = document.createElement('div');
       el.className = 'dp-aqua-bubble';
       el.style.width = el.style.height = `${size}px`;
@@ -233,6 +235,7 @@
     root = r;
     fishes = [];
     bubbles = [];
+    scale = (NS.getScale && NS.getScale()) || 1;
 
     // Background layers (water wash, caustic shimmer, kelp)
     const wash = document.createElement('div');
@@ -243,9 +246,16 @@
     caustic.className = 'dp-aqua-caustic';
     root.appendChild(caustic);
 
+    // Kelp sized by viewport scale — was 120×320 fixed, now shrinks
+    // proportionally on small screens / iframes.
+    const kelpW = Math.round(120 * scale);
+    const kelpH = Math.round(320 * scale);
+
     // Kelp (left)
     const kelpL = document.createElement('div');
     kelpL.className = 'dp-aqua-kelp dp-aqua-kelp-left';
+    kelpL.style.width  = `${kelpW}px`;
+    kelpL.style.height = `${kelpH}px`;
     kelpL.innerHTML = `
       <svg viewBox="0 0 120 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
         <g fill="#1a5a3b" opacity="0.68">
@@ -256,10 +266,12 @@
       </svg>`;
     root.appendChild(kelpL);
 
-    // Kelp (right)
+    // Kelp (right) — mirrored via CSS
     const kelpR = document.createElement('div');
     kelpR.className = 'dp-aqua-kelp dp-aqua-kelp-right';
-    kelpR.innerHTML = kelpL.innerHTML; // same SVG, flipped via CSS
+    kelpR.style.width  = `${kelpW}px`;
+    kelpR.style.height = `${kelpH}px`;
+    kelpR.innerHTML = kelpL.innerHTML;
     root.appendChild(kelpR);
 
     // (sand band removed — kelp roots straight into the bottom edge now)

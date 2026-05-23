@@ -1,5 +1,6 @@
 /* You Got This — drifting Fraunces italic text in a desert/autumn palette
-   with a solid black outline so any color reads on any page background. */
+   on a solid black backdrop. The backdrop guarantees the colored text
+   reads on any page background (dark, light, photo, gradient). */
 
 .dp-quote {
   position: fixed;
@@ -8,26 +9,18 @@
   pointer-events: none;
   font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
   font-style: italic;
-  /* Bumped from 300 → 400 so the letters have enough stem weight for the
-     1.5px outline to look intentional, not gluey. */
-  font-weight: 400;
+  font-weight: 500;
   font-variation-settings: "opsz" 144;
-  letter-spacing: -0.012em;
+  letter-spacing: -0.005em;
   white-space: nowrap;
   /* The fill color is set inline by the JS — one of seven autumn/desert
-     hues, picked randomly per quote. */
-  /* Solid 1.5px black outline via 8-direction text-shadow stack. Works
-     uniformly across browsers and contrasts the colored fill against
-     any background — dark page, light page, photographic header, all OK. */
-  text-shadow:
-    -1.5px -1.5px 0 #000,
-     1.5px -1.5px 0 #000,
-    -1.5px  1.5px 0 #000,
-     1.5px  1.5px 0 #000,
-     0    -1.5px 0 #000,
-     0     1.5px 0 #000,
-    -1.5px  0    0 #000,
-     1.5px  0    0 #000;
+     hues picked randomly per quote. The backdrop is what makes the color
+     legible against any page underneath. */
+  background: rgba(0, 0, 0, 0.88);
+  padding: 6px 14px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
   will-change: transform, opacity;
   user-select: none;
   -webkit-font-smoothing: antialiased;

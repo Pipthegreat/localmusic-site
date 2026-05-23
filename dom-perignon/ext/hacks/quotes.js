@@ -87,6 +87,7 @@
   let fontLink = null;
   let spawnTimer = null;
   let root = null;
+  let quoteScale = 1;
 
   async function loadCSS() {
     if (document.getElementById('__dp-quotes-style')) return;
@@ -126,15 +127,13 @@
     const yBand = 0.12 + Math.random() * 0.76; // 12% to 88% of viewport height
     const y = yBand * vh;
 
-    // Vary size; the larger quotes feel like printed plates, smaller
-    // ones like marginalia. Range bumped to 22-55px to accommodate the
-    // longer quotes added in this round.
-    const fontSize = 22 + Math.random() * 33; // 22-55px
-    // Slightly tighter opacity range — the colored fill + black outline
-    // already provide presence, so quotes can sit a touch more recessed.
-    const opacity = 0.55 + Math.random() * 0.30;
-    // Pick a desert/autumn hue at random; outline keeps it legible
-    // regardless of the page background it floats over.
+    // Font size range scales with viewport — smaller iframes get smaller
+    // labels so they don't dominate. Floor at 14px so quotes are always
+    // readable even at the smallest scale.
+    const fontSize = Math.max(14, (22 + Math.random() * 33) * quoteScale);
+    // Backdrop label is solid black — quotes can sit close to fully opaque
+    const opacity = 0.85 + Math.random() * 0.15;
+    // Pick a desert/autumn hue at random; backdrop guarantees legibility
     const color = AUTUMN_PALETTE[Math.floor(Math.random() * AUTUMN_PALETTE.length)];
 
     node.style.fontSize = `${fontSize}px`;
@@ -167,6 +166,7 @@
     await loadCSS();
     ensureFont();
     root = r;
+    quoteScale = (NS.getScale && NS.getScale()) || 1;
     // Initial burst: spawn 3 quotes immediately so the page isn't empty
     for (let i = 0; i < 3; i++) setTimeout(spawnQuote, i * 800);
     // Then continue spawning at intervals

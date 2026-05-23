@@ -5,8 +5,10 @@
 (function () {
   const NS = (window.__DOMPerignon = window.__DOMPerignon || { hacks: {} });
 
-  const LOGO_COUNT = 8;   // 30% more — helps absorb grainy low-res favicons
-  const LOGO_SIZE  = 35;  // 60% smaller — sharper at higher resolutions
+  const LOGO_COUNT_BASE = 8;
+  const LOGO_SIZE_BASE  = 35;
+  let LOGO_COUNT = LOGO_COUNT_BASE;
+  let LOGO_SIZE  = LOGO_SIZE_BASE;
   let raf = null;
   let styleEl = null;
   let logos = [];
@@ -78,6 +80,10 @@
 
   async function init(root) {
     await loadCSS();
+    // Scale on activation — fewer copies, smaller sizes in small viewports
+    const scale = (NS.getScale && NS.getScale()) || 1;
+    LOGO_SIZE  = Math.max(18, Math.round(LOGO_SIZE_BASE * scale));
+    LOGO_COUNT = Math.max(4, Math.round(LOGO_COUNT_BASE * (0.5 + 0.5 * scale)));
     const logoURL = detectLogoURL();
 
     // Build a banner that shows what we found (useful when the logo is too
@@ -96,8 +102,8 @@
     for (let i = 0; i < LOGO_COUNT; i++) {
       const el = document.createElement('div');
       el.className = 'dp-dynlogo';
-      // Vary sizes ±25% around base so they don't all look identical
-      const size = LOGO_SIZE + (Math.random() - 0.5) * 16;
+      // Vary sizes ±25% around scaled base so they don't all look identical
+      const size = LOGO_SIZE + (Math.random() - 0.5) * (16 * scale);
       el.style.width = el.style.height = `${size}px`;
 
       if (logoURL) {

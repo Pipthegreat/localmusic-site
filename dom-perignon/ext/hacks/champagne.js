@@ -17,6 +17,7 @@
   let bubbles = [];
   let corks = [];
   let root = null;
+  let bubbleScale = 1;
 
   async function loadCSS() {
     if (document.getElementById('__dp-champ-style')) return;
@@ -35,8 +36,9 @@
     const vw = window.innerWidth;
     const vh = window.innerHeight;
 
-    // Power-law size distribution: lots of small, few big
-    const size = Math.pow(Math.random(), 2) * 32 + 6; // 6-38px
+    // Power-law size distribution: lots of small, few big. Max size scales
+    // with viewport so small iframes don't get oversized bubbles.
+    const size = Math.pow(Math.random(), 2) * (32 * bubbleScale) + 6;
     const el = document.createElement('div');
     el.className = 'dp-bubble';
     el.style.width = el.style.height = `${size}px`;
@@ -146,6 +148,7 @@
     root = r;
     bubbles = [];
     corks = [];
+    bubbleScale = (NS.getScale && NS.getScale()) || 1;
 
     // Pre-populate the viewport at varied Y positions so the user sees a
     // fully-bubbling page from frame one — no opening wave at the bottom,

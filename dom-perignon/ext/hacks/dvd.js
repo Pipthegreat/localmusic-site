@@ -4,8 +4,12 @@
 (function () {
   const NS = (window.__DOMPerignon = window.__DOMPerignon || { hacks: {} });
 
-  const LOGO_W = 90;
-  const LOGO_H = 50;
+  // Base size at desktop. Scaled per viewport on init so the DVD doesn't
+  // dominate small iframes / mobile screens.
+  const BASE_W = 90;
+  const BASE_H = 50;
+  let LOGO_W = BASE_W;
+  let LOGO_H = BASE_H;
   // DVD-Video logo — heavy italic Impact "DVD" with subtle gradient sheen
   // (mimics the iconic 3D-block look), pill-shaped disc with legible
   // "VIDEO" below. All chromatic surfaces use currentColor so the wall
@@ -126,8 +130,16 @@
     await loadCSS();
     cornerCount = 0;
 
+    // Scale once at activation based on current viewport — small iframes
+    // and mobile screens get a proportionally smaller DVD.
+    const scale = (NS.getScale && NS.getScale()) || 1;
+    LOGO_W = Math.round(BASE_W * scale);
+    LOGO_H = Math.round(BASE_H * scale);
+
     logo = document.createElement('div');
     logo.className = 'dp-dvd-logo';
+    logo.style.width  = `${LOGO_W}px`;
+    logo.style.height = `${LOGO_H}px`;
     logo.innerHTML = LOGO_SVG;
     root.appendChild(logo);
 

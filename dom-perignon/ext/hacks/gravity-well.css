@@ -1,0 +1,28 @@
+/* Gravity Well — clone overlays with a subtle drop shadow so the user
+   can tell the falling item from the page beneath it. */
+
+.dp-gw-item {
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.28));
+  transition: filter 200ms;
+}
+.dp-gw-item:hover {
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.45)) brightness(1.06);
+}
+
+/* Small instructional chip at the top, soft slate background */
+.dp-gw-chip {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 10, 14, 0.85);
+  border: 1px solid oklch(58% 0.05 250 / 0.45);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: oklch(86% 0.03 250);
+  text-shadow: 0 0 8px oklch(40% 0.05 250 / 0.6);
+  pointer-events: none;
+}

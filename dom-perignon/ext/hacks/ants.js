@@ -7,7 +7,9 @@
 (function () {
   const NS = (window.__DOMPerignon = window.__DOMPerignon || { hacks: {} });
 
-  const ANT_COUNT = 14;
+  const ANT_COUNT_BASE = 14;
+  let ANT_COUNT = ANT_COUNT_BASE;
+  let antScale = 1;
   // Each ant points "right" at 0deg in its local coordinates.
   const ANT_SVG = `
     <svg viewBox="0 0 40 22" xmlns="http://www.w3.org/2000/svg">
@@ -47,6 +49,9 @@
   function spawnAnt(root) {
     const wrap = document.createElement('div');
     wrap.className = 'dp-ant';
+    // Scale ant size proportionally (default CSS: 22×12)
+    wrap.style.width  = `${22 * antScale}px`;
+    wrap.style.height = `${12 * antScale}px`;
     wrap.innerHTML = ANT_SVG;
     root.appendChild(wrap);
 
@@ -57,7 +62,8 @@
       x: Math.random() * vw,
       y: Math.random() * vh,
       angle: Math.random() * Math.PI * 2,
-      speed: 0.25 + Math.random() * 0.55, // px per frame
+      // Speed also scales — ants on a small iframe shouldn't dart across faster
+      speed: (0.25 + Math.random() * 0.55) * antScale,
       wobble: Math.random() * Math.PI * 2,
       wobbleRate: 0.02 + Math.random() * 0.04,
       turnRate: (Math.random() - 0.5) * 0.04,
@@ -108,6 +114,11 @@
   async function init(root) {
     await loadCSS();
     root.style.pointerEvents = 'none';
+    // Capture scale once at activation
+    antScale = (NS.getScale && NS.getScale()) || 1;
+    // Slightly fewer ants on tiny viewports — the colony reads better when
+    // less crowded relative to the page
+    ANT_COUNT = Math.max(6, Math.round(ANT_COUNT_BASE * (0.6 + 0.4 * antScale)));
     ants = [];
     for (let i = 0; i < ANT_COUNT; i++) ants.push(spawnAnt(root));
     raf = requestAnimationFrame(step);

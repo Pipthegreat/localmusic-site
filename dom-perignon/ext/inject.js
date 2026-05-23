@@ -12,6 +12,19 @@
   // their own CSS file from the extension bundle).
   NS.getCSSURL = (relPath) => chrome.runtime.getURL(relPath);
 
+  // Viewport-scale helper. Used by every hijink that draws fixed-size
+  // visuals so they shrink gracefully in small viewports (mobile, iframe
+  // previews, side panels). Linear from 0.4 at ≤512px to 1.0 at 1280px+.
+  // Hijinks should call this on init AND react to window resize if they
+  // care (most don't — a one-shot read at activation is sufficient).
+  NS.getScale = () => {
+    const w = window.innerWidth || 1280;
+    if (w >= 1280) return 1.0;
+    if (w <= 512)  return 0.4;
+    // Linear interpolation between (512, 0.4) and (1280, 1.0)
+    return 0.4 + (w - 512) * (0.6 / 768);
+  };
+
   // Make a shared "root" div so each hack can hang DOM under it and we can
   // wipe everything atomically on teardown. Hacks may also append to body
   // directly if they need MutationObserver behavior on the page itself
