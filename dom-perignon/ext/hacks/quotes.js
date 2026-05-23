@@ -6,6 +6,7 @@
   const NS = (window.__DOMPerignon = window.__DOMPerignon || { hacks: {} });
 
   const QUOTES = [
+    // Original 29
     'You got this',
     'Keep going',
     'One step at a time',
@@ -35,6 +36,51 @@
     "Don't give up",
     "It's going to be okay",
     "You're doing the work",
+    // Added round-3 — pool doubled, ~10% longer max length permitted
+    'Take it easy on yourself',
+    'Slow and steady wins',
+    "You're not alone in this",
+    'Step by step, day by day',
+    'Worth the effort',
+    'Make today count',
+    'Trust your gut',
+    'Find your rhythm',
+    'Lean into it',
+    "Showing up is enough",
+    'Pace yourself, friend',
+    "You're more than your worst day",
+    'Try anyway',
+    'Begin exactly where you are',
+    'Notice the small wins',
+    'Tomorrow is a fresh start',
+    'Trust the timing of your life',
+    'Rest is productive too',
+    'Forward is a pace',
+    'Be where your feet are',
+    'Quiet your mind, just for now',
+    'Today is enough',
+    'Hold the line, kindly',
+    'Open your hands and breathe',
+    'Let it be easy',
+    'Find one small joy today',
+    "Bend, don't break",
+    'Stay soft, stay open',
+    'The work counts even when no one sees',
+    'You can begin again',
+    'Soft eyes, steady heart',
+  ];
+
+  // Lighter-side autumn / desert palette. Each quote picks one on spawn.
+  // Mid-lightness (58-78%), mid-chroma (0.08-0.15) — rich without going
+  // dark, warm without being orange-only.
+  const AUTUMN_PALETTE = [
+    'oklch(72% 0.15 65)',    // saffron
+    'oklch(65% 0.14 35)',    // terracotta
+    'oklch(58% 0.13 30)',    // burnt sienna
+    'oklch(78% 0.14 80)',    // mustard
+    'oklch(70% 0.08 130)',   // desert sage
+    'oklch(60% 0.10 20)',    // rosewood
+    'oklch(63% 0.11 40)',    // adobe clay
   ];
 
   let styleEl = null;
@@ -81,11 +127,18 @@
     const y = yBand * vh;
 
     // Vary size; the larger quotes feel like printed plates, smaller
-    // ones like marginalia
-    const fontSize = 22 + Math.random() * 28; // 22-50px
-    const opacity = 0.45 + Math.random() * 0.35;
+    // ones like marginalia. Range bumped to 22-55px to accommodate the
+    // longer quotes added in this round.
+    const fontSize = 22 + Math.random() * 33; // 22-55px
+    // Slightly tighter opacity range — the colored fill + black outline
+    // already provide presence, so quotes can sit a touch more recessed.
+    const opacity = 0.55 + Math.random() * 0.30;
+    // Pick a desert/autumn hue at random; outline keeps it legible
+    // regardless of the page background it floats over.
+    const color = AUTUMN_PALETTE[Math.floor(Math.random() * AUTUMN_PALETTE.length)];
 
     node.style.fontSize = `${fontSize}px`;
+    node.style.color    = color;
     node.style.opacity  = '0';
     node.style.top      = `${y}px`;
     node.style.left     = dirLR ? `-360px` : `${vw + 40}px`;
