@@ -602,6 +602,9 @@ function firePendingPlay(uri) {
   if (pendingPlayForUri !== uri) return;   // already fired
   if (!controller) return;
   pendingPlayForUri = null;
+  // CRITICAL stutter guard — controller.play() always seeks to 0,
+  // so we must not call it if audio is already flowing for this URI.
+  if (lastUpdateAt > 0 && lastPosition > 0 && !isPaused) return;
   try { controller.play(); } catch (e) {}
 }
 

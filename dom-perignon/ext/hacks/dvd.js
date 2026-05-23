@@ -4,8 +4,8 @@
 (function () {
   const NS = (window.__DOMPerignon = window.__DOMPerignon || { hacks: {} });
 
-  const LOGO_W = 180;
-  const LOGO_H = 100;
+  const LOGO_W = 90;
+  const LOGO_H = 50;
   // DVD-Video logo — heavy italic Impact "DVD" with subtle gradient sheen
   // (mimics the iconic 3D-block look), pill-shaped disc with legible
   // "VIDEO" below. All chromatic surfaces use currentColor so the wall

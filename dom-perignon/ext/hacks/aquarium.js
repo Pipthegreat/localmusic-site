@@ -248,7 +248,7 @@
     kelpL.className = 'dp-aqua-kelp dp-aqua-kelp-left';
     kelpL.innerHTML = `
       <svg viewBox="0 0 120 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <g fill="#1a5a3b" opacity="0.85">
+        <g fill="#1a5a3b" opacity="0.68">
           <path d="M 20 320 C 16 260 30 200 18 140 C 10 90 24 40 22 0 L 32 0 C 28 50 38 100 28 150 C 18 210 36 270 30 320 Z"/>
           <path d="M 56 320 C 52 250 68 180 56 110 C 50 70 60 30 58 0 L 68 0 C 66 35 70 80 62 130 C 54 200 70 280 64 320 Z"/>
           <path d="M 92 320 C 88 270 100 220 90 170 C 84 130 94 80 90 30 L 100 30 C 100 80 104 130 96 180 C 88 240 98 290 100 320 Z"/>

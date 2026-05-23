@@ -28,7 +28,9 @@
     document.documentElement.appendChild(styleEl);
   }
 
-  function spawnBubble() {
+  // initialY: pass a Y position to start the bubble mid-rise (used for
+  // pre-population on init). Omit to spawn from below the viewport.
+  function spawnBubble(initialY) {
     if (!root || bubbles.length >= MAX_BUBBLES) return;
     const vw = window.innerWidth;
     const vh = window.innerHeight;
@@ -44,7 +46,7 @@
       el,
       size,
       x: Math.random() * vw,
-      y: vh + size,
+      y: initialY !== undefined ? initialY : vh + size,
       // Speed inversely related to size — small bubbles dart up
       vy: -(0.6 + 1.4 / Math.sqrt(size)),
       // Wobble: phase + frequency vary per bubble
@@ -145,15 +147,36 @@
     bubbles = [];
     corks = [];
 
-    // No opening wave — bubbles just start trickling up at the steady rate.
-    // The viewport will fill naturally over the first ~6 seconds.
-    spawnT = setInterval(spawnBubble, SPAWN_INTERVAL_MS);
-    corkT  = setInterval(spawnCork, CORK_INTERVAL_MS);
-    raf    = requestAnimationFrame(step);
+    // Pre-populate the viewport at varied Y positions so the user sees a
+    // fully-bubbling page from frame one — no opening wave at the bottom,
+    // no empty gaps to wait through.
+    const vh = window.innerHeight;
+    for (let i = 0; i < 32; i++) {
+      spawnBubble(Math.random() * vh);
+    }
+
+    // Then trickle in new bubbles from below with JITTERED intervals.
+    // The previous constant-90ms cadence visibly clustered: each tick fed
+    // a uniformly-distributed bubble into a stream of variable rise speeds,
+    // and the periodic input collided with the periodic eye to form bands.
+    // Randomised spacing breaks that resonance.
+    const queueNext = () => {
+      const delay = 40 + Math.random() * 140; // 40-180ms, avg ~110ms
+      spawnT = setTimeout(() => {
+        spawnBubble();
+        queueNext();
+      }, delay);
+    };
+    queueNext();
+
+    corkT = setInterval(spawnCork, CORK_INTERVAL_MS);
+    raf   = requestAnimationFrame(step);
   }
 
   function teardown() {
-    if (spawnT) clearInterval(spawnT);
+    // spawnT is now a setTimeout (recursive), not setInterval — clearTimeout
+    // also clears interval handles, so this works for both forms.
+    if (spawnT) clearTimeout(spawnT);
     if (corkT)  clearInterval(corkT);
     if (raf)    cancelAnimationFrame(raf);
     spawnT = corkT = raf = null;

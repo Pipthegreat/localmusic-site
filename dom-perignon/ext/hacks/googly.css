@@ -7,49 +7,59 @@
   gap: var(--eye-gap, 6px);
   pointer-events: none;
   z-index: 2147483647;
-  /* Half as visible — each pair recedes; the collective effect comes from
-     having twice as many in whimsical places */
-  opacity: 0.5;
+  /* 20% more translucent than before (0.5 → 0.4). The collective effect
+     comes from quantity + scatter, not individual presence. */
+  opacity: 0.4;
   transform: rotate(var(--dp-tilt, 0deg));
 }
 
+/* Sclera — was bright white. Now a slightly cream-tinted off-white that
+   reads as old porcelain rather than cartoon. The shift drops them out of
+   "googly" territory and into "watching." */
 .dp-eye {
   width:  var(--eye-size, 32px);
   height: var(--eye-size, 32px);
   border-radius: 50%;
   background:
-    radial-gradient(circle at 32% 32%, #ffffff 0%, #f4f2ee 55%, #d9d6cf 100%);
-  border: 1.5px solid #1a1a1a;
+    radial-gradient(circle at 32% 32%, #f6f1e8 0%, #e2dccf 60%, #b8b1a3 100%);
+  border: 1.5px solid #0d0d0d;
   box-shadow:
-    inset -2px -3px 6px rgba(0, 0, 0, 0.15),
-    0 2px 5px rgba(0, 0, 0, 0.35);
+    inset -2px -3px 7px rgba(0, 0, 0, 0.22),
+    0 2px 5px rgba(0, 0, 0, 0.4);
   position: relative;
   overflow: hidden;
 }
 
+/* Pupil — was 40% (wide-eyed cartoon). Now 55% (larger iris, more intense
+   gaze). Deeper black with a hint of dark red at the rim — the sinister
+   undertone. The highlight is smaller and sharper, suggesting a focused
+   point of light rather than a friendly spark. */
 .dp-pupil {
   position: absolute;
-  width: 40%;
-  height: 40%;
-  left: 30%;
-  top: 30%;
+  width: 55%;
+  height: 55%;
+  left: 22.5%;
+  top: 22.5%;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 30% 30%, #2a2a2a 0%, #050505 70%);
+    radial-gradient(circle at 32% 32%,
+      #0d0d0d 0%,
+      #050505 55%,
+      #1a0606 88%,
+      #2a0a0a 100%);
   box-shadow:
-    inset 1px 1px 2px rgba(255, 255, 255, 0.3),
-    0 1px 2px rgba(0, 0, 0, 0.4);
-  /* Specular highlight */
+    inset 0 0 3px rgba(80, 10, 10, 0.55),
+    0 1px 2px rgba(0, 0, 0, 0.5);
   will-change: transform;
 }
 .dp-pupil::after {
   content: '';
   position: absolute;
-  top: 12%;
-  left: 18%;
-  width: 28%;
-  height: 28%;
+  top: 18%;
+  left: 22%;
+  width: 18%;
+  height: 18%;
   background: #ffffff;
   border-radius: 50%;
-  opacity: 0.9;
+  opacity: 0.85;
 }

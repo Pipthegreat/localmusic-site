@@ -145,6 +145,10 @@ h1 em {
   border-color: oklch(70% 0.16 40 / 0.65);
   box-shadow: 0 0 0 1px oklch(70% 0.16 40 / 0.2);
 }
+.hack-card.popular {
+  border-color: oklch(72% 0.085 130 / 0.65);
+  box-shadow: 0 0 0 1px oklch(72% 0.085 130 / 0.2);
+}
 
 .preview-frame {
   position: relative;
@@ -201,12 +205,19 @@ h1 em {
   font: 500 9px/1 var(--mono);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent-soft);
-  background: oklch(40% 0.06 130 / 0.4);
-  border: 1px solid oklch(72% 0.085 130 / 0.3);
   padding: 4px 8px;
   border-radius: 4px;
   margin-top: 10px;
+}
+.hack-badge-signature {
+  color: var(--ember);
+  background: oklch(30% 0.10 40 / 0.45);
+  border: 1px solid oklch(70% 0.16 40 / 0.35);
+}
+.hack-badge-popular {
+  color: var(--accent-soft);
+  background: oklch(40% 0.06 130 / 0.4);
+  border: 1px solid oklch(72% 0.085 130 / 0.3);
 }
 
 /* ─── Install section ─────────────────────────────────────────────── */
@@ -351,29 +362,31 @@ footer {
       <h1><em>DOM</em> Perignon</h1>
       <p class="lede">A Chrome extension with a collection of eight UI hijinks. Pick one from the toolbar popup to enhance your browsing experience — it stays active until you switch to another. Live previews below — each tile is a working iframe running the actual hijink.</p>
     </div>
-    <span class="version-chip">v1.1.1</span>
+    <span class="version-chip">v1.1.2</span>
   </header>
 
   <div class="section-label">The collection</div>
   <div class="gallery">
 
-    <div class="hack-card">
+    <div class="hack-card popular">
       <div class="preview-frame">
         <iframe src="demo.html?hack=ants" loading="lazy" title="Ants preview"></iframe>
       </div>
       <div class="hack-meta">
         <h2 class="hack-name"><span class="num">01</span> Ants</h2>
         <p class="hack-desc">A colony of crawling SVG ants with momentum-based random walks and alternating-tripod leg gait. Antennae sway. Bonus chaos for any site with a lot of empty white space.</p>
+        <span class="hack-badge hack-badge-popular">Most popular</span>
       </div>
     </div>
 
-    <div class="hack-card">
+    <div class="hack-card signature">
       <div class="preview-frame">
-        <iframe src="demo.html?hack=dvd" loading="lazy" title="DVD preview"></iframe>
+        <iframe src="demo.html?hack=champagne" loading="lazy" title="Champagne preview"></iframe>
       </div>
       <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">02</span> DVD Bouncer</h2>
-        <p class="hack-desc">The classic. One DVD-Video logo at 45° angles, color cycling on every wall bounce. Corner hits trigger a flash and increment a small counter you can root for.</p>
+        <h2 class="hack-name"><span class="num">02</span> Champagne Bubbles</h2>
+        <p class="hack-desc">Pale bubbles rise from below with realistic fizz physics — pre-populated so the page is alive from frame one, jittered intervals so they never form bands. Click any to pop. Corks ricochet across every twenty-eight seconds or so.</p>
+        <span class="hack-badge hack-badge-signature">House signature</span>
       </div>
     </div>
 
@@ -393,28 +406,17 @@ footer {
       </div>
       <div class="hack-meta">
         <h2 class="hack-name"><span class="num">04</span> Site Logo Bounce</h2>
-        <p class="hack-desc">Sniffs the current site's apple-touch-icon, favicon, og:image, or header img and bounces six copies. Falls back to a "?" plate if nothing is detectable.</p>
-      </div>
-    </div>
-
-    <div class="hack-card signature">
-      <div class="preview-frame">
-        <iframe src="demo.html?hack=champagne" loading="lazy" title="Champagne preview"></iframe>
-      </div>
-      <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">05</span> Champagne Bubbles</h2>
-        <p class="hack-desc">The house signature. Pale champagne bubbles rise from the bottom edge with realistic fizz physics. Click any to pop. Corks ricochet across every twenty-eight seconds or so.</p>
-        <span class="hack-badge">House signature</span>
+        <p class="hack-desc">Sniffs the current site's apple-touch-icon, favicon, og:image, or header img and bounces eight copies at small size for sharper rendering on low-res favicons.</p>
       </div>
     </div>
 
     <div class="hack-card">
       <div class="preview-frame">
-        <iframe src="demo.html?hack=lava" loading="lazy" title="Lava preview"></iframe>
+        <iframe src="demo.html?hack=gravity-well" loading="lazy" title="Gravity Well preview"></iframe>
       </div>
       <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">06</span> The Floor is Lava</h2>
-        <p class="hack-desc">Page images and headings fall to a glowing lava band at the bottom. The originals tuck out of sight cleanly. Click any falling element to rescue it back to its proper place.</p>
+        <h2 class="hack-name"><span class="num">05</span> Gravity Well</h2>
+        <p class="hack-desc">Page elements slowly succumb to gravity and pile up at the bottom edge. Continuously re-scans, so new content keeps falling too. Click any falling piece to rescue it back where it belongs.</p>
       </div>
     </div>
 
@@ -423,8 +425,8 @@ footer {
         <iframe src="demo.html?hack=googly" loading="lazy" title="Googly Eyes preview"></iframe>
       </div>
       <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">07</span> Googly Eyes</h2>
-        <p class="hack-desc">A faint, scattered colony of mouse-tracking eyes lands on images, buttons, and avatars. Random tilts and offsets. Hover the iframe to see them follow.</p>
+        <h2 class="hack-name"><span class="num">06</span> Googly Eyes</h2>
+        <p class="hack-desc">Inquisitive eyes scatter across the page at random tilts and offsets. Larger pupils, off-white sclera, a hint of dark red at the iris rim — less cartoon, more curious. Hover to see them track.</p>
       </div>
     </div>
 
@@ -433,8 +435,18 @@ footer {
         <iframe src="demo.html?hack=aquarium" loading="lazy" title="Aquarium preview"></iframe>
       </div>
       <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">08</span> Aquarium Mode</h2>
+        <h2 class="hack-name"><span class="num">07</span> Aquarium Mode</h2>
         <p class="hack-desc">The page becomes the back wall of a tank. Blue-green wash, caustic shimmer at the top, swaying kelp at the corners, rising bubble clusters, four fish species swimming through, and a cursor ripple.</p>
+      </div>
+    </div>
+
+    <div class="hack-card">
+      <div class="preview-frame">
+        <iframe src="demo.html?hack=dvd" loading="lazy" title="DVD preview"></iframe>
+      </div>
+      <div class="hack-meta">
+        <h2 class="hack-name"><span class="num">08</span> DVD Bouncer</h2>
+        <p class="hack-desc">The classic. One small DVD-Video logo at 45° angles, color cycling on every wall bounce. Corner hits trigger a flash and increment a small counter you can root for.</p>
       </div>
     </div>
 
@@ -446,9 +458,9 @@ footer {
 
       <div class="download-card">
         <span class="download-meta">Latest release</span>
-        <h3 class="download-title">dom-perignon-v1.1.1.zip</h3>
+        <h3 class="download-title">dom-perignon-v1.1.2.zip</h3>
         <p class="hack-desc">A self-contained Chrome extension. ~44 KB. Manifest V3. No network calls, no telemetry — it only paints over the pages you open.</p>
-        <a class="download-btn" href="downloads/dom-perignon-v1.1.1.zip" download>↓ Download zip</a>
+        <a class="download-btn" href="downloads/dom-perignon-v1.1.2.zip" download>↓ Download zip</a>
       </div>
 
       <div class="install-steps">
@@ -471,7 +483,7 @@ footer {
 
   <footer>
     <span>© 2026 · customprojects.info</span>
-    <span>DOM Perignon v1.1.1</span>
+    <span>DOM Perignon v1.1.2</span>
   </footer>
 </div>
 </body>

@@ -547,6 +547,8 @@ function firePendingPlay(uri) {
   if (pendingPlayForUri !== uri) return;
   if (!controller) return;
   pendingPlayForUri = null;
+  // Stutter guard — don't re-seek a track that's already playing.
+  if (lastUpdateAt > 0 && lastPosition > 0 && !isPaused) return;
   try { controller.play(); } catch (e) {}
 }
 
