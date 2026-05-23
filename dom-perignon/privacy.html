@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DOM Perignon - Privacy Policy</title>
+<meta name="description" content="DOM Perignon stores nothing, sends nothing, tracks nothing. The whole privacy policy fits on this page.">
+<link rel="canonical" href="https://customprojects.info/dom-perignon/privacy/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --slate-300: oklch(82% 0.050 45);
+  --slate-500: oklch(52% 0.080 45);
+  --slate-700: oklch(36% 0.080 40);
+  --slate-800: oklch(30% 0.075 40);
+  --slate-900: oklch(23% 0.060 40);
+  --ember:       oklch(70% 0.16 40);
+  --fg-default:  oklch(96% 0.030 60);
+  --fg-muted:    oklch(83% 0.045 55);
+  --serif: 'Fraunces', Georgia, serif;
+  --sans:  'Inter', system-ui, sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+html, body { margin: 0; padding: 0; }
+body {
+  font: 400 16px/1.55 var(--sans);
+  color: var(--fg-default);
+  background: var(--slate-900);
+  background-image:
+    radial-gradient(ellipse 80% 45% at 75% -8%, oklch(60% 0.10 38 / 0.30), transparent 62%),
+    radial-gradient(ellipse 55% 35% at 8% 4%, oklch(60% 0.08 130 / 0.18), transparent 62%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+.shell { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+.crumb {
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 14px;
+}
+.crumb a { color: var(--fg-muted); text-decoration: none; border-bottom: 1px dotted oklch(83% 0.045 55 / 0.4); }
+.crumb a:hover { color: var(--fg-default); }
+.crumb-sep { margin: 0 8px; opacity: 0.5; }
+h1 {
+  font: 300 48px/1.05 var(--serif);
+  font-style: italic;
+  font-variation-settings: "opsz" 144;
+  letter-spacing: -0.015em;
+  margin: 0 0 8px;
+}
+h1 em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--ember);
+}
+.lede {
+  font: 400 18px/1.5 var(--sans);
+  color: var(--fg-default);
+  margin: 12px 0 36px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--slate-700);
+}
+.updated {
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+h2 {
+  font: 400 22px/1.3 var(--serif);
+  font-variation-settings: "opsz" 144;
+  margin: 36px 0 12px;
+  color: var(--fg-default);
+}
+p { color: var(--fg-default); max-width: 60ch; }
+ul { color: var(--fg-default); padding-left: 22px; }
+ul li { margin-bottom: 8px; max-width: 60ch; }
+a { color: var(--ember); }
+code {
+  font: 500 13px/1 var(--mono);
+  background: oklch(20% 0.05 40 / 0.6);
+  border: 1px solid oklch(40% 0.08 40 / 0.5);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--ember);
+}
+footer {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--slate-700);
+  font: 500 11px/1.5 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="crumb">
+    <a href="/">customprojects.info</a>
+    <span class="crumb-sep">/</span>
+    <a href="/dom-perignon/">DOM Perignon</a>
+    <span class="crumb-sep">/</span>
+    Privacy
+  </div>
+
+  <h1><em>DOM</em> Perignon - Privacy</h1>
+  <p class="updated">Last updated: 2026-05-23</p>
+
+  <p class="lede">
+    DOM Perignon stores nothing on a server, sends nothing to anyone,
+    and tracks nothing about you. The whole policy fits on this page.
+  </p>
+
+  <h2>What we store</h2>
+  <p>
+    Two things, both in <code>chrome.storage.local</code> on your machine:
+  </p>
+  <ul>
+    <li>The hijink you've selected (e.g. <code>champagne</code>, <code>ants</code>).</li>
+    <li>Whether the extension is currently active (on/off).</li>
+  </ul>
+  <p>
+    This data never leaves your browser. We have no servers, no analytics,
+    no third-party tracking, no account.
+  </p>
+
+  <h2>What we read from the pages you visit</h2>
+  <p>
+    DOM Perignon needs <code>host_permissions: &lt;all_urls&gt;</code> so it
+    can render the selected hijink on whichever page you're viewing.
+    Different hijinks read slightly different things from the page:
+  </p>
+  <ul>
+    <li><strong>Logo Bounce House</strong> reads the page's favicon and meta tags to find a logo to bounce.</li>
+    <li><strong>Watchers</strong> scans for images, buttons, and headings to place googly eyes on.</li>
+    <li><strong>Gravity Well</strong> identifies visible page elements (images, headings) so they can fall.</li>
+    <li><strong>You Got This</strong>, <strong>Champagne Bubbles</strong>, <strong>Ants</strong>, <strong>DVD Bouncer</strong>, and <strong>Aquarium</strong> don't read page content at all - they just paint over it.</li>
+  </ul>
+  <p>
+    Nothing read from any page is transmitted anywhere. It's used in-browser only,
+    just long enough to render the visual overlay.
+  </p>
+
+  <h2>External network calls</h2>
+  <p>
+    The <strong>You Got This</strong> hijink loads the Fraunces font from
+    Google Fonts (<code>fonts.googleapis.com</code>) so the motivational
+    quotes display in the intended typeface. Google may log that request
+    per its own privacy policy. No information about you or the page is
+    sent - only a standard request for the font file.
+  </p>
+  <p>
+    No other DOM Perignon hijink makes any network call.
+  </p>
+
+  <h2>Permission justifications</h2>
+  <ul>
+    <li><code>storage</code> - to remember which hijink you've picked between browser sessions.</li>
+    <li><code>host_permissions: &lt;all_urls&gt;</code> - because the user explicitly selects which hijink to apply, and that hijink is rendered on whichever page the user is viewing.</li>
+  </ul>
+
+  <h2>Changes to this policy</h2>
+  <p>
+    If this policy ever changes (it almost certainly won't, since the
+    extension does so little), the "Last updated" date at the top of this
+    page will change. The current version is always at
+    <a href="https://customprojects.info/dom-perignon/privacy/">customprojects.info/dom-perignon/privacy/</a>.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions? Concerns? Visit the
+    <a href="https://customprojects.info/dom-perignon/">project page</a>.
+  </p>
+
+  <footer>
+    <span>© 2026 · customprojects.info</span>
+  </footer>
+</div>
+</body>
+</html>
