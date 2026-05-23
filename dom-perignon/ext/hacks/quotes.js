@@ -127,15 +127,21 @@
     const vh = window.innerHeight;
 
     // Pick an entry edge. Quote starts off-edge and drifts to the
-    // opposite side. Vertical position is randomized within safe band.
+    // opposite side. Vertical position uses the FULL viewport height with
+    // just enough margin so the text isn't clipped at the top or bottom.
     const dirLR = Math.random() < 0.5; // true = left→right
-    const yBand = 0.12 + Math.random() * 0.76; // 12% to 88% of viewport height
-    const y = yBand * vh;
 
     // Range trimmed in v1.1.12: 24-39px desktop (was 30-70). The whole
     // range is 20% smaller and the top end gets an additional 30% cut so
     // the largest quote isn't dominating the viewport. Mobile floor 16px.
     const fontSize = Math.max(16, (24 + Math.random() * 15) * quoteScale);
+
+    // Y range: top margin = fontSize/2 (keeps cap-height visible),
+    // bottom margin = fontSize * 1.5 (clears descender + drop-shadow).
+    // Full viewport gets used now, not just the middle 76% as in v1.1.12.
+    const yTop    = fontSize * 0.5;
+    const yBottom = Math.max(yTop + 1, vh - fontSize * 1.5);
+    const y       = yTop + Math.random() * (yBottom - yTop);
     // Outlined characters can sit at high opacity without being heavy
     const opacity = 0.85 + Math.random() * 0.15;
     // Pick a desert/autumn hue at random; backdrop guarantees legibility
