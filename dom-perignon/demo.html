@@ -56,6 +56,10 @@ body {
   background: var(--bg-canvas);
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  /* Preview iframes show this page; clip anything past the viewport so the
+     tiles look like clean single-box mockups, not scrollable mini-windows. */
+  max-height: 100vh;
+  overflow: hidden;
 }
 a { color: var(--accent); text-decoration: none; }
 .shell { max-width: 920px; margin: 0 auto; padding: 18px 18px 60px; }
@@ -360,7 +364,10 @@ footer .meta span + span::before { content: "·"; margin: 0 8px; color: var(--bo
 <script>
   window.chrome = window.chrome || {};
   window.chrome.runtime = window.chrome.runtime || {
-    getURL: (relPath) => relPath,
+    // Extension files are mirrored under ext/, not at the demo's root.
+    // Hijink modules call NS.getCSSURL('hacks/X.css'); prepend 'ext/' so
+    // those resolve to /dom-perignon/ext/hacks/X.css in the iframe.
+    getURL: (relPath) => 'ext/' + relPath,
     onMessage: { addListener: () => {} },
     sendMessage: () => Promise.resolve(),
   };

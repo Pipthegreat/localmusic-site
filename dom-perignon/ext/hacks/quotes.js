@@ -70,17 +70,17 @@
     'Soft eyes, steady heart',
   ];
 
-  // Lighter-side autumn / desert palette. Each quote picks one on spawn.
-  // Mid-lightness (58-78%), mid-chroma (0.08-0.15) — rich without going
-  // dark, warm without being orange-only.
+  // Autumn / desert palette — chroma bumped 30-40% from v1.1.5 for more
+  // motivational presence. Lightness range unchanged (58-78%) so quotes
+  // still read as warm/laid-back rather than neon.
   const AUTUMN_PALETTE = [
-    'oklch(72% 0.15 65)',    // saffron
-    'oklch(65% 0.14 35)',    // terracotta
-    'oklch(58% 0.13 30)',    // burnt sienna
-    'oklch(78% 0.14 80)',    // mustard
-    'oklch(70% 0.08 130)',   // desert sage
-    'oklch(60% 0.10 20)',    // rosewood
-    'oklch(63% 0.11 40)',    // adobe clay
+    'oklch(72% 0.20 65)',    // saffron
+    'oklch(65% 0.19 35)',    // terracotta
+    'oklch(58% 0.17 30)',    // burnt sienna
+    'oklch(78% 0.18 80)',    // mustard
+    'oklch(70% 0.11 130)',   // desert sage
+    'oklch(60% 0.14 20)',    // rosewood
+    'oklch(63% 0.15 40)',    // adobe clay
   ];
 
   let styleEl = null;
@@ -127,11 +127,11 @@
     const yBand = 0.12 + Math.random() * 0.76; // 12% to 88% of viewport height
     const y = yBand * vh;
 
-    // Font size range scales with viewport — smaller iframes get smaller
-    // labels so they don't dominate. Floor at 14px so quotes are always
-    // readable even at the smallest scale.
-    const fontSize = Math.max(14, (22 + Math.random() * 33) * quoteScale);
-    // Backdrop label is solid black — quotes can sit close to fully opaque
+    // Bigger range than v1.1.5 (30-70px desktop instead of 22-55px) for
+    // more motivational presence. Mobile floor lifted to 20px so even the
+    // smallest scaled quote reads as a statement, not marginalia.
+    const fontSize = Math.max(20, (30 + Math.random() * 40) * quoteScale);
+    // Outlined characters can sit at high opacity without being heavy
     const opacity = 0.85 + Math.random() * 0.15;
     // Pick a desert/autumn hue at random; backdrop guarantees legibility
     const color = AUTUMN_PALETTE[Math.floor(Math.random() * AUTUMN_PALETTE.length)];

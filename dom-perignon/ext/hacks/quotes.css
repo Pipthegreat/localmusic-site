@@ -9,9 +9,9 @@
   pointer-events: none;
   font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
   font-style: italic;
-  font-weight: 500;
+  font-weight: 600;
   font-variation-settings: "opsz" 144;
-  letter-spacing: -0.005em;
+  letter-spacing: -0.01em;
   white-space: nowrap;
   /* The fill color is set inline by the JS — one of seven autumn/desert
      hues picked randomly per quote. */

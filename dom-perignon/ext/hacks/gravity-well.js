@@ -20,8 +20,8 @@
 
   const GRAVITY            = 0.05;   // px/frame² — soft pull
   const TERMINAL_V         = 4.5;    // px/frame — gentle terminal velocity
-  const RESCAN_INTERVAL_MS = 3500;
-  const ITEMS_PER_SCAN     = 6;
+  const RESCAN_INTERVAL_MS = 2500;   // faster cadence for visible activity
+  const ITEMS_PER_SCAN     = 8;
   const COLUMNS            = 48;     // shelf resolution
 
   let styleEl = null;
@@ -68,9 +68,15 @@
   }
 
   // ── Candidate discovery ───────────────────────────────────────────────
+  // Min/max element-dimension bounds scale with viewport so we catch
+  // smaller things in small iframes (the KF 20×20 logo, for instance)
+  // and skip elements that span the whole tiny preview.
   function findCandidates() {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
+    const scale = (NS.getScale && NS.getScale()) || 1;
+    const minDim = Math.max(14, Math.round(28 * scale));
+    const maxDim = Math.max(120, Math.round(420 * scale));
     const out = [];
     const seen = new Set();
     function consider(el) {
@@ -78,8 +84,8 @@
       if (el.closest && el.closest('#__dom-perignon-root')) return;
       seen.add(el);
       const r = el.getBoundingClientRect();
-      if (r.width < 28 || r.height < 28) return;
-      if (r.width > 360 || r.height > 360) return;
+      if (r.width < minDim || r.height < minDim) return;
+      if (r.width > maxDim || r.height > maxDim) return;
       if (r.right < 0 || r.bottom < 0) return;
       if (r.left > vw || r.top > vh) return;
       const cs = getComputedStyle(el);
@@ -87,7 +93,7 @@
       out.push({ el, rect: r });
     }
     document.querySelectorAll('img').forEach(consider);
-    document.querySelectorAll('button, h1, h2, h3, a[role="button"]').forEach(consider);
+    document.querySelectorAll('button, h1, h2, h3, a[role="button"], a.btn').forEach(consider);
     return out;
   }
 
@@ -117,7 +123,8 @@
       origLeft: rect.left, origTop: rect.top,
       x: rect.left, y: rect.top,
       vy: 0,
-      delay: 600 + Math.random() * 5400, // start falling 0.6–6s after creation
+      // Snappier delay so previews show the fall within a couple seconds
+      delay: 200 + Math.random() * 2200, // 0.2–2.4s
       started: false, startedAt: 0,
       rescued: false, settled: false,
     };
