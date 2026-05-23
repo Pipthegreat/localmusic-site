@@ -1,0 +1,67 @@
+/* Champagne bubbles — the house signature */
+
+.dp-bubble {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  /* Pale champagne — almost cream with the faintest gold tint. The brown
+     undertones are gone; this reads as celebratory, not serious. */
+  background:
+    radial-gradient(
+      circle at 30% 28%,
+      oklch(99% 0.015 100 / 0.95) 0%,
+      oklch(96% 0.04 100 / 0.55) 30%,
+      oklch(92% 0.06 95 / 0.28) 65%,
+      oklch(88% 0.06 90 / 0.08) 100%
+    );
+  border: 1px solid oklch(94% 0.05 95 / 0.50);
+  box-shadow:
+    inset -2px -2px 5px oklch(78% 0.06 90 / 0.18),
+    0 2px 6px oklch(92% 0.05 95 / 0.18);
+  will-change: transform;
+  cursor: pointer;
+}
+
+/* Specular highlight overlay — gives the wet shimmer */
+.dp-bubble::before {
+  content: '';
+  position: absolute;
+  top: 12%;
+  left: 18%;
+  width: 28%;
+  height: 22%;
+  background: oklch(99% 0.01 80 / 0.85);
+  border-radius: 50%;
+  filter: blur(0.4px);
+  pointer-events: none;
+}
+
+/* Pop animation: scale up rapidly while fading. The radial highlight
+   makes it look like the surface ruptures. */
+@keyframes dp-bubble-pop {
+  0%   { transform: scale(1);   opacity: 1; filter: blur(0); }
+  60%  { transform: scale(1.5); opacity: 0.5; filter: blur(2px); }
+  100% { transform: scale(2.2); opacity: 0;   filter: blur(6px); }
+}
+.dp-bubble.dp-bubble-pop {
+  animation: dp-bubble-pop 420ms ease-out forwards;
+  pointer-events: none !important;
+}
+
+/* Cork shooting across the screen */
+.dp-cork {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 38px;
+  pointer-events: none;
+  will-change: transform;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.45));
+}
+.dp-cork svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

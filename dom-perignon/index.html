@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DOM Perignon — a collection of UI hijinks for Chrome</title>
+<meta name="description" content="A Chrome extension that enhances your browsing experience with one of eight UI hijinks. Live previews and install instructions.">
+<link rel="canonical" href="https://customprojects.info/dom-perignon/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,1,300;9..144,1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Inherit the autumn cinnamon palette from the parent site */
+  --slate-300: oklch(82% 0.050 45);
+  --slate-500: oklch(52% 0.080 45);
+  --slate-700: oklch(36% 0.080 40);
+  --slate-800: oklch(30% 0.075 40);
+  --slate-900: oklch(23% 0.060 40);
+  --accent:      oklch(72% 0.085 130);
+  --accent-soft: oklch(80% 0.065 130);
+  --ember:       oklch(70% 0.16 40);
+  --ember-glow:  oklch(72% 0.20 42 / 0.45);
+  --fg-default:  oklch(96% 0.030 60);
+  --fg-muted:    oklch(83% 0.045 55);
+  --bubble-shadow: oklch(12% 0.035 40 / 0.55);
+  --serif: 'Fraunces', Georgia, serif;
+  --sans:  'Inter', system-ui, sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { overflow-x: hidden; }
+html, body { margin: 0; padding: 0; }
+body {
+  font: 400 16px/1.55 var(--sans);
+  color: var(--fg-default);
+  background: var(--slate-900);
+  background-image:
+    radial-gradient(ellipse 80% 45% at 75% -8%, oklch(60% 0.10 38 / 0.30), transparent 62%),
+    radial-gradient(ellipse 55% 35% at 8% 4%, oklch(60% 0.08 130 / 0.18), transparent 62%),
+    radial-gradient(ellipse 90% 35% at 50% 105%, oklch(28% 0.07 40 / 0.45), transparent 70%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+
+.shell { max-width: 1080px; margin: 0 auto; padding: 48px 24px 80px; }
+
+/* ─── Header ───────────────────────────────────────────────────────── */
+.crumb {
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 14px;
+}
+.crumb a { color: var(--fg-muted); text-decoration: none; border-bottom: 1px dotted oklch(83% 0.045 55 / 0.4); }
+.crumb a:hover { color: var(--fg-default); }
+.crumb-sep { margin: 0 8px; opacity: 0.5; }
+
+.masthead {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: end;
+  margin-bottom: 48px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--slate-700);
+}
+h1 {
+  font: 400 64px/1.05 var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: -0.015em;
+  margin: 0;
+  font-variation-settings: "opsz" 144;
+}
+h1 em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--ember);
+}
+.lede {
+  color: var(--fg-muted);
+  margin: 14px 0 0;
+  max-width: 60ch;
+  font-size: 17px;
+  line-height: 1.5;
+}
+.version-chip {
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ember);
+  background: oklch(30% 0.10 40 / 0.5);
+  border: 1px solid oklch(70% 0.16 40 / 0.35);
+  padding: 8px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  align-self: end;
+}
+
+/* ─── Section labels ──────────────────────────────────────────────── */
+.section-label {
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin: 56px 0 18px;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--slate-700);
+}
+
+/* ─── Hack gallery grid ───────────────────────────────────────────── */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+@media (max-width: 720px) { .gallery { grid-template-columns: 1fr; } }
+
+.hack-card {
+  background: linear-gradient(135deg,
+              oklch(33% 0.075 40),
+              oklch(27% 0.065 40));
+  border: 1px solid var(--slate-700);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: border-color 200ms, box-shadow 200ms, transform 200ms;
+}
+.hack-card:hover {
+  border-color: var(--ember);
+  box-shadow: 0 12px 32px var(--bubble-shadow),
+              0 0 0 4px oklch(70% 0.16 40 / 0.10);
+  transform: translateY(-2px);
+}
+.hack-card.signature {
+  border-color: oklch(70% 0.16 40 / 0.65);
+  box-shadow: 0 0 0 1px oklch(70% 0.16 40 / 0.2);
+}
+
+.preview-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #fafaf6;
+  border-bottom: 1px solid var(--slate-700);
+  overflow: hidden;
+}
+.preview-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+/* Faint top-edge gradient hints "this is a window" */
+.preview-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 22px;
+  background: linear-gradient(180deg, oklch(0% 0 0 / 0.08), transparent);
+  pointer-events: none;
+}
+
+.hack-meta {
+  padding: 18px 22px 22px;
+}
+.hack-name {
+  font: 400 22px/1.2 var(--serif);
+  letter-spacing: -0.005em;
+  margin: 0 0 6px;
+  color: var(--fg-default);
+  display: flex; align-items: center; gap: 10px;
+}
+.hack-name .num {
+  font: 500 11px/1 var(--mono);
+  color: var(--ember);
+  letter-spacing: 0.18em;
+  background: oklch(30% 0.10 40 / 0.5);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.hack-desc {
+  color: var(--fg-muted);
+  font-size: 13.5px;
+  margin: 0;
+  line-height: 1.45;
+}
+.hack-badge {
+  display: inline-block;
+  font: 500 9px/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  background: oklch(40% 0.06 130 / 0.4);
+  border: 1px solid oklch(72% 0.085 130 / 0.3);
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+/* ─── Install section ─────────────────────────────────────────────── */
+.install-shell {
+  margin-top: 24px;
+  background: linear-gradient(135deg,
+              oklch(38% 0.080 40),
+              oklch(28% 0.070 40));
+  border: 1px solid var(--slate-700);
+  border-radius: 18px;
+  padding: 32px;
+}
+.install-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+@media (max-width: 720px) { .install-grid { grid-template-columns: 1fr; } }
+
+.download-card {
+  background: oklch(20% 0.05 40 / 0.6);
+  border: 1px solid oklch(70% 0.16 40 / 0.35);
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.download-title {
+  font: 400 20px/1.2 var(--serif);
+  margin: 0;
+}
+.download-meta {
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 18px;
+  background: var(--ember);
+  color: oklch(15% 0.04 40);
+  text-decoration: none;
+  border-radius: 999px;
+  font: 500 14px/1 var(--sans);
+  letter-spacing: 0.02em;
+  transition: background 180ms, box-shadow 180ms, transform 180ms;
+  margin-top: auto;
+}
+.download-btn:hover {
+  background: oklch(76% 0.18 42);
+  box-shadow: 0 0 24px var(--ember-glow);
+  transform: translateY(-1px);
+}
+
+.install-steps h3 {
+  font: 400 20px/1.2 var(--serif);
+  margin: 0 0 14px;
+}
+.install-steps ol {
+  margin: 0; padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+.install-steps li {
+  counter-increment: step;
+  padding: 12px 0 12px 38px;
+  position: relative;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--fg-default);
+  border-top: 1px solid oklch(36% 0.080 40 / 0.5);
+}
+.install-steps li:first-child { border-top: none; padding-top: 0; }
+.install-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0; top: 12px;
+  width: 26px; height: 26px;
+  background: var(--ember);
+  color: oklch(15% 0.04 40);
+  font: 500 12px/26px var(--mono);
+  text-align: center;
+  border-radius: 50%;
+  letter-spacing: 0;
+}
+.install-steps li:first-child::before { top: 0; }
+.install-steps code {
+  font: 500 12.5px/1 var(--mono);
+  background: oklch(20% 0.05 40 / 0.6);
+  border: 1px solid oklch(40% 0.08 40 / 0.5);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--accent-soft);
+}
+.install-steps a {
+  color: var(--ember);
+  text-decoration: underline;
+  text-decoration-color: oklch(70% 0.16 40 / 0.4);
+  text-underline-offset: 3px;
+}
+.install-steps a:hover { text-decoration-color: var(--ember); }
+
+.tutorial-link {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid oklch(36% 0.080 40 / 0.5);
+  font-size: 13.5px;
+  color: var(--fg-muted);
+}
+.tutorial-link a { color: var(--accent-soft); }
+
+/* ─── Footer ──────────────────────────────────────────────────────── */
+footer {
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--slate-700);
+  display: flex;
+  justify-content: space-between;
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="crumb">
+    <a href="/">customprojects.info</a>
+    <span class="crumb-sep">/</span>
+    DOM Perignon
+  </div>
+
+  <header class="masthead">
+    <div>
+      <h1><em>DOM</em> Perignon</h1>
+      <p class="lede">A Chrome extension with a collection of eight UI hijinks. Pick one from the toolbar popup to enhance your browsing experience — it stays active until you switch to another. Live previews below — each tile is a working iframe running the actual hijink.</p>
+    </div>
+    <span class="version-chip">v1.1.1</span>
+  </header>
+
+  <div class="section-label">The collection</div>
+  <div class="gallery">
+
+    <div class="hack-card">
+      <div class="preview-frame">
+        <iframe src="demo.html?hack=ants" loading="lazy" title="Ants preview"></iframe>
+      </div>
+      <div class="hack-meta">
+        <h2 class="hack-name"><span class="num">01</span> Ants</h2>
+        <p class="hack-desc">A colony of crawling SVG ants with momentum-based random walks and alternating-tripod leg gait. Antennae sway. Bonus chaos for any site with a lot of empty white space.</p>
+      </div>
+    </div>
+
+    <div class="hack-card">
+      <div class="preview-frame">
+        <iframe src="demo.html?hack=dvd" loading="lazy" title="DVD preview"></iframe>
+      </div>
+      <div class="hack-meta">
+        <h2 class="hack-name"><span class="num">02</span> DVD Bouncer</h2>
+        <p class="hack-desc">The classic. One DVD-Video logo at 45° angles, color cycling on every wall bounce. Corner hits trigger a flash and increment a small counter you can root for.</p>
+      </div>
+    </div>
+
+    <div class="hack-card">
+      <div class="preview-frame">
+        <iframe src="demo.html?hack=quotes" loading="lazy" title="Quotes preview"></iframe>
+      </div>
+      <div class="hack-meta">
+        <h2 class="hack-name"><span class="num">03</span> Words of Encouragement</h2>
+        <p class="hack-desc">Soft motivational quotes drift across the screen in Fraunces italic with a warm ember halo. Twenty-nine-line rotation; reset on every page load.</p>
+      </div>
+    </div>
+
+    <div class="hack-card">
+      <div class="preview-frame">
+        <iframe src="demo.html?hack=dynamic-logo" loading="lazy" title="Site logo preview"></iframe>
+      </div>
+      <div class="hack-meta">
+        <h2 class="hack-name"><span class="num">04</span> Site Logo Bounce</h2>
+        <p class="hack-desc">Sniffs the current site's apple-touch-icon, favicon, og:image, or header img and bounces six copies. Falls back to a "?" plate if nothing is detectable.</p>
+      </div>
+    </div>
+
+    <div class="hack-card signature">
+      <div class="preview-frame">
+        <iframe src="demo.html?hack=champagne" loading="lazy" title="Champagne preview"></iframe>
+      </div>
+      <div class="hack-meta">
+        <h2 class="hack-name"><span class="num">05</span> Champagne Bubbles</h2>
+        <p class="hack-desc">The house signature. Pale champagne bubbles rise from the bottom edge with realistic fizz physics. Click any to pop. Corks ricochet across every twenty-eight seconds or so.</p>
+        <span class="hack-badge">House signature</span>
+      </div>
+    </div>
+
+    <div class="hack-card">
+      <div class="preview-frame">
+        <iframe src="demo.html?hack=lava" loading="lazy" title="Lava preview"></iframe>
+      </div>
+      <div class="hack-meta">
+        <h2 class="hack-name"><span class="num">06</span> The Floor is Lava</h2>
+        <p class="hack-desc">Page images and headings fall to a glowing lava band at the bottom. The originals tuck out of sight cleanly. Click any falling element to rescue it back to its proper place.</p>
+      </div>
+    </div>
+
+    <div class="hack-card">
+      <div class="preview-frame">
+        <iframe src="demo.html?hack=googly" loading="lazy" title="Googly Eyes preview"></iframe>
+      </div>
+      <div class="hack-meta">
+        <h2 class="hack-name"><span class="num">07</span> Googly Eyes</h2>
+        <p class="hack-desc">A faint, scattered colony of mouse-tracking eyes lands on images, buttons, and avatars. Random tilts and offsets. Hover the iframe to see them follow.</p>
+      </div>
+    </div>
+
+    <div class="hack-card">
+      <div class="preview-frame">
+        <iframe src="demo.html?hack=aquarium" loading="lazy" title="Aquarium preview"></iframe>
+      </div>
+      <div class="hack-meta">
+        <h2 class="hack-name"><span class="num">08</span> Aquarium Mode</h2>
+        <p class="hack-desc">The page becomes the back wall of a tank. Blue-green wash, caustic shimmer at the top, swaying kelp at the corners, rising bubble clusters, four fish species swimming through, and a cursor ripple.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-label">Install</div>
+  <div class="install-shell">
+    <div class="install-grid">
+
+      <div class="download-card">
+        <span class="download-meta">Latest release</span>
+        <h3 class="download-title">dom-perignon-v1.1.1.zip</h3>
+        <p class="hack-desc">A self-contained Chrome extension. ~44 KB. Manifest V3. No network calls, no telemetry — it only paints over the pages you open.</p>
+        <a class="download-btn" href="downloads/dom-perignon-v1.1.1.zip" download>↓ Download zip</a>
+      </div>
+
+      <div class="install-steps">
+        <h3>Load as an unpacked extension</h3>
+        <ol>
+          <li>Unzip the file anywhere stable on your machine (e.g. <code>Documents/dom-perignon</code>).</li>
+          <li>Open Chrome and visit <code>chrome://extensions</code>.</li>
+          <li>Toggle <strong>Developer mode</strong> on (top-right corner of the page).</li>
+          <li>Click <strong>Load unpacked</strong> and select the unzipped folder.</li>
+          <li>Pin the toolbar icon (the puzzle-piece menu, then the pin next to "DOM Perignon"). Click it, flip <strong>Active</strong> on, pick a hijink.</li>
+        </ol>
+        <div class="tutorial-link">
+          Never installed an unpacked extension before? Chrome's official walkthrough is here:
+          <a href="https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked" target="_blank" rel="noopener">developer.chrome.com — Load unpacked</a>.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <span>© 2026 · customprojects.info</span>
+    <span>DOM Perignon v1.1.1</span>
+  </footer>
+</div>
+</body>
+</html>

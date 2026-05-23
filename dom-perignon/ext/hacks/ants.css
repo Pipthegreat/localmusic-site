@@ -1,0 +1,67 @@
+/* Ants — overlay styles */
+
+.dp-ant {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 12px;
+  pointer-events: none;
+  will-change: transform;
+  /* Origin centered so rotation feels natural */
+  transform-origin: 50% 50%;
+}
+
+.dp-ant svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* Ant body — deep walnut brown with subtle red undertone */
+.dp-ant .ant-head,
+.dp-ant .ant-thorax,
+.dp-ant .ant-abdomen {
+  fill: #1a0e08;
+  stroke: #2a1812;
+  stroke-width: 0.4;
+}
+
+.dp-ant .ant-leg,
+.dp-ant .ant-antenna {
+  stroke: #1a0e08;
+  stroke-width: 0.7;
+  stroke-linecap: round;
+  fill: none;
+}
+
+/* Alternating-tripod gait: legs tagged leg-a and leg-b animate in opposite
+   phase. Each leg pivots a few degrees around the body-joint end. */
+@keyframes dp-ant-gait-a {
+  0%, 100% { transform: rotate(-6deg); }
+  50%      { transform: rotate(6deg); }
+}
+@keyframes dp-ant-gait-b {
+  0%, 100% { transform: rotate(6deg); }
+  50%      { transform: rotate(-6deg); }
+}
+
+.dp-ant .leg-a {
+  transform-origin: 26px 11px; /* pivot at thorax */
+  animation: dp-ant-gait-a 280ms linear infinite;
+}
+.dp-ant .leg-b {
+  transform-origin: 26px 11px;
+  animation: dp-ant-gait-b 280ms linear infinite;
+}
+
+/* Antennae sway gently */
+@keyframes dp-ant-antenna {
+  0%, 100% { transform: rotate(-3deg); }
+  50%      { transform: rotate(3deg); }
+}
+.dp-ant .ant-antenna {
+  transform-origin: 36px 11px;
+  animation: dp-ant-antenna 620ms ease-in-out infinite;
+}

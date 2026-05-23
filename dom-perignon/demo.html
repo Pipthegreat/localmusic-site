@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northgate Studio — sample page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf6;
+    --ink: #1a1a1a;
+    --muted: #5a5a5a;
+    --rule: #e5e4dd;
+    --accent: #c45a1a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 14px/1.55 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 28px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .brand {
+    font: 500 17px/1 'Fraunces', Georgia, serif;
+    letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .brand-mark {
+    width: 22px; height: 22px;
+    background: var(--ink);
+    display: inline-block;
+    border-radius: 2px;
+    transform: rotate(45deg);
+    position: relative;
+  }
+  .brand-mark::after {
+    content: '';
+    position: absolute; inset: 5px;
+    background: var(--bg);
+    border-radius: 1px;
+  }
+  nav {
+    display: flex; gap: 22px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  nav a { color: inherit; text-decoration: none; }
+  nav a:hover { color: var(--ink); }
+
+  .hero {
+    padding: 56px 28px 40px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  .hero h1 {
+    font: 400 42px/1.05 'Fraunces', Georgia, serif;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+    color: var(--ink);
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero p {
+    color: var(--muted);
+    margin: 0 0 22px;
+    max-width: 42ch;
+    font-size: 14.5px;
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    background: var(--ink);
+    color: var(--bg);
+    text-decoration: none;
+    border-radius: 999px;
+    font: 500 13px/1 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+  }
+  .cta:hover { background: var(--accent); }
+
+  /* Hero illustration — abstract editorial geometric shapes */
+  .hero-art {
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, #f0ece1, #e5dfd0);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 12px 30px rgba(50, 30, 10, 0.10);
+  }
+  .hero-art svg { width: 100%; height: 100%; display: block; }
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin: 0 28px;
+  }
+  .meta-cell {
+    padding: 16px 14px;
+    border-left: 1px solid var(--rule);
+  }
+  .meta-cell:first-child { border-left: none; }
+  .meta-label {
+    font: 500 10px/1 'JetBrains Mono', ui-monospace, monospace;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .meta-value {
+    font: 400 16px/1.2 'Fraunces', serif;
+  }
+
+  .body-section {
+    padding: 36px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .body-section h2 {
+    font: 400 22px/1.2 'Fraunces', serif;
+    margin: 0 0 12px;
+  }
+  .body-section p {
+    color: var(--muted);
+    font-size: 13.5px;
+    margin: 0 0 12px;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .gallery > div {
+    aspect-ratio: 1;
+    border-radius: 6px;
+    background: #ece8db;
+  }
+  .gallery > div:nth-child(2) { background: #d9d2bd; }
+  .gallery > div:nth-child(3) { background: #c8b89a; }
+  .gallery > div:nth-child(4) { background: #b8a880; }
+  .gallery > div:nth-child(5) { background: #ece8db; }
+  .gallery > div:nth-child(6) { background: #d9d2bd; }
+
+  .avatar-row { display: flex; gap: 10px; margin-top: 14px; align-items: center; }
+  .avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, #c45a1a, #8a3a10);
+  }
+  .avatar.b { background: linear-gradient(135deg, #5a7a6a, #2a4030); }
+  .avatar.c { background: linear-gradient(135deg, #a09080, #604838); }
+  .avatar-meta { font-size: 12.5px; }
+  .avatar-meta strong { font-weight: 500; }
+  .avatar-meta div { color: var(--muted); font-size: 11.5px; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 20px 28px;
+    color: var(--muted);
+    font-size: 12px;
+    display: flex; justify-content: space-between;
+  }
+
+  /* Below ~640px the iframe view, collapse the two-col grids gracefully */
+  @media (max-width: 640px) {
+    .hero, .body-section { grid-template-columns: 1fr; gap: 20px; }
+    .meta-row { grid-template-columns: 1fr; }
+    .meta-cell { border-left: none; border-top: 1px solid var(--rule); }
+    .meta-cell:first-child { border-top: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark"></span>
+    <span>Northgate Studio</span>
+  </div>
+  <nav>
+    <a href="#">Work</a>
+    <a href="#">About</a>
+    <a href="#">Journal</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>Built for <em>the long view.</em></h1>
+    <p>A small architecture and fabrication studio working with builders, restaurateurs, and civic teams on the projects that have to last.</p>
+    <a class="cta" href="#">See recent work →</a>
+  </div>
+  <div class="hero-art">
+    <svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="20" width="100" height="140" rx="4" fill="#c45a1a" opacity="0.85"/>
+      <circle cx="160" cy="90" r="48" fill="#5a7a6a" opacity="0.9"/>
+      <rect x="130" y="120" width="80" height="50" rx="3" fill="#3a3a3a" opacity="0.75"/>
+      <line x1="20" y1="160" x2="220" y2="160" stroke="#1a1a1a" stroke-width="1.5"/>
+    </svg>
+  </div>
+</section>
+
+<div class="meta-row">
+  <div class="meta-cell">
+    <div class="meta-label">Founded</div>
+    <div class="meta-value">2014</div>
+  </div>
+  <div class="meta-cell">
+    <div class="meta-label">Studio</div>
+    <div class="meta-value">Portland, OR</div>
+  </div>
+  <div class="meta-cell">
+    <div class="meta-label">Active projects</div>
+    <div class="meta-value">17</div>
+  </div>
+</div>
+
+<section class="body-section">
+  <div>
+    <h2>Our practice</h2>
+    <p>We work across architecture, interior design, and custom fabrication — but the through-line is restraint. The first move is usually to take something away.</p>
+    <p>Studio meets weekly at the workshop. Most clients become friends. We turn down more work than we take.</p>
+    <div class="avatar-row">
+      <div class="avatar"></div>
+      <div class="avatar b"></div>
+      <div class="avatar c"></div>
+      <div class="avatar-meta">
+        <strong>Three principals</strong>
+        <div>Maren · Issa · Hollis</div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h2>Recent work</h2>
+    <div class="gallery">
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Northgate Studio</span>
+  <span>hello@northgate.studio</span>
+</footer>
+
+<!-- ─── DOM Perignon hack runner (stub Chrome APIs, then activate by ?hack=…) ─── -->
+<script>
+  // Stub minimal Chrome extension APIs so the hack modules load happily
+  window.chrome = window.chrome || {};
+  window.chrome.runtime = window.chrome.runtime || {
+    getURL: (relPath) => relPath,                    // resolve relative to demo.html's folder
+    onMessage: { addListener: () => {} },
+    sendMessage: () => Promise.resolve(),
+  };
+  window.chrome.storage = window.chrome.storage || {
+    local: {
+      get: (def) => Promise.resolve(def),            // always return the default (off)
+      set: () => Promise.resolve(),
+    },
+  };
+  window.chrome.tabs = window.chrome.tabs || {
+    query: () => Promise.resolve([]),
+    sendMessage: () => Promise.resolve(),
+  };
+</script>
+<!-- Load the same hack files the extension ships -->
+<script src="ext/hacks/ants.js"></script>
+<script src="ext/hacks/dvd.js"></script>
+<script src="ext/hacks/quotes.js"></script>
+<script src="ext/hacks/dynamic-logo.js"></script>
+<script src="ext/hacks/champagne.js"></script>
+<script src="ext/hacks/lava.js"></script>
+<script src="ext/hacks/googly.js"></script>
+<script src="ext/hacks/aquarium.js"></script>
+<script src="ext/inject.js"></script>
+<script>
+  // Activate the requested hack once everything has registered. Give the
+  // page a beat to settle so DOM-scanning hacks (lava, googly) see real
+  // dimensions.
+  (function () {
+    const params = new URLSearchParams(location.search);
+    const hack = params.get('hack');
+    if (!hack || !window.__DOMPerignon) return;
+    const fire = () => window.__DOMPerignon.activate(hack);
+    if (document.readyState === 'complete') setTimeout(fire, 80);
+    else window.addEventListener('load', () => setTimeout(fire, 80));
+  })();
+</script>
+
+</body>
+</html>

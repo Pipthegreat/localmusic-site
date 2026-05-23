@@ -1,0 +1,111 @@
+/* Aquarium Mode */
+
+/* ─── Water wash overlay ─────────────────────────────────────────── */
+.dp-aqua-wash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg,
+      oklch(58% 0.10 220 / 0.20) 0%,
+      oklch(48% 0.13 220 / 0.30) 50%,
+      oklch(32% 0.13 230 / 0.45) 100%);
+  mix-blend-mode: multiply;
+}
+
+/* ─── Caustic light shimmer at the top (water-surface refraction) ── */
+.dp-aqua-caustic {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 18% -10%, oklch(95% 0.10 200 / 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse at 55% -20%, oklch(98% 0.06 195 / 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse at 82% -15%, oklch(92% 0.12 210 / 0.16) 0%, transparent 60%);
+  animation: dp-aqua-caustic 9s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+@keyframes dp-aqua-caustic {
+  0%, 100% { transform: translateX(0)   skewX(0deg)  scale(1); }
+  33%      { transform: translateX(40px) skewX(-1deg) scale(1.03); }
+  66%      { transform: translateX(-30px) skewX(1deg) scale(1.06); }
+}
+
+/* ─── Kelp ────────────────────────────────────────────────────────── */
+.dp-aqua-kelp {
+  position: fixed;
+  bottom: 0;
+  width: 120px;
+  height: 320px;
+  pointer-events: none;
+  transform-origin: bottom center;
+  filter: drop-shadow(0 0 8px oklch(30% 0.12 200 / 0.45));
+}
+.dp-aqua-kelp svg { width: 100%; height: 100%; display: block; }
+.dp-aqua-kelp-left  { left: -8px;  animation: dp-aqua-sway-l 6s ease-in-out infinite; }
+.dp-aqua-kelp-right { right: -8px; transform: scaleX(-1); animation: dp-aqua-sway-r 5.4s ease-in-out infinite; }
+
+@keyframes dp-aqua-sway-l {
+  0%, 100% { transform: rotate(-2deg) translateX(0); }
+  50%      { transform: rotate(3deg)  translateX(6px); }
+}
+@keyframes dp-aqua-sway-r {
+  0%, 100% { transform: scaleX(-1) rotate(-2deg) translateX(0); }
+  50%      { transform: scaleX(-1) rotate(3deg)  translateX(6px); }
+}
+
+/* ─── Fish ─────────────────────────────────────────────────────────── */
+.dp-fish {
+  position: fixed;
+  left: 0;
+  pointer-events: none;
+  will-change: transform;
+  filter: drop-shadow(0 6px 10px oklch(20% 0.10 220 / 0.45));
+  /* 30% translucent — fish feel like they're deeper in the tank, not
+     glued to the glass */
+  opacity: 0.7;
+}
+.dp-fish svg { width: 100%; height: 100%; display: block; }
+.dp-fish-tail {
+  transform-origin: 100% 50%;
+  animation: dp-fish-wiggle 320ms ease-in-out infinite;
+}
+@keyframes dp-fish-wiggle {
+  0%, 100% { transform: rotate(-8deg); }
+  50%      { transform: rotate(8deg); }
+}
+
+/* ─── Aquarium bubbles (clusters) ─────────────────────────────────── */
+.dp-aqua-bubble {
+  position: fixed;
+  top: 0; left: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 28%,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(220, 240, 255, 0.55) 35%,
+      rgba(120, 180, 220, 0.25) 80%,
+      rgba(60, 120, 170, 0.10) 100%);
+  border: 1px solid rgba(200, 230, 250, 0.55);
+  box-shadow: inset -1px -1px 3px rgba(0, 0, 0, 0.12);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* ─── Cursor ripple ───────────────────────────────────────────────── */
+.dp-aqua-ripple {
+  position: fixed;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid oklch(85% 0.10 210 / 0.6);
+  pointer-events: none;
+  animation: dp-aqua-ripple 900ms ease-out forwards;
+}
+@keyframes dp-aqua-ripple {
+  0%   { transform: scale(0.3); opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
