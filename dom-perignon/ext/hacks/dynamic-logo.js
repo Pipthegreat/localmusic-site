@@ -1,4 +1,4 @@
-// Dynamic site-logo bounce — sniffs the current site for its logo
+// Dynamic site-logo bounce - sniffs the current site for its logo
 // (apple-touch-icon, og:image, favicon, header img), then spawns 6 copies
 // that bounce around DVD-style.
 
@@ -52,7 +52,7 @@
       if (src) candidates.push({ url: src, score: 30 });
     }
 
-    // 5. Last resort — site-root favicon
+    // 5. Last resort - site-root favicon
     candidates.push({
       url: `${window.location.origin}/favicon.ico`,
       score: 1,
@@ -80,7 +80,7 @@
 
   async function init(root) {
     await loadCSS();
-    // Scale on activation — fewer copies, smaller sizes in small viewports
+    // Scale on activation - fewer copies, smaller sizes in small viewports
     const scale = (NS.getScale && NS.getScale()) || 1;
     LOGO_SIZE  = Math.max(18, Math.round(LOGO_SIZE_BASE * scale));
     LOGO_COUNT = Math.max(4, Math.round(LOGO_COUNT_BASE * (0.5 + 0.5 * scale)));

@@ -1,4 +1,4 @@
-// Aquarium Mode — the page becomes the back wall of a fish tank.
+// Aquarium Mode - the page becomes the back wall of a fish tank.
 //
 // Layers:
 //   1. Blue-green wash overlay (multiply blend) tinting the page
@@ -11,7 +11,7 @@
 (function () {
   const NS = (window.__DOMPerignon = window.__DOMPerignon || { hacks: {} });
 
-  // Fish species — each has its own SVG and behavior bias
+  // Fish species - each has its own SVG and behavior bias
   const FISH = [
     {
       name: 'goldfish',
@@ -246,7 +246,7 @@
     caustic.className = 'dp-aqua-caustic';
     root.appendChild(caustic);
 
-    // Kelp sized by viewport scale — was 120×320 fixed, now shrinks
+    // Kelp sized by viewport scale - was 120×320 fixed, now shrinks
     // proportionally on small screens / iframes.
     const kelpW = Math.round(120 * scale);
     const kelpH = Math.round(320 * scale);
@@ -266,7 +266,7 @@
       </svg>`;
     root.appendChild(kelpL);
 
-    // Kelp (right) — mirrored via CSS
+    // Kelp (right) - mirrored via CSS
     const kelpR = document.createElement('div');
     kelpR.className = 'dp-aqua-kelp dp-aqua-kelp-right';
     kelpR.style.width  = `${kelpW}px`;
@@ -274,7 +274,7 @@
     kelpR.innerHTML = kelpL.innerHTML;
     root.appendChild(kelpR);
 
-    // (sand band removed — kelp roots straight into the bottom edge now)
+    // (sand band removed - kelp roots straight into the bottom edge now)
 
     // Seed some initial bubbles + fish
     for (let i = 0; i < 3; i++) setTimeout(spawnBubbleCluster, i * 600);

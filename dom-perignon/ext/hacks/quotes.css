@@ -1,4 +1,4 @@
-/* You Got This — drifting Fraunces italic text in a desert/autumn palette.
+/* You Got This - drifting Fraunces italic text in a desert/autumn palette.
    Each character carries a crisp black outline so the colored letterforms
    read on any page background (dark, light, photo, gradient). */
 
@@ -9,29 +9,28 @@
   pointer-events: none;
   font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
   font-style: italic;
-  /* Light weight so the colored autumn fill reads as the dominant visual,
-     not the black outline. Real Fraunces italic 300 is delicate; the
-     thin 1.25px outline keeps each character legible without overpowering
-     the color. */
-  font-weight: 300;
-  font-variation-settings: "opsz" 144, "SOFT" 50;
-  letter-spacing: -0.01em;
+  /* Very light weight + slightly wider tracking so the colored autumn fill
+     is the dominant visual. Real Fraunces italic 200 with positive
+     letter-spacing reads as airy and confident; the thin 1px outline
+     keeps characters legible without crowding the color. */
+  font-weight: 200;
+  font-variation-settings: "opsz" 144, "SOFT" 70;
+  letter-spacing: 0.04em;
   white-space: nowrap;
-  /* The fill color is set inline by the JS — one of seven autumn/desert
+  /* The fill color is set inline by the JS - one of seven autumn/desert
      hues picked randomly per quote. */
   /* Primary technique: -webkit-text-stroke + paint-order so the stroke
      renders BEHIND the fill, preserving the colored letterform shape
      while adding a clean black halo around each character. */
-  -webkit-text-stroke: 1.25px #000;
+  -webkit-text-stroke: 1px #000;
   paint-order: stroke fill;
-  /* Thin 1px outline in 4 cardinal directions + a soft drop shadow.
-     Less ink, more color visible. */
+  /* Thin outline + soft drop shadow. Less ink, more color visible. */
   text-shadow:
-    -1px -1px 0 #000,
-     1px -1px 0 #000,
-    -1px  1px 0 #000,
-     1px  1px 0 #000,
-     0    3px  6px rgba(0,0,0,0.5);
+    -0.5px -0.5px 0 #000,
+     0.5px -0.5px 0 #000,
+    -0.5px  0.5px 0 #000,
+     0.5px  0.5px 0 #000,
+     0     3px   6px rgba(0,0,0,0.55);
   will-change: transform, opacity;
   user-select: none;
   -webkit-font-smoothing: antialiased;

@@ -1,4 +1,4 @@
-// Champagne Bubbles — the house signature.
+// Champagne Bubbles - the house signature.
 //
 // Bubbles rise continuously from the bottom of the viewport with realistic
 // physics: smaller bubbles rise faster (less drag relative to buoyancy),
@@ -50,7 +50,7 @@
       size,
       x: Math.random() * vw,
       y: initialY !== undefined ? initialY : vh + size,
-      // Speed inversely related to size — small bubbles dart up
+      // Speed inversely related to size - small bubbles dart up
       vy: -(0.6 + 1.4 / Math.sqrt(size)),
       // Wobble: phase + frequency vary per bubble
       wobble: Math.random() * Math.PI * 2,
@@ -78,7 +78,7 @@
     const vh = window.innerHeight;
     const fromLeft = Math.random() < 0.5;
 
-    // 🍾 emoji replaces the hand-drawn cork SVG — reads instantly and
+    // 🍾 emoji replaces the hand-drawn cork SVG - reads instantly and
     // matches the brand cue without rendering bespoke artwork.
     const el = document.createElement('div');
     el.className = 'dp-cork';
@@ -88,7 +88,7 @@
     const startX = fromLeft ? -120 : vw + 120;
     const endX   = fromLeft ? vw + 120 : -120;
     const startY = vh - 80 - Math.random() * 60;
-    // Slight arc — go up then come down (parabola via two keyframes)
+    // Slight arc - go up then come down (parabola via two keyframes)
     const peakY  = startY - (vh * 0.4);
     const endY   = startY + 40;
 
@@ -140,7 +140,7 @@
     bubbleScale = (NS.getScale && NS.getScale()) || 1;
 
     // Pre-populate the viewport at varied Y positions so the user sees a
-    // fully-bubbling page from frame one — no opening wave at the bottom,
+    // fully-bubbling page from frame one - no opening wave at the bottom,
     // no empty gaps to wait through.
     const vh = window.innerHeight;
     for (let i = 0; i < 32; i++) {
@@ -166,7 +166,7 @@
   }
 
   function teardown() {
-    // spawnT is now a setTimeout (recursive), not setInterval — clearTimeout
+    // spawnT is now a setTimeout (recursive), not setInterval - clearTimeout
     // also clears interval handles, so this works for both forms.
     if (spawnT) clearTimeout(spawnT);
     if (corkT)  clearInterval(corkT);

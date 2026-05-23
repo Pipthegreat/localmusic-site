@@ -1,4 +1,4 @@
-// DVD bouncer hack — the classic logo at 45° angles, color cycling on
+// DVD bouncer hack - the classic logo at 45° angles, color cycling on
 // every wall bounce. Corner hits trigger a brief celebration flash.
 
 (function () {
@@ -10,7 +10,7 @@
   const BASE_H = 50;
   let LOGO_W = BASE_W;
   let LOGO_H = BASE_H;
-  // DVD-Video logo — heavy italic Impact "DVD" with subtle gradient sheen
+  // DVD-Video logo - heavy italic Impact "DVD" with subtle gradient sheen
   // (mimics the iconic 3D-block look), pill-shaped disc with legible
   // "VIDEO" below. All chromatic surfaces use currentColor so the wall
   // bounce color cycle drives every element together.
@@ -55,7 +55,7 @@
                fill="currentColor"
                stroke="rgba(0,0,0,0.4)" stroke-width="1.2"/>
 
-      <!-- VIDEO text inside the disc — always black for legibility -->
+      <!-- VIDEO text inside the disc - always black for legibility -->
       <text x="100" y="97"
             text-anchor="middle"
             font-family="'Arial Black', 'Helvetica Neue', Helvetica, sans-serif"
@@ -66,7 +66,7 @@
     </svg>
   `;
 
-  // Classic palette — saturated, rotates per bounce
+  // Classic palette - saturated, rotates per bounce
   const COLORS = [
     '#ff2d2d', '#ff8b2d', '#ffd62d',
     '#2dff5e', '#2de1ff', '#2d6bff',
@@ -124,7 +124,7 @@
   async function init(root) {
     await loadCSS();
 
-    // Scale once at activation based on current viewport — small iframes
+    // Scale once at activation based on current viewport - small iframes
     // and mobile screens get a proportionally smaller DVD.
     const scale = (NS.getScale && NS.getScale()) || 1;
     LOGO_W = Math.round(BASE_W * scale);
@@ -145,7 +145,7 @@
     const vh = window.innerHeight;
     x = Math.random() * (vw - LOGO_W);
     y = Math.random() * (vh - LOGO_H);
-    // Classic 1.5–2.2 px/frame at ~60fps. Sign random for direction.
+    // Classic 1.5-2.2 px/frame at ~60fps. Sign random for direction.
     vx = (Math.random() < 0.5 ? -1 : 1) * (1.8 + Math.random() * 0.5);
     vy = (Math.random() < 0.5 ? -1 : 1) * (1.4 + Math.random() * 0.4);
     colorIdx = Math.floor(Math.random() * COLORS.length);

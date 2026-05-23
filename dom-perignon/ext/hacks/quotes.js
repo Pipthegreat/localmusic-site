@@ -1,4 +1,4 @@
-// Motivational quotes hack — gentle words drift across the page in Fraunces
+// Motivational quotes hack - gentle words drift across the page in Fraunces
 // italic. Pulls from a curated pool; spawns one new quote every ~3-5s,
 // each fading in at a random edge and floating to the opposite side.
 
@@ -25,7 +25,7 @@
     "You're stronger than you think",
     'Just begin',
     "You're enough",
-    'Breathe — you got this',
+    'Breathe - you got this',
     'Today is a good day',
     "You're on the right path",
     'Keep showing up',
@@ -36,7 +36,7 @@
     "Don't give up",
     "It's going to be okay",
     "You're doing the work",
-    // Added round-3 — pool doubled, ~10% longer max length permitted
+    // Added round-3 - pool doubled, ~10% longer max length permitted
     'Take it easy on yourself',
     'Slow and steady wins',
     "You're not alone in this",
@@ -70,7 +70,7 @@
     'Soft eyes, steady heart',
   ];
 
-  // Autumn / desert palette — chroma bumped 30-40% from v1.1.5 for more
+  // Autumn / desert palette - chroma bumped 30-40% from v1.1.5 for more
   // motivational presence. Lightness range unchanged (58-78%) so quotes
   // still read as warm/laid-back rather than neon.
   const AUTUMN_PALETTE = [

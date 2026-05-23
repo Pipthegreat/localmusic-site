@@ -1,4 +1,4 @@
-/* Ants — overlay styles */
+/* Ants - overlay styles */
 
 .dp-ant {
   position: fixed;
@@ -19,7 +19,7 @@
   overflow: visible;
 }
 
-/* Ant body — deep walnut brown with subtle red undertone */
+/* Ant body - deep walnut brown with subtle red undertone */
 .dp-ant .ant-head,
 .dp-ant .ant-thorax,
 .dp-ant .ant-abdomen {

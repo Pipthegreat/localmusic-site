@@ -13,7 +13,7 @@
   transform: rotate(var(--dp-tilt, 0deg));
 }
 
-/* Sclera — was bright white. Now a slightly cream-tinted off-white that
+/* Sclera - was bright white. Now a slightly cream-tinted off-white that
    reads as old porcelain rather than cartoon. The shift drops them out of
    "googly" territory and into "watching." */
 .dp-eye {
@@ -30,8 +30,8 @@
   overflow: hidden;
 }
 
-/* Pupil — was 40% (wide-eyed cartoon). Now 55% (larger iris, more intense
-   gaze). Deeper black with a hint of dark red at the rim — the sinister
+/* Pupil - was 40% (wide-eyed cartoon). Now 55% (larger iris, more intense
+   gaze). Deeper black with a hint of dark red at the rim - the sinister
    undertone. The highlight is smaller and sharper, suggesting a focused
    point of light rather than a friendly spark. */
 .dp-pupil {

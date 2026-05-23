@@ -1,4 +1,4 @@
-// Googly Eyes — paste a pair of mouse-tracking eyes on every visible image,
+// Googly Eyes - paste a pair of mouse-tracking eyes on every visible image,
 // avatar, button, and card on the page. Pupils orient toward the cursor.
 // MutationObserver picks up new elements added by the page over time.
 
@@ -65,7 +65,7 @@
       rightPupil: rightEye.querySelector('.dp-pupil'),
       target,
       lastRect: null,
-      // Whimsical position factors — each pair stakes out its own anchor
+      // Whimsical position factors - each pair stakes out its own anchor
       // within the target element (so they aren't all in the same spot)
       anchorXFrac: 0.1 + Math.random() * 0.8,
       anchorYFrac: 0.1 + Math.random() * 0.8,
@@ -186,7 +186,7 @@
 
     // Watch for added/removed nodes
     observer = new MutationObserver(() => {
-      // Cheap signal — actual rescan throttled by setInterval
+      // Cheap signal - actual rescan throttled by setInterval
     });
     observer.observe(document.body, { childList: true, subtree: true });
 

@@ -1,11 +1,11 @@
-/* Champagne bubbles — the house signature */
+/* Champagne bubbles - the house signature */
 
 .dp-bubble {
   position: fixed;
   top: 0;
   left: 0;
   border-radius: 50%;
-  /* Pale champagne — almost cream with the faintest gold tint. The brown
+  /* Pale champagne - almost cream with the faintest gold tint. The brown
      undertones are gone; this reads as celebratory, not serious. */
   background:
     radial-gradient(
@@ -23,7 +23,7 @@
   cursor: pointer;
 }
 
-/* Specular highlight overlay — gives the wet shimmer */
+/* Specular highlight overlay - gives the wet shimmer */
 .dp-bubble::before {
   content: '';
   position: absolute;

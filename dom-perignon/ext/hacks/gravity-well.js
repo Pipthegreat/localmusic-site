@@ -1,9 +1,9 @@
-// Gravity Well — page elements slowly succumb to gravity.
+// Gravity Well - page elements slowly succumb to gravity.
 //
 // On activation, scans the page for visible images, headings, and buttons.
 // Each one starts falling on a staggered delay with very soft gravity, so
 // the descent feels like slow sinking rather than dropping. As items land
-// they stack on a column-shelf grid — pieces rest on top of pieces that
+// they stack on a column-shelf grid - pieces rest on top of pieces that
 // fell before them rather than all overlapping at the floor.
 //
 // Re-scans the page every 3.5 seconds (batch of 6 per scan) so new
@@ -11,15 +11,15 @@
 //
 // Click any falling clone to rescue it: the clone animates back to the
 // original position, the original element becomes visible again, the
-// clone is removed. Page DOM is never mutated — clones are fixed-position
+// clone is removed. Page DOM is never mutated - clones are fixed-position
 // overlays; the original element just gets visibility:hidden while its
 // clone is in flight.
 
 (function () {
   const NS = (window.__DOMPerignon = window.__DOMPerignon || { hacks: {} });
 
-  const GRAVITY            = 0.05;   // px/frame² — soft pull
-  const TERMINAL_V         = 4.5;    // px/frame — gentle terminal velocity
+  const GRAVITY            = 0.05;   // px/frame² - soft pull
+  const TERMINAL_V         = 4.5;    // px/frame - gentle terminal velocity
   const RESCAN_INTERVAL_MS = 2500;   // faster cadence for visible activity
   const ITEMS_PER_SCAN     = 8;
   const COLUMNS            = 48;     // shelf resolution
@@ -124,7 +124,7 @@
       x: rect.left, y: rect.top,
       vy: 0,
       // Snappier delay so previews show the fall within a couple seconds
-      delay: 200 + Math.random() * 2200, // 0.2–2.4s
+      delay: 200 + Math.random() * 2200, // 0.2-2.4s
       started: false, startedAt: 0,
       rescued: false, settled: false,
     };

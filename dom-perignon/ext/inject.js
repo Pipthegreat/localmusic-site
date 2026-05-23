@@ -1,4 +1,4 @@
-// DOM Perignon — hack router
+// DOM Perignon - hack router
 //
 // Each hack file (loaded BEFORE this script in manifest.json) registers
 // itself on `window.__DOMPerignon.hacks` as `{ init, teardown }`. This file
@@ -16,7 +16,7 @@
   // visuals so they shrink gracefully in small viewports (mobile, iframe
   // previews, side panels). Linear from 0.4 at ≤512px to 1.0 at 1280px+.
   // Hijinks should call this on init AND react to window resize if they
-  // care (most don't — a one-shot read at activation is sufficient).
+  // care (most don't - a one-shot read at activation is sufficient).
   NS.getScale = () => {
     const w = window.innerWidth || 1280;
     if (w >= 1280) return 1.0;
@@ -90,7 +90,7 @@
       });
       activate(enabled ? activeHack : 'off');
     } catch (e) {
-      // chrome.storage unavailable — do nothing
+      // chrome.storage unavailable - do nothing
     }
   })();
 })();

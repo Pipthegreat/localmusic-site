@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Sfoak · Lock-screen mode</title>
+<meta name="description" content="Continuous-playback mode for SF + Oakland live music. Plays through while the phone is locked.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  /* ============ Ember on Slate (sfoak's canonical palette) ============ */
+  :root {
+    --bg-canvas:    oklch(9% 0.011 250);
+    --bg-elevated:  oklch(13% 0.013 250);
+    --bg-row-hover: oklch(17% 0.014 250);
+    --bg-row-active: oklch(20% 0.045 38);
+    --fg-default:   oklch(98% 0.005 250);
+    --fg-strong:    oklch(99% 0.003 250);
+    --fg-muted:     oklch(72% 0.012 248);
+    --fg-subtle:    oklch(58% 0.013 248);
+    --border-subtle: oklch(20% 0.014 250);
+    --border-default: oklch(26% 0.014 248);
+    --ember-300:  oklch(80% 0.13 42);
+    --ember-400:  oklch(74% 0.17 41);
+    --ember-500:  oklch(62% 0.17 40);
+    --ember-glow: oklch(72% 0.20 42 / 0.45);
+    --ember-wash: oklch(62% 0.17 40 / 0.10);
+    --on-ember:   oklch(9% 0.011 250);
+
+    --font-display: "Fraunces", "Georgia", ui-serif, serif;
+    --font-body:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  html, body {
+    margin: 0; padding: 0; background: var(--bg-canvas); color: var(--fg-default);
+    overflow-x: hidden;
+  }
+  body {
+    font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+    padding-bottom: 24px;
+    background-image:
+      radial-gradient(ellipse 900px 500px at 50% -10%, var(--ember-wash), transparent 60%);
+    background-attachment: fixed;
+  }
+  ::selection { background: var(--ember-500); color: var(--on-ember); }
+
+  /* ====== HEADER ====== */
+  .wrap { max-width: 720px; margin: 0 auto; padding: 24px 20px 0; }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--fg-subtle); text-decoration: none;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 6px 10px; border-radius: 6px;
+    border: 1px solid var(--border-subtle);
+    transition: all 120ms var(--ease-out-quart);
+  }
+  .back-link:hover { color: var(--fg-default); border-color: var(--border-default); }
+  .eyebrow {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ember-400); font-weight: 500;
+    margin: 20px 0 4px;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 96;
+    font-weight: 400; font-style: italic;
+    font-size: clamp(36px, 8vw, 56px);
+    line-height: 1; letter-spacing: -0.02em;
+    margin: 0 0 8px; color: var(--fg-strong);
+  }
+  h1 em { font-style: normal; font-weight: 500; color: var(--ember-400); }
+  .lede {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 24;
+    font-size: 15.5px; line-height: 1.45;
+    color: var(--fg-muted); margin: 0 0 16px;
+    max-width: 60ch;
+  }
+  .meta-strip {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--fg-subtle); letter-spacing: 0.04em;
+    margin: 0 0 18px;
+  }
+  .meta-strip span {
+    padding: 3px 8px; border-radius: 99px;
+    background: var(--bg-elevated); border: 1px solid var(--border-subtle);
+  }
+
+  /* ====== AUDIO PLAYER ====== */
+  .player-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    padding: 16px;
+    margin: 12px 0 20px;
+    position: sticky; top: 12px; z-index: 10;
+    box-shadow: 0 8px 24px -16px rgba(0,0,0,.6);
+  }
+  .now-line {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 24;
+    font-weight: 500; font-size: 17px; letter-spacing: -0.005em;
+    color: var(--fg-strong);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    margin-bottom: 2px;
+  }
+  .now-artist {
+    font-family: var(--font-mono); font-size: 11.5px;
+    color: var(--fg-subtle); letter-spacing: 0.06em; text-transform: uppercase;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    margin-bottom: 10px;
+  }
+  audio {
+    width: 100%; height: 40px; display: block;
+    border-radius: 6px;
+  }
+  audio::-webkit-media-controls-panel { background: var(--bg-row-hover); }
+
+  /* ====== TRACK LIST ====== */
+  .list-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin: 22px 0 8px;
+    border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;
+  }
+  .list-title {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--fg-subtle); letter-spacing: 0.16em; text-transform: uppercase;
+  }
+  .list-count { font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle); }
+  ol.tracks {
+    list-style: none; padding: 0; margin: 0;
+  }
+  .row {
+    display: grid; grid-template-columns: 44px 1fr 56px;
+    align-items: center; gap: 10px;
+    padding: 10px 8px;
+    border-top: 1px solid var(--border-subtle);
+    cursor: pointer;
+    transition: background 120ms var(--ease-out-quart);
+    border-radius: 6px;
+    position: relative;
+  }
+  .row:first-child { border-top: 0; }
+  .row:hover { background: var(--bg-row-hover); }
+  .row.active { background: var(--bg-row-active); }
+  .row.active::before {
+    content: ""; position: absolute; left: -2px; top: 12px; bottom: 12px;
+    width: 2px; background: var(--ember-500); border-radius: 2px;
+  }
+  .row .num {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--fg-subtle); text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .row.active .num { color: var(--ember-400); }
+  .row .meta { min-width: 0; }
+  .row .title {
+    font-family: var(--font-body); font-weight: 500; font-size: 15px;
+    color: var(--fg-default); letter-spacing: -0.005em;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .row.active .title { color: var(--ember-300); }
+  .row .artist {
+    font-family: var(--font-mono); font-size: 10.5px;
+    color: var(--fg-subtle); letter-spacing: 0.06em; text-transform: uppercase;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    margin-top: 2px;
+  }
+  .row .dur {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--fg-subtle); font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+
+  /* ====== EMPTY / LOADING / ERROR STATES ====== */
+  .empty {
+    margin: 32px 0; padding: 20px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px; color: var(--fg-muted); text-align: center;
+    font-size: 14px;
+  }
+  .empty b { color: var(--fg-default); font-weight: 600; }
+
+  /* ====== FOOTER ====== */
+  footer {
+    margin: 32px 20px 24px; padding: 20px 0 0;
+    border-top: 1px solid var(--border-subtle);
+    font-family: var(--font-mono); font-size: 11px; line-height: 1.6;
+    color: var(--fg-subtle); letter-spacing: 0.04em;
+    max-width: 720px;
+  }
+  footer b { color: var(--fg-default); text-transform: uppercase;
+             font-size: 10px; letter-spacing: 0.14em; display: block;
+             margin-bottom: 4px; }
+  footer p { margin: 0 0 10px; }
+  footer a { color: var(--ember-300); text-decoration: none;
+             border-bottom: 1px dashed transparent; }
+  footer a:hover { border-bottom-color: var(--ember-300); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important;
+                              animation-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <a class="back-link" href="../">← back to sfoak</a>
+
+  <div class="eyebrow">sfoak · lock-screen mode</div>
+  <h1>Plays through<br><em>while you walk away</em>.</h1>
+  <p class="lede">
+    One continuous audio file. Press play; the OS owns playback from there.
+    Locks, tab switches, going to another app — the music keeps going to the
+    end of the reel.
+  </p>
+  <div class="meta-strip" id="meta-strip">
+    <span>30-second iTunes previews</span>
+    <span id="meta-count">loading…</span>
+    <span id="meta-duration">—</span>
+  </div>
+
+  <div class="player-card">
+    <div class="now-line" id="now-title">Loading reel…</div>
+    <div class="now-artist" id="now-artist">—</div>
+    <audio id="audio" controls preload="metadata" playsinline></audio>
+  </div>
+
+  <div class="list-head">
+    <span class="list-title">in this reel</span>
+    <span class="list-count" id="list-count">—</span>
+  </div>
+  <ol class="tracks" id="tracks"></ol>
+
+  <div class="empty" id="empty" style="display:none;">
+    <b>No reel available yet.</b><br>
+    The daily build hasn't produced a reel for sfoak yet. Check back after
+    the next 00:01 sync, or use the main sfoak page for tonight's shows.
+  </div>
+</div>
+
+<footer>
+  <b>about lock-screen mode</b>
+  <p>This page plays one pre-built audio file containing every preview back-to-back.
+  Because there's no JavaScript driving the playback boundary, iOS Safari's
+  lock-screen suspension can't break it. You'll lose per-track lock-screen
+  metadata (the OS sees one track titled "Sfoak"), and tracks are 30-second
+  previews instead of full songs.</p>
+  <p>For full tracks with rich metadata, use the <a href="../">main sfoak page</a>
+  on desktop, or <a href="https://open.spotify.com">open the playlist in the
+  Spotify app</a>.</p>
+</footer>
+
+<script>
+// ============================================================
+// REEL PLAYER
+//
+// Loads reel.json sidecar → renders the track list.
+// Sets `<audio src="../reel.mp3">`. Browser native HTML5 audio
+// handles all playback including lock-screen continuation.
+//
+// JS responsibilities (all UI-only, none touching the audio path):
+//   - currentTime → currently-playing track index (binary search)
+//   - update "now playing" labels + active row class on timeupdate
+//   - tap a row → seek audio.currentTime to that segment's start
+//   - MediaSession metadata updates as the segment crosses
+//   - MediaSession action handlers for nexttrack / previoustrack
+//     (lock-screen "next" → seek to next segment's start)
+//
+// The audio element ITSELF advances through the file without any JS.
+// That's the whole point — JS suspension on lock cannot stop it.
+// ============================================================
+
+const audio = document.getElementById('audio');
+const trackListEl = document.getElementById('tracks');
+const emptyEl = document.getElementById('empty');
+const nowTitleEl = document.getElementById('now-title');
+const nowArtistEl = document.getElementById('now-artist');
+const metaCountEl = document.getElementById('meta-count');
+const metaDurationEl = document.getElementById('meta-duration');
+const listCountEl = document.getElementById('list-count');
+
+let reel = null;          // sidecar JSON
+let activeIdx = -1;
+
+function fmt(s) {
+  if (!isFinite(s) || s < 0) return '0:00';
+  const m = Math.floor(s / 60);
+  const r = Math.floor(s % 60);
+  return `${m}:${String(r).padStart(2, '0')}`;
+}
+
+// Find the track index containing time `t`.
+// Binary search on the sorted segments (start ascending).
+function trackIndexAt(t) {
+  if (!reel || !reel.tracks.length) return -1;
+  let lo = 0, hi = reel.tracks.length - 1;
+  while (lo < hi) {
+    const mid = (lo + hi + 1) >> 1;
+    if (reel.tracks[mid].start <= t) lo = mid;
+    else hi = mid - 1;
+  }
+  return lo;
+}
+
+function updateNowPlaying(force) {
+  const t = audio.currentTime || 0;
+  const idx = trackIndexAt(t);
+  if (!force && idx === activeIdx) return;
+  activeIdx = idx;
+  if (idx < 0) { return; }
+  const tr = reel.tracks[idx];
+  nowTitleEl.textContent = tr.title;
+  nowArtistEl.textContent = tr.artist;
+  // Highlight the active row.
+  trackListEl.querySelectorAll('.row').forEach((el, i) => {
+    el.classList.toggle('active', i === idx);
+  });
+  // Scroll the active row into view if it's not visible.
+  const activeEl = trackListEl.querySelector('.row.active');
+  if (activeEl) {
+    const r = activeEl.getBoundingClientRect();
+    if (r.top < 80 || r.bottom > window.innerHeight - 40) {
+      activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+  // Update MediaSession metadata.
+  setMediaSessionMetadata(tr);
+}
+
+function setMediaSessionMetadata(tr) {
+  if (!('mediaSession' in navigator) || typeof MediaMetadata === 'undefined') return;
+  try {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: tr.title,
+      artist: tr.artist,
+      album: reel.page_title || 'Sfoak · Lock-screen mode',
+    });
+    navigator.mediaSession.playbackState = audio.paused ? 'paused' : 'playing';
+  } catch (e) {}
+}
+
+function setupMediaSessionHandlers() {
+  if (!('mediaSession' in navigator)) return;
+  try {
+    navigator.mediaSession.setActionHandler('play', () => {
+      audio.play().catch(() => {});
+    });
+    navigator.mediaSession.setActionHandler('pause', () => {
+      audio.pause();
+    });
+    navigator.mediaSession.setActionHandler('nexttrack', () => {
+      const next = activeIdx + 1;
+      if (next < (reel?.tracks?.length || 0)) {
+        audio.currentTime = reel.tracks[next].start + 0.01;
+        audio.play().catch(() => {});
+      }
+    });
+    navigator.mediaSession.setActionHandler('previoustrack', () => {
+      const t = audio.currentTime;
+      // If >3s into current, restart it; else go to previous.
+      const cur = reel?.tracks?.[activeIdx];
+      if (cur && t - cur.start > 3) {
+        audio.currentTime = cur.start + 0.01;
+      } else if (activeIdx > 0) {
+        audio.currentTime = reel.tracks[activeIdx - 1].start + 0.01;
+      } else {
+        audio.currentTime = 0;
+      }
+      audio.play().catch(() => {});
+    });
+  } catch (e) {}
+}
+
+function renderTrackList() {
+  trackListEl.innerHTML = '';
+  reel.tracks.forEach((tr, i) => {
+    const li = document.createElement('li');
+    li.className = 'row';
+    li.dataset.idx = i;
+    li.innerHTML = `
+      <span class="num">${fmt(tr.start)}</span>
+      <div class="meta">
+        <div class="title"></div>
+        <div class="artist"></div>
+      </div>
+      <span class="dur">${fmt(tr.duration)}</span>`;
+    li.querySelector('.title').textContent = tr.title;
+    li.querySelector('.artist').textContent = tr.artist;
+    li.addEventListener('click', () => {
+      audio.currentTime = tr.start + 0.01;
+      audio.play().catch(() => {});
+    });
+    trackListEl.appendChild(li);
+  });
+}
+
+audio.addEventListener('timeupdate', () => updateNowPlaying(false));
+audio.addEventListener('play',  () => setMediaSessionMetadata(reel?.tracks?.[activeIdx] || {}));
+audio.addEventListener('pause', () => setMediaSessionMetadata(reel?.tracks?.[activeIdx] || {}));
+
+// Boot.
+fetch('../reel.json', { cache: 'no-store' })
+  .then(r => { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
+  .then(data => {
+    reel = data;
+    if (!reel.tracks || !reel.tracks.length) throw new Error('empty reel');
+    metaCountEl.textContent = `${reel.track_count} tracks`;
+    metaDurationEl.textContent = fmt(reel.total_duration);
+    listCountEl.textContent = `${reel.track_count} · ${fmt(reel.total_duration)} total`;
+    renderTrackList();
+    audio.src = '../reel.mp3?v=' + (reel.built_at || Date.now());
+    setupMediaSessionHandlers();
+    // Initial paint of the now-playing labels.
+    updateNowPlaying(true);
+    if (activeIdx < 0 && reel.tracks.length) {
+      activeIdx = 0;
+      const tr = reel.tracks[0];
+      nowTitleEl.textContent = tr.title;
+      nowArtistEl.textContent = tr.artist;
+      trackListEl.querySelector('.row[data-idx="0"]')?.classList.add('active');
+    }
+  })
+  .catch(err => {
+    emptyEl.style.display = 'block';
+    nowTitleEl.textContent = 'No reel available';
+    nowArtistEl.textContent = 'See note below';
+    console.warn('[reel] could not load reel.json:', err);
+  });
+</script>
+</body>
+</html>

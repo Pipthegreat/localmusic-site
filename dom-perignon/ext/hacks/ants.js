@@ -1,4 +1,4 @@
-// Ants hack — a colony of crawling ants overlaid on every page.
+// Ants hack - a colony of crawling ants overlaid on every page.
 //
 // Spawns ~14 SVG ants that wander the viewport with a momentum-based
 // random walk. Bounce gently off edges. Body bobs faintly while walking
@@ -62,7 +62,7 @@
       x: Math.random() * vw,
       y: Math.random() * vh,
       angle: Math.random() * Math.PI * 2,
-      // Speed also scales — ants on a small iframe shouldn't dart across faster
+      // Speed also scales - ants on a small iframe shouldn't dart across faster
       speed: (0.25 + Math.random() * 0.55) * antScale,
       wobble: Math.random() * Math.PI * 2,
       wobbleRate: 0.02 + Math.random() * 0.04,
@@ -116,7 +116,7 @@
     root.style.pointerEvents = 'none';
     // Capture scale once at activation
     antScale = (NS.getScale && NS.getScale()) || 1;
-    // Slightly fewer ants on tiny viewports — the colony reads better when
+    // Slightly fewer ants on tiny viewports - the colony reads better when
     // less crowded relative to the page
     ANT_COUNT = Math.max(6, Math.round(ANT_COUNT_BASE * (0.6 + 0.4 * antScale)));
     ants = [];
