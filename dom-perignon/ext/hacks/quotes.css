@@ -25,18 +25,22 @@
     the colored fill. Instead, build the outline entirely OUTSIDE the
     letterform via 8-direction text-shadow. The pale colored character
     keeps its full natural width; the black outline grows outward only.
+
+    v1.2.7 cleanup: offsets snapped to whole pixels (was 1.5px, which
+    rounds inconsistently to 1 or 2px at fractional positions and
+    creates bumpy outlines on italic glyphs). Soft drop shadow removed
+    - the 6px blur extending downward bunched up under italic letters'
+    bottom-left corners and read as a stray smudge on light backgrounds.
   */
   text-shadow:
-    -1.5px -1.5px 0 #000,
-     1.5px -1.5px 0 #000,
-    -1.5px  1.5px 0 #000,
-     1.5px  1.5px 0 #000,
-     0    -1.5px 0 #000,
-     0     1.5px 0 #000,
-    -1.5px  0    0 #000,
-     1.5px  0    0 #000,
-    /* Soft drop shadow for depth against busy backgrounds */
-     0     3px   6px rgba(0,0,0,0.55);
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000,
+     0   -1px 0 #000,
+     0    1px 0 #000,
+    -1px  0   0 #000,
+     1px  0   0 #000;
   will-change: transform, opacity;
   user-select: none;
   -webkit-font-smoothing: antialiased;
