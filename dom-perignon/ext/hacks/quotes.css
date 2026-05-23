@@ -19,20 +19,24 @@
   white-space: nowrap;
   /* The fill color is set inline by the JS - one of seven pale autumn
      hues, each at OKLCH L 88-95%. */
-  /* -webkit-text-stroke + paint-order so the stroke renders BEHIND the
-     fill, preserving the pale letterform interior while a clean black
-     outline traces every character. */
-  -webkit-text-stroke: 1.5px #000;
-  paint-order: stroke fill;
-  /* Cardinal-direction text-shadow as a fallback for older browsers that
-     don't honour paint-order on HTML text. Plus a soft drop shadow for
-     depth against busy backgrounds. */
+  /*
+    No -webkit-text-stroke. It paints CENTERED on each glyph's path,
+    which means half the stroke width eats inward and visually shrinks
+    the colored fill. Instead, build the outline entirely OUTSIDE the
+    letterform via 8-direction text-shadow. The pale colored character
+    keeps its full natural width; the black outline grows outward only.
+  */
   text-shadow:
-    -1px -1px 0 #000,
-     1px -1px 0 #000,
-    -1px  1px 0 #000,
-     1px  1px 0 #000,
-     0    3px  6px rgba(0,0,0,0.55);
+    -1.5px -1.5px 0 #000,
+     1.5px -1.5px 0 #000,
+    -1.5px  1.5px 0 #000,
+     1.5px  1.5px 0 #000,
+     0    -1.5px 0 #000,
+     0     1.5px 0 #000,
+    -1.5px  0    0 #000,
+     1.5px  0    0 #000,
+    /* Soft drop shadow for depth against busy backgrounds */
+     0     3px   6px rgba(0,0,0,0.55);
   will-change: transform, opacity;
   user-select: none;
   -webkit-font-smoothing: antialiased;

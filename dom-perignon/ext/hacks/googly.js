@@ -7,6 +7,7 @@
 
   const MAX_PAIRS    = 440;
   const MIN_SIZE     = 20;   // catch small headings, capability labels, eyebrows, etc.
+  const MIN_VISIBLE  = 4;    // if a page has fewer candidates than this, fill with floating pairs
   const REFRESH_MS   = 1500; // re-scan for new candidates this often
 
   let styleEl = null;
@@ -103,18 +104,21 @@
 
   function trackPupils() {
     for (const p of pairs) {
-      if (!p.target.isConnected) continue;
-      // Re-measure target if it might have moved (cheap to do every frame)
-      const r = p.target.getBoundingClientRect();
-      if (!r.width || !r.height) continue;
-      // Only reposition wrap if rect has changed significantly
-      if (!p.lastRect ||
-          Math.abs(r.left - p.lastRect.left) > 1 ||
-          Math.abs(r.top  - p.lastRect.top)  > 1 ||
-          Math.abs(r.width  - p.lastRect.width)  > 1 ||
-          Math.abs(r.height - p.lastRect.height) > 1) {
-        positionPair(p);
+      if (!p.floating) {
+        // Element-anchored pair: skip if target was removed, and re-measure
+        // so the pair follows scroll/layout shifts.
+        if (!p.target.isConnected) continue;
+        const r = p.target.getBoundingClientRect();
+        if (!r.width || !r.height) continue;
+        if (!p.lastRect ||
+            Math.abs(r.left - p.lastRect.left) > 1 ||
+            Math.abs(r.top  - p.lastRect.top)  > 1 ||
+            Math.abs(r.width  - p.lastRect.width)  > 1 ||
+            Math.abs(r.height - p.lastRect.height) > 1) {
+          positionPair(p);
+        }
       }
+      // (floating pairs keep their fixed-on-spawn position; nothing to re-measure)
 
       // Compute pupil offset for each eye, separately (eyes converge)
       const eyeSize = p.eyeSize;
@@ -164,10 +168,62 @@
       root.appendChild(p.wrap);
       pairs.push(p);
     }
-    // Garbage-collect pairs whose target is gone
+    // Garbage-collect pairs whose target element is gone. Floating pairs
+    // (no target) live forever.
     pairs = pairs.filter(p => {
+      if (p.floating) return true;
       if (!p.target.isConnected) { p.wrap.remove(); return false; }
       return true;
+    });
+
+    // Top up to a minimum of MIN_VISIBLE pairs with floating fallbacks —
+    // so even on small/sparse pages (the gallery preview tiles, mostly)
+    // there are always enough Watchers to feel populated.
+    while (pairs.length < MIN_VISIBLE) {
+      addFloatingPair();
+    }
+  }
+
+  // Floating pair: anchored at a random viewport position, not tied to a
+  // DOM element. Used when an initial scan turns up fewer candidates than
+  // MIN_VISIBLE. Position is set once on spawn and never re-measured.
+  function addFloatingPair() {
+    if (!root) return;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    const wrap = document.createElement('div');
+    wrap.className = 'dp-googly-pair';
+    wrap.style.setProperty('--dp-tilt', `${(Math.random() - 0.5) * 30}deg`);
+    wrap.innerHTML = `
+      <div class="dp-eye"><div class="dp-pupil"></div></div>
+      <div class="dp-eye"><div class="dp-pupil"></div></div>
+    `;
+    const [leftEye, rightEye] = wrap.querySelectorAll('.dp-eye');
+
+    // Medium random size — readable but not dominant
+    const eyeSize = 22 + Math.random() * 14;
+    const gap = eyeSize * 0.2;
+    const pairW = eyeSize * 2 + gap;
+    const left = 20 + Math.random() * Math.max(20, vw - pairW - 40);
+    const top  = 20 + Math.random() * Math.max(20, vh - eyeSize - 40);
+
+    wrap.style.left = `${left}px`;
+    wrap.style.top  = `${top}px`;
+    wrap.style.setProperty('--eye-size', `${eyeSize}px`);
+    wrap.style.setProperty('--eye-gap',  `${gap}px`);
+
+    root.appendChild(wrap);
+    pairs.push({
+      wrap,
+      leftEye,
+      rightEye,
+      leftPupil:  leftEye.querySelector('.dp-pupil'),
+      rightPupil: rightEye.querySelector('.dp-pupil'),
+      target: null,
+      lastRect: null,
+      floating: true,
+      eyeSize,
     });
   }
 

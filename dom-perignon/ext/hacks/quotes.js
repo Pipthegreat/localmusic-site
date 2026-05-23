@@ -132,10 +132,10 @@
     const yBand = 0.12 + Math.random() * 0.76; // 12% to 88% of viewport height
     const y = yBand * vh;
 
-    // Bigger range than v1.1.5 (30-70px desktop instead of 22-55px) for
-    // more motivational presence. Mobile floor lifted to 20px so even the
-    // smallest scaled quote reads as a statement, not marginalia.
-    const fontSize = Math.max(20, (30 + Math.random() * 40) * quoteScale);
+    // Range trimmed in v1.1.12: 24-39px desktop (was 30-70). The whole
+    // range is 20% smaller and the top end gets an additional 30% cut so
+    // the largest quote isn't dominating the viewport. Mobile floor 16px.
+    const fontSize = Math.max(16, (24 + Math.random() * 15) * quoteScale);
     // Outlined characters can sit at high opacity without being heavy
     const opacity = 0.85 + Math.random() * 0.15;
     // Pick a desert/autumn hue at random; backdrop guarantees legibility
