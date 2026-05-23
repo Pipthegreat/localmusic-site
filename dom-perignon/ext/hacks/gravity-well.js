@@ -23,6 +23,17 @@
   const RESCAN_INTERVAL_MS = 2500;   // faster cadence for visible activity
   const ITEMS_PER_SCAN     = 8;
   const COLUMNS            = 48;     // shelf resolution
+  // ── Physics constants (v1.2.5: bounce + drift restored) ─────────────
+  const BOUNCE_DAMP        = 0.4;    // vertical velocity retained on each bounce
+  const HORIZONTAL_DAMP    = 0.985;  // per-frame horizontal friction
+  const ANGULAR_DAMP       = 0.99;   // per-frame angular friction
+  const BOUNCE_HORIZ_DAMP  = 0.72;   // horizontal velocity damped on bounce
+  const WALL_BOUNCE_DAMP   = 0.55;   // velocity retained on side wall hit
+  const SETTLE_VY          = 0.55;   // |vy| below this on contact = could settle
+  const SETTLE_VX          = 0.25;   // |vx| must also be small to fully settle
+  const SPAWN_VX_RANGE     = 0.9;    // ± initial horizontal velocity on spawn
+  const SPAWN_ANGVEL_RANGE = 0.018;  // ± initial angular velocity on spawn
+  const BOUNCE_ANGVEL_KICK = 0.013;  // ± random tilt added on each bounce
 
   let styleEl = null;
   let chipEl  = null;
@@ -122,7 +133,12 @@
       clone, target: el, rect,
       origLeft: rect.left, origTop: rect.top,
       x: rect.left, y: rect.top,
+      // Initial velocities + spin: a touch of horizontal drift and a
+      // mild rotation so items don't fall in perfectly identical lines.
+      vx: (Math.random() - 0.5) * SPAWN_VX_RANGE,
       vy: 0,
+      angle: 0,
+      angVel: (Math.random() - 0.5) * SPAWN_ANGVEL_RANGE,
       // Snappier delay so previews show the fall within a couple seconds
       delay: 200 + Math.random() * 2200, // 0.2-2.4s
       started: false, startedAt: 0,
@@ -146,8 +162,10 @@
     item.rescued = true;
     item.clone.style.transition =
       'transform 760ms cubic-bezier(0.34, 1.56, 0.64, 1)';
+    // Explicit rotate(0) so the interpolation unwinds whatever tilt the
+    // item picked up during the fall.
     item.clone.style.transform =
-      `translate(${item.origLeft}px, ${item.origTop}px)`;
+      `translate(${item.origLeft}px, ${item.origTop}px) rotate(0rad)`;
     setTimeout(() => {
       restoreOriginal(item.target);
       item.clone.remove();
@@ -155,6 +173,7 @@
   }
 
   function step(t) {
+    const vw = window.innerWidth;
     for (const it of fallingItems) {
       if (it.rescued || it.settled) continue;
       if (!it.started) {
@@ -163,17 +182,52 @@
         it.started = true;
         hideOriginal(it.target);
       }
+      // Integrate: gravity on vy, friction on vx + angVel, advance position + rotation
       it.vy = Math.min(it.vy + GRAVITY, TERMINAL_V);
+      it.vx *= HORIZONTAL_DAMP;
+      it.angVel *= ANGULAR_DAMP;
+      it.x += it.vx;
       it.y += it.vy;
+      it.angle += it.angVel;
 
+      // Side wall collisions - bounce inward with damping
+      if (it.x < 0) {
+        it.x = 0;
+        it.vx = Math.abs(it.vx) * WALL_BOUNCE_DAMP;
+      } else if (it.x + it.rect.width > vw) {
+        it.x = vw - it.rect.width;
+        it.vx = -Math.abs(it.vx) * WALL_BOUNCE_DAMP;
+      }
+
+      // Floor / pile collision - bounce, slide, or settle
       const shelfTop = minShelfAcross(it.x, it.rect.width);
       if (it.y + it.rect.height >= shelfTop) {
         it.y = shelfTop - it.rect.height;
-        it.vy = 0;
-        it.settled = true;
-        raiseShelves(it.x, it.rect.width, it.y);
+
+        const slowVy = Math.abs(it.vy) < SETTLE_VY;
+        const slowVx = Math.abs(it.vx) < SETTLE_VX;
+
+        if (slowVy && slowVx) {
+          // Energy spent - settle here and claim the shelf
+          it.vy = 0;
+          it.vx = 0;
+          it.angVel = 0;
+          it.settled = true;
+          raiseShelves(it.x, it.rect.width, it.y);
+        } else if (slowVy) {
+          // Sliding along the shelf surface - kill vy but keep gliding horizontally
+          it.vy = 0;
+        } else {
+          // Bounce: reverse vy with damping, dampen vx, kick angVel so the
+          // item visibly tilts on impact (no two landings are identical)
+          it.vy = -Math.abs(it.vy) * BOUNCE_DAMP;
+          it.vx *= BOUNCE_HORIZ_DAMP;
+          it.angVel += (Math.random() - 0.5) * BOUNCE_ANGVEL_KICK;
+        }
       }
-      it.clone.style.transform = `translate(${it.x}px, ${it.y}px)`;
+
+      it.clone.style.transform =
+        `translate(${it.x}px, ${it.y}px) rotate(${it.angle}rad)`;
     }
     raf = requestAnimationFrame(step);
   }
