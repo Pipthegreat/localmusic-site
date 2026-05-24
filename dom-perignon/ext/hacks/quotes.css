@@ -1,6 +1,8 @@
-/* You Got This - drifting Fraunces italic text in a desert/autumn palette.
-   Each character carries a crisp black outline so the colored letterforms
-   read on any page background (dark, light, photo, gradient). */
+/* You Got This — drifting quotes in five distinct Fraunces treatments.
+   ----
+   Base .dp-quote handles positioning, the black character outline,
+   GPU compositing, and shared font stack. Each .dp-treat-* class is
+   one of the five typographic personalities the JS picks from. */
 
 .dp-quote {
   position: fixed;
@@ -8,30 +10,11 @@
   top: 0;
   pointer-events: none;
   font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
-  font-style: italic;
-  /* Regular weight (not ultralight) so each letterform has enough interior
-     surface area for the pale autumn fill to read. The "lightness" the
-     user wants comes from the fill color (near-white with a hint of
-     hue), not from the font weight. */
-  font-weight: 500;
-  font-variation-settings: "opsz" 144, "SOFT" 60;
-  letter-spacing: 0.02em;
   white-space: nowrap;
-  /* The fill color is set inline by the JS - one of seven pale autumn
-     hues, each at OKLCH L 88-95%. */
-  /*
-    No -webkit-text-stroke. It paints CENTERED on each glyph's path,
-    which means half the stroke width eats inward and visually shrinks
-    the colored fill. Instead, build the outline entirely OUTSIDE the
-    letterform via 8-direction text-shadow. The pale colored character
-    keeps its full natural width; the black outline grows outward only.
-
-    v1.2.7 cleanup: offsets snapped to whole pixels (was 1.5px, which
-    rounds inconsistently to 1 or 2px at fractional positions and
-    creates bumpy outlines on italic glyphs). Soft drop shadow removed
-    - the 6px blur extending downward bunched up under italic letters'
-    bottom-left corners and read as a stray smudge on light backgrounds.
-  */
+  /* 8-direction whole-pixel outline. Built outside the glyph (not as
+     a centred stroke) so each treatment's fill colour reads at its
+     full natural width. 1px on every side keeps it crisp at the
+     fractional positions the transform animation produces. */
   text-shadow:
     -1px -1px 0 #000,
      1px -1px 0 #000,
@@ -44,11 +27,85 @@
   will-change: transform, opacity;
   user-select: none;
   -webkit-font-smoothing: antialiased;
-  /* Force GPU compositor layer on spawn. Paired with translate3d() in the
-     JS animation transform, this caches the text+shadow bitmap so the
-     GPU just composites the cached layer each frame instead of re-
-     rasterising the 9-offset outline. Kills slow-text stutter. */
+  /* GPU compositor layer — the outline bitmap caches once, the GPU
+     just composites each frame. Kills slow-text stutter. */
   transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+
+/* ─── Treatment 1: Wonk ─────────────────────────────────────────────
+   The wildest Fraunces look. WONK axis on (curling 'g' tail, looped
+   'k' leg, alternate 'y' descender) + swash terminals + ss01 stylistic
+   set. SOFT pushed high so the letterforms feel rounded and humane.
+   Slight italic-axis lean keeps it cursive without going full italic. */
+.dp-treat-wonk {
+  font-style: italic;
+  font-weight: 600;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  font-feature-settings: "ss01" 1, "ss02" 1, "ss04" 1, "swsh" 1, "dlig" 1, "liga" 1;
+  letter-spacing: 0.005em;
+}
+
+/* ─── Treatment 2: Display Italic ───────────────────────────────────
+   Refined classic. The "old" look but cleaned — optical size at the
+   display peak, moderate softness, default features. The baseline
+   against which the other four push outward. */
+.dp-treat-display {
+  font-style: italic;
+  font-weight: 400;
+  font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 0;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Treatment 3: Roman Display Headline ───────────────────────────
+   Bold upright Fraunces, optical size at display peak, SOFT pulled
+   low for crisp serifs, slightly tightened tracking. Reads like an
+   editorial pull-quote — completely different register from the
+   italic treatments. */
+.dp-treat-roman {
+  font-style: normal;
+  font-weight: 700;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+  font-feature-settings: "ss01" 1, "kern" 1, "liga" 1;
+  letter-spacing: -0.015em;
+}
+
+/* ─── Treatment 4: Small Caps ───────────────────────────────────────
+   All caps at lowercase size + wide tracking. Quiet authority — the
+   exhibition-label voice. Optical size pulled down to 96 because the
+   true display weights are too heavy at small-cap scale. */
+.dp-treat-smallcaps {
+  font-style: normal;
+  font-weight: 500;
+  font-variation-settings: "opsz" 96, "SOFT" 50, "WONK" 0;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.16em;
+}
+
+/* ─── Treatment 5: Drop Cap Italic ──────────────────────────────────
+   Italic body in the display-italic register, with the first letter
+   replaced by a much larger wonky-italic glyph (wrapped in
+   .dp-drop-init by the JS). Literary opening feel — like a chapter
+   start drifting across the page. */
+.dp-treat-dropcap {
+  font-style: italic;
+  font-weight: 400;
+  font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 0;
+  letter-spacing: 0.02em;
+}
+.dp-treat-dropcap .dp-drop-init {
+  /* Oversized first letter. Inherits color + outline from the parent
+     so it stays legible on any backdrop. */
+  font-weight: 700;
+  font-size: 1.65em;
+  line-height: 0.9;
+  font-variation-settings: "opsz" 144, "SOFT" 90, "WONK" 1;
+  font-feature-settings: "ss01" 1, "swsh" 1, "dlig" 1;
+  /* Optical centring — Fraunces' display italic caps weight low; nudge
+     up a hair so the drop-cap sits with the x-line of the body, not
+     below it. */
+  vertical-align: -0.06em;
+  margin-right: 0.04em;
+  display: inline-block;
 }

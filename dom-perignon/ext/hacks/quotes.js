@@ -1,6 +1,8 @@
-// Motivational quotes hack - gentle words drift across the page in Fraunces
-// italic. Pulls from a curated pool; spawns one new quote every ~3-5s,
-// each fading in at a random edge and floating to the opposite side.
+// Motivational quotes hack - gentle words drift across the page in
+// Fraunces, rendered through five distinct typographic treatments
+// (wonk, display italic, roman headline, small caps, drop cap). Each
+// spawn picks a treatment at random so consecutive quotes never look
+// the same — the typography itself becomes part of the inspiration.
 
 (function () {
   const NS = (window.__DOMPerignon = window.__DOMPerignon || { hacks: {} });
@@ -70,10 +72,9 @@
     'Soft eyes, steady heart',
   ];
 
-  // Reflective pool added in v1.2.3 - outward-facing observations about
-  // healthier ways to live, not direct quotes from any source. Each of
-  // these fires half as often as each primary quote (see pickQuote()
-  // below).
+  // Reflective pool — outward-facing observations about healthier ways
+  // to live, not direct quotes from any source. Each of these fires
+  // half as often as each primary quote (see pickQuote() below).
   const QUOTES_REFLECTIVE = [
     'Slowness is a discipline',
     'Sleep is a craft',
@@ -117,13 +118,10 @@
     'Hospitality is a small revolution',
   ];
 
-  // Weighted picker. Each primary quote has weight 1, each reflective
-  // quote has weight 0.5 - so within the rotation, a reflective quote
-  // fires half as often as a primary one. Aggregate spawn share:
-  // primary ~75%, reflective ~25%.
+  // Weighted picker. Each primary quote weight 1, each reflective 0.5.
   function pickQuote() {
-    const primaryWeight = QUOTES.length;                  // 60 * 1.0
-    const reflectiveWeight = QUOTES_REFLECTIVE.length * 0.5; // 40 * 0.5 = 20
+    const primaryWeight = QUOTES.length;
+    const reflectiveWeight = QUOTES_REFLECTIVE.length * 0.5;
     const r = Math.random() * (primaryWeight + reflectiveWeight);
     if (r < primaryWeight) {
       return QUOTES[Math.floor(Math.random() * QUOTES.length)];
@@ -131,19 +129,60 @@
     return QUOTES_REFLECTIVE[Math.floor(Math.random() * QUOTES_REFLECTIVE.length)];
   }
 
-  // Autumn / desert palette - PALE versions. Lightness pushed to 88-95%,
-  // chroma reduced to 0.04-0.08. Each colour reads as a near-white wash
-  // hinting at the hue, so when paired with the black character outline
-  // the result is "ghostly outlined text with a wash of warm colour"
-  // rather than saturated mid-tone letters.
-  const AUTUMN_PALETTE = [
-    'oklch(94% 0.06 65)',    // pale saffron
-    'oklch(92% 0.06 35)',    // pale terracotta
-    'oklch(90% 0.05 30)',    // pale burnt sienna
-    'oklch(95% 0.07 80)',    // pale mustard
-    'oklch(94% 0.04 130)',   // pale desert sage
-    'oklch(91% 0.05 20)',    // pale rosewood
-    'oklch(92% 0.06 40)',    // pale adobe clay
+  // ─── TYPOGRAPHIC TREATMENTS ────────────────────────────────────────
+  // Each treatment is one CSS class (defined in quotes.css). Picked at
+  // random per spawn so consecutive quotes always look different —
+  // typography itself carries the variety, not just text.
+  //
+  //   wonk      Fraunces italic w/ WONK axis on + swash + ss01 alts.
+  //             The wildest Fraunces look: curling tails, swashed
+  //             terminals, the famous wonky 'g'.
+  //   display   Fraunces italic, refined classic display weight.
+  //   roman     Bold roman headline, tight tracking. Editorial weight.
+  //   smallcaps All-small-caps roman, wide tracking. Quiet authority.
+  //   dropcap   Italic body w/ oversized wonky first letter. Literary
+  //             opening feel — JS wraps the first letter in a span.
+  //
+  // Weights bias toward the more dramatic treatments (wonk + dropcap)
+  // since those carry the strongest "this is hand-set" feel.
+  const TREATMENTS = [
+    { cls: 'dp-treat-wonk',      weight: 1.4, sizeFactor: 1.10 },
+    { cls: 'dp-treat-display',   weight: 1.0, sizeFactor: 1.00 },
+    { cls: 'dp-treat-roman',     weight: 0.9, sizeFactor: 1.05 },
+    { cls: 'dp-treat-smallcaps', weight: 0.7, sizeFactor: 0.92 },
+    { cls: 'dp-treat-dropcap',   weight: 1.2, sizeFactor: 1.05 },
+  ];
+
+  function pickTreatment() {
+    const total = TREATMENTS.reduce((s, t) => s + t.weight, 0);
+    let r = Math.random() * total;
+    for (const t of TREATMENTS) {
+      r -= t.weight;
+      if (r <= 0) return t;
+    }
+    return TREATMENTS[0];
+  }
+
+  // Autumn palette — pale (94-95% L) tones unchanged, plus a new
+  // band of mid-tone autumn (78-86% L, higher chroma) for richer
+  // treatments. Random pick per spawn; the weight is unstratified so
+  // both bands appear evenly.
+  const PALETTE = [
+    // Pale autumn (lightness 90-95%)
+    'oklch(94% 0.06 65)',     // pale saffron
+    'oklch(92% 0.07 35)',     // pale terracotta
+    'oklch(90% 0.06 30)',     // pale burnt sienna
+    'oklch(95% 0.07 80)',     // pale mustard
+    'oklch(94% 0.05 130)',    // pale desert sage
+    'oklch(91% 0.06 20)',     // pale rosewood
+    'oklch(92% 0.07 40)',     // pale adobe clay
+    // Mid-tone autumn (lightness 78-86%, higher chroma — for richer
+    // treatments where bolder weights handle the deeper colour well)
+    'oklch(85% 0.10 50)',     // honey amber
+    'oklch(82% 0.11 30)',     // burnished copper
+    'oklch(86% 0.09 75)',     // mellow gold
+    'oklch(79% 0.12 18)',     // wine flush
+    'oklch(83% 0.09 130)',    // pressed sage
   ];
 
   let styleEl = null;
@@ -164,49 +203,68 @@
 
   function ensureFont() {
     if (document.getElementById('__dp-quotes-font')) return;
-    // Try to inject Google Fonts link. If the page's CSP blocks it, we
-    // gracefully fall back to Georgia italic via the stack in the CSS.
     fontLink = document.createElement('link');
     fontLink.id = '__dp-quotes-font';
     fontLink.rel = 'stylesheet';
-    // Load Fraunces with full italic axis + weight range so we get real
-    // italic at weight 600+, not a browser-synthesized slant on the
-    // regular file (which renders weak/boring).
+    // Load Fraunces with the FULL set of registered + custom axes
+    // (ital, opsz, wght, SOFT, WONK). The previous URL omitted SOFT
+    // and WONK, so font-variation-settings for those were silently
+    // ignored. With the full axis range we can use the WONK axis for
+    // the wonk treatment and the SOFT axis to differentiate
+    // treatments' temperaments.
     fontLink.href =
-      'https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,1,100..900&display=swap';
+      'https://fonts.googleapis.com/css2?family=Fraunces:' +
+      'ital,opsz,wght,SOFT,WONK@' +
+      '0,9..144,100..900,0..100,0;'  +
+      '0,9..144,100..900,0..100,1;'  +
+      '1,9..144,100..900,0..100,0;'  +
+      '1,9..144,100..900,0..100,1'   +
+      '&display=swap';
     (document.head || document.documentElement).appendChild(fontLink);
   }
 
   function spawnQuote() {
     if (!root) return;
     const text = pickQuote();
+    const treat = pickTreatment();
     const node = document.createElement('div');
-    node.className = 'dp-quote';
-    node.textContent = text;
+    node.className = 'dp-quote ' + treat.cls;
+
+    // Drop-cap treatment: wrap first letter in its own span so the
+    // CSS can scale + restyle just that glyph.
+    if (treat.cls === 'dp-treat-dropcap' && text.length > 0) {
+      const first = text.charAt(0);
+      const rest  = text.slice(1);
+      node.innerHTML =
+        '<span class="dp-drop-init">' +
+        first.replace(/[&<>"']/g, c => ({
+          '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+        })[c]) +
+        '</span>' +
+        rest.replace(/[&<>"']/g, c => ({
+          '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+        })[c]);
+    } else {
+      node.textContent = text;
+    }
 
     const vw = window.innerWidth;
     const vh = window.innerHeight;
 
-    // Pick an entry edge. Quote starts off-edge and drifts to the
-    // opposite side. Vertical position uses the FULL viewport height with
-    // just enough margin so the text isn't clipped at the top or bottom.
-    const dirLR = Math.random() < 0.5; // true = left→right
+    const dirLR = Math.random() < 0.5;
 
-    // Range trimmed in v1.1.12: 24-39px desktop (was 30-70). The whole
-    // range is 20% smaller and the top end gets an additional 30% cut so
-    // the largest quote isn't dominating the viewport. Mobile floor 16px.
-    const fontSize = Math.max(16, (24 + Math.random() * 15) * quoteScale);
+    // Base range 24-39px desktop, mobile floor 16px. Each treatment
+    // gets a per-treatment scaling so wonk + drop-cap read a touch
+    // larger (more presence) and small-caps reads a touch smaller
+    // (more contained).
+    const baseFontSize = (24 + Math.random() * 15) * quoteScale;
+    const fontSize = Math.max(16, baseFontSize * (treat.sizeFactor || 1));
 
-    // Y range: top margin = fontSize/2 (keeps cap-height visible),
-    // bottom margin = fontSize * 1.5 (clears descender + drop-shadow).
-    // Full viewport gets used now, not just the middle 76% as in v1.1.12.
     const yTop    = fontSize * 0.5;
     const yBottom = Math.max(yTop + 1, vh - fontSize * 1.5);
     const y       = yTop + Math.random() * (yBottom - yTop);
-    // Outlined characters can sit at high opacity without being heavy
     const opacity = 0.85 + Math.random() * 0.15;
-    // Pick a desert/autumn hue at random; backdrop guarantees legibility
-    const color = AUTUMN_PALETTE[Math.floor(Math.random() * AUTUMN_PALETTE.length)];
+    const color   = PALETTE[Math.floor(Math.random() * PALETTE.length)];
 
     node.style.fontSize = `${fontSize}px`;
     node.style.color    = color;
@@ -216,18 +274,10 @@
 
     root.appendChild(node);
 
-    // Wait a frame so the start position is committed, then animate to
-    // the opposite edge over a fontSize-linked duration:
-    //   smallest fontSize → 24s (slowest)
-    //   largest  fontSize → 14s (fastest)
-    // Inverse mapping because smaller text exposes more sub-pixel
-    // rendering artefacts as it moves, so slow it down to mask them;
-    // larger text composites cleanly and can fly through quickly.
-    // Envelope (14s-24s) unchanged from previous versions.
+    // Animation envelope unchanged from v1.2.8 — fontSize-linked
+    // duration; smaller text drifts slower to mask sub-pixel artefacts.
     const FONT_MIN_FOR_SPEED = 16;
     const FONT_MAX_FOR_SPEED = 39;
-    // v1.2.8: durations bumped 1.333x for a 25% speed reduction across
-    // the screen (motion in px/sec is now 75% of v1.2.7).
     const DUR_AT_SMALLEST = 32000;
     const DUR_AT_LARGEST  = 18700;
     const sizeFrac = Math.max(0, Math.min(1,
@@ -239,19 +289,12 @@
     requestAnimationFrame(() => {
       node.style.transition = `transform ${duration}ms linear, opacity 1800ms ease-in-out`;
       node.style.opacity = String(opacity);
-      // small vertical drift for life
       const yDrift = (Math.random() - 0.5) * 80;
       const endX = dirLR ? vw + 400 : -node.offsetWidth - 40;
       const startX = dirLR ? -360 : vw + 40;
-      // translate3d (not translate) forces the browser to promote this
-      // element to a GPU compositor layer. The bitmap (including the
-      // expensive 9-offset text-shadow outline) is cached once and the
-      // GPU composites each frame instead of re-rasterising. Removes
-      // the small-text stutter that users see at slow speeds.
       node.style.transform = `translate3d(${endX - startX}px, ${yDrift}px, 0)`;
     });
 
-    // Fade out then remove
     setTimeout(() => { node.style.opacity = '0'; }, duration - 1700);
     setTimeout(() => { node.remove(); }, duration + 200);
   }
@@ -261,9 +304,7 @@
     ensureFont();
     root = r;
     quoteScale = (NS.getScale && NS.getScale()) || 1;
-    // Initial burst: spawn 3 quotes immediately so the page isn't empty
     for (let i = 0; i < 3; i++) setTimeout(spawnQuote, i * 800);
-    // Then continue spawning at intervals (15% slower in v1.2.3)
     spawnTimer = setInterval(spawnQuote, 3300);
   }
 
