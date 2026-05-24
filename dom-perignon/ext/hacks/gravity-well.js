@@ -78,6 +78,35 @@
     }
   }
 
+  // How "well-supported" is an item landing at this shelf height? Returns
+  // { supportFrac, leftSupport, rightSupport } where supportFrac is the
+  // share of the item's column range whose shelves are at-or-near the
+  // landing height (within SHELF_TOLERANCE). Anything below that fraction
+  // means most of the item is dangling over empty space or a much deeper
+  // shelf - physically the item should tip and slide, not settle.
+  const SHELF_TOLERANCE = 8;     // px - within this counts as "same surface"
+  const MIN_SUPPORT_FRAC = 0.4;  // below this triggers tip-off behaviour
+  function evaluateSupport(left, width, shelfTop) {
+    const c1 = colFromX(left);
+    const c2 = colFromX(left + width);
+    const midCol = (c1 + c2) / 2;
+    let supported = 0, total = 0;
+    let leftSupport = 0, rightSupport = 0;
+    for (let c = c1; c <= c2; c++) {
+      total++;
+      if (shelves[c] <= shelfTop + SHELF_TOLERANCE) {
+        supported++;
+        if (c < midCol) leftSupport++;
+        else            rightSupport++;
+      }
+    }
+    return {
+      supportFrac: total > 0 ? supported / total : 1,
+      leftSupport,
+      rightSupport,
+    };
+  }
+
   // ── Candidate discovery ───────────────────────────────────────────────
   // Min/max element-dimension bounds scale with viewport so we catch
   // smaller things in small iframes (the KF 20×20 logo, for instance)
@@ -203,7 +232,7 @@
         it.vx = -Math.abs(it.vx) * WALL_BOUNCE_DAMP;
       }
 
-      // Floor / pile collision - bounce, slide, or settle
+      // Floor / pile collision - bounce, slide, tip, or settle
       const shelfTop = minShelfAcross(it.x, it.rect.width);
       if (it.y + it.rect.height >= shelfTop) {
         it.y = shelfTop - it.rect.height;
@@ -211,8 +240,24 @@
         const slowVy = Math.abs(it.vy) < SETTLE_VY;
         const slowVx = Math.abs(it.vx) < SETTLE_VX;
 
-        if (slowVy && slowVx) {
-          // Energy spent - settle here and claim the shelf
+        // First: check whether the item is balanced on this shelf or
+        // perched on a narrow support. If most of the item's footprint
+        // hangs over a deeper shelf, it tips and keeps falling.
+        const sup = evaluateSupport(it.x, it.rect.width, shelfTop);
+        const unbalanced = sup.supportFrac < MIN_SUPPORT_FRAC;
+
+        if (unbalanced) {
+          // Tip toward the LESS supported side. If support is mostly on
+          // the left, the right is hanging and the item tips right.
+          const tipDir = sup.leftSupport > sup.rightSupport ? 1 : -1;
+          it.vx += tipDir * 1.6;
+          it.angVel += tipDir * 0.05;
+          // Bleed off most of the vertical impact - the item is mostly
+          // rotating/sliding now, not bouncing
+          it.vy = Math.max(0.4, it.vy * 0.25);
+          // Don't claim the shelf - the item is still moving
+        } else if (slowVy && slowVx) {
+          // Energy spent AND well-supported - settle here and claim shelf
           it.vy = 0;
           it.vx = 0;
           it.angVel = 0;
