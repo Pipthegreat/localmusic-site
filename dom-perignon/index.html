@@ -248,30 +248,43 @@ h1 em {
 }
 
 /* ─── Mysterious split-preview ───────────────────────────────────────
-   A single wide card showing two iframes side-by-side. Wider aspect
-   so each half stays roughly tile-shaped. No card chrome differences
-   from the regular gallery - mystery comes from the content, not the
-   frame. */
-.hack-card.wide { grid-column: 1 / -1; }
-.hack-card.wide .preview-frame {
-  aspect-ratio: 32 / 9;
+   Single-column card with TWO iframes stacked vertically inside the
+   preview frame. Each iframe carries a "Show me" toggle button that
+   postMessages this gallery to apply the theme page-wide. */
+.hack-card.mystery .preview-frame {
+  aspect-ratio: auto;
   background: #000;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
 }
-.hack-card.wide .preview-frame iframe {
+.hack-card.mystery .preview-frame iframe {
   position: static;
   width: 100%;
-  height: 100%;
+  height: 220px;
+  border: 0;
+  transition: box-shadow 220ms, outline-color 220ms;
 }
-/* Whisker-thin divider so the two halves read as separate panes
-   without breaking the unified card aesthetic. */
-.hack-card.wide .preview-frame iframe:first-child {
-  border-right: 1px solid oklch(20% 0.02 240);
+.hack-card.mystery .preview-frame iframe[data-ezr="green"] {
+  border-bottom: 1px solid oklch(20% 0.02 240);
 }
-/* The mystery card gets a slightly different border tint - hints
-   that it sits apart from the cataloged eight without naming what
-   it is. */
+/* Glow ring applied when this iframe's theme is the active page theme.
+   Inset box-shadow + outline so the ring sits on top of the iframe
+   without being clipped. */
+.hack-card.mystery .preview-frame iframe.ezr-glow {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+  box-shadow:
+    inset 0 0 24px var(--ezr-glow, transparent),
+    0 0 28px var(--ezr-glow, transparent);
+}
+.hack-card.mystery .preview-frame iframe[data-ezr="green"].ezr-glow {
+  color: #39ff14;
+  --ezr-glow: #00ff41;
+}
+.hack-card.mystery .preview-frame iframe[data-ezr="red"].ezr-glow {
+  color: #ff3a1a;
+  --ezr-glow: #c41e1e;
+}
 .hack-card.mystery {
   border-color: oklch(35% 0.06 280 / 0.5);
 }
@@ -282,8 +295,6 @@ h1 em {
   color: oklch(72% 0.08 280);
   background: oklch(25% 0.05 280 / 0.45);
   letter-spacing: 0.32em;
-  /* Egg glyph sits centered inside the chip - inline-flex aligns the
-     inline SVG without baseline drift. */
   display: inline-flex;
   align-items: center;
   padding: 3px 8px;
@@ -293,6 +304,104 @@ h1 em {
   height: 13px;
   fill: currentColor;
   display: block;
+}
+
+/* ─── Page-wide easter-egg theme ─────────────────────────────────────
+   Activated when a user clicks "Show me" in either iframe. Body bg
+   goes black, glyph rain fills the page, top-of-page typography
+   picks up the theme tint. The .hack-card (01-08) tiles are left
+   alone — they sit above the rain on z-index and their internal
+   styles aren't overridden. */
+body.ezr-themed {
+  background: #000 !important;
+  background-image: none !important;
+}
+body.ezr-themed .crumb,
+body.ezr-themed .crumb a,
+body.ezr-themed .masthead h1,
+body.ezr-themed .subheader,
+body.ezr-themed .subheader a,
+body.ezr-themed .lede-bullets li,
+body.ezr-themed .lede-bullets li::before,
+body.ezr-themed .section-label,
+body.ezr-themed .install-shell h3,
+body.ezr-themed .install-steps li,
+body.ezr-themed .install-steps .hack-desc,
+body.ezr-themed .tutorial-link,
+body.ezr-themed footer,
+body.ezr-themed footer span,
+body.ezr-themed footer a {
+  color: var(--ezr-text) !important;
+}
+body.ezr-themed .lede-bullets li::before {
+  background: var(--ezr-bright) !important;
+}
+body.ezr-themed .masthead h1 em,
+body.ezr-themed .brand-inline em {
+  color: var(--ezr-bright) !important;
+}
+body.ezr-themed .version-chip {
+  color: var(--ezr-bright) !important;
+  background: rgba(0,0,0,0.6) !important;
+  border-color: var(--ezr-dim) !important;
+}
+body.ezr-themed .section-label::after {
+  background: var(--ezr-dim) !important;
+  opacity: 0.4;
+}
+body.ezr-green {
+  --ezr-text:   #c8ffc8;
+  --ezr-bright: #39ff14;
+  --ezr-dim:    #00b32d;
+  --ezr-glow:   #00ff41;
+}
+body.ezr-red {
+  --ezr-text:   #e8a8a8;
+  --ezr-bright: #ff3a1a;
+  --ezr-dim:    #7a0a0a;
+  --ezr-glow:   #c41e1e;
+}
+
+/* Page-wide glyph rain — sits behind the shell content on z-index 0.
+   Hidden by default; .ezr-themed body shows it. */
+.ezr-rain {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  display: none;
+  mask-image: radial-gradient(ellipse 65% 70% at 50% 50%,
+    rgba(0,0,0,0.25) 0%,
+    rgba(0,0,0,0.75) 45%,
+    rgba(0,0,0,1) 80%);
+  -webkit-mask-image: radial-gradient(ellipse 65% 70% at 50% 50%,
+    rgba(0,0,0,0.25) 0%,
+    rgba(0,0,0,0.75) 45%,
+    rgba(0,0,0,1) 80%);
+}
+body.ezr-themed .ezr-rain { display: block; }
+body.ezr-themed .shell { position: relative; z-index: 1; }
+.ezr-rain .ezr-col {
+  position: absolute;
+  top: -120%;
+  font: 15px/1.25 'Courier New', ui-monospace, monospace;
+  color: var(--ezr-dim);
+  text-shadow: 0 0 3px var(--ezr-bright);
+  white-space: pre;
+  text-align: center;
+  width: 1ch;
+  opacity: 0.7;
+  animation: ezr-fall linear infinite;
+}
+.ezr-rain .ezr-col .head {
+  color: var(--ezr-bright);
+  text-shadow: 0 0 6px var(--ezr-bright), 0 0 12px var(--ezr-dim);
+}
+.ezr-rain .ezr-col .mid { color: var(--ezr-bright); }
+@keyframes ezr-fall {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(0, 220%, 0); }
 }
 
 .hack-meta {
@@ -574,14 +683,14 @@ footer {
       </div>
     </div>
 
-    <div class="hack-card wide mystery">
+    <div class="hack-card mystery">
       <div class="preview-frame">
-        <iframe src="demo-ezr.html?theme=green" loading="lazy" title="—"></iframe>
-        <iframe src="demo-ezr.html?theme=red"   loading="lazy" title="—"></iframe>
+        <iframe src="demo-ezr.html?theme=green" data-ezr="green" loading="lazy" title="—"></iframe>
+        <iframe src="demo-ezr.html?theme=red"   data-ezr="red"   loading="lazy" title="—"></iframe>
       </div>
       <div class="hack-meta">
         <h2 class="hack-name"><span class="num mystery-num" aria-label="egg"><svg viewBox="0 0 12 16" aria-hidden="true"><path d="M6 0.8 C 9 0.8, 11 6.5, 11 10.8 C 11 13.8, 8.8 15.4, 6 15.4 C 3.2 15.4, 1 13.8, 1 10.8 C 1 6.5, 3 0.8, 6 0.8 Z"/></svg></span> Two more easter eggs</h2>
-        <p class="hack-desc">Two bonus atmospheres for specific corners of the web.</p>
+        <p class="hack-desc">Bonus atmospheres for two corners of the web.</p>
       </div>
     </div>
 
@@ -621,5 +730,84 @@ footer {
     <span>DOM Pérignon v1.3.7</span>
   </footer>
 </div>
+
+<!-- Page-wide easter-egg rain. Hidden until body.ezr-themed is set. -->
+<div class="ezr-rain" id="ezrRain" aria-hidden="true"></div>
+
+<script>
+  // ─── Easter-egg theme bridge ─────────────────────────────────────────
+  // Each "Two more easter eggs" iframe carries a "Show me" button that
+  // postMessages this gallery on click. We toggle a body class to apply
+  // the page-wide overlay and ring the originating iframe. Mutual
+  // exclusion between the two themes — activating one deactivates the
+  // other (and tells its iframe to clear its button state).
+  (function () {
+    const body = document.body;
+    const rain = document.getElementById('ezrRain');
+    let rainSeeded = false;
+
+    function seedRain() {
+      if (rainSeeded) return;
+      rainSeeded = true;
+      const GLYPHS = 'ﾋﾘｱｾﾜﾗﾇﾈﾏﾜﾓｴﾆﾃﾂﾐｼﾎｵﾖﾅﾑﾌｺｿﾅκλμπσχθαβγδ01:_>/';
+      const cols = 26;
+      const spacing = 100 / cols;
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < cols; i++) {
+        const col = document.createElement('div');
+        col.className = 'ezr-col';
+        const x = i * spacing + (Math.random() - 0.5) * spacing * 0.6;
+        col.style.left = `${x}%`;
+        col.style.animationDuration = (9 + Math.random() * 14).toFixed(2) + 's';
+        col.style.animationDelay   = (-Math.random() * 20).toFixed(2) + 's';
+        col.style.fontSize = (12 + Math.random() * 5).toFixed(1) + 'px';
+        let html = '';
+        for (let g = 0; g < 28; g++) {
+          const ch = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+          const br = g < 27 ? '\n' : '';
+          if (g === 0)      html += `<span class="head">${ch}</span>${br}`;
+          else if (g < 4)   html += `<span class="mid">${ch}</span>${br}`;
+          else              html += ch + br;
+        }
+        col.innerHTML = html;
+        frag.appendChild(col);
+      }
+      rain.appendChild(frag);
+    }
+
+    function setActive(theme /* 'green' | 'red' | null */) {
+      body.classList.remove('ezr-green', 'ezr-red', 'ezr-themed');
+      if (theme) {
+        body.classList.add('ezr-themed', `ezr-${theme}`);
+      }
+      document.querySelectorAll('iframe[data-ezr]').forEach(f => {
+        f.classList.toggle('ezr-glow', !!theme && f.dataset.ezr === theme);
+      });
+    }
+
+    window.addEventListener('message', (e) => {
+      const msg = e.data;
+      if (!msg || msg.type !== 'ezr-toggle') return;
+      const { theme, activated } = msg;
+      if (theme !== 'green' && theme !== 'red') return;
+
+      seedRain();
+
+      if (activated) {
+        // Tell the OTHER iframe to clear its button state.
+        const other = theme === 'green' ? 'red' : 'green';
+        document.querySelectorAll(`iframe[data-ezr="${other}"]`).forEach(f => {
+          if (f.contentWindow) {
+            f.contentWindow.postMessage({ type: 'ezr-deactivate' }, '*');
+          }
+        });
+        setActive(theme);
+      } else {
+        setActive(null);
+      }
+    });
+  })();
+</script>
+
 </body>
 </html>

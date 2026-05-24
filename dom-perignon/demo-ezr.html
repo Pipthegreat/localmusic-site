@@ -7,8 +7,10 @@
 <style>
 /* Split-preview iframe for the easter-egg themes. Self-contained — does
    NOT load the real ezr-*.css (those target site-specific selectors).
-   Captures the *aesthetic*: phosphor rain, terminal palette, chat-shape
-   bubbles. ?theme=green (default) or ?theme=red switches palette.       */
+   Captures the *aesthetic*: phosphor rain, terminal palette, two chat
+   bubbles. ?theme=green (default) or ?theme=red switches palette. The
+   "Show me" bubble is a real <button>; clicking it postMessages the
+   parent gallery to apply the theme page-wide.                         */
 
 :root {
   --void:           #000;
@@ -21,7 +23,6 @@
   --phosphor-deep:  #003b00;
   --text:           #b8ffb8;
   --text-muted:     #5fa05f;
-  --amber:          #ffb000;
 }
 html[data-theme="red"] {
   --deep:           #080404;
@@ -33,7 +34,6 @@ html[data-theme="red"] {
   --phosphor-deep:  #2a0606;
   --text:           #d4a8a8;
   --text-muted:     #6a3838;
-  --amber:          #ff5500;
 }
 
 * { box-sizing: border-box; }
@@ -45,46 +45,39 @@ body {
   overflow: hidden;
   position: relative;
   min-height: 100vh;
-  /* Top-left-anchored vignette so the chat (which sits top-left) has
-     the brightest open ground around it. */
   background-image:
-    radial-gradient(ellipse 60% 70% at 15% 28%, var(--deep) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 70% at 50% 40%, var(--deep) 0%, transparent 65%),
     radial-gradient(ellipse 90% 90% at 50% 50%, transparent 40%, var(--void) 85%);
 }
 
-/* ─── Falling glyph rain ──────────────────────────────────────────────
-   JS injects N .col elements at random x. Each is a stack of glyphs that
-   translates downward across 3x viewport height, repeating. Two opacities
-   per column for the head-vs-trail effect. */
+/* ─── Falling glyph rain (decorative; JS-generated columns) ─────────── */
 .rain {
   position: fixed;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
-  /* Pull the rain visually back from the chat bubbles. */
-  mask-image: radial-gradient(ellipse 55% 60% at 50% 50%,
-    rgba(0,0,0,0.2) 0%,
-    rgba(0,0,0,0.7) 35%,
-    rgba(0,0,0,1) 70%);
-  -webkit-mask-image: radial-gradient(ellipse 55% 60% at 50% 50%,
-    rgba(0,0,0,0.2) 0%,
-    rgba(0,0,0,0.7) 35%,
-    rgba(0,0,0,1) 70%);
+  mask-image: radial-gradient(ellipse 60% 65% at 50% 50%,
+    rgba(0,0,0,0.25) 0%,
+    rgba(0,0,0,0.7) 40%,
+    rgba(0,0,0,1) 75%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 65% at 50% 50%,
+    rgba(0,0,0,0.25) 0%,
+    rgba(0,0,0,0.7) 40%,
+    rgba(0,0,0,1) 75%);
 }
 .col {
   position: absolute;
   top: -120%;
   font-size: 15px;
   line-height: 1.25;
-  letter-spacing: 0;
   color: var(--phosphor-dim);
   white-space: pre;
   text-align: center;
   width: 1ch;
   animation: fall linear infinite;
   text-shadow: 0 0 3px var(--phosphor);
-  opacity: 0.75;
+  opacity: 0.7;
 }
 .col .head {
   color: var(--phosphor-bright);
@@ -92,40 +85,41 @@ body {
     0 0 6px var(--phosphor-bright),
     0 0 12px var(--phosphor);
 }
-.col .mid {
-  color: var(--phosphor);
-}
+.col .mid { color: var(--phosphor); }
 @keyframes fall {
   0%   { transform: translate3d(0, 0, 0); }
   100% { transform: translate3d(0, 220%, 0); }
 }
 
 /* ─── Chat shell ──────────────────────────────────────────────────────
-   No labels, no app name. Three short exchanges + a blinking cursor.
-   Sits top-left to leave the rain visible on the right + bottom. */
+   Two bubbles: system left, user right (now a real <button>). Wider gap
+   between them since the iframe is narrower than before — keeps the
+   conversation from looking garbled. */
 .shell {
   position: relative;
   z-index: 1;
-  padding: 22px 26px;
+  padding: 20px 22px 24px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  max-width: 78%;
-  font-size: 13.5px;
-  line-height: 1.55;
+  gap: 26px;
+  font-size: 13px;
+  line-height: 1.5;
+  height: 100%;
+  justify-content: flex-start;
 }
 
 .wordmark {
   font-size: 9px;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--phosphor);
   text-shadow: 0 0 4px var(--phosphor);
-  opacity: 0.75;
-  margin-bottom: 6px;
+  opacity: 0.8;
+  margin-bottom: 4px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
+  align-self: flex-start;
 }
 .wordmark::before {
   content: "▌";
@@ -141,18 +135,11 @@ body {
   border-radius: 3px;
   color: var(--phosphor-pale);
   text-shadow: 0 0 2px var(--phosphor-deep);
-  max-width: 100%;
+  max-width: 80%;
   font-family: 'Courier New', ui-monospace, monospace;
 }
-.bubble.user {
-  align-self: flex-end;
-  border-color: var(--phosphor-dim);
-  background: linear-gradient(180deg, var(--panel), var(--void));
-  color: var(--phosphor);
-}
-.bubble.me {
-  align-self: flex-start;
-}
+.bubble.system { align-self: flex-start; }
+.bubble.user   { align-self: flex-end; }
 .bubble .role {
   font-size: 8px;
   letter-spacing: 0.24em;
@@ -162,21 +149,37 @@ body {
   display: block;
 }
 
-.cursor {
-  display: inline-block;
-  width: 7px;
-  height: 13px;
-  background: var(--phosphor-bright);
-  margin-left: 3px;
-  vertical-align: -2px;
-  box-shadow: 0 0 5px var(--phosphor);
-  animation: blink 1.1s steps(2) infinite;
+/* User bubble is a button — click to activate the page-wide theme.
+   Sized to comfortably meet the 44px mobile tap-target guideline. */
+button.bubble.user {
+  font-family: 'Courier New', ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+  cursor: pointer;
+  background: linear-gradient(180deg, var(--panel), var(--void));
+  border-color: var(--phosphor-dim);
+  color: var(--phosphor);
+  min-height: 44px;
+  transition: box-shadow 180ms, border-color 180ms, color 180ms;
 }
-@keyframes blink {
-  to { opacity: 0; }
+button.bubble.user:hover {
+  border-color: var(--phosphor);
+  box-shadow: 0 0 8px var(--phosphor-dim);
+}
+button.bubble.user:focus-visible {
+  outline: 1px solid var(--phosphor-bright);
+  outline-offset: 2px;
+}
+button.bubble.user.activated {
+  border-color: var(--phosphor-bright);
+  color: var(--phosphor-bright);
+  box-shadow:
+    0 0 14px var(--phosphor-bright),
+    inset 0 0 10px var(--phosphor-deep);
 }
 
-/* Scanline overlay — subtle CRT feel that ties both panels together. */
+/* Scanline + vignette overlays — CRT feel */
 .scanlines {
   position: fixed;
   inset: 0;
@@ -191,8 +194,6 @@ body {
   );
   mix-blend-mode: multiply;
 }
-
-/* Vertical color cast at very edges, like a worn monitor */
 .vignette {
   position: fixed;
   inset: 0;
@@ -208,53 +209,70 @@ body {
 <div class="rain" id="rain"></div>
 
 <div class="shell">
-  <div class="wordmark">prompt bar</div>
+  <div class="wordmark" id="wordmark">prompt bar a</div>
 
-  <div class="bubble me">
-    <span class="role">user</span>
-    where does this go
-  </div>
-
-  <div class="bubble user">
+  <div class="bubble system">
     <span class="role">system</span>
-    somewhere specific
+    Follow the white rabbit
   </div>
 
-  <div class="bubble me">
+  <button type="button" class="bubble user" id="showMeBtn" aria-pressed="false">
     <span class="role">user</span>
-    show me<span class="cursor"></span>
-  </div>
+    Show me
+  </button>
 </div>
 
 <div class="scanlines"></div>
 <div class="vignette"></div>
 
 <script>
-  // Theme switch via ?theme=green|red
-  const theme = new URLSearchParams(location.search).get('theme');
+  // ─── Theme + label ──────────────────────────────────────────────────
+  const params  = new URLSearchParams(location.search);
+  const theme   = params.get('theme') === 'red' ? 'red' : 'green';
   if (theme === 'red') document.documentElement.dataset.theme = 'red';
+  document.getElementById('wordmark').textContent =
+    'prompt bar ' + (theme === 'red' ? 'b' : 'a');
 
-  // Glyph rain — generate N columns at random x, varied speed + glyph
-  // pool. Each column emits a 25-glyph stream so the loop is seamless.
+  // ─── "Show me" toggle ───────────────────────────────────────────────
+  // Local active state, postMessaged to parent so the gallery can apply
+  // the theme page-wide and ring this iframe.
+  const btn = document.getElementById('showMeBtn');
+  let activated = false;
+  btn.addEventListener('click', () => {
+    activated = !activated;
+    btn.classList.toggle('activated', activated);
+    btn.setAttribute('aria-pressed', String(activated));
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: 'ezr-toggle', theme, activated }, '*');
+    }
+  });
+
+  // Parent tells us to deactivate when the other theme takes over.
+  window.addEventListener('message', (e) => {
+    if (!e.data || e.data.type !== 'ezr-deactivate') return;
+    if (!activated) return;
+    activated = false;
+    btn.classList.remove('activated');
+    btn.setAttribute('aria-pressed', 'false');
+  });
+
+  // ─── Glyph rain ─────────────────────────────────────────────────────
   const GLYPHS = 'ﾋﾘｱｾﾜﾗﾇﾈﾏﾜﾓｴﾆﾃﾂﾐｼﾎｵﾖﾅﾑﾌｺｿﾅκλμπσχθαβγδ01:_>/';
   const rain = document.getElementById('rain');
-  const colCount = 22;
+  const colCount = 16;
   const colSpacing = 100 / colCount;
   for (let i = 0; i < colCount; i++) {
     const col = document.createElement('div');
     col.className = 'col';
-    // x: jittered around the regular grid so it doesn't look striped
     const xPct = i * colSpacing + (Math.random() - 0.5) * colSpacing * 0.6;
     col.style.left = `${xPct}%`;
-    // speed: 9 - 22s; size: 13 - 17px
     col.style.animationDuration = (9 + Math.random() * 13).toFixed(2) + 's';
     col.style.animationDelay   = (-Math.random() * 20).toFixed(2) + 's';
-    col.style.fontSize = (13 + Math.random() * 4).toFixed(1) + 'px';
-    // Build a 28-char glyph stream with a bright head, lit mids, dim trail
+    col.style.fontSize = (12 + Math.random() * 4).toFixed(1) + 'px';
     let html = '';
-    for (let g = 0; g < 28; g++) {
+    for (let g = 0; g < 24; g++) {
       const ch = GLYPHS[(Math.random() * GLYPHS.length) | 0];
-      const lineBreak = g < 27 ? '\n' : '';
+      const lineBreak = g < 23 ? '\n' : '';
       if (g === 0)      html += `<span class="head">${ch}</span>${lineBreak}`;
       else if (g < 4)   html += `<span class="mid">${ch}</span>${lineBreak}`;
       else              html += ch + lineBreak;
