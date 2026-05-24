@@ -1,47 +1,66 @@
-/* matrix-red — blood-red counterpart to matrix-green.css.
-   Identical layer + animation logic; palette swapped to the
-   ezr-chatgpt reds. */
+/* matrix-red — blood-red counterpart to matrix-green.css. Same
+   class-prefixed scoping (html.dp-matrix-red-on) for specificity. */
 
-html {
+html.dp-matrix-red-on {
   background-color: #000 !important;
   background-image: none !important;
 }
-body {
+html.dp-matrix-red-on body {
   background-color: transparent !important;
   background-image: none !important;
 }
 
-body, body * {
+html.dp-matrix-red-on body,
+html.dp-matrix-red-on body * {
   color: #e8a8a8 !important;
   border-color: #2a0606 !important;
 }
-body a, body a * {
+html.dp-matrix-red-on body a,
+html.dp-matrix-red-on body a * {
   color: #ff3a1a !important;
 }
-body button, body input, body textarea, body select {
+html.dp-matrix-red-on body button,
+html.dp-matrix-red-on body input,
+html.dp-matrix-red-on body textarea,
+html.dp-matrix-red-on body select {
   background-color: #0d0606 !important;
   color: #e8a8a8 !important;
   border: 1px solid #2a0606 !important;
 }
 
-body img, body picture, body video, body canvas {
+html.dp-matrix-red-on body header,
+html.dp-matrix-red-on body main,
+html.dp-matrix-red-on body nav,
+html.dp-matrix-red-on body article,
+html.dp-matrix-red-on body section,
+html.dp-matrix-red-on body aside,
+html.dp-matrix-red-on body footer,
+html.dp-matrix-red-on body div {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+html.dp-matrix-red-on body img,
+html.dp-matrix-red-on body picture,
+html.dp-matrix-red-on body video,
+html.dp-matrix-red-on body canvas {
   opacity: 0.55 !important;
 }
 
-#__dp-matrix-red {
+html.dp-matrix-red-on #__dp-matrix-red {
   position: fixed !important;
   inset: 0 !important;
   z-index: -1 !important;
   pointer-events: none !important;
 }
-#__dp-matrix-red .dp-matrix-rain {
+html.dp-matrix-red-on #__dp-matrix-red .dp-matrix-rain {
   position: fixed !important;
   inset: 0 !important;
   overflow: hidden !important;
   pointer-events: none !important;
 }
 
-#__dp-matrix-red .dp-matrix-col {
+html.dp-matrix-red-on #__dp-matrix-red .dp-matrix-col {
   position: absolute !important;
   top: -100vh !important;
   height: 200vh !important;
@@ -56,11 +75,11 @@ body img, body picture, body video, body canvas {
   animation-iteration-count: infinite !important;
   will-change: transform !important;
 }
-#__dp-matrix-red .dp-matrix-col .head {
+html.dp-matrix-red-on #__dp-matrix-red .dp-matrix-col .head {
   color: #ff3a1a !important;
   text-shadow: 0 0 6px #ff3a1a, 0 0 12px #c41e1e !important;
 }
-#__dp-matrix-red .dp-matrix-col .mid {
+html.dp-matrix-red-on #__dp-matrix-red .dp-matrix-col .mid {
   color: #ff3a1a !important;
 }
 

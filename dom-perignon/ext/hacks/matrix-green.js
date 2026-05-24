@@ -1,18 +1,18 @@
-// matrix-green hack — simplified phosphor-green falling-glyph overlay,
-// applied to ANY page when the green ">_" toggle is on in the popup.
-// On claude.ai, the green toggle activates the full ezr-claude theme
-// instead (handled by inject.js pickTheme).
+// matrix-green hack — phosphor matrix takeover for arbitrary pages.
+// Activated when the green ">_" toggle is on in the popup. On
+// claude.ai, the green toggle activates the full ezr-claude theme
+// instead (routed by inject.js pickTheme).
 //
-// Compared to ezr-claude: no site-specific selectors. Just a black
-// body wash, a dark page-content dimmer, and the seamless-loop rain
-// from the gallery preview. Won't compete with the page's own UI for
-// interactivity (pointer-events: none on every layer), but does cover
-// the page with a phosphor mood.
+// The recolor is the load-bearing thing for "does the UI actually
+// shift?". Adding the .dp-matrix-green-on class to <html> gives every
+// CSS rule below it specificity (0,1,X) instead of (0,0,X), which is
+// what lets the broad body-text recolor beat most sites' own rules.
 
 (function () {
   const NS = (window.__DOMPerignon = window.__DOMPerignon || { hacks: {} });
-  const STYLE_ID = '__dp-matrix-green-style';
-  const RAIN_ID  = '__dp-matrix-green';
+  const STYLE_ID    = '__dp-matrix-green-style';
+  const RAIN_ID     = '__dp-matrix-green';
+  const HTML_CLASS  = 'dp-matrix-green-on';
 
   let styleEl = null;
   let rootEl  = null;
@@ -27,6 +27,11 @@
     styleEl.textContent = css;
     document.documentElement.appendChild(styleEl);
 
+    // Specificity boost — every rule in matrix-green.css is scoped to
+    // html.dp-matrix-green-on, so adding the class is what activates
+    // the broad recolor.
+    document.documentElement.classList.add(HTML_CLASS);
+
     rootEl = document.createElement('div');
     rootEl.id = RAIN_ID;
     rootEl.setAttribute('aria-hidden', 'true');
@@ -37,6 +42,7 @@
   }
 
   function teardown() {
+    document.documentElement.classList.remove(HTML_CLASS);
     if (styleEl) { styleEl.remove(); styleEl = null; }
     if (rootEl)  { rootEl.remove();  rootEl  = null; }
   }

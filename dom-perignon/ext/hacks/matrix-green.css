@@ -1,67 +1,77 @@
 /* matrix-green — phosphor matrix takeover for arbitrary pages.
-   ----
-   What we do:
-     1. Paint html → pure black, body → transparent. The page's own
-        elements still render with their own backgrounds, but the
-        gaps now show our matrix canvas (= html bg + rain) instead
-        of the site's body color.
-     2. Recolor body text broadly to phosphor green so it reads as
-        on-theme. Links + form controls get a slightly brighter
-        tint and a dark form background for legibility.
-     3. Pin the falling-glyph rain at z-index: -1 so it sits BEHIND
-        every body descendant. The site's own DOM keeps its z-stack
-        intact; we just slip in below.
-   Animation: only longhand animation-* properties carry !important
-   here — animation-duration is set inline per column by the JS so
-   each column falls at its own pace. (The shorthand with !important
-   would have clobbered the inline duration → static columns.)
-*/
+   Every rule is scoped under html.dp-matrix-green-on so its
+   specificity is at least (0,1,N) — high enough to beat the
+   class-based selectors most sites use in their own CSS. */
 
-html {
+/* Canvas: html → black, body → transparent so the rain (z-index: -1)
+   shows through whatever isn't covered by site UI. */
+html.dp-matrix-green-on {
   background-color: #000 !important;
   background-image: none !important;
 }
-body {
+html.dp-matrix-green-on body {
   background-color: transparent !important;
   background-image: none !important;
 }
 
-/* Broad recolor — text + borders go phosphor. The .dp-matrix-col
-   selectors below are more specific, so the rain keeps its own
-   palette and isn't affected by this sweep. */
-body, body * {
+/* Broad recolor. body * keeps the rain element styling out of scope
+   because the .dp-matrix-col rules below are more specific still. */
+html.dp-matrix-green-on body,
+html.dp-matrix-green-on body * {
   color: #c8ffc8 !important;
   border-color: #003b00 !important;
 }
-body a, body a * {
+html.dp-matrix-green-on body a,
+html.dp-matrix-green-on body a * {
   color: #00ff41 !important;
 }
-body button, body input, body textarea, body select {
+html.dp-matrix-green-on body button,
+html.dp-matrix-green-on body input,
+html.dp-matrix-green-on body textarea,
+html.dp-matrix-green-on body select {
   background-color: #061206 !important;
   color: #c8ffc8 !important;
   border: 1px solid #003b00 !important;
 }
 
-/* Soften imagery so the rain reads as dominant. */
-body img, body picture, body video, body canvas {
+/* Site UI sometimes paints its own opaque container backgrounds
+   over the body. Force the common ones transparent so the rain
+   keeps showing through. */
+html.dp-matrix-green-on body header,
+html.dp-matrix-green-on body main,
+html.dp-matrix-green-on body nav,
+html.dp-matrix-green-on body article,
+html.dp-matrix-green-on body section,
+html.dp-matrix-green-on body aside,
+html.dp-matrix-green-on body footer,
+html.dp-matrix-green-on body div {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Soften images / video so the rain reads as dominant. */
+html.dp-matrix-green-on body img,
+html.dp-matrix-green-on body picture,
+html.dp-matrix-green-on body video,
+html.dp-matrix-green-on body canvas {
   opacity: 0.55 !important;
 }
 
-/* Rain layer — behind body content. */
-#__dp-matrix-green {
+/* Rain — behind body content via z-index: -1. */
+html.dp-matrix-green-on #__dp-matrix-green {
   position: fixed !important;
   inset: 0 !important;
   z-index: -1 !important;
   pointer-events: none !important;
 }
-#__dp-matrix-green .dp-matrix-rain {
+html.dp-matrix-green-on #__dp-matrix-green .dp-matrix-rain {
   position: fixed !important;
   inset: 0 !important;
   overflow: hidden !important;
   pointer-events: none !important;
 }
 
-#__dp-matrix-green .dp-matrix-col {
+html.dp-matrix-green-on #__dp-matrix-green .dp-matrix-col {
   position: absolute !important;
   top: -100vh !important;
   height: 200vh !important;
@@ -71,18 +81,18 @@ body img, body picture, body video, body canvas {
   color: #00b32d !important;
   text-shadow: 0 0 4px #39ff14 !important;
   white-space: pre !important;
-  /* LONGHANDS only — don't touch animation-duration so JS-set value
-     (varied per column) actually applies. */
+  /* LONGHANDS only — don't touch animation-duration so JS-set
+     duration actually applies. */
   animation-name: dp-matrix-fall !important;
   animation-timing-function: linear !important;
   animation-iteration-count: infinite !important;
   will-change: transform !important;
 }
-#__dp-matrix-green .dp-matrix-col .head {
+html.dp-matrix-green-on #__dp-matrix-green .dp-matrix-col .head {
   color: #39ff14 !important;
   text-shadow: 0 0 6px #39ff14, 0 0 12px #00ff41 !important;
 }
-#__dp-matrix-green .dp-matrix-col .mid {
+html.dp-matrix-green-on #__dp-matrix-green .dp-matrix-col .mid {
   color: #39ff14 !important;
 }
 

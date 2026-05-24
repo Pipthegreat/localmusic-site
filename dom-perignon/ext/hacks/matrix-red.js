@@ -1,15 +1,14 @@
-// matrix-red hack — simplified blood-red falling-glyph overlay,
-// applied to ANY page when the red ">_" toggle is on in the popup.
-// On chatgpt.com, the red toggle activates the full ezr-chatgpt
-// theme instead (handled by inject.js pickTheme).
-//
-// Identical structure to matrix-green.js; only the palette in the
-// companion CSS differs.
+// matrix-red hack — blood-red counterpart to matrix-green. Activated
+// when the red ">_" toggle is on. On chatgpt.com the red toggle
+// activates the full ezr-chatgpt theme instead (routed by pickTheme).
+// Same shape as matrix-green.js; only HTML_CLASS and the companion
+// CSS palette differ.
 
 (function () {
   const NS = (window.__DOMPerignon = window.__DOMPerignon || { hacks: {} });
-  const STYLE_ID = '__dp-matrix-red-style';
-  const RAIN_ID  = '__dp-matrix-red';
+  const STYLE_ID    = '__dp-matrix-red-style';
+  const RAIN_ID     = '__dp-matrix-red';
+  const HTML_CLASS  = 'dp-matrix-red-on';
 
   let styleEl = null;
   let rootEl  = null;
@@ -24,6 +23,8 @@
     styleEl.textContent = css;
     document.documentElement.appendChild(styleEl);
 
+    document.documentElement.classList.add(HTML_CLASS);
+
     rootEl = document.createElement('div');
     rootEl.id = RAIN_ID;
     rootEl.setAttribute('aria-hidden', 'true');
@@ -34,6 +35,7 @@
   }
 
   function teardown() {
+    document.documentElement.classList.remove(HTML_CLASS);
     if (styleEl) { styleEl.remove(); styleEl = null; }
     if (rootEl)  { rootEl.remove();  rootEl  = null; }
   }
