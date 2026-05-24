@@ -1,377 +1,422 @@
 {
   "page_title": "SF + Oakland Live Music",
-  "total_duration": 1225.33,
-  "track_count": 41,
-  "built_at": 1779590114,
+  "total_duration": 1375.59,
+  "track_count": 46,
+  "built_at": 1779606213,
   "tracks": [
     {
-      "artist": "acid barbie",
-      "title": "anything anything",
-      "spotify_uri": "spotify:track:1z7OFpL6c7VHengX5jF3Z4",
+      "artist": "doc martin",
+      "title": "8 eyes",
+      "spotify_uri": "spotify:track:07ADZxgMZQq55E0AmUHVA4",
       "audio_source": "itunes",
-      "duration": 29.95,
+      "duration": 29.96,
       "start": 0.0,
-      "end": 29.95
+      "end": 29.96
     },
     {
-      "artist": "acid barbie",
-      "title": "star girl",
-      "spotify_uri": "spotify:track:0zItJItq8nRstjMbEZubH0",
+      "artist": "doc martin",
+      "title": "lovin' me",
+      "spotify_uri": "spotify:track:4ck0opYKX2JypokaKTCLbZ",
       "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 29.95,
-      "end": 59.9
+      "duration": 29.73,
+      "start": 29.96,
+      "end": 59.69
     },
     {
-      "artist": "acid barbie",
-      "title": "silly little me",
-      "spotify_uri": "spotify:track:5jY4i9mSWRmQupnhyPwHO5",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 59.9,
-      "end": 89.85
-    },
-    {
-      "artist": "andyland",
-      "title": "satelite pop machine",
-      "spotify_uri": "spotify:track:32tQ07E986IalIAn4sXzHM",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 89.85,
-      "end": 119.8
-    },
-    {
-      "artist": "andyland",
-      "title": "nervous in the sunshine",
-      "spotify_uri": "spotify:track:3pDEld2dcKB0FaQFOtiSvF",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 119.8,
-      "end": 149.75
-    },
-    {
-      "artist": "andyland",
-      "title": "future pta (this must be the place?)",
-      "spotify_uri": "spotify:track:3TEpYDolMfeT8q4lWJbPNJ",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 149.75,
-      "end": 179.7
-    },
-    {
-      "artist": "arts fishing club",
-      "title": "tupelo honey",
-      "spotify_uri": "spotify:track:0U0sYKSWssXHoHiaewDlRR",
+      "artist": "doc martin",
+      "title": "vajra",
+      "spotify_uri": "spotify:track:2so00W7H5NMdkqVC76Qlg7",
       "audio_source": "itunes",
       "duration": 29.96,
-      "start": 179.7,
-      "end": 209.66
+      "start": 59.69,
+      "end": 89.65
     },
     {
-      "artist": "arts fishing club",
-      "title": "just the way it is",
-      "spotify_uri": "spotify:track:3bLSun4vvEr7rfF53qYAwE",
+      "artist": "get lost cassidy frost",
+      "title": "hey guess what",
+      "spotify_uri": "spotify:track:4lhKoK3FRnMXTEBRHizJmi",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 209.66,
-      "end": 239.61
+      "start": 89.65,
+      "end": 119.6
     },
     {
-      "artist": "arts fishing club",
-      "title": "suffocate",
-      "spotify_uri": "spotify:track:2j2MYtcAym3XhqZvI0PF6Q",
+      "artist": "jeff straw",
+      "title": "chemical reaction - radio edit",
+      "spotify_uri": "spotify:track:4ftDQlGMPpbN0S11gXzCGv",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 239.61,
-      "end": 269.56
+      "start": 119.6,
+      "end": 149.55
     },
     {
-      "artist": "benny benassi",
-      "title": "satisfaction",
-      "spotify_uri": "spotify:track:5JZnjM9ijpit0d5zjT8MM7",
+      "artist": "jeff straw",
+      "title": "i've been",
+      "spotify_uri": "spotify:track:3BJntn779Myc7fdXjVIlJr",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 149.55,
+      "end": 179.5
+    },
+    {
+      "artist": "jeff straw",
+      "title": "may flowers fall - original mix",
+      "spotify_uri": "spotify:track:6d6CjOWyhnKkwoafcmowZh",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 179.5,
+      "end": 209.45
+    },
+    {
+      "artist": "jlittle",
+      "title": "move",
+      "spotify_uri": "spotify:track:4crN1JFblX3AKGk9SLBWmr",
       "audio_source": "itunes",
       "duration": 29.96,
-      "start": 269.56,
-      "end": 299.52
+      "start": 209.45,
+      "end": 239.41
     },
     {
-      "artist": "benny benassi",
-      "title": "cinema (feat. gary go) - skrillex remix",
-      "spotify_uri": "spotify:track:6jNM6fKx3WnyHbWBI9hs2r",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 299.52,
-      "end": 329.48
-    },
-    {
-      "artist": "benny benassi",
-      "title": "cinema (feat. gary go) - radio edit",
-      "spotify_uri": "spotify:track:4IazOWzgfLB8MR5VIY368A",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 329.48,
-      "end": 359.44
-    },
-    {
-      "artist": "black lipstick",
-      "title": "grandma airplane",
-      "spotify_uri": "spotify:track:6R4UwXSyWMUCw5p4KS7gEF",
+      "artist": "jlittle",
+      "title": "saucy",
+      "spotify_uri": "spotify:track:6RnrfRtaigDMqwTH17VM3q",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 359.44,
-      "end": 389.31
+      "start": 239.41,
+      "end": 269.28
     },
     {
-      "artist": "black lipstick",
-      "title": "b.o.b. f.o.s.s.e.",
-      "spotify_uri": "spotify:track:7prKEgwTL9uEAz5TrclsS2",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 389.31,
-      "end": 419.18
-    },
-    {
-      "artist": "black lipstick",
-      "title": "throw some money at it",
-      "spotify_uri": "spotify:track:0h3WjC08hY5oQBnYtUcXaa",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 419.18,
-      "end": 449.05
-    },
-    {
-      "artist": "blockhead",
-      "title": "the music scene",
-      "spotify_uri": "spotify:track:12TyU7JblI0e8WhMTck8bF",
-      "audio_source": "itunes",
-      "duration": 29.69,
-      "start": 449.05,
-      "end": 478.74
-    },
-    {
-      "artist": "blockhead",
-      "title": "mississippi",
-      "spotify_uri": "spotify:track:6QeGe9sQvQlL8gy6zcAhVV",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 478.74,
-      "end": 508.69
-    },
-    {
-      "artist": "blockhead",
-      "title": "insomniac olympics",
-      "spotify_uri": "spotify:track:7IuxuJBP6kwOOu1ShFzmR1",
-      "audio_source": "itunes",
-      "duration": 28.82,
-      "start": 508.69,
-      "end": 537.51
-    },
-    {
-      "artist": "bored lord",
-      "title": "girl u could be down 4",
-      "spotify_uri": "spotify:track:2AqNfj3Y6t3mvdc6TSXaE2",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 537.51,
-      "end": 567.38
-    },
-    {
-      "artist": "bored lord",
-      "title": "crush on u",
-      "spotify_uri": "spotify:track:6ljA3sobRkcY3vHloN2I0T",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 567.38,
-      "end": 597.25
-    },
-    {
-      "artist": "bored lord",
-      "title": "feel it",
-      "spotify_uri": "spotify:track:3RJo0RullUItvPWAM3W2b8",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 597.25,
-      "end": 627.2
-    },
-    {
-      "artist": "chadley",
-      "title": "piss",
-      "spotify_uri": "spotify:track:0omoC05Vj77NZmdQolCFSS",
+      "artist": "jlittle",
+      "title": "move - extended mix",
+      "spotify_uri": "spotify:track:2PjJlFuhCTeDxPj7ZqMJWs",
       "audio_source": "itunes",
       "duration": 29.97,
-      "start": 627.2,
-      "end": 657.17
+      "start": 269.28,
+      "end": 299.25
     },
     {
-      "artist": "chadley",
-      "title": "angels",
-      "spotify_uri": "spotify:track:69ahCjbjGzQ59AFPc1Wasq",
+      "artist": "kshmr",
+      "title": "kids (feat. mkla)",
+      "spotify_uri": "spotify:track:3rgTS3933lMWoPiN6CW4qY",
       "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 657.17,
-      "end": 687.12
+      "duration": 29.97,
+      "start": 299.25,
+      "end": 329.22
     },
     {
-      "artist": "chadley",
-      "title": "pet mouse",
-      "spotify_uri": "spotify:track:6nTCqrYrHLQitCt18sC4yI",
+      "artist": "kshmr",
+      "title": "take me home, country roads",
+      "spotify_uri": "spotify:track:3yyWrz4CsVzkWPuxtZflov",
       "audio_source": "itunes",
       "duration": 29.96,
-      "start": 687.12,
-      "end": 717.08
+      "start": 329.22,
+      "end": 359.18
     },
     {
-      "artist": "defem",
-      "title": "boxer ii (andy morin remix)",
-      "spotify_uri": "spotify:track:1GlLTXWb8lA2Dec2nyHF99",
+      "artist": "love supreme",
+      "title": "lonely feelings",
+      "spotify_uri": "spotify:track:0RtkHfadSVMBrbCdiu5ZKh",
+      "audio_source": "itunes",
+      "duration": 29.7,
+      "start": 359.18,
+      "end": 388.88
+    },
+    {
+      "artist": "love supreme",
+      "title": "beauty",
+      "spotify_uri": "spotify:track:48tDZSxZwnDRDdBSYRaak9",
+      "audio_source": "itunes",
+      "duration": 29.71,
+      "start": 388.88,
+      "end": 418.59
+    },
+    {
+      "artist": "love supreme",
+      "title": "sun",
+      "spotify_uri": "spotify:track:1NxN8G3FNhrITNeGR5SZKk",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 717.08,
-      "end": 746.95
+      "start": 418.59,
+      "end": 448.46
     },
     {
-      "artist": "defem",
-      "title": "popped off",
-      "spotify_uri": "spotify:track:6Sgu61eytggiXD3Cm1LLb2",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 746.95,
-      "end": 776.82
-    },
-    {
-      "artist": "defem",
-      "title": "young one",
-      "spotify_uri": "spotify:track:3Uth09QgTLk7e88shJ5jxM",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 776.82,
-      "end": 806.69
-    },
-    {
-      "artist": "dirtybeats",
-      "title": "carnival trip",
-      "spotify_uri": "spotify:track:1KyfvKXUWpRw5hPeSCFYLK",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 806.69,
-      "end": 836.56
-    },
-    {
-      "artist": "dirtybeats",
-      "title": "brick that - mogo remix",
-      "spotify_uri": "spotify:track:0LOP3oUk9ZSjHQI9WYFgGy",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 836.56,
-      "end": 866.43
-    },
-    {
-      "artist": "dj omar",
-      "title": "vibras",
-      "spotify_uri": "spotify:track:7BgezCf7pUNaw8gxta1kCs",
+      "artist": "lovetempo",
+      "title": "wanna be with you",
+      "spotify_uri": "spotify:track:5zR4Hxkh55bNkbTUzNvmIF",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 866.43,
-      "end": 896.38
+      "start": 448.46,
+      "end": 478.41
     },
     {
-      "artist": "dj pressed",
-      "title": "i have a dream (gay)",
-      "spotify_uri": "spotify:track:271A7nvnRVCGZFyvcOhCUK",
-      "audio_source": "itunes",
-      "duration": 29.85,
-      "start": 896.38,
-      "end": 926.23
-    },
-    {
-      "artist": "dj pressed",
-      "title": "dayman - dj pressed remix",
-      "spotify_uri": "spotify:track:0EB9RB3YXUbHCasmxIpSuC",
+      "artist": "lovetempo",
+      "title": "maybe in another life - bosq sunset boogie mix",
+      "spotify_uri": "spotify:track:1MgedSTahfRlJnlYYzknSq",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 926.23,
-      "end": 956.18
+      "start": 478.41,
+      "end": 508.36
     },
     {
-      "artist": "dj pressed",
-      "title": "golden god",
-      "spotify_uri": "spotify:track:14bMhRegQHCxUSuGqmnnw2",
+      "artist": "lovetempo",
+      "title": "there is a light",
+      "spotify_uri": "spotify:track:3DPFPpQxgdby1FesuXEYh6",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 956.18,
-      "end": 986.13
+      "start": 508.36,
+      "end": 538.31
     },
     {
-      "artist": "dj saratonin",
-      "title": "say_yu_wanna_love_me",
-      "spotify_uri": "spotify:track:1kiLJEWUX0N9IFpcE4DpUO",
+      "artist": "makaya mccraven",
+      "title": "mantra",
+      "spotify_uri": "spotify:track:5onG1aH1y4VoLoa1FS5hNt",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 538.31,
+      "end": 568.18
+    },
+    {
+      "artist": "makaya mccraven",
+      "title": "butterscotch",
+      "spotify_uri": "spotify:track:1fHjb4JsAuno8LTSWCV6i6",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 568.18,
+      "end": 598.05
+    },
+    {
+      "artist": "makaya mccraven",
+      "title": "inner flight",
+      "spotify_uri": "spotify:track:0uxgN97AvcTbJFZSflyoKa",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 598.05,
+      "end": 627.92
+    },
+    {
+      "artist": "netsky",
+      "title": "everybody loves the sunshine",
+      "spotify_uri": "spotify:track:4ch0ejqrSwJrotLroa9mXn",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 627.92,
+      "end": 657.79
+    },
+    {
+      "artist": "netsky",
+      "title": "let me hold you",
+      "spotify_uri": "spotify:track:5soWKIkC6GnpZT99IatCYq",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 657.79,
+      "end": 687.66
+    },
+    {
+      "artist": "netsky",
+      "title": "let me hold you - grafix remix",
+      "spotify_uri": "spotify:track:6OcqU6LL9lAjxF2IdCLC6O",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 687.66,
+      "end": 717.53
+    },
+    {
+      "artist": "omnigone",
+      "title": "liar",
+      "spotify_uri": "spotify:track:7l33Oi8y7kKjFjRWJahmIm",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 986.13,
-      "end": 1016.08
+      "start": 717.53,
+      "end": 747.48
     },
     {
-      "artist": "dj saratonin",
-      "title": "fateful encounter",
-      "spotify_uri": "spotify:track:3ufJYdjvYMAaxseWsQ9W20",
+      "artist": "omnigone",
+      "title": "swallow poison",
+      "spotify_uri": "spotify:track:0yeenDGO4FSmduxdWASqj7",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 1016.08,
-      "end": 1045.95
+      "start": 747.48,
+      "end": 777.35
     },
     {
-      "artist": "donovan plant",
-      "title": "san francisco",
-      "spotify_uri": "spotify:track:7I6JVS8U3sryIr79uaz87Z",
+      "artist": "omnigone",
+      "title": "horizontal aggression",
+      "spotify_uri": "spotify:track:4XL1b5riJ1Y5kmXzuNABok",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 1045.95,
-      "end": 1075.82
+      "start": 777.35,
+      "end": 807.22
     },
     {
-      "artist": "donovan plant",
-      "title": "white wolf",
-      "spotify_uri": "spotify:track:1pe8K7KWJePsk6UKKnkzQq",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1075.82,
-      "end": 1105.69
-    },
-    {
-      "artist": "eliot lipp",
-      "title": "tides",
-      "spotify_uri": "spotify:track:1MKmxxtXeEr1SsJ2QwfakW",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1105.69,
-      "end": 1135.56
-    },
-    {
-      "artist": "eliot lipp",
-      "title": "the sunset",
-      "spotify_uri": "spotify:track:1p3Po5j1O36C6e9QanYLCc",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1135.56,
-      "end": 1165.43
-    },
-    {
-      "artist": "ergot",
-      "title": "hiss",
-      "spotify_uri": "spotify:track:1dgfgcIyEIPneu4TAQetCR",
+      "artist": "overtime",
+      "title": "hunger in my stomach",
+      "spotify_uri": "spotify:track:7uv5HOmo28erEvbHOx58mL",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 1165.43,
-      "end": 1195.38
+      "start": 807.22,
+      "end": 837.17
     },
     {
-      "artist": "ergot",
-      "title": "ignis sacer",
-      "spotify_uri": "spotify:track:6xTLzYzFEctnK6iaNJDDmt",
+      "artist": "overtime",
+      "title": "next to me",
+      "spotify_uri": "spotify:track:2OphhDrZ35nKCd1XOtXZFz",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 1195.38,
-      "end": 1225.33
+      "start": 837.17,
+      "end": 867.12
+    },
+    {
+      "artist": "overtime",
+      "title": "divided we fall",
+      "spotify_uri": "spotify:track:2HUc9TKVwt6MF9gw7V4d5u",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 867.12,
+      "end": 897.07
+    },
+    {
+      "artist": "rose gray",
+      "title": "party people",
+      "spotify_uri": "spotify:track:0KN08YO4zGw8NCkCiaRkS9",
+      "audio_source": "itunes",
+      "duration": 29.97,
+      "start": 897.07,
+      "end": 927.04
+    },
+    {
+      "artist": "shipwreck detective",
+      "title": "iv",
+      "spotify_uri": "spotify:track:2pPi5T4vl0TJL0cOxzR8sN",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 927.04,
+      "end": 956.91
+    },
+    {
+      "artist": "shipwreck detective",
+      "title": "pomegranate kiss",
+      "spotify_uri": "spotify:track:7mTKQZRqJqv9VyKrGlMJC7",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 956.91,
+      "end": 986.86
+    },
+    {
+      "artist": "shipwreck detective",
+      "title": "i",
+      "spotify_uri": "spotify:track:5tVFJnbv2YSyhd25LocHVl",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 986.86,
+      "end": 1016.73
+    },
+    {
+      "artist": "starfari",
+      "title": "the weekend - original mix",
+      "spotify_uri": "spotify:track:07aHvCXIzmEn0b2ST8STtv",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1016.73,
+      "end": 1046.6
+    },
+    {
+      "artist": "starfari",
+      "title": "the weekend - mphd remix",
+      "spotify_uri": "spotify:track:5xiMfB0UZFIEIQkQuIDfdu",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1046.6,
+      "end": 1076.47
+    },
+    {
+      "artist": "the rhythmist",
+      "title": "databurst",
+      "spotify_uri": "spotify:track:7soziuj1pedpY6heuxag6k",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1076.47,
+      "end": 1106.42
+    },
+    {
+      "artist": "the rhythmist",
+      "title": "tuesday",
+      "spotify_uri": "spotify:track:5bvhBHzN5gK6HXhNeHTs0K",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1106.42,
+      "end": 1136.29
+    },
+    {
+      "artist": "the rhythmist",
+      "title": "the loop",
+      "spotify_uri": "spotify:track:48QnehLhaB9SIwpopBSON4",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1136.29,
+      "end": 1166.24
+    },
+    {
+      "artist": "theo croker",
+      "title": "one pillow",
+      "spotify_uri": "spotify:track:7tOLgvowU2OcA1gx44mpxz",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1166.24,
+      "end": 1196.19
+    },
+    {
+      "artist": "theo croker",
+      "title": "high vibrations",
+      "spotify_uri": "spotify:track:0gr9ny9UGmMdrBV1ivgnGb",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1196.19,
+      "end": 1226.14
+    },
+    {
+      "artist": "theo croker",
+      "title": "king kong feat hawa & theo croker",
+      "spotify_uri": "spotify:track:1Qthn23wXlXEeS0nA0GFbU",
+      "audio_source": "itunes",
+      "duration": 29.97,
+      "start": 1226.14,
+      "end": 1256.11
+    },
+    {
+      "artist": "tragedy andy",
+      "title": "safe to say",
+      "spotify_uri": "spotify:track:5MyLclLfYTGABwE4s9NGG3",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1256.11,
+      "end": 1285.98
+    },
+    {
+      "artist": "tragedy andy",
+      "title": "self-destructive romance",
+      "spotify_uri": "spotify:track:5PRh8HSCl5OVrN6S15dOO0",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1285.98,
+      "end": 1315.85
+    },
+    {
+      "artist": "tragedy andy",
+      "title": "photosynthesis in retrospect",
+      "spotify_uri": "spotify:track:0MKnvMpHdd9pobegaPDmE7",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1315.85,
+      "end": 1345.72
+    },
+    {
+      "artist": "yanni",
+      "title": "one man's dream",
+      "spotify_uri": "spotify:track:53Lfqp8F0KCInwcFjabMJB",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1345.72,
+      "end": 1375.59
     }
   ]
 }
