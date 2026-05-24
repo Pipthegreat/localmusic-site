@@ -13,19 +13,23 @@ html.dp-matrix-red-on body {
 html.dp-matrix-red-on body,
 html.dp-matrix-red-on body * {
   color: #e8a8a8 !important;
-  border-color: #2a0606 !important;
+  /* dim crimson — readable as a border colour on the black canvas */
+  border-color: #7a0a0a !important;
 }
 html.dp-matrix-red-on body a,
 html.dp-matrix-red-on body a * {
   color: #ff3a1a !important;
 }
+/* Form chrome gets the bright blood border + soft ember glow so
+   prompt bars, CTAs, and inputs stay clearly interactive. */
 html.dp-matrix-red-on body button,
 html.dp-matrix-red-on body input,
 html.dp-matrix-red-on body textarea,
 html.dp-matrix-red-on body select {
   background-color: #0d0606 !important;
   color: #e8a8a8 !important;
-  border: 1px solid #2a0606 !important;
+  border: 1px solid #ff3a1a !important;
+  box-shadow: 0 0 6px rgba(196, 30, 30, 0.4) !important;
 }
 
 html.dp-matrix-red-on body header,

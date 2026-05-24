@@ -19,19 +19,24 @@ html.dp-matrix-green-on body {
 html.dp-matrix-green-on body,
 html.dp-matrix-green-on body * {
   color: #c8ffc8 !important;
-  border-color: #003b00 !important;
+  /* dim phosphor — readable as a border colour on the black canvas */
+  border-color: #00b32d !important;
 }
 html.dp-matrix-green-on body a,
 html.dp-matrix-green-on body a * {
   color: #00ff41 !important;
 }
+/* Form chrome gets the full bright phosphor border + a soft glow so
+   inputs, prompt bars, and CTAs read as interactive instead of melting
+   into the canvas. */
 html.dp-matrix-green-on body button,
 html.dp-matrix-green-on body input,
 html.dp-matrix-green-on body textarea,
 html.dp-matrix-green-on body select {
   background-color: #061206 !important;
   color: #c8ffc8 !important;
-  border: 1px solid #003b00 !important;
+  border: 1px solid #39ff14 !important;
+  box-shadow: 0 0 6px rgba(0, 255, 65, 0.35) !important;
 }
 
 /* Site UI sometimes paints its own opaque container backgrounds
