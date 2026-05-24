@@ -215,11 +215,28 @@
         it.started = true;
         hideOriginal(it.target);
       }
-      // Integrate: gravity on vy, friction on vx + angVel, advance position + rotation
+      // Integrate: gravity on vy, friction on vx + angVel
       it.vy = Math.min(it.vy + GRAVITY, TERMINAL_V);
       it.vx *= HORIZONTAL_DAMP;
       it.angVel *= ANGULAR_DAMP;
-      it.x += it.vx;
+
+      // Horizontal motion gate: refuse to move INTO a pile.
+      // Without this check, an item drifting sideways during its fall
+      // can pass through a settled pile (because at the old x the shelf
+      // was further down) and then "blink" up to the pile's top the
+      // next frame when floor-collision fires. Bouncing the vx off the
+      // side of the pile keeps the visual continuous.
+      const proposedX = it.x + it.vx;
+      const shelfAtProposed = minShelfAcross(proposedX, it.rect.width);
+      if (it.y + it.rect.height > shelfAtProposed + 2) {
+        // Bottom edge would end up below the shelf at the new x - hit a wall
+        it.vx = -it.vx * WALL_BOUNCE_DAMP;
+        it.angVel += (Math.random() - 0.5) * 0.012;
+        // Don't apply horizontal motion this frame; x stays where it was
+      } else {
+        it.x = proposedX;
+      }
+
       it.y += it.vy;
       it.angle += it.angVel;
 
