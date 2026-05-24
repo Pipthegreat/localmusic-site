@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kestrel Fabrications - sample page (DOM Perignon preview)</title>
+<title>Kestrel Fabrications - sample page (DOM Pérignon preview)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Fraunces with FULL italic axis + weight range so the You Got This
@@ -358,7 +358,7 @@ footer .meta span + span::before { content: "·"; margin: 0 8px; color: var(--bo
 
 </div>
 
-<!-- ─── DOM Perignon hijink runner ─────────────────────────────────────
+<!-- ─── DOM Pérignon hijink runner ─────────────────────────────────────
      Stub the minimum Chrome extension APIs so the hijink modules load
      happily, then activate whichever one the parent gallery requested
      via ?hack=… in the URL.
@@ -397,8 +397,8 @@ footer .meta span + span::before { content: "·"; margin: 0 8px; color: var(--bo
   (function () {
     const params = new URLSearchParams(location.search);
     const hack = params.get('hack');
-    if (!hack || !window.__DOMPerignon) return;
-    const fire = () => window.__DOMPerignon.activate(hack);
+    if (!hack || !window.__DOMPérignon) return;
+    const fire = () => window.__DOMPérignon.activate(hack);
     if (document.readyState === 'complete') setTimeout(fire, 80);
     else window.addEventListener('load', () => setTimeout(fire, 80));
   })();

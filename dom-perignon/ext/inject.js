@@ -72,25 +72,45 @@
   }
   NS.activate = activate;
 
-  // Listen for hack-switch messages from popup
+  // Easter-egg override: when the user has flipped the hidden ">_" toggle in
+  // the popup AND the current site is claude.ai or chatgpt.com, apply the
+  // original ui-updater-2 theme for that site INSTEAD of whatever hijink is
+  // selected - regardless of the master Active toggle. On any other site,
+  // the easter-egg state has no effect.
+  function pickTheme(easterEgg, enabled, activeHack) {
+    const host = window.location.hostname || '';
+    if (easterEgg) {
+      if (host === 'claude.ai' || host.endsWith('.claude.ai'))   return 'ezr-claude';
+      if (host === 'chatgpt.com' || host.endsWith('.chatgpt.com')) return 'ezr-chatgpt';
+    }
+    return enabled ? activeHack : 'off';
+  }
+
+  async function reactivateFromStorage() {
+    try {
+      const { activeHack, enabled, easterEgg } = await chrome.storage.local.get({
+        activeHack: 'off',
+        enabled:    true,
+        easterEgg:  false,
+      });
+      activate(pickTheme(easterEgg, enabled, activeHack));
+    } catch (e) {
+      // chrome.storage unavailable - do nothing
+    }
+  }
+  NS.reactivateFromStorage = reactivateFromStorage;
+
+  // Listen for messages from popup. setHack carries the new selection but we
+  // re-read storage in case other state (easterEgg, enabled) is relevant.
+  // reactivate is a pure "re-evaluate from storage" signal.
   chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-    if (msg && msg.type === 'setHack') {
-      activate(msg.hack);
+    if (msg && (msg.type === 'setHack' || msg.type === 'reactivate')) {
+      reactivateFromStorage();
       sendResponse({ ok: true });
       return true;
     }
   });
 
-  // On script load, read current selection + enabled flag, then activate
-  (async () => {
-    try {
-      const { activeHack, enabled } = await chrome.storage.local.get({
-        activeHack: 'off',
-        enabled: true,
-      });
-      activate(enabled ? activeHack : 'off');
-    } catch (e) {
-      // chrome.storage unavailable - do nothing
-    }
-  })();
+  // On script load, evaluate from storage and apply
+  reactivateFromStorage();
 })();

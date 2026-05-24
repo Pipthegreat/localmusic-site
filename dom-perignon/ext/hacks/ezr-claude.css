@@ -1,0 +1,1657 @@
+/* ============================================================
+   Claude hacker.io — Chrome Extension Edition
+   Version 1.13.0
+   Author: Raleigh
+   
+   Terminal-green phosphor theme for claude.ai.
+   Injected via Manifest V3 content_script (scoped by manifest).
+   ============================================================ */
+
+/* ============================================================
+     1. PALETTE — phosphor greens on near-black
+     ============================================================ */
+    :root {
+        --hk-void:           #000000;       /* absolute black */
+        --hk-deep:           #030a03;       /* body bg */
+        --hk-panel:          #061206;       /* message bubble bg */
+        --hk-panel-deeper:   #020602;       /* darker panels */
+        --hk-phosphor:       #00ff41;       /* signature phosphor green */
+        --hk-phosphor-bright:#39ff14;       /* brighter — send button, focus */
+        --hk-phosphor-pale:  #c8ffc8;       /* readable prose green */
+        --hk-phosphor-dim:   #00b32d;       /* secondary text */
+        --hk-phosphor-deep:  #003b00;       /* borders, dim accents */
+        --hk-phosphor-darkest:#001a00;      /* darkest green */
+        --hk-acid:           #7fff00;       /* highlights */
+        --hk-amber:          #ffb000;       /* warnings / pop accent (terminal amber) */
+        --hk-cyan-glitch:    #00ffd5;       /* chromatic aberration left split */
+        --hk-magenta-glitch: #ff00aa;       /* chromatic aberration right split */
+        --hk-text:           #b8ffb8;       /* main body text */
+        --hk-text-muted:     #5fa05f;       /* muted text */
+    }
+
+    /* ============================================================
+     2. READABILITY FLOOR
+     ============================================================ */
+    html,
+    body {
+        background-color: var(--hk-void) !important;
+        position: relative !important;
+    }
+
+    button,
+    input,
+    textarea,
+    select,
+    a {
+        color: var(--hk-phosphor-pale) !important;
+    }
+
+    /* ============================================================
+     3. ARTIFACT VIEWER OPT-OUT — work surface stays native
+     ============================================================ */
+    [class*="artifact"],
+    [data-testid*="artifact"],
+    [aria-label*="artifact" i],
+    iframe[title*="artifact" i],
+    div:has(> [class*="hljs"]),
+    pre[class*="language-"],
+    [class*="side-panel"],
+    [class*="preview-panel"] {
+        background: #1e1e1e !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        animation: none !important;
+    }
+
+    [class*="artifact"] *,
+    [data-testid*="artifact"] *,
+    [aria-label*="artifact" i] *,
+    [class*="side-panel"] *,
+    [class*="preview-panel"] * {
+        color: #d4d4d4 !important;
+        background-color: transparent !important;
+        border-color: rgba(255,255,255,0.08) !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        font-style: normal !important;
+        text-transform: none !important;
+        letter-spacing: normal !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        animation: none !important;
+        filter: none !important;
+    }
+
+    /* VS Code-ish syntax tokens inside artifact panel */
+    [class*="artifact"] .hljs-keyword,
+    [class*="artifact"] .hljs-selector-tag,
+    [class*="side-panel"] .hljs-keyword {
+        color: #569cd6 !important;
+    }
+    [class*="artifact"] .hljs-string,
+    [class*="side-panel"] .hljs-string {
+        color: #ce9178 !important;
+    }
+    [class*="artifact"] .hljs-comment,
+    [class*="side-panel"] .hljs-comment {
+        color: #6a9955 !important;
+        font-style: italic !important;
+    }
+    [class*="artifact"] .hljs-number,
+    [class*="side-panel"] .hljs-number {
+        color: #b5cea8 !important;
+    }
+    [class*="artifact"] .hljs-function,
+    [class*="artifact"] .hljs-title,
+    [class*="side-panel"] .hljs-function {
+        color: #dcdcaa !important;
+    }
+
+    /* ============================================================
+     4. IMAGE LIGHTBOX KILL-SWITCH — opt out completely
+     ============================================================ */
+    [role="dialog"]:has(img),
+    [role="dialog"]:has(picture),
+    [aria-modal="true"]:has(img),
+    [aria-modal="true"]:has(picture),
+    [class*="lightbox"],
+    [class*="Lightbox"],
+    [class*="image-viewer"],
+    [class*="ImageViewer"],
+    [class*="image-modal"],
+    [class*="ImageModal"],
+    [class*="image-preview-modal"],
+    [data-testid*="image-viewer"],
+    [data-testid*="lightbox"],
+    [data-testid*="image-modal"],
+    div[data-state="open"]:has(img),
+    div[data-radix-portal]:has(img) {
+        all: revert !important;
+    }
+
+    [role="dialog"]:has(img) *,
+    [role="dialog"]:has(picture) *,
+    [aria-modal="true"]:has(img) *,
+    [aria-modal="true"]:has(picture) *,
+    [class*="lightbox"] *,
+    [class*="Lightbox"] *,
+    [class*="image-viewer"] *,
+    [class*="ImageViewer"] *,
+    [class*="image-modal"] *,
+    [class*="ImageModal"] *,
+    [data-testid*="image-viewer"] *,
+    [data-testid*="lightbox"] *,
+    div[data-state="open"]:has(img) *,
+    div[data-radix-portal]:has(img) * {
+        all: revert !important;
+    }
+
+    img,
+    picture {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    [class*="font-user-message"] img,
+    [class*="font-claude-message"] img,
+    [class*="font-user-message"] picture,
+    [class*="font-claude-message"] picture {
+        max-width: 100% !important;
+        height: auto !important;
+        display: inline-block !important;
+        cursor: zoom-in !important;
+    }
+
+    /* ============================================================
+     5. ATTACHMENT REVERT — preserve native X (remove) button
+     ============================================================ */
+    [class*="attachment"],
+    [class*="upload"],
+    [data-testid*="attachment"],
+    [data-testid*="upload"],
+    [class*="file-preview"],
+    [aria-label*="attachment" i],
+    [class*="attachment"] *,
+    [class*="upload"] *,
+    [data-testid*="attachment"] *,
+    [data-testid*="upload"] *,
+    [class*="file-preview"] *,
+    [aria-label*="attachment" i] * {
+        all: revert !important;
+    }
+
+    /* ============================================================
+     6. BACKGROUND — FALLING GLYPH RAIN (v1.6)
+     ----
+     Five independent layers at five distinct fall rates so columns
+     drift in and out of phase over time.
+
+       Layer A1 (body::before) — half of A's cols, 14s fall  (fast)
+       Layer A2 (body::after)  — other half of A,  19s fall  (medium)
+       Layer B  (html::after)  — all B columns,    24s fall
+       Layer C  (main::before) — all C columns,    31s fall  (slowest back)
+       Front    (main::after)  — densified to 16 cols, 9s fall (fastest)
+
+     NEW IN v1.6:
+       1. Front layer densified from 8 to 16 columns at ~20px spacing.
+          When stacked with the back layers, this guarantees no empty
+          vertical corridor wider than 24px across any 1920px viewport
+          projection (verified algorithmically). The wide black bands
+          visible in v1.5 are eliminated.
+
+       2. Drift durations cut in half (75s-195s vs 150s-390s in v1.5).
+          Drift is now ~4 pixels/sec — perceptible without being
+          distracting. The rain visibly migrates horizontally during a
+          session.
+
+       3. Mask tightened aggressively (ellipse 38% 48%, falloff complete
+          at 50% radius). Rain is fully visible immediately outside the
+          prose-reading column.
+
+     Within each tile, columns honor min (1.4× glyph) and max (2.4×
+     glyph) gap constraints. The drift moves whole tiles, preserving
+     internal column spacing.
+     ============================================================ */
+    body {
+        background-color: var(--hk-void) !important;
+        position: relative !important;
+    }
+
+    /* v2.1: PER-PAGE RAIN OFFSETS — shift background-position on each
+       rain layer using distinct values per page route, so columns land
+       in different horizontal slots on /chats vs /projects vs project
+       detail pages. Detection uses :has() to spot page-specific elements.
+
+       Pseudo-elements must be addressed directly on the element they
+       belong to (e.g. html:has(...)::after, not html:has(...) html::after).
+       Hence the slightly verbose syntax below. */
+
+    /* Default (open-chat view, new-chat view) — baseline 0 offsets, no override */
+
+    /* Chats list page (/recents) — main contains a <table> */
+    html:has(main table) body::before {
+        background-position: 83px 0 !important;
+    }
+    html:has(main table) body::after {
+        background-position: -119px 0 !important;
+    }
+    html:has(main table)::after {
+        background-position: 61px 0 !important;
+    }
+    html:has(main table) main::before {
+        background-position: -43px 0 !important;
+    }
+    html:has(main table) main::after {
+        background-position: 197px 0 !important;
+    }
+
+    /* Projects index page (/projects) — main contains a grid of project links */
+    html:has(main ul a[href*="/project/"]) body::before {
+        background-position: -207px 0 !important;
+    }
+    html:has(main ul a[href*="/project/"]) body::after {
+        background-position: 91px 0 !important;
+    }
+    html:has(main ul a[href*="/project/"])::after {
+        background-position: -157px 0 !important;
+    }
+    html:has(main ul a[href*="/project/"]) main::before {
+        background-position: 113px 0 !important;
+    }
+    html:has(main ul a[href*="/project/"]) main::after {
+        background-position: -89px 0 !important;
+    }
+
+    /* Individual project page — Files section present */
+    html:has([aria-label*="Files" i]) body::before {
+        background-position: 137px 0 !important;
+    }
+    html:has([aria-label*="Files" i]) body::after {
+        background-position: -71px 0 !important;
+    }
+    html:has([aria-label*="Files" i])::after {
+        background-position: 179px 0 !important;
+    }
+    html:has([aria-label*="Files" i]) main::before {
+        background-position: -103px 0 !important;
+    }
+    html:has([aria-label*="Files" i]) main::after {
+        background-position: 53px 0 !important;
+    }
+
+    /* Layer A1 — fast half of A's columns */
+    body::before {
+        content: "" !important;
+        position: fixed !important;
+        top: -100vh !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 300vh !important;
+        z-index: 0 !important;
+        pointer-events: none !important;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='478' height='828' viewBox='0 0 478 828'><style>text{font-family:Courier New,monospace;font-size:18px;fill:%2300b32d;opacity:0.55}.b{fill:%2300ff41;opacity:0.85}.h{fill:%23c8ffc8;opacity:1}</style><g><text x='28' y='28' class='b'>ﾋ</text><text x='28' y='49'>ﾋ</text><text x='28' y='70'>ﾘ</text><text x='28' y='91'>ﾋ</text><text x='28' y='112'>ﾒ</text><text x='28' y='133'>ｳ</text><text x='28' y='154'>ﾜ</text><text x='28' y='175'>ﾗ</text><text x='28' y='196' class='b'>ﾜ</text><text x='28' y='217'>ζ</text><text x='28' y='238'>ﾓ</text><text x='28' y='259'>γ</text><text x='28' y='280'>ﾃ</text><text x='28' y='301'>β</text><text x='28' y='322'>ﾂ</text><text x='28' y='343'>Χ</text><text x='28' y='364' class='b'>ᚹ</text><text x='28' y='385'>Τ</text><text x='28' y='406'>Θ</text><text x='28' y='427' class='h'>Κ</text><text x='28' y='448'>ﾈ</text><text x='28' y='469'>β</text><text x='28' y='490'>Μ</text><text x='28' y='511'>ﾏ</text><text x='28' y='532' class='b'>ᚨ</text><text x='28' y='553'>ｱ</text><text x='28' y='574'>ﾃ</text><text x='28' y='595'>ﾇ</text><text x='28' y='616'>Θ</text><text x='28' y='637'>Β</text><text x='28' y='658'>σ</text><text x='28' y='679'>ﾇ</text><text x='28' y='700' class='b'>ﾊ</text><text x='28' y='721'>ﾘ</text><text x='28' y='763'>ﾋ</text><text x='28' y='784'>γ</text><text x='28' y='805'>ｳ</text><text x='92' y='49'>ﾐ</text><text x='92' y='70'>Ρ</text><text x='92' y='91'>ｰ</text><text x='92' y='112' class='b'>Γ</text><text x='92' y='133'>ｾ</text><text x='92' y='154'>ﾑ</text><text x='92' y='175'>π</text><text x='92' y='196' class='b'>ﾂ</text><text x='92' y='217'>ｳ</text><text x='92' y='259'>ᚨ</text><text x='92' y='280' class='b'>ﾈ</text><text x='92' y='301'>ﾗ</text><text x='92' y='322'>ﾈ</text><text x='92' y='343'>ﾕ</text><text x='92' y='364' class='b'>ﾘ</text><text x='92' y='385'>ᚺ</text><text x='92' y='406' class='h'>χ</text><text x='92' y='427'>ﾁ</text><text x='92' y='448' class='b'>ﾎ</text><text x='92' y='469'>Ζ</text><text x='92' y='490'>ﾜ</text><text x='92' y='532' class='b'>ᚢ</text><text x='92' y='574'>ᚱ</text><text x='92' y='595'>ｼ</text><text x='92' y='616' class='b'>ﾐ</text><text x='92' y='637'>ε</text><text x='92' y='658'>Ε</text><text x='92' y='679'>ψ</text><text x='92' y='700' class='b'>ｶ</text><text x='92' y='721'>ᛉ</text><text x='92' y='763'>ﾁ</text><text x='92' y='784' class='h'>ｰ</text><text x='92' y='805'>ｱ</text><text x='172' y='34' class='b'>ﾘ</text><text x='172' y='58'>ｼ</text><text x='172' y='82'>ﾎ</text><text x='172' y='106'>ﾃ</text><text x='172' y='130' class='b'>ﾊ</text><text x='172' y='154'>ﾎ</text><text x='172' y='178'>ﾇ</text><text x='172' y='202'>ｴ</text><text x='172' y='226' class='b'>Γ</text><text x='172' y='250'>Ο</text><text x='172' y='322' class='b'>Ο</text><text x='172' y='346'>ᚺ</text><text x='172' y='370' class='h'>ﾕ</text><text x='172' y='394'>ｽ</text><text x='172' y='418' class='b'>Β</text><text x='172' y='442'>ﾓ</text><text x='172' y='466'>Ξ</text><text x='172' y='490'>ψ</text><text x='172' y='514' class='b'>ﾊ</text><text x='172' y='538'>π</text><text x='172' y='586'>ﾜ</text><text x='172' y='658'>ﾋ</text><text x='172' y='682'>ﾋ</text><text x='172' y='706' class='h'>ᛊ</text><text x='172' y='730'>ω</text><text x='172' y='754'>ｶ</text><text x='172' y='778'>ｱ</text><text x='172' y='802' class='b'>ﾐ</text><text x='228' y='38' class='b'>Β</text><text x='228' y='63'>Ρ</text><text x='228' y='88'>δ</text><text x='228' y='113'>ｵ</text><text x='228' y='138'>ｾ</text><text x='228' y='163'>ﾁ</text><text x='228' y='188'>Δ</text><text x='228' y='213'>ﾐ</text><text x='228' y='238' class='b'>ﾜ</text><text x='228' y='263'>ﾘ</text><text x='228' y='288'>ᛚ</text><text x='228' y='313'>ｼ</text><text x='228' y='338'>ﾖ</text><text x='228' y='363'>ｻ</text><text x='228' y='388'>ﾋ</text><text x='228' y='413'>ᛟ</text><text x='228' y='438' class='h'>γ</text><text x='228' y='463'>ᛖ</text><text x='228' y='488'>ﾒ</text><text x='228' y='513'>π</text><text x='228' y='563'>ﾇ</text><text x='228' y='588'>λ</text><text x='228' y='638' class='b'>ｵ</text><text x='228' y='663'>ﾀ</text><text x='228' y='688'>ｵ</text><text x='228' y='713'>ᛁ</text><text x='228' y='738'>ﾆ</text><text x='228' y='788'>ﾈ</text><text x='292' y='36' class='b'>ﾅ</text><text x='292' y='61'>ﾅ</text><text x='292' y='111'>ｷ</text><text x='292' y='136' class='b'>ﾎ</text><text x='292' y='161'>ｽ</text><text x='292' y='186'>ﾜ</text><text x='292' y='211'>Ο</text><text x='292' y='236' class='b'>ｴ</text><text x='292' y='261'>ﾋ</text><text x='292' y='286'>ﾏ</text><text x='292' y='311'>ﾎ</text><text x='292' y='336' class='b'>ﾇ</text><text x='292' y='361'>ｽ</text><text x='292' y='386'>ﾎ</text><text x='292' y='411'>ﾖ</text><text x='292' y='436' class='b'>ᛒ</text><text x='292' y='461'>ﾓ</text><text x='292' y='486'>ﾅ</text><text x='292' y='511' class='h'>ᛊ</text><text x='292' y='536' class='b'>ﾗ</text><text x='292' y='561'>ｽ</text><text x='292' y='611'>ﾒ</text><text x='292' y='661'>ﾗ</text><text x='292' y='686'>ｽ</text><text x='292' y='736' class='b'>ﾐ</text><text x='292' y='761'>ﾑ</text><text x='292' y='786'>ﾒ</text></g></svg>") !important;
+        background-repeat: repeat !important;
+        background-size: 478px 828px !important;
+        background-position: 0 0 !important;
+        animation: hk-rain-a1 14s linear infinite, hk-drift-a1 120s linear infinite !important;
+        will-change: transform, background-position !important;
+        opacity: 0.55 !important;
+        -webkit-mask-image: radial-gradient(ellipse 38% 48% at 50% 50%,
+            rgba(0,0,0,0.15) 0%,
+            rgba(0,0,0,0.4) 12%,
+            rgba(0,0,0,0.85) 30%,
+            rgba(0,0,0,1) 50%,
+            rgba(0,0,0,1) 100%) !important;
+        mask-image: radial-gradient(ellipse 38% 48% at 50% 50%,
+            rgba(0,0,0,0.15) 0%,
+            rgba(0,0,0,0.4) 12%,
+            rgba(0,0,0,0.85) 30%,
+            rgba(0,0,0,1) 50%,
+            rgba(0,0,0,1) 100%) !important;
+    }
+
+    /* Layer A2 — slow half of A's columns, drifts opposite direction */
+    body::after {
+        content: "" !important;
+        position: fixed !important;
+        top: -100vh !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 300vh !important;
+        z-index: 0 !important;
+        pointer-events: none !important;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='478' height='828' viewBox='0 0 478 828'><style>text{font-family:Courier New,monospace;font-size:18px;fill:%2300b32d;opacity:0.52}.b{fill:%2300ff41;opacity:0.82}.h{fill:%23c8ffc8;opacity:1}</style><g><text x='54' y='44' class='b'>ᛗ</text><text x='54' y='72'>ﾖ</text><text x='54' y='100'>ᛞ</text><text x='54' y='128'>ᛃ</text><text x='54' y='156' class='b'>Χ</text><text x='54' y='184'>ﾓ</text><text x='54' y='212'>ᚺ</text><text x='54' y='240'>ｻ</text><text x='54' y='268' class='b'>ﾂ</text><text x='54' y='296'>ᛟ</text><text x='54' y='324'>ｵ</text><text x='54' y='352'>ᛉ</text><text x='54' y='380' class='b'>ｾ</text><text x='54' y='408'>ﾕ</text><text x='54' y='436' class='h'>ｼ</text><text x='54' y='464'>ｹ</text><text x='54' y='492' class='b'>ﾅ</text><text x='54' y='520'>ﾁ</text><text x='54' y='548'>ﾀ</text><text x='54' y='576'>ｶ</text><text x='54' y='604' class='b'>ｾ</text><text x='54' y='632'>ﾎ</text><text x='54' y='660'>ﾎ</text><text x='54' y='688'>ᛖ</text><text x='54' y='716' class='b'>Θ</text><text x='54' y='744'>ｳ</text><text x='54' y='772'>ﾇ</text><text x='54' y='800'>ﾑ</text><text x='133' y='24' class='b'>λ</text><text x='133' y='47'>ε</text><text x='133' y='70'>ﾀ</text><text x='133' y='93'>ﾆ</text><text x='133' y='116'>ｰ</text><text x='133' y='139'>ﾀ</text><text x='133' y='185'>ﾃ</text><text x='133' y='208'>ｴ</text><text x='133' y='231'>ω</text><text x='133' y='254'>ｳ</text><text x='133' y='300' class='b'>ｰ</text><text x='133' y='323'>Ν</text><text x='133' y='346'>ﾋ</text><text x='133' y='369'>ﾈ</text><text x='133' y='438' class='h'>ｹ</text><text x='133' y='461'>ｶ</text><text x='133' y='484'>ﾃ</text><text x='133' y='507'>ﾀ</text><text x='133' y='530'>ᛞ</text><text x='133' y='553'>ﾘ</text><text x='133' y='576' class='b'>Γ</text><text x='133' y='622'>Β</text><text x='133' y='645'>ﾓ</text><text x='133' y='668'>ﾇ</text><text x='133' y='691'>ｴ</text><text x='133' y='760'>ᚨ</text><text x='133' y='806'>ｶ</text><text x='202' y='31' class='b'>ﾗ</text><text x='202' y='54'>ζ</text><text x='202' y='77'>ﾆ</text><text x='202' y='100'>ﾈ</text><text x='202' y='123' class='b'>ﾅ</text><text x='202' y='146'>ﾅ</text><text x='202' y='169'>ﾏ</text><text x='202' y='192'>ｼ</text><text x='202' y='215' class='b'>ﾕ</text><text x='202' y='238'>ﾜ</text><text x='202' y='261'>ｶ</text><text x='202' y='284'>ﾜ</text><text x='202' y='307' class='b'>ｴ</text><text x='202' y='330'>ﾐ</text><text x='202' y='353'>Φ</text><text x='202' y='376'>ﾒ</text><text x='202' y='399' class='b'>ᛗ</text><text x='202' y='445'>ﾆ</text><text x='202' y='468'>ﾕ</text><text x='202' y='491' class='b'>ｾ</text><text x='202' y='514'>Φ</text><text x='202' y='560'>ﾗ</text><text x='202' y='583' class='b'>ｽ</text><text x='202' y='606'>ｽ</text><text x='202' y='629'>ﾆ</text><text x='202' y='652'>ﾁ</text><text x='202' y='675' class='b'>ﾖ</text><text x='202' y='698'>ﾇ</text><text x='202' y='721'>ﾆ</text><text x='202' y='744'>ｶ</text><text x='202' y='767' class='b'>ω</text><text x='202' y='790'>ｾ</text><text x='202' y='813'>ｳ</text><text x='258' y='32' class='b'>ｼ</text><text x='258' y='55'>ﾂ</text><text x='258' y='78'>θ</text><text x='258' y='101'>ᛜ</text><text x='258' y='124'>ｳ</text><text x='258' y='147'>ﾊ</text><text x='258' y='170'>ﾕ</text><text x='258' y='193' class='b'>ﾇ</text><text x='258' y='216'>ﾀ</text><text x='258' y='239'>ﾃ</text><text x='258' y='262'>ﾜ</text><text x='258' y='308'>ﾓ</text><text x='258' y='331'>ﾏ</text><text x='258' y='354' class='b'>ﾏ</text><text x='258' y='377'>ﾓ</text><text x='258' y='400'>ﾒ</text><text x='258' y='423'>ｰ</text><text x='258' y='446'>ｳ</text><text x='258' y='469'>Ξ</text><text x='258' y='492'>ｶ</text><text x='258' y='515' class='b'>ｴ</text><text x='258' y='538' class='h'>ｾ</text><text x='258' y='561'>Τ</text><text x='258' y='584'>ﾃ</text><text x='258' y='607'>ﾜ</text><text x='258' y='630'>ﾒ</text><text x='258' y='653'>ｷ</text><text x='258' y='676' class='b'>ｻ</text><text x='258' y='699'>ᚱ</text><text x='258' y='722'>γ</text><text x='258' y='745'>Α</text><text x='258' y='768'>Υ</text><text x='258' y='791'>ᚾ</text><text x='258' y='814'>ｹ</text><text x='326' y='33' class='b'>ｹ</text><text x='326' y='61'>ﾓ</text><text x='326' y='89'>ｻ</text><text x='326' y='117'>ﾃ</text><text x='326' y='145'>Β</text><text x='326' y='173' class='b'>ｶ</text><text x='326' y='201'>Κ</text><text x='326' y='229'>ﾃ</text><text x='326' y='257'>ᚷ</text><text x='326' y='285'>ᛊ</text><text x='326' y='313' class='b'>ᛚ</text><text x='326' y='341'>ｻ</text><text x='326' y='369'>Ρ</text><text x='326' y='397'>ｱ</text><text x='326' y='425'>ｾ</text><text x='326' y='453' class='b'>θ</text><text x='326' y='481'>ｱ</text><text x='326' y='509'>π</text><text x='326' y='537'>ﾖ</text><text x='326' y='565' class='h'>ᛊ</text><text x='326' y='593' class='b'>ｷ</text><text x='326' y='621'>ｱ</text><text x='326' y='649'>ﾇ</text><text x='326' y='677'>ξ</text><text x='326' y='705'>ｽ</text><text x='326' y='733' class='b'>ﾗ</text><text x='326' y='761'>ﾂ</text><text x='326' y='789'>ﾃ</text><text x='326' y='817'>ﾒ</text></g></svg>") !important;
+        background-repeat: repeat !important;
+        background-size: 478px 828px !important;
+        background-position: 0 0 !important;
+        animation: hk-rain-a2 19s linear infinite, hk-drift-a2 165s linear infinite !important;
+        will-change: transform, background-position !important;
+        opacity: 0.52 !important;
+        -webkit-mask-image: radial-gradient(ellipse 38% 48% at 50% 50%,
+            rgba(0,0,0,0.15) 0%,
+            rgba(0,0,0,0.4) 12%,
+            rgba(0,0,0,0.85) 30%,
+            rgba(0,0,0,1) 50%,
+            rgba(0,0,0,1) 100%) !important;
+        mask-image: radial-gradient(ellipse 38% 48% at 50% 50%,
+            rgba(0,0,0,0.15) 0%,
+            rgba(0,0,0,0.4) 12%,
+            rgba(0,0,0,0.85) 30%,
+            rgba(0,0,0,1) 50%,
+            rgba(0,0,0,1) 100%) !important;
+    }
+
+    /* Layer B — all columns, mid speed */
+    html::after {
+        content: "" !important;
+        position: fixed !important;
+        top: -100vh !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 300vh !important;
+        z-index: 0 !important;
+        pointer-events: none !important;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='405' height='699' viewBox='0 0 405 699'><style>text{font-family:Courier New,monospace;font-size:15px;fill:%2300b32d;opacity:0.5}.b{fill:%2300ff41;opacity:0.8}.h{fill:%23c8ffc8;opacity:1}</style><g><text x='21' y='29' class='b'>ﾆ</text><text x='21' y='49'>ｵ</text><text x='21' y='69'>ｰ</text><text x='21' y='89'>ｻ</text><text x='21' y='109' class='b'>ｱ</text><text x='21' y='129'>ｾ</text><text x='21' y='149'>ﾖ</text><text x='21' y='169'>ﾜ</text><text x='21' y='189' class='b'>ﾒ</text><text x='21' y='209'>ﾃ</text><text x='21' y='229'>Μ</text><text x='21' y='249'>ᛒ</text><text x='21' y='269' class='b'>ｰ</text><text x='21' y='289'>ﾀ</text><text x='21' y='309'>ｵ</text><text x='21' y='329'>Ν</text><text x='21' y='349' class='b'>ᛖ</text><text x='21' y='369'>ﾖ</text><text x='21' y='389' class='h'>ｶ</text><text x='21' y='409'>Σ</text><text x='21' y='429' class='b'>ᚷ</text><text x='21' y='449'>ﾃ</text><text x='21' y='469'>ｱ</text><text x='21' y='509' class='b'>ᛁ</text><text x='21' y='529'>ξ</text><text x='21' y='549'>ﾗ</text><text x='21' y='569'>Χ</text><text x='21' y='589' class='b'>ｵ</text><text x='21' y='629'>Ρ</text><text x='21' y='649'>ｴ</text><text x='21' y='669' class='b'>ﾈ</text><text x='21' y='689'>ﾎ</text><text x='46' y='20' class='b'>ﾏ</text><text x='46' y='52'>ᚾ</text><text x='46' y='84'>ﾈ</text><text x='46' y='100'>ﾘ</text><text x='46' y='116'>ﾓ</text><text x='46' y='132' class='b'>μ</text><text x='46' y='164'>ﾎ</text><text x='46' y='180'>ᚨ</text><text x='46' y='196'>ｳ</text><text x='46' y='212'>ﾃ</text><text x='46' y='228'>Τ</text><text x='46' y='244' class='b'>Ι</text><text x='46' y='260'>ｷ</text><text x='46' y='276'>ﾜ</text><text x='46' y='292' class='h'>ｷ</text><text x='46' y='308'>ｱ</text><text x='46' y='324'>ᛏ</text><text x='46' y='340'>ｶ</text><text x='46' y='356' class='b'>ｷ</text><text x='46' y='372'>Β</text><text x='46' y='388'>Φ</text><text x='46' y='404'>ﾂ</text><text x='46' y='420'>ｳ</text><text x='46' y='436'>ﾂ</text><text x='46' y='452'>ﾕ</text><text x='46' y='468' class='b'>ﾅ</text><text x='46' y='484'>ﾘ</text><text x='46' y='500'>ᛁ</text><text x='46' y='516'>ﾗ</text><text x='46' y='532'>χ</text><text x='46' y='548'>ｾ</text><text x='46' y='564' class='h'>ｵ</text><text x='46' y='596'>ﾓ</text><text x='46' y='612'>ｾ</text><text x='46' y='628'>ﾓ</text><text x='46' y='644'>Δ</text><text x='46' y='676'>ᛚ</text><text x='46' y='692' class='b'>ﾓ</text><text x='67' y='34' class='b'>π</text><text x='67' y='74'>Θ</text><text x='67' y='94'>ｶ</text><text x='67' y='114'>Ω</text><text x='67' y='134' class='b'>ｰ</text><text x='67' y='154'>Σ</text><text x='67' y='174'>ﾒ</text><text x='67' y='194'>ﾁ</text><text x='67' y='214'>ﾊ</text><text x='67' y='234' class='b'>ﾐ</text><text x='67' y='254'>ﾇ</text><text x='67' y='274'>ﾎ</text><text x='67' y='294'>Μ</text><text x='67' y='314'>ﾎ</text><text x='67' y='354'>ｼ</text><text x='67' y='374'>Θ</text><text x='67' y='414'>ᛁ</text><text x='67' y='434' class='b'>ｰ</text><text x='67' y='454'>σ</text><text x='67' y='474' class='h'>ﾓ</text><text x='67' y='494'>ᛜ</text><text x='67' y='514'>ᚺ</text><text x='67' y='534' class='b'>ﾋ</text><text x='67' y='554'>Δ</text><text x='67' y='574'>Δ</text><text x='67' y='594'>ｱ</text><text x='67' y='614'>ﾂ</text><text x='67' y='634' class='b'>Ι</text><text x='67' y='654'>ψ</text><text x='67' y='674'>ﾋ</text><text x='67' y='694'>σ</text><text x='100' y='21' class='b'>ﾗ</text><text x='100' y='57'>ζ</text><text x='100' y='75'>ζ</text><text x='100' y='93' class='b'>ｴ</text><text x='100' y='129'>ｰ</text><text x='100' y='147'>ｱ</text><text x='100' y='165' class='b'>ｱ</text><text x='100' y='183'>ｾ</text><text x='100' y='201'>ｹ</text><text x='100' y='219'>ｽ</text><text x='100' y='237' class='b'>ｴ</text><text x='100' y='255'>ﾃ</text><text x='100' y='273'>ﾜ</text><text x='100' y='291'>ﾋ</text><text x='100' y='309' class='b'>ｳ</text><text x='100' y='327' class='h'>ﾃ</text><text x='100' y='363'>Ι</text><text x='100' y='381' class='b'>λ</text><text x='100' y='399'>ﾒ</text><text x='100' y='417'>ﾃ</text><text x='100' y='435'>Κ</text><text x='100' y='453' class='b'>ﾐ</text><text x='100' y='471'>ｶ</text><text x='100' y='507'>Α</text><text x='100' y='525' class='b'>ﾈ</text><text x='100' y='543'>ｱ</text><text x='100' y='561'>ｹ</text><text x='100' y='615'>ｼ</text><text x='100' y='633' class='h'>ｶ</text><text x='100' y='651'>ﾆ</text><text x='100' y='669' class='b'>ｰ</text><text x='100' y='687'>ﾜ</text><text x='133' y='40'>ﾈ</text><text x='133' y='57'>η</text><text x='133' y='74'>Ζ</text><text x='133' y='108'>ᚢ</text><text x='133' y='125' class='b'>ｴ</text><text x='133' y='142'>Γ</text><text x='133' y='159'>ｽ</text><text x='133' y='176'>ｳ</text><text x='133' y='193'>ᛚ</text><text x='133' y='227' class='b'>ｽ</text><text x='133' y='244'>ﾘ</text><text x='133' y='261'>Υ</text><text x='133' y='278' class='h'>ᛗ</text><text x='133' y='295'>ﾕ</text><text x='133' y='329' class='b'>ｼ</text><text x='133' y='346'>ｷ</text><text x='133' y='363'>ﾊ</text><text x='133' y='380'>ﾀ</text><text x='133' y='397'>ｳ</text><text x='133' y='414'>ﾐ</text><text x='133' y='431' class='b'>ᚨ</text><text x='133' y='448'>ｷ</text><text x='133' y='465'>ﾁ</text><text x='133' y='482'>α</text><text x='133' y='499'>ﾐ</text><text x='133' y='516'>ﾐ</text><text x='133' y='533' class='h'>ｱ</text><text x='133' y='550'>ﾖ</text><text x='133' y='567'>ｽ</text><text x='133' y='584'>ﾗ</text><text x='133' y='601'>ｳ</text><text x='133' y='618'>ﾆ</text><text x='133' y='635' class='b'>ｼ</text><text x='133' y='652'>ｻ</text><text x='133' y='669'>ﾕ</text><text x='133' y='686'>ﾋ</text><text x='164' y='25' class='b'>ﾘ</text><text x='164' y='41'>ｾ</text><text x='164' y='57'>τ</text><text x='164' y='73'>ｴ</text><text x='164' y='105'>Τ</text><text x='164' y='121'>ᛊ</text><text x='164' y='137' class='b'>ᛞ</text><text x='164' y='153'>π</text><text x='164' y='185'>ﾊ</text><text x='164' y='201'>Ψ</text><text x='164' y='217'>Μ</text><text x='164' y='233'>ｰ</text><text x='164' y='249' class='b'>ﾃ</text><text x='164' y='265'>ﾘ</text><text x='164' y='281'>Κ</text><text x='164' y='297'>ﾖ</text><text x='164' y='313' class='h'>Π</text><text x='164' y='345'>ᛊ</text><text x='164' y='361' class='b'>φ</text><text x='164' y='377'>Δ</text><text x='164' y='393'>ﾁ</text><text x='164' y='409'>ｶ</text><text x='164' y='425'>θ</text><text x='164' y='441'>Φ</text><text x='164' y='457'>Τ</text><text x='164' y='473' class='b'>ﾘ</text><text x='164' y='489'>ᛏ</text><text x='164' y='505'>ﾋ</text><text x='164' y='537'>ｰ</text><text x='164' y='553'>ﾒ</text><text x='164' y='569'>ｶ</text><text x='164' y='585' class='b'>Ε</text><text x='164' y='601' class='h'>ﾏ</text><text x='164' y='649'>Η</text><text x='164' y='665'>ﾃ</text><text x='164' y='681'>ﾀ</text><text x='193' y='24' class='b'>ﾀ</text><text x='193' y='40'>ｴ</text><text x='193' y='56'>λ</text><text x='193' y='72'>ﾇ</text><text x='193' y='88'>ﾏ</text><text x='193' y='104'>Η</text><text x='193' y='120' class='b'>Ι</text><text x='193' y='136'>ᚨ</text><text x='193' y='152'>ﾀ</text><text x='193' y='168'>ｷ</text><text x='193' y='184'>ﾏ</text><text x='193' y='200'>λ</text><text x='193' y='216' class='b'>χ</text><text x='193' y='232' class='h'>ψ</text><text x='193' y='248'>ᛊ</text><text x='193' y='280'>ﾏ</text><text x='193' y='296'>Τ</text><text x='193' y='312' class='b'>ｷ</text><text x='193' y='328'>ﾇ</text><text x='193' y='344'>ﾊ</text><text x='193' y='360'>ｼ</text><text x='193' y='376'>Ο</text><text x='193' y='392'>ｽ</text><text x='193' y='408' class='b'>ᛏ</text><text x='193' y='424'>ﾇ</text><text x='193' y='440' class='h'>ﾑ</text><text x='193' y='456'>ﾕ</text><text x='193' y='472'>Ν</text><text x='193' y='488'>ᚱ</text><text x='193' y='504' class='b'>ﾈ</text><text x='193' y='520'>ｵ</text><text x='193' y='536'>ﾊ</text><text x='193' y='552'>Χ</text><text x='193' y='568'>τ</text><text x='193' y='584'>Ε</text><text x='193' y='600' class='b'>Π</text><text x='193' y='616'>ｰ</text><text x='193' y='632'>ｽ</text><text x='193' y='648' class='h'>ｵ</text><text x='193' y='664'>ﾈ</text><text x='193' y='680'>ﾆ</text><text x='219' y='26' class='b'>Ω</text><text x='219' y='43'>ﾖ</text><text x='219' y='60'>ﾁ</text><text x='219' y='94' class='b'>ﾏ</text><text x='219' y='111'>ﾈ</text><text x='219' y='128'>ｰ</text><text x='219' y='162' class='b'>ﾜ</text><text x='219' y='179'>ﾓ</text><text x='219' y='196'>ﾒ</text><text x='219' y='213'>ｹ</text><text x='219' y='230' class='b'>ｴ</text><text x='219' y='247'>ﾂ</text><text x='219' y='264'>ﾐ</text><text x='219' y='281'>η</text><text x='219' y='298' class='b'>ﾇ</text><text x='219' y='315'>ｳ</text><text x='219' y='332'>ﾏ</text><text x='219' y='349'>β</text><text x='219' y='366' class='b'>ᛖ</text><text x='219' y='383' class='h'>τ</text><text x='219' y='400'>ﾇ</text><text x='219' y='417'>ᛏ</text><text x='219' y='434' class='b'>ﾇ</text><text x='219' y='451'>Π</text><text x='219' y='468'>ﾅ</text><text x='219' y='485'>ｹ</text><text x='219' y='502' class='b'>φ</text><text x='219' y='519'>ﾈ</text><text x='219' y='536'>ｹ</text><text x='219' y='553'>ﾃ</text><text x='219' y='570' class='b'>ｼ</text><text x='219' y='587'>Ι</text><text x='219' y='604'>ﾏ</text><text x='219' y='621'>ｴ</text><text x='219' y='638' class='b'>ᛇ</text><text x='219' y='655'>Ο</text><text x='219' y='672'>ε</text><text x='219' y='689'>Τ</text><text x='255' y='52'>ﾏ</text><text x='255' y='71'>ﾋ</text><text x='255' y='90'>ｽ</text><text x='255' y='128'>ᚺ</text><text x='255' y='147' class='b'>ﾆ</text><text x='255' y='166'>ﾂ</text><text x='255' y='185'>ﾏ</text><text x='255' y='204'>ｼ</text><text x='255' y='223'>ｾ</text><text x='255' y='261' class='b'>Ζ</text><text x='255' y='280'>Σ</text><text x='255' y='299' class='h'>Α</text><text x='255' y='356'>ﾆ</text><text x='255' y='375' class='b'>ｶ</text><text x='255' y='394'>ﾈ</text><text x='255' y='413'>ﾒ</text><text x='255' y='432'>ﾊ</text><text x='255' y='451'>ﾑ</text><text x='255' y='470'>ᛇ</text><text x='255' y='489' class='b'>ﾒ</text><text x='255' y='508'>ｵ</text><text x='255' y='527'>ｶ</text><text x='255' y='565' class='h'>ｴ</text><text x='255' y='603' class='b'>ᛜ</text><text x='255' y='622'>ｶ</text><text x='255' y='641'>ｷ</text><text x='255' y='660'>ᛟ</text><text x='255' y='679'>ｾ</text></g></svg>") !important;
+        background-repeat: repeat !important;
+        background-size: 405px 699px !important;
+        background-position: 173px 0 !important;
+        animation: hk-rain-b 24s linear infinite, hk-drift-b 90s linear infinite !important;
+        will-change: transform, background-position !important;
+        opacity: 0.5 !important;
+        -webkit-mask-image: radial-gradient(ellipse 38% 48% at 50% 50%,
+            rgba(0,0,0,0.15) 0%,
+            rgba(0,0,0,0.4) 12%,
+            rgba(0,0,0,0.85) 30%,
+            rgba(0,0,0,1) 50%,
+            rgba(0,0,0,1) 100%) !important;
+        mask-image: radial-gradient(ellipse 38% 48% at 50% 50%,
+            rgba(0,0,0,0.15) 0%,
+            rgba(0,0,0,0.4) 12%,
+            rgba(0,0,0,0.85) 30%,
+            rgba(0,0,0,1) 50%,
+            rgba(0,0,0,1) 100%) !important;
+    }
+
+    /* Layer C — slowest back layer, largest glyphs */
+    main::before {
+        content: "" !important;
+        position: fixed !important;
+        top: -100vh !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 300vh !important;
+        z-index: 0 !important;
+        pointer-events: none !important;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='552' height='957' viewBox='0 0 552 957'><style>text{font-family:Courier New,monospace;font-size:21px;fill:%2300b32d;opacity:0.55}.b{fill:%2300ff41;opacity:0.85}.h{fill:%23c8ffc8;opacity:1}</style><g><text x='29' y='41' class='b'>ﾆ</text><text x='29' y='67'>ｶ</text><text x='29' y='93'>ﾁ</text><text x='29' y='119'>φ</text><text x='29' y='145'>ﾘ</text><text x='29' y='171' class='b'>Χ</text><text x='29' y='197'>ｹ</text><text x='29' y='223'>ﾓ</text><text x='29' y='249'>ｷ</text><text x='29' y='275'>ᚷ</text><text x='29' y='301' class='b'>ｱ</text><text x='29' y='327'>ψ</text><text x='29' y='353'>Μ</text><text x='29' y='379'>ﾃ</text><text x='29' y='405'>Μ</text><text x='29' y='431' class='b'>Π</text><text x='29' y='457' class='h'>ﾎ</text><text x='29' y='483'>ﾎ</text><text x='29' y='509'>ﾏ</text><text x='29' y='535'>Ξ</text><text x='29' y='561' class='b'>ﾘ</text><text x='29' y='587'>ｷ</text><text x='29' y='613'>ﾅ</text><text x='29' y='639'>ε</text><text x='29' y='665'>ﾊ</text><text x='29' y='691' class='b'>ﾏ</text><text x='29' y='717'>ᚨ</text><text x='29' y='743'>π</text><text x='29' y='769'>ｷ</text><text x='29' y='795'>ｱ</text><text x='29' y='821' class='b'>μ</text><text x='29' y='847'>Ζ</text><text x='29' y='873' class='h'>μ</text><text x='29' y='899'>Η</text><text x='29' y='925'>ﾑ</text><text x='29' y='951' class='b'>ｷ</text><text x='65' y='30' class='b'>δ</text><text x='65' y='52'>ﾑ</text><text x='65' y='74'>ﾑ</text><text x='65' y='96'>ﾑ</text><text x='65' y='118' class='b'>ᚨ</text><text x='65' y='140'>ｴ</text><text x='65' y='162'>χ</text><text x='65' y='184'>ﾀ</text><text x='65' y='206' class='b'>ｻ</text><text x='65' y='228'>ᛉ</text><text x='65' y='250'>ﾀ</text><text x='65' y='272'>ｱ</text><text x='65' y='294' class='b'>ﾕ</text><text x='65' y='316'>σ</text><text x='65' y='338'>γ</text><text x='65' y='360'>ｼ</text><text x='65' y='404'>ｽ</text><text x='65' y='448'>ﾋ</text><text x='65' y='470' class='b'>ｰ</text><text x='65' y='492'>ﾓ</text><text x='65' y='514' class='h'>ﾐ</text><text x='65' y='536'>ｶ</text><text x='65' y='558' class='b'>ﾜ</text><text x='65' y='580'>θ</text><text x='65' y='602'>ﾂ</text><text x='65' y='624'>ᚱ</text><text x='65' y='668'>ﾘ</text><text x='65' y='690'>ᛜ</text><text x='65' y='712'>ﾗ</text><text x='65' y='734' class='b'>Σ</text><text x='65' y='778'>ｼ</text><text x='65' y='800'>ᚱ</text><text x='65' y='822' class='b'>ﾒ</text><text x='65' y='844'>ﾂ</text><text x='65' y='888'>ᛃ</text><text x='65' y='910' class='b'>ﾅ</text><text x='65' y='932'>γ</text><text x='111' y='34' class='b'>Α</text><text x='111' y='57'>Κ</text><text x='111' y='80'>ᛇ</text><text x='111' y='103'>ﾆ</text><text x='111' y='126'>ᚱ</text><text x='111' y='149'>ﾗ</text><text x='111' y='172'>ﾓ</text><text x='111' y='195'>β</text><text x='111' y='218' class='b'>τ</text><text x='111' y='241'>ﾖ</text><text x='111' y='264'>ﾋ</text><text x='111' y='287'>ᚺ</text><text x='111' y='310'>ｱ</text><text x='111' y='333'>ﾀ</text><text x='111' y='356'>ﾋ</text><text x='111' y='379' class='h'>ｵ</text><text x='111' y='402' class='b'>ᛊ</text><text x='111' y='425'>ﾁ</text><text x='111' y='448'>ｾ</text><text x='111' y='471'>ｱ</text><text x='111' y='494'>ᛚ</text><text x='111' y='517'>γ</text><text x='111' y='563'>ﾊ</text><text x='111' y='586' class='b'>Ι</text><text x='111' y='609'>ﾓ</text><text x='111' y='632'>ﾓ</text><text x='111' y='655'>ｻ</text><text x='111' y='678'>ﾏ</text><text x='111' y='701'>ｱ</text><text x='111' y='724' class='h'>χ</text><text x='111' y='747'>ｰ</text><text x='111' y='770' class='b'>ﾗ</text><text x='111' y='793'>ﾓ</text><text x='111' y='816'>ｷ</text><text x='111' y='839'>ᚠ</text><text x='111' y='862'>ᚲ</text><text x='111' y='885'>ｻ</text><text x='111' y='908'>ﾂ</text><text x='111' y='931'>ｱ</text><text x='145' y='35' class='b'>χ</text><text x='145' y='60'>ｵ</text><text x='145' y='85'>ﾓ</text><text x='145' y='110'>ᛞ</text><text x='145' y='135'>Ν</text><text x='145' y='160'>ｶ</text><text x='145' y='185' class='b'>ｴ</text><text x='145' y='210'>ｴ</text><text x='145' y='235'>ﾒ</text><text x='145' y='260'>ﾏ</text><text x='145' y='285'>ﾏ</text><text x='145' y='310'>ﾀ</text><text x='145' y='335' class='b'>ᛗ</text><text x='145' y='360'>α</text><text x='145' y='385'>ﾃ</text><text x='145' y='410' class='h'>ｴ</text><text x='145' y='435'>Π</text><text x='145' y='460'>ﾖ</text><text x='145' y='485' class='b'>μ</text><text x='145' y='510'>ｹ</text><text x='145' y='535'>ﾎ</text><text x='145' y='560'>Υ</text><text x='145' y='585'>ᛚ</text><text x='145' y='610'>ﾇ</text><text x='145' y='635' class='b'>ᚠ</text><text x='145' y='660'>Ε</text><text x='145' y='685'>ﾒ</text><text x='145' y='710'>ｵ</text><text x='145' y='735'>Κ</text><text x='145' y='760'>ω</text><text x='145' y='785' class='h'>ﾎ</text><text x='145' y='810'>ᛉ</text><text x='145' y='835'>ｻ</text><text x='145' y='860'>ｼ</text><text x='145' y='885'>ﾀ</text><text x='145' y='910'>ﾋ</text><text x='145' y='935' class='b'>ﾒ</text><text x='190' y='37' class='b'>ﾋ</text><text x='190' y='65'>ﾁ</text><text x='190' y='93'>ｴ</text><text x='190' y='121'>ﾗ</text><text x='190' y='149'>ﾜ</text><text x='190' y='177'>ﾐ</text><text x='190' y='205'>ﾂ</text><text x='190' y='233' class='b'>ﾘ</text><text x='190' y='261'>ﾑ</text><text x='190' y='289'>ﾏ</text><text x='190' y='317'>ﾈ</text><text x='190' y='345'>ᛉ</text><text x='190' y='373'>ｵ</text><text x='190' y='401'>ᛟ</text><text x='190' y='429' class='b'>Ν</text><text x='190' y='457' class='h'>ｼ</text><text x='190' y='485'>Τ</text><text x='190' y='513'>ﾅ</text><text x='190' y='541'>ﾇ</text><text x='190' y='569'>ᚾ</text><text x='190' y='625' class='b'>ﾒ</text><text x='190' y='653'>ｰ</text><text x='190' y='681'>ｵ</text><text x='190' y='709'>ﾂ</text><text x='190' y='737'>ﾂ</text><text x='190' y='765'>ｳ</text><text x='190' y='793'>ｳ</text><text x='190' y='821' class='b'>ﾑ</text><text x='190' y='877' class='h'>ᚷ</text><text x='190' y='905'>ﾋ</text><text x='190' y='933'>ｼ</text><text x='232' y='22' class='b'>ﾃ</text><text x='232' y='48'>ﾎ</text><text x='232' y='74'>ﾒ</text><text x='232' y='100'>ﾖ</text><text x='232' y='126'>η</text><text x='232' y='152'>ｹ</text><text x='232' y='178'>Ρ</text><text x='232' y='204'>ᛉ</text><text x='232' y='230' class='b'>Ρ</text><text x='232' y='256'>ﾇ</text><text x='232' y='282'>ﾐ</text><text x='232' y='308'>ﾜ</text><text x='232' y='334'>ﾎ</text><text x='232' y='360'>ﾈ</text><text x='232' y='386'>ﾎ</text><text x='232' y='412'>δ</text><text x='232' y='438' class='b'>ﾎ</text><text x='232' y='464'>ᛜ</text><text x='232' y='490'>ｱ</text><text x='232' y='516' class='h'>ﾋ</text><text x='232' y='542'>Ι</text><text x='232' y='568'>ﾘ</text><text x='232' y='594'>Ν</text><text x='232' y='620'>π</text><text x='232' y='646' class='b'>σ</text><text x='232' y='698'>ﾑ</text><text x='232' y='724'>ᛏ</text><text x='232' y='750'>ᛃ</text><text x='232' y='802'>ﾐ</text><text x='232' y='854' class='b'>ﾂ</text><text x='232' y='906'>α</text><text x='232' y='932'>φ</text><text x='275' y='33' class='b'>ｻ</text><text x='275' y='57'>β</text><text x='275' y='81'>ᚷ</text><text x='275' y='105'>ᚷ</text><text x='275' y='129' class='b'>ﾗ</text><text x='275' y='153'>ﾀ</text><text x='275' y='177'>ω</text><text x='275' y='201'>ﾀ</text><text x='275' y='225' class='b'>δ</text><text x='275' y='249'>ᛖ</text><text x='275' y='273'>ﾅ</text><text x='275' y='297'>ψ</text><text x='275' y='321' class='b'>Λ</text><text x='275' y='345'>ﾊ</text><text x='275' y='369' class='h'>ﾑ</text><text x='275' y='393'>ｷ</text><text x='275' y='417' class='b'>ｵ</text><text x='275' y='441'>ｰ</text><text x='275' y='465'>ﾆ</text><text x='275' y='489'>ﾓ</text><text x='275' y='513' class='b'>Μ</text><text x='275' y='537'>ｷ</text><text x='275' y='561'>ﾈ</text><text x='275' y='585'>ﾈ</text><text x='275' y='609' class='b'>Ζ</text><text x='275' y='633'>ᛜ</text><text x='275' y='657'>ᚷ</text><text x='275' y='681'>ｾ</text><text x='275' y='705' class='h'>ﾖ</text><text x='275' y='729'>Γ</text><text x='275' y='753'>ﾕ</text><text x='275' y='777'>ｹ</text><text x='275' y='801' class='b'>ｴ</text><text x='275' y='825'>ﾘ</text><text x='275' y='849'>ﾂ</text><text x='275' y='873'>ﾕ</text><text x='275' y='897' class='b'>ｰ</text><text x='275' y='921'>ﾇ</text><text x='275' y='945'>Η</text><text x='306' y='44' class='b'>Χ</text><text x='306' y='73'>φ</text><text x='306' y='102'>ﾖ</text><text x='306' y='131'>ᚾ</text><text x='306' y='160'>ﾖ</text><text x='306' y='189' class='b'>ᛈ</text><text x='306' y='218'>ｳ</text><text x='306' y='247'>ﾏ</text><text x='306' y='276'>ξ</text><text x='306' y='305'>ﾇ</text><text x='306' y='334' class='b'>ｹ</text><text x='306' y='363'>ｹ</text><text x='306' y='392'>δ</text><text x='306' y='421'>ᚨ</text><text x='306' y='450'>ﾏ</text><text x='306' y='479' class='h'>Α</text><text x='306' y='508'>φ</text><text x='306' y='537'>ﾋ</text><text x='306' y='566'>ｴ</text><text x='306' y='624' class='b'>ﾃ</text><text x='306' y='653'>ﾏ</text><text x='306' y='682'>ｼ</text><text x='306' y='711'>ﾐ</text><text x='306' y='740'>ｵ</text><text x='306' y='769' class='b'>ᚨ</text><text x='306' y='798'>ᚹ</text><text x='306' y='827'>ﾑ</text><text x='306' y='856'>Μ</text><text x='306' y='885'>ᛜ</text><text x='306' y='914' class='h'>η</text><text x='306' y='943'>ᛊ</text></g></svg>") !important;
+        background-repeat: repeat !important;
+        background-size: 552px 957px !important;
+        background-position: 71px 0 !important;
+        animation: hk-rain-c 31s linear infinite, hk-drift-c 195s linear infinite !important;
+        will-change: transform, background-position !important;
+        opacity: 0.5 !important;
+        -webkit-mask-image: radial-gradient(ellipse 38% 48% at 50% 50%,
+            rgba(0,0,0,0.15) 0%,
+            rgba(0,0,0,0.42) 12%,
+            rgba(0,0,0,0.88) 30%,
+            rgba(0,0,0,1) 50%,
+            rgba(0,0,0,1) 100%) !important;
+        mask-image: radial-gradient(ellipse 38% 48% at 50% 50%,
+            rgba(0,0,0,0.15) 0%,
+            rgba(0,0,0,0.42) 12%,
+            rgba(0,0,0,0.88) 30%,
+            rgba(0,0,0,1) 50%,
+            rgba(0,0,0,1) 100%) !important;
+    }
+
+    /* Front layer — densified to 16 cols at ~20px spacing.
+       This is what eliminates wide corridors in the stacked view. */
+    main::after {
+        content: "" !important;
+        position: fixed !important;
+        top: -100vh !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 300vh !important;
+        z-index: 0 !important;
+        pointer-events: none !important;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='331' height='589' viewBox='0 0 331 589'><style>text{font-family:Courier New,monospace;font-size:13px;fill:%2300ff41;opacity:0.7}.b{fill:%2339ff14;opacity:0.95}.h{fill:%23ffffff;opacity:1}</style><g><text x='7' y='13' class='b'>ﾚ</text><text x='7' y='30'>ﾄ</text><text x='7' y='47'>δ</text><text x='7' y='64'>Ν</text><text x='7' y='81'>ｶ</text><text x='7' y='98'>ｷ</text><text x='7' y='115' class='b'>ﾃ</text><text x='7' y='132'>ｺ</text><text x='7' y='149'>ᛇ</text><text x='7' y='166'>χ</text><text x='7' y='183'>ｽ</text><text x='7' y='200'>ｰ</text><text x='7' y='217' class='b'>Δ</text><text x='7' y='234'>ｸ</text><text x='7' y='251'>ᛟ</text><text x='7' y='268'>σ</text><text x='7' y='285'>ﾌ</text><text x='7' y='302' class='h'>ｵ</text><text x='7' y='319' class='b'>ｼ</text><text x='7' y='336'>ι</text><text x='7' y='353'>η</text><text x='7' y='370'>ﾊ</text><text x='7' y='387'>Κ</text><text x='7' y='404'>ｹ</text><text x='7' y='421' class='b'>ﾆ</text><text x='7' y='438'>ﾏ</text><text x='7' y='455'>ｼ</text><text x='7' y='472'>Α</text><text x='7' y='489'>ω</text><text x='7' y='506'>θ</text><text x='7' y='523' class='b'>ﾐ</text><text x='7' y='540'>ｹ</text><text x='7' y='557'>ｰ</text><text x='7' y='574'>ｸ</text><text x='27' y='23' class='b'>ﾘ</text><text x='27' y='40'>ᛇ</text><text x='27' y='57'>Β</text><text x='27' y='74'>ᚠ</text><text x='27' y='91'>ﾀ</text><text x='27' y='108'>ﾍ</text><text x='27' y='125' class='b'>Κ</text><text x='27' y='142'>Κ</text><text x='27' y='159'>Δ</text><text x='27' y='176'>ｸ</text><text x='27' y='193'>ﾜ</text><text x='27' y='210'>Γ</text><text x='27' y='227' class='b'>Δ</text><text x='27' y='244'>δ</text><text x='27' y='261'>ｷ</text><text x='27' y='278'>ﾍ</text><text x='27' y='295'>ᚢ</text><text x='27' y='312' class='h'>ｶ</text><text x='27' y='329' class='b'>ᚠ</text><text x='27' y='346'>Α</text><text x='27' y='363'>ᛏ</text><text x='27' y='380'>ﾂ</text><text x='27' y='397'>ﾖ</text><text x='27' y='414'>η</text><text x='27' y='431' class='b'>ﾃ</text><text x='27' y='448'>ψ</text><text x='27' y='465'>ﾀ</text><text x='27' y='482'>Γ</text><text x='27' y='499'>ﾘ</text><text x='27' y='516'>Α</text><text x='27' y='533' class='b'>ᛁ</text><text x='27' y='550'>ｾ</text><text x='27' y='567'>Ρ</text><text x='27' y='584'>ﾈ</text><text x='47' y='21' class='b'>ﾒ</text><text x='47' y='38'>ｾ</text><text x='47' y='55'>Δ</text><text x='47' y='72'>Γ</text><text x='47' y='89'>ᚦ</text><text x='47' y='106'>Λ</text><text x='47' y='123' class='b'>Λ</text><text x='47' y='140'>ﾉ</text><text x='47' y='157'>α</text><text x='47' y='174'>ｽ</text><text x='47' y='191'>ω</text><text x='47' y='208'>Φ</text><text x='47' y='225' class='b'>ｹ</text><text x='47' y='242'>ｶ</text><text x='47' y='259'>Β</text><text x='47' y='276'>ｸ</text><text x='47' y='293'>Ι</text><text x='47' y='310' class='h'>ﾋ</text><text x='47' y='327' class='b'>ﾜ</text><text x='47' y='344'>ρ</text><text x='47' y='361'>Ρ</text><text x='47' y='378'>χ</text><text x='47' y='395'>θ</text><text x='47' y='412'>ᚱ</text><text x='47' y='429' class='b'>ｾ</text><text x='47' y='446'>ﾅ</text><text x='47' y='463'>ﾙ</text><text x='47' y='480'>ν</text><text x='47' y='497'>ﾈ</text><text x='47' y='514'>Δ</text><text x='47' y='531' class='b'>ᚦ</text><text x='47' y='548'>μ</text><text x='47' y='565'>ｰ</text><text x='47' y='582'>ﾗ</text><text x='67' y='28' class='b'>ᚢ</text><text x='67' y='45'>ﾐ</text><text x='67' y='62'>ᚷ</text><text x='67' y='79'>ﾈ</text><text x='67' y='96'>ｱ</text><text x='67' y='113'>Τ</text><text x='67' y='130' class='b'>ᚱ</text><text x='67' y='147'>ｻ</text><text x='67' y='164'>ﾐ</text><text x='67' y='181'>ｻ</text><text x='67' y='198'>Γ</text><text x='67' y='215'>ﾗ</text><text x='67' y='232' class='b'>φ</text><text x='67' y='249'>ρ</text><text x='67' y='266'>ᛗ</text><text x='67' y='283'>ﾑ</text><text x='67' y='300'>ﾜ</text><text x='67' y='317' class='h'>Ψ</text><text x='67' y='334' class='b'>λ</text><text x='67' y='351'>ᚲ</text><text x='67' y='368'>ﾕ</text><text x='67' y='385'>Η</text><text x='67' y='402'>ｺ</text><text x='67' y='419'>ﾀ</text><text x='67' y='436' class='b'>τ</text><text x='67' y='453'>ﾀ</text><text x='67' y='470'>η</text><text x='67' y='487'>ﾆ</text><text x='67' y='504'>ᚢ</text><text x='67' y='521'>Λ</text><text x='67' y='538' class='b'>Η</text><text x='67' y='555'>ﾜ</text><text x='67' y='572'>ｹ</text><text x='87' y='26' class='b'>ｽ</text><text x='87' y='43'>ﾋ</text><text x='87' y='60'>ﾄ</text><text x='87' y='77'>ᚠ</text><text x='87' y='94'>π</text><text x='87' y='111'>η</text><text x='87' y='128' class='b'>ﾘ</text><text x='87' y='145'>ｶ</text><text x='87' y='162'>ﾇ</text><text x='87' y='179'>Ο</text><text x='87' y='196'>ｺ</text><text x='87' y='213'>ᚦ</text><text x='87' y='230' class='b'>Α</text><text x='87' y='247'>Γ</text><text x='87' y='264'>Α</text><text x='87' y='281'>ᚷ</text><text x='87' y='298'>ᛗ</text><text x='87' y='315' class='h'>ᛁ</text><text x='87' y='332' class='b'>ﾙ</text><text x='87' y='349'>ﾜ</text><text x='87' y='366'>ﾜ</text><text x='87' y='383'>ﾃ</text><text x='87' y='400'>Σ</text><text x='87' y='417'>ｦ</text><text x='87' y='434' class='b'>Γ</text><text x='87' y='451'>Ζ</text><text x='87' y='468'>ρ</text><text x='87' y='485'>Η</text><text x='87' y='502'>Δ</text><text x='87' y='519'>ᚠ</text><text x='87' y='536' class='b'>ﾈ</text><text x='87' y='553'>ᚺ</text><text x='87' y='570'>Ζ</text><text x='107' y='22' class='b'>μ</text><text x='107' y='39'>ｹ</text><text x='107' y='56'>ᛉ</text><text x='107' y='73'>ｼ</text><text x='107' y='90'>ﾓ</text><text x='107' y='107'>Β</text><text x='107' y='124' class='b'>ｳ</text><text x='107' y='141'>ξ</text><text x='107' y='158'>Τ</text><text x='107' y='175'>Ο</text><text x='107' y='192'>ｹ</text><text x='107' y='209'>ｸ</text><text x='107' y='226' class='b'>ﾜ</text><text x='107' y='243'>Ψ</text><text x='107' y='260'>Τ</text><text x='107' y='277'>ﾘ</text><text x='107' y='294'>Μ</text><text x='107' y='311' class='h'>Γ</text><text x='107' y='328' class='b'>ﾒ</text><text x='107' y='345'>Ρ</text><text x='107' y='362'>ᚢ</text><text x='107' y='379'>ᛇ</text><text x='107' y='396'>Δ</text><text x='107' y='413'>λ</text><text x='107' y='430' class='b'>ﾕ</text><text x='107' y='447'>Φ</text><text x='107' y='464'>γ</text><text x='107' y='481'>ᛚ</text><text x='107' y='498'>ﾇ</text><text x='107' y='515'>Ο</text><text x='107' y='532' class='b'>ﾅ</text><text x='107' y='549'>ｦ</text><text x='107' y='566'>ﾊ</text><text x='107' y='583'>ﾐ</text><text x='128' y='27' class='b'>ﾊ</text><text x='128' y='44'>ﾕ</text><text x='128' y='61'>ｳ</text><text x='128' y='78'>ν</text><text x='128' y='95'>ﾝ</text><text x='128' y='112'>ﾆ</text><text x='128' y='129' class='b'>ｾ</text><text x='128' y='146'>Θ</text><text x='128' y='163'>ｿ</text><text x='128' y='180'>ρ</text><text x='128' y='197'>ﾎ</text><text x='128' y='214'>ｸ</text><text x='128' y='231' class='b'>ﾌ</text><text x='128' y='248'>ᚨ</text><text x='128' y='265'>ﾈ</text><text x='128' y='282'>ﾕ</text><text x='128' y='299'>ﾁ</text><text x='128' y='316' class='h'>Ω</text><text x='128' y='333' class='b'>ﾐ</text><text x='128' y='350'>δ</text><text x='128' y='367'>δ</text><text x='128' y='384'>ᚹ</text><text x='128' y='401'>ᛖ</text><text x='128' y='418'>ρ</text><text x='128' y='435' class='b'>ｻ</text><text x='128' y='452'>ﾆ</text><text x='128' y='469'>λ</text><text x='128' y='486'>ε</text><text x='128' y='503'>ﾑ</text><text x='128' y='520'>ｽ</text><text x='128' y='537' class='b'>ω</text><text x='128' y='554'>ﾔ</text><text x='128' y='571'>ᛚ</text><text x='148' y='16' class='b'>Γ</text><text x='148' y='33'>ﾂ</text><text x='148' y='50'>ᛁ</text><text x='148' y='67'>ι</text><text x='148' y='84'>ᚦ</text><text x='148' y='101'>ﾀ</text><text x='148' y='118' class='b'>ｴ</text><text x='148' y='135'>ｳ</text><text x='148' y='152'>ᛒ</text><text x='148' y='169'>ω</text><text x='148' y='186'>ﾔ</text><text x='148' y='203'>Υ</text><text x='148' y='220' class='b'>η</text><text x='148' y='237'>ｷ</text><text x='148' y='254'>ﾝ</text><text x='148' y='271'>Ρ</text><text x='148' y='288'>ᛚ</text><text x='148' y='305' class='h'>β</text><text x='148' y='322' class='b'>ﾎ</text><text x='148' y='339'>ﾄ</text><text x='148' y='356'>ｻ</text><text x='148' y='373'>ﾇ</text><text x='148' y='390'>Ι</text><text x='148' y='407'>ﾄ</text><text x='148' y='424' class='b'>ﾎ</text><text x='148' y='441'>Ξ</text><text x='148' y='458'>ﾎ</text><text x='148' y='475'>ｻ</text><text x='148' y='492'>ｲ</text><text x='148' y='509'>π</text><text x='148' y='526' class='b'>ᛈ</text><text x='148' y='543'>ᚢ</text><text x='148' y='560'>Ε</text><text x='148' y='577'>ﾑ</text><text x='168' y='17' class='b'>ｾ</text><text x='168' y='34'>Λ</text><text x='168' y='51'>ﾈ</text><text x='168' y='68'>ﾒ</text><text x='168' y='85'>ｹ</text><text x='168' y='102'>Δ</text><text x='168' y='119' class='b'>ﾕ</text><text x='168' y='136'>ｱ</text><text x='168' y='153'>ﾃ</text><text x='168' y='170'>η</text><text x='168' y='187'>χ</text><text x='168' y='204'>ﾋ</text><text x='168' y='221' class='b'>ｴ</text><text x='168' y='238'>α</text><text x='168' y='255'>Θ</text><text x='168' y='272'>Γ</text><text x='168' y='289'>ﾓ</text><text x='168' y='306' class='h'>Β</text><text x='168' y='323' class='b'>ﾙ</text><text x='168' y='340'>ﾁ</text><text x='168' y='357'>Σ</text><text x='168' y='374'>ﾂ</text><text x='168' y='391'>ᚠ</text><text x='168' y='408'>ᛏ</text><text x='168' y='425' class='b'>ﾀ</text><text x='168' y='442'>τ</text><text x='168' y='459'>Ι</text><text x='168' y='476'>ﾁ</text><text x='168' y='493'>Ν</text><text x='168' y='510'>Π</text><text x='168' y='527' class='b'>Ω</text><text x='168' y='544'>ｾ</text><text x='168' y='561'>ｷ</text><text x='168' y='578'>μ</text><text x='188' y='20' class='b'>ᛞ</text><text x='188' y='37'>ᛖ</text><text x='188' y='54'>ᚱ</text><text x='188' y='71'>ᛖ</text><text x='188' y='88'>Ρ</text><text x='188' y='105'>ᚢ</text><text x='188' y='122' class='b'>ᚺ</text><text x='188' y='139'>Α</text><text x='188' y='156'>ｻ</text><text x='188' y='173'>δ</text><text x='188' y='190'>δ</text><text x='188' y='207'>ε</text><text x='188' y='224' class='b'>δ</text><text x='188' y='241'>ｾ</text><text x='188' y='258'>ο</text><text x='188' y='275'>ｰ</text><text x='188' y='292'>Λ</text><text x='188' y='309' class='h'>ε</text><text x='188' y='326' class='b'>ﾀ</text><text x='188' y='343'>ｸ</text><text x='188' y='360'>ﾉ</text><text x='188' y='377'>ｹ</text><text x='188' y='394'>ﾋ</text><text x='188' y='411'>ﾃ</text><text x='188' y='428' class='b'>ｱ</text><text x='188' y='445'>κ</text><text x='188' y='462'>ﾅ</text><text x='188' y='479'>ｷ</text><text x='188' y='496'>ｿ</text><text x='188' y='513'>ﾇ</text><text x='188' y='530' class='b'>ﾜ</text><text x='188' y='547'>Ζ</text><text x='188' y='564'>ｷ</text><text x='188' y='581'>ｶ</text><text x='208' y='21' class='b'>ｾ</text><text x='208' y='38'>Κ</text><text x='208' y='55'>ﾋ</text><text x='208' y='72'>ﾓ</text><text x='208' y='89'>ｱ</text><text x='208' y='106'>ﾁ</text><text x='208' y='123' class='b'>ｵ</text><text x='208' y='140'>ｰ</text><text x='208' y='157'>ｷ</text><text x='208' y='174'>ᚠ</text><text x='208' y='191'>Β</text><text x='208' y='208'>ﾀ</text><text x='208' y='225' class='b'>ﾁ</text><text x='208' y='242'>ｻ</text><text x='208' y='259'>Δ</text><text x='208' y='276'>ﾄ</text><text x='208' y='293'>χ</text><text x='208' y='310' class='h'>ﾈ</text><text x='208' y='327' class='b'>ｽ</text><text x='208' y='344'>ｰ</text><text x='208' y='361'>Θ</text><text x='208' y='378'>ｴ</text><text x='208' y='395'>Α</text><text x='208' y='412'>ｺ</text><text x='208' y='429' class='b'>Ζ</text><text x='208' y='446'>ᛖ</text><text x='208' y='463'>ﾋ</text><text x='208' y='480'>Θ</text><text x='208' y='497'>β</text><text x='208' y='514'>ﾄ</text><text x='208' y='531' class='b'>Λ</text><text x='208' y='548'>ﾑ</text><text x='208' y='565'>ｦ</text><text x='208' y='582'>Η</text><text x='228' y='15' class='b'>ｰ</text><text x='228' y='32'>ξ</text><text x='228' y='49'>ﾀ</text><text x='228' y='66'>ﾒ</text><text x='228' y='83'>ｿ</text><text x='228' y='100'>ᛊ</text><text x='228' y='117' class='b'>ﾐ</text><text x='228' y='134'>ﾕ</text><text x='228' y='151'>π</text><text x='228' y='168'>ᚨ</text><text x='228' y='185'>ν</text><text x='228' y='202'>ο</text><text x='228' y='219' class='b'>ｹ</text><text x='228' y='236'>ο</text><text x='228' y='253'>ﾘ</text><text x='228' y='270'>ｻ</text><text x='228' y='287'>ﾃ</text><text x='228' y='304' class='h'>ｾ</text><text x='228' y='321' class='b'>ᚠ</text><text x='228' y='338'>ﾜ</text><text x='228' y='355'>Ω</text><text x='228' y='372'>ﾈ</text><text x='228' y='389'>ﾁ</text><text x='228' y='406'>ﾒ</text><text x='228' y='423' class='b'>ο</text><text x='228' y='440'>ᛈ</text><text x='228' y='457'>Σ</text><text x='228' y='474'>ﾅ</text><text x='228' y='491'>υ</text><text x='228' y='508'>ｳ</text><text x='228' y='525' class='b'>ﾋ</text><text x='228' y='542'>ﾜ</text><text x='228' y='559'>ｻ</text><text x='228' y='576'>φ</text><text x='248' y='27' class='b'>ｰ</text><text x='248' y='44'>ﾃ</text><text x='248' y='61'>ﾃ</text><text x='248' y='78'>ｼ</text><text x='248' y='95'>Σ</text><text x='248' y='112'>ψ</text><text x='248' y='129' class='b'>ᚹ</text><text x='248' y='146'>ﾈ</text><text x='248' y='163'>ｴ</text><text x='248' y='180'>ᚦ</text><text x='248' y='197'>φ</text><text x='248' y='214'>ﾗ</text><text x='248' y='231' class='b'>Μ</text><text x='248' y='248'>Β</text><text x='248' y='265'>ᛒ</text><text x='248' y='282'>ｼ</text><text x='248' y='299'>Τ</text><text x='248' y='316' class='h'>ᛊ</text><text x='248' y='333' class='b'>ﾒ</text><text x='248' y='350'>υ</text><text x='248' y='367'>ｻ</text><text x='248' y='384'>ｰ</text><text x='248' y='401'>ᛟ</text><text x='248' y='418'>Ε</text><text x='248' y='435' class='b'>ﾆ</text><text x='248' y='452'>Γ</text><text x='248' y='469'>Α</text><text x='248' y='486'>ﾝ</text><text x='248' y='503'>ᚨ</text><text x='248' y='520'>ｷ</text><text x='248' y='537' class='b'>ﾍ</text><text x='248' y='554'>χ</text><text x='248' y='571'>Γ</text><text x='268' y='25' class='b'>ψ</text><text x='268' y='42'>ᚱ</text><text x='268' y='59'>ᚨ</text><text x='268' y='76'>σ</text><text x='268' y='93'>ﾛ</text><text x='268' y='110'>Λ</text><text x='268' y='127' class='b'>ｻ</text><text x='268' y='144'>ｻ</text><text x='268' y='161'>ﾍ</text><text x='268' y='178'>Θ</text><text x='268' y='195'>ﾋ</text><text x='268' y='212'>ᚾ</text><text x='268' y='229' class='b'>ᚲ</text><text x='268' y='246'>ᚦ</text><text x='268' y='263'>ᛏ</text><text x='268' y='280'>ﾉ</text><text x='268' y='297'>ᚾ</text><text x='268' y='314' class='h'>ﾕ</text><text x='268' y='331' class='b'>ﾏ</text><text x='268' y='348'>Ε</text><text x='268' y='365'>ﾜ</text><text x='268' y='382'>ᛁ</text><text x='268' y='399'>ﾇ</text><text x='268' y='416'>ﾈ</text><text x='268' y='433' class='b'>ε</text><text x='268' y='450'>Ω</text><text x='268' y='467'>Μ</text><text x='268' y='484'>ᚺ</text><text x='268' y='501'>ﾈ</text><text x='268' y='518'>Λ</text><text x='268' y='535' class='b'>ﾎ</text><text x='268' y='552'>ﾊ</text><text x='268' y='569'>υ</text><text x='289' y='27' class='b'>ρ</text><text x='289' y='44'>ｱ</text><text x='289' y='61'>ﾝ</text><text x='289' y='78'>Ψ</text><text x='289' y='95'>ｴ</text><text x='289' y='112'>ｴ</text><text x='289' y='129' class='b'>ᚷ</text><text x='289' y='146'>ﾎ</text><text x='289' y='163'>ｱ</text><text x='289' y='180'>ﾔ</text><text x='289' y='197'>ξ</text><text x='289' y='214'>ﾒ</text><text x='289' y='231' class='b'>ﾃ</text><text x='289' y='248'>Δ</text><text x='289' y='265'>ﾉ</text><text x='289' y='282'>Σ</text><text x='289' y='299'>Κ</text><text x='289' y='316' class='h'>Η</text><text x='289' y='333' class='b'>ｦ</text><text x='289' y='350'>ﾀ</text><text x='289' y='367'>λ</text><text x='289' y='384'>ᚾ</text><text x='289' y='401'>Χ</text><text x='289' y='418'>ｽ</text><text x='289' y='435' class='b'>ﾜ</text><text x='289' y='452'>Ι</text><text x='289' y='469'>ｦ</text><text x='289' y='486'>ｰ</text><text x='289' y='503'>ｻ</text><text x='289' y='520'>Μ</text><text x='289' y='537' class='b'>ﾍ</text><text x='289' y='554'>ｾ</text><text x='289' y='571'>ﾎ</text><text x='309' y='27' class='b'>ξ</text><text x='309' y='44'>ﾊ</text><text x='309' y='61'>ᚢ</text><text x='309' y='78'>ﾜ</text><text x='309' y='95'>ﾘ</text><text x='309' y='112'>ﾋ</text><text x='309' y='129' class='b'>ο</text><text x='309' y='146'>Ι</text><text x='309' y='163'>Ι</text><text x='309' y='180'>ﾎ</text><text x='309' y='197'>ﾎ</text><text x='309' y='214'>ᛞ</text><text x='309' y='231' class='b'>Θ</text><text x='309' y='248'>ｻ</text><text x='309' y='265'>ﾋ</text><text x='309' y='282'>ᛉ</text><text x='309' y='299'>ｱ</text><text x='309' y='316' class='h'>ο</text><text x='309' y='333' class='b'>ᛟ</text><text x='309' y='350'>Ν</text><text x='309' y='367'>ᚱ</text><text x='309' y='384'>ｦ</text><text x='309' y='401'>ｹ</text><text x='309' y='418'>ᚺ</text><text x='309' y='435' class='b'>ﾒ</text><text x='309' y='452'>Μ</text><text x='309' y='469'>ｻ</text><text x='309' y='486'>ᛈ</text><text x='309' y='503'>ｼ</text><text x='309' y='520'>Ξ</text><text x='309' y='537' class='b'>ｵ</text><text x='309' y='554'>ｼ</text><text x='309' y='571'>ﾀ</text></g></svg>") !important;
+        background-repeat: repeat !important;
+        background-size: 331px 589px !important;
+        animation: hk-rain-front 9s linear infinite, hk-drift-front 75s linear infinite !important;
+        will-change: transform, background-position !important;
+        opacity: 0.62 !important;
+        -webkit-mask-image: radial-gradient(ellipse 34% 42% at 50% 50%,
+            rgba(0,0,0,0.1) 0%,
+            rgba(0,0,0,0.35) 15%,
+            rgba(0,0,0,0.8) 32%,
+            rgba(0,0,0,1) 52%,
+            rgba(0,0,0,1) 100%) !important;
+        mask-image: radial-gradient(ellipse 34% 42% at 50% 50%,
+            rgba(0,0,0,0.1) 0%,
+            rgba(0,0,0,0.35) 15%,
+            rgba(0,0,0,0.8) 32%,
+            rgba(0,0,0,1) 52%,
+            rgba(0,0,0,1) 100%) !important;
+    }
+
+    @keyframes hk-rain-a1 {
+        0%   { transform: translateY(0); }
+        100% { transform: translateY(828px); }
+    }
+
+    @keyframes hk-rain-a2 {
+        0%   { transform: translateY(0); }
+        100% { transform: translateY(828px); }
+    }
+
+    @keyframes hk-rain-b {
+        0%   { transform: translateY(0); }
+        100% { transform: translateY(699px); }
+    }
+
+    @keyframes hk-rain-c {
+        0%   { transform: translateY(0); }
+        100% { transform: translateY(957px); }
+    }
+
+    @keyframes hk-rain-front {
+        0%   { transform: translateY(0); }
+        100% { transform: translateY(589px); }
+    }
+
+    /* ----- Horizontal drift keyframes (v1.6: faster, perceptible) ----- */
+    @keyframes hk-drift-a1 {
+        0%   { background-position-x: 0; }
+        100% { background-position-x: -478px; }
+    }
+
+    @keyframes hk-drift-a2 {
+        0%   { background-position-x: 0; }
+        100% { background-position-x: 478px; }
+    }
+
+    @keyframes hk-drift-b {
+        0%   { background-position-x: 173px; }
+        100% { background-position-x: -232px; }
+    }
+
+    @keyframes hk-drift-c {
+        0%   { background-position-x: 71px; }
+        100% { background-position-x: 623px; }
+    }
+
+    @keyframes hk-drift-front {
+        0%   { background-position-x: 0; }
+        100% { background-position-x: -331px; }
+    }
+
+    /* Ensure app content sits above the rain */
+    body > div,
+    body > main,
+    main,
+    #__next,
+    [class*="layout"],
+    [class*="App"] {
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+    /* ============================================================
+     6b. GLITCH / FLICKER KEYFRAMES
+     ----
+     Used by glanceable UI only (sidebar items, header bar,
+     composer toolbar, headings). NEVER applied to body prose.
+     ============================================================ */
+    @keyframes hk-flicker-subtle {
+        /* v1.17.1: Atmospheric CRT distortion. The picture stays visible —
+           we never fully vanish. One micro-event per cycle: either a brief
+           brightness dip (picture loses signal for a frame) or a thin
+           horizontal band shears sideways. No opacity 0. No double-flashes.
+           Should read as "background TV" not "broken screen". */
+        0%, 100%   { opacity: 1; filter: none; clip-path: none; transform: translate(0,0); }
+
+        /* Picture-darken at ~47% — quick brightness dip, no vanish */
+        46.8%      { filter: none; }
+        47%        { filter: brightness(0.55); }
+        47.4%      { filter: none; }
+
+        /* Thin band shear at ~84% — top sliver jerks 5px, holds 1 frame */
+        83.8%      { transform: translate(0,0); clip-path: none; }
+        84%        { transform: translate(-5px, 0); clip-path: inset(0 0 82% 0); }
+        84.25%     { transform: translate(0, 0); clip-path: none; }
+    }
+
+    @keyframes hk-flicker-strong {
+        /* v1.17.1: Slightly more visible than subtle, but still atmospheric.
+           Two events per cycle, well-spaced, mid-strength. */
+        0%, 100%   { opacity: 1; filter: none; clip-path: none; transform: translate(0,0); }
+
+        /* Picture-dim at ~28% */
+        27.8%      { filter: none; }
+        28%        { filter: brightness(0.4); }
+        28.4%      { filter: none; }
+
+        /* Mid-band shear at ~63% — middle strip yanks 8px left */
+        62.8%      { transform: translate(0,0); clip-path: none; }
+        63%        { transform: translate(-8px, 0); clip-path: inset(40% 0 40% 0); }
+        63.3%      { transform: translate(0, 0); clip-path: none; }
+    }
+
+    @keyframes hk-glitch-shift {
+        0%, 100% { transform: translate(0,0); }
+        88%      { transform: translate(0,0); }
+        89%      { transform: translate(-1px, 0); }
+        90%      { transform: translate(1px, 0); }
+        91%      { transform: translate(0, 0); }
+        43%      { transform: translate(0, 0); }
+        44%      { transform: translate(1px, -1px); }
+        45%      { transform: translate(0, 0); }
+    }
+
+    @keyframes hk-heading-pulse {
+        /* v1.8: removed the 82-83% chromatic-aberration glitch frame
+           since it was firing across all visible headings at once. The
+           pulse now only does the gentle 0%-50%-100% breathe. */
+        0%, 100% {
+            text-shadow:
+                0 0 4px var(--hk-phosphor),
+                0 0 12px rgba(0, 255, 65, 0.55),
+                0 0 24px rgba(0, 255, 65, 0.3);
+        }
+        50% {
+            text-shadow:
+                0 0 6px var(--hk-phosphor-bright),
+                0 0 18px rgba(57, 255, 20, 0.7),
+                0 0 36px rgba(57, 255, 20, 0.4);
+        }
+    }
+
+    /* CRT scanline overlay */
+    html::before {
+        content: "" !important;
+        position: fixed !important;
+        top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+        z-index: 9998 !important;
+        pointer-events: none !important;
+        background: repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0) 0px,
+            rgba(0, 0, 0, 0) 2px,
+            rgba(0, 0, 0, 0.18) 3px,
+            rgba(0, 0, 0, 0) 4px
+        ) !important;
+        opacity: 0.5 !important;
+        mix-blend-mode: multiply !important;
+    }
+
+    /* ============================================================
+     7. TYPOGRAPHY
+     ============================================================ */
+    body, p, span, div, li, td, th {
+        font-family: 'Courier New', 'Consolas', 'Monaco', 'Lucida Console', monospace !important;
+    }
+
+    /* But protect the artifact panel — already overridden above */
+
+    /* ============================================================
+     8. HEADERS — phosphor glow + occasional chromatic glitch
+     ----
+     Anti-clip armor: line-height 1.4, padding, overflow:visible
+     on parents.
+     ============================================================ */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Courier New', 'Consolas', monospace !important;
+        font-weight: 700 !important;
+        color: var(--hk-phosphor-bright) !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.08em !important;
+        line-height: 1.4 !important;
+        padding-top: 0.35em !important;
+        padding-bottom: 0.25em !important;
+        padding-left: 0.15em !important;
+        padding-right: 0.15em !important;
+        overflow: visible !important;
+        word-wrap: break-word !important;
+        display: inline-block !important;
+        box-decoration-break: clone !important;
+        -webkit-box-decoration-break: clone !important;
+        max-width: 100% !important;
+        text-shadow:
+            0 0 4px var(--hk-phosphor),
+            0 0 12px rgba(0, 255, 65, 0.55),
+            0 0 24px rgba(0, 255, 65, 0.3) !important;
+        animation: hk-heading-pulse 72s ease-in-out infinite !important;
+    }
+
+    *:has(> h1),
+    *:has(> h2),
+    *:has(> h3),
+    *:has(> h4),
+    *:has(> h5),
+    *:has(> h6) {
+        overflow: visible !important;
+    }
+
+    /* ============================================================
+     9. PROJECT FILE THUMBNAILS — keep them small and readable
+     ============================================================ */
+    [class*="file"] h1, [class*="file"] h2, [class*="file"] h3, [class*="file"] h4,
+    [class*="thumbnail"] h1, [class*="thumbnail"] h2, [class*="thumbnail"] h3, [class*="thumbnail"] h4,
+    [class*="tile"] h1, [class*="tile"] h2, [class*="tile"] h3, [class*="tile"] h4,
+    [class*="card"]:not([class*="font-claude-message"]):not([class*="font-user-message"]) h1,
+    [class*="card"]:not([class*="font-claude-message"]):not([class*="font-user-message"]) h2,
+    [class*="card"]:not([class*="font-claude-message"]):not([class*="font-user-message"]) h3,
+    [class*="card"]:not([class*="font-claude-message"]):not([class*="font-user-message"]) h4,
+    [data-testid*="file"] h1, [data-testid*="file"] h2, [data-testid*="file"] h3, [data-testid*="file"] h4,
+    [class*="ProjectFile"] h1, [class*="ProjectFile"] h2, [class*="ProjectFile"] h3, [class*="ProjectFile"] h4,
+    [class*="project-file"] h1, [class*="project-file"] h2, [class*="project-file"] h3, [class*="project-file"] h4,
+    [role="article"] h1, [role="article"] h2, [role="article"] h3, [role="article"] h4 {
+        font-family: 'Courier New', monospace !important;
+        font-style: normal !important;
+        font-weight: 500 !important;
+        font-size: 13px !important;
+        text-transform: none !important;
+        letter-spacing: normal !important;
+        text-shadow: 0 0 4px rgba(0, 255, 65, 0.4) !important;
+        color: var(--hk-phosphor) !important;
+        line-height: 1.3 !important;
+        padding: 0 !important;
+        margin: 0 0 4px 0 !important;
+        animation: none !important;
+        display: block !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        max-width: 100% !important;
+    }
+
+    /* v1.18: File row subtitle ("Document · MD" line) was too faint to read
+       against the rain-bleeding background. Brighten it to dim phosphor with
+       a slight glow — readable but visually subordinate to the title. */
+    [class*="file"] p, [class*="file"] span:not(:has(*)),
+    [class*="thumbnail"] p, [class*="thumbnail"] span:not(:has(*)),
+    [class*="tile"] p, [class*="tile"] span:not(:has(*)),
+    [data-testid*="file"] p, [data-testid*="file"] span:not(:has(*)),
+    [class*="ProjectFile"] p, [class*="ProjectFile"] span:not(:has(*)),
+    [class*="project-file"] p, [class*="project-file"] span:not(:has(*)) {
+        color: var(--hk-phosphor-pale) !important;
+        text-shadow: 0 0 3px rgba(0, 255, 65, 0.25) !important;
+        font-family: 'Courier New', monospace !important;
+    }
+
+    /* ============================================================
+     10. SIDEBAR — flicker, edge stripe in amber (contrast vs greens)
+     ============================================================ */
+    aside,
+    nav,
+    [class*="sidebar" i],
+    [class*="Sidebar"],
+    [data-testid*="sidebar" i] {
+        background: linear-gradient(180deg,
+            rgba(3, 10, 3, 0.88) 0%,
+            rgba(0, 0, 0, 0.92) 100%) !important;
+        border-right: 1px solid var(--hk-amber) !important;
+        box-shadow:
+            1px 0 0 rgba(255, 176, 0, 0.4),
+            4px 0 24px rgba(255, 176, 0, 0.18),
+            inset -1px 0 0 rgba(0, 255, 65, 0.15) !important;
+        backdrop-filter: blur(4px) !important;
+        -webkit-backdrop-filter: blur(4px) !important;
+        color: var(--hk-phosphor-pale) !important;
+    }
+
+    /* Sidebar items get subtle flicker — glanceable, not read-through */
+    aside a,
+    aside button,
+    nav a,
+    nav button,
+    [class*="sidebar" i] a,
+    [class*="sidebar" i] button {
+        animation: hk-flicker-subtle 32s linear infinite !important;
+        color: var(--hk-phosphor) !important;
+        text-shadow: 0 0 4px rgba(0, 255, 65, 0.45) !important;
+        font-family: 'Courier New', monospace !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        font-size: 12px !important;
+    }
+
+    /* Stagger flicker timings across siblings via :nth-child */
+    aside a:nth-child(2n),
+    aside button:nth-child(2n),
+    nav a:nth-child(2n),
+    nav button:nth-child(2n) {
+        animation-delay: -2.3s !important;
+    }
+    aside a:nth-child(3n),
+    aside button:nth-child(3n),
+    nav a:nth-child(3n),
+    nav button:nth-child(3n) {
+        animation-delay: -4.7s !important;
+    }
+    aside a:nth-child(5n),
+    aside button:nth-child(5n),
+    nav a:nth-child(5n),
+    nav button:nth-child(5n) {
+        animation-delay: -1.1s !important;
+    }
+
+    aside a:hover,
+    aside button:hover,
+    nav a:hover,
+    nav button:hover,
+    [class*="sidebar" i] a:hover,
+    [class*="sidebar" i] button:hover {
+        color: var(--hk-phosphor-bright) !important;
+        text-shadow:
+            0 0 6px var(--hk-phosphor-bright),
+            0 0 16px rgba(57, 255, 20, 0.6) !important;
+        background: rgba(0, 255, 65, 0.08) !important;
+    }
+
+    /* ============================================================
+     11. HEADER BAR — fade out opaque bg, add flicker
+     ============================================================ */
+    /* v1.8: The "top bar" in claude.ai is NOT a <header> element. It's a
+       sticky div with classes "sticky top-0 z-header bg-bg-100" living
+       inside #main-content, as a sibling of <main>. We target it by its
+       stable class tokens. (Keeping the <header> and [data-testid="page-header"]
+       selectors too as defensive fallbacks for other views.) */
+    header,
+    [data-testid="page-header"],
+    [class*="page-header"],
+    [class*="PageHeader"],
+    div.sticky.top-0.z-header,
+    [class~="z-header"],
+    [class*="z-header"] {
+        /* Horizontal gradient: solid at left (chat title pill) and right
+           (share/menu buttons), transparent through the middle so the
+           rain shows through. */
+        /* v1.11: bar itself is 90% see-through so the rain shows through
+           the empty stretches. Solid-black halo backing is applied to
+           the text-containing children below (chat title pill, buttons,
+           page-heading text). */
+        background: rgba(0, 0, 0, 0.1) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        animation: hk-flicker-subtle 47s linear infinite !important;
+        animation-delay: -3.2s !important;
+    }
+
+    /* For the Chats and Projects index views, the same sticky z-header div
+       wraps the page title + "New chat/project" button + search input,
+       which is a TALLER area with content stretched across more of the
+       width. The horizontal-gradient approach above leaves content sitting
+       on transparent rain in the middle. For these views the title and
+       buttons span more horizontal space, so a narrower transparent middle
+       works better — handled by a more conservative override. */
+    div.sticky.top-0.z-header:has(input[type="search"]),
+    div.sticky.top-0.z-header:has(input[placeholder*="Search" i]),
+    [class*="z-header"]:has(input[type="search"]) {
+        /* v1.11: 90% see-through (matches chat top bar). Heading text
+           and search input get solid-black halos via the child rule
+           below. */
+        background: rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* v1.11: Spotlight halos on text-containing children of the z-header.
+       Bar itself is 90% see-through (above); these halos paint solid
+       black ONLY under elements that contain text/glyphs. Box-shadow
+       provides a soft halo a few pixels past each text edge. */
+
+    /* Generic descendant strip — children should not paint their own
+       opaque bg over the 90% see-through bar. */
+    div.sticky.top-0.z-header > *,
+    [class*="z-header"] > * {
+        background: transparent !important;
+    }
+
+    /* Heading text inside the bar (e.g. "PROJECTS", "CHATS"): solid
+       black halo. inline-block + padding lets the halo only cover the
+       glyph extent plus a small margin, not the full row width. */
+    div.sticky.top-0.z-header h1,
+    div.sticky.top-0.z-header h2,
+    div.sticky.top-0.z-header h3,
+    [class*="z-header"] h1,
+    [class*="z-header"] h2,
+    [class*="z-header"] h3 {
+        /* v1.13: halved again — 2px halo, 1-4px padding. Tightest possible
+           backing for the CHATS/PROJECTS page headings. */
+        background-color: #000000 !important;
+        display: inline-block !important;
+        padding: 1px 4px !important;
+        box-shadow: 0 0 0 2px #000000 !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+    /* The chat title in the chat view is rendered as a button (it's a
+       pill the user can click to rename the chat). Give it the same
+       solid-black halo. */
+    div.sticky.top-0.z-header button,
+    div.sticky.top-0.z-header [data-cds="Button"],
+    div.sticky.top-0.z-header a,
+    [class*="z-header"] button,
+    [class*="z-header"] [data-cds="Button"],
+    [class*="z-header"] a {
+        background-color: #000000 !important;
+        box-shadow:
+            0 0 0 4px #000000,
+            0 0 8px rgba(0, 255, 65, 0.2) !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+    /* Input fields (the Search projects/chats input) get a solid black
+       backing and the same halo. The composer textarea rules elsewhere
+       are scoped to <textarea> only so they don't interfere here. */
+    div.sticky.top-0.z-header input,
+    [class*="z-header"] input {
+        background-color: #000000 !important;
+        box-shadow:
+            0 0 0 4px #000000,
+            0 0 8px rgba(0, 255, 65, 0.2) !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+    /* Generic prose text spans/divs inside the bar (timestamps, "Sort
+       by" labels, etc.) — small text-tight halo. */
+    div.sticky.top-0.z-header span:not(:has(*)),
+    div.sticky.top-0.z-header p,
+    [class*="z-header"] span:not(:has(*)),
+    [class*="z-header"] p {
+        background-color: #000000 !important;
+        box-shadow: 0 0 0 3px #000000 !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+
+    /* ============================================================
+     12. PROJECT DETAIL PANELS — Memory / Instructions / Files (v2.2)
+     ----
+     DOM evidence from DevTools: these panels are
+       <div class="border-0.5 border-border-300 rounded-2xl ...">
+     in the right column. The aria-label / role-based selectors I had
+     before never matched. Target by claude.ai's actual classes.
+
+     Also wrap a single row of file tiles ("concept-rebuild.md",
+     "SKILL.md", etc.) which are <div class="rounded-card bg-surface-2 ...">.
+     ============================================================ */
+
+    /* Right-column panels (Memory / Instructions / Files header card) */
+    div[class*="border-border-300"][class*="rounded-2xl"],
+    div[class*="rounded-2xl"][class*="border-0.5"] {
+        background: rgba(3, 10, 3, 0.94) !important;
+        border-color: var(--hk-phosphor-deep) !important;
+        box-shadow:
+            inset 0 0 0 1px rgba(0, 255, 65, 0.08),
+            0 0 16px rgba(0, 255, 65, 0.12) !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+    /* File tiles inside the project Files panel */
+    div[class*="rounded-card"][class*="bg-surface-"],
+    div[class*="bg-surface-2"]:has(> p),
+    [data-testid*="file-card"],
+    [class*="ProjectFile"],
+    [class*="project-file"] {
+        background: rgba(3, 10, 3, 0.94) !important;
+        border: 1px solid var(--hk-phosphor-deep) !important;
+        box-shadow:
+            inset 0 0 0 1px rgba(0, 255, 65, 0.06),
+            0 0 10px rgba(0, 255, 65, 0.08) !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+    /* ============================================================
+     12.5 CHAT LIST ROWS — solid backing so rain doesn't bleed (v2.3)
+     ----
+     Two different DOMs to cover:
+
+     (A) Main /recents page: <table> with <tr> rows. Each <tr> has
+         multiple <td> cells; the <a href="/chat/..."> sits in one
+         cell and uses `after:absolute after:inset-0` for click target.
+         The visible chat-title text lives in OTHER <td> cells, not
+         the anchor itself. So we need to backing the <td> cells.
+
+     (B) Project detail page recent chats: <ul> with <li> items, each
+         containing <a href="/chat/..."> directly with visible text
+         inside. Backing the <a> works here.
+
+     Both rules below are scoped to main (so sidebar nav unaffected).
+     ============================================================ */
+
+    /* (A) Table form — back every <td> in any row containing a chat link */
+    main table tr:has(a[href*="/chat/"]) > td {
+        background: rgba(3, 10, 3, 0.94) !important;
+        border-top: 1px solid var(--hk-phosphor-deep) !important;
+        border-bottom: 1px solid var(--hk-phosphor-deep) !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+    main table tr:has(a[href*="/chat/"]) > td:first-child {
+        border-left: 1px solid var(--hk-phosphor-deep) !important;
+        border-top-left-radius: 4px !important;
+        border-bottom-left-radius: 4px !important;
+    }
+    main table tr:has(a[href*="/chat/"]) > td:last-child {
+        border-right: 1px solid var(--hk-phosphor-deep) !important;
+        border-top-right-radius: 4px !important;
+        border-bottom-right-radius: 4px !important;
+    }
+    main table tr:has(a[href*="/chat/"]):hover > td {
+        background: rgba(6, 22, 6, 0.97) !important;
+        border-color: var(--hk-phosphor) !important;
+    }
+
+    /* Belt-and-suspenders for (A): some claude.ai layouts use the
+       anchor's ::after pseudo-element as the clickable overlay.
+       Force it to inherit a dark backing so even if the <td> rule
+       doesn't render, the link itself is opaque. */
+    main table a[href*="/chat/"]::after {
+        background: rgba(3, 10, 3, 0.94) !important;
+        z-index: -1 !important;
+    }
+
+    /* (B) List form — project detail page recent-chats <ul><li><a> */
+    main ul li:has(> div > a[href*="/chat/"]),
+    main ul li:has(> a[href*="/chat/"]) {
+        background: rgba(3, 10, 3, 0.94) !important;
+        border: 1px solid var(--hk-phosphor-deep) !important;
+        border-radius: 4px !important;
+        margin: 4px 0 !important;
+        box-shadow:
+            inset 0 0 0 1px rgba(0, 255, 65, 0.06),
+            0 0 12px rgba(0, 255, 65, 0.08) !important;
+        position: relative !important;
+        z-index: 1 !important;
+        /* Override any !border-transparent claude.ai sets */
+        border-color: var(--hk-phosphor-deep) !important;
+    }
+    main ul li:has(> div > a[href*="/chat/"]):hover,
+    main ul li:has(> a[href*="/chat/"]):hover {
+        background: rgba(6, 22, 6, 0.97) !important;
+        border-color: var(--hk-phosphor) !important;
+        box-shadow:
+            inset 0 0 0 1px rgba(0, 255, 65, 0.18),
+            0 0 18px rgba(0, 255, 65, 0.18) !important;
+    }
+
+    /* ============================================================
+     12.6 PROJECT LIST CARDS — solidify the surface (v2.1)
+     ----
+     The /projects index renders cards as <a href="/project/..."> with
+     claude.ai's bg-surface-1 class providing a partially-transparent
+     dark backing. The rain bleeds through. Override with opaque green-
+     tinted dark.
+     ============================================================ */
+    main a[href*="/project/"]:not(aside a):not(nav a) {
+        background: rgba(3, 10, 3, 0.94) !important;
+        border: 1px solid var(--hk-phosphor-deep) !important;
+        box-shadow:
+            inset 0 0 0 1px rgba(0, 255, 65, 0.06),
+            0 0 16px rgba(0, 255, 65, 0.08) !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+    main a[href*="/project/"]:not(aside a):not(nav a):hover {
+        background: rgba(6, 22, 6, 0.97) !important;
+        border-color: var(--hk-phosphor) !important;
+        box-shadow:
+            inset 0 0 0 1px rgba(0, 255, 65, 0.18),
+            0 0 24px rgba(0, 255, 65, 0.18) !important;
+    }
+
+    /* ============================================================
+     13. MESSAGE BUBBLES
+     ----
+     Semi-opaque so prose is readable but rain shows at edges.
+     User and assistant get different left borders.
+     ============================================================ */
+    [class*="font-claude-message"],
+    [class*="font-user-message"] {
+        background: rgba(6, 18, 6, 0.78) !important;
+        border: 1px solid var(--hk-phosphor-deep) !important;
+        border-radius: 2px !important;
+        padding: 16px 20px !important;
+        color: var(--hk-text) !important;
+        box-shadow:
+            0 0 0 1px rgba(0, 0, 0, 0.4),
+            0 0 24px rgba(0, 255, 65, 0.08) !important;
+        position: relative !important;
+    }
+
+    [class*="font-claude-message"] {
+        border-left: 3px solid var(--hk-phosphor) !important;
+        box-shadow:
+            0 0 0 1px rgba(0, 0, 0, 0.4),
+            -2px 0 12px rgba(0, 255, 65, 0.22),
+            0 0 24px rgba(0, 255, 65, 0.08) !important;
+    }
+
+    [class*="font-user-message"] {
+        border-left: 3px solid var(--hk-amber) !important;
+        box-shadow:
+            0 0 0 1px rgba(0, 0, 0, 0.4),
+            -2px 0 12px rgba(255, 176, 0, 0.22),
+            0 0 24px rgba(255, 176, 0, 0.08) !important;
+    }
+
+    /* ============================================================
+     14. PROSE — readable, no animation on body copy
+     ============================================================ */
+    [class*="font-claude-message"] p,
+    [class*="font-user-message"] p,
+    [class*="font-claude-message"] li,
+    [class*="font-user-message"] li,
+    [class*="font-claude-message"] span,
+    [class*="font-user-message"] span {
+        color: var(--hk-text) !important;
+        font-family: 'Courier New', 'Consolas', monospace !important;
+        font-size: 14.5px !important;
+        line-height: 1.65 !important;
+        letter-spacing: 0.01em !important;
+        animation: none !important;
+    }
+
+    [class*="font-claude-message"] strong,
+    [class*="font-user-message"] strong,
+    [class*="font-claude-message"] b,
+    [class*="font-user-message"] b {
+        color: var(--hk-phosphor-bright) !important;
+        font-weight: 700 !important;
+        text-shadow: 0 0 4px rgba(57, 255, 20, 0.45) !important;
+    }
+
+    [class*="font-claude-message"] em,
+    [class*="font-user-message"] em,
+    [class*="font-claude-message"] i,
+    [class*="font-user-message"] i {
+        color: var(--hk-amber) !important;
+        font-style: italic !important;
+    }
+
+    [class*="font-claude-message"] code,
+    [class*="font-user-message"] code {
+        background: rgba(0, 0, 0, 0.7) !important;
+        color: var(--hk-acid) !important;
+        padding: 2px 6px !important;
+        border: 1px solid var(--hk-phosphor-deep) !important;
+        border-radius: 0 !important;
+        font-family: 'Courier New', monospace !important;
+        font-size: 0.92em !important;
+    }
+
+    [class*="font-claude-message"] ul,
+    [class*="font-user-message"] ul,
+    [class*="font-claude-message"] ol,
+    [class*="font-user-message"] ol {
+        padding-left: 1.6em !important;
+    }
+
+    [class*="font-claude-message"] ul li::marker {
+        color: var(--hk-phosphor-bright) !important;
+    }
+
+    /* ============================================================
+     15. LINKS — three scopes (Lesson 12)
+     ============================================================ */
+    a {
+        color: var(--hk-phosphor-pale) !important;
+        text-decoration: none !important;
+        transition: all 150ms ease !important;
+    }
+    a:hover {
+        color: var(--hk-phosphor-bright) !important;
+        text-shadow: 0 0 8px rgba(57, 255, 20, 0.6) !important;
+    }
+
+    /* Prose links inside chat — loud underline */
+    [class*="font-claude-message"] a,
+    [class*="font-user-message"] a {
+        color: var(--hk-acid) !important;
+        text-decoration: underline !important;
+        text-decoration-color: var(--hk-phosphor) !important;
+        text-decoration-thickness: 1px !important;
+        text-underline-offset: 3px !important;
+        text-shadow: 0 0 6px rgba(127, 255, 0, 0.5) !important;
+    }
+    [class*="font-claude-message"] a:hover,
+    [class*="font-user-message"] a:hover {
+        color: #ffffff !important;
+        text-decoration-color: var(--hk-phosphor-bright) !important;
+        text-shadow:
+            0 0 8px var(--hk-phosphor-bright),
+            0 0 20px rgba(57, 255, 20, 0.7) !important;
+    }
+
+    /* Footer / disclaimer links */
+    main p > a,
+    main > footer a,
+    footer a,
+    [class*="footer"] a,
+    [class*="error-message"] a,
+    [class*="disclaimer"] a {
+        color: var(--hk-amber) !important;
+        text-decoration: underline !important;
+        text-shadow: 0 0 6px rgba(255, 176, 0, 0.4) !important;
+    }
+
+    /* Artifact viewer links — native blue */
+    [class*="artifact"] a,
+    [class*="side-panel"] a {
+        color: #569cd6 !important;
+        text-shadow: none !important;
+    }
+
+    /* ============================================================
+     16. CHAT CODE BLOCKS — terminal box
+     ============================================================ */
+    [class*="font-claude-message"] pre,
+    [class*="font-user-message"] pre {
+        background: #000000 !important;
+        border: 1px solid var(--hk-phosphor) !important;
+        border-radius: 0 !important;
+        padding: 14px 16px !important;
+        margin: 14px 0 !important;
+        box-shadow:
+            inset 0 0 24px rgba(0, 255, 65, 0.06),
+            0 0 16px rgba(0, 255, 65, 0.18) !important;
+        overflow-x: auto !important;
+    }
+
+    [class*="font-claude-message"] pre code,
+    [class*="font-user-message"] pre code {
+        background: transparent !important;
+        border: none !important;
+        color: var(--hk-phosphor) !important;
+        padding: 0 !important;
+        font-family: 'Courier New', monospace !important;
+        font-size: 13px !important;
+        line-height: 1.55 !important;
+        text-shadow: 0 0 2px rgba(0, 255, 65, 0.4) !important;
+    }
+
+    /* ============================================================
+     17. COMPOSER — outer wrapper gets the glow, textarea is bare
+     ============================================================ */
+    fieldset:has(textarea),
+    [data-testid*="composer"],
+    [class*="composer"],
+    form:has(textarea) {
+        background: linear-gradient(180deg,
+            rgba(3, 10, 3, 0.82) 0%,
+            rgba(0, 0, 0, 0.9) 100%) !important;
+        border: 1px solid var(--hk-phosphor) !important;
+        border-radius: 2px !important;
+        backdrop-filter: blur(6px) !important;
+        -webkit-backdrop-filter: blur(6px) !important;
+        box-shadow:
+            0 0 0 1px rgba(0, 255, 65, 0.25),
+            0 0 24px rgba(0, 255, 65, 0.4),
+            0 0 64px rgba(0, 255, 65, 0.18),
+            inset 0 0 32px rgba(0, 255, 65, 0.05) !important;
+        transition: box-shadow 200ms ease !important;
+    }
+
+    fieldset:has(textarea:focus),
+    [data-testid*="composer"]:focus-within,
+    [class*="composer"]:focus-within,
+    form:has(textarea:focus) {
+        border-color: var(--hk-phosphor-bright) !important;
+        box-shadow:
+            0 0 0 1px rgba(57, 255, 20, 0.5),
+            0 0 28px rgba(57, 255, 20, 0.6),
+            0 0 72px rgba(57, 255, 20, 0.3),
+            inset 0 0 40px rgba(57, 255, 20, 0.08) !important;
+    }
+
+    /* Strip box-shadow/border/bg from every nested composer descendant
+       (but leave buttons, svg, textarea, contenteditable, dialogs,
+       menus, attachments alone) */
+    [data-testid*="composer"] *:not(button):not(svg):not(textarea):not([contenteditable]):not([role="dialog"]):not([role="menu"]):not(img):not([class*="attachment"]):not([class*="upload"]),
+    [class*="composer"] *:not(button):not(svg):not(textarea):not([contenteditable]):not([role="dialog"]):not([role="menu"]):not(img):not([class*="attachment"]):not([class*="upload"]),
+    fieldset:has(textarea) *:not(button):not(svg):not(textarea):not([contenteditable]):not([role="dialog"]):not([role="menu"]):not(img):not([class*="attachment"]):not([class*="upload"]) {
+        box-shadow: none !important;
+        border: none !important;
+        background-color: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    /* Textarea bare */
+    textarea,
+    [contenteditable="true"],
+    div[contenteditable] {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+        color: var(--hk-phosphor-pale) !important;
+        font-family: 'Courier New', 'Consolas', monospace !important;
+        font-size: 14.5px !important;
+        line-height: 1.6 !important;
+        padding-right: 80px !important;
+        padding-bottom: 50px !important;
+        min-height: 60px !important;
+        caret-color: var(--hk-phosphor-bright) !important;
+    }
+
+    textarea::placeholder,
+    [contenteditable="true"]:empty::before {
+        color: var(--hk-text-muted) !important;
+        opacity: 0.7 !important;
+    }
+
+    /* Composer toolbar (the bottom strip with model picker, mic, send)
+       gets subtle flicker — glanceable area */
+    [data-testid*="composer"] > div:last-child,
+    [class*="composer"] > div:last-child,
+    fieldset:has(textarea) > div:last-child {
+        animation: hk-flicker-subtle 56s linear infinite !important;
+        animation-delay: -5.4s !important;
+    }
+
+    /* ============================================================
+     18. FILE INPUT — terminal "CHOOSE FILES" button
+     ============================================================ */
+    input[type="file"]::file-selector-button {
+        background: var(--hk-void) !important;
+        color: var(--hk-phosphor) !important;
+        border: 1px solid var(--hk-phosphor) !important;
+        border-radius: 0 !important;
+        padding: 6px 14px !important;
+        font-family: 'Courier New', monospace !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.1em !important;
+        font-size: 11px !important;
+        cursor: pointer !important;
+        box-shadow: 0 0 8px rgba(0, 255, 65, 0.4) !important;
+        text-shadow: 0 0 4px rgba(0, 255, 65, 0.6) !important;
+        margin-right: 8px !important;
+        transition: all 150ms ease !important;
+    }
+
+    input[type="file"]::file-selector-button:hover {
+        background: var(--hk-phosphor) !important;
+        color: var(--hk-void) !important;
+        text-shadow: none !important;
+        box-shadow: 0 0 16px var(--hk-phosphor) !important;
+    }
+
+    /* ============================================================
+     19. BUTTONS — base typography, then color
+     ----
+     EXCLUDE image-content buttons via :not(:has(>img)) so chat
+     thumbnails don't get overridden.
+     ============================================================ */
+    button:not([type="submit"]):not([aria-label*="Send" i]):not([data-testid*="send-button"]):not(:has(> img)):not(:has(> picture)),
+    [data-cds="Button"]:not([type="submit"]):not([aria-label*="Send" i]):not([data-testid*="send-button"]) {
+        font-family: 'Courier New', 'Consolas', monospace !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.08em !important;
+        font-size: 12px !important;
+        background: rgba(0, 20, 0, 0.7) !important;
+        color: var(--hk-phosphor) !important;
+        border: 1px solid var(--hk-phosphor) !important;
+        border-radius: 0 !important;
+        padding: 6px 12px !important;
+        text-shadow: 0 0 4px rgba(0, 255, 65, 0.5) !important;
+        box-shadow:
+            0 0 0 1px rgba(0, 0, 0, 0.6) inset,
+            0 0 8px rgba(0, 255, 65, 0.18) !important;
+        transition: all 150ms ease !important;
+        cursor: pointer !important;
+    }
+
+    button:not([type="submit"]):not([aria-label*="Send" i]):not([data-testid*="send-button"]):not(:has(> img)):not(:has(> picture)):hover,
+    [data-cds="Button"]:not([type="submit"]):not([aria-label*="Send" i]):not([data-testid*="send-button"]):hover {
+        background: rgba(0, 60, 0, 0.7) !important;
+        color: var(--hk-phosphor-bright) !important;
+        border-color: var(--hk-phosphor-bright) !important;
+        text-shadow:
+            0 0 6px var(--hk-phosphor-bright),
+            0 0 14px rgba(57, 255, 20, 0.6) !important;
+        box-shadow:
+            0 0 0 1px rgba(0, 0, 0, 0.6) inset,
+            0 0 16px rgba(57, 255, 20, 0.5) !important;
+    }
+
+    /* Force button child spans to inherit (Lesson 3) */
+    button > span,
+    button > span > *,
+    [data-cds="Button"] > span,
+    [data-cds="Button"] > span > * {
+        font-family: inherit !important;
+        text-transform: inherit !important;
+        letter-spacing: inherit !important;
+        font-weight: inherit !important;
+        color: inherit !important;
+    }
+
+    /* Hide the hidden pill-bg span on design-system buttons (Lesson 2) */
+    [data-cds="Button"] > span[aria-hidden="true"] {
+        display: none !important;
+    }
+
+    /* ============================================================
+     20. IMAGE THUMBNAIL BUTTONS — surgical revert (Lesson 5)
+     ============================================================ */
+    button:has(> img),
+    button:has(> picture),
+    [class*="group/thumbnail"] button,
+    [data-testid$="_image.png"] button,
+    [data-testid$="_image.jpg"] button,
+    [data-testid$="_image.jpeg"] button,
+    [data-testid$="_image.webp"] button,
+    [data-testid$="_image.gif"] button {
+        background: revert !important;
+        background-color: revert !important;
+        background-image: revert !important;
+        border: revert !important;
+        border-color: revert !important;
+        border-width: revert !important;
+        border-style: revert !important;
+        border-radius: revert !important;
+        box-shadow: revert !important;
+        color: revert !important;
+        font-family: revert !important;
+        font-size: revert !important;
+        font-weight: revert !important;
+        text-transform: revert !important;
+        letter-spacing: revert !important;
+        text-shadow: revert !important;
+        transition: revert !important;
+        outline: revert !important;
+        backdrop-filter: revert !important;
+        -webkit-backdrop-filter: revert !important;
+        animation: none !important;
+        /* NOTE: no width/height/position/display/overflow */
+    }
+
+    /* ============================================================
+     21. WHITE CTA BUTTONS — catch by aria-label (Lesson 17)
+     ============================================================ */
+    button[aria-label*="New project" i],
+    a[aria-label*="New project" i],
+    button[aria-label*="New chat" i],
+    a[aria-label*="New chat" i] {
+        background: rgba(0, 30, 0, 0.8) !important;
+        color: var(--hk-phosphor-bright) !important;
+        border: 1px solid var(--hk-phosphor-bright) !important;
+        text-shadow: 0 0 6px var(--hk-phosphor-bright) !important;
+    }
+
+    button[aria-label*="New project" i] *,
+    a[aria-label*="New project" i] *,
+    button[aria-label*="New chat" i] *,
+    a[aria-label*="New chat" i] * {
+        color: var(--hk-phosphor-bright) !important;
+    }
+
+    /* ============================================================
+     22. ARTIFACT BUTTON RE-ASSERT — native look in artifact panel
+     ============================================================ */
+    [class*="artifact"] button,
+    [class*="side-panel"] button {
+        background: #2d2d30 !important;
+        color: #cccccc !important;
+        border: 1px solid #3e3e42 !important;
+        border-radius: 2px !important;
+        text-transform: none !important;
+        letter-spacing: normal !important;
+        text-shadow: none !important;
+        box-shadow: none !important;
+        font-family: 'Segoe UI', system-ui, sans-serif !important;
+        font-weight: 400 !important;
+        animation: none !important;
+    }
+
+    [class*="artifact"] button:hover,
+    [class*="side-panel"] button:hover {
+        background: #3e3e42 !important;
+        color: #ffffff !important;
+        border-color: #555 !important;
+        text-shadow: none !important;
+        box-shadow: none !important;
+    }
+
+    /* ============================================================
+     23. SEND BUTTON — LAST so it wins cascade
+     ============================================================ */
+    button[type="submit"],
+    button[aria-label*="Send" i],
+    [data-testid*="send-button"] {
+        background: linear-gradient(180deg,
+            var(--hk-phosphor-bright) 0%,
+            var(--hk-phosphor) 100%) !important;
+        color: var(--hk-void) !important;
+        border: 1px solid var(--hk-phosphor-bright) !important;
+        border-radius: 2px !important;
+        font-family: 'Courier New', monospace !important;
+        font-weight: 900 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.1em !important;
+        text-shadow: none !important;
+        box-shadow:
+            0 0 0 1px var(--hk-void) inset,
+            0 0 12px var(--hk-phosphor),
+            0 0 28px rgba(57, 255, 20, 0.5) !important;
+        transition: all 150ms ease !important;
+        animation: none !important;
+    }
+
+    button[type="submit"]:hover,
+    button[aria-label*="Send" i]:hover,
+    [data-testid*="send-button"]:hover {
+        background: var(--hk-phosphor-bright) !important;
+        box-shadow:
+            0 0 0 1px var(--hk-void) inset,
+            0 0 20px var(--hk-phosphor-bright),
+            0 0 44px rgba(57, 255, 20, 0.7) !important;
+        transform: translateY(-1px) !important;
+    }
+
+    button[type="submit"] *,
+    button[aria-label*="Send" i] *,
+    [data-testid*="send-button"] *,
+    button[type="submit"] svg,
+    button[aria-label*="Send" i] svg,
+    [data-testid*="send-button"] svg {
+        color: var(--hk-void) !important;
+        fill: var(--hk-void) !important;
+        stroke: var(--hk-void) !important;
+    }
+
+    /* ============================================================
+     24. SCROLLBARS — phosphor
+     ============================================================ */
+    * {
+        scrollbar-width: thin !important;
+        scrollbar-color: var(--hk-phosphor) var(--hk-void) !important;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px !important;
+        height: 10px !important;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--hk-void) !important;
+        border-left: 1px solid rgba(0, 255, 65, 0.15) !important;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, var(--hk-phosphor-bright), var(--hk-phosphor), var(--hk-phosphor-deep)) !important;
+        border-radius: 0 !important;
+        border: 1px solid var(--hk-void) !important;
+        box-shadow: 0 0 6px rgba(0, 255, 65, 0.4) !important;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--hk-phosphor-bright) !important;
+        box-shadow: 0 0 12px var(--hk-phosphor-bright) !important;
+    }
+
+    [class*="artifact"] *,
+    [class*="side-panel"] * {
+        scrollbar-color: #555 #1e1e1e !important;
+    }
+
+    /* ============================================================
+     25. SELECTION
+     ============================================================ */
+    ::selection {
+        background: var(--hk-phosphor-bright) !important;
+        color: var(--hk-void) !important;
+        text-shadow: none !important;
+    }
+
+    /* ============================================================
+     26. DROPDOWNS / MENUS / MODALS — but NOT image lightboxes
+     ============================================================ */
+    [role="menu"]:not(:has(img)),
+    [role="dialog"]:not(:has(img)):not(:has(picture)):not([aria-label*="image" i]):not([aria-modal="true"]:has(img)),
+    [role="listbox"],
+    [class*="dropdown"],
+    [class*="popover"],
+    [class*="modal"]:not(:has(img)):not([aria-label*="image" i]) {
+        background: linear-gradient(135deg,
+            rgba(3, 10, 3, 0.95) 0%,
+            rgba(0, 0, 0, 0.98) 100%) !important;
+        border: 1px solid var(--hk-phosphor) !important;
+        border-radius: 2px !important;
+        backdrop-filter: blur(6px) !important;
+        -webkit-backdrop-filter: blur(6px) !important;
+        box-shadow:
+            0 0 0 1px rgba(0, 255, 65, 0.3),
+            0 0 28px rgba(0, 255, 65, 0.4),
+            0 8px 32px rgba(0, 0, 0, 0.8) !important;
+        color: var(--hk-phosphor-pale) !important;
+        font-family: 'Courier New', monospace !important;
+    }
+
+    [role="menuitem"],
+    [role="option"] {
+        color: var(--hk-phosphor-pale) !important;
+        transition: all 150ms ease !important;
+        border: none !important;
+        font-family: 'Courier New', monospace !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.04em !important;
+        font-size: 12px !important;
+    }
+
+    [role="menuitem"]:hover,
+    [role="option"]:hover {
+        background: rgba(0, 255, 65, 0.12) !important;
+        color: var(--hk-phosphor-bright) !important;
+        text-shadow: 0 0 6px var(--hk-phosphor-bright) !important;
+    }
+
+    /* ============================================================
+     27. TABLES / BLOCKQUOTES / HR — chat only
+     ============================================================ */
+    [class*="font-claude-message"] table,
+    [class*="font-user-message"] table {
+        border: 1px solid var(--hk-phosphor-deep) !important;
+        background: rgba(0, 0, 0, 0.6) !important;
+        border-collapse: collapse !important;
+        box-shadow: 0 0 0 1px rgba(0, 255, 65, 0.15) !important;
+        margin: 12px 0 !important;
+        font-family: 'Courier New', monospace !important;
+    }
+
+    [class*="font-claude-message"] th,
+    [class*="font-user-message"] th {
+        background: rgba(0, 30, 0, 0.7) !important;
+        color: var(--hk-phosphor-bright) !important;
+        border-bottom: 2px solid var(--hk-phosphor) !important;
+        font-family: 'Courier New', monospace !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.08em !important;
+        padding: 10px 14px !important;
+        text-align: left !important;
+        text-shadow: 0 0 4px rgba(57, 255, 20, 0.4) !important;
+    }
+
+    [class*="font-claude-message"] td,
+    [class*="font-user-message"] td {
+        border-bottom: 1px solid rgba(0, 255, 65, 0.18) !important;
+        color: var(--hk-text) !important;
+        padding: 10px 14px !important;
+    }
+
+    [class*="font-claude-message"] blockquote,
+    [class*="font-user-message"] blockquote {
+        border: none !important;
+        border-left: 4px solid var(--hk-amber) !important;
+        background: rgba(255, 176, 0, 0.06) !important;
+        color: var(--hk-amber) !important;
+        font-style: italic !important;
+        padding: 14px 22px !important;
+        margin: 16px 0 !important;
+        box-shadow: -2px 0 16px rgba(255, 176, 0, 0.18) !important;
+    }
+
+    [class*="font-claude-message"] blockquote *,
+    [class*="font-user-message"] blockquote * {
+        color: var(--hk-amber) !important;
+    }
+
+    [class*="font-claude-message"] hr,
+    [class*="font-user-message"] hr {
+        border: none !important;
+        height: 1px !important;
+        background: linear-gradient(90deg,
+            transparent 0%,
+            var(--hk-phosphor) 30%,
+            var(--hk-phosphor-bright) 50%,
+            var(--hk-phosphor) 70%,
+            transparent 100%) !important;
+        box-shadow: 0 0 12px rgba(0, 255, 65, 0.5) !important;
+        margin: 20px 0 !important;
+    }
+
+    /* ============================================================
+     28. FOCUS RINGS
+     ============================================================ */
+    *:focus-visible {
+        outline: 2px solid var(--hk-phosphor-bright) !important;
+        outline-offset: 2px !important;
+        box-shadow: 0 0 12px rgba(57, 255, 20, 0.5) !important;
+    }
+
+    /* ============================================================
+     29. REDUCED MOTION RESPECT
+     ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+        body::before,
+        body::after,
+        html::after,
+        main::before,
+        main::after,
+        h1, h2, h3, h4, h5, h6,
+        aside a, aside button,
+        nav a, nav button,
+        [class*="sidebar" i] a, [class*="sidebar" i] button,
+        header, [data-testid="page-header"],
+        [data-testid*="composer"] > div:last-child,
+        [class*="composer"] > div:last-child {
+            animation: none !important;
+        }
+    }
