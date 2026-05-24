@@ -209,7 +209,7 @@ button.bubble.user.activated {
 <div class="rain" id="rain"></div>
 
 <div class="shell">
-  <div class="wordmark" id="wordmark">prompt bar a</div>
+  <div class="wordmark" id="wordmark">prompt bar 1</div>
 
   <div class="bubble system">
     <span class="role">system</span>
@@ -231,7 +231,7 @@ button.bubble.user.activated {
   const theme   = params.get('theme') === 'red' ? 'red' : 'green';
   if (theme === 'red') document.documentElement.dataset.theme = 'red';
   document.getElementById('wordmark').textContent =
-    'prompt bar ' + (theme === 'red' ? 'b' : 'a');
+    'prompt bar ' + (theme === 'red' ? '2' : '1');
 
   // ─── "Show me" toggle ───────────────────────────────────────────────
   // Local active state, postMessaged to parent so the gallery can apply
