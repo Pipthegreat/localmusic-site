@@ -446,6 +446,20 @@ body.ezr-themed .hack-badge-popular {
   background: rgba(0,0,0,0.55) !important;
   border: 1px solid var(--ezr-dim) !important;
 }
+body.ezr-themed .preview-toggle {
+  background: rgba(0,0,0,0.55) !important;
+  border-color: var(--ezr-dim) !important;
+  color: var(--ezr-bright) !important;
+}
+body.ezr-themed .preview-toggle:hover {
+  box-shadow: 0 0 8px var(--ezr-glow) !important;
+}
+body.ezr-themed .preview-toggle.active {
+  background: var(--ezr-bright) !important;
+  color: #000 !important;
+  border-color: var(--ezr-bright) !important;
+  box-shadow: 0 0 14px var(--ezr-glow) !important;
+}
 
 body.ezr-themed .install-shell {
   background: linear-gradient(135deg, #070707, #000) !important;
@@ -504,6 +518,44 @@ body.ezr-themed .tutorial-link {
   margin: 0 0 6px;
   color: var(--fg-default);
   display: flex; align-items: center; gap: 10px;
+  flex-wrap: wrap;
+}
+.hack-name .hack-title-text { flex: 1; min-width: 0; }
+
+/* Click-to-preview toggle. Applies the corresponding hijink to this
+   gallery page itself (mutually exclusive with the easter-egg themes
+   and with the other preview buttons). Skipped on Gravity Well and
+   on the mystery card. */
+.preview-toggle {
+  font: 500 9px/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: oklch(30% 0.10 40 / 0.45);
+  border: 1px solid oklch(70% 0.16 40 / 0.4);
+  color: var(--ember);
+  padding: 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 180ms, border-color 180ms, box-shadow 180ms, color 180ms;
+}
+.preview-toggle:hover {
+  background: oklch(40% 0.12 40 / 0.55);
+  box-shadow: 0 0 8px oklch(70% 0.16 40 / 0.3);
+}
+.preview-toggle.active {
+  background: var(--ember);
+  color: oklch(15% 0.04 40);
+  border-color: var(--ember);
+  box-shadow: 0 0 14px var(--ember-glow);
+}
+.preview-toggle:focus-visible {
+  outline: 1px solid var(--ember);
+  outline-offset: 2px;
+}
+@media (max-width: 640px) {
+  .preview-toggle { padding: 5px 8px; font-size: 8.5px; letter-spacing: 0.12em; }
 }
 .hack-name .num {
   font: 500 11px/1 var(--mono);
@@ -684,6 +736,7 @@ footer {
         <li>The DOM (Document Object Model) is the live tree of every web page's elements</li>
         <li><span class="brand-inline"><em>DOM</em> Pérignon</span> uses that for eight different perspectives</li>
         <li>Live previews for the eight styles, against a sample 'Kestrel Fabrications' page</li>
+        <li>Each example can be clicked to apply it to the page</li>
       </ul>
     </div>
     <span class="version-chip">v1.3.7</span>
@@ -697,7 +750,7 @@ footer {
         <iframe src="demo.html?hack=ants" loading="lazy" title="Ants preview"></iframe>
       </div>
       <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">01</span> Ants</h2>
+        <h2 class="hack-name"><span class="num">01</span> <span class="hack-title-text">Ants</span><button class="preview-toggle" type="button" data-hack="ants">Click to preview</button></h2>
         <p class="hack-desc">A colony of crawling SVG ants with realistic leg gait. Bonus chaos on sites with empty white space.</p>
         <span class="hack-badge hack-badge-popular">Most popular</span>
       </div>
@@ -708,7 +761,7 @@ footer {
         <iframe src="demo.html?hack=champagne" loading="lazy" title="Champagne preview"></iframe>
       </div>
       <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">02</span> Champagne Bubbles</h2>
+        <h2 class="hack-name"><span class="num">02</span> <span class="hack-title-text">Champagne Bubbles</span><button class="preview-toggle" type="button" data-hack="champagne">Click to preview</button></h2>
         <p class="hack-desc">Pale bubbles rise with realistic fizz physics. Click to pop. Corks ricochet across every twenty-eight seconds or so.</p>
         <span class="hack-badge hack-badge-signature">House signature</span>
       </div>
@@ -719,7 +772,7 @@ footer {
         <iframe src="demo.html?hack=dynamic-logo" loading="lazy" title="Logo Bounce House preview"></iframe>
       </div>
       <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">03</span> Logo Bounce House</h2>
+        <h2 class="hack-name"><span class="num">03</span> <span class="hack-title-text">Logo Bounce House</span><button class="preview-toggle" type="button" data-hack="dynamic-logo">Click to preview</button></h2>
         <p class="hack-desc">The site's logo, loose and bouncing - eight small copies. Sharper rendering on low-res favicons.</p>
       </div>
     </div>
@@ -729,7 +782,7 @@ footer {
         <iframe src="demo.html?hack=quotes" loading="lazy" title="You Got This preview"></iframe>
       </div>
       <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">04</span> You Got This</h2>
+        <h2 class="hack-name"><span class="num">04</span> <span class="hack-title-text">You Got This</span><button class="preview-toggle" type="button" data-hack="quotes">Click to preview</button></h2>
         <p class="hack-desc">A little laid-back inspiration. Sixty affirmations in desert/autumn hues - saffron, terracotta, sienna, mustard, sage, rosewood, adobe clay.</p>
       </div>
     </div>
@@ -749,7 +802,7 @@ footer {
         <iframe src="demo.html?hack=aquarium" loading="lazy" title="Aquarium preview"></iframe>
       </div>
       <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">06</span> Aquarium</h2>
+        <h2 class="hack-name"><span class="num">06</span> <span class="hack-title-text">Aquarium</span><button class="preview-toggle" type="button" data-hack="aquarium">Click to preview</button></h2>
         <p class="hack-desc">The page becomes the back wall of a tank. Kelp, bubbles, fish, ripples.</p>
       </div>
     </div>
@@ -759,7 +812,7 @@ footer {
         <iframe src="demo.html?hack=googly" loading="lazy" title="Watchers preview"></iframe>
       </div>
       <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">07</span> Watchers</h2>
+        <h2 class="hack-name"><span class="num">07</span> <span class="hack-title-text">Watchers</span><button class="preview-toggle" type="button" data-hack="googly">Click to preview</button></h2>
         <p class="hack-desc">Eyes appear quietly across the page. They follow your cursor. They do not blink.</p>
       </div>
     </div>
@@ -769,7 +822,7 @@ footer {
         <iframe src="demo.html?hack=dvd" loading="lazy" title="DVD preview"></iframe>
       </div>
       <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">08</span> DVD Bouncer</h2>
+        <h2 class="hack-name"><span class="num">08</span> <span class="hack-title-text">DVD Bouncer</span><button class="preview-toggle" type="button" data-hack="dvd">Click to preview</button></h2>
         <p class="hack-desc">If you're feeling nostalgic and uninspired.</p>
       </div>
     </div>
@@ -826,16 +879,21 @@ footer {
 <div class="ezr-rain" id="ezrRain" aria-hidden="true"></div>
 
 <script>
-  // ─── Easter-egg theme bridge ─────────────────────────────────────────
-  // Each "Two more easter eggs" iframe carries a "Show me" button that
-  // postMessages this gallery on click. We toggle a body class to apply
-  // the page-wide overlay and ring the originating iframe. Mutual
-  // exclusion between the two themes — activating one deactivates the
-  // other (and tells its iframe to clear its button state).
+  // ─── Easter-egg theme bridge + click-to-preview ──────────────────────
+  // Two activation paths share this gallery:
+  //   1. Easter-egg iframes ("Show me" buttons) postMessage to apply a
+  //      page-wide phosphor/blood theme.
+  //   2. Per-card "Click to preview" buttons load + activate a hijink
+  //      against the gallery DOM itself.
+  // The two paths are mutually exclusive — activating either clears
+  // whatever else was on. Skipped: Gravity Well (no button on its card)
+  // and the mystery card (its iframes have their own toggles).
   (function () {
     const body = document.body;
     const rain = document.getElementById('ezrRain');
     let rainSeeded = false;
+    let currentHack = null;
+    let hackLoadPromise = null;
 
     function seedRain() {
       if (rainSeeded) return;
@@ -844,6 +902,11 @@ footer {
       const cols = 32;
       const spacing = 100 / cols;
       const vh = Math.max(window.innerHeight, 720);
+      // Mobile gets a wider dim-side opacity range so the rain doesn't
+      // wash out on small screens where every column reads brighter.
+      const isMobile = window.matchMedia('(max-width: 720px)').matches;
+      const minOp = isMobile ? 0.45 : 0.55;
+      const maxOp = 0.70;
       const frag = document.createDocumentFragment();
       for (let i = 0; i < cols; i++) {
         const col = document.createElement('div');
@@ -852,6 +915,7 @@ footer {
         col.style.left = `${x}%`;
         col.style.animationDuration = (10 + Math.random() * 14).toFixed(2) + 's';
         col.style.animationDelay   = (-Math.random() * 24).toFixed(2) + 's';
+        col.style.opacity = (minOp + Math.random() * (maxOp - minOp)).toFixed(2);
         const fontSize = 13 + Math.random() * 5;
         col.style.fontSize = fontSize.toFixed(1) + 'px';
 
@@ -883,6 +947,100 @@ footer {
       });
     }
 
+    // ─── Hack loader + toggle ──────────────────────────────────────────
+    // Lazy-loads the extension's hijink modules + inject.js into the
+    // gallery page on first click. Provides the same chrome.* stubs that
+    // demo.html uses so the modules run as if inside the extension. After
+    // load, window.__DOMPerignon.activate(name) switches hijinks; passing
+    // 'off' tears down the current one.
+    function ensureHacksLoaded() {
+      if (hackLoadPromise) return hackLoadPromise;
+
+      window.chrome = window.chrome || {};
+      window.chrome.runtime = window.chrome.runtime || {
+        getURL: (rel) => 'ext/' + rel,
+        onMessage: { addListener: () => {} },
+        sendMessage: () => Promise.resolve(),
+      };
+      window.chrome.storage = window.chrome.storage || {
+        local: {
+          get: (def) => Promise.resolve(def),
+          set: () => Promise.resolve(),
+        },
+      };
+      window.chrome.tabs = window.chrome.tabs || {
+        query: () => Promise.resolve([]),
+        sendMessage: () => Promise.resolve(),
+      };
+
+      // Skip ezr-* (those are scoped to claude.ai/chatgpt.com only) and
+      // gravity-well (no preview button on its card per design).
+      const scripts = [
+        'ext/hacks/ants.js',
+        'ext/hacks/dvd.js',
+        'ext/hacks/quotes.js',
+        'ext/hacks/dynamic-logo.js',
+        'ext/hacks/champagne.js',
+        'ext/hacks/googly.js',
+        'ext/hacks/aquarium.js',
+        'ext/inject.js',
+      ];
+      hackLoadPromise = new Promise((resolve, reject) => {
+        let pending = scripts.length;
+        scripts.forEach(src => {
+          const s = document.createElement('script');
+          s.src = src;
+          s.onload  = () => { if (--pending === 0) resolve(); };
+          s.onerror = (err) => reject(err);
+          document.head.appendChild(s);
+        });
+      });
+      return hackLoadPromise;
+    }
+
+    function setHackButtonState(activeName) {
+      document.querySelectorAll('.preview-toggle[data-hack]').forEach(b => {
+        b.classList.toggle('active', b.dataset.hack === activeName);
+      });
+    }
+
+    async function toggleHack(name) {
+      try {
+        await ensureHacksLoaded();
+      } catch (err) {
+        console.warn('[gallery] hack load failed', err);
+        return;
+      }
+      if (!window.__DOMPerignon) return;
+
+      // Click the active button again → turn off
+      if (currentHack === name) {
+        window.__DOMPerignon.activate('off');
+        currentHack = null;
+        setHackButtonState(null);
+        return;
+      }
+
+      // Switching hacks (or starting one): clear any active theme first
+      if (body.classList.contains('ezr-themed')) {
+        setActive(null);
+        document.querySelectorAll('iframe[data-ezr]').forEach(f => {
+          if (f.contentWindow) {
+            f.contentWindow.postMessage({ type: 'ezr-deactivate' }, '*');
+          }
+        });
+      }
+
+      window.__DOMPerignon.activate(name);
+      currentHack = name;
+      setHackButtonState(name);
+    }
+
+    document.querySelectorAll('.preview-toggle[data-hack]').forEach(btn => {
+      btn.addEventListener('click', () => toggleHack(btn.dataset.hack));
+    });
+
+    // ─── Easter-egg messages ───────────────────────────────────────────
     window.addEventListener('message', (e) => {
       const msg = e.data;
       if (!msg || msg.type !== 'ezr-toggle') return;
@@ -892,6 +1050,12 @@ footer {
       seedRain();
 
       if (activated) {
+        // Mutual exclusion with the click-to-preview hijinks.
+        if (currentHack && window.__DOMPerignon) {
+          window.__DOMPerignon.activate('off');
+          currentHack = null;
+          setHackButtonState(null);
+        }
         // Tell the OTHER iframe to clear its button state.
         const other = theme === 'green' ? 'red' : 'green';
         document.querySelectorAll(`iframe[data-ezr="${other}"]`).forEach(f => {
