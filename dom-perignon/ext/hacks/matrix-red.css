@@ -1,28 +1,42 @@
 /* matrix-red — blood-red counterpart to matrix-green.css.
-   Same layer structure; palette swapped to the ezr-chatgpt reds. */
+   Identical layer + animation logic; palette swapped to the
+   ezr-chatgpt reds. */
 
-html, body {
+html {
   background-color: #000 !important;
+  background-image: none !important;
+}
+body {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+body, body * {
+  color: #e8a8a8 !important;
+  border-color: #2a0606 !important;
+}
+body a, body a * {
+  color: #ff3a1a !important;
+}
+body button, body input, body textarea, body select {
+  background-color: #0d0606 !important;
+  color: #e8a8a8 !important;
+  border: 1px solid #2a0606 !important;
+}
+
+body img, body picture, body video, body canvas {
+  opacity: 0.55 !important;
 }
 
 #__dp-matrix-red {
   position: fixed !important;
   inset: 0 !important;
+  z-index: -1 !important;
   pointer-events: none !important;
 }
-
-#__dp-matrix-red .dp-matrix-wash {
-  position: fixed !important;
-  inset: 0 !important;
-  background: rgba(0, 0, 0, 0.60) !important;
-  z-index: 2147483645 !important;
-  pointer-events: none !important;
-}
-
 #__dp-matrix-red .dp-matrix-rain {
   position: fixed !important;
   inset: 0 !important;
-  z-index: 2147483646 !important;
   overflow: hidden !important;
   pointer-events: none !important;
 }
@@ -37,8 +51,9 @@ html, body {
   color: #7a0a0a !important;
   text-shadow: 0 0 4px #ff3a1a !important;
   white-space: pre !important;
-  opacity: 0.7;
-  animation: dp-matrix-fall linear infinite !important;
+  animation-name: dp-matrix-fall !important;
+  animation-timing-function: linear !important;
+  animation-iteration-count: infinite !important;
   will-change: transform !important;
 }
 #__dp-matrix-red .dp-matrix-col .head {

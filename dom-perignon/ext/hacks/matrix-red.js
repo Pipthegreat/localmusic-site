@@ -27,7 +27,7 @@
     rootEl = document.createElement('div');
     rootEl.id = RAIN_ID;
     rootEl.setAttribute('aria-hidden', 'true');
-    rootEl.innerHTML = '<div class="dp-matrix-wash"></div><div class="dp-matrix-rain"></div>';
+    rootEl.innerHTML = '<div class="dp-matrix-rain"></div>';
     (document.body || document.documentElement).appendChild(rootEl);
 
     seedRain(rootEl.querySelector('.dp-matrix-rain'));

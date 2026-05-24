@@ -1,38 +1,62 @@
-/* matrix-green — simplified phosphor overlay for arbitrary pages.
+/* matrix-green — phosphor matrix takeover for arbitrary pages.
    ----
-   Two stacked layers above page content (clicks pass through):
-     .dp-matrix-wash — translucent black wash that dims the page
-                       so the rain reads as the dominant subject.
-     .dp-matrix-rain — seamless-loop column rain in phosphor green.
+   What we do:
+     1. Paint html → pure black, body → transparent. The page's own
+        elements still render with their own backgrounds, but the
+        gaps now show our matrix canvas (= html bg + rain) instead
+        of the site's body color.
+     2. Recolor body text broadly to phosphor green so it reads as
+        on-theme. Links + form controls get a slightly brighter
+        tint and a dark form background for legibility.
+     3. Pin the falling-glyph rain at z-index: -1 so it sits BEHIND
+        every body descendant. The site's own DOM keeps its z-stack
+        intact; we just slip in below.
+   Animation: only longhand animation-* properties carry !important
+   here — animation-duration is set inline per column by the JS so
+   each column falls at its own pace. (The shorthand with !important
+   would have clobbered the inline duration → static columns.)
+*/
 
-   Page-level chrome (html/body) gets a black bg in case any of the
-   site's own body bg shines through gaps. Page DOM is otherwise
-   untouched: no aggressive recolor pass, no selector clobbering.
-   This is intentionally lighter than the ezr-claude theme — that
-   one targets claude.ai's specific chat shell. */
-
-html, body {
+html {
   background-color: #000 !important;
+  background-image: none !important;
+}
+body {
+  background-color: transparent !important;
+  background-image: none !important;
 }
 
+/* Broad recolor — text + borders go phosphor. The .dp-matrix-col
+   selectors below are more specific, so the rain keeps its own
+   palette and isn't affected by this sweep. */
+body, body * {
+  color: #c8ffc8 !important;
+  border-color: #003b00 !important;
+}
+body a, body a * {
+  color: #00ff41 !important;
+}
+body button, body input, body textarea, body select {
+  background-color: #061206 !important;
+  color: #c8ffc8 !important;
+  border: 1px solid #003b00 !important;
+}
+
+/* Soften imagery so the rain reads as dominant. */
+body img, body picture, body video, body canvas {
+  opacity: 0.55 !important;
+}
+
+/* Rain layer — behind body content. */
 #__dp-matrix-green {
   position: fixed !important;
   inset: 0 !important;
+  z-index: -1 !important;
   pointer-events: none !important;
 }
-
-#__dp-matrix-green .dp-matrix-wash {
-  position: fixed !important;
-  inset: 0 !important;
-  background: rgba(0, 0, 0, 0.60) !important;
-  z-index: 2147483645 !important;
-  pointer-events: none !important;
-}
-
 #__dp-matrix-green .dp-matrix-rain {
   position: fixed !important;
   inset: 0 !important;
-  z-index: 2147483646 !important;
   overflow: hidden !important;
   pointer-events: none !important;
 }
@@ -47,8 +71,11 @@ html, body {
   color: #00b32d !important;
   text-shadow: 0 0 4px #39ff14 !important;
   white-space: pre !important;
-  opacity: 0.7;
-  animation: dp-matrix-fall linear infinite !important;
+  /* LONGHANDS only — don't touch animation-duration so JS-set value
+     (varied per column) actually applies. */
+  animation-name: dp-matrix-fall !important;
+  animation-timing-function: linear !important;
+  animation-iteration-count: infinite !important;
   will-change: transform !important;
 }
 #__dp-matrix-green .dp-matrix-col .head {
