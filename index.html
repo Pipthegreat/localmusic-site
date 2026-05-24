@@ -3,189 +3,766 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>customprojects.info</title>
-<meta name="description" content="A small set of independent web projects — a live-music companion, a fabrication studio site, and a personal tracker.">
+<title>customprojects.info — Five Independent Projects</title>
+<meta name="description" content="Five independent web projects by one author — a live-music directory, a fabrication studio, a personal tracker, an opinionated recommendations catalogue, and a Chrome extension.">
 <link rel="canonical" href="https://customprojects.info/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* ============================================================
+   customprojects.info — root cover
+
+   Type-led editorial cover. The page's primary visual moment is
+   a typographic one (Stle design-guide §2.2): "customprojects"
+   set at display-grade Fraunces, sized via clamp() with a
+   vw-driven middle term. The grid is asymmetric on purpose
+   (§2.1) — content sits offset from the centered axis so the
+   composition reads as authored, not templated.
+
+   Palette: the autumn cinnamon canvas + sage accent stays —
+   it's the brand surface. Restraint is the move (Stle §2.1):
+   one accent, one supporting hue, everything else neutral.
+   Per-project differentiation is achieved by hierarchy
+   (numeric marker, scale) — not by giving every card its own
+   hue.
+
+   Motion: intersection-driven entrance only. The page settles
+   inside 600ms (Stle design-guide §2.14). No perpetual motion.
+   prefers-reduced-motion replaces the entrance with a fade —
+   not a kill (§5.2).
+   ============================================================ */
+
 :root {
-  /* Autumn palette: warm cinnamon canvas + mossy sage accent. Replaces
-     the prior cream/peach (hue 60 + 30) which read as monochromatic
-     and pinkish. The contrast between the warm canvas hue (45) and the
-     cool sage accent (130) is what gives this page its "autumn leaves"
-     feel — earth tones with one cool counterpoint, not a single
-     orange family blurring together. Chroma stays in the 0.07–0.085
-     band per the project-wide palette feedback. */
-  --slate-300: oklch(82% 0.050 45);
-  --slate-500: oklch(52% 0.080 45);
-  --slate-700: oklch(36% 0.080 40);
-  --slate-800: oklch(30% 0.075 40);
-  --slate-900: oklch(23% 0.060 40);
-  --accent:      oklch(72% 0.085 130);
-  --accent-soft: oklch(80% 0.065 130);
-  --fg-default:  oklch(96% 0.030 60);
-  --fg-muted:    oklch(83% 0.045 55);
-  --bubble-shadow: oklch(12% 0.035 40 / 0.55);
-  --serif: 'Fraunces', Georgia, serif;
-  --sans:  'Inter', system-ui, sans-serif;
+  /* Reference scale — derived in OKLCH, hue 40 (cinnamon) for
+     warm neutrals, hue 130 (sage) for the accent. Chroma
+     follows the project-wide band (0.07–0.085). */
+  --ink-50:   oklch(98% 0.020 60);
+  --ink-100:  oklch(94% 0.030 55);
+  --ink-200:  oklch(86% 0.045 50);
+  --ink-300:  oklch(74% 0.055 45);
+  --ink-400:  oklch(58% 0.075 42);
+  --ink-500:  oklch(46% 0.080 40);
+  --ink-600:  oklch(36% 0.075 40);
+  --ink-700:  oklch(28% 0.070 38);
+  --ink-800:  oklch(20% 0.058 38);
+  --ink-900:  oklch(13% 0.040 38);
+  --ink-950:  oklch(8%  0.028 36);
+
+  --sage-300: oklch(82% 0.060 130);
+  --sage-400: oklch(76% 0.075 130);
+  --sage-500: oklch(70% 0.085 130);
+  --sage-600: oklch(58% 0.078 130);
+  --sage-700: oklch(46% 0.065 132);
+
+  --ember-500: oklch(68% 0.130 38);
+  --ember-600: oklch(60% 0.135 36);
+
+  /* Semantic aliases — components only read these. */
+  --bg-canvas:      var(--ink-950);
+  --bg-surface:     var(--ink-900);
+  --bg-elevated:    var(--ink-800);
+  --fg-default:     var(--ink-50);
+  --fg-muted:       var(--ink-300);
+  --fg-subtle:      var(--ink-400);
+  --border-subtle:  oklch(28% 0.05 38);
+  --border-strong:  oklch(38% 0.06 40);
+  --accent:         var(--sage-500);
+  --accent-soft:    var(--sage-400);
+  --accent-deep:    var(--sage-700);
+  --hot:            var(--ember-500);
+  --ring:           var(--sage-500);
+
+  --serif: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --sans:  'Inter', system-ui, -apple-system, sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Spacing — powers-of-2 ladder anchored to 4px (Stle §8). */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 20px; --s-6: 24px; --s-8: 32px; --s-10: 40px;
+  --s-12: 48px; --s-16: 64px; --s-20: 80px; --s-24: 96px;
+  --s-32: 128px; --s-40: 160px;
+
+  /* Easings — four named curves, named durations (Stle §5.1). */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --t-fast: 120ms;
+  --t: 200ms;
+  --t-slow: 400ms;
+
   color-scheme: dark;
 }
-* { box-sizing: border-box; }
-html {
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  overflow-x: hidden;
-}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: hidden; }
 html, body { margin: 0; padding: 0; }
+
 body {
   font: 400 16px/1.55 var(--sans);
   color: var(--fg-default);
-  background: var(--slate-900);
+  background: var(--bg-canvas);
+  /* The atmospheric gradient: a single warm bloom at the
+     top, a cool sage echo at the lower-left, a deep undertone
+     at the bottom. Fixed attachment, no perpetual motion. */
   background-image:
-    /* Warm cinnamon glow top-right */
-    radial-gradient(ellipse 80% 45% at 75% -8%, oklch(60% 0.10 38 / 0.30), transparent 62%),
-    /* Sage accent glow top-left */
-    radial-gradient(ellipse 55% 35% at 8% 4%, oklch(60% 0.08 130 / 0.18), transparent 62%),
-    /* Deep warm undertone bottom */
-    radial-gradient(ellipse 90% 35% at 50% 105%, oklch(28% 0.07 40 / 0.45), transparent 70%);
+    radial-gradient(ellipse 70% 50% at 78% -10%, oklch(58% 0.13 36 / 0.42), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 4% 96%, oklch(56% 0.09 130 / 0.18), transparent 65%),
+    radial-gradient(ellipse 100% 40% at 50% 110%, oklch(20% 0.07 38 / 0.55), transparent 70%);
   background-attachment: fixed;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
-}
-.shell { max-width: 600px; margin: 0 auto; padding: 56px 24px 80px; }
-.eyebrow {
-  font: 500 11px/1 'JetBrains Mono', ui-monospace, monospace;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--fg-muted);
-  margin-bottom: 14px;
-}
-h1 {
-  font: 400 44px/1.1 var(--serif);
-  margin: 0 0 14px; letter-spacing: -0.01em;
-}
-.lede { color: var(--fg-muted); margin: 0 0 40px; max-width: 52ch; }
-
-/* Bubble stack — vertical column, no two-up grid. Each project gets
-   its own line so the page reads like a list of distinct things,
-   not a wall of equally-weighted tiles. */
-.cards {
-  display: flex; flex-direction: column; gap: 16px;
-  margin: 0 0 48px;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv11", "kern", "liga";
+  text-rendering: optimizeLegibility;
 }
 
-/* Bubble — soft rounded shape with a gradient fill and lift shadow.
-   Big border-radius (28px) + the gradient + the shadow are what sells
-   the "bubble" read; the content inside is laid out as a 2-col grid so
-   the title+description sit on the left and the open arrow rides the
-   right edge centered to the bubble. */
-.card {
+/* Skip link — accessibility baseline. */
+.skip {
+  position: absolute; top: -100px; left: var(--s-4);
+  background: var(--accent); color: var(--ink-950);
+  padding: var(--s-2) var(--s-4); border-radius: 6px;
+  font: 600 13px/1 var(--mono); text-decoration: none;
+  z-index: 100;
+}
+.skip:focus { top: var(--s-4); outline: none; }
+
+/* Focus ring — first-class accent surface (Stle §2.10).
+   2px solid + 2px halo. Authored, not browser default. */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+::selection { background: var(--sage-400); color: var(--ink-950); }
+
+/* ============================================================
+   Layout shell — 16-column flex (Stle §4.1). On mobile collapses
+   to a single column; from 720px up it splits the page into a
+   16-track grid that lets headings, body, and metadata sit at
+   chosen columns instead of all flowing through center.
+   ============================================================ */
+
+.page {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 56px);
+}
+
+/* ============================================================
+   Running header — monospace metadata strip across the top.
+   Borrows from print: edition, volume, year, line count.
+   Sticks at top until first project section scrolls past it,
+   then releases (no perpetual sticky — once is enough).
+   ============================================================ */
+
+.runner {
   display: grid;
   grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 18px;
-  padding: 22px 26px;
-  background: linear-gradient(135deg,
-              oklch(38% 0.080 40),
-              oklch(31% 0.070 40));
-  border: 1px solid var(--slate-500);
-  border-radius: 28px;
-  color: var(--fg-default);
-  text-decoration: none;
-  box-shadow: 0 6px 24px var(--bubble-shadow);
-  transition: transform 200ms ease, border-color 200ms ease,
-              box-shadow 200ms ease, background 200ms ease;
+  align-items: baseline;
+  gap: var(--s-6);
+  padding: var(--s-6) 0 var(--s-4);
+  border-bottom: 1px solid var(--border-subtle);
+  font: 500 11px/1.4 var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
 }
-.card:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 32px var(--bubble-shadow),
-              0 0 0 4px oklch(72% 0.085 130 / 0.10);
-  background: linear-gradient(135deg,
-              oklch(40% 0.085 40),
-              oklch(33% 0.075 40));
+.runner-left {
+  display: flex; gap: var(--s-6); flex-wrap: wrap;
 }
-.card-content { display: flex; flex-direction: column; min-width: 0; }
-.card-label {
-  font: 500 10px/1 'JetBrains Mono', ui-monospace, monospace;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--accent-soft);
-  margin-bottom: 6px;
-}
-.card-title {
-  font: 400 22px/1.2 var(--serif);
-  margin: 2px 0 6px;
-}
-.card-desc { font-size: 13.5px; color: var(--fg-muted); margin: 0; }
+.runner-left span:nth-child(2) { color: var(--accent); }
+.runner-right { color: var(--fg-subtle); }
 
-/* Right-edge arrow rendered as a small circular chip — feels like the
-   bubble's own "go" affordance rather than a generic link. */
-.card-arrow {
-  flex-shrink: 0;
-  width: 38px; height: 38px;
-  display: inline-flex; align-items: center; justify-content: center;
-  border-radius: 999px;
-  background: oklch(42% 0.075 40);
-  color: var(--fg-default);
-  font: 500 18px/1 var(--sans);
-  transition: background 200ms ease, color 200ms ease, transform 200ms ease;
+/* ============================================================
+   HERO — type as load-bearing element. The brand mark is the
+   image. clamp() with a vw-driven middle term gives display
+   sizes that scale honestly across viewports.
+   ============================================================ */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-8);
+  padding: clamp(48px, 12vh, 144px) 0 clamp(64px, 14vh, 192px);
+  position: relative;
 }
-.card:hover .card-arrow {
+
+@media (min-width: 880px) {
+  .hero {
+    grid-template-columns: minmax(0, 10fr) minmax(0, 5fr);
+    gap: clamp(48px, 6vw, 96px);
+    align-items: end;
+  }
+}
+
+.brand {
+  /* Display Fraunces with optical sizing driven from font size.
+     SOFT-axis tuned for big-display (low contrast at small sizes,
+     more contrast as it scales up). */
+  font: 380 clamp(72px, 17vw, 264px) / 0.88 var(--serif);
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  letter-spacing: -0.05em;
+  margin: 0;
+  color: var(--fg-default);
+  word-break: keep-all;
+}
+.brand .l1 { display: block; }
+.brand .l2 { display: block; font-style: italic; font-weight: 350; color: var(--ink-100); }
+.brand .dot { color: var(--accent); }
+
+.hero-meta {
+  display: flex; flex-direction: column; gap: var(--s-6);
+  padding-bottom: var(--s-2);
+}
+.hero-lede {
+  font: 400 clamp(17px, 1.6vw, 21px) / 1.45 var(--serif);
+  color: var(--ink-100);
+  letter-spacing: -0.005em;
+  margin: 0;
+  max-width: 36ch;
+}
+.hero-lede em { font-style: italic; color: var(--accent-soft); }
+.hero-stats {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s-2) var(--s-5);
+  font: 500 11px/1.5 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--border-subtle);
+}
+.hero-stats dt { color: var(--fg-muted); }
+.hero-stats dd { margin: 0; color: var(--fg-default); }
+
+.scroll-cue {
+  display: inline-flex; align-items: center; gap: var(--s-3);
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--fg-muted);
+  text-decoration: none;
+  padding: var(--s-3) 0;
+  transition: color var(--t) var(--ease-out);
+}
+.scroll-cue:hover, .scroll-cue:focus-visible { color: var(--accent); outline: none; }
+.scroll-cue .line {
+  display: inline-block;
+  width: 56px; height: 1px;
+  background: currentColor;
+  transition: width var(--t-slow) var(--ease-out);
+}
+.scroll-cue:hover .line { width: 88px; }
+
+/* ============================================================
+   SECTIONAL — "The Work" anchor banner. A typographic stripe
+   that separates the hero from the project rows. Print
+   convention: a department heading.
+   ============================================================ */
+
+.dept {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-4);
+  padding: var(--s-12) 0 var(--s-8);
+  border-top: 1px solid var(--border-subtle);
+}
+@media (min-width: 720px) {
+  .dept {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 11fr);
+    align-items: baseline;
+    gap: clamp(24px, 4vw, 56px);
+  }
+}
+.dept-label {
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent);
+  margin: 0;
+}
+.dept-title {
+  font: 360 clamp(28px, 4vw, 56px) / 1.05 var(--serif);
+  font-variation-settings: "opsz" 96;
+  letter-spacing: -0.02em;
+  color: var(--ink-100);
+  margin: 0;
+  max-width: 22ch;
+}
+.dept-title em { font-style: italic; color: var(--accent-soft); }
+
+/* ============================================================
+   FEATURE ROW — each project is a full-bleed feature, not a
+   tile. Layout: giant numeric marker / metadata column / body
+   column / arrow chip. Asymmetric on purpose.
+   ============================================================ */
+
+.feature {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-6);
+  padding: var(--s-16) 0;
+  border-top: 1px solid var(--border-subtle);
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+  /* Each feature carries its own --tint hue so the project
+     gets a faint chromatic gesture (focus ring, numeral on
+     hover, underline). One hue per row — restrained, not a
+     parade. */
+}
+.feature:first-of-type { border-top: 0; padding-top: var(--s-12); }
+
+@media (min-width: 720px) {
+  .feature {
+    grid-template-columns:
+      minmax(0, 2fr)   /* numeral */
+      minmax(0, 3fr)   /* metadata */
+      minmax(0, 9fr)   /* body */
+      auto;            /* arrow */
+    gap: clamp(20px, 3vw, 48px);
+    align-items: start;
+  }
+}
+
+.feature-num {
+  font: 350 clamp(56px, 9vw, 144px) / 0.85 var(--serif);
+  font-variation-settings: "opsz" 144;
+  letter-spacing: -0.04em;
+  color: var(--ink-700);
+  margin: 0;
+  transition: color var(--t-slow) var(--ease-out),
+              transform var(--t-slow) var(--ease-out);
+}
+.feature-meta {
+  display: flex; flex-direction: column; gap: var(--s-4);
+  padding-top: var(--s-3);
+}
+.feature-kicker {
+  font: 500 11px/1.3 var(--mono);
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent);
+  margin: 0;
+}
+.feature-tags {
+  display: flex; flex-wrap: wrap; gap: var(--s-2);
+  font: 500 11px/1.5 var(--mono);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--fg-subtle);
+  list-style: none; padding: 0; margin: 0;
+}
+.feature-tags li {
+  padding: var(--s-1) var(--s-3);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.feature-body {
+  padding-top: var(--s-3);
+  display: flex; flex-direction: column; gap: var(--s-4);
+}
+.feature-title {
+  font: 380 clamp(34px, 5.4vw, 80px) / 0.96 var(--serif);
+  font-variation-settings: "opsz" 96, "SOFT" 50;
+  letter-spacing: -0.03em;
+  color: var(--fg-default);
+  margin: 0;
+  transition: color var(--t-slow) var(--ease-out);
+}
+.feature-title em { font-style: italic; color: var(--accent-soft); }
+.feature-desc {
+  font: 400 clamp(15px, 1.2vw, 17px) / 1.55 var(--serif);
+  font-variation-settings: "opsz" 18;
+  color: var(--ink-100);
+  max-width: 52ch;
+  margin: 0;
+}
+
+.feature-arrow {
+  align-self: start;
+  width: 64px; height: 64px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  font: 500 26px/1 var(--sans);
+  color: var(--fg-default);
+  background: transparent;
+  transition: background var(--t) var(--ease-out),
+              border-color var(--t) var(--ease-out),
+              transform var(--t) var(--ease-out),
+              color var(--t) var(--ease-out);
+}
+
+/* Hover — lift the numeral, ignite the arrow, underline the
+   title. The feature reads as a single interactive surface. */
+.feature:hover .feature-num,
+.feature:focus-visible .feature-num {
+  color: var(--accent);
+  transform: translateX(6px);
+}
+.feature:hover .feature-title,
+.feature:focus-visible .feature-title {
+  color: var(--fg-default);
+}
+.feature:hover .feature-arrow,
+.feature:focus-visible .feature-arrow {
   background: var(--accent);
-  color: oklch(20% 0.06 130);
-  transform: translateX(2px);
+  border-color: var(--accent);
+  color: var(--ink-950);
+  transform: translateX(6px);
+}
+.feature:focus-visible {
+  outline: none;
+}
+.feature:focus-visible::before {
+  content: "";
+  position: absolute; inset: var(--s-4) calc(-1 * var(--s-4));
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+/* Per-feature tint — each feature's number/arrow flips toward
+   its own hue on hover. Sage stays canonical; tints are sub-
+   audible color gestures, not a paint job. */
+.feature[data-tint="ember"]:hover .feature-num,
+.feature[data-tint="ember"]:focus-visible .feature-num { color: var(--hot); }
+.feature[data-tint="ember"]:hover .feature-arrow,
+.feature[data-tint="ember"]:focus-visible .feature-arrow {
+  background: var(--hot); border-color: var(--hot); color: var(--ink-950);
+}
+
+/* ============================================================
+   FOOTER — second hero (Stle §2.8). Oversized closing type,
+   contact line, year stamp. The last screen earns the same
+   weight as the first.
+   ============================================================ */
+
+.foot {
+  margin-top: var(--s-20);
+  padding: clamp(56px, 10vh, 144px) 0 var(--s-16);
+  border-top: 1px solid var(--border-subtle);
+  display: grid;
+  gap: var(--s-12);
+}
+@media (min-width: 720px) {
+  .foot {
+    grid-template-columns: minmax(0, 11fr) minmax(0, 5fr);
+    align-items: end;
+    gap: clamp(40px, 6vw, 96px);
+  }
+}
+.foot-mark {
+  font: 360 clamp(48px, 9vw, 144px) / 0.92 var(--serif);
+  font-variation-settings: "opsz" 144, "SOFT" 40;
+  letter-spacing: -0.04em;
+  margin: 0;
+  color: var(--ink-100);
+}
+.foot-mark em { font-style: italic; color: var(--accent); }
+.foot-meta {
+  display: grid; gap: var(--s-5);
+  font: 500 11px/1.6 var(--mono);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+.foot-meta dt { color: var(--accent); margin-bottom: var(--s-1); }
+.foot-meta dd { margin: 0; color: var(--ink-100); font-weight: 500; }
+.foot-meta a { color: var(--ink-100); text-decoration: none; border-bottom: 1px solid var(--border-strong); padding-bottom: 1px; transition: color var(--t), border-color var(--t); }
+.foot-meta a:hover, .foot-meta a:focus-visible { color: var(--accent); border-color: var(--accent); outline: none; }
+.foot-rule { border: 0; border-top: 1px solid var(--border-subtle); margin: 0; }
+.foot-baseline {
+  display: grid; grid-template-columns: 1fr auto; gap: var(--s-4);
+  font: 500 11px/1.4 var(--mono);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+.foot-baseline .end { color: var(--accent); }
+
+/* ============================================================
+   Entrance — intersection-driven, sub-400ms, staggered.
+   Replaced with a quiet fade for reduced-motion users
+   (Stle §5.2 — replace, don't kill).
+   ============================================================ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 600ms var(--ease-out),
+                transform 600ms var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 0; transition: opacity 200ms linear; }
+  .reveal.in { opacity: 1; }
+}
+
+/* ============================================================
+   Mobile recomposition — when the feature row collapses to
+   single column, the numeral and metadata sit inline above
+   the body so density survives.
+   ============================================================ */
+
+@media (max-width: 719px) {
+  .feature {
+    padding: var(--s-12) 0;
+  }
+  .feature-num {
+    font-size: clamp(72px, 18vw, 128px);
+  }
+  .feature-arrow {
+    width: 48px; height: 48px; font-size: 20px;
+    align-self: end;
+  }
+  .runner { font-size: 10px; }
+  .runner-left { gap: var(--s-4); }
+  .hero-stats { font-size: 10px; }
 }
 </style>
 </head>
 <body>
-<div class="shell">
-  <div class="eyebrow">Custom Projects</div>
-  <h1>customprojects.info</h1>
-  <p class="lede">A small set of independent web projects.</p>
 
-  <section class="cards">
-    <a class="card" href="/localmusic/">
-      <div class="card-content">
-        <span class="card-label">Live music</span>
-        <h2 class="card-title">Live Music Companions</h2>
-        <p class="card-desc">A directory of city and festival music pages — daily-updated lineups paired with Spotify playlists.</p>
-      </div>
-      <span class="card-arrow" aria-hidden="true">→</span>
-    </a>
-    <a class="card" href="/kestrelfabrications/">
-      <div class="card-content">
-        <span class="card-label">Studio</span>
-        <h2 class="card-title">Kestrel Fabrications</h2>
-        <p class="card-desc">Design studio producing custom industrial work through in-house build and a vetted fabrication-partner network.</p>
-      </div>
-      <span class="card-arrow" aria-hidden="true">→</span>
-    </a>
-    <a class="card" href="/tracker/">
-      <div class="card-content">
-        <span class="card-label">Tracker</span>
-        <h2 class="card-title">Tracker</h2>
-        <p class="card-desc">Personal tracking page.</p>
-      </div>
-      <span class="card-arrow" aria-hidden="true">→</span>
-    </a>
-    <a class="card" href="/recommendations/">
-      <div class="card-content">
-        <span class="card-label">Recommendations</span>
-        <h2 class="card-title">Things Worth Buying</h2>
-        <p class="card-desc">A small, opinionated catalogue of single-item product recommendations — things I bought, kept using, and would pay for again.</p>
-      </div>
-      <span class="card-arrow" aria-hidden="true">→</span>
-    </a>
-    <a class="card" href="/dom-perignon/">
-      <div class="card-content">
-        <span class="card-label">Chrome extension</span>
-        <h2 class="card-title">DOM Pérignon</h2>
-        <p class="card-desc">A Chrome extension named after the innovator Dom Pierre Pérignon. The DOM (Document Object Model) is the live tree of every web page's elements. DOM Pérignon uses that for eight different perspectives.</p>
-      </div>
-      <span class="card-arrow" aria-hidden="true">→</span>
-    </a>
+<a class="skip" href="#work">Skip to projects</a>
+
+<div class="page">
+
+  <!-- Running head: edition / vol / index pointer. Borrowed from
+       print mastheads. Monospace is doing work here — IDs,
+       indices, a count — not "tech vibes." -->
+  <header class="runner" role="banner">
+    <div class="runner-left">
+      <span>Vol. 01 — MMXXVI</span>
+      <span>Five Independent Projects</span>
+      <span>Edited &amp; Built by Hand</span>
+    </div>
+    <div class="runner-right">customprojects<span style="color:var(--accent);">.</span>info / Index</div>
+  </header>
+
+  <!-- HERO — the type IS the image. Two-line wordmark in
+       Fraunces, the period rendered in sage as the only color
+       gesture in the heading. The lede sits in a smaller
+       right-column at desktop, beneath at mobile. -->
+  <section class="hero" aria-labelledby="brandmark">
+    <h1 class="brand reveal" id="brandmark">
+      <span class="l1">custom</span><span class="l2">projects<span class="dot">.</span></span>
+    </h1>
+    <div class="hero-meta reveal" style="--reveal-delay: 120ms;">
+      <p class="hero-lede">
+        Five small, sharply opinionated web projects by one author.
+        Each one earns its own URL — <em>nothing here is a tile in a
+        portfolio grid.</em>
+      </p>
+      <dl class="hero-stats">
+        <dt>Projects</dt><dd>05</dd>
+        <dt>Live URLs</dt><dd>05</dd>
+        <dt>Updated</dt><dd>Daily where it matters</dd>
+        <dt>Built with</dt><dd>One pair of hands</dd>
+      </dl>
+      <a class="scroll-cue" href="#work">
+        <span class="line" aria-hidden="true"></span>
+        <span>Start with the work</span>
+      </a>
+    </div>
   </section>
+
+  <!-- Department heading — a typographic stripe between the
+       cover and the feature rows. -->
+  <section class="dept reveal" id="work">
+    <p class="dept-label">The Work — 01 / 05</p>
+    <h2 class="dept-title">
+      Five sites that don't try to be the <em>same site</em>.
+    </h2>
+  </section>
+
+  <!-- ============================================================
+       FEATURE ROWS — one per project, stacked. Each is a
+       single interactive surface (the whole row is the link),
+       not a card with a button inside it.
+       ============================================================ -->
+
+  <main>
+
+    <a class="feature reveal" href="/localmusic/" data-tint="ember" aria-label="Live Music Companions — A directory of city and festival music pages">
+      <p class="feature-num">01</p>
+      <div class="feature-meta">
+        <p class="feature-kicker">Live music · Daily</p>
+        <ul class="feature-tags">
+          <li>Directory</li>
+          <li>Cities + Festivals</li>
+          <li>Spotify</li>
+          <li>Refreshed daily</li>
+        </ul>
+      </div>
+      <div class="feature-body">
+        <h3 class="feature-title">Live Music <em>Companions</em></h3>
+        <p class="feature-desc">
+          A directory of city and festival pages. Daily-updated lineups paired
+          with a Spotify playlist for each place. The page each city ships is
+          authored — its own palette, its own venues, its own scrape — not a
+          template with a different logo.
+        </p>
+      </div>
+      <span class="feature-arrow" aria-hidden="true">→</span>
+    </a>
+
+    <a class="feature reveal" href="/kestrelfabrications/" aria-label="Kestrel Fabrications — Design studio producing custom industrial work">
+      <p class="feature-num">02</p>
+      <div class="feature-meta">
+        <p class="feature-kicker">Studio</p>
+        <ul class="feature-tags">
+          <li>Industrial</li>
+          <li>Bespoke</li>
+          <li>Studio + Network</li>
+        </ul>
+      </div>
+      <div class="feature-body">
+        <h3 class="feature-title">Kestrel <em>Fabrications</em></h3>
+        <p class="feature-desc">
+          A design studio producing custom industrial work — through in-house
+          build for the things that need a single set of hands, and a vetted
+          fabrication-partner network for the things that need a foundry.
+        </p>
+      </div>
+      <span class="feature-arrow" aria-hidden="true">→</span>
+    </a>
+
+    <a class="feature reveal" href="/tracker/" aria-label="Tracker — Personal tracking page">
+      <p class="feature-num">03</p>
+      <div class="feature-meta">
+        <p class="feature-kicker">Tracker · Personal</p>
+        <ul class="feature-tags">
+          <li>Personal</li>
+          <li>Workers</li>
+          <li>Quiet</li>
+        </ul>
+      </div>
+      <div class="feature-body">
+        <h3 class="feature-title"><em>Tracker</em></h3>
+        <p class="feature-desc">
+          A personal tracking page. Lives on its own URL on purpose — it isn't
+          a feature of anything else, it's a small private surface that earns
+          its own room.
+        </p>
+      </div>
+      <span class="feature-arrow" aria-hidden="true">→</span>
+    </a>
+
+    <a class="feature reveal" href="/recommendations/" data-tint="ember" aria-label="Things Worth Buying — A small opinionated recommendations catalogue">
+      <p class="feature-num">04</p>
+      <div class="feature-meta">
+        <p class="feature-kicker">Recommendations · Catalogue</p>
+        <ul class="feature-tags">
+          <li>One-item rec.</li>
+          <li>Bought it</li>
+          <li>Kept it</li>
+          <li>Would pay again</li>
+        </ul>
+      </div>
+      <div class="feature-body">
+        <h3 class="feature-title">Things <em>Worth Buying</em></h3>
+        <p class="feature-desc">
+          A small, opinionated catalogue of single-item product recommendations
+          — things I actually bought, kept using, and would pay for again.
+          No affiliate carousels, no top-10 listicles, no everything-bagel
+          reviews of seventeen near-identical objects.
+        </p>
+      </div>
+      <span class="feature-arrow" aria-hidden="true">→</span>
+    </a>
+
+    <a class="feature reveal" href="/dom-perignon/" aria-label="DOM Pérignon — A Chrome extension with eight DOM perspectives">
+      <p class="feature-num">05</p>
+      <div class="feature-meta">
+        <p class="feature-kicker">Chrome extension</p>
+        <ul class="feature-tags">
+          <li>Browser</li>
+          <li>8 perspectives</li>
+          <li>DOM tooling</li>
+        </ul>
+      </div>
+      <div class="feature-body">
+        <h3 class="feature-title">DOM <em>Pérignon</em></h3>
+        <p class="feature-desc">
+          A Chrome extension named after the innovator Dom Pierre Pérignon. The
+          DOM — the Document Object Model — is the live tree of every web
+          page's elements. DOM Pérignon uses that tree for eight different
+          perspectives on the page you're looking at.
+        </p>
+      </div>
+      <span class="feature-arrow" aria-hidden="true">→</span>
+    </a>
+
+  </main>
+
+  <!-- FOOTER — designed surface, not a sitemap. A typographic
+       closing moment + contact metadata. -->
+  <footer class="foot reveal" role="contentinfo">
+    <p class="foot-mark">
+      Five sites.<br>
+      <em>One author.</em>
+    </p>
+    <dl class="foot-meta">
+      <div>
+        <dt>Index</dt>
+        <dd>customprojects.info</dd>
+      </div>
+      <div>
+        <dt>Mail</dt>
+        <dd><a href="mailto:person@customprojects.info">person@customprojects.info</a></dd>
+      </div>
+      <div>
+        <dt>System</dt>
+        <dd>Built on the Stle design system — OKLCH, APCA, restraint.</dd>
+      </div>
+    </dl>
+  </footer>
+
+  <hr class="foot-rule">
+  <div class="foot-baseline">
+    <span>© MMXXVI customprojects.info — Set in Fraunces &amp; Inter</span>
+    <span class="end">— end —</span>
+  </div>
+
 </div>
+
+<script>
+/* Intersection-driven reveal. The page settles inside 600ms.
+   No perpetual ambient motion. Reduced-motion users get a
+   replacement fade via the CSS @media block. */
+(function () {
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    return;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '-5% 0px -10% 0px', threshold: 0.05 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    /* Stagger siblings inside the same section by 80ms each —
+       just enough rhythm, not a parade. */
+    if (!el.style.getPropertyValue('--reveal-delay')) {
+      el.style.setProperty('--reveal-delay', (i % 4 * 80) + 'ms');
+    }
+    io.observe(el);
+  });
+})();
+</script>
+
 </body>
 </html>
