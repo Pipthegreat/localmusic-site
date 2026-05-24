@@ -1,336 +1,336 @@
 {
   "page_title": "SF + Oakland Live Music",
-  "total_duration": 1229.78,
+  "total_duration": 1225.33,
   "track_count": 41,
-  "built_at": 1779575277,
+  "built_at": 1779586430,
   "tracks": [
     {
       "artist": "acid barbie",
       "title": "anything anything",
       "uri": "spotify:track:1z7OFpL6c7VHengX5jF3Z4",
-      "duration": 30.0,
+      "duration": 29.95,
       "start": 0.0,
-      "end": 30.0
+      "end": 29.95
     },
     {
       "artist": "acid barbie",
       "title": "star girl",
       "uri": "spotify:track:0zItJItq8nRstjMbEZubH0",
-      "duration": 30.0,
-      "start": 30.0,
-      "end": 60.0
+      "duration": 29.95,
+      "start": 29.95,
+      "end": 59.9
     },
     {
       "artist": "acid barbie",
       "title": "silly little me",
       "uri": "spotify:track:5jY4i9mSWRmQupnhyPwHO5",
-      "duration": 30.0,
-      "start": 60.0,
-      "end": 90.0
+      "duration": 29.95,
+      "start": 59.9,
+      "end": 89.85
     },
     {
       "artist": "andyland",
       "title": "satelite pop machine",
       "uri": "spotify:track:32tQ07E986IalIAn4sXzHM",
-      "duration": 30.0,
-      "start": 90.0,
-      "end": 120.0
+      "duration": 29.95,
+      "start": 89.85,
+      "end": 119.8
     },
     {
       "artist": "andyland",
       "title": "nervous in the sunshine",
       "uri": "spotify:track:3pDEld2dcKB0FaQFOtiSvF",
-      "duration": 30.0,
-      "start": 120.0,
-      "end": 150.0
+      "duration": 29.95,
+      "start": 119.8,
+      "end": 149.75
     },
     {
       "artist": "andyland",
       "title": "future pta (this must be the place?)",
       "uri": "spotify:track:3TEpYDolMfeT8q4lWJbPNJ",
-      "duration": 30.0,
-      "start": 150.0,
-      "end": 180.0
+      "duration": 29.95,
+      "start": 149.75,
+      "end": 179.7
     },
     {
       "artist": "arts fishing club",
       "title": "tupelo honey",
       "uri": "spotify:track:0U0sYKSWssXHoHiaewDlRR",
-      "duration": 30.02,
-      "start": 180.0,
-      "end": 210.02
+      "duration": 29.96,
+      "start": 179.7,
+      "end": 209.66
     },
     {
       "artist": "arts fishing club",
       "title": "just the way it is",
       "uri": "spotify:track:3bLSun4vvEr7rfF53qYAwE",
-      "duration": 30.0,
-      "start": 210.02,
-      "end": 240.02
+      "duration": 29.95,
+      "start": 209.66,
+      "end": 239.61
     },
     {
       "artist": "arts fishing club",
       "title": "suffocate",
       "uri": "spotify:track:2j2MYtcAym3XhqZvI0PF6Q",
-      "duration": 30.0,
-      "start": 240.02,
-      "end": 270.02
+      "duration": 29.95,
+      "start": 239.61,
+      "end": 269.56
     },
     {
       "artist": "benny benassi",
       "title": "satisfaction",
       "uri": "spotify:track:5JZnjM9ijpit0d5zjT8MM7",
-      "duration": 30.02,
-      "start": 270.02,
-      "end": 300.04
+      "duration": 29.96,
+      "start": 269.56,
+      "end": 299.52
     },
     {
       "artist": "benny benassi",
       "title": "cinema (feat. gary go) - skrillex remix",
       "uri": "spotify:track:6jNM6fKx3WnyHbWBI9hs2r",
-      "duration": 30.02,
-      "start": 300.04,
-      "end": 330.06
+      "duration": 29.96,
+      "start": 299.52,
+      "end": 329.48
     },
     {
       "artist": "benny benassi",
       "title": "cinema (feat. gary go) - radio edit",
       "uri": "spotify:track:4IazOWzgfLB8MR5VIY368A",
-      "duration": 30.02,
-      "start": 330.06,
-      "end": 360.08
+      "duration": 29.96,
+      "start": 329.48,
+      "end": 359.44
     },
     {
       "artist": "black lipstick",
       "title": "grandma airplane",
       "uri": "spotify:track:6R4UwXSyWMUCw5p4KS7gEF",
-      "duration": 29.98,
-      "start": 360.08,
-      "end": 390.06
+      "duration": 29.87,
+      "start": 359.44,
+      "end": 389.31
     },
     {
       "artist": "black lipstick",
       "title": "b.o.b. f.o.s.s.e.",
       "uri": "spotify:track:7prKEgwTL9uEAz5TrclsS2",
-      "duration": 29.98,
-      "start": 390.06,
-      "end": 420.04
+      "duration": 29.87,
+      "start": 389.31,
+      "end": 419.18
     },
     {
       "artist": "black lipstick",
       "title": "throw some money at it",
       "uri": "spotify:track:0h3WjC08hY5oQBnYtUcXaa",
-      "duration": 29.98,
-      "start": 420.04,
-      "end": 450.02
+      "duration": 29.87,
+      "start": 419.18,
+      "end": 449.05
     },
     {
       "artist": "blockhead",
       "title": "the music scene",
       "uri": "spotify:track:12TyU7JblI0e8WhMTck8bF",
-      "duration": 29.98,
-      "start": 450.02,
-      "end": 480.0
+      "duration": 29.69,
+      "start": 449.05,
+      "end": 478.74
     },
     {
       "artist": "blockhead",
       "title": "mississippi",
       "uri": "spotify:track:6QeGe9sQvQlL8gy6zcAhVV",
-      "duration": 30.0,
-      "start": 480.0,
-      "end": 510.0
+      "duration": 29.95,
+      "start": 478.74,
+      "end": 508.69
     },
     {
       "artist": "blockhead",
       "title": "insomniac olympics",
       "uri": "spotify:track:7IuxuJBP6kwOOu1ShFzmR1",
-      "duration": 29.98,
-      "start": 510.0,
-      "end": 539.98
+      "duration": 28.82,
+      "start": 508.69,
+      "end": 537.51
     },
     {
       "artist": "bored lord",
       "title": "girl u could be down 4",
       "uri": "spotify:track:2AqNfj3Y6t3mvdc6TSXaE2",
-      "duration": 29.98,
-      "start": 539.98,
-      "end": 569.96
+      "duration": 29.87,
+      "start": 537.51,
+      "end": 567.38
     },
     {
       "artist": "bored lord",
       "title": "crush on u",
       "uri": "spotify:track:6ljA3sobRkcY3vHloN2I0T",
-      "duration": 29.98,
-      "start": 569.96,
-      "end": 599.94
+      "duration": 29.87,
+      "start": 567.38,
+      "end": 597.25
     },
     {
       "artist": "bored lord",
       "title": "feel it",
       "uri": "spotify:track:3RJo0RullUItvPWAM3W2b8",
-      "duration": 30.0,
-      "start": 599.94,
-      "end": 629.94
+      "duration": 29.95,
+      "start": 597.25,
+      "end": 627.2
     },
     {
       "artist": "chadley",
       "title": "piss",
       "uri": "spotify:track:0omoC05Vj77NZmdQolCFSS",
-      "duration": 30.02,
-      "start": 629.94,
-      "end": 659.96
+      "duration": 29.97,
+      "start": 627.2,
+      "end": 657.17
     },
     {
       "artist": "chadley",
       "title": "angels",
       "uri": "spotify:track:69ahCjbjGzQ59AFPc1Wasq",
-      "duration": 30.01,
-      "start": 659.96,
-      "end": 689.97
+      "duration": 29.95,
+      "start": 657.17,
+      "end": 687.12
     },
     {
       "artist": "chadley",
       "title": "pet mouse",
       "uri": "spotify:track:6nTCqrYrHLQitCt18sC4yI",
-      "duration": 30.02,
-      "start": 689.97,
-      "end": 719.99
+      "duration": 29.96,
+      "start": 687.12,
+      "end": 717.08
     },
     {
       "artist": "defem",
       "title": "boxer ii (andy morin remix)",
       "uri": "spotify:track:1GlLTXWb8lA2Dec2nyHF99",
-      "duration": 29.98,
-      "start": 719.99,
-      "end": 749.97
+      "duration": 29.87,
+      "start": 717.08,
+      "end": 746.95
     },
     {
       "artist": "defem",
       "title": "popped off",
       "uri": "spotify:track:6Sgu61eytggiXD3Cm1LLb2",
-      "duration": 29.98,
-      "start": 749.97,
-      "end": 779.95
+      "duration": 29.87,
+      "start": 746.95,
+      "end": 776.82
     },
     {
       "artist": "defem",
       "title": "young one",
       "uri": "spotify:track:3Uth09QgTLk7e88shJ5jxM",
-      "duration": 29.98,
-      "start": 779.95,
-      "end": 809.93
+      "duration": 29.87,
+      "start": 776.82,
+      "end": 806.69
     },
     {
       "artist": "dirtybeats",
       "title": "carnival trip",
       "uri": "spotify:track:1KyfvKXUWpRw5hPeSCFYLK",
-      "duration": 29.98,
-      "start": 809.93,
-      "end": 839.91
+      "duration": 29.87,
+      "start": 806.69,
+      "end": 836.56
     },
     {
       "artist": "dirtybeats",
       "title": "brick that - mogo remix",
       "uri": "spotify:track:0LOP3oUk9ZSjHQI9WYFgGy",
-      "duration": 29.98,
-      "start": 839.91,
-      "end": 869.89
+      "duration": 29.87,
+      "start": 836.56,
+      "end": 866.43
     },
     {
       "artist": "dj omar",
       "title": "vibras",
       "uri": "spotify:track:7BgezCf7pUNaw8gxta1kCs",
-      "duration": 30.0,
-      "start": 869.89,
-      "end": 899.89
+      "duration": 29.95,
+      "start": 866.43,
+      "end": 896.38
     },
     {
       "artist": "dj pressed",
       "title": "i have a dream (gay)",
       "uri": "spotify:track:271A7nvnRVCGZFyvcOhCUK",
-      "duration": 29.98,
-      "start": 899.89,
-      "end": 929.87
+      "duration": 29.85,
+      "start": 896.38,
+      "end": 926.23
     },
     {
       "artist": "dj pressed",
       "title": "dayman - dj pressed remix",
       "uri": "spotify:track:0EB9RB3YXUbHCasmxIpSuC",
-      "duration": 30.0,
-      "start": 929.87,
-      "end": 959.87
+      "duration": 29.95,
+      "start": 926.23,
+      "end": 956.18
     },
     {
       "artist": "dj pressed",
       "title": "golden god",
       "uri": "spotify:track:14bMhRegQHCxUSuGqmnnw2",
-      "duration": 30.0,
-      "start": 959.87,
-      "end": 989.87
+      "duration": 29.95,
+      "start": 956.18,
+      "end": 986.13
     },
     {
       "artist": "dj saratonin",
       "title": "say_yu_wanna_love_me",
       "uri": "spotify:track:1kiLJEWUX0N9IFpcE4DpUO",
-      "duration": 30.01,
-      "start": 989.87,
-      "end": 1019.88
+      "duration": 29.95,
+      "start": 986.13,
+      "end": 1016.08
     },
     {
       "artist": "dj saratonin",
       "title": "fateful encounter",
       "uri": "spotify:track:3ufJYdjvYMAaxseWsQ9W20",
-      "duration": 29.98,
-      "start": 1019.88,
-      "end": 1049.86
+      "duration": 29.87,
+      "start": 1016.08,
+      "end": 1045.95
     },
     {
       "artist": "donovan plant",
       "title": "san francisco",
       "uri": "spotify:track:7I6JVS8U3sryIr79uaz87Z",
-      "duration": 29.98,
-      "start": 1049.86,
-      "end": 1079.84
+      "duration": 29.87,
+      "start": 1045.95,
+      "end": 1075.82
     },
     {
       "artist": "donovan plant",
       "title": "white wolf",
       "uri": "spotify:track:1pe8K7KWJePsk6UKKnkzQq",
-      "duration": 29.98,
-      "start": 1079.84,
-      "end": 1109.82
+      "duration": 29.87,
+      "start": 1075.82,
+      "end": 1105.69
     },
     {
       "artist": "eliot lipp",
       "title": "tides",
       "uri": "spotify:track:1MKmxxtXeEr1SsJ2QwfakW",
-      "duration": 29.98,
-      "start": 1109.82,
-      "end": 1139.8
+      "duration": 29.87,
+      "start": 1105.69,
+      "end": 1135.56
     },
     {
       "artist": "eliot lipp",
       "title": "the sunset",
       "uri": "spotify:track:1p3Po5j1O36C6e9QanYLCc",
-      "duration": 29.98,
-      "start": 1139.8,
-      "end": 1169.78
+      "duration": 29.87,
+      "start": 1135.56,
+      "end": 1165.43
     },
     {
       "artist": "ergot",
       "title": "hiss",
       "uri": "spotify:track:1dgfgcIyEIPneu4TAQetCR",
-      "duration": 30.0,
-      "start": 1169.78,
-      "end": 1199.78
+      "duration": 29.95,
+      "start": 1165.43,
+      "end": 1195.38
     },
     {
       "artist": "ergot",
       "title": "ignis sacer",
       "uri": "spotify:track:6xTLzYzFEctnK6iaNJDDmt",
-      "duration": 30.0,
-      "start": 1199.78,
-      "end": 1229.78
+      "duration": 29.95,
+      "start": 1195.38,
+      "end": 1225.33
     }
   ]
 }
