@@ -363,7 +363,12 @@ body.ezr-red {
 }
 
 /* Page-wide glyph rain — sits behind the shell content on z-index 0.
-   Hidden by default; .ezr-themed body shows it. */
+   Hidden by default; .ezr-themed body shows it.
+
+   Each column is 200vh tall with its glyph stream duplicated (top
+   half == bottom half). Animation translates by exactly 100vh per
+   cycle, so the visible viewport content at t=100% matches t=0% —
+   no visible reset, infinite flow. */
 .ezr-rain {
   position: fixed;
   inset: 0;
@@ -371,37 +376,123 @@ body.ezr-red {
   overflow: hidden;
   pointer-events: none;
   display: none;
-  mask-image: radial-gradient(ellipse 65% 70% at 50% 50%,
-    rgba(0,0,0,0.25) 0%,
-    rgba(0,0,0,0.75) 45%,
-    rgba(0,0,0,1) 80%);
-  -webkit-mask-image: radial-gradient(ellipse 65% 70% at 50% 50%,
-    rgba(0,0,0,0.25) 0%,
-    rgba(0,0,0,0.75) 45%,
-    rgba(0,0,0,1) 80%);
 }
 body.ezr-themed .ezr-rain { display: block; }
 body.ezr-themed .shell { position: relative; z-index: 1; }
 .ezr-rain .ezr-col {
   position: absolute;
-  top: -120%;
-  font: 15px/1.25 'Courier New', ui-monospace, monospace;
-  color: var(--ezr-dim);
-  text-shadow: 0 0 3px var(--ezr-bright);
-  white-space: pre;
-  text-align: center;
+  top: -100vh;
+  height: 200vh;
   width: 1ch;
+  text-align: center;
+  font: 16px/1.3 'Courier New', ui-monospace, monospace;
+  color: var(--ezr-dim);
+  text-shadow: 0 0 4px var(--ezr-bright);
+  white-space: pre;
   opacity: 0.7;
   animation: ezr-fall linear infinite;
+  will-change: transform;
 }
 .ezr-rain .ezr-col .head {
   color: var(--ezr-bright);
-  text-shadow: 0 0 6px var(--ezr-bright), 0 0 12px var(--ezr-dim);
+  text-shadow: 0 0 6px var(--ezr-bright), 0 0 12px var(--ezr-glow);
 }
 .ezr-rain .ezr-col .mid { color: var(--ezr-bright); }
 @keyframes ezr-fall {
   0%   { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(0, 220%, 0); }
+  100% { transform: translate3d(0, 100vh, 0); }
+}
+
+/* ─── Themed card + install chrome ───────────────────────────────────
+   When .ezr-themed is on body, swap the brown/ember accents (card
+   gradients, download button, step numbers, code chips) for the
+   active theme palette. The iframe previews inside the cards are
+   cross-document and can't be reached from here — they stay native. */
+body.ezr-themed .hack-card {
+  background: linear-gradient(135deg, #060606, #000) !important;
+  border-color: var(--ezr-dim) !important;
+}
+body.ezr-themed .hack-card:hover {
+  border-color: var(--ezr-bright) !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.55), 0 0 0 4px rgba(0,0,0,0.4) !important;
+}
+body.ezr-themed .hack-card.signature,
+body.ezr-themed .hack-card.popular,
+body.ezr-themed .hack-card.mystery {
+  border-color: var(--ezr-dim) !important;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.4) !important;
+}
+body.ezr-themed .hack-card .preview-frame {
+  border-bottom-color: var(--ezr-dim) !important;
+}
+body.ezr-themed .hack-name {
+  color: var(--ezr-text) !important;
+}
+body.ezr-themed .hack-name .num {
+  color: var(--ezr-bright) !important;
+  background: rgba(0,0,0,0.55) !important;
+}
+body.ezr-themed .mystery-num {
+  color: var(--ezr-bright) !important;
+  background: rgba(0,0,0,0.55) !important;
+}
+body.ezr-themed .hack-desc {
+  color: var(--ezr-text) !important;
+  opacity: 0.78;
+}
+body.ezr-themed .hack-badge-signature,
+body.ezr-themed .hack-badge-popular {
+  color: var(--ezr-bright) !important;
+  background: rgba(0,0,0,0.55) !important;
+  border: 1px solid var(--ezr-dim) !important;
+}
+
+body.ezr-themed .install-shell {
+  background: linear-gradient(135deg, #070707, #000) !important;
+  border-color: var(--ezr-dim) !important;
+}
+body.ezr-themed .download-card {
+  background: rgba(0,0,0,0.55) !important;
+  border-color: var(--ezr-dim) !important;
+}
+body.ezr-themed .download-title,
+body.ezr-themed .install-steps h3 {
+  color: var(--ezr-text) !important;
+}
+body.ezr-themed .download-meta {
+  color: var(--ezr-text) !important;
+  opacity: 0.7;
+}
+body.ezr-themed .download-btn {
+  background: var(--ezr-bright) !important;
+  color: #000 !important;
+  border-color: var(--ezr-bright) !important;
+}
+body.ezr-themed .download-btn:hover {
+  box-shadow: 0 0 24px var(--ezr-glow) !important;
+}
+body.ezr-themed .install-steps li {
+  color: var(--ezr-text) !important;
+  border-top-color: var(--ezr-dim) !important;
+}
+body.ezr-themed .install-steps li::before {
+  background: var(--ezr-bright) !important;
+  color: #000 !important;
+}
+body.ezr-themed .install-steps code {
+  color: var(--ezr-bright) !important;
+  background: rgba(0,0,0,0.55) !important;
+  border-color: var(--ezr-dim) !important;
+}
+body.ezr-themed .install-steps a,
+body.ezr-themed .tutorial-link a {
+  color: var(--ezr-bright) !important;
+  text-decoration-color: var(--ezr-dim) !important;
+}
+body.ezr-themed .tutorial-link {
+  color: var(--ezr-text) !important;
+  border-top-color: var(--ezr-dim) !important;
+  opacity: 0.85;
 }
 
 .hack-meta {
@@ -750,26 +841,33 @@ footer {
       if (rainSeeded) return;
       rainSeeded = true;
       const GLYPHS = 'ﾋﾘｱｾﾜﾗﾇﾈﾏﾜﾓｴﾆﾃﾂﾐｼﾎｵﾖﾅﾑﾌｺｿﾅκλμπσχθαβγδ01:_>/';
-      const cols = 26;
+      const cols = 32;
       const spacing = 100 / cols;
+      const vh = Math.max(window.innerHeight, 720);
       const frag = document.createDocumentFragment();
       for (let i = 0; i < cols; i++) {
         const col = document.createElement('div');
         col.className = 'ezr-col';
         const x = i * spacing + (Math.random() - 0.5) * spacing * 0.6;
         col.style.left = `${x}%`;
-        col.style.animationDuration = (9 + Math.random() * 14).toFixed(2) + 's';
-        col.style.animationDelay   = (-Math.random() * 20).toFixed(2) + 's';
-        col.style.fontSize = (12 + Math.random() * 5).toFixed(1) + 'px';
-        let html = '';
-        for (let g = 0; g < 28; g++) {
+        col.style.animationDuration = (10 + Math.random() * 14).toFixed(2) + 's';
+        col.style.animationDelay   = (-Math.random() * 24).toFixed(2) + 's';
+        const fontSize = 13 + Math.random() * 5;
+        col.style.fontSize = fontSize.toFixed(1) + 'px';
+
+        // Build one viewport-height worth of glyphs, then duplicate.
+        // Top-half == bottom-half means the column shifts by exactly
+        // one viewport per cycle with no visible seam.
+        const lineHeight  = fontSize * 1.3;
+        const perHalf     = Math.ceil(vh / lineHeight) + 2;
+        let half = '';
+        for (let g = 0; g < perHalf; g++) {
           const ch = GLYPHS[(Math.random() * GLYPHS.length) | 0];
-          const br = g < 27 ? '\n' : '';
-          if (g === 0)      html += `<span class="head">${ch}</span>${br}`;
-          else if (g < 4)   html += `<span class="mid">${ch}</span>${br}`;
-          else              html += ch + br;
+          if (g === 0)        half += `<span class="head">${ch}</span>\n`;
+          else if (g < 4)     half += `<span class="mid">${ch}</span>\n`;
+          else                half += ch + '\n';
         }
-        col.innerHTML = html;
+        col.innerHTML = half + half;
         frag.appendChild(col);
       }
       rain.appendChild(frag);
