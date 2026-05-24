@@ -213,7 +213,16 @@ a:focus-visible, button:focus-visible {
 }
 .brand .l1 { display: block; }
 .brand .l2 { display: block; font-style: italic; font-weight: 350; color: var(--ink-100); }
-.brand .dot { color: var(--accent); }
+/* Dot scaled down so it reads as punctuation rather than a glyph
+   competing with the wordmark. 0.5em keeps it visually present
+   without forcing "projects" to give up width on narrow viewports. */
+.brand .dot {
+  font-size: 0.5em;
+  color: var(--accent);
+  vertical-align: baseline;
+  display: inline-block;
+  margin-left: 0.04em;
+}
 
 .hero-meta {
   display: flex; flex-direction: column; gap: var(--s-6);
