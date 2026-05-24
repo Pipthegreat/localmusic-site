@@ -1,0 +1,65 @@
+/* matrix-green — simplified phosphor overlay for arbitrary pages.
+   ----
+   Two stacked layers above page content (clicks pass through):
+     .dp-matrix-wash — translucent black wash that dims the page
+                       so the rain reads as the dominant subject.
+     .dp-matrix-rain — seamless-loop column rain in phosphor green.
+
+   Page-level chrome (html/body) gets a black bg in case any of the
+   site's own body bg shines through gaps. Page DOM is otherwise
+   untouched: no aggressive recolor pass, no selector clobbering.
+   This is intentionally lighter than the ezr-claude theme — that
+   one targets claude.ai's specific chat shell. */
+
+html, body {
+  background-color: #000 !important;
+}
+
+#__dp-matrix-green {
+  position: fixed !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+}
+
+#__dp-matrix-green .dp-matrix-wash {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0, 0, 0, 0.60) !important;
+  z-index: 2147483645 !important;
+  pointer-events: none !important;
+}
+
+#__dp-matrix-green .dp-matrix-rain {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483646 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+#__dp-matrix-green .dp-matrix-col {
+  position: absolute !important;
+  top: -100vh !important;
+  height: 200vh !important;
+  width: 1ch !important;
+  text-align: center !important;
+  font: 16px/1.3 'Courier New', ui-monospace, monospace !important;
+  color: #00b32d !important;
+  text-shadow: 0 0 4px #39ff14 !important;
+  white-space: pre !important;
+  opacity: 0.7;
+  animation: dp-matrix-fall linear infinite !important;
+  will-change: transform !important;
+}
+#__dp-matrix-green .dp-matrix-col .head {
+  color: #39ff14 !important;
+  text-shadow: 0 0 6px #39ff14, 0 0 12px #00ff41 !important;
+}
+#__dp-matrix-green .dp-matrix-col .mid {
+  color: #39ff14 !important;
+}
+
+@keyframes dp-matrix-fall {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(0, 100vh, 0); }
+}

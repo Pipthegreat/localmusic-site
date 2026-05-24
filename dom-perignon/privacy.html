@@ -115,7 +115,7 @@ footer {
   </div>
 
   <h1><em>DOM</em> Pérignon - Privacy</h1>
-  <p class="updated">Last updated: 2026-05-23</p>
+  <p class="updated">Last updated: 2026-05-24</p>
 
   <p class="lede">
     DOM Pérignon stores nothing on a server, sends nothing to anyone,
@@ -124,11 +124,13 @@ footer {
 
   <h2>What we store</h2>
   <p>
-    Two things, both in <code>chrome.storage.local</code> on your machine:
+    Four small preferences, all in <code>chrome.storage.local</code> on your machine:
   </p>
   <ul>
-    <li>The hijink you've selected (e.g. <code>champagne</code>, <code>ants</code>).</li>
-    <li>Whether the extension is currently active (on/off).</li>
+    <li>The hijink you've selected (e.g. <code>champagne</code>, <code>ants</code>, or <code>off</code>).</li>
+    <li>Whether the master Active toggle is on or off.</li>
+    <li>Whether the green <code>&gt;_</code> override is on.</li>
+    <li>Whether the red <code>&gt;_</code> override is on.</li>
   </ul>
   <p>
     This data never leaves your browser. We have no servers, no analytics,
@@ -138,36 +140,41 @@ footer {
   <h2>What we read from the pages you visit</h2>
   <p>
     DOM Pérignon needs <code>host_permissions: &lt;all_urls&gt;</code> so it
-    can render the selected hijink on whichever page you're viewing.
-    Different hijinks read slightly different things from the page:
+    can render whichever effect is active on whichever page you're viewing.
+    Different effects look at slightly different things in the page DOM:
   </p>
   <ul>
-    <li><strong>Logo Bounce House</strong> reads the page's favicon and meta tags to find a logo to bounce.</li>
-    <li><strong>Watchers</strong> scans for images, buttons, and headings to place googly eyes on.</li>
-    <li><strong>Gravity Well</strong> identifies visible page elements (images, headings) so they can fall.</li>
-    <li><strong>You Got This</strong>, <strong>Champagne Bubbles</strong>, <strong>Ants</strong>, <strong>DVD Bouncer</strong>, and <strong>Aquarium</strong> don't read page content at all - they just paint over it.</li>
+    <li><strong>Logo Bounce House</strong> reads <code>&lt;link rel="icon"&gt;</code> and <code>&lt;link rel="apple-touch-icon"&gt;</code> tags, the <code>og:image</code> meta tag, and images inside <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, or elements with "logo" in their class or id. Falls back to the site's <code>/favicon.ico</code>, or to the first letter of the hostname if no logo can be found.</li>
+    <li><strong>Watchers</strong> scans for things to ogle - images, video, picture, buttons, headings (h1/h2/h3), paragraphs, blockquotes, and avatar/profile-style elements - and reads their on-screen positions and sizes (via <code>getBoundingClientRect</code>) so the eyes can sit where they should. A <code>MutationObserver</code> watches for matching elements added while the hijink is active.</li>
+    <li><strong>Gravity Well</strong> looks at images, buttons, headings (h1/h2/h3), and link-styled buttons so they can fall.</li>
+    <li><strong>You Got This</strong>, <strong>Champagne Bubbles</strong>, <strong>Ants</strong>, <strong>DVD Bouncer</strong>, and <strong>Aquarium</strong> don't read page content - they paint over it.</li>
+    <li>The <strong>green <code>&gt;_</code></strong> and <strong>red <code>&gt;_</code></strong> overrides don't read page content either. The green override paints a falling-glyph overlay on every site; on <code>claude.ai</code> it loads a more elaborate stylesheet targeting Claude's chat UI. The red override does the same with a blood-red palette and its elaborate version applies on <code>chatgpt.com</code>.</li>
   </ul>
   <p>
-    Nothing read from any page is transmitted anywhere. It's used in-browser only,
-    just long enough to render the visual overlay.
+    Nothing read from any page is transmitted anywhere. Information stays
+    in the browser, just long enough to render the visual effect.
   </p>
 
   <h2>External network calls</h2>
   <p>
-    The <strong>You Got This</strong> hijink loads the Fraunces font from
-    Google Fonts (<code>fonts.googleapis.com</code>) so the motivational
-    quotes display in the intended typeface. Google may log that request
-    per its own privacy policy. No information about you or the page is
-    sent - only a standard request for the font file.
+    When you open the DOM Pérignon popup, it loads the Fraunces, Inter, and
+    JetBrains Mono fonts from Google Fonts (<code>fonts.googleapis.com</code>)
+    so its own UI displays in the intended typefaces. The
+    <strong>You Got This</strong> hijink also loads Fraunces from the same
+    place so the motivational quotes display correctly. Google may log
+    these requests per its own privacy policy. No information about you or
+    the page you're on is sent - only standard requests for the font files.
   </p>
   <p>
-    No other DOM Pérignon hijink makes any network call.
+    No other DOM Pérignon code makes any external network call. The other
+    hijinks and the <code>&gt;_</code> overrides load their CSS from inside
+    the extension bundle, not from the network.
   </p>
 
   <h2>Permission justifications</h2>
   <ul>
-    <li><code>storage</code> - to remember which hijink you've picked between browser sessions.</li>
-    <li><code>host_permissions: &lt;all_urls&gt;</code> - because the user explicitly selects which hijink to apply, and that hijink is rendered on whichever page the user is viewing.</li>
+    <li><code>storage</code> - to remember the four preferences listed above between browser sessions.</li>
+    <li><code>host_permissions: &lt;all_urls&gt;</code> - because the user explicitly picks what to apply (a hijink, the green <code>&gt;_</code>, or the red <code>&gt;_</code>) and that effect renders on whichever page the user is viewing.</li>
   </ul>
 
   <h2>Changes to this policy</h2>

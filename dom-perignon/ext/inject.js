@@ -72,28 +72,36 @@
   }
   NS.activate = activate;
 
-  // Easter-egg override: when the user has flipped the hidden ">_" toggle in
-  // the popup AND the current site is claude.ai or chatgpt.com, apply the
-  // original ui-updater-2 theme for that site INSTEAD of whatever hijink is
-  // selected - regardless of the master Active toggle. On any other site,
-  // the easter-egg state has no effect.
-  function pickTheme(easterEgg, enabled, activeHack) {
+  // Two independent ">_" override toggles:
+  //   greenMode → full ezr-claude theme on claude.ai, simplified
+  //               matrix-green overlay on every other URL.
+  //   redMode   → full ezr-chatgpt theme on chatgpt.com, simplified
+  //               matrix-red overlay on every other URL.
+  // Either override beats the master Active toggle + active hijink.
+  // If both are somehow on at once, green wins (popup enforces mutual
+  // exclusion, but defensive ordering here).
+  function pickTheme(greenMode, redMode, enabled, activeHack) {
     const host = window.location.hostname || '';
-    if (easterEgg) {
-      if (host === 'claude.ai' || host.endsWith('.claude.ai'))   return 'ezr-claude';
+    if (greenMode) {
+      if (host === 'claude.ai' || host.endsWith('.claude.ai')) return 'ezr-claude';
+      return 'matrix-green';
+    }
+    if (redMode) {
       if (host === 'chatgpt.com' || host.endsWith('.chatgpt.com')) return 'ezr-chatgpt';
+      return 'matrix-red';
     }
     return enabled ? activeHack : 'off';
   }
 
   async function reactivateFromStorage() {
     try {
-      const { activeHack, enabled, easterEgg } = await chrome.storage.local.get({
+      const { activeHack, enabled, greenMode, redMode } = await chrome.storage.local.get({
         activeHack: 'off',
         enabled:    true,
-        easterEgg:  false,
+        greenMode:  false,
+        redMode:    false,
       });
-      activate(pickTheme(easterEgg, enabled, activeHack));
+      activate(pickTheme(greenMode, redMode, enabled, activeHack));
     } catch (e) {
       // chrome.storage unavailable - do nothing
     }
