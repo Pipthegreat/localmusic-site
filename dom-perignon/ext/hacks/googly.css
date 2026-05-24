@@ -7,9 +7,9 @@
   gap: var(--eye-gap, 6px);
   pointer-events: none;
   z-index: 2147483647;
-  /* 20% more translucent than before (0.5 → 0.4). The collective effect
+  /* 40% more translucent in v1.3.1 (0.4 → 0.24). The collective effect
      comes from quantity + scatter, not individual presence. */
-  opacity: 0.4;
+  opacity: 0.24;
   transform: rotate(var(--dp-tilt, 0deg));
 }
 
