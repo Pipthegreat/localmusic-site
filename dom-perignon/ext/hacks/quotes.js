@@ -226,8 +226,10 @@
     // Envelope (14s-24s) unchanged from previous versions.
     const FONT_MIN_FOR_SPEED = 16;
     const FONT_MAX_FOR_SPEED = 39;
-    const DUR_AT_SMALLEST = 24000;
-    const DUR_AT_LARGEST  = 14000;
+    // v1.2.8: durations bumped 1.333x for a 25% speed reduction across
+    // the screen (motion in px/sec is now 75% of v1.2.7).
+    const DUR_AT_SMALLEST = 32000;
+    const DUR_AT_LARGEST  = 18700;
     const sizeFrac = Math.max(0, Math.min(1,
       (fontSize - FONT_MIN_FOR_SPEED) /
       (FONT_MAX_FOR_SPEED - FONT_MIN_FOR_SPEED)
