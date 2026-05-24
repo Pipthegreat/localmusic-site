@@ -23,6 +23,49 @@
     document.documentElement.appendChild(styleEl);
   }
 
+  // Build a fallback "logo" when the page has no detectable real one.
+  // Uses the first letter of the hostname (stripping www.) rendered in
+  // the page's own background colour, text colour, and font family - so
+  // the bouncing letter visually belongs to the page it's on instead of
+  // looking like a generic placeholder.
+  function makeFallbackLogo(size) {
+    const fb = document.createElement('div');
+    fb.className = 'dp-dynlogo-fallback';
+
+    // First letter, stripping www. prefix. customprojects.info -> "C",
+    // docs.google.com -> "D", adobe.com -> "A", etc.
+    const host = (window.location.hostname || '').replace(/^www\./i, '');
+    fb.textContent = (host.charAt(0) || '?').toUpperCase();
+
+    // Pull body's rendered styling. Wrapped in try/catch because some
+    // exotic pages (no body, sandboxed iframes) can throw.
+    try {
+      const bodyStyle = getComputedStyle(document.body);
+      let bg = bodyStyle.backgroundColor;
+      // Body has transparent background? Walk up to <html>, then default.
+      if (bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent' || !bg) {
+        const htmlStyle = getComputedStyle(document.documentElement);
+        bg = htmlStyle.backgroundColor;
+        if (bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent' || !bg) {
+          bg = '#ffffff';
+        }
+      }
+      fb.style.background = bg;
+      fb.style.color      = bodyStyle.color || '#1a1a1a';
+      fb.style.fontFamily = bodyStyle.fontFamily || 'serif';
+    } catch (_) {
+      // Sensible defaults if computed style is unreadable
+      fb.style.background = '#ffffff';
+      fb.style.color      = '#1a1a1a';
+      fb.style.fontFamily = 'Georgia, serif';
+    }
+
+    // Font size scaled to the wrapper so the letter fills the box without
+    // overflowing - 60% of the wrapper's smaller dimension.
+    fb.style.fontSize = `${Math.round(size * 0.6)}px`;
+    return fb;
+  }
+
   // Find the best logo URL on the current page. Returns a string URL or null.
   function detectLogoURL() {
     const candidates = [];
@@ -111,19 +154,15 @@
         img.src = logoURL;
         img.referrerPolicy = 'no-referrer';
         img.onerror = () => {
-          // Fallback: a "?" glyph when the URL doesn't load (CORS, 404, etc.)
+          // URL failed (CORS, 404, decode error). Swap in the
+          // first-letter-of-hostname fallback styled to match the page.
           img.remove();
-          const fb = document.createElement('div');
-          fb.className = 'dp-dynlogo-fallback';
-          fb.textContent = '?';
-          el.appendChild(fb);
+          el.appendChild(makeFallbackLogo(size));
         };
         el.appendChild(img);
       } else {
-        const fb = document.createElement('div');
-        fb.className = 'dp-dynlogo-fallback';
-        fb.textContent = '?';
-        el.appendChild(fb);
+        // No logo URL detectable at all - use the first-letter fallback.
+        el.appendChild(makeFallbackLogo(size));
       }
 
       root.appendChild(el);
