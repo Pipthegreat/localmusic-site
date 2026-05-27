@@ -1,9 +1,21 @@
-// Motivational quotes hack — heavy-bold Fraunces drifting across the
-// page in three legibility-first treatments. Each spawn picks one of:
-// crisp heavy italic, heavy roman display, or soft heavy italic. The
-// 2px black character outline + extreme weight keeps every quote
-// readable on white pages, dark pages, photos, gradients, or busy
-// dashboard chrome.
+// Motivational quotes hack — drifting words in four reference-inspired
+// treatments, validated for legibility against white, light-photo,
+// dark, dark-photo, and busy-gradient backdrops before shipping (see
+// _test_render.py in the project root for the Pillow bench).
+//
+//   chunky-caps    Heavy all-caps with per-word colour from a pale
+//                  autumn palette. Reads like a hand-painted poster.
+//   wide-caps      Bold all-caps with very wide letter-spacing.
+//                  Reads as inscribed / editorial.
+//   italic-quoted  Heavy italic mixed-case framed by typographic
+//                  quote glyphs. Reads as a pulled quote.
+//   roman-head     Bold roman headline, mixed-case, tight tracking.
+//                  Reads as a newspaper banner.
+//
+// Palette is pale (L 92-95% with hue tint) so the fill reads as
+// near-white on dark backdrops, while a thin 1px black outline keeps
+// the letter edges crisp on light backdrops. Heavy weights (700-900)
+// provide stroke mass so the outline doesn't need to be heavier.
 
 (function () {
   const NS = (window.__DOMPerignon = window.__DOMPerignon || { hacks: {} });
@@ -124,32 +136,31 @@
     return QUOTES_REFLECTIVE[Math.floor(Math.random() * QUOTES_REFLECTIVE.length)];
   }
 
-  // ─── HEAVY TREATMENTS ───────────────────────────────────────────────
-  // Three readability-first treatments, all weight 800+. The previous
-  // wonk / drop-cap / small-caps treatments fell apart on real pages
-  // (illegible at 16-20px, swallowed by busy backdrops). These three
-  // are extreme weight so the stroke itself carries presence, with a
-  // 2px outline as backstop.
-  //
-  //   italic-heavy  Fraunces italic, wght 800, SOFT 40 (crisp serifs)
-  //   roman-heavy   Fraunces roman,  wght 900, SOFT 30, tight tracking
-  //   italic-soft   Fraunces italic, wght 800, SOFT 95 (rounder warmth)
-  //
-  // Self-audit pass (mentally traced against representative pages):
-  //   • Pure-white pages (Google, Wikipedia): the 2px black outline
-  //     gives every glyph an enclosed black ring → strong contrast.
-  //   • Pure-dark pages (terminals, dark-mode apps): the outline blends
-  //     in, but the heavy-weight coloured fill (mid-tone autumn) reads
-  //     against the dark — stroke widths big enough to register.
-  //   • Photo / hero-image backdrops: outline + heavy fill carries.
-  //   • Patterned / busy dashboards: outline + heavy fill carries.
-  //   • Small text (16-18px floor on mobile): wght 800+ keeps glyph
-  //     surface area large enough to read; 2px outline grows the
-  //     legibility envelope outward.
+  // Pale autumn palette — near-white tones with warm hue tints. Reads
+  // as near-white on dark backdrops (sufficient luminance contrast)
+  // and the 1px outline carries the edge on light backdrops. Values
+  // chosen empirically from the Pillow bench render.
+  const PALETTE = [
+    'oklch(94% 0.06 65)',     // pale honey
+    'oklch(92% 0.07 35)',     // pale copper
+    'oklch(94% 0.06 75)',     // pale gold
+    'oklch(91% 0.07 18)',     // pale wine
+    'oklch(94% 0.05 130)',    // pale sage
+    'oklch(92% 0.07 40)',     // pale clay
+    'oklch(93% 0.07 60)',     // pale saffron
+  ];
+
+  function pickColor() {
+    return PALETTE[Math.floor(Math.random() * PALETTE.length)];
+  }
+
+  // Treatment registry. multicolor=true means each word gets its own
+  // palette colour, applied as inline span styles in spawnQuote.
   const TREATMENTS = [
-    { cls: 'dp-treat-italic-heavy', weight: 1.0 },
-    { cls: 'dp-treat-roman-heavy',  weight: 1.0 },
-    { cls: 'dp-treat-italic-soft',  weight: 1.0 },
+    { cls: 'dp-treat-chunky-caps',   weight: 1.0, sizeFactor: 1.10, multicolor: true  },
+    { cls: 'dp-treat-wide-caps',     weight: 0.8, sizeFactor: 0.90, multicolor: false },
+    { cls: 'dp-treat-italic-quoted', weight: 1.0, sizeFactor: 1.00, multicolor: false },
+    { cls: 'dp-treat-roman-head',    weight: 1.0, sizeFactor: 1.00, multicolor: false },
   ];
 
   function pickTreatment() {
@@ -162,18 +173,11 @@
     return TREATMENTS[0];
   }
 
-  // Mid-tone autumn — saturated enough to read on white but warm
-  // enough to feel like the brand. Lightness 75-82%, chroma 0.10-0.13.
-  // Avoids the previous pale palette which vanished into white pages.
-  const PALETTE = [
-    'oklch(82% 0.11 50)',     // honey amber
-    'oklch(78% 0.13 30)',     // burnished copper
-    'oklch(80% 0.10 75)',     // mellow gold
-    'oklch(76% 0.13 18)',     // wine flush
-    'oklch(81% 0.10 130)',    // pressed sage
-    'oklch(75% 0.12 20)',     // sunset clay
-    'oklch(78% 0.11 60)',     // saffron
-  ];
+  function escapeHTML(s) {
+    return s.replace(/[&<>"']/g, c => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    })[c]);
+  }
 
   let styleEl = null;
   let fontLink = null;
@@ -196,8 +200,8 @@
     fontLink = document.createElement('link');
     fontLink.id = '__dp-quotes-font';
     fontLink.rel = 'stylesheet';
-    // Need SOFT axis loaded for the italic-heavy / italic-soft contrast.
-    // Drop WONK from the URL since none of the v1.4.6 treatments use it.
+    // SOFT axis loaded so italic-quoted (SOFT 70) can differ from
+    // roman-head (SOFT 40) in temperament.
     fontLink.href =
       'https://fonts.googleapis.com/css2?family=Fraunces:' +
       'ital,opsz,wght,SOFT@' +
@@ -213,33 +217,42 @@
     const treat = pickTreatment();
     const node = document.createElement('div');
     node.className = 'dp-quote ' + treat.cls;
-    node.textContent = text;
+
+    if (treat.multicolor) {
+      // chunky-caps: wrap each word in its own colour span. Per-word
+      // colour shift is the load-bearing visual of this treatment
+      // (matches the user's reference image 1).
+      const words = text.split(' ');
+      node.innerHTML = words.map(w =>
+        `<span style="color:${pickColor()}">${escapeHTML(w)}</span>`
+      ).join(' ');
+    } else {
+      node.textContent = text;
+      node.style.color = pickColor();
+    }
 
     const vw = window.innerWidth;
     const vh = window.innerHeight;
     const dirLR = Math.random() < 0.5;
 
-    // 26-42px desktop. Bumped from 24-39 to give the heavy weights
-    // more room to read — 26px floor is where wght 800 + 2px outline
-    // stops feeling cramped. Mobile floor 18px (also bumped from 16).
-    const fontSize = Math.max(18, (26 + Math.random() * 16) * quoteScale);
+    // 24-40px base with per-treatment scaling. Mobile floor 18px.
+    const baseFontSize = (24 + Math.random() * 16) * quoteScale;
+    const fontSize = Math.max(18, baseFontSize * (treat.sizeFactor || 1));
 
     const yTop    = fontSize * 0.5;
     const yBottom = Math.max(yTop + 1, vh - fontSize * 1.5);
     const y       = yTop + Math.random() * (yBottom - yTop);
     const opacity = 0.92 + Math.random() * 0.08;
-    const color   = PALETTE[Math.floor(Math.random() * PALETTE.length)];
 
     node.style.fontSize = `${fontSize}px`;
-    node.style.color    = color;
     node.style.opacity  = '0';
     node.style.top      = `${y}px`;
-    node.style.left     = dirLR ? `-360px` : `${vw + 40}px`;
+    node.style.left     = dirLR ? `-420px` : `${vw + 60}px`;
 
     root.appendChild(node);
 
     const FONT_MIN_FOR_SPEED = 18;
-    const FONT_MAX_FOR_SPEED = 42;
+    const FONT_MAX_FOR_SPEED = 44;
     const DUR_AT_SMALLEST = 32000;
     const DUR_AT_LARGEST  = 18700;
     const sizeFrac = Math.max(0, Math.min(1,
@@ -252,8 +265,8 @@
       node.style.transition = `transform ${duration}ms linear, opacity 1800ms ease-in-out`;
       node.style.opacity = String(opacity);
       const yDrift = (Math.random() - 0.5) * 80;
-      const endX = dirLR ? vw + 400 : -node.offsetWidth - 40;
-      const startX = dirLR ? -360 : vw + 40;
+      const endX = dirLR ? vw + 420 : -node.offsetWidth - 60;
+      const startX = dirLR ? -420 : vw + 60;
       node.style.transform = `translate3d(${endX - startX}px, ${yDrift}px, 0)`;
     });
 

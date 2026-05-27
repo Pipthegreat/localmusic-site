@@ -1,7 +1,13 @@
-/* You Got This — heavy-bold Fraunces in three treatments. Legibility
-   first: every treatment is weight 800+ and wears a 2px black outline
-   so the text reads on white, dark, photo, gradient, and patterned
-   backdrops alike. */
+/* You Got This — four reference-inspired treatments, all readable
+   on white / light-photo / dark / dark-photo / busy backdrops.
+   Validated via Pillow render bench (see _test_render.py at the
+   repo root) before shipping.
+
+   Outline back to 1px (user feedback: v1.4.6's 2px was way too
+   thick — looked like a border, not a stroke). The pale palette
+   + heavy weights carry the legibility; the 1px outline only
+   needs to provide edge contrast on light backdrops where the
+   pale fill nearly matches the background. */
 
 .dp-quote {
   position: fixed;
@@ -10,57 +16,69 @@
   pointer-events: none;
   font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
   white-space: nowrap;
-  /* 2px 8-direction outline — twice the v1.4.5 value. Heavy-weight
-     strokes need a proportionally thicker outline to keep glyph
-     edges crisp against busy backdrops. Whole-pixel offsets only
-     (fractional values caused bumpy outlines on italics back in
-     v1.2.7). */
   text-shadow:
-    -2px -2px 0 #000,
-     2px -2px 0 #000,
-    -2px  2px 0 #000,
-     2px  2px 0 #000,
-     0   -2px 0 #000,
-     0    2px 0 #000,
-    -2px  0   0 #000,
-     2px  0   0 #000;
+    -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
+     0   -1px 0 #000, 0    1px 0 #000, -1px 0   0 #000, 1px 0   0 #000;
   will-change: transform, opacity;
   user-select: none;
   -webkit-font-smoothing: antialiased;
-  /* GPU compositor layer caches the outline bitmap. Kills slow-text
-     stutter; especially important with 8 shadows at 2px each. */
   transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
-/* ─── Treatment 1: Heavy Crisp Italic ───────────────────────────────
-   wght 800 italic, opsz at the display peak, SOFT pulled low (40)
-   for sharp serifs. The "hand-set headline" register. */
-.dp-treat-italic-heavy {
-  font-style: italic;
-  font-weight: 800;
-  font-variation-settings: "opsz" 144, "SOFT" 40;
-  letter-spacing: 0.005em;
-}
-
-/* ─── Treatment 2: Heavy Roman Headline ─────────────────────────────
-   wght 900 upright, opsz 144, SOFT 30, slightly negative tracking.
-   The "newspaper banner" register. Strongest presence of the three. */
-.dp-treat-roman-heavy {
+/* ─── Treatment A: Chunky multi-colour caps ─────────────────────────
+   Heavy all-caps, weight 900. Each word gets its own palette colour
+   via inline span style set by the JS. Hand-painted-poster register
+   (matches reference image 1). */
+.dp-treat-chunky-caps {
   font-style: normal;
   font-weight: 900;
-  font-variation-settings: "opsz" 144, "SOFT" 30;
-  font-feature-settings: "kern" 1, "liga" 1;
-  letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 144, "SOFT" 60;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  word-spacing: 0.06em;
 }
 
-/* ─── Treatment 3: Heavy Soft Italic ────────────────────────────────
-   wght 800 italic, SOFT cranked to 95 — rounder terminals, softer
-   inner counters. Warm and humane while still extreme-bold. */
-.dp-treat-italic-soft {
+/* ─── Treatment B: Wide editorial caps ──────────────────────────────
+   Bold all-caps + very wide letter-spacing. Single colour, inscribed
+   feel (matches reference image 2). */
+.dp-treat-wide-caps {
+  font-style: normal;
+  font-weight: 700;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  text-transform: uppercase;
+  letter-spacing: 0.20em;
+}
+
+/* ─── Treatment C: Heavy italic + quote marks ───────────────────────
+   Bold italic, framed by typographic quote glyphs as design language
+   (matches reference images 3, 4). */
+.dp-treat-italic-quoted {
   font-style: italic;
   font-weight: 800;
-  font-variation-settings: "opsz" 144, "SOFT" 95;
-  letter-spacing: 0.02em;
+  font-variation-settings: "opsz" 144, "SOFT" 70;
+  letter-spacing: 0.01em;
+}
+.dp-treat-italic-quoted::before {
+  content: '\201C';   /* left double quote */
+  margin-right: 0.06em;
+  font-weight: 900;
+  opacity: 0.75;
+}
+.dp-treat-italic-quoted::after {
+  content: '\201D';   /* right double quote */
+  margin-left: 0.06em;
+  font-weight: 900;
+  opacity: 0.75;
+}
+
+/* ─── Treatment D: Bold roman headline ──────────────────────────────
+   Bold roman, mixed case, slight negative tracking. Newspaper-banner
+   register (matches reference image 5). */
+.dp-treat-roman-head {
+  font-style: normal;
+  font-weight: 800;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  letter-spacing: -0.005em;
 }
