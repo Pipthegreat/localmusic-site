@@ -37,15 +37,36 @@
   pointer-events: none;
 }
 
-/* Pop animation: scale up rapidly while fading. The radial highlight
-   makes it look like the surface ruptures. */
+/* Pop defaults — the JS freezes the bubble's current x/y into these
+   custom properties before adding the pop class so the keyframe can
+   preserve position. Without this the CSS animation's transform
+   wipes the inline translate and the bubble pops at the viewport's
+   top-left corner instead of where the user was looking. */
+.dp-bubble {
+  --pop-x: 0px;
+  --pop-y: 0px;
+}
+
+/* Click-pop: dramatic scale-up + fade + blur. Surface-rupture feel. */
 @keyframes dp-bubble-pop {
-  0%   { transform: scale(1);   opacity: 1; filter: blur(0); }
-  60%  { transform: scale(1.5); opacity: 0.5; filter: blur(2px); }
-  100% { transform: scale(2.2); opacity: 0;   filter: blur(6px); }
+  0%   { transform: translate(var(--pop-x), var(--pop-y)) scale(1);   opacity: 1; filter: blur(0); }
+  60%  { transform: translate(var(--pop-x), var(--pop-y)) scale(1.5); opacity: 0.5; filter: blur(2px); }
+  100% { transform: translate(var(--pop-x), var(--pop-y)) scale(2.2); opacity: 0;   filter: blur(6px); }
 }
 .dp-bubble.dp-bubble-pop {
   animation: dp-bubble-pop 420ms ease-out forwards;
+  pointer-events: none !important;
+}
+
+/* Auto-pop: subtle surface flicker. ~20% of bubbles do this mid-rise.
+   Smaller scale envelope (1 → 1.25), no big blur, 320ms. Reads as a
+   bubble fizzing out, not as a dramatic burst. */
+@keyframes dp-bubble-pop-subtle {
+  0%   { transform: translate(var(--pop-x), var(--pop-y)) scale(1);     opacity: 1; filter: blur(0); }
+  100% { transform: translate(var(--pop-x), var(--pop-y)) scale(1.25);  opacity: 0; filter: blur(1px); }
+}
+.dp-bubble.dp-bubble-pop-subtle {
+  animation: dp-bubble-pop-subtle 320ms ease-out forwards;
   pointer-events: none !important;
 }
 

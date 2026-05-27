@@ -57,19 +57,49 @@
       wobbleRate: 0.018 + Math.random() * 0.018,
       wobbleAmp: 0.6 + Math.random() * 1.4,
     };
+    // ~20% of bubbles auto-pop mid-rise. Subtle scale + fade, distinct
+    // from the more dramatic click-pop. Pop fires at a randomised time
+    // 2-6s after spawn so they go off across the field, not in a wave.
+    if (Math.random() < 0.20) {
+      bubble.autoPopAt = performance.now() + 2000 + Math.random() * 4000;
+    }
     el.addEventListener('click', () => popBubble(bubble), { once: true });
     bubble.el.style.pointerEvents = 'auto'; // bubbles ARE clickable
     bubbles.push(bubble);
   }
 
+  // Freeze the bubble's current screen position into CSS custom
+  // properties so the pop keyframe can reference them — otherwise the
+  // CSS animation's transform would overwrite the inline translate and
+  // the bubble would visually jump to viewport top-left as it pops.
+  function freezePosition(b) {
+    const x = b.x + Math.sin(b.wobble) * b.wobbleAmp;
+    b.el.style.setProperty('--pop-x', `${x}px`);
+    b.el.style.setProperty('--pop-y', `${b.y}px`);
+  }
+
   function popBubble(b) {
     if (b.popped) return;
     b.popped = true;
+    freezePosition(b);
     b.el.classList.add('dp-bubble-pop');
     setTimeout(() => {
       b.el.remove();
       bubbles = bubbles.filter(x => x !== b);
     }, 420);
+  }
+
+  // Auto-pop: gentler scale-to-1.25 + fade over 320ms. Reads as a
+  // small surface flicker rather than a click-pop's full burst.
+  function autoPopBubble(b) {
+    if (b.popped) return;
+    b.popped = true;
+    freezePosition(b);
+    b.el.classList.add('dp-bubble-pop-subtle');
+    setTimeout(() => {
+      b.el.remove();
+      bubbles = bubbles.filter(x => x !== b);
+    }, 320);
   }
 
   function spawnCork() {
@@ -115,8 +145,15 @@
   }
 
   function step() {
+    const now = performance.now();
     for (const b of bubbles) {
       if (b.popped) continue;
+      // Auto-pop check fires before the position update so the freeze
+      // captures the position the user just saw, not next-frame's.
+      if (b.autoPopAt && now >= b.autoPopAt) {
+        autoPopBubble(b);
+        continue;
+      }
       b.wobble += b.wobbleRate;
       b.y += b.vy;
       const drift = Math.sin(b.wobble) * b.wobbleAmp;

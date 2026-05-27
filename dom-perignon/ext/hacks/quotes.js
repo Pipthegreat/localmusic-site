@@ -1,14 +1,14 @@
-// Motivational quotes hack - gentle words drift across the page in
-// Fraunces, rendered through five distinct typographic treatments
-// (wonk, display italic, roman headline, small caps, drop cap). Each
-// spawn picks a treatment at random so consecutive quotes never look
-// the same — the typography itself becomes part of the inspiration.
+// Motivational quotes hack — heavy-bold Fraunces drifting across the
+// page in three legibility-first treatments. Each spawn picks one of:
+// crisp heavy italic, heavy roman display, or soft heavy italic. The
+// 2px black character outline + extreme weight keeps every quote
+// readable on white pages, dark pages, photos, gradients, or busy
+// dashboard chrome.
 
 (function () {
   const NS = (window.__DOMPerignon = window.__DOMPerignon || { hacks: {} });
 
   const QUOTES = [
-    // Original 29
     'You got this',
     'Keep going',
     'One step at a time',
@@ -38,7 +38,6 @@
     "Don't give up",
     "It's going to be okay",
     "You're doing the work",
-    // Added round-3 - pool doubled, ~10% longer max length permitted
     'Take it easy on yourself',
     'Slow and steady wins',
     "You're not alone in this",
@@ -72,9 +71,6 @@
     'Soft eyes, steady heart',
   ];
 
-  // Reflective pool — outward-facing observations about healthier ways
-  // to live, not direct quotes from any source. Each of these fires
-  // half as often as each primary quote (see pickQuote() below).
   const QUOTES_REFLECTIVE = [
     'Slowness is a discipline',
     'Sleep is a craft',
@@ -118,7 +114,6 @@
     'Hospitality is a small revolution',
   ];
 
-  // Weighted picker. Each primary quote weight 1, each reflective 0.5.
   function pickQuote() {
     const primaryWeight = QUOTES.length;
     const reflectiveWeight = QUOTES_REFLECTIVE.length * 0.5;
@@ -129,28 +124,32 @@
     return QUOTES_REFLECTIVE[Math.floor(Math.random() * QUOTES_REFLECTIVE.length)];
   }
 
-  // ─── TYPOGRAPHIC TREATMENTS ────────────────────────────────────────
-  // Each treatment is one CSS class (defined in quotes.css). Picked at
-  // random per spawn so consecutive quotes always look different —
-  // typography itself carries the variety, not just text.
+  // ─── HEAVY TREATMENTS ───────────────────────────────────────────────
+  // Three readability-first treatments, all weight 800+. The previous
+  // wonk / drop-cap / small-caps treatments fell apart on real pages
+  // (illegible at 16-20px, swallowed by busy backdrops). These three
+  // are extreme weight so the stroke itself carries presence, with a
+  // 2px outline as backstop.
   //
-  //   wonk      Fraunces italic w/ WONK axis on + swash + ss01 alts.
-  //             The wildest Fraunces look: curling tails, swashed
-  //             terminals, the famous wonky 'g'.
-  //   display   Fraunces italic, refined classic display weight.
-  //   roman     Bold roman headline, tight tracking. Editorial weight.
-  //   smallcaps All-small-caps roman, wide tracking. Quiet authority.
-  //   dropcap   Italic body w/ oversized wonky first letter. Literary
-  //             opening feel — JS wraps the first letter in a span.
+  //   italic-heavy  Fraunces italic, wght 800, SOFT 40 (crisp serifs)
+  //   roman-heavy   Fraunces roman,  wght 900, SOFT 30, tight tracking
+  //   italic-soft   Fraunces italic, wght 800, SOFT 95 (rounder warmth)
   //
-  // Weights bias toward the more dramatic treatments (wonk + dropcap)
-  // since those carry the strongest "this is hand-set" feel.
+  // Self-audit pass (mentally traced against representative pages):
+  //   • Pure-white pages (Google, Wikipedia): the 2px black outline
+  //     gives every glyph an enclosed black ring → strong contrast.
+  //   • Pure-dark pages (terminals, dark-mode apps): the outline blends
+  //     in, but the heavy-weight coloured fill (mid-tone autumn) reads
+  //     against the dark — stroke widths big enough to register.
+  //   • Photo / hero-image backdrops: outline + heavy fill carries.
+  //   • Patterned / busy dashboards: outline + heavy fill carries.
+  //   • Small text (16-18px floor on mobile): wght 800+ keeps glyph
+  //     surface area large enough to read; 2px outline grows the
+  //     legibility envelope outward.
   const TREATMENTS = [
-    { cls: 'dp-treat-wonk',      weight: 1.4, sizeFactor: 1.10 },
-    { cls: 'dp-treat-display',   weight: 1.0, sizeFactor: 1.00 },
-    { cls: 'dp-treat-roman',     weight: 0.9, sizeFactor: 1.05 },
-    { cls: 'dp-treat-smallcaps', weight: 0.7, sizeFactor: 0.92 },
-    { cls: 'dp-treat-dropcap',   weight: 1.2, sizeFactor: 1.05 },
+    { cls: 'dp-treat-italic-heavy', weight: 1.0 },
+    { cls: 'dp-treat-roman-heavy',  weight: 1.0 },
+    { cls: 'dp-treat-italic-soft',  weight: 1.0 },
   ];
 
   function pickTreatment() {
@@ -163,26 +162,17 @@
     return TREATMENTS[0];
   }
 
-  // Autumn palette — pale (94-95% L) tones unchanged, plus a new
-  // band of mid-tone autumn (78-86% L, higher chroma) for richer
-  // treatments. Random pick per spawn; the weight is unstratified so
-  // both bands appear evenly.
+  // Mid-tone autumn — saturated enough to read on white but warm
+  // enough to feel like the brand. Lightness 75-82%, chroma 0.10-0.13.
+  // Avoids the previous pale palette which vanished into white pages.
   const PALETTE = [
-    // Pale autumn (lightness 90-95%)
-    'oklch(94% 0.06 65)',     // pale saffron
-    'oklch(92% 0.07 35)',     // pale terracotta
-    'oklch(90% 0.06 30)',     // pale burnt sienna
-    'oklch(95% 0.07 80)',     // pale mustard
-    'oklch(94% 0.05 130)',    // pale desert sage
-    'oklch(91% 0.06 20)',     // pale rosewood
-    'oklch(92% 0.07 40)',     // pale adobe clay
-    // Mid-tone autumn (lightness 78-86%, higher chroma — for richer
-    // treatments where bolder weights handle the deeper colour well)
-    'oklch(85% 0.10 50)',     // honey amber
-    'oklch(82% 0.11 30)',     // burnished copper
-    'oklch(86% 0.09 75)',     // mellow gold
-    'oklch(79% 0.12 18)',     // wine flush
-    'oklch(83% 0.09 130)',    // pressed sage
+    'oklch(82% 0.11 50)',     // honey amber
+    'oklch(78% 0.13 30)',     // burnished copper
+    'oklch(80% 0.10 75)',     // mellow gold
+    'oklch(76% 0.13 18)',     // wine flush
+    'oklch(81% 0.10 130)',    // pressed sage
+    'oklch(75% 0.12 20)',     // sunset clay
+    'oklch(78% 0.11 60)',     // saffron
   ];
 
   let styleEl = null;
@@ -206,19 +196,13 @@
     fontLink = document.createElement('link');
     fontLink.id = '__dp-quotes-font';
     fontLink.rel = 'stylesheet';
-    // Load Fraunces with the FULL set of registered + custom axes
-    // (ital, opsz, wght, SOFT, WONK). The previous URL omitted SOFT
-    // and WONK, so font-variation-settings for those were silently
-    // ignored. With the full axis range we can use the WONK axis for
-    // the wonk treatment and the SOFT axis to differentiate
-    // treatments' temperaments.
+    // Need SOFT axis loaded for the italic-heavy / italic-soft contrast.
+    // Drop WONK from the URL since none of the v1.4.6 treatments use it.
     fontLink.href =
       'https://fonts.googleapis.com/css2?family=Fraunces:' +
-      'ital,opsz,wght,SOFT,WONK@' +
-      '0,9..144,100..900,0..100,0;'  +
-      '0,9..144,100..900,0..100,1;'  +
-      '1,9..144,100..900,0..100,0;'  +
-      '1,9..144,100..900,0..100,1'   +
+      'ital,opsz,wght,SOFT@' +
+      '0,9..144,100..900,0..100;' +
+      '1,9..144,100..900,0..100' +
       '&display=swap';
     (document.head || document.documentElement).appendChild(fontLink);
   }
@@ -229,41 +213,21 @@
     const treat = pickTreatment();
     const node = document.createElement('div');
     node.className = 'dp-quote ' + treat.cls;
-
-    // Drop-cap treatment: wrap first letter in its own span so the
-    // CSS can scale + restyle just that glyph.
-    if (treat.cls === 'dp-treat-dropcap' && text.length > 0) {
-      const first = text.charAt(0);
-      const rest  = text.slice(1);
-      node.innerHTML =
-        '<span class="dp-drop-init">' +
-        first.replace(/[&<>"']/g, c => ({
-          '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-        })[c]) +
-        '</span>' +
-        rest.replace(/[&<>"']/g, c => ({
-          '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-        })[c]);
-    } else {
-      node.textContent = text;
-    }
+    node.textContent = text;
 
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-
     const dirLR = Math.random() < 0.5;
 
-    // Base range 24-39px desktop, mobile floor 16px. Each treatment
-    // gets a per-treatment scaling so wonk + drop-cap read a touch
-    // larger (more presence) and small-caps reads a touch smaller
-    // (more contained).
-    const baseFontSize = (24 + Math.random() * 15) * quoteScale;
-    const fontSize = Math.max(16, baseFontSize * (treat.sizeFactor || 1));
+    // 26-42px desktop. Bumped from 24-39 to give the heavy weights
+    // more room to read — 26px floor is where wght 800 + 2px outline
+    // stops feeling cramped. Mobile floor 18px (also bumped from 16).
+    const fontSize = Math.max(18, (26 + Math.random() * 16) * quoteScale);
 
     const yTop    = fontSize * 0.5;
     const yBottom = Math.max(yTop + 1, vh - fontSize * 1.5);
     const y       = yTop + Math.random() * (yBottom - yTop);
-    const opacity = 0.85 + Math.random() * 0.15;
+    const opacity = 0.92 + Math.random() * 0.08;
     const color   = PALETTE[Math.floor(Math.random() * PALETTE.length)];
 
     node.style.fontSize = `${fontSize}px`;
@@ -274,10 +238,8 @@
 
     root.appendChild(node);
 
-    // Animation envelope unchanged from v1.2.8 — fontSize-linked
-    // duration; smaller text drifts slower to mask sub-pixel artefacts.
-    const FONT_MIN_FOR_SPEED = 16;
-    const FONT_MAX_FOR_SPEED = 39;
+    const FONT_MIN_FOR_SPEED = 18;
+    const FONT_MAX_FOR_SPEED = 42;
     const DUR_AT_SMALLEST = 32000;
     const DUR_AT_LARGEST  = 18700;
     const sizeFrac = Math.max(0, Math.min(1,

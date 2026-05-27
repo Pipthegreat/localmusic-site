@@ -84,8 +84,13 @@
   // landing height (within SHELF_TOLERANCE). Anything below that fraction
   // means most of the item is dangling over empty space or a much deeper
   // shelf - physically the item should tip and slide, not settle.
-  const SHELF_TOLERANCE = 8;     // px - within this counts as "same surface"
-  const MIN_SUPPORT_FRAC = 0.4;  // below this triggers tip-off behaviour
+  const SHELF_TOLERANCE = 8;      // px - within this counts as "same surface"
+  // Bumped 0.4 → 0.55 in v1.4.6. Items now need >55% of their footprint
+  // resting on the shelf before they're allowed to settle. Less than
+  // that and they tip off into the deeper neighbouring column. This
+  // (combined with the slope-tip below) is what prevents the old
+  // "tower" pile shape and forces the pile to spread horizontally.
+  const MIN_SUPPORT_FRAC = 0.55;
   function evaluateSupport(left, width, shelfTop) {
     const c1 = colFromX(left);
     const c2 = colFromX(left + width);
@@ -105,6 +110,36 @@
       leftSupport,
       rightSupport,
     };
+  }
+
+  // Slope-tip: even when an item lands well-supported, an actual
+  // gravity well would pull it sideways if the immediately adjacent
+  // shelves are substantially deeper. Without this, items happily
+  // perch on top of any flat surface (including other items) and the
+  // pile climbs vertically into a tower. With it, items settled on
+  // peaks roll into the valleys and the pile spreads.
+  const SLOPE_CHECK_COLS = 4;        // columns to peek on each side
+  const SLOPE_TIP_FRAC   = 0.55;     // neighbour deeper by > itemH * this → tip
+  function evaluateSlope(left, width, shelfTop, itemHeight) {
+    const c1 = colFromX(left);
+    const c2 = colFromX(left + width);
+    let leftMaxDepth = 0, rightMaxDepth = 0;
+    for (let c = Math.max(0, c1 - SLOPE_CHECK_COLS); c < c1; c++) {
+      const d = shelves[c] - shelfTop;
+      if (d > leftMaxDepth) leftMaxDepth = d;
+    }
+    for (let c = c2 + 1; c <= Math.min(COLUMNS - 1, c2 + SLOPE_CHECK_COLS); c++) {
+      const d = shelves[c] - shelfTop;
+      if (d > rightMaxDepth) rightMaxDepth = d;
+    }
+    const threshold = itemHeight * SLOPE_TIP_FRAC;
+    if (leftMaxDepth > threshold && leftMaxDepth >= rightMaxDepth) {
+      return { shouldSlide: true, direction: -1 };
+    }
+    if (rightMaxDepth > threshold && rightMaxDepth > leftMaxDepth) {
+      return { shouldSlide: true, direction: 1 };
+    }
+    return { shouldSlide: false, direction: 0 };
   }
 
   // ── Candidate discovery ───────────────────────────────────────────────
@@ -274,12 +309,22 @@
           it.vy = Math.max(0.4, it.vy * 0.25);
           // Don't claim the shelf - the item is still moving
         } else if (slowVy && slowVx) {
-          // Energy spent AND well-supported - settle here and claim shelf
-          it.vy = 0;
-          it.vx = 0;
-          it.angVel = 0;
-          it.settled = true;
-          raiseShelves(it.x, it.rect.width, it.y);
+          // Energy spent AND well-supported. Before settling, check
+          // whether the item is actually on a peak with much deeper
+          // neighbouring columns — if so, an actual gravity well would
+          // tug it sideways into the valley, so slide instead of stick.
+          const slope = evaluateSlope(it.x, it.rect.width, shelfTop, it.rect.height);
+          if (slope.shouldSlide) {
+            it.vx += slope.direction * 1.4;
+            it.angVel += slope.direction * 0.035;
+            it.vy = 0.35;  // small downward pull keeps the item engaged with gravity
+          } else {
+            it.vy = 0;
+            it.vx = 0;
+            it.angVel = 0;
+            it.settled = true;
+            raiseShelves(it.x, it.rect.width, it.y);
+          }
         } else if (slowVy) {
           // Sliding along the shelf surface - kill vy but keep gliding horizontally
           it.vy = 0;
