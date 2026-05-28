@@ -57,14 +57,14 @@
       wobbleRate: 0.018 + Math.random() * 0.018,
       wobbleAmp: 0.6 + Math.random() * 1.4,
     };
-    // ~20% of bubbles auto-pop mid-rise. Subtle scale + fade, distinct
-    // from the more dramatic click-pop. Pop fires at a randomised time
-    // 2-6s after spawn so they go off across the field, not in a wave.
+    // ~20% of bubbles auto-pop mid-rise. Subtle scale + fade. Pop fires
+    // at a randomised time 2-6s after spawn so they go off across the
+    // field, not in a wave. This is the ONLY way a bubble pops now —
+    // the click-to-pop interaction was removed so bubbles never
+    // intercept page clicks (they're pointer-events: none via CSS).
     if (Math.random() < 0.20) {
       bubble.autoPopAt = performance.now() + 2000 + Math.random() * 4000;
     }
-    el.addEventListener('click', () => popBubble(bubble), { once: true });
-    bubble.el.style.pointerEvents = 'auto'; // bubbles ARE clickable
     bubbles.push(bubble);
   }
 
@@ -78,19 +78,8 @@
     b.el.style.setProperty('--pop-y', `${b.y}px`);
   }
 
-  function popBubble(b) {
-    if (b.popped) return;
-    b.popped = true;
-    freezePosition(b);
-    b.el.classList.add('dp-bubble-pop');
-    setTimeout(() => {
-      b.el.remove();
-      bubbles = bubbles.filter(x => x !== b);
-    }, 420);
-  }
-
   // Auto-pop: gentler scale-to-1.25 + fade over 320ms. Reads as a
-  // small surface flicker rather than a click-pop's full burst.
+  // small surface flicker rather than a burst.
   function autoPopBubble(b) {
     if (b.popped) return;
     b.popped = true;

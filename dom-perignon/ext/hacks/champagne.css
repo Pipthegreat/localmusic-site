@@ -20,7 +20,10 @@
     inset -2px -2px 5px oklch(78% 0.06 90 / 0.18),
     0 2px 6px oklch(92% 0.05 95 / 0.18);
   will-change: transform;
-  cursor: pointer;
+  /* Bubbles are decorative only — never intercept clicks meant for the
+     page underneath. Click-to-pop was removed; bubbles now only pop
+     via the spontaneous auto-pop in champagne.js. */
+  pointer-events: none;
 }
 
 /* Specular highlight overlay - gives the wet shimmer */
