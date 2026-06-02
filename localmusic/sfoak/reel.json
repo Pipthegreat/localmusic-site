@@ -1,413 +1,314 @@
 {
   "page_title": "SF + Oakland Live Music",
-  "total_duration": 1340.84,
-  "track_count": 45,
-  "built_at": 1779924716,
+  "total_duration": 1014.97,
+  "track_count": 34,
+  "built_at": 1780383777,
   "tracks": [
     {
-      "artist": "accessory",
-      "title": "safeword",
-      "spotify_uri": "spotify:track:5AgbD4ZSxrAPkG9YqSbX9B",
+      "artist": "bixby",
+      "title": "desire",
+      "spotify_uri": "spotify:track:59IZjbjihzu5wbWKQa3tKS",
       "audio_source": "itunes",
-      "duration": 29.77,
+      "duration": 29.95,
       "start": 0.0,
-      "end": 29.77
+      "end": 29.95
     },
     {
-      "artist": "accessory",
-      "title": "sunshine",
-      "spotify_uri": "spotify:track:19swoESh14znOg6WDx3liB",
+      "artist": "bixby",
+      "title": "feel it",
+      "spotify_uri": "spotify:track:2iZQUadQmB1WhkqhjrdCch",
       "audio_source": "itunes",
-      "duration": 29.89,
-      "start": 29.77,
-      "end": 59.66
+      "duration": 29.95,
+      "start": 29.95,
+      "end": 59.9
     },
     {
-      "artist": "accessory",
-      "title": "calcium",
-      "spotify_uri": "spotify:track:3zonc3ETbpfha6IsNbigeD",
+      "artist": "bixby",
+      "title": "distance",
+      "spotify_uri": "spotify:track:2stuYeS9icwoQf79tUmnv8",
       "audio_source": "itunes",
-      "duration": 29.82,
-      "start": 59.66,
-      "end": 89.48
+      "duration": 29.95,
+      "start": 59.9,
+      "end": 89.85
     },
     {
-      "artist": "inner ear brigade",
-      "title": "brood x",
-      "spotify_uri": "spotify:track:07bVnFjUZOP5j5Ju3cCUGY",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 89.48,
-      "end": 119.44
-    },
-    {
-      "artist": "inner ear brigade",
-      "title": "dark sleep fortress",
-      "spotify_uri": "spotify:track:1EO7FoXpGcbuhNxrYeCLCu",
+      "artist": "daisy grenade",
+      "title": "got it bad",
+      "spotify_uri": "spotify:track:5xpFAhYwM5ITYFEW5y5BER",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 119.44,
-      "end": 149.31
+      "start": 89.85,
+      "end": 119.72
     },
     {
-      "artist": "jerry joseph",
-      "title": "days of heaven",
-      "spotify_uri": "spotify:track:1zjRcBctuZsiTnhIyTsMhk",
+      "artist": "daisy grenade",
+      "title": "king for a day (feat. kasey karlsen of deadlands)",
+      "spotify_uri": "spotify:track:5W3aG3QA2ZVII4MtstSHHf",
       "audio_source": "itunes",
-      "duration": 27.98,
-      "start": 149.31,
-      "end": 177.29
+      "duration": 29.76,
+      "start": 119.72,
+      "end": 149.48
     },
     {
-      "artist": "lunar mistake",
-      "title": "meltdown on main street",
-      "spotify_uri": "spotify:track:2InaTcMfDaWDzndnHrXBbm",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 177.29,
-      "end": 207.24
-    },
-    {
-      "artist": "lunar mistake",
-      "title": "future history",
-      "spotify_uri": "spotify:track:2pQdukYRVvkPmRLwlOTKK0",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 207.24,
-      "end": 237.19
-    },
-    {
-      "artist": "lunar mistake",
-      "title": "leap of faith",
-      "spotify_uri": "spotify:track:01oaQeTAUXoAgSeY8Ev4Q9",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 237.19,
-      "end": 267.14
-    },
-    {
-      "artist": "male tears",
-      "title": "hit me",
-      "spotify_uri": "spotify:track:3h7kHYAyGJfuRYlExGlFMa",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 267.14,
-      "end": 297.09
-    },
-    {
-      "artist": "male tears",
-      "title": "belladonna",
-      "spotify_uri": "spotify:track:72M7ld6GHakLmRiWlJollH",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 297.09,
-      "end": 327.04
-    },
-    {
-      "artist": "male tears",
-      "title": "talk to me",
-      "spotify_uri": "spotify:track:2p4PYFoA9u3kfyBG8ntmWK",
-      "audio_source": "itunes",
-      "duration": 29.37,
-      "start": 327.04,
-      "end": 356.41
-    },
-    {
-      "artist": "miguel zenón",
-      "title": "cómo fue",
-      "spotify_uri": "spotify:track:71kX9pOTMTHA5ofZj4TUmS",
-      "audio_source": "itunes",
-      "duration": 28.43,
-      "start": 356.41,
-      "end": 384.84
-    },
-    {
-      "artist": "miguel zenón",
-      "title": "colobó",
-      "spotify_uri": "spotify:track:43BkOsYBrtPJZSOWahpe7Q",
+      "artist": "daisy grenade",
+      "title": "guts",
+      "spotify_uri": "spotify:track:6lA4txLLHuNQtbAici3K41",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 384.84,
-      "end": 414.71
+      "start": 149.48,
+      "end": 179.35
     },
     {
-      "artist": "miguel zenón",
-      "title": "esta plena",
-      "spotify_uri": "spotify:track:74GF2f3yRPDhuxyuo8OPpX",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 414.71,
-      "end": 444.58
-    },
-    {
-      "artist": "new found glory",
-      "title": "hit or miss",
-      "spotify_uri": "spotify:track:2JGfAzStXQ1VEo6H4l6rSR",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 444.58,
-      "end": 474.45
-    },
-    {
-      "artist": "new found glory",
-      "title": "all downhill from here",
-      "spotify_uri": "spotify:track:6PAoCw99yAkmpeXmY8IIUE",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 474.45,
-      "end": 504.32
-    },
-    {
-      "artist": "new found glory",
-      "title": "my friends over you",
-      "spotify_uri": "spotify:track:4pImG3RdbaGfanzQOTFgyr",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 504.32,
-      "end": 534.19
-    },
-    {
-      "artist": "plain white t's",
-      "title": "hey there delilah",
-      "spotify_uri": "spotify:track:4RCWB3V8V0dignt99LZ8vH",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 534.19,
-      "end": 564.06
-    },
-    {
-      "artist": "plain white t's",
-      "title": "hate (i really don't like you)",
-      "spotify_uri": "spotify:track:6cQSR4chKDTFhlCT2MuNwq",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 564.06,
-      "end": 593.93
-    },
-    {
-      "artist": "plain white t's",
-      "title": "our time now",
-      "spotify_uri": "spotify:track:3CE3PYF64qJBjq54Uf9ZiW",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 593.93,
-      "end": 623.8
-    },
-    {
-      "artist": "sleek teeth",
-      "title": "operating",
-      "spotify_uri": "spotify:track:75uPGDDIEr15wwOTe0NWlD",
-      "audio_source": "itunes",
-      "duration": 29.97,
-      "start": 623.8,
-      "end": 653.77
-    },
-    {
-      "artist": "sleek teeth",
-      "title": "powerless",
-      "spotify_uri": "spotify:track:5hytFeulh7KU8nGqIeiYkD",
+      "artist": "foolish relics",
+      "title": "i melt with you",
+      "spotify_uri": "spotify:track:4UCA1dk4uJlDvAEG6pLcHP",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 653.77,
-      "end": 683.72
+      "start": 179.35,
+      "end": 209.3
     },
     {
-      "artist": "sleek teeth",
-      "title": "the river",
-      "spotify_uri": "spotify:track:24eMaRPbmKkAgEvscuwZkc",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 683.72,
-      "end": 713.67
-    },
-    {
-      "artist": "sleepytime gorilla museum",
-      "title": "sleep is wrong",
-      "spotify_uri": "spotify:track:7x1dmOdCBYmXOZECXfgVTW",
-      "audio_source": "itunes",
-      "duration": 28.88,
-      "start": 713.67,
-      "end": 742.55
-    },
-    {
-      "artist": "sleepytime gorilla museum",
-      "title": "the donkey-headed adversary of humanity opens the discussion",
-      "spotify_uri": "spotify:track:4wv4mYGR4R1e3Scp3Ri1cf",
+      "artist": "foolish relics",
+      "title": "thank you 4 skankin'",
+      "spotify_uri": "spotify:track:2QzJswHLuOcbOu0NNN7qMu",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 742.55,
-      "end": 772.42
+      "start": 209.3,
+      "end": 239.17
     },
     {
-      "artist": "sleepytime gorilla museum",
-      "title": "phthisis",
-      "spotify_uri": "spotify:track:4M2x9Nwfga2DYqbv4oXezt",
+      "artist": "foolish relics",
+      "title": "childlike empress",
+      "spotify_uri": "spotify:track:0mAgt8NFdMiY0OfxxIFDD2",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 239.17,
+      "end": 269.12
+    },
+    {
+      "artist": "friendship games",
+      "title": "die in california!!",
+      "spotify_uri": "spotify:track:11aHWk2HxlNxl0lBTrRoam",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 269.12,
+      "end": 299.07
+    },
+    {
+      "artist": "friendship games",
+      "title": "self-destruct",
+      "spotify_uri": "spotify:track:01NCPWTNSn9liGRrBWhQf2",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 299.07,
+      "end": 329.02
+    },
+    {
+      "artist": "friendship games",
+      "title": "cheers, belmonte",
+      "spotify_uri": "spotify:track:0NmyIwZ02ppgQ3plXB1hyB",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 329.02,
+      "end": 358.97
+    },
+    {
+      "artist": "jady",
+      "title": "boltcutter",
+      "spotify_uri": "spotify:track:2CCpGyBPQhrUPJ6pKyqnTb",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 358.97,
+      "end": 388.92
+    },
+    {
+      "artist": "jady",
+      "title": "fragile",
+      "spotify_uri": "spotify:track:5Zh9Wc1E6MrFjZNJfKXqcP",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 388.92,
+      "end": 418.87
+    },
+    {
+      "artist": "jady",
+      "title": "shed my skin",
+      "spotify_uri": "spotify:track:1YIK1ONe2MnF2tHC5n3zlO",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 418.87,
+      "end": 448.82
+    },
+    {
+      "artist": "mia wilson",
+      "title": "it must be so easy",
+      "spotify_uri": "spotify:track:5stRD4oD8lRQzuok2UNxtM",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 448.82,
+      "end": 478.77
+    },
+    {
+      "artist": "mia wilson",
+      "title": "i want it all",
+      "spotify_uri": "spotify:track:7uTLyPjTz3AcfxNvjDo2P5",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 478.77,
+      "end": 508.72
+    },
+    {
+      "artist": "mia wilson",
+      "title": "what can i do?",
+      "spotify_uri": "spotify:track:4axVkUyc4ktP6ijW8AdQOK",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 508.72,
+      "end": 538.67
+    },
+    {
+      "artist": "ny oh",
+      "title": "be free",
+      "spotify_uri": "spotify:track:5ykk5qOMCLtgQabMEySJN3",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 772.42,
-      "end": 802.29
+      "start": 538.67,
+      "end": 568.54
     },
     {
-      "artist": "the last dinner party",
-      "title": "nothing matters",
-      "spotify_uri": "spotify:track:3p84R45PM75ngq8XRoe45o",
+      "artist": "ny oh",
+      "title": "aperture",
+      "spotify_uri": "spotify:track:70V9L7OvNpLHGKHr4VLSX7",
       "audio_source": "itunes",
-      "duration": 29.97,
-      "start": 802.29,
-      "end": 832.26
+      "duration": 29.75,
+      "start": 568.54,
+      "end": 598.29
     },
     {
-      "artist": "the last dinner party",
-      "title": "sinner",
-      "spotify_uri": "spotify:track:5IXA8J6Xugs507nAzwSa5F",
+      "artist": "ny oh",
+      "title": "conduit",
+      "spotify_uri": "spotify:track:6bd4gxtsG9Zu6KlB2iYJ4h",
       "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 832.26,
-      "end": 862.21
+      "duration": 29.91,
+      "start": 598.29,
+      "end": 628.2
     },
     {
-      "artist": "the last dinner party",
-      "title": "the feminine urge",
-      "spotify_uri": "spotify:track:1gRK6QnBOpNtEDjYKftzTc",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 862.21,
-      "end": 892.17
-    },
-    {
-      "artist": "the scratch",
-      "title": "another round",
-      "spotify_uri": "spotify:track:0ansLolwMuxl8ubtrFCfFe",
+      "artist": "qveen herby",
+      "title": "the fool",
+      "spotify_uri": "spotify:track:25t97abak6qFwNkYANONy9",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 892.17,
-      "end": 922.04
+      "start": 628.2,
+      "end": 658.07
     },
     {
-      "artist": "the scratch",
-      "title": "old dog",
-      "spotify_uri": "spotify:track:60GvW88cbZp7YRJvlfPEQy",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 922.04,
-      "end": 951.99
-    },
-    {
-      "artist": "yellowcard",
-      "title": "breathing",
-      "spotify_uri": "spotify:track:0DxN6Ywom8nnndyQXdSBPy",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 951.99,
-      "end": 981.94
-    },
-    {
-      "artist": "yellowcard",
-      "title": "way away",
-      "spotify_uri": "spotify:track:63IIUzd6eJBfCGIcF8MFnJ",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 981.94,
-      "end": 1011.89
-    },
-    {
-      "artist": "yellowcard",
-      "title": "only one",
-      "spotify_uri": "spotify:track:0gZp88SA5OcujHLDGkxtI3",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1011.89,
-      "end": 1041.84
-    },
-    {
-      "artist": "alan sparhawk",
-      "title": "not broken",
-      "spotify_uri": "spotify:track:0mQTDyVOHUVmgAU17SP8uR",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 1041.84,
-      "end": 1071.8
-    },
-    {
-      "artist": "alan sparhawk",
-      "title": "too high",
-      "spotify_uri": "spotify:track:7AAIHtjiMv1427lB4O6tS5",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1071.8,
-      "end": 1101.75
-    },
-    {
-      "artist": "chapterhouse",
-      "title": "mesmerise",
-      "spotify_uri": "spotify:track:7FapX1px1HQt88qhXKt3Qv",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 1101.75,
-      "end": 1131.71
-    },
-    {
-      "artist": "chapterhouse",
-      "title": "pearl - 12'' version",
-      "spotify_uri": "spotify:track:19QGKOXTqmk1ezHQpiUIwA",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 1131.71,
-      "end": 1161.67
-    },
-    {
-      "artist": "chapterhouse",
-      "title": "pearl - edit",
-      "spotify_uri": "spotify:track:0kCzcpTLcdi6ClEI2x28hb",
+      "artist": "qveen herby",
+      "title": "vitamins",
+      "spotify_uri": "spotify:track:5ysrRd2EiGlPoEVVHu9nGF",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 1161.67,
-      "end": 1191.54
+      "start": 658.07,
+      "end": 687.94
     },
     {
-      "artist": "circuit des yeux",
-      "title": "black fly",
-      "spotify_uri": "spotify:track:3AXcnekPeKzjol7iQlM0Xx",
-      "audio_source": "itunes",
-      "duration": 29.61,
-      "start": 1191.54,
-      "end": 1221.15
-    },
-    {
-      "artist": "circuit des yeux",
-      "title": "canopy of eden - edit",
-      "spotify_uri": "spotify:track:0gZHLsXzG7LFDpqjaa9aUN",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1221.15,
-      "end": 1251.1
-    },
-    {
-      "artist": "circuit des yeux",
-      "title": "dogma",
-      "spotify_uri": "spotify:track:5ovEfy9J8b9ip2PrEdsoo5",
+      "artist": "sad snack",
+      "title": "no children - ska",
+      "spotify_uri": "spotify:track:0DkfSl7YEz3iBJRhNfJAtf",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 1251.1,
-      "end": 1280.97
+      "start": 687.94,
+      "end": 717.81
     },
     {
-      "artist": "danny ali",
-      "title": "motion",
-      "spotify_uri": "spotify:track:292u5eQz70NaJcTvTNfe1b",
+      "artist": "sad snack",
+      "title": "rvivl!",
+      "spotify_uri": "spotify:track:3dsc23QXfmKChxKooxQNGi",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 717.81,
+      "end": 747.68
+    },
+    {
+      "artist": "vienna vienna",
+      "title": "vienna (everything’s fine)",
+      "spotify_uri": "spotify:track:4MZkA1wOfqYclYkQt7MUEd",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 1280.97,
-      "end": 1310.92
+      "start": 747.68,
+      "end": 777.63
     },
     {
-      "artist": "danny ali",
-      "title": "made it off rap!",
-      "spotify_uri": "spotify:track:2xEYPgOwnXTiMYIL2lBIKD",
+      "artist": "vienna vienna",
+      "title": "god save the queens",
+      "spotify_uri": "spotify:track:6LjiRz2t73c0vK68fC7sK9",
       "audio_source": "itunes",
-      "duration": 29.92,
-      "start": 1310.92,
-      "end": 1340.84
+      "duration": 29.66,
+      "start": 777.63,
+      "end": 807.29
+    },
+    {
+      "artist": "apocalyptica",
+      "title": "i don't care",
+      "spotify_uri": "spotify:track:1WxF4gMsFXnKCyh48CW2RI",
+      "audio_source": "itunes",
+      "duration": 28.36,
+      "start": 807.29,
+      "end": 835.65
+    },
+    {
+      "artist": "apocalyptica",
+      "title": "not strong enough",
+      "spotify_uri": "spotify:track:6BD9XMxKnjL6dCJbxXAPUa",
+      "audio_source": "itunes",
+      "duration": 29.57,
+      "start": 835.65,
+      "end": 865.22
+    },
+    {
+      "artist": "brūha",
+      "title": "locket",
+      "spotify_uri": "spotify:track:3yzDx4vrzo1TUT0a5OLSnf",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 865.22,
+      "end": 895.17
+    },
+    {
+      "artist": "brūha",
+      "title": "baby blue",
+      "spotify_uri": "spotify:track:0uY8JBGxNOr2ZIkJd8mpFp",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 895.17,
+      "end": 925.12
+    },
+    {
+      "artist": "cigarettes for breakfast",
+      "title": "numb the pain",
+      "spotify_uri": "spotify:track:1pks1G5EuxVsVxTCWRgHFN",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 925.12,
+      "end": 955.07
+    },
+    {
+      "artist": "cigarettes for breakfast",
+      "title": "drifting",
+      "spotify_uri": "spotify:track:4fGrf7LmKrBYtD0RTXF0eH",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 955.07,
+      "end": 985.02
+    },
+    {
+      "artist": "day hike",
+      "title": "big league chew",
+      "spotify_uri": "spotify:track:5gONsHUh8LLllpfUWcRpim",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 985.02,
+      "end": 1014.97
     }
   ]
 }
