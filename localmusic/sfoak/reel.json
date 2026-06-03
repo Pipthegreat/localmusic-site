@@ -1,8 +1,8 @@
 {
   "page_title": "SF + Oakland Live Music",
-  "total_duration": 1014.97,
-  "track_count": 34,
-  "built_at": 1780383777,
+  "total_duration": 1074.79,
+  "track_count": 36,
+  "built_at": 1780461495,
   "tracks": [
     {
       "artist": "bixby",
@@ -302,13 +302,31 @@
       "end": 985.02
     },
     {
-      "artist": "day hike",
-      "title": "big league chew",
-      "spotify_uri": "spotify:track:5gONsHUh8LLllpfUWcRpim",
+      "artist": "dead love triangle",
+      "title": "haunting pa",
+      "spotify_uri": "spotify:track:1PxfJEirwHgvGO0rQYMPPx",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 985.02,
+      "end": 1014.89
+    },
+    {
+      "artist": "hazy portraits",
+      "title": "poplar",
+      "spotify_uri": "spotify:track:1BDN0ATvVyZyZmad0mihPp",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 985.02,
-      "end": 1014.97
+      "start": 1014.89,
+      "end": 1044.84
+    },
+    {
+      "artist": "hazy portraits",
+      "title": "skins",
+      "spotify_uri": "spotify:track:3CZmV3BUkXGeA0jg6A6rmi",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1044.84,
+      "end": 1074.79
     }
   ]
 }
