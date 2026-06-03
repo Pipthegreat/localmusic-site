@@ -1344,7 +1344,7 @@ applyFilter();
 // Each resolved artist appears as a new playable row.
 // =====================================================================
 const WORKER_URL = 'https://localmusic-search.mr-raleigh-j.workers.dev';
-const UNRESOLVED_EDM = [{"artist": "Todd Terje (DJ Set", "venue": "Public Works", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Late Night Clubbing #061", "venue": "TBA", "city": "San Francisco", "date": "2026-07-26", "date_human": "Sun Jul 26"}, {"artist": "Just Jovani", "venue": "Halcyon", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Underground Trance Rave V5", "venue": "Qbar", "city": "San Francisco", "date": "2026-06-11", "date_human": "Thu Jun 11"}, {"artist": "Mandy", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-06-20", "date_human": "Sat Jun 20"}, {"artist": "Late Night Clubbing #063", "venue": "TBA", "city": "San Francisco", "date": "2026-08-02", "date_human": "Sun Aug 02"}, {"artist": "DJ Bunny Bexxx", "venue": "TBA", "city": "Oakland", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Late Night Clubbing #055", "venue": "TBA", "city": "San Francisco", "date": "2026-07-05", "date_human": "Sun Jul 05"}, {"artist": "Late Night Clubbing #054", "venue": "TBA", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "A Queer Dance Ritual", "venue": "DACHA Kitchen and Bar", "city": "San Francisco", "date": "2026-06-12", "date_human": "Fri Jun 12"}, {"artist": "Late Night Clubbing #059", "venue": "TBA", "city": "San Francisco", "date": "2026-07-19", "date_human": "Sun Jul 19"}, {"artist": "Horse Meat Disco: Stardella", "venue": "The Castro Theatre", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Noot", "venue": "Fluid 510", "city": "Oakland", "date": "2026-06-05", "date_human": "Fri Jun 05"}, {"artist": "Late Night Clubbing #062", "venue": "TBA", "city": "San Francisco", "date": "2026-08-01", "date_human": "Sat Aug 01"}, {"artist": "Stormy Deep Nights - Night01", "venue": "Mr. Mahjong's", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Late Night Clubbing #053", "venue": "TBA", "city": "San Francisco", "date": "2026-06-28", "date_human": "Sun Jun 28"}, {"artist": "Giuliano", "venue": "Q Bar", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Oksional First Thursdays: Amatric", "venue": "Mothership Bar", "city": "San Francisco", "date": "2026-07-02", "date_human": "Thu Jul 02"}, {"artist": "Rebellion", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Stardella", "venue": "The Castro Theatre", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "One Year Of DJs Anonymous", "venue": "Madarae", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Late Night Clubbing #058", "venue": "TBA", "city": "San Francisco", "date": "2026-07-18", "date_human": "Sat Jul 18"}, {"artist": "Late Night Clubbing #065", "venue": "TBA", "city": "San Francisco", "date": "2026-08-09", "date_human": "Sun Aug 09"}, {"artist": "Late Night Clubbing #049", "venue": "TBA", "city": "San Francisco", "date": "2026-06-14", "date_human": "Sun Jun 14"}, {"artist": "Coffintexts b2b Jonny From Space", "venue": "F8 1192 Folsom", "city": "San Francisco", "date": "2026-08-07", "date_human": "Fri Aug 07"}, {"artist": "Alphabet Mafia Night! Majick", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Late Night Clubbing #048", "venue": "TBA", "city": "San Francisco", "date": "2026-06-13", "date_human": "Sat Jun 13"}, {"artist": "Zedd Pride Weekend Block Party", "venue": "The Midway", "city": "San Francisco", "date": "2026-06-28", "date_human": "Sun Jun 28"}, {"artist": "Uya Edition - Paul Goodyear", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-07-25", "date_human": "Sat Jul 25"}, {"artist": "After Life: Rebellion", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Queermom", "venue": "TBA", "city": "Oakland", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "GIRLS ON DECK", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Oksional First Thursdays: Plack Panda", "venue": "Mothership Bar", "city": "San Francisco", "date": "2026-06-04", "date_human": "Thu Jun 04"}, {"artist": "DJ Kyon", "venue": "Qbar", "city": "San Francisco", "date": "2026-06-11", "date_human": "Thu Jun 11"}, {"artist": "Zuri Alexa", "venue": "Arcana", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Late Night Clubbing #046", "venue": "TBA", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Galvanize", "venue": "Q Bar", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Holy Prom: A Queer Dance Ritual", "venue": "DACHA Kitchen and Bar", "city": "San Francisco", "date": "2026-06-12", "date_human": "Fri Jun 12"}, {"artist": "Pride - Sequoixa", "venue": "Q Bar", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Outside Lands", "venue": "Golden Gate Park", "city": "San Francisco", "date": "2026-08-07", "date_human": "Fri Aug 07"}, {"artist": "Late Night Clubbing #056", "venue": "TBA", "city": "San Francisco", "date": "2026-07-11", "date_human": "Sat Jul 11"}, {"artist": "Late Night Clubbing #047", "venue": "TBA", "city": "San Francisco", "date": "2026-06-07", "date_human": "Sun Jun 07"}, {"artist": "Discnogirl", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Jordan Michael b2b Sir James", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Afakasi Papi", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Starr Noir", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Open Aux", "venue": "Public Works", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Laplayah", "venue": "Arcana", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Plack Panda", "venue": "Mothership Bar", "city": "San Francisco", "date": "2026-06-04", "date_human": "Thu Jun 04"}, {"artist": "Connect: Jsmn", "venue": "F8 1192 Folsom", "city": "San Francisco", "date": "2026-06-04", "date_human": "Thu Jun 04"}, {"artist": "Estellita", "venue": "TBA", "city": "Oakland", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Back To Baysics", "venue": "Embarcadero Plaza", "city": "San Francisco", "date": "2026-06-13", "date_human": "Sat Jun 13"}, {"artist": "Aki", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-07-25", "date_human": "Sat Jul 25"}, {"artist": "Sndr", "venue": "Public Works", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Mees Salome", "venue": "The Great Northern", "city": "San Francisco", "date": "2026-07-31", "date_human": "Fri Jul 31"}, {"artist": "Slurrp: Pride - Sequoixa", "venue": "Q Bar", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Cristoph b2b Rebuke", "venue": "The MIdway", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Nicole Cayenne", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-05", "date_human": "Fri Jun 05"}, {"artist": "Chellzz", "venue": "Audio", "city": "San Francisco", "date": "2026-07-31", "date_human": "Fri Jul 31"}, {"artist": "Owell", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-27", "date_human": "Sat Jun 27"}, {"artist": "Padre Bless", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-27", "date_human": "Sat Jun 27"}, {"artist": "felipe d", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Late Night Clubbing #060", "venue": "TBA", "city": "San Francisco", "date": "2026-07-25", "date_human": "Sat Jul 25"}, {"artist": "Late Night Clubbing #064", "venue": "TBA", "city": "San Francisco", "date": "2026-08-08", "date_human": "Sat Aug 08"}, {"artist": "Olly", "venue": "Fluid 510", "city": "Oakland", "date": "2026-06-05", "date_human": "Fri Jun 05"}, {"artist": "Salenie Beanie", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-06-12", "date_human": "Fri Jun 12"}, {"artist": "Elderbrook Day Party", "venue": "Gold Bar Treasure Island", "city": "San Francisco", "date": "2026-07-03", "date_human": "Fri Jul 03"}, {"artist": "Mostly Cloudy Pride: Amarji King", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Vtss A/V Tour", "venue": "Regency Ballroom", "city": "San Francisco", "date": "2026-06-13", "date_human": "Sat Jun 13"}, {"artist": "Colorize: Praana", "venue": "The Great Northern", "city": "San Francisco", "date": "2026-07-31", "date_human": "Fri Jul 31"}, {"artist": "Sinego (Timbales DJ Set", "venue": "Madarae", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Hk", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-20", "date_human": "Sat Jun 20"}, {"artist": "Ali Farahani", "venue": "Via Hotel Rooftop", "city": "San Francisco", "date": "2026-07-19", "date_human": "Sun Jul 19"}, {"artist": "Jubilee", "venue": "F8 1192 Folsom", "city": "San Francisco", "date": "2026-08-07", "date_human": "Fri Aug 07"}, {"artist": "Late Night Clubbing #057", "venue": "TBA", "city": "San Francisco", "date": "2026-07-12", "date_human": "Sun Jul 12"}, {"artist": "Xavier b2b Piste", "venue": "Audio", "city": "San Francisco", "date": "2026-07-31", "date_human": "Fri Jul 31"}, {"artist": "Hard Reset's Pride Month Kickoff", "venue": "The Cafe", "city": "San Francisco", "date": "2026-06-05", "date_human": "Fri Jun 05"}, {"artist": "Stellaria", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-13", "date_human": "Sat Jun 13"}, {"artist": "Chronique", "venue": "Fluid 510", "city": "Oakland", "date": "2026-06-05", "date_human": "Fri Jun 05"}, {"artist": "Amarji King", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Jawba", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-13", "date_human": "Sat Jun 13"}, {"artist": "Late Night Clubbing #050", "venue": "TBA", "city": "San Francisco", "date": "2026-06-20", "date_human": "Sat Jun 20"}, {"artist": "Jim", "venue": "Public Works", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Sorry For Party Rocking", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-06-12", "date_human": "Fri Jun 12"}, {"artist": "Pink Block Pride 2026", "venue": "The Great Northern", "city": "San Francisco", "date": "2026-06-27", "date_human": "Sat Jun 27"}, {"artist": "Late Night Clubbing #052", "venue": "TBA", "city": "San Francisco", "date": "2026-06-27", "date_human": "Sat Jun 27"}, {"artist": "Drwski", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-20", "date_human": "Sat Jun 20"}, {"artist": "DJ B Luke", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Olrazzledazzlee", "venue": "Public Works", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Amatric", "venue": "Mothership Bar", "city": "San Francisco", "date": "2026-07-02", "date_human": "Thu Jul 02"}, {"artist": "Just Another Bitch", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Late Night Clubbing #051", "venue": "TBA", "city": "San Francisco", "date": "2026-06-21", "date_human": "Sun Jun 21"}, {"artist": "Sunset Rooftop Party", "venue": "Via Hotel Rooftop", "city": "San Francisco", "date": "2026-07-19", "date_human": "Sun Jul 19"}];
+const UNRESOLVED_EDM = [{"artist": "Padre Bless", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-27", "date_human": "Sat Jun 27"}, {"artist": "Zuri Alexa", "venue": "Arcana", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Late Night Clubbing #056", "venue": "TBA", "city": "San Francisco", "date": "2026-07-11", "date_human": "Sat Jul 11"}, {"artist": "Late Night Clubbing #048", "venue": "TBA", "city": "San Francisco", "date": "2026-06-13", "date_human": "Sat Jun 13"}, {"artist": "Late Night Clubbing #049", "venue": "TBA", "city": "San Francisco", "date": "2026-06-14", "date_human": "Sun Jun 14"}, {"artist": "Uya Edition - Paul Goodyear", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-07-25", "date_human": "Sat Jul 25"}, {"artist": "Colorize: Praana", "venue": "The Great Northern", "city": "San Francisco", "date": "2026-07-31", "date_human": "Fri Jul 31"}, {"artist": "Amarji King", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Coffintexts b2b Jonny From Space", "venue": "F8 1192 Folsom", "city": "San Francisco", "date": "2026-08-07", "date_human": "Fri Aug 07"}, {"artist": "Mostly Cloudy Pride: Amarji King", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Todd Terje (DJ Set", "venue": "Public Works", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "After Life: Rebellion", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Just Jovani", "venue": "Halcyon", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Pink Block Pride 2026", "venue": "The Great Northern", "city": "San Francisco", "date": "2026-06-27", "date_human": "Sat Jun 27"}, {"artist": "Jordan Michael b2b Sir James", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Vtss A/V Tour", "venue": "Regency Ballroom", "city": "San Francisco", "date": "2026-06-13", "date_human": "Sat Jun 13"}, {"artist": "Stellaria", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-13", "date_human": "Sat Jun 13"}, {"artist": "Mandy", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-06-20", "date_human": "Sat Jun 20"}, {"artist": "DJ B Luke", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Late Night Clubbing #051", "venue": "TBA", "city": "San Francisco", "date": "2026-06-21", "date_human": "Sun Jun 21"}, {"artist": "Sndr", "venue": "Public Works", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Queermom", "venue": "TBA", "city": "Oakland", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Late Night Clubbing #065", "venue": "TBA", "city": "San Francisco", "date": "2026-08-09", "date_human": "Sun Aug 09"}, {"artist": "Late Night Clubbing #060", "venue": "TBA", "city": "San Francisco", "date": "2026-07-25", "date_human": "Sat Jul 25"}, {"artist": "Jawba", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-13", "date_human": "Sat Jun 13"}, {"artist": "Late Night Clubbing #053", "venue": "TBA", "city": "San Francisco", "date": "2026-06-28", "date_human": "Sun Jun 28"}, {"artist": "Late Night Clubbing #054", "venue": "TBA", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Giuliano", "venue": "Q Bar", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Olrazzledazzlee", "venue": "Public Works", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Chellzz", "venue": "Audio", "city": "San Francisco", "date": "2026-07-31", "date_human": "Fri Jul 31"}, {"artist": "Afakasi Papi", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Underground Trance Rave V5", "venue": "Qbar", "city": "San Francisco", "date": "2026-06-11", "date_human": "Thu Jun 11"}, {"artist": "Late Night Clubbing #055", "venue": "TBA", "city": "San Francisco", "date": "2026-07-05", "date_human": "Sun Jul 05"}, {"artist": "Galvanize", "venue": "Q Bar", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Late Night Clubbing #052", "venue": "TBA", "city": "San Francisco", "date": "2026-06-27", "date_human": "Sat Jun 27"}, {"artist": "Late Night Clubbing #050", "venue": "TBA", "city": "San Francisco", "date": "2026-06-20", "date_human": "Sat Jun 20"}, {"artist": "Chronique", "venue": "Fluid 510", "city": "Oakland", "date": "2026-06-05", "date_human": "Fri Jun 05"}, {"artist": "Jim", "venue": "Public Works", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Hard Reset's Pride Month Kickoff", "venue": "The Cafe", "city": "San Francisco", "date": "2026-06-05", "date_human": "Fri Jun 05"}, {"artist": "Amatric", "venue": "Mothership Bar", "city": "San Francisco", "date": "2026-07-02", "date_human": "Thu Jul 02"}, {"artist": "Owell", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-27", "date_human": "Sat Jun 27"}, {"artist": "GIRLS ON DECK", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "A Queer Dance Ritual", "venue": "DACHA Kitchen and Bar", "city": "San Francisco", "date": "2026-06-12", "date_human": "Fri Jun 12"}, {"artist": "Salenie Beanie", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-06-12", "date_human": "Fri Jun 12"}, {"artist": "Noot", "venue": "Fluid 510", "city": "Oakland", "date": "2026-06-05", "date_human": "Fri Jun 05"}, {"artist": "DJ Kyon", "venue": "Qbar", "city": "San Francisco", "date": "2026-06-11", "date_human": "Thu Jun 11"}, {"artist": "One Year Of DJs Anonymous", "venue": "Madarae", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Starr Noir", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Oksional First Thursdays: Amatric", "venue": "Mothership Bar", "city": "San Francisco", "date": "2026-07-02", "date_human": "Thu Jul 02"}, {"artist": "Back To Baysics", "venue": "Embarcadero Plaza", "city": "San Francisco", "date": "2026-06-13", "date_human": "Sat Jun 13"}, {"artist": "Pride - Sequoixa", "venue": "Q Bar", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Sinego (Timbales DJ Set", "venue": "Madarae", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Jubilee", "venue": "F8 1192 Folsom", "city": "San Francisco", "date": "2026-08-07", "date_human": "Fri Aug 07"}, {"artist": "DJ Bunny Bexxx", "venue": "TBA", "city": "Oakland", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Ali Farahani", "venue": "Via Hotel Rooftop", "city": "San Francisco", "date": "2026-07-19", "date_human": "Sun Jul 19"}, {"artist": "Late Night Clubbing #062", "venue": "TBA", "city": "San Francisco", "date": "2026-08-01", "date_human": "Sat Aug 01"}, {"artist": "Late Night Clubbing #046", "venue": "TBA", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Xavier b2b Piste", "venue": "Audio", "city": "San Francisco", "date": "2026-07-31", "date_human": "Fri Jul 31"}, {"artist": "Late Night Clubbing #059", "venue": "TBA", "city": "San Francisco", "date": "2026-07-19", "date_human": "Sun Jul 19"}, {"artist": "Oksional First Thursdays: Plack Panda", "venue": "Mothership Bar", "city": "San Francisco", "date": "2026-06-04", "date_human": "Thu Jun 04"}, {"artist": "Zedd Pride Weekend Block Party", "venue": "The Midway", "city": "San Francisco", "date": "2026-06-28", "date_human": "Sun Jun 28"}, {"artist": "Cristoph b2b Rebuke", "venue": "The MIdway", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Discnogirl", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Olly", "venue": "Fluid 510", "city": "Oakland", "date": "2026-06-05", "date_human": "Fri Jun 05"}, {"artist": "Plack Panda", "venue": "Mothership Bar", "city": "San Francisco", "date": "2026-06-04", "date_human": "Thu Jun 04"}, {"artist": "Elderbrook Day Party", "venue": "Gold Bar Treasure Island", "city": "San Francisco", "date": "2026-07-03", "date_human": "Fri Jul 03"}, {"artist": "Estellita", "venue": "TBA", "city": "Oakland", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Late Night Clubbing #061", "venue": "TBA", "city": "San Francisco", "date": "2026-07-26", "date_human": "Sun Jul 26"}, {"artist": "Aki", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-07-25", "date_human": "Sat Jul 25"}, {"artist": "Rebellion", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Open Aux", "venue": "Public Works", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Sunset Rooftop Party", "venue": "Via Hotel Rooftop", "city": "San Francisco", "date": "2026-07-19", "date_human": "Sun Jul 19"}, {"artist": "Outside Lands", "venue": "Golden Gate Park", "city": "San Francisco", "date": "2026-08-07", "date_human": "Fri Aug 07"}, {"artist": "Mees Salome", "venue": "The Great Northern", "city": "San Francisco", "date": "2026-07-31", "date_human": "Fri Jul 31"}, {"artist": "felipe d", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Laplayah", "venue": "Arcana", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Late Night Clubbing #058", "venue": "TBA", "city": "San Francisco", "date": "2026-07-18", "date_human": "Sat Jul 18"}, {"artist": "Late Night Clubbing #047", "venue": "TBA", "city": "San Francisco", "date": "2026-06-07", "date_human": "Sun Jun 07"}, {"artist": "Slurrp: Pride - Sequoixa", "venue": "Q Bar", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Alphabet Mafia Night! Majick", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Late Night Clubbing #063", "venue": "TBA", "city": "San Francisco", "date": "2026-08-02", "date_human": "Sun Aug 02"}, {"artist": "Late Night Clubbing #057", "venue": "TBA", "city": "San Francisco", "date": "2026-07-12", "date_human": "Sun Jul 12"}, {"artist": "Hk", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-20", "date_human": "Sat Jun 20"}, {"artist": "Connect: Jsmn", "venue": "F8 1192 Folsom", "city": "San Francisco", "date": "2026-06-04", "date_human": "Thu Jun 04"}, {"artist": "Stardella", "venue": "The Castro Theatre", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Holy Prom: A Queer Dance Ritual", "venue": "DACHA Kitchen and Bar", "city": "San Francisco", "date": "2026-06-12", "date_human": "Fri Jun 12"}, {"artist": "Drwski", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-20", "date_human": "Sat Jun 20"}, {"artist": "Just Another Bitch", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Late Night Clubbing #064", "venue": "TBA", "city": "San Francisco", "date": "2026-08-08", "date_human": "Sat Aug 08"}, {"artist": "Sorry For Party Rocking", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-06-12", "date_human": "Fri Jun 12"}, {"artist": "Horse Meat Disco: Stardella", "venue": "The Castro Theatre", "city": "San Francisco", "date": "2026-06-06", "date_human": "Sat Jun 06"}, {"artist": "Nicole Cayenne", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-05", "date_human": "Fri Jun 05"}, {"artist": "Stormy Deep Nights - Night01", "venue": "Mr. Mahjong's", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}];
 const LIVE_LS_KEY = 'sfo-live-';      // localStorage cache for live results
 let edmLoadTriggered = false;
 
@@ -3048,6 +3048,216 @@ _syncWakeLock = function() {
 };
 
 _setupMediaSession();
+
+// ============================================================
+// DIAG MODE — auto-activates when URL contains ?diag=1 (or ?diag, or
+// #diag). Adds a corner overlay showing live player state and logs every
+// state transition / function call / Spotify event to the DevTools
+// console with [diag] tags so they're easy to filter.
+//
+// Purpose: when the user says "the player is broken right now," they
+// open the page with ?diag=1, hit play, and DevTools shows EXACTLY what
+// the player is doing. No extension needed, no MCP, no install. Just a
+// URL query param.
+//
+// Things this catches that headless probes can't:
+//   - Spotify-Connect-conflict "play stalled" warnings firing
+//   - playback_update events emitting position but never advancing
+//     (which would mean "iframe says it's playing but audio is dead")
+//   - Auto-advance / Safety Net A/B firing when they shouldn't
+//   - Visibility handoff misbehaving in real Chrome (real throttling)
+//   - Reel audio element actually emitting samples (via AnalyserNode RMS)
+// ============================================================
+const _diagOn = (() => {
+  try {
+    const u = new URL(location.href);
+    if (u.searchParams.has('diag')) return true;
+    if (location.hash && location.hash.toLowerCase().includes('diag')) return true;
+  } catch (e) {}
+  return false;
+})();
+if (_diagOn) {
+  console.log('%c[diag] sfoak debug mode ON — open DevTools console + look at the bottom-right overlay.', 'color:#0c8;font-weight:bold');
+
+  // --- 1. Overlay: live state, bottom-right, semi-transparent ---
+  const ov = document.createElement('div');
+  ov.id = 'diag-overlay';
+  ov.style.cssText = 'position:fixed;right:8px;bottom:8px;z-index:9999;background:rgba(15,18,24,0.92);color:#cfd6df;font:11px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px 10px;border:1px solid #2a313b;border-radius:6px;max-width:380px;min-width:280px;pointer-events:auto;user-select:text';
+  ov.innerHTML = '<div style="font-weight:700;color:#7fb1d8;margin-bottom:4px">sfoak diag</div><div id="diag-body">booting…</div><div id="diag-counters" style="margin-top:6px;color:#95a0b0;font-size:10px"></div>';
+  document.body.appendChild(ov);
+
+  // --- 2. Counters: every interesting function gets a tally ---
+  const counters = {
+    skipNext: 0, skipPrev: 0, loadAndPlayRow: 0,
+    sdk_loadUri: 0, sdk_play: 0, sdk_resume: 0, sdk_seek: 0,
+    sdk_playFromStart: 0, sdk_pause: 0,
+    autoAdvance: 0, safetyNetA: 0, safetyNetB: 0,
+    handoffStart: 0, handoffStop: 0,
+    visHide: 0, visShow: 0,
+    playbackUpdate: 0,
+  };
+  function bump(k) { counters[k] = (counters[k] || 0) + 1; }
+
+  // --- 3. Wrap player-level functions ---
+  function wrap(name, label, beforeBump) {
+    const orig = window[name];
+    if (typeof orig !== 'function') return;
+    window[name] = function(...args) {
+      bump(beforeBump || name);
+      const argDesc = args.map(a => a && a.dataset ? `<${a.tagName}.${a.dataset.artist||'?'}>` : String(a).slice(0, 60)).join(', ');
+      console.log(`%c[diag fn]%c ${label}(${argDesc})  | uri=${currentUri && currentUri.split(':').pop().slice(0,10)} pos=${currentPositionMs}/${lastDurationMs} paused=${isPaused}`,
+                  'color:#f2d56c;font-weight:bold', 'color:#cfd6df');
+      return orig.apply(this, args);
+    };
+  }
+  wrap('skipNext', 'skipNext');
+  wrap('skipPrev', 'skipPrev');
+  wrap('loadAndPlayRow', 'loadAndPlayRow');
+
+  // --- 4. Wrap Spotify iframe controller methods ---
+  // The controller is created asynchronously; wrap on first use, then
+  // again later if it gets recreated (e.g., new iframe instance).
+  const _diagWrapController = () => {
+    if (typeof embedController === 'undefined' || !embedController) return;
+    if (embedController.__diagWrapped) return;
+    embedController.__diagWrapped = true;
+    ['loadUri', 'play', 'resume', 'pause', 'seek', 'playFromStart', 'restart'].forEach(name => {
+      const orig = embedController[name];
+      if (typeof orig !== 'function') return;
+      embedController[name] = function(...args) {
+        bump('sdk_' + name);
+        console.log(`%c[diag sdk]%c ${name}(${args.map(String).join(', ').slice(0,80)})  | pos=${currentPositionMs}/${lastDurationMs} paused=${isPaused}`,
+                    'color:#d8a47f;font-weight:bold', 'color:#cfd6df');
+        return orig.apply(this, args);
+      };
+    });
+    console.log('[diag] wrapped embedController methods');
+  };
+  const _diagCtrlPoll = setInterval(() => {
+    _diagWrapController();
+    if (typeof embedController !== 'undefined' && embedController && embedController.__diagWrapped) {
+      clearInterval(_diagCtrlPoll);
+    }
+  }, 250);
+
+  // --- 5. State change observer (every 200ms): log transitions only ---
+  let _diagPrev = null;
+  const _diagFields = ['currentUri', 'currentPositionMs', 'isPaused', 'lastDurationMs', 'lastEndedUri'];
+  setInterval(() => {
+    const cur = {
+      currentUri: typeof currentUri !== 'undefined' ? currentUri : null,
+      currentPositionMs: typeof currentPositionMs !== 'undefined' ? currentPositionMs : null,
+      isPaused: typeof isPaused !== 'undefined' ? isPaused : null,
+      lastDurationMs: typeof lastDurationMs !== 'undefined' ? lastDurationMs : null,
+      lastEndedUri: typeof lastEndedUri !== 'undefined' ? lastEndedUri : null,
+      artist: currentRow?.dataset?.artist,
+      handoffActive: typeof desktopHandoff !== 'undefined' ? desktopHandoff.active : null,
+      hidden: document.hidden,
+    };
+    if (cur.currentUri !== _diagPrev?.currentUri && _diagPrev?.currentUri) {
+      // URI transition — log as a discrete event with context.
+      console.log(`%c[diag uri]%c ${(_diagPrev.currentUri||'').split(':').pop()} → ${(cur.currentUri||'').split(':').pop()}  (${cur.artist})  pos was=${_diagPrev.currentPositionMs}/${_diagPrev.lastDurationMs}`,
+                  'color:#9c9cf0;font-weight:bold', 'color:#cfd6df');
+    }
+    if (cur.isPaused !== _diagPrev?.isPaused && _diagPrev !== null) {
+      console.log(`%c[diag paused]%c ${_diagPrev.isPaused} → ${cur.isPaused}  uri=${(cur.currentUri||'').split(':').pop().slice(0,10)} pos=${cur.currentPositionMs}`,
+                  'color:#d87fc8', 'color:#cfd6df');
+    }
+    _diagPrev = cur;
+    // Update overlay body.
+    const body = document.getElementById('diag-body');
+    if (body) {
+      const uriShort = (cur.currentUri||'(none)').split(':').pop().slice(0,12);
+      body.innerHTML = `<b>${cur.artist || '—'}</b> · ${uriShort}<br>` +
+        `pos: <b>${cur.currentPositionMs ?? '?'}</b> / ${cur.lastDurationMs ?? '?'}ms` +
+        ` · paused=<b>${cur.isPaused}</b><br>` +
+        `hidden=${cur.hidden} · handoff=<b>${cur.handoffActive}</b>` +
+        (cur.lastEndedUri ? `<br>ended: ${cur.lastEndedUri.split(':').pop().slice(0,10)}` : '');
+    }
+    const cBody = document.getElementById('diag-counters');
+    if (cBody) {
+      const compact = Object.entries(counters).filter(([_,v])=>v>0)
+        .map(([k,v])=>`${k}=${v}`).join(' ');
+      cBody.textContent = compact || '(no calls yet)';
+    }
+  }, 200);
+
+  // --- 6. Real reel audio output meter ---
+  // AnalyserNode on the parent-page <audio>. RMS > 0 means actual audio
+  // samples are flowing through Web Audio (proves reel handoff is
+  // playing real bytes, not just changing state).
+  const reelAudio = document.getElementById('reel-audio');
+  if (reelAudio) {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const src = ctx.createMediaElementSource(reelAudio);
+      const an = ctx.createAnalyser();
+      an.fftSize = 256;
+      src.connect(an);
+      an.connect(ctx.destination);
+      const buf = new Uint8Array(an.frequencyBinCount);
+      setInterval(() => {
+        an.getByteFrequencyData(buf);
+        const sum = buf.reduce((a,b) => a+b, 0);
+        if (sum > 0 && !reelAudio.paused) {
+          // Only log when actually emitting (not on every tick).
+          const cBody = document.getElementById('diag-counters');
+          if (cBody && !cBody.dataset.reelHot) {
+            cBody.dataset.reelHot = '1';
+            console.log('%c[diag audio]%c reel <audio> is emitting real samples (RMS sum=' + sum + ')',
+                        'color:#80ff80', 'color:#cfd6df');
+          }
+        } else if (cBody?.dataset?.reelHot) {
+          delete cBody.dataset.reelHot;
+        }
+      }, 500);
+      console.log('[diag] reel <audio> AnalyserNode attached — will report when real samples flow');
+    } catch (e) {
+      console.warn('[diag] failed to attach AnalyserNode:', e);
+    }
+  }
+
+  // --- 7. Visibility + handoff events ---
+  document.addEventListener('visibilitychange', () => {
+    bump(document.hidden ? 'visHide' : 'visShow');
+    console.log(`%c[diag vis]%c hidden=${document.hidden}  uri=${(currentUri||'').split(':').pop().slice(0,10)} pos=${currentPositionMs}`,
+                'color:#80c4d8;font-weight:bold', 'color:#cfd6df');
+  });
+
+  // --- 8. Audio-fetch sniffer: PerformanceObserver catches every
+  //     Spotify CDN audio resource the iframe fetches. Proves real audio
+  //     bytes are being downloaded (vs. iframe faking play state). ---
+  try {
+    const po = new PerformanceObserver((list) => {
+      for (const e of list.getEntries()) {
+        if (/p\.scdn\.co\/mp3-preview|audio-akp|audio-fa|spotifycdn.*audio/i.test(e.name)) {
+          console.log(`%c[diag net]%c audio fetch: ${e.name.slice(0, 100)}  size~${Math.round((e.transferSize||0)/1024)}kB`,
+                      'color:#a0f0a0', 'color:#cfd6df');
+        }
+      }
+    });
+    po.observe({type: 'resource', buffered: true});
+    console.log('[diag] PerformanceObserver attached for Spotify audio CDN');
+  } catch (e) {
+    console.warn('[diag] PerformanceObserver failed:', e);
+  }
+
+  // --- 9. Helper: window.diag — useful inspection accessors ---
+  window.diag = {
+    state: () => ({
+      currentUri, currentPositionMs, lastDurationMs, isPaused, lastEndedUri,
+      artist: currentRow?.dataset?.artist,
+      handoffActive: typeof desktopHandoff !== 'undefined' ? desktopHandoff.active : null,
+      hidden: document.hidden,
+    }),
+    counters: () => Object.fromEntries(Object.entries(counters).filter(([_,v]) => v > 0)),
+    reelInfo: () => {
+      const a = document.getElementById('reel-audio');
+      return a ? {src: a.src, paused: a.paused, currentTime: a.currentTime, duration: a.duration, volume: a.volume, muted: a.muted} : null;
+    },
+  };
+  console.log('%c[diag] window.diag = { state(), counters(), reelInfo() } — call any of these in console for snapshots','color:#0c8');
+}
 
 </script>
 </body>
