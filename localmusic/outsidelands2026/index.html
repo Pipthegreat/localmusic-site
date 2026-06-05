@@ -3,131 +3,560 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Outside Lands 2026</title>
+<title>Outside Lands 2026 — Lineup by Day</title>
+<meta name="description" content="Browse the Outside Lands 2026 lineup with one-click Spotify previews. Aug 7–9 at Golden Gate Park.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,ital@9..144,400..600,0;9..144,400..600,1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root {
---slate-300: oklch(82% 0.048 145.0);
-  --slate-500: oklch(52% 0.080 145.0);
-  --slate-700: oklch(37% 0.080 145.0);
-  --slate-900: oklch(25% 0.068 145.0);
-  --accent:      oklch(70% 0.080 60.0);
-  --accent-soft: oklch(78% 0.064 60.0);
-  --fg-default: oklch(96% 0.03 145.0);
-  --fg-muted:   oklch(82% 0.04 145.0);
+  /* Outside Lands palette — deep pine canopy + warm redwood-bark amber.
+     Per configs/outsidelands2026.yaml: hue 145 dominant, hue 60 accent,
+     chroma capped at 0.080 so green doesn't slide into institutional sage. */
+  --pine-100: oklch(92% 0.030 145);
+  --pine-300: oklch(82% 0.048 145);
+  --pine-500: oklch(52% 0.080 145);
+  --pine-600: oklch(44% 0.080 145);
+  --pine-700: oklch(37% 0.075 145);
+  --pine-800: oklch(31% 0.068 145);
+  --pine-850: oklch(28% 0.065 145);
+  --pine-900: oklch(25% 0.060 145);
+  --pine-950: oklch(20% 0.055 145);
+  /* Redwood-bark amber — single accent, earns every use */
+  --bark-300: oklch(82% 0.072 60);
+  --bark-400: oklch(75% 0.080 60);
+  --bark-500: oklch(68% 0.080 60);
+  --bark-600: oklch(58% 0.072 60);
+  --bark-glow: oklch(72% 0.090 60 / 0.40);
+  --bark-wash: oklch(68% 0.080 60 / 0.10);
+  /* Cream/ivory text — warm, never pure white */
+  --ivory:        oklch(96% 0.028 90);
+  --ivory-strong: oklch(98% 0.020 85);
+  --ivory-muted:  oklch(82% 0.040 90);
+  --ivory-subtle: oklch(66% 0.045 80);
+  --bg-canvas:    var(--pine-900);
+  --bg-elevated:  var(--pine-850);
+  --bg-row:       var(--pine-800);
+  --bg-row-hover: var(--pine-700);
+  --bg-row-active: oklch(34% 0.080 60);   /* bark wash on active row */
+  --fg-default: var(--ivory);
+  --fg-strong:  var(--ivory-strong);
+  --fg-muted:   var(--ivory-muted);
+  --fg-subtle:  var(--ivory-subtle);
+  --border-subtle: var(--pine-800);
+  --border-default: var(--pine-700);
+  --border-strong: var(--pine-600);
+  --link: var(--bark-400);
+  --link-hover: var(--bark-300);
   --serif: 'Fraunces', Georgia, serif;
   --sans:  'Inter', system-ui, sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, monospace;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
-html {
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  overflow-x: hidden;
-}
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: hidden; }
 html, body { margin: 0; padding: 0; }
 body {
-  font: 400 16px/1.55 var(--sans);
+  background: var(--bg-canvas);
   color: var(--fg-default);
-  background: var(--slate-900);
+  font: 400 15px/1.55 var(--sans);
+  -webkit-font-smoothing: antialiased;
   background-image:
-    radial-gradient(ellipse 80% 45% at 70% -10%, oklch(60% 0.080 145.0 / 0.30), transparent 65%),
-    radial-gradient(ellipse 60% 35% at 8% 4%, oklch(60% 0.080 60.0 / 0.18), transparent 65%),
-    radial-gradient(ellipse 90% 35% at 50% 105%, oklch(28% 0.068 145.0 / 0.45), transparent 70%);
+    radial-gradient(ellipse 80% 45% at 70% -10%, oklch(60% 0.085 145 / 0.30), transparent 65%),
+    radial-gradient(ellipse 60% 35% at 8% 4%, oklch(70% 0.090 60 / 0.20), transparent 65%),
+    radial-gradient(ellipse 90% 35% at 50% 110%, oklch(28% 0.070 145 / 0.55), transparent 70%);
   background-attachment: fixed;
   min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
+  padding-bottom: 130px;
 }
-.shell { max-width: 880px; margin: 0 auto; padding: 56px 24px 80px; }
-.eyebrow {
-  font: 500 11px/1 'JetBrains Mono', ui-monospace, monospace;
-  letter-spacing: 0.18em; text-transform: uppercase;
+.shell { max-width: 1100px; margin: 0 auto; padding: 40px 28px 32px; }
+
+/* HEADER */
+.ah { position: relative; padding-bottom: 28px; }
+.ah::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--pine-600) 35%, var(--bark-600) 50%, var(--pine-600) 65%, transparent 100%);
+  opacity: 0.65;
+}
+.ah-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; gap: 16px; flex-wrap: wrap; }
+.ah-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font: 500 11px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--fg-muted);
-  margin-bottom: 14px;
 }
-h1 {
-  font: 400 44px/1.1 var(--serif);
-  margin: 0 0 14px; letter-spacing: -0.01em;
+.ah-pulse {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--bark-500);
+  position: relative; flex-shrink: 0; box-shadow: 0 0 10px 0 var(--bark-glow);
 }
-.subhead {
-  font: 500 13px/1 'JetBrains Mono', ui-monospace, monospace;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--accent-soft);
-  margin: 0 0 28px;
+.ah-pulse::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  animation: ah-pulse 2.4s ease-out infinite;
 }
-.panel {
-  padding: 22px 24px;
-  background: var(--slate-700);
-  border: 1px solid var(--slate-500);
-  border-radius: 12px;
-  margin-bottom: 16px;
+@keyframes ah-pulse {
+  0%   { box-shadow: 0 0 0 0 oklch(72% 0.10 60 / 0.5); }
+  70%  { box-shadow: 0 0 0 10px oklch(72% 0.10 60 / 0); }
+  100% { box-shadow: 0 0 0 0 oklch(72% 0.10 60 / 0); }
 }
-.panel h2 { font: 400 20px/1.25 var(--serif); margin: 0 0 8px; }
-.panel p  { color: var(--fg-muted); margin: 0; font-size: 14.5px; }
-.panel.coming-soon { border-style: dashed; }
-.stages { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-.stage-pill {
-  font: 500 11px/1 'JetBrains Mono', ui-monospace, monospace;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: var(--slate-700);
-  color: var(--accent-soft);
-  border: 1px solid var(--slate-500);
+.ah-link {
+  font: 500 14px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--pine-300); text-decoration: none;
+  border-bottom: 1px solid var(--pine-600); padding-bottom: 3px;
+  transition: color 160ms, border-color 160ms;
 }
-.stage-block {
-  margin: 24px 0;
+.ah-link:hover { color: var(--bark-300); border-bottom-color: var(--bark-500); }
+.ah-title {
+  font: 400 clamp(40px, 5vw, 56px)/1.0 var(--serif);
+  margin: 0; letter-spacing: -0.018em; color: var(--fg-strong);
 }
-.stage-name {
-  font: 400 22px/1.2 var(--serif);
-  margin: 0 0 12px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--slate-500);
+.ah-amp { color: var(--bark-400); font-style: italic; margin: 0 0.04em; display: inline-block; }
+.ah-sub { display: flex; align-items: center; gap: 16px; margin-top: 14px; flex-wrap: wrap; }
+.ah-sub-lead { font: 400 italic 18px/1.2 var(--serif); color: var(--fg-muted); }
+.ah-sub-lead em { font-style: italic; color: var(--bark-400); }
+.ah-rule { flex-shrink: 0; width: 28px; height: 1px; background: var(--border-default); }
+.ah-meta {
+  font: 500 11px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--pine-300); font-variant-numeric: tabular-nums;
 }
-.acts { display: grid; gap: 6px; }
-.act {
-  padding: 8px 12px;
-  border-radius: 8px;
-  background: var(--slate-700);
-  border: 1px solid var(--slate-500);
+.ah-stats {
+  display: flex; gap: 48px; margin-top: 30px; padding-top: 22px;
+  border-top: 1px solid var(--border-subtle); align-items: baseline;
+  flex-wrap: wrap;
 }
-.act-name { color: var(--fg-default); font-weight: 500; }
-.act-day {
-  display: inline-block;
-  margin-left: 10px;
-  font: 500 10px/1 'JetBrains Mono', ui-monospace, monospace;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--accent-soft);
+.ah-stat { display: flex; align-items: baseline; gap: 12px; }
+.ah-stat .num {
+  font: 400 italic 30px/1 var(--serif); color: var(--bark-400);
+  font-variant-numeric: tabular-nums;
 }
-.act-note {
-  display: inline-block; margin-left: 10px;
-  font-size: 12px; color: var(--fg-muted);
-  font-style: italic;
+.ah-stat .lbl {
+  font: 500 10px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--fg-subtle);
 }
+
+/* CONTROLS */
+.ctrls {
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  margin: 28px 0 8px;
+}
+.search {
+  flex: 1 1 280px; min-width: 200px;
+  background: var(--bg-elevated); border: 1px solid var(--border-default);
+  border-radius: 999px; padding: 9px 16px;
+  color: var(--fg-default); font: 400 14px/1 var(--sans);
+  outline: none; transition: border-color 160ms, background 160ms;
+}
+.search::placeholder { color: var(--fg-subtle); }
+.search:focus { border-color: var(--bark-500); background: var(--pine-800); }
+.day-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.day-pill {
+  font: 500 11px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 8px 14px; border-radius: 999px;
+  background: var(--bg-elevated); color: var(--fg-muted);
+  border: 1px solid var(--border-default);
+  cursor: pointer; user-select: none;
+  transition: background 140ms, color 140ms, border-color 140ms;
+}
+.day-pill:hover { color: var(--bark-300); border-color: var(--bark-600); }
+.day-pill.on {
+  background: var(--bark-wash); color: var(--bark-300); border-color: var(--bark-500);
+}
+
+/* DAY GROUPS */
+.day-block { margin: 32px 0 8px; }
+.day-head {
+  display: flex; align-items: baseline; gap: 14px;
+  padding-bottom: 10px; margin-bottom: 14px;
+  border-bottom: 1px solid var(--border-default);
+}
+.day-name {
+  font: 400 italic 28px/1 var(--serif);
+  color: var(--fg-strong); margin: 0;
+  letter-spacing: -0.005em;
+}
+.day-date {
+  font: 500 11px/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--pine-300);
+}
+.day-count {
+  margin-left: auto;
+  font: 500 11px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--fg-subtle); font-variant-numeric: tabular-nums;
+}
+
+/* LINEUP ROWS */
+.lineup { display: grid; grid-template-columns: 1fr; gap: 6px; }
+.row {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  background: var(--bg-row);
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 140ms, border-color 140ms, transform 140ms;
+}
+.row:hover { background: var(--bg-row-hover); border-color: var(--bark-600); }
+.row.active {
+  background: var(--bg-row-active);
+  border-color: var(--bark-500);
+  box-shadow: 0 0 0 1px var(--bark-500) inset;
+}
+.row.headliner .artist { font-weight: 600; font-size: 17px; }
+.row.headliner .thumb { box-shadow: 0 0 0 2px var(--bark-500); }
+.row.no-stream { cursor: default; opacity: 0.78; }
+.row.no-stream:hover { background: var(--bg-row); border-color: var(--border-default); transform: none; }
+.thumb {
+  width: 48px; height: 48px; border-radius: 6px;
+  background: var(--pine-700); background-size: cover; background-position: center;
+  flex-shrink: 0;
+}
+.thumb.placeholder {
+  display: flex; align-items: center; justify-content: center;
+  color: var(--fg-subtle); font: 500 13px/1 var(--mono);
+}
+.text { min-width: 0; }
+.artist {
+  font: 500 15px/1.2 var(--sans);
+  color: var(--fg-default);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.track {
+  font: 400 12px/1.3 var(--sans);
+  color: var(--fg-subtle); margin-top: 3px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.row.active .artist { color: var(--bark-300); }
+.badges { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.badge {
+  font: 600 10px/1 var(--mono); letter-spacing: 0.10em; text-transform: uppercase;
+  padding: 6px 9px; border-radius: 6px;
+  background: var(--pine-700); color: var(--fg-muted);
+  border: 1px solid var(--border-default);
+  text-decoration: none;
+  transition: background 140ms, color 140ms;
+}
+.badge:hover { background: var(--bark-wash); color: var(--bark-300); }
+.badge.headline {
+  background: var(--bark-wash); color: var(--bark-300);
+  border-color: var(--bark-500);
+}
+
+/* PLAYER BAR */
+.player {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  background: var(--pine-950);
+  border-top: 1px solid var(--bark-600);
+  box-shadow: 0 -8px 32px oklch(15% 0.04 145 / 0.6);
+  z-index: 50;
+  transform: translateY(110%);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.player.open { transform: translateY(0); }
+.player-inner {
+  max-width: 1100px; margin: 0 auto;
+  padding: 14px 24px;
+  display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center;
+}
+.player-meta {
+  display: flex; align-items: center; gap: 14px; min-width: 0;
+}
+.player-meta .ptitle {
+  font: 500 14px/1.2 var(--sans); color: var(--fg-strong);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.player-meta .psub {
+  font: 500 10px/1.2 var(--mono); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--bark-400); margin-top: 4px;
+}
+.player-close {
+  background: transparent; border: 1px solid var(--border-default);
+  color: var(--fg-muted); width: 30px; height: 30px; border-radius: 50%;
+  cursor: pointer; font: 500 14px/1 var(--sans);
+  transition: color 140ms, border-color 140ms;
+}
+.player-close:hover { color: var(--bark-300); border-color: var(--bark-500); }
+.player-embed { padding: 0 24px 14px; max-width: 1100px; margin: 0 auto; }
+.player-embed iframe {
+  width: 100%; height: 152px; border: 0;
+  border-radius: 12px; background: var(--pine-800);
+}
+.player-embed iframe.sc { height: 166px; }
+
+footer {
+  margin-top: 56px; padding-top: 22px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 13px; color: var(--fg-subtle);
+}
+footer a { color: var(--link); text-decoration: none; }
+footer a:hover { color: var(--link-hover); }
 .back {
-  display: inline-block; margin-top: 28px;
-  font-size: 14px; color: var(--accent); text-decoration: none;
+  display: inline-block; margin-top: 22px;
+  font: 500 12px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--bark-400); text-decoration: none;
+  border-bottom: 1px solid var(--pine-600); padding-bottom: 3px;
 }
-.back:hover { filter: brightness(1.1); }
+.back:hover { color: var(--bark-300); border-bottom-color: var(--bark-500); }
+
+@media (max-width: 640px) {
+  .shell { padding: 28px 18px 28px; }
+  .ah-title { font-size: 38px; }
+  .ah-stats { gap: 28px; }
+  .row { grid-template-columns: 40px 1fr auto; gap: 10px; padding: 9px 11px; }
+  .thumb { width: 40px; height: 40px; }
+  .player-inner { padding: 12px 18px; }
+  .player-embed { padding: 0 18px 12px; }
+}
 </style>
 </head>
 <body>
 <div class="shell">
-  <div class="eyebrow">Festival lineup</div>
-  <h1>Outside Lands 2026</h1>
-  <p class="subhead">Golden Gate Park, San Francisco · 2026-08-07 to 2026-08-09</p>
 
-  
-  <section class="panel coming-soon">
-    <h2>Lineup</h2>
-    <p>Page ready — full lineup-by-stage will fill in once the
-       official announcement drops, the same way the Tomorrowland
-       page does (stages, acts, playlist).</p>
-  </section>
+  <header class="ah">
+    <div class="ah-top">
+      <span class="ah-eyebrow"><span class="ah-pulse"></span>Festival lineup</span>
+      <a class="ah-link" href="/localmusic/">← Live Music Companions</a>
+    </div>
+    <h1 class="ah-title">Outside Lands <span class="ah-amp">·</span> 2026</h1>
+    <div class="ah-sub">
+      <span class="ah-sub-lead">Three days in the <em>eucalyptus</em></span>
+      <span class="ah-rule"></span>
+      <span class="ah-meta">Aug 7–9 · Golden Gate Park, SF</span>
+    </div>
+    <div class="ah-stats">
+      <div class="ah-stat"><span class="num">91</span><span class="lbl">Artists</span></div>
+      <div class="ah-stat"><span class="num">3</span><span class="lbl">Days</span></div>
+      <div class="ah-stat"><span class="num">91</span><span class="lbl">One-click streams</span></div>
+    </div>
+  </header>
 
-  <a class="back" href="/localmusic/">← Back to Live Music Companions</a>
+  <div class="ctrls">
+    <input class="search" id="q" type="search" placeholder="Search artist…" autocomplete="off" spellcheck="false">
+    <div class="day-pills" id="day-pills">
+      <span class="day-pill on" data-day="all">All days</span>
+      <span class="day-pill" data-day="Fri">Fri</span>
+      <span class="day-pill" data-day="Sat">Sat</span>
+      <span class="day-pill" data-day="Sun">Sun</span>
+    </div>
+  </div>
+
+  <section class="day-block" data-day="Fri">  <header class="day-head">    <h2 class="day-name">Friday</h2>    <span class="day-date">Aug 7</span>    <span class="day-count">30 acts</span>  </header>  <div class="lineup" data-day="Fri"><div class="row headliner" data-slug="charli-xcx" data-name="charli xcx"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e025b8ef3c9b30d307df5245bfa')"></div><div class="text"><div class="artist">Charli xcx</div><div class="track">party 4 u</div></div><div class="badges"><span class="badge headline">Headliner</span><a class="badge" href="https://open.spotify.com/artist/25uiPmTg16RbhZWAqwLBy5" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/charlixcx" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="turnstile" data-name="turnstile"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02c11ba539d58741bbd1332c92')"></div><div class="text"><div class="artist">Turnstile</div><div class="track">BLACKOUT</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/2qnpHrOzdmOo1S4ox3j17x" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/turnstile" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="griztronics-subtronics-griz" data-name="griztronics (subtronics + griz)"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0283046e046407ae9b6e629956')"></div><div class="text"><div class="artist">GRiZTRONICS (Subtronics + GRiZ)</div><div class="track">Griztronics</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/25oLRSUjJk4YHNUsQXk7Ut" target="_blank" rel="noopener" title="Open on Spotify">SP</a></div></div>
+<div class="row" data-slug="labrinth" data-name="labrinth"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0289c39ba1acdf33ed7acd3867')"></div><div class="text"><div class="artist">Labrinth</div><div class="track">Formula (From &quot;Euphoria: Season 1&quot; Soundtrack)</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/2feDdbD5araYcm6JhFHHw7" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/labrinth" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="glorilla" data-name="glorilla"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02084a94988541c2402615d014')"></div><div class="text"><div class="artist">GloRilla</div><div class="track">Sticky (feat. GloRilla, Sexyy Red &amp; Lil Wayne)</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/2qoQgPAilErOKCwE2Y8wOG" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/glorilla" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="geese" data-name="geese"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0245e82ae0372a50834825c018')"></div><div class="text"><div class="artist">Geese</div><div class="track">Au Pays du Cocaine</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/0WCo84qtCKfbyIf1lqQWB4" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/geese" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="clipse" data-name="clipse"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02ef854fe1d04279372a96f3d6')"></div><div class="text"><div class="artist">Clipse</div><div class="track">So Be It</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/2J257euzcjnDLipsyJH3F2" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/clipse" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="modest-mouse" data-name="modest mouse"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02cc68329bfbf34037df965dc1')"></div><div class="text"><div class="artist">Modest Mouse</div><div class="track">Float On</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/1yAwtBaoHLEDWAnWR87hBT" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/modestmouse" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="wet-leg" data-name="wet leg"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e022f9e981ef2f67e481a6bac03')"></div><div class="text"><div class="artist">Wet Leg</div><div class="track">mangetout</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/2TwOrUcYnAlIiKmVQkkoSZ" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/wetleg" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="sierra-ferrell" data-name="sierra ferrell"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02a50d60df8a301596cecaf8e5')"></div><div class="text"><div class="artist">Sierra Ferrell</div><div class="track">Years</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/3oVcF3VdpMuvMvLLyHPT4t" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/sierraferrell" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="tinashe" data-name="tinashe"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02699b0363dda94e1f1e32eef5')"></div><div class="text"><div class="artist">Tinashe</div><div class="track">No Broke Boys</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/0NIIxcxNHmOoyBx03SfTCD" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/tinashe" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="odd-mob-omnom-present-hyperbeam" data-name="odd mob &amp; omnom present hyperbeam"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e027f7e5ff268d2bc1c69531269')"></div><div class="text"><div class="artist">Odd Mob &amp; OMNOM present HYPERBEAM</div><div class="track">System</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/4qLwtWhlhyAoQ4S9mSrDW9" target="_blank" rel="noopener" title="Open on Spotify">SP</a></div></div>
+<div class="row" data-slug="the-story-so-far" data-name="the story so far"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02677d27bf2ee2804f9b9d3109')"></div><div class="text"><div class="artist">The Story So Far</div><div class="track">Clairvoyant</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/6meTcQ79DrfkIuSLPZkpBg" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/the-story-so-far" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="øu-uk-uk1mat-u" data-name="¥øu$uk€ ¥uk1mat$u"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02c3b3a0dc476263bde99e33d2')"></div><div class="text"><div class="artist">¥ØU$UK€ ¥UK1MAT$U</div><div class="track">Midnight is Comin&#x27; - Mixed</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/0BEmPeY22LTrZJFFP2xIyk" target="_blank" rel="noopener" title="Open on Spotify">SP</a></div></div>
+<div class="row" data-slug="ki-ki" data-name="ki/ki"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02e24dfa312b66d77c9a4e4152')"></div><div class="text"><div class="artist">KI/KI</div><div class="track">Losing Control</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/0UMs6dTf23FC2fHc40fXNS" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/kiki" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="durand-bernarr" data-name="durand bernarr"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0289e7b5d4497f2553051eba2b')"></div><div class="text"><div class="artist">Durand Bernarr</div><div class="track">AM I OKAY?!</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/2d6ggH1oVt4z2zCuY2u5DW" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/durandbernarr" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="alleycvt" data-name="alleycvt"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02b9207eba00866e509c698f9c')"></div><div class="text"><div class="artist">ALLEYCVT</div><div class="track">ALIVE</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/4JxRK2gxmri7L7OWaxnVD1" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/alleycvt" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="die-spitz" data-name="die spitz"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02af708f9648b245d29682cc3a')"></div><div class="text"><div class="artist">Die Spitz</div><div class="track">Hair of Dog</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/0zfZmpHTu0MlkkNr5KHeXE" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/diespitz" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="mph" data-name="mph"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02d42ce1eebb6c63df6f8200a0')"></div><div class="text"><div class="artist">MPH</div><div class="track">Flex It</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/62SCu33InHVq97VaWw3eof" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/mph" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="goldie-boutilier" data-name="goldie boutilier"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02eafe9c4b2b485b50609b8d8d')"></div><div class="text"><div class="artist">Goldie Boutilier</div><div class="track">PARTY</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/392WuM1Yb4QRI0GG4epyn5" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/goldieboutilier" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="dylan-brady" data-name="dylan brady"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e024fdb99bd9cd149e2d8e1458e')"></div><div class="text"><div class="artist">Dylan Brady</div><div class="track">Party At My Place</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/2Cm6C9PNHioyjRKBfO7n9N" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/dylanbrady" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="tobiahs" data-name="tobiahs"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02f825c5f3a2a0d8857636328d')"></div><div class="text"><div class="artist">Tobiahs</div><div class="track">Lifetime</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/4eHzBO6qaL2wt35kENSbTs" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/tobiahs" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="billie-marten" data-name="billie marten"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02792675f3474149244b0a65a2')"></div><div class="text"><div class="artist">Billie Marten</div><div class="track">La Lune</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/02YLJJnWC7YQVixkjEBRn7" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/billie-marten" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="faouzia" data-name="faouzia"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02144d2b69317e926031436c78')"></div><div class="text"><div class="artist">Faouzia</div><div class="track">UNETHICAL</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/5NhgsV7qPWHZqYEMKzbYvo" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/faouziaofficial" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="luke-alessi" data-name="luke alessi"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e029a8112208d5f17ef7f860c19')"></div><div class="text"><div class="artist">Luke Alessi</div><div class="track">After Five</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/3Foat3c8Ui3HkvZghZAzQp" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/luke-alessi" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="bad-nerves" data-name="bad nerves"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e026637880b7e0b7b5e63164976')"></div><div class="text"><div class="artist">Bad Nerves</div><div class="track">Can&#x27;t Be Mine</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/7IPyXY4ZHkuvQY1ny8TnMQ" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/badnerves" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="chezile" data-name="chezile"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e029d181176cafa856a3c8b5537')"></div><div class="text"><div class="artist">Chezile</div><div class="track">Beanie</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/1EmdfupUQDpXOcb4Nj2mBH" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/chezile" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="sawyer-hill" data-name="sawyer hill"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02e9f67612b011eab1ac9e3c9b')"></div><div class="text"><div class="artist">Sawyer Hill</div><div class="track">Jimmy&#x27;s Gone Numb</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/3CwWzT9t3z7DARyhDIzwIG" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/sawyerhill" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="nezza" data-name="nezza"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0291de9ed038b1dee03fb5eb5f')"></div><div class="text"><div class="artist">NEZZA</div><div class="track">SWEAT</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/0cRKBhWUTEtR1vmA06kVKz" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/nezza" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="vertigo" data-name="vertigo"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02318b99daee205ff1eeb68ae3')"></div><div class="text"><div class="artist">Vertigo</div><div class="track">Break This The Breaking Point 2</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/3QkzcRNHg1pCeifBUZGmb6" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/vertigo" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div></div></section>
+<section class="day-block" data-day="Sat">  <header class="day-head">    <h2 class="day-name">Saturday</h2>    <span class="day-date">Aug 8</span>    <span class="day-count">31 acts</span>  </header>  <div class="lineup" data-day="Sat"><div class="row headliner" data-slug="the-strokes" data-name="the strokes"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02e3f1ba3de4659708c25d0f39')"></div><div class="text"><div class="artist">The Strokes</div><div class="track">The Adults Are Talking</div></div><div class="badges"><span class="badge headline">Headliner</span><a class="badge" href="https://open.spotify.com/artist/0epOFNiUfyON9EYx7Tpr6V" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/thestrokes" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="the-xx" data-name="the xx"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02a46d603701aa0342e8cca64e')"></div><div class="text"><div class="artist">The xx</div><div class="track">Intro</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/3iOvXCl6edW5Um0fXEBRXy" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/thexx" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="djo" data-name="djo"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02fddfffec51b4580acae727c1')"></div><div class="text"><div class="artist">Djo</div><div class="track">End of Beginning</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/5p9HO3XC5P3BLxJs5Mtrhm" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/djo" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="pinkpantheress" data-name="pinkpantheress"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e022a6a5bd7ec690d91a384245d')"></div><div class="text"><div class="artist">PinkPantheress</div><div class="track">Girl Like Me</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/78rUTD7y6Cy67W1RVzYs7t" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/pinkpantheress" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="dijon" data-name="dijon"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0224a1563d4e61f31efec9be17')"></div><div class="text"><div class="artist">Dijon</div><div class="track">Skin</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/0knGpCTbmG4ctl1wzYRZs4" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/dijon" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="ethel-cain" data-name="ethel cain"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02f044eadcf908a0e9649512db')"></div><div class="text"><div class="artist">Ethel Cain</div><div class="track">Crush</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/0avMDS4HyoCEP6RqZJWpY2" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/ethel-cain" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="lucy-dacus" data-name="lucy dacus"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e026c3ce277efb2276dd13991a0')"></div><div class="text"><div class="artist">Lucy Dacus</div><div class="track">Night Shift</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/lucy-dacus" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="malcolm-todd" data-name="malcolm todd"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e022c1f34ecc1929fb59908aad1')"></div><div class="text"><div class="artist">Malcolm Todd</div><div class="track">Earrings</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/7eKkW1zo5uzW8kUntiiBvz" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/malcolm-todd" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="lane-8" data-name="lane 8"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0207c935007c81beea6ac0b6a6')"></div><div class="text"><div class="artist">Lane 8</div><div class="track">You</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/27gtK7m9vYwCyJ04zz0kIb" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/lane8" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="snow-strippers" data-name="snow strippers"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0217dbd78819c31da3641cb8ca')"></div><div class="text"><div class="artist">Snow Strippers</div><div class="track">Under Your Spell</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/6TsAG8Ve1icEC8ydeHm3C8" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/snowstrippers" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="it-s-murph" data-name="it&#x27;s murph"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0207f074178d042ed6df29e8e4')"></div><div class="text"><div class="artist">it&#x27;s murph</div><div class="track">Food for the Soul</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/3zW0xazqnHoq9QV9zBROVC" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/itsmurph" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="audrey-hobert" data-name="audrey hobert"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02d754a73edca1a9d88ebd7658')"></div><div class="text"><div class="artist">Audrey Hobert</div><div class="track">Sue me</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/4N0TAwz9vhnQtjCqS65aKS" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/audreyhobert" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="ben-böhmer" data-name="ben böhmer"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0263393476ef4f6c43a0a0be09')"></div><div class="text"><div class="artist">Ben Böhmer</div><div class="track">Breathing</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/5tDjiBYUsTqzd0RkTZxK7u" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/benbohmer" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="dj-trixie-mattel" data-name="dj trixie mattel"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02d94e5119b3aef395720dcc07')"></div><div class="text"><div class="artist">DJ Trixie Mattel</div><div class="track">Kitty Girl (AS3 Version)</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/33hAj1SghVYxDAxZxNDcyc" target="_blank" rel="noopener" title="Open on Spotify">SP</a></div></div>
+<div class="row" data-slug="łaswezo" data-name="łaswezo"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02fe384a7e364a45a20f57b45b')"></div><div class="text"><div class="artist">Łaswezo</div><div class="track">Ławeczka</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/0sJalZQ3d5B3bfqjXEdlFn" target="_blank" rel="noopener" title="Open on Spotify">SP</a></div></div>
+<div class="row" data-slug="sienna-spiro" data-name="sienna spiro"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e020901e50bfaff4351a29f462b')"></div><div class="text"><div class="artist">SIENNA SPIRO</div><div class="track">Die On This Hill</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/02gSuSAWEdWa5UOvqzjX6v" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/siennaspiro" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="sultan-shepard" data-name="sultan + shepard"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0275c9b3b8c868f711c831aecc')"></div><div class="text"><div class="artist">Sultan + Shepard</div><div class="track">Assassin</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/14Tg9FvbNismPR1PJHxRau" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/sultanshepard" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="silvana-estrada" data-name="silvana estrada"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e022c51f9e55870d0299b85f63c')"></div><div class="text"><div class="artist">Silvana Estrada</div><div class="track">Antes De Ti</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/72VywtXEoONiBLNu3ibGI7" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/silvanaestrada" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="haute-freddy" data-name="haute &amp; freddy"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02528f41b9db60ce18ba04f252')"></div><div class="text"><div class="artist">Haute &amp; Freddy</div><div class="track">Freaks</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/66T34XqGkEWbzKWALSBDuR" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/hauteandfreddy" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="yard-act" data-name="yard act"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e023e874bbc64e5a28574e52a11')"></div><div class="text"><div class="artist">Yard Act</div><div class="track">Redeemer</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/2h3ooJn8m8X8cL2g1BZ1Rd" target="_blank" rel="noopener" title="Open on Spotify">SP</a></div></div>
+<div class="row" data-slug="wunderhorse" data-name="wunderhorse"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02be8e67d6db7bb17c437092fa')"></div><div class="text"><div class="artist">Wunderhorse</div><div class="track">Teal</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/41pd7r1XBRsvdxY3vHEgib" target="_blank" rel="noopener" title="Open on Spotify">SP</a></div></div>
+<div class="row" data-slug="camoufly" data-name="camoufly"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02ba9ee0b93783891c8268eacf')"></div><div class="text"><div class="artist">camoufly</div><div class="track">Himalaya</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/6ZmJg6NCjGmRgC2GEI86pQ" target="_blank" rel="noopener" title="Open on Spotify">SP</a></div></div>
+<div class="row" data-slug="bandalos-chinos" data-name="bandalos chinos"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e027c2bf000d3e0bb0bd7cdea7c')"></div><div class="text"><div class="artist">Bandalos Chinos</div><div class="track">Mi Fiesta</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/0wn2qDKzeFlhjRUtJAwJjp" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/bandaloschinos" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="after" data-name="after"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02dfed999f959177dfc4f33cdc')"></div><div class="text"><div class="artist">After</div><div class="track">Apocalypse</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/1QAJqy2dA3ihHBFIHRphZj" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/after" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="rio-kosta" data-name="rio kosta"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0237abd64afb6ed5d849b39a21')"></div><div class="text"><div class="artist">RIO KOSTA</div><div class="track">Ancients</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/4xU7M9wEvpnvkNOyPdVi5y" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/riokosta" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="automatic" data-name="automatic"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0205caa622dbfc1f44bf8d7455')"></div><div class="text"><div class="artist">Automatic</div><div class="track">Black Box</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/3uX1tstdmFJyxW9b5mSNlU" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/automatic" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="1-800-girls" data-name="1-800 girls"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e029aba0efb419aa59540fe56fe')"></div><div class="text"><div class="artist">1-800 GIRLS</div><div class="track">sometimes</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/67yGrC4QoCSD0g7YMcGIgJ" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/1800girls" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="red-leather" data-name="red leather"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02896608597c97ba5f8679af72')"></div><div class="text"><div class="artist">Red Leather</div><div class="track">LAST CALL</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/2qltFRTCjw1j67Da9FR8F1" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/red-leather" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="racing-mount-pleasant" data-name="racing mount pleasant"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0252501e69190f5d7b6c9f7ab3')"></div><div class="text"><div class="artist">Racing Mount Pleasant</div><div class="track">Racing Mount Pleasant</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/5zaSiNpGxS2lOvZTIZiOQX" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/racingmountpleasant" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="ryman" data-name="ryman"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0231175d634ecaff2528adcdfe')"></div><div class="text"><div class="artist">RYMAN</div><div class="track">Way Down in Mexico</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/6a84XW6PjSgibLahMxGxxw" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/ryman" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="bad-juuju" data-name="bad juuju"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02eb4fd6c8bd33362d3b219fa2')"></div><div class="text"><div class="artist">bad juuju</div><div class="track">ENDLESS SUMMER</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/6VSeE8pSmjYajjDmz3gfmu" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/badjuuju" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div></div></section>
+<section class="day-block" data-day="Sun">  <header class="day-head">    <h2 class="day-name">Sunday</h2>    <span class="day-date">Aug 9</span>    <span class="day-count">30 acts</span>  </header>  <div class="lineup" data-day="Sun"><div class="row headliner" data-slug="rüfüs-du-sol" data-name="rüfüs du sol"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0260e5059dcab339142d7642bb')"></div><div class="text"><div class="artist">RÜFÜS DU SOL</div><div class="track">Innerbloom</div></div><div class="badges"><span class="badge headline">Headliner</span><a class="badge" href="https://open.spotify.com/artist/5Pb27ujIyYb33zBqVysBkj" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/rufusdusol" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="baby-keem" data-name="baby keem"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02683757f1fd40a7f7ef64bec1')"></div><div class="text"><div class="artist">Baby Keem</div><div class="track">HONEST</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/5SXuuuRpukkTvsLuUknva1" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/babykeem" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="empire-of-the-sun" data-name="empire of the sun"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02f3aa0e6ca22a382007f61e4d')"></div><div class="text"><div class="artist">Empire of the Sun</div><div class="track">We Are The People</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/67hb7towEyKvt5Z8Bx306c" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/empireofthesun" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="death-cab-for-cutie" data-name="death cab for cutie"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02c985bcc18dd81da80839e5a9')"></div><div class="text"><div class="artist">Death Cab for Cutie</div><div class="track">Soul Meets Body</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/0YrtvWJMgSdVrk3SfNjTbx" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/deathcabforcutie" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="disco-lines" data-name="disco lines"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02699b0363dda94e1f1e32eef5')"></div><div class="text"><div class="artist">Disco Lines</div><div class="track">No Broke Boys</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/5Kmr0b3ip8g9P2i0dLTC3Z" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/discolines" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="mariah-the-scientist" data-name="mariah the scientist"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0206dc36d24b15a6660b24e05a')"></div><div class="text"><div class="artist">Mariah the Scientist</div><div class="track">Spread Thin</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/7HO5fOXE4gh3lzZn64tX2E" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/mariahthescientist" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="not-for-radio" data-name="not for radio"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02b031f864e75e48cf3ee1c949')"></div><div class="text"><div class="artist">Not for Radio</div><div class="track">Not the Only One</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/0oXhGlRUQ8aVTx8eO4MoMT" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/notforradio" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="boris-brejcha" data-name="boris brejcha"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02f7d7b03b53a92c3ca51f67e0')"></div><div class="text"><div class="artist">Boris Brejcha</div><div class="track">Purple Noise</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/6caPJFLv1wesmM7gwK1ACy" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/borisbrejcha" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="jade" data-name="jade"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e029fae113e845ec51e07c8a266')"></div><div class="text"><div class="artist">JADE</div><div class="track">Constellations</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/4JnJjqxsTp8E5rZsyITf63" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/jade" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="the-temper-trap" data-name="the temper trap"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e023ff39c2f14c0088b77af749a')"></div><div class="text"><div class="artist">The Temper Trap</div><div class="track">Sweet Disposition</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/4W48hZAnAHVOC2c8WH8pcq" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/thetempertrap" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="kwn" data-name="kwn"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0210cf44e056664567963e2715')"></div><div class="text"><div class="artist">kwn</div><div class="track">touch myself</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/2KnhnL8zuqLhIhGk601fsb" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/kwn" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="boys-noize" data-name="boys noize"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e027d5713d7b374cc597a975893')"></div><div class="text"><div class="artist">Boys Noize</div><div class="track">Dracula - JENNIE Remix - Boys Noize Disko Version</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/62k5LKMhymqlDNo2DWOvvv" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/boysnoize" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="destin-conrad" data-name="destin conrad"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02c5626e40ff7ec9f2a9405bf3')"></div><div class="text"><div class="artist">DESTIN CONRAD</div><div class="track">IN THE AIR</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/4jwROPSUkTkohLCRiyjiZZ" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/destinconrad" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="kingfishr" data-name="kingfishr"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e029c4f50605aeeeb1a86f95e0e')"></div><div class="text"><div class="artist">Kingfishr</div><div class="track">Killeagh</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/6c2qQFq3xfxFJndX6wSe4f" target="_blank" rel="noopener" title="Open on Spotify">SP</a></div></div>
+<div class="row" data-slug="balu-brigada" data-name="balu brigada"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e021fc8017bbf246da18b953789')"></div><div class="text"><div class="artist">Balu Brigada</div><div class="track">So Cold</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/6O9vGMmTwzihULICPCsNf2" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/balubrigada" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="frost-children" data-name="frost children"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02de825e6f087f44e3b2297645')"></div><div class="text"><div class="artist">Frost Children</div><div class="track">Falling</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/6R1kfr0GIWnwxY4zW11Vag" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/frostchildren" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="miss-monique" data-name="miss monique"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02f149bbb2d66a5e14d2603246')"></div><div class="text"><div class="artist">Miss Monique</div><div class="track">Hot Sauce</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/29TpNOsTNYbLb6Xa10H0PR" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/missmonique" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="carlita" data-name="carlita"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0284d96d07b7f5ac08ca28090e')"></div><div class="text"><div class="artist">Carlita</div><div class="track">Time</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/1GVbOnrND8b3eh2JZ4opw8" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/carlita" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="momma" data-name="momma"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02088d81927483865772a923cd')"></div><div class="text"><div class="artist">Momma</div><div class="track">Medicine</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/5Wj0an60VgRckYV9zlDe1e" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/momma" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="amble" data-name="amble"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02f6f440b812686f31809867cb')"></div><div class="text"><div class="artist">Amble</div><div class="track">Moral Victory</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/5ZC7GPz5h9zkEfjZBUDNzI" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/amble" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="sports" data-name="sports"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e021192eb9f894b18f0de2682f1')"></div><div class="text"><div class="artist">Sports</div><div class="track">You Are the Right One</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/4AGNJdJiVltImYk1UTLE0K" target="_blank" rel="noopener" title="Open on Spotify">SP</a></div></div>
+<div class="row" data-slug="infinity-song" data-name="infinity song"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e022bb221122ff6864a657a6394')"></div><div class="text"><div class="artist">Infinity Song</div><div class="track">One Foot Out</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/2PZThLYBW7XtcYVzQms8oM" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/infinitysong" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="marlon-funaki" data-name="marlon funaki"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0225b9ba00602c19c8fe9aacb4')"></div><div class="text"><div class="artist">Marlon Funaki</div><div class="track">when sunday comes around</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/3BcSXip92N0HwJRA9sVmP6" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/marlonfunaki" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="night-tapes" data-name="night tapes"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e027d528675954fb8013407c112')"></div><div class="text"><div class="artist">Night Tapes</div><div class="track">drifting</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/5APEQlUaQ5K70LgPqAdTuU" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/nighttapes" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="x-club" data-name="x club"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e028d5f98eeca8918251acc9739')"></div><div class="text"><div class="artist">X CLUB</div><div class="track">Stay With Me</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/4CYPaFp9yDrNduNptv0DPQ" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/xclub" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="jim-legxacy" data-name="jim legxacy"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e027494797b5555c45d84f8eda6')"></div><div class="text"><div class="artist">Jim Legxacy</div><div class="track">idk idk</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/7IrBqZo6diq3hV3GpUhrs2" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/jimlegxacy" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="sosocamo" data-name="sosocamo"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e028a372f389087673289f84d09')"></div><div class="text"><div class="artist">Sosocamo</div><div class="track">keep steady</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/6hpztnbgmaneFFGGnEOVjd" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/sosocamo" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="day-we-ran" data-name="day we ran"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02c55d2d01062e7e88b9db0f8a')"></div><div class="text"><div class="artist">Day We Ran</div><div class="track">Foaming</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/6dtbK89qIT2XjIsCQHjTxS" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/dayweran" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="cruz-beckham" data-name="cruz beckham"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e0205480772caf876873d9d8588')"></div><div class="text"><div class="artist">Cruz Beckham</div><div class="track">YEAH YEAH YEAH</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/3ZPOiGqgEbfNlKFFKxXVsD" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/cruz-beckham" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div>
+<div class="row" data-slug="britton" data-name="britton"><div class="thumb" style="background-image:url('https://i.scdn.co/image/ab67616d00001e02cf0d57a749828bd126e68414')"></div><div class="text"><div class="artist">Britton</div><div class="track">PAPERCUT</div></div><div class="badges"><a class="badge" href="https://open.spotify.com/artist/2VjEhHV3KaZlYg2js0Mqr0" target="_blank" rel="noopener" title="Open on Spotify">SP</a><a class="badge" href="https://soundcloud.com/britton" target="_blank" rel="noopener" title="Open on SoundCloud">SC</a></div></div></div></section>
+
+  <footer>
+    Tap an artist to hear a top track. Streams are
+    <a href="https://open.spotify.com/" target="_blank" rel="noopener">Spotify</a>
+    when available, with
+    <a href="https://soundcloud.com/" target="_blank" rel="noopener">SoundCloud</a>
+    as a backup for DJs not on Spotify. Lineup data sourced from the
+    <a href="https://sfoutsidelands.com/lineup/" target="_blank" rel="noopener">official Outside Lands rollout</a>.
+    <br>
+    <a class="back" href="/localmusic/">← Back to Live Music Companions</a>
+  </footer>
 </div>
+
+<!-- Bottom player bar -->
+<div class="player" id="player" aria-live="polite">
+  <div class="player-inner">
+    <div class="player-meta">
+      <div>
+        <div class="ptitle" id="ptitle">—</div>
+        <div class="psub"  id="psub">—</div>
+      </div>
+    </div>
+    <button class="player-close" id="pclose" aria-label="Close player" title="Close">×</button>
+  </div>
+  <div class="player-embed" id="pembed"></div>
+</div>
+
+<script>
+const ACTS = [{"artist": "Charli xcx", "slug": "charli-xcx", "day": "Fri", "headliner": true, "spotify": {"track_id": "2RdEC8Ff83WkX7kDVCHseE", "track_name": "party 4 u", "artist_id": "25uiPmTg16RbhZWAqwLBy5"}, "soundcloud": "charlixcx"}, {"artist": "Turnstile", "slug": "turnstile", "day": "Fri", "headliner": false, "spotify": {"track_id": "0bGImSqDB2ebdeoCidUC8o", "track_name": "BLACKOUT", "artist_id": "2qnpHrOzdmOo1S4ox3j17x"}, "soundcloud": "turnstile"}, {"artist": "GRiZTRONICS (Subtronics + GRiZ)", "slug": "griztronics-subtronics-griz", "day": "Fri", "headliner": false, "spotify": {"track_id": "6OTClxme7EYRZGO6An3SMc", "track_name": "Griztronics", "artist_id": "25oLRSUjJk4YHNUsQXk7Ut"}, "soundcloud": ""}, {"artist": "Labrinth", "slug": "labrinth", "day": "Fri", "headliner": false, "spotify": {"track_id": "6EtKlIQmGPB9SX8UjDJG5s", "track_name": "Formula (From \"Euphoria: Season 1\" Soundtrack)", "artist_id": "2feDdbD5araYcm6JhFHHw7"}, "soundcloud": "labrinth"}, {"artist": "GloRilla", "slug": "glorilla", "day": "Fri", "headliner": false, "spotify": {"track_id": "3tFed7YsjGnIfxeLEQwx3R", "track_name": "Sticky (feat. GloRilla, Sexyy Red & Lil Wayne)", "artist_id": "2qoQgPAilErOKCwE2Y8wOG"}, "soundcloud": "glorilla"}, {"artist": "Geese", "slug": "geese", "day": "Fri", "headliner": false, "spotify": {"track_id": "1g9GiiPPaL7KcDHlDzu7lT", "track_name": "Au Pays du Cocaine", "artist_id": "0WCo84qtCKfbyIf1lqQWB4"}, "soundcloud": "geese"}, {"artist": "Clipse", "slug": "clipse", "day": "Fri", "headliner": false, "spotify": {"track_id": "0xaQ86cGRgcF8wwP1SkXsb", "track_name": "So Be It", "artist_id": "2J257euzcjnDLipsyJH3F2"}, "soundcloud": "clipse"}, {"artist": "Modest Mouse", "slug": "modest-mouse", "day": "Fri", "headliner": false, "spotify": {"track_id": "2lwwrWVKdf3LR9lbbhnr6R", "track_name": "Float On", "artist_id": "1yAwtBaoHLEDWAnWR87hBT"}, "soundcloud": "modestmouse"}, {"artist": "Wet Leg", "slug": "wet-leg", "day": "Fri", "headliner": false, "spotify": {"track_id": "5UW4tA4j23YL6kDfRw3rWT", "track_name": "mangetout", "artist_id": "2TwOrUcYnAlIiKmVQkkoSZ"}, "soundcloud": "wetleg"}, {"artist": "Sierra Ferrell", "slug": "sierra-ferrell", "day": "Fri", "headliner": false, "spotify": {"track_id": "29mTi7k11emagueZvOaXgS", "track_name": "Years", "artist_id": "3oVcF3VdpMuvMvLLyHPT4t"}, "soundcloud": "sierraferrell"}, {"artist": "Tinashe", "slug": "tinashe", "day": "Fri", "headliner": false, "spotify": {"track_id": "3cZajhyr8LmtPfHZ9296tj", "track_name": "No Broke Boys", "artist_id": "0NIIxcxNHmOoyBx03SfTCD"}, "soundcloud": "tinashe"}, {"artist": "Odd Mob & OMNOM present HYPERBEAM", "slug": "odd-mob-omnom-present-hyperbeam", "day": "Fri", "headliner": false, "spotify": {"track_id": "0oB8BYocpXaQ7hxX8ZhPJ6", "track_name": "System", "artist_id": "4qLwtWhlhyAoQ4S9mSrDW9"}, "soundcloud": ""}, {"artist": "The Story So Far", "slug": "the-story-so-far", "day": "Fri", "headliner": false, "spotify": {"track_id": "5fgnsSQYKIlEn2KTQcGjh2", "track_name": "Clairvoyant", "artist_id": "6meTcQ79DrfkIuSLPZkpBg"}, "soundcloud": "the-story-so-far"}, {"artist": "¥ØU$UK€ ¥UK1MAT$U", "slug": "øu-uk-uk1mat-u", "day": "Fri", "headliner": false, "spotify": {"track_id": "4sz4Ispkp9BPd5ymAwyklz", "track_name": "Midnight is Comin' - Mixed", "artist_id": "0BEmPeY22LTrZJFFP2xIyk"}, "soundcloud": ""}, {"artist": "KI/KI", "slug": "ki-ki", "day": "Fri", "headliner": false, "spotify": {"track_id": "3gJ16QEGGhLFPNLvbXgB1u", "track_name": "Losing Control", "artist_id": "0UMs6dTf23FC2fHc40fXNS"}, "soundcloud": "kiki"}, {"artist": "Durand Bernarr", "slug": "durand-bernarr", "day": "Fri", "headliner": false, "spotify": {"track_id": "7acblFUsVC2haLFRkHqlQZ", "track_name": "AM I OKAY?!", "artist_id": "2d6ggH1oVt4z2zCuY2u5DW"}, "soundcloud": "durandbernarr"}, {"artist": "ALLEYCVT", "slug": "alleycvt", "day": "Fri", "headliner": false, "spotify": {"track_id": "5uaGvrkuejhZ6ROQGac5Qs", "track_name": "ALIVE", "artist_id": "4JxRK2gxmri7L7OWaxnVD1"}, "soundcloud": "alleycvt"}, {"artist": "Die Spitz", "slug": "die-spitz", "day": "Fri", "headliner": false, "spotify": {"track_id": "7x7Ej1fQsdve9jNOvN0AOU", "track_name": "Hair of Dog", "artist_id": "0zfZmpHTu0MlkkNr5KHeXE"}, "soundcloud": "diespitz"}, {"artist": "MPH", "slug": "mph", "day": "Fri", "headliner": false, "spotify": {"track_id": "3xuUg8w6c9mXkaCrkhx9Vm", "track_name": "Flex It", "artist_id": "62SCu33InHVq97VaWw3eof"}, "soundcloud": "mph"}, {"artist": "Goldie Boutilier", "slug": "goldie-boutilier", "day": "Fri", "headliner": false, "spotify": {"track_id": "1oRovB4I1ZmRMkk8qoouBr", "track_name": "PARTY", "artist_id": "392WuM1Yb4QRI0GG4epyn5"}, "soundcloud": "goldieboutilier"}, {"artist": "Dylan Brady", "slug": "dylan-brady", "day": "Fri", "headliner": false, "spotify": {"track_id": "6CtUVW0IkBCejttSw9Bgdi", "track_name": "Party At My Place", "artist_id": "2Cm6C9PNHioyjRKBfO7n9N"}, "soundcloud": "dylanbrady"}, {"artist": "Tobiahs", "slug": "tobiahs", "day": "Fri", "headliner": false, "spotify": {"track_id": "1oH6oeK8iKeRL9VTQY5w2r", "track_name": "Lifetime", "artist_id": "4eHzBO6qaL2wt35kENSbTs"}, "soundcloud": "tobiahs"}, {"artist": "Billie Marten", "slug": "billie-marten", "day": "Fri", "headliner": false, "spotify": {"track_id": "0DwaOWI1kC2s98qLj0LTDd", "track_name": "La Lune", "artist_id": "02YLJJnWC7YQVixkjEBRn7"}, "soundcloud": "billie-marten"}, {"artist": "Faouzia", "slug": "faouzia", "day": "Fri", "headliner": false, "spotify": {"track_id": "6QKpHmO41jkd9pTp0FfmHs", "track_name": "UNETHICAL", "artist_id": "5NhgsV7qPWHZqYEMKzbYvo"}, "soundcloud": "faouziaofficial"}, {"artist": "Luke Alessi", "slug": "luke-alessi", "day": "Fri", "headliner": false, "spotify": {"track_id": "6w9hBIcFDUMb9Q0oSpVybl", "track_name": "After Five", "artist_id": "3Foat3c8Ui3HkvZghZAzQp"}, "soundcloud": "luke-alessi"}, {"artist": "Bad Nerves", "slug": "bad-nerves", "day": "Fri", "headliner": false, "spotify": {"track_id": "0rkFGvIijVu6BdBG8ahBGp", "track_name": "Can't Be Mine", "artist_id": "7IPyXY4ZHkuvQY1ny8TnMQ"}, "soundcloud": "badnerves"}, {"artist": "Chezile", "slug": "chezile", "day": "Fri", "headliner": false, "spotify": {"track_id": "5e0b9LgOfi3aJSKXFcOWRe", "track_name": "Beanie", "artist_id": "1EmdfupUQDpXOcb4Nj2mBH"}, "soundcloud": "chezile"}, {"artist": "Sawyer Hill", "slug": "sawyer-hill", "day": "Fri", "headliner": false, "spotify": {"track_id": "7eZhfoVxaTWG94JvOG7hzi", "track_name": "Jimmy's Gone Numb", "artist_id": "3CwWzT9t3z7DARyhDIzwIG"}, "soundcloud": "sawyerhill"}, {"artist": "NEZZA", "slug": "nezza", "day": "Fri", "headliner": false, "spotify": {"track_id": "1H9z7rx9nFgbiDAhiwAzro", "track_name": "SWEAT", "artist_id": "0cRKBhWUTEtR1vmA06kVKz"}, "soundcloud": "nezza"}, {"artist": "Vertigo", "slug": "vertigo", "day": "Fri", "headliner": false, "spotify": {"track_id": "0lUHAZHS5h2dbBfNtlrVOJ", "track_name": "Break This The Breaking Point 2", "artist_id": "3QkzcRNHg1pCeifBUZGmb6"}, "soundcloud": "vertigo"}, {"artist": "The Strokes", "slug": "the-strokes", "day": "Sat", "headliner": true, "spotify": {"track_id": "5ruzrDWcT0vuJIOMW7gMnW", "track_name": "The Adults Are Talking", "artist_id": "0epOFNiUfyON9EYx7Tpr6V"}, "soundcloud": "thestrokes"}, {"artist": "The xx", "slug": "the-xx", "day": "Sat", "headliner": false, "spotify": {"track_id": "2usrT8QIbIk9y0NEtQwS4j", "track_name": "Intro", "artist_id": "3iOvXCl6edW5Um0fXEBRXy"}, "soundcloud": "thexx"}, {"artist": "Djo", "slug": "djo", "day": "Sat", "headliner": false, "spotify": {"track_id": "3qhlB30KknSejmIvZZLjOD", "track_name": "End of Beginning", "artist_id": "5p9HO3XC5P3BLxJs5Mtrhm"}, "soundcloud": "djo"}, {"artist": "PinkPantheress", "slug": "pinkpantheress", "day": "Sat", "headliner": false, "spotify": {"track_id": "7aYGCP34Xo6XujY7Ix1DxB", "track_name": "Girl Like Me", "artist_id": "78rUTD7y6Cy67W1RVzYs7t"}, "soundcloud": "pinkpantheress"}, {"artist": "Dijon", "slug": "dijon", "day": "Sat", "headliner": false, "spotify": {"track_id": "467t3218y3yihFcyDGWjr0", "track_name": "Skin", "artist_id": "0knGpCTbmG4ctl1wzYRZs4"}, "soundcloud": "dijon"}, {"artist": "Ethel Cain", "slug": "ethel-cain", "day": "Sat", "headliner": false, "spotify": {"track_id": "0nsIevK1SeDfZzDOi6Si75", "track_name": "Crush", "artist_id": "0avMDS4HyoCEP6RqZJWpY2"}, "soundcloud": "ethel-cain"}, {"artist": "Lucy Dacus", "slug": "lucy-dacus", "day": "Sat", "headliner": false, "spotify": {"track_id": "1yYlpGuBiRRf33e1gY61bN", "track_name": "Night Shift", "artist_id": "07D1Bjaof0NFlU32KXiqUP"}, "soundcloud": "lucy-dacus"}, {"artist": "Malcolm Todd", "slug": "malcolm-todd", "day": "Sat", "headliner": false, "spotify": {"track_id": "0eAuGrXyGFYwur9ARUe7LJ", "track_name": "Earrings", "artist_id": "7eKkW1zo5uzW8kUntiiBvz"}, "soundcloud": "malcolm-todd"}, {"artist": "Lane 8", "slug": "lane-8", "day": "Sat", "headliner": false, "spotify": {"track_id": "1KCMF9fdF7sNE74R2V46af", "track_name": "You", "artist_id": "27gtK7m9vYwCyJ04zz0kIb"}, "soundcloud": "lane8"}, {"artist": "Snow Strippers", "slug": "snow-strippers", "day": "Sat", "headliner": false, "spotify": {"track_id": "5q0N5SaFhROG9UQiPukv9p", "track_name": "Under Your Spell", "artist_id": "6TsAG8Ve1icEC8ydeHm3C8"}, "soundcloud": "snowstrippers"}, {"artist": "it's murph", "slug": "it-s-murph", "day": "Sat", "headliner": false, "spotify": {"track_id": "7u0fz3V6cYeYTX91DMmIvQ", "track_name": "Food for the Soul", "artist_id": "3zW0xazqnHoq9QV9zBROVC"}, "soundcloud": "itsmurph"}, {"artist": "Audrey Hobert", "slug": "audrey-hobert", "day": "Sat", "headliner": false, "spotify": {"track_id": "6ZAuQOgLrNQb9s7BXheuTy", "track_name": "Sue me", "artist_id": "4N0TAwz9vhnQtjCqS65aKS"}, "soundcloud": "audreyhobert"}, {"artist": "Ben Böhmer", "slug": "ben-böhmer", "day": "Sat", "headliner": false, "spotify": {"track_id": "1MvLmHeLkaNgUScgbUVnWJ", "track_name": "Breathing", "artist_id": "5tDjiBYUsTqzd0RkTZxK7u"}, "soundcloud": "benbohmer"}, {"artist": "DJ Trixie Mattel", "slug": "dj-trixie-mattel", "day": "Sat", "headliner": false, "spotify": {"track_id": "0U4XtlrlYmpjXbLge0132w", "track_name": "Kitty Girl (AS3 Version)", "artist_id": "33hAj1SghVYxDAxZxNDcyc"}, "soundcloud": ""}, {"artist": "Łaswezo", "slug": "łaswezo", "day": "Sat", "headliner": false, "spotify": {"track_id": "4rIEu3ABbySH6hEKAmtN5X", "track_name": "Ławeczka", "artist_id": "0sJalZQ3d5B3bfqjXEdlFn"}, "soundcloud": ""}, {"artist": "SIENNA SPIRO", "slug": "sienna-spiro", "day": "Sat", "headliner": false, "spotify": {"track_id": "2gYTC8DsplN3RNdpdBcCOQ", "track_name": "Die On This Hill", "artist_id": "02gSuSAWEdWa5UOvqzjX6v"}, "soundcloud": "siennaspiro"}, {"artist": "Sultan + Shepard", "slug": "sultan-shepard", "day": "Sat", "headliner": false, "spotify": {"track_id": "2wLkOJ9pwMu0kfV5tlPDUp", "track_name": "Assassin", "artist_id": "14Tg9FvbNismPR1PJHxRau"}, "soundcloud": "sultanshepard"}, {"artist": "Silvana Estrada", "slug": "silvana-estrada", "day": "Sat", "headliner": false, "spotify": {"track_id": "6zpMOUVDo9fpT37BLywSPl", "track_name": "Antes De Ti", "artist_id": "72VywtXEoONiBLNu3ibGI7"}, "soundcloud": "silvanaestrada"}, {"artist": "Haute & Freddy", "slug": "haute-freddy", "day": "Sat", "headliner": false, "spotify": {"track_id": "6p2ZaQL49aH9OdVS4EqFNa", "track_name": "Freaks", "artist_id": "66T34XqGkEWbzKWALSBDuR"}, "soundcloud": "hauteandfreddy"}, {"artist": "Yard Act", "slug": "yard-act", "day": "Sat", "headliner": false, "spotify": {"track_id": "6rDVb2EImUpLRrOJkev2XE", "track_name": "Redeemer", "artist_id": "2h3ooJn8m8X8cL2g1BZ1Rd"}, "soundcloud": ""}, {"artist": "Wunderhorse", "slug": "wunderhorse", "day": "Sat", "headliner": false, "spotify": {"track_id": "1jJvNlkbQmtRpG9uIUpiYA", "track_name": "Teal", "artist_id": "41pd7r1XBRsvdxY3vHEgib"}, "soundcloud": ""}, {"artist": "camoufly", "slug": "camoufly", "day": "Sat", "headliner": false, "spotify": {"track_id": "6mRdQVSDsKkMm9qGPRstyR", "track_name": "Himalaya", "artist_id": "6ZmJg6NCjGmRgC2GEI86pQ"}, "soundcloud": ""}, {"artist": "Bandalos Chinos", "slug": "bandalos-chinos", "day": "Sat", "headliner": false, "spotify": {"track_id": "1DcZiy6gWQOG2IhhM6HBui", "track_name": "Mi Fiesta", "artist_id": "0wn2qDKzeFlhjRUtJAwJjp"}, "soundcloud": "bandaloschinos"}, {"artist": "After", "slug": "after", "day": "Sat", "headliner": false, "spotify": {"track_id": "1oAwsWBovWRIp7qLMGPIet", "track_name": "Apocalypse", "artist_id": "1QAJqy2dA3ihHBFIHRphZj"}, "soundcloud": "after"}, {"artist": "RIO KOSTA", "slug": "rio-kosta", "day": "Sat", "headliner": false, "spotify": {"track_id": "2J88GgPpK1qwUUz2gPLXSy", "track_name": "Ancients", "artist_id": "4xU7M9wEvpnvkNOyPdVi5y"}, "soundcloud": "riokosta"}, {"artist": "Automatic", "slug": "automatic", "day": "Sat", "headliner": false, "spotify": {"track_id": "45c2puZgmaC23MaKgeHda2", "track_name": "Black Box", "artist_id": "3uX1tstdmFJyxW9b5mSNlU"}, "soundcloud": "automatic"}, {"artist": "1-800 GIRLS", "slug": "1-800-girls", "day": "Sat", "headliner": false, "spotify": {"track_id": "4akb3UnPEbDpUBc8JdQ5ED", "track_name": "sometimes", "artist_id": "67yGrC4QoCSD0g7YMcGIgJ"}, "soundcloud": "1800girls"}, {"artist": "Red Leather", "slug": "red-leather", "day": "Sat", "headliner": false, "spotify": {"track_id": "32IRGXo4s0dGQ0uQlEE3S1", "track_name": "LAST CALL", "artist_id": "2qltFRTCjw1j67Da9FR8F1"}, "soundcloud": "red-leather"}, {"artist": "Racing Mount Pleasant", "slug": "racing-mount-pleasant", "day": "Sat", "headliner": false, "spotify": {"track_id": "1O4YoWMQys8jrSfCuDZQit", "track_name": "Racing Mount Pleasant", "artist_id": "5zaSiNpGxS2lOvZTIZiOQX"}, "soundcloud": "racingmountpleasant"}, {"artist": "RYMAN", "slug": "ryman", "day": "Sat", "headliner": false, "spotify": {"track_id": "2qveJQ0MgpR8LbU1KFyYN3", "track_name": "Way Down in Mexico", "artist_id": "6a84XW6PjSgibLahMxGxxw"}, "soundcloud": "ryman"}, {"artist": "bad juuju", "slug": "bad-juuju", "day": "Sat", "headliner": false, "spotify": {"track_id": "0boGHuHEz1tOmMdJ3ZhsxV", "track_name": "ENDLESS SUMMER", "artist_id": "6VSeE8pSmjYajjDmz3gfmu"}, "soundcloud": "badjuuju"}, {"artist": "RÜFÜS DU SOL", "slug": "rüfüs-du-sol", "day": "Sun", "headliner": true, "spotify": {"track_id": "6CGMZijOAZvTXG21T8t6R0", "track_name": "Innerbloom", "artist_id": "5Pb27ujIyYb33zBqVysBkj"}, "soundcloud": "rufusdusol"}, {"artist": "Baby Keem", "slug": "baby-keem", "day": "Sun", "headliner": false, "spotify": {"track_id": "58k32my5lKofeZRtIvBDg9", "track_name": "HONEST", "artist_id": "5SXuuuRpukkTvsLuUknva1"}, "soundcloud": "babykeem"}, {"artist": "Empire of the Sun", "slug": "empire-of-the-sun", "day": "Sun", "headliner": false, "spotify": {"track_id": "3zEN0ii6s4DHHBpnTp3RP7", "track_name": "We Are The People", "artist_id": "67hb7towEyKvt5Z8Bx306c"}, "soundcloud": "empireofthesun"}, {"artist": "Death Cab for Cutie", "slug": "death-cab-for-cutie", "day": "Sun", "headliner": false, "spotify": {"track_id": "5yc59J3MR3tVDPTOgwgRI5", "track_name": "Soul Meets Body", "artist_id": "0YrtvWJMgSdVrk3SfNjTbx"}, "soundcloud": "deathcabforcutie"}, {"artist": "Disco Lines", "slug": "disco-lines", "day": "Sun", "headliner": false, "spotify": {"track_id": "3cZajhyr8LmtPfHZ9296tj", "track_name": "No Broke Boys", "artist_id": "5Kmr0b3ip8g9P2i0dLTC3Z"}, "soundcloud": "discolines"}, {"artist": "Mariah the Scientist", "slug": "mariah-the-scientist", "day": "Sun", "headliner": false, "spotify": {"track_id": "4MbzauKV2ydtZZjLsPcuTF", "track_name": "Spread Thin", "artist_id": "7HO5fOXE4gh3lzZn64tX2E"}, "soundcloud": "mariahthescientist"}, {"artist": "Not for Radio", "slug": "not-for-radio", "day": "Sun", "headliner": false, "spotify": {"track_id": "17AnW24hC6ZU6P8VQwElH9", "track_name": "Not the Only One", "artist_id": "0oXhGlRUQ8aVTx8eO4MoMT"}, "soundcloud": "notforradio"}, {"artist": "Boris Brejcha", "slug": "boris-brejcha", "day": "Sun", "headliner": false, "spotify": {"track_id": "6MoTeX5dtuPZ3hwaecuBkz", "track_name": "Purple Noise", "artist_id": "6caPJFLv1wesmM7gwK1ACy"}, "soundcloud": "borisbrejcha"}, {"artist": "JADE", "slug": "jade", "day": "Sun", "headliner": false, "spotify": {"track_id": "32ShlHZGBYLoybP9pdb87z", "track_name": "Constellations", "artist_id": "4JnJjqxsTp8E5rZsyITf63"}, "soundcloud": "jade"}, {"artist": "The Temper Trap", "slug": "the-temper-trap", "day": "Sun", "headliner": false, "spotify": {"track_id": "0fIDUXVyJ1JISqB4HP4D5H", "track_name": "Sweet Disposition", "artist_id": "4W48hZAnAHVOC2c8WH8pcq"}, "soundcloud": "thetempertrap"}, {"artist": "kwn", "slug": "kwn", "day": "Sun", "headliner": false, "spotify": {"track_id": "3yftdtj8z7vS7M3EoPfVFK", "track_name": "touch myself", "artist_id": "2KnhnL8zuqLhIhGk601fsb"}, "soundcloud": "kwn"}, {"artist": "Boys Noize", "slug": "boys-noize", "day": "Sun", "headliner": false, "spotify": {"track_id": "53AnN5mzvc62M1KOT45ffl", "track_name": "Dracula - JENNIE Remix - Boys Noize Disko Version", "artist_id": "62k5LKMhymqlDNo2DWOvvv"}, "soundcloud": "boysnoize"}, {"artist": "DESTIN CONRAD", "slug": "destin-conrad", "day": "Sun", "headliner": false, "spotify": {"track_id": "4TLJNON6mZLpfZX3g4Oh8B", "track_name": "IN THE AIR", "artist_id": "4jwROPSUkTkohLCRiyjiZZ"}, "soundcloud": "destinconrad"}, {"artist": "Kingfishr", "slug": "kingfishr", "day": "Sun", "headliner": false, "spotify": {"track_id": "5Zx1iBItF4TWFQt4C9P5hZ", "track_name": "Killeagh", "artist_id": "6c2qQFq3xfxFJndX6wSe4f"}, "soundcloud": ""}, {"artist": "Balu Brigada", "slug": "balu-brigada", "day": "Sun", "headliner": false, "spotify": {"track_id": "2SGyf0hCuB81F85cHXuRjl", "track_name": "So Cold", "artist_id": "6O9vGMmTwzihULICPCsNf2"}, "soundcloud": "balubrigada"}, {"artist": "Frost Children", "slug": "frost-children", "day": "Sun", "headliner": false, "spotify": {"track_id": "43tkPQscsEOhXxf3rECI5X", "track_name": "Falling", "artist_id": "6R1kfr0GIWnwxY4zW11Vag"}, "soundcloud": "frostchildren"}, {"artist": "Miss Monique", "slug": "miss-monique", "day": "Sun", "headliner": false, "spotify": {"track_id": "4NQfTDDQ6NshgWnGz3YZeF", "track_name": "Hot Sauce", "artist_id": "29TpNOsTNYbLb6Xa10H0PR"}, "soundcloud": "missmonique"}, {"artist": "Carlita", "slug": "carlita", "day": "Sun", "headliner": false, "spotify": {"track_id": "0IAIsE9u9AYUH3wh7p77AE", "track_name": "Time", "artist_id": "1GVbOnrND8b3eh2JZ4opw8"}, "soundcloud": "carlita"}, {"artist": "Momma", "slug": "momma", "day": "Sun", "headliner": false, "spotify": {"track_id": "3381KgaT7kBV2Cuno9scbe", "track_name": "Medicine", "artist_id": "5Wj0an60VgRckYV9zlDe1e"}, "soundcloud": "momma"}, {"artist": "Amble", "slug": "amble", "day": "Sun", "headliner": false, "spotify": {"track_id": "5D2AaNj4RfxSbHTSYjbb4E", "track_name": "Moral Victory", "artist_id": "5ZC7GPz5h9zkEfjZBUDNzI"}, "soundcloud": "amble"}, {"artist": "Sports", "slug": "sports", "day": "Sun", "headliner": false, "spotify": {"track_id": "2qpacEyFxmbxCpIEqZkqvC", "track_name": "You Are the Right One", "artist_id": "4AGNJdJiVltImYk1UTLE0K"}, "soundcloud": ""}, {"artist": "Infinity Song", "slug": "infinity-song", "day": "Sun", "headliner": false, "spotify": {"track_id": "16muzdLNvN4Wi5nIvcRDdx", "track_name": "One Foot Out", "artist_id": "2PZThLYBW7XtcYVzQms8oM"}, "soundcloud": "infinitysong"}, {"artist": "Marlon Funaki", "slug": "marlon-funaki", "day": "Sun", "headliner": false, "spotify": {"track_id": "1qTLYAQcXTs1JGbt8DfedM", "track_name": "when sunday comes around", "artist_id": "3BcSXip92N0HwJRA9sVmP6"}, "soundcloud": "marlonfunaki"}, {"artist": "Night Tapes", "slug": "night-tapes", "day": "Sun", "headliner": false, "spotify": {"track_id": "2YuySJd7C2aoBarBP8OvzR", "track_name": "drifting", "artist_id": "5APEQlUaQ5K70LgPqAdTuU"}, "soundcloud": "nighttapes"}, {"artist": "X CLUB", "slug": "x-club", "day": "Sun", "headliner": false, "spotify": {"track_id": "5VYFPf4MuiPTjL4geOkEH3", "track_name": "Stay With Me", "artist_id": "4CYPaFp9yDrNduNptv0DPQ"}, "soundcloud": "xclub"}, {"artist": "Jim Legxacy", "slug": "jim-legxacy", "day": "Sun", "headliner": false, "spotify": {"track_id": "3CZ0ba4RIVdv40FbjHpOEA", "track_name": "idk idk", "artist_id": "7IrBqZo6diq3hV3GpUhrs2"}, "soundcloud": "jimlegxacy"}, {"artist": "Sosocamo", "slug": "sosocamo", "day": "Sun", "headliner": false, "spotify": {"track_id": "3UsJUXvHb7qz4GiQtEc4a4", "track_name": "keep steady", "artist_id": "6hpztnbgmaneFFGGnEOVjd"}, "soundcloud": "sosocamo"}, {"artist": "Day We Ran", "slug": "day-we-ran", "day": "Sun", "headliner": false, "spotify": {"track_id": "0HeEz3p1yVoAIOjAULJzrD", "track_name": "Foaming", "artist_id": "6dtbK89qIT2XjIsCQHjTxS"}, "soundcloud": "dayweran"}, {"artist": "Cruz Beckham", "slug": "cruz-beckham", "day": "Sun", "headliner": false, "spotify": {"track_id": "68EF2Sx1uCjXsmZ4nU1Epx", "track_name": "YEAH YEAH YEAH", "artist_id": "3ZPOiGqgEbfNlKFFKxXVsD"}, "soundcloud": "cruz-beckham"}, {"artist": "Britton", "slug": "britton", "day": "Sun", "headliner": false, "spotify": {"track_id": "25AjbQVBqFYNsACWvMLI6h", "track_name": "PAPERCUT", "artist_id": "2VjEhHV3KaZlYg2js0Mqr0"}, "soundcloud": "britton"}];
+const DAY_NAMES = {Fri: "Friday", Sat: "Saturday", Sun: "Sunday"};
+const DAY_DATES = {Fri: "Aug 7", Sat: "Aug 8", Sun: "Aug 9"};
+const DAY_ORDER = ["Fri", "Sat", "Sun"];
+
+const rowsByDay = new Map();
+DAY_ORDER.forEach(d => rowsByDay.set(d, document.querySelector(`.lineup[data-day="${d}"]`)));
+
+let activeRow = null;
+const player  = document.getElementById('player');
+const pembed  = document.getElementById('pembed');
+const ptitle  = document.getElementById('ptitle');
+const psub    = document.getElementById('psub');
+const pclose  = document.getElementById('pclose');
+
+function openPlayer(act) {
+  if (activeRow) activeRow.classList.remove('active');
+  const row = document.querySelector(`[data-slug="${act.slug}"]`);
+  if (row) { row.classList.add('active'); activeRow = row; }
+  ptitle.textContent = act.artist;
+  let src = '';
+  let cls = '';
+  if (act.spotify && act.spotify.track_id) {
+    src = `https://open.spotify.com/embed/track/${act.spotify.track_id}?utm_source=outsidelands`;
+    psub.textContent = act.spotify.track_name ? `Spotify · ${act.spotify.track_name}` : 'Spotify';
+  } else if (act.soundcloud) {
+    const u = encodeURIComponent(`https://soundcloud.com/${act.soundcloud}`);
+    src = `https://w.soundcloud.com/player/?url=${u}&color=%23bf8a4a&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false`;
+    cls = 'sc';
+    psub.textContent = `SoundCloud · @${act.soundcloud}`;
+  } else {
+    psub.textContent = 'No stream — search opens in a new tab';
+  }
+  if (src) {
+    pembed.innerHTML = `<iframe class="${cls}" src="${src}" allow="autoplay; encrypted-media; clipboard-write" loading="lazy" allowfullscreen></iframe>`;
+  } else {
+    pembed.innerHTML = '';
+  }
+  player.classList.add('open');
+}
+
+function closePlayer() {
+  player.classList.remove('open');
+  pembed.innerHTML = '';
+  if (activeRow) { activeRow.classList.remove('active'); activeRow = null; }
+}
+
+pclose.addEventListener('click', closePlayer);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePlayer(); });
+
+// Wire row clicks
+document.querySelectorAll('.row').forEach(row => {
+  row.addEventListener('click', e => {
+    if (e.target.closest('.badge')) return; // external link badges
+    const slug = row.dataset.slug;
+    const act = ACTS.find(a => a.slug === slug);
+    if (!act) return;
+    if (!act.spotify?.track_id && !act.soundcloud) {
+      // no embed available → open Spotify search in a new tab
+      window.open(`https://open.spotify.com/search/${encodeURIComponent(act.artist)}`, '_blank', 'noopener');
+      return;
+    }
+    openPlayer(act);
+  });
+});
+
+// Search + day filter
+const q = document.getElementById('q');
+const dayPills = document.querySelectorAll('.day-pill');
+let activeDay = 'all';
+
+function applyFilters() {
+  const term = q.value.trim().toLowerCase();
+  DAY_ORDER.forEach(d => {
+    const wrap = document.querySelector(`.day-block[data-day="${d}"]`);
+    if (!wrap) return;
+    const dayOn = activeDay === 'all' || activeDay === d;
+    let visible = 0;
+    wrap.querySelectorAll('.row').forEach(r => {
+      const name = r.dataset.name || '';
+      const match = !term || name.includes(term);
+      const show = dayOn && match;
+      r.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    wrap.style.display = (visible === 0) ? 'none' : '';
+    const cnt = wrap.querySelector('.day-count');
+    if (cnt) cnt.textContent = `${visible} acts`;
+  });
+}
+q.addEventListener('input', applyFilters);
+dayPills.forEach(p => p.addEventListener('click', () => {
+  dayPills.forEach(x => x.classList.remove('on'));
+  p.classList.add('on');
+  activeDay = p.dataset.day;
+  applyFilters();
+}));
+applyFilters();
+</script>
 </body>
 </html>
