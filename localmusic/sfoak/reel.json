@@ -1,8 +1,8 @@
 {
   "page_title": "SF + Oakland Live Music",
-  "total_duration": 1137.16,
-  "track_count": 38,
-  "built_at": 1780556588,
+  "total_duration": 1316.85,
+  "track_count": 44,
+  "built_at": 1780634106,
   "tracks": [
     {
       "artist": "atm danny",
@@ -68,22 +68,13 @@
       "end": 209.62
     },
     {
-      "artist": "climax",
-      "title": "precious and few",
-      "spotify_uri": "spotify:track:7uuM0HwvCG20e5ttu6ugmP",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 209.62,
-      "end": 239.49
-    },
-    {
       "artist": "dagger polyester",
       "title": "lipstick no. 425",
       "spotify_uri": "spotify:track:7ITymS4lkCcrGGpMRVNam7",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 239.49,
-      "end": 269.44
+      "start": 209.62,
+      "end": 239.57
     },
     {
       "artist": "dagger polyester",
@@ -91,8 +82,8 @@
       "spotify_uri": "spotify:track:6yzwEDMIa3rTeCzEpILX3A",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 269.44,
-      "end": 299.39
+      "start": 239.57,
+      "end": 269.52
     },
     {
       "artist": "dagger polyester",
@@ -100,8 +91,8 @@
       "spotify_uri": "spotify:track:6pMaLmYFZfBs1BPGvbB4nr",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 299.39,
-      "end": 329.34
+      "start": 269.52,
+      "end": 299.47
     },
     {
       "artist": "dirty cello",
@@ -109,8 +100,8 @@
       "spotify_uri": "spotify:track:3vzLGvRFJgPtLIaNZcKxpw",
       "audio_source": "itunes",
       "duration": 29.85,
-      "start": 329.34,
-      "end": 359.19
+      "start": 299.47,
+      "end": 329.32
     },
     {
       "artist": "dirty cello",
@@ -118,8 +109,8 @@
       "spotify_uri": "spotify:track:3FdP7E5atWjlxu5u1foB9A",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 359.19,
-      "end": 389.14
+      "start": 329.32,
+      "end": 359.27
     },
     {
       "artist": "dirty cello",
@@ -127,26 +118,8 @@
       "spotify_uri": "spotify:track:3hge1cEbkPui8Kbsbc3Ath",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 389.14,
-      "end": 419.01
-    },
-    {
-      "artist": "doubleplus alright",
-      "title": "february burn",
-      "spotify_uri": "spotify:track:2HnObhTjddONLUsyBMKZ89",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 419.01,
-      "end": 448.96
-    },
-    {
-      "artist": "doubleplus alright",
-      "title": "feelin' it",
-      "spotify_uri": "spotify:track:5MYvWdtUWvgL9mENVvNMDU",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 448.96,
-      "end": 478.91
+      "start": 359.27,
+      "end": 389.14
     },
     {
       "artist": "hazzard's cure",
@@ -154,8 +127,8 @@
       "spotify_uri": "spotify:track:0dkvPpC5HFrw0DmfcXFlx3",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 478.91,
-      "end": 508.78
+      "start": 389.14,
+      "end": 419.01
     },
     {
       "artist": "hazzard's cure",
@@ -163,8 +136,8 @@
       "spotify_uri": "spotify:track:3FKLbMoLoSUG3jKMdmrT7H",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 508.78,
-      "end": 538.65
+      "start": 419.01,
+      "end": 448.88
     },
     {
       "artist": "hazzard's cure",
@@ -172,17 +145,8 @@
       "spotify_uri": "spotify:track:44E6sUmgqWFkLxuwTMg172",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 538.65,
-      "end": 568.52
-    },
-    {
-      "artist": "huffy",
-      "title": "come down",
-      "spotify_uri": "spotify:track:6K1RqsCoFKl5seGz2SGdRR",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 568.52,
-      "end": 598.47
+      "start": 448.88,
+      "end": 478.75
     },
     {
       "artist": "jsmn",
@@ -190,8 +154,8 @@
       "spotify_uri": "spotify:track:0BElpK18Rka60Dm4qYYTDR",
       "audio_source": "itunes",
       "duration": 29.86,
-      "start": 598.47,
-      "end": 628.33
+      "start": 478.75,
+      "end": 508.61
     },
     {
       "artist": "jsmn",
@@ -199,8 +163,8 @@
       "spotify_uri": "spotify:track:1WKfw4lL8xFxNB1V5gUYfQ",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 628.33,
-      "end": 658.28
+      "start": 508.61,
+      "end": 538.56
     },
     {
       "artist": "jsmn",
@@ -208,8 +172,8 @@
       "spotify_uri": "spotify:track:09FZ0LqlfRfexYYpFF28wB",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 658.28,
-      "end": 688.23
+      "start": 538.56,
+      "end": 568.51
     },
     {
       "artist": "justjovani",
@@ -217,8 +181,8 @@
       "spotify_uri": "spotify:track:0wlTWpAtJocympX0I08qYL",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 688.23,
-      "end": 718.18
+      "start": 568.51,
+      "end": 598.46
     },
     {
       "artist": "justjovani",
@@ -226,8 +190,8 @@
       "spotify_uri": "spotify:track:7dEIbyqxRCePmSscQgJaVz",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 718.18,
-      "end": 748.13
+      "start": 598.46,
+      "end": 628.41
     },
     {
       "artist": "justyn myers",
@@ -235,8 +199,8 @@
       "spotify_uri": "spotify:track:6nCPvs00ecGTqNdX7IwBvL",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 748.13,
-      "end": 778.0
+      "start": 628.41,
+      "end": 658.28
     },
     {
       "artist": "lindsey webster",
@@ -244,8 +208,8 @@
       "spotify_uri": "spotify:track:0t2HshZ08EhED905i6S302",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 778.0,
-      "end": 807.95
+      "start": 658.28,
+      "end": 688.23
     },
     {
       "artist": "lindsey webster",
@@ -253,8 +217,8 @@
       "spotify_uri": "spotify:track:19f4zBn8h8KnmLPQp1JPll",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 807.95,
-      "end": 837.82
+      "start": 688.23,
+      "end": 718.1
     },
     {
       "artist": "lindsey webster",
@@ -262,8 +226,8 @@
       "spotify_uri": "spotify:track:5ju4A9S7YAudIzt2ujGhiu",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 837.82,
-      "end": 867.69
+      "start": 718.1,
+      "end": 747.97
     },
     {
       "artist": "marbled eye",
@@ -271,8 +235,8 @@
       "spotify_uri": "spotify:track:4Nr3OHMRnElu67iM6ev50y",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 867.69,
-      "end": 897.56
+      "start": 747.97,
+      "end": 777.84
     },
     {
       "artist": "marbled eye",
@@ -280,8 +244,8 @@
       "spotify_uri": "spotify:track:6wpAP2LALT9oKRYmA8hqXp",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 897.56,
-      "end": 927.51
+      "start": 777.84,
+      "end": 807.79
     },
     {
       "artist": "marbled eye",
@@ -289,8 +253,8 @@
       "spotify_uri": "spotify:track:12FrnS6ZB3874QiXeknOkJ",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 927.51,
-      "end": 957.46
+      "start": 807.79,
+      "end": 837.74
     },
     {
       "artist": "matt jaffe",
@@ -298,8 +262,8 @@
       "spotify_uri": "spotify:track:4eQPjq8HfCXxL97fykXhhL",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 957.46,
-      "end": 987.41
+      "start": 837.74,
+      "end": 867.69
     },
     {
       "artist": "matt jaffe",
@@ -307,8 +271,8 @@
       "spotify_uri": "spotify:track:6Td8TSksL21POEeovoAvlZ",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 987.41,
-      "end": 1017.36
+      "start": 867.69,
+      "end": 897.64
     },
     {
       "artist": "matt jaffe",
@@ -316,17 +280,8 @@
       "spotify_uri": "spotify:track:0MmstTnVp5YZlDujJidMcz",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 1017.36,
-      "end": 1047.31
-    },
-    {
-      "artist": "prettyboy chance",
-      "title": "dance with me",
-      "spotify_uri": "spotify:track:0ld6WXgzxyfEoQ34yhHLj5",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1047.31,
-      "end": 1077.26
+      "start": 897.64,
+      "end": 927.59
     },
     {
       "artist": "sleepbomb",
@@ -334,8 +289,8 @@
       "spotify_uri": "spotify:track:2LtjOzwHbThfRTLBquiGBj",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 1077.26,
-      "end": 1107.21
+      "start": 927.59,
+      "end": 957.54
     },
     {
       "artist": "sleepbomb",
@@ -343,8 +298,107 @@
       "spotify_uri": "spotify:track:0isnbewjYB4OPT72jXFpwH",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 1107.21,
-      "end": 1137.16
+      "start": 957.54,
+      "end": 987.49
+    },
+    {
+      "artist": "sleepbomb",
+      "title": "forged in steel",
+      "spotify_uri": "spotify:track:55F0n5V0OgkZriByzGvl6O",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 987.49,
+      "end": 1017.44
+    },
+    {
+      "artist": "stevie bill",
+      "title": "hahaha",
+      "spotify_uri": "spotify:track:4Fa0B5ldh4uw1ZUXWfCSTZ",
+      "audio_source": "itunes",
+      "duration": 29.96,
+      "start": 1017.44,
+      "end": 1047.4
+    },
+    {
+      "artist": "stevie bill",
+      "title": "poison",
+      "spotify_uri": "spotify:track:5StQDoFQTDElQjMnfk8qIy",
+      "audio_source": "itunes",
+      "duration": 29.94,
+      "start": 1047.4,
+      "end": 1077.34
+    },
+    {
+      "artist": "stevie bill",
+      "title": "indigo",
+      "spotify_uri": "spotify:track:3cxBEkmOaCVUdJOkgF8lJb",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1077.34,
+      "end": 1107.29
+    },
+    {
+      "artist": "sympathy flowers",
+      "title": "apparition",
+      "spotify_uri": "spotify:track:0nXeRCpICHq9YFBiOAXVvx",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1107.29,
+      "end": 1137.24
+    },
+    {
+      "artist": "sympathy flowers",
+      "title": "in solitude",
+      "spotify_uri": "spotify:track:60vpPG82nUdMx1VT75beEa",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1137.24,
+      "end": 1167.19
+    },
+    {
+      "artist": "sympathy flowers",
+      "title": "veil",
+      "spotify_uri": "spotify:track:4tsLRm2DSh5Hu4U61ORGrX",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1167.19,
+      "end": 1197.14
+    },
+    {
+      "artist": "tchami",
+      "title": "praise",
+      "spotify_uri": "spotify:track:6b42A4qusQFLVD7ZBzMipP",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1197.14,
+      "end": 1227.09
+    },
+    {
+      "artist": "tchami",
+      "title": "adieu",
+      "spotify_uri": "spotify:track:53Us5C3wTQ2zi6ODWhmHMN",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1227.09,
+      "end": 1257.04
+    },
+    {
+      "artist": "tchami",
+      "title": "shades",
+      "spotify_uri": "spotify:track:3l4AkHU1PoC4dWJPT61NzM",
+      "audio_source": "itunes",
+      "duration": 29.94,
+      "start": 1257.04,
+      "end": 1286.98
+    },
+    {
+      "artist": "alesso",
+      "title": "heroes (we could be)",
+      "spotify_uri": "spotify:track:3zU9rdflI65tK4dkkNSp77",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1286.98,
+      "end": 1316.85
     }
   ]
 }
