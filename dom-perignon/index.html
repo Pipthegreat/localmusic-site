@@ -34,7 +34,11 @@
   --carbon-700: oklch(36% 0.018 240);
   --carbon-900: oklch(20% 0.014 240);
 
-  --bg-canvas:        var(--carbon-50);
+  /* v1.5.11 — canvas darkened from carbon-50 (≈98.5% L) to a soft
+     cool-tinted neutral around 93% L. Distinct from tan, still light
+     enough to read against, but with enough body that pale-gold
+     champagne bubbles + cream highlights stop disappearing into it. */
+  --bg-canvas:        oklch(93% 0.012 240);
   --bg-surface:       #ffffff;
   --bg-sunken:        var(--carbon-100);
   --fg-default:       var(--carbon-900);
@@ -304,6 +308,10 @@ h1.display em {
   overflow: hidden;
   border-bottom: 1px solid var(--border-subtle);
 }
+/* Theme-world cards get a 30% taller preview so the recoloured page
+   underneath has room to read. Reads as a more cinematic "tall poster"
+   tile next to the wider overlay tiles. */
+.card.is-theme .card-preview { aspect-ratio: 16 / 13; }
 .card-preview iframe {
   position: absolute;
   inset: 0;
@@ -312,17 +320,32 @@ h1.display em {
   border: 0;
   display: block;
 }
+/* Preview-unavailable placeholder (Gravity Well). Pure black box with
+   centred light type so it visibly announces "this one isn't running
+   here" rather than blending in as another light tile. */
 .preview-unavailable {
   position: absolute;
   inset: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: var(--fg-muted);
-  font: 500 10px/1 var(--mono);
-  letter-spacing: 0.20em;
+  gap: 6px;
+  text-align: center;
+  padding: 18px;
+  color: oklch(78% 0.012 240);
+  background: #0a0d12;
+}
+.preview-unavailable .pu-headline {
+  font: 600 11px/1.2 var(--mono);
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  background: var(--carbon-100);
+  color: #fff;
+}
+.preview-unavailable .pu-sub {
+  font: 400 12px/1.4 var(--sans);
+  color: oklch(72% 0.012 240);
+  max-width: 22ch;
 }
 .card-num {
   position: absolute;
@@ -406,6 +429,23 @@ h1.display em {
   background: var(--cobalt-950);
   color: var(--fg-on-accent);
   border-color: var(--cobalt-950);
+}
+/* Disabled card-try (Gravity Well): visibly inert. Stronger contrast
+   than the default muted look so users can read the "not here"
+   message. */
+.card-try:disabled,
+.card-try[disabled] {
+  color: var(--fg-strong);
+  background: var(--bg-sunken);
+  border-color: var(--border-emphasis);
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+.card-try:disabled:hover,
+.card-try[disabled]:hover {
+  background: var(--bg-sunken);
+  border-color: var(--border-emphasis);
+  color: var(--fg-strong);
 }
 
 /* ─── Mystery tile (>_) ─────────────────────────────────────────── */
@@ -540,28 +580,34 @@ h1.display em {
   margin: 0; padding: 0;
   list-style: none;
   counter-reset: step;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 14px;
 }
+/* Flex (not grid) on the li so inline content — <strong>, links —
+   stays in the same flex item as its surrounding text. Grid was making
+   <strong>Developer mode</strong> jump to its own row, which is what
+   was breaking the install steps before v1.5.11. */
 .install-right li {
   counter-increment: step;
-  display: grid;
-  grid-template-columns: 32px 1fr;
-  gap: 12px;
+  display: flex;
   align-items: baseline;
+  gap: 12px;
   font: 400 14px/1.5 var(--sans);
   color: var(--fg-default);
 }
 .install-right li::before {
   content: counter(step);
-  font: 500 11px/1 var(--mono);
-  color: var(--accent);
-  background: var(--cobalt-100);
+  flex: 0 0 28px;
+  font: 600 11px/1 var(--mono);
+  color: var(--fg-on-accent);
+  background: var(--accent);
   text-align: center;
-  padding: 6px 0;
+  padding: 7px 0;
   border-radius: 999px;
   letter-spacing: 0;
 }
+.install-right li > * { flex: 1; min-width: 0; }
 .install-right code {
   font: 500 12.5px/1 var(--mono);
   background: #fff;
@@ -592,11 +638,29 @@ footer {
   text-transform: uppercase;
   color: var(--fg-muted);
 }
-footer a { color: inherit; border-bottom: 1px dotted oklch(56% 0.016 240 / 0.4); }
-footer a:hover { color: var(--fg-strong); text-decoration: none; }
+/* Footer links: cobalt accent + solid underline so Privacy is obviously
+   a URL, not just slightly emphasised text. */
+footer a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+footer a:hover {
+  color: var(--cobalt-800);
+  text-decoration-thickness: 2px;
+}
 /* The "© 2026" hides the Stage Watermark download. Plain text styling
    so it doesn't read as a link. */
-footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
+footer .copyhide {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: none;
+}
+footer .copyhide:hover {
+  color: inherit;
+  text-decoration: none;
+}
 </style>
 </head>
 <body>
@@ -610,8 +674,8 @@ footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
       DOM Pérignon
     </div>
     <div class="head-right">
-      <span class="version-chip">v1.5.10</span>
-      <a class="download-pill" href="downloads/dom-perignon-v1.5.10.zip" download>
+      <span class="version-chip">v1.5.11</span>
+      <a class="download-pill" href="downloads/dom-perignon-v1.5.11.zip" download>
         Download <span class="arrow">↓</span>
       </a>
     </div>
@@ -623,13 +687,15 @@ footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
       <h1 class="display"><em>DOM</em> Pérignon</h1>
       <p class="lede">
         Named after the innovator <a href="https://en.wikipedia.org/wiki/Dom_P%C3%A9rignon_(monk)" target="_blank" rel="noopener">Dom Pierre Pérignon</a>.
-        The DOM is the live tree of every web page's elements — and this extension
-        uses it for fifteen different perspectives.
+        The DOM is the live tree of every web page's elements. This extension
+        gives you fifteen ways to mess with it: eight live overlays that
+        paint on top of any page, and seven theme worlds that recolor and
+        re-type everything underneath.
       </p>
     </div>
     <ul class="bullets">
       <li><span class="num">8</span><span><strong>Overlays</strong> — live DOM animations painted on top of the page</span></li>
-      <li><span class="num">7</span><span><strong>Theme worlds</strong> — full graphic overrides for the page underneath</span></li>
+      <li><span class="num">7</span><span><strong>Theme Worlds</strong> — full graphic overrides for the page underneath</span></li>
       <li><span class="num">×</span><span>Run one of each at the same time, or just one, or neither</span></li>
       <li><span class="num">↓</span><span>Click any tile below to <strong>apply it to this page</strong></span></li>
     </ul>
@@ -695,12 +761,15 @@ footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
     <div class="card">
       <div class="card-preview">
         <span class="card-num">05</span>
-        <div class="preview-unavailable">Preview off · open it on a real page</div>
+        <div class="preview-unavailable">
+          <span class="pu-headline">Preview off</span>
+          <span class="pu-sub">Gravity Well tears the page apart — needs a real one, not a thumbnail.</span>
+        </div>
       </div>
       <div class="card-meta">
         <h3 class="card-title">Gravity Well</h3>
         <p class="card-desc">Page elements fall and pile. Click any falling piece to rescue.</p>
-        <button class="card-try" type="button" data-overlay="gravity-well" disabled>Open it elsewhere</button>
+        <button class="card-try" type="button" data-overlay="gravity-well" disabled>Not previewable</button>
       </div>
     </div>
 
@@ -745,13 +814,13 @@ footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
   <!-- ═══════════════ Section 02 ═══════════════ -->
   <div class="section-rule">
     <span class="num-plate">02</span>
-    <h2>Theme worlds</h2>
+    <h2>Theme Worlds</h2>
     <span class="meta">Full graphic overrides · CSS only</span>
   </div>
 
   <div class="grid">
 
-    <div class="card">
+    <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">09</span>
         <iframe src="demo.html?theme=tubular" loading="lazy" title="Tubular preview"></iframe>
@@ -763,7 +832,7 @@ footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
       </div>
     </div>
 
-    <div class="card">
+    <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">10</span>
         <iframe src="demo.html?theme=arcade" loading="lazy" title="Arcade preview"></iframe>
@@ -775,7 +844,7 @@ footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
       </div>
     </div>
 
-    <div class="card">
+    <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">11</span>
         <iframe src="demo.html?theme=buzzbin" loading="lazy" title="Buzzbin preview"></iframe>
@@ -787,7 +856,7 @@ footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
       </div>
     </div>
 
-    <div class="card">
+    <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">12</span>
         <iframe src="demo.html?theme=vapor" loading="lazy" title="Vaporwave preview"></iframe>
@@ -799,7 +868,7 @@ footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
       </div>
     </div>
 
-    <div class="card">
+    <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">13</span>
         <iframe src="demo.html?theme=press" loading="lazy" title="Press preview"></iframe>
@@ -811,7 +880,7 @@ footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
       </div>
     </div>
 
-    <div class="card">
+    <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">14</span>
         <iframe src="demo.html?theme=blueprint" loading="lazy" title="Blueprint preview"></iframe>
@@ -823,7 +892,7 @@ footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
       </div>
     </div>
 
-    <div class="card">
+    <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">15</span>
         <iframe src="demo.html?theme=chalkboard" loading="lazy" title="Chalkboard preview"></iframe>
@@ -835,7 +904,7 @@ footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
       </div>
     </div>
 
-    <div class="card mystery">
+    <div class="card mystery is-theme">
       <div class="card-preview">
         <span class="card-num">??</span>
         <div class="ezr-glyph">&gt;_</div>
@@ -862,9 +931,9 @@ footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
   <div class="install">
     <div class="install-left">
       <h3>Get the extension</h3>
-      <span class="filename">dom-perignon-v1.5.10.zip · ~120 KB · MV3 · no telemetry</span>
+      <span class="filename">dom-perignon-v1.5.11.zip · ~120 KB · MV3 · no telemetry</span>
       <p class="note">A self-contained Chrome extension. No servers, no analytics. Loads in unpacked mode.</p>
-      <a class="cta" href="downloads/dom-perignon-v1.5.10.zip" download>↓ Download the zip</a>
+      <a class="cta" href="downloads/dom-perignon-v1.5.11.zip" download>↓ Download the zip</a>
     </div>
     <div class="install-right">
       <ol>
@@ -882,7 +951,7 @@ footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
 
   <footer>
     <span><a class="copyhide" href="downloads/stage-watermark-v1.0.0.zip" download title="">© 2026</a> · customprojects.info · <a href="privacy.html">Privacy</a></span>
-    <span>DOM Pérignon v1.5.10</span>
+    <span>DOM Pérignon v1.5.11</span>
   </footer>
 
 </div>
