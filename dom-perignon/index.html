@@ -34,7 +34,7 @@
   --carbon-700: oklch(36% 0.018 240);
   --carbon-900: oklch(20% 0.014 240);
 
-  /* v1.5.24 — canvas darkened from carbon-50 (≈98.5% L) to a soft
+  /* v1.5.25 — canvas darkened from carbon-50 (≈98.5% L) to a soft
      cool-tinted neutral around 93% L. Distinct from tan, still light
      enough to read against, but with enough body that pale-gold
      champagne bubbles + cream highlights stop disappearing into it. */
@@ -312,14 +312,18 @@ h1.display em {
    underneath has room to read. Reads as a more cinematic "tall poster"
    tile next to the wider overlay tiles. */
 .card.is-theme .card-preview { aspect-ratio: 16 / 13; }
+.card-preview iframe,
 .card-preview img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  border: 0;
+  display: block;
+}
+.card-preview img {
   object-fit: cover;
   object-position: top center;
-  display: block;
 }
 /* Preview-unavailable placeholder (Gravity Well). Pure black box with
    centred light type so it visibly announces "this one isn't running
@@ -588,7 +592,7 @@ h1.display em {
 /* Flex (not grid) on the li so inline content — <strong>, links —
    stays in the same flex item as its surrounding text. Grid was making
    <strong>Developer mode</strong> jump to its own row, which is what
-   was breaking the install steps before v1.5.24. */
+   was breaking the install steps before v1.5.25. */
 .install-right li {
   counter-increment: step;
   display: flex;
@@ -675,8 +679,8 @@ footer .copyhide:hover {
       DOM Pérignon
     </div>
     <div class="head-right">
-      <span class="version-chip">v1.5.24</span>
-      <a class="download-pill" href="downloads/dom-perignon-v1.5.24.zip" download>
+      <span class="version-chip">v1.5.25</span>
+      <a class="download-pill" href="downloads/dom-perignon-v1.5.25.zip" download>
         Download <span class="arrow">↓</span>
       </a>
     </div>
@@ -714,7 +718,7 @@ footer .copyhide:hover {
     <div class="card popular">
       <div class="card-preview">
         <span class="card-num">01</span>
-        <img src="previews/ants.png" alt="Ants preview" loading="lazy">
+        <iframe src="demo.html?overlay=ants" data-png="previews/ants.png" loading="lazy" title="Ants preview"></iframe>
       </div>
       <div class="card-meta">
         <h3 class="card-title">Ants <span class="card-badge card-badge-popular">Popular</span></h3>
@@ -726,7 +730,7 @@ footer .copyhide:hover {
     <div class="card signature">
       <div class="card-preview">
         <span class="card-num">02</span>
-        <img src="previews/champagne.png" alt="Champagne Bubbles preview" loading="lazy">
+        <iframe src="demo.html?overlay=champagne" data-png="previews/champagne.png" loading="lazy" title="Champagne Bubbles preview"></iframe>
       </div>
       <div class="card-meta">
         <h3 class="card-title">Champagne Bubbles <span class="card-badge card-badge-signature">House</span></h3>
@@ -738,7 +742,7 @@ footer .copyhide:hover {
     <div class="card">
       <div class="card-preview">
         <span class="card-num">03</span>
-        <img src="previews/dynamic-logo.png" alt="Logo Bounce House preview" loading="lazy">
+        <iframe src="demo.html?overlay=dynamic-logo" data-png="previews/dynamic-logo.png" loading="lazy" title="Logo Bounce House preview"></iframe>
       </div>
       <div class="card-meta">
         <h3 class="card-title">Logo Bounce House</h3>
@@ -750,7 +754,7 @@ footer .copyhide:hover {
     <div class="card">
       <div class="card-preview">
         <span class="card-num">04</span>
-        <img src="previews/quotes.png" alt="You Got This preview" loading="lazy">
+        <iframe src="demo.html?overlay=quotes" data-png="previews/quotes.png" loading="lazy" title="You Got This preview"></iframe>
       </div>
       <div class="card-meta">
         <h3 class="card-title">You Got This</h3>
@@ -777,7 +781,7 @@ footer .copyhide:hover {
     <div class="card">
       <div class="card-preview">
         <span class="card-num">06</span>
-        <img src="previews/aquarium.png" alt="Aquarium preview" loading="lazy">
+        <iframe src="demo.html?overlay=aquarium" data-png="previews/aquarium.png" loading="lazy" title="Aquarium preview"></iframe>
       </div>
       <div class="card-meta">
         <h3 class="card-title">Aquarium</h3>
@@ -789,7 +793,7 @@ footer .copyhide:hover {
     <div class="card">
       <div class="card-preview">
         <span class="card-num">07</span>
-        <img src="previews/googly.png" alt="Watchers preview" loading="lazy">
+        <iframe src="demo.html?overlay=googly" data-png="previews/googly.png" loading="lazy" title="Watchers preview"></iframe>
       </div>
       <div class="card-meta">
         <h3 class="card-title">Watchers</h3>
@@ -801,7 +805,7 @@ footer .copyhide:hover {
     <div class="card">
       <div class="card-preview">
         <span class="card-num">08</span>
-        <img src="previews/dvd.png" alt="DVD Bouncer preview" loading="lazy">
+        <iframe src="demo.html?overlay=dvd" data-png="previews/dvd.png" loading="lazy" title="DVD Bouncer preview"></iframe>
       </div>
       <div class="card-meta">
         <h3 class="card-title">DVD Bouncer</h3>
@@ -824,7 +828,7 @@ footer .copyhide:hover {
     <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">09</span>
-        <img src="previews/tubular.png" alt="Tubular preview" loading="lazy">
+        <iframe src="demo.html?theme=tubular" data-png="previews/tubular.png" loading="lazy" title="Tubular preview"></iframe>
       </div>
       <div class="card-meta">
         <h3 class="card-title">Tubular</h3>
@@ -836,7 +840,7 @@ footer .copyhide:hover {
     <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">10</span>
-        <img src="previews/arcade.png" alt="Arcade preview" loading="lazy">
+        <iframe src="demo.html?theme=arcade" data-png="previews/arcade.png" loading="lazy" title="Arcade preview"></iframe>
       </div>
       <div class="card-meta">
         <h3 class="card-title">Arcade</h3>
@@ -848,7 +852,7 @@ footer .copyhide:hover {
     <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">11</span>
-        <img src="previews/buzzbin.png" alt="Buzzbin preview" loading="lazy">
+        <iframe src="demo.html?theme=buzzbin" data-png="previews/buzzbin.png" loading="lazy" title="Buzzbin preview"></iframe>
       </div>
       <div class="card-meta">
         <h3 class="card-title">Buzzbin</h3>
@@ -860,7 +864,7 @@ footer .copyhide:hover {
     <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">12</span>
-        <img src="previews/vapor.png" alt="Vaporwave preview" loading="lazy">
+        <iframe src="demo.html?theme=vapor" data-png="previews/vapor.png" loading="lazy" title="Vaporwave preview"></iframe>
       </div>
       <div class="card-meta">
         <h3 class="card-title">Vaporwave</h3>
@@ -872,7 +876,7 @@ footer .copyhide:hover {
     <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">13</span>
-        <img src="previews/press.png" alt="Press preview" loading="lazy">
+        <iframe src="demo.html?theme=press" data-png="previews/press.png" loading="lazy" title="Press preview"></iframe>
       </div>
       <div class="card-meta">
         <h3 class="card-title">Press</h3>
@@ -884,7 +888,7 @@ footer .copyhide:hover {
     <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">14</span>
-        <img src="previews/blueprint.png" alt="Blueprint preview" loading="lazy">
+        <iframe src="demo.html?theme=blueprint" data-png="previews/blueprint.png" loading="lazy" title="Blueprint preview"></iframe>
       </div>
       <div class="card-meta">
         <h3 class="card-title">Blueprint</h3>
@@ -896,7 +900,7 @@ footer .copyhide:hover {
     <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">15</span>
-        <img src="previews/chalkboard.png" alt="Chalkboard preview" loading="lazy">
+        <iframe src="demo.html?theme=chalkboard" data-png="previews/chalkboard.png" loading="lazy" title="Chalkboard preview"></iframe>
       </div>
       <div class="card-meta">
         <h3 class="card-title">Chalkboard</h3>
@@ -932,9 +936,9 @@ footer .copyhide:hover {
   <div class="install">
     <div class="install-left">
       <h3>Get the extension</h3>
-      <span class="filename">dom-perignon-v1.5.24.zip · ~120 KB · MV3 · no telemetry</span>
+      <span class="filename">dom-perignon-v1.5.25.zip · ~120 KB · MV3 · no telemetry</span>
       <p class="note">A self-contained Chrome extension. No servers, no analytics. Loads in unpacked mode.</p>
-      <a class="cta" href="downloads/dom-perignon-v1.5.24.zip" download>↓ Download the zip</a>
+      <a class="cta" href="downloads/dom-perignon-v1.5.25.zip" download>↓ Download the zip</a>
     </div>
     <div class="install-right">
       <ol>
@@ -952,7 +956,7 @@ footer .copyhide:hover {
 
   <footer>
     <span><a class="copyhide" href="downloads/stage-watermark-v1.0.0.zip" download title="">© 2026</a> · customprojects.info · <a href="privacy.html">Privacy</a></span>
-    <span>DOM Pérignon v1.5.24</span>
+    <span>DOM Pérignon v1.5.25</span>
   </footer>
 
 </div>
@@ -968,7 +972,7 @@ footer .copyhide:hover {
   //
   // The "what's active" check reads inject.js's NS.currentOverlay /
   // NS.currentTheme directly instead of tracking it in a local var. In
-  // v1.5.24 the local tracker could desync from the actual runtime
+  // v1.5.25 the local tracker could desync from the actual runtime
   // (page interactions, late-arriving init resolves) so a "deactivate"
   // click sometimes hit the wrong branch and needed a second tap.
   // Reading from NS at the start of each click means we always operate
@@ -1067,6 +1071,67 @@ footer .copyhide:hover {
       btn.addEventListener('click', () => toggle('theme', btn.dataset.theme));
     });
   })();
+</script>
+
+<!-- ── Preview-iframe fallback to static PNG ─────────────────────────────
+     v1.5.25. The preview iframes load demo.html?overlay=X / ?theme=X and
+     run the real hijink JS. On most networks this works perfectly. On
+     corporate networks (proxy blocks fonts.googleapis.com, ad blocker
+     swallows ext/hacks/* by extension, captive portal, ...) the iframe
+     loads its mock HTML but the hijink JS never activates, so the card
+     sits showing only the static Kestrel mock with nothing happening.
+     This script checks each iframe ~5s after the page loads. If the
+     iframe's documentElement has no `dp-<name>-on` class (theme) AND
+     no `#__dom-perignon-root` element (overlay), we conclude activation
+     failed and swap the iframe for the static PNG screenshot living
+     in /previews/. The PNG was captured via headless Chromium driving
+     a live activated demo.html, so the swap is visually equivalent —
+     just frozen instead of animated.
+
+     Same-origin iframe: contentDocument is reachable. Cross-origin
+     would throw on access; we catch and treat as "not activated"
+     which falls through to the PNG fallback. -->
+<script>
+(function () {
+  function isActivated(iframe) {
+    try {
+      const doc = iframe.contentDocument;
+      if (!doc || !doc.documentElement) return false;
+      const cls = doc.documentElement.className || '';
+      if (/\bdp-[a-z0-9-]+-on\b/.test(cls)) return true;
+      if (doc.getElementById('__dom-perignon-root')) return true;
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+  function swapToPng(iframe) {
+    const png = iframe.dataset.png;
+    const title = iframe.title || 'Preview';
+    if (!png) return;
+    const img = document.createElement('img');
+    img.src = png;
+    img.alt = title;
+    img.loading = 'lazy';
+    iframe.parentNode.replaceChild(img, iframe);
+  }
+  function checkAll() {
+    document.querySelectorAll('iframe[data-png]').forEach(iframe => {
+      if (!isActivated(iframe)) swapToPng(iframe);
+    });
+  }
+  // Check 5s after window.load. Iframes typically activate within 1-2s
+  // on a healthy network; 5s gives generous slack for slow connections
+  // before declaring failure. Re-check at 10s in case a slow iframe
+  // recovers between 5s and 10s — by then anything that's still inert
+  // is genuinely not going to work and gets swapped.
+  function schedule() {
+    setTimeout(checkAll, 5000);
+    setTimeout(checkAll, 10000);
+  }
+  if (document.readyState === 'complete') schedule();
+  else window.addEventListener('load', schedule);
+})();
 </script>
 
 </body>
