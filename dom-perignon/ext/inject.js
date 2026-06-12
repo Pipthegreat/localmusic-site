@@ -187,5 +187,33 @@
     }
   });
 
+  // v1.5.21 — listen to chrome.storage directly so EVERY tab catches
+  // storage changes the moment they happen, not only when the popup
+  // remembers to broadcast and only to tabs the broadcast reaches.
+  // popup.js's broadcastReactivate stays in place as belt-and-braces.
+  if (chrome.storage && chrome.storage.onChanged) {
+    chrome.storage.onChanged.addListener((changes, area) => {
+      if (area !== 'local') return;
+      if (changes.activeOverlay || changes.activeTheme ||
+          changes.enabled || changes.greenMode || changes.redMode) {
+        reactivateFromStorage();
+      }
+    });
+  }
+
+  // v1.5.21 — bfcache rescue. When the user navigates away from a page
+  // with a theme/overlay applied and then back, Chrome restores the
+  // page from the back-forward cache complete with all injected DOM
+  // (class on <html>, <style> elements, overlay roots) but does NOT
+  // re-run the content script. If the user disabled the extension or
+  // changed selection while we were "gone", the bfcached page would
+  // come back showing the OLD state. pageshow with persisted=true
+  // fires only on bfcache restore, so calling reactivateFromStorage
+  // there re-syncs with whatever storage now says — including tearing
+  // everything down if the user turned the extension off entirely.
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) reactivateFromStorage();
+  });
+
   reactivateFromStorage();
 })();
