@@ -11,11 +11,28 @@
   0%   { background-position: 0 0, 0 0; }
   100% { background-position: 0 60px, 0 60px; }
 }
+/* Sky shifts slowly between four pastel stops. background-size is 100%
+   200% (twice the viewport tall) so animating background-position from
+   0 0 to 0 100% slides which slice of the gradient sits at the horizon
+   — the sky reads as a slow tonal drift, not as a colour change. */
+@keyframes dp-vapor-sky {
+  0%, 100% { background-position: 0 0%; }
+  50%      { background-position: 0 100%; }
+}
+/* Sun breathes — drop-shadow halo expands and contracts so the
+   horizon has a heartbeat. Paired with the gradient drift, vaporwave
+   ends up the most overtly-moving of the theme worlds. */
+@keyframes dp-vapor-sun {
+  0%, 100% { filter: drop-shadow(0 0 40px rgba(255,180,210,0.80)); }
+  50%      { filter: drop-shadow(0 0 90px rgba(255,180,210,0.95)); }
+}
 
 html.dp-vapor-on {
   background-color: #c1a4ff !important;
-  background-image: linear-gradient(180deg, #f7c6f7 0%, #c1a4ff 40%, #7adfff 80%, #fdb8c5 100%) !important;
+  background-image: linear-gradient(180deg, #f7c6f7 0%, #c1a4ff 35%, #7adfff 70%, #fdb8c5 100%) !important;
+  background-size: 100% 200% !important;
   background-attachment: fixed !important;
+  animation: dp-vapor-sky 22s ease-in-out infinite !important;
   color-scheme: light !important;
 }
 html.dp-vapor-on body {
@@ -25,7 +42,7 @@ html.dp-vapor-on body {
   font-family: 'Space Grotesk', 'Inter', sans-serif !important;
 }
 
-/* Pink sun glow on horizon */
+/* Pink sun on horizon — drop-shadow halo breathes via dp-vapor-sun. */
 html.dp-vapor-on body::before {
   content: '' !important;
   position: fixed !important; inset: 0 !important;
@@ -34,6 +51,7 @@ html.dp-vapor-on body::before {
     radial-gradient(circle at 50% 78%, rgba(255,180,210,0.85) 0%, rgba(255,180,210,0) 22%),
     radial-gradient(circle at 50% 78%, #ffe4f0 0%, #ffe4f0 12%, transparent 12.4%) !important;
   filter: drop-shadow(0 0 40px rgba(255,180,210,0.8)) !important;
+  animation: dp-vapor-sun 6s ease-in-out infinite !important;
 }
 
 /* Perspective grid floor */
