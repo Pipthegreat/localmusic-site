@@ -384,24 +384,30 @@ footer .meta span + span::before { content: "·"; margin: 0 8px; color: var(--bo
     sendMessage: () => Promise.resolve(),
   };
 </script>
-<!-- v1.5.12 — kill the subtle heading-shake on tubular/chalkboard inside
-     thumbnail previews. The 2px-at-92% jitter and 0.3s scribble vibration
-     read as subtle on a full-size page but as dramatic shake at 296×185
-     thumbnail scale, which made gallery viewers think the actual theme
-     was shaking the whole page. The override only lives in demo.html, so
-     the extension's behaviour on real pages is unchanged. -->
+<!-- v1.5.15 — kill the heading-shake on tubular/chalkboard inside
+     thumbnail previews. The 2px-at-92% jitter and 0.3s scribble
+     vibration read as subtle on a full-size page but as dramatic
+     shake at 296×185 thumbnail scale. The override only lives in
+     demo.html, so the extension's behaviour on real pages is
+     unchanged.
+
+     IMPORTANT: tubular.css and chalkboard.css are loaded LATER than
+     this <style> (the hack scripts inject them at runtime), so equal
+     specificity loses the cascade. The doubled `.dp-*-on.dp-*-on`
+     class repeat bumps specificity from (0,1,3) to (0,2,3), which
+     beats the original rule regardless of cascade order. -->
 <style>
-  html.dp-tubular-on body h1,
-  html.dp-tubular-on body h2,
-  html.dp-tubular-on body h3,
-  html.dp-tubular-on body h4,
-  html.dp-tubular-on body h5,
-  html.dp-tubular-on body h6,
-  html.dp-chalkboard-on body h2,
-  html.dp-chalkboard-on body h3,
-  html.dp-chalkboard-on body h4,
-  html.dp-chalkboard-on body h5,
-  html.dp-chalkboard-on body h6 {
+  html.dp-tubular-on.dp-tubular-on body h1,
+  html.dp-tubular-on.dp-tubular-on body h2,
+  html.dp-tubular-on.dp-tubular-on body h3,
+  html.dp-tubular-on.dp-tubular-on body h4,
+  html.dp-tubular-on.dp-tubular-on body h5,
+  html.dp-tubular-on.dp-tubular-on body h6,
+  html.dp-chalkboard-on.dp-chalkboard-on body h2,
+  html.dp-chalkboard-on.dp-chalkboard-on body h3,
+  html.dp-chalkboard-on.dp-chalkboard-on body h4,
+  html.dp-chalkboard-on.dp-chalkboard-on body h5,
+  html.dp-chalkboard-on.dp-chalkboard-on body h6 {
     animation: none !important;
   }
 </style>
