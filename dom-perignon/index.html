@@ -149,12 +149,17 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; text-decoratio
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 56px;
+  /* Bottom-align both columns so the bullets sit flush with the
+     lede's last line — keeps the divider tight against both halves
+     instead of leaving a visible dead zone under the shorter (right)
+     column. */
+  align-items: end;
   margin-bottom: 64px;
   padding-bottom: 56px;
   border-bottom: 1px solid var(--border-subtle);
 }
 @media (max-width: 880px) {
-  .hero { grid-template-columns: 1fr; gap: 24px; }
+  .hero { grid-template-columns: 1fr; gap: 24px; align-items: start; }
 }
 .kicker {
   font: 500 11px/1 var(--mono);
