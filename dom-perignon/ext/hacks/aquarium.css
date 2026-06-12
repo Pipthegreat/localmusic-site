@@ -1,8 +1,6 @@
 /* Aquarium Mode */
 
 /* ─── Water wash overlay ─────────────────────────────────────────── */
-/* All alphas dropped 20% in this round (× 0.8) to let the page breathe
-   through the tank more. */
 .dp-aqua-wash {
   position: fixed;
   inset: 0;
@@ -15,7 +13,7 @@
   mix-blend-mode: multiply;
 }
 
-/* ─── Caustic light shimmer at the top (water-surface refraction) ── */
+/* ─── Caustic light shimmer at the top ───────────────────────────── */
 .dp-aqua-caustic {
   position: fixed;
   top: 0;
@@ -59,6 +57,46 @@
   50%      { transform: scaleX(-1) rotate(3deg)  translateX(6px); }
 }
 
+/* Per-strand sway (v1.5.19). Each kelp blade rotates and skews on its
+   own period and offset, so the cluster reads as multiple swaying
+   blades instead of one rigid plant pivoting. transform-box: fill-box
+   pivots each <path> around its own bounding box. */
+.dp-aqua-kelp svg .dp-kelp-strand {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+.dp-aqua-kelp svg .dp-kelp-strand.s1 { animation: dp-kelp-sway-a 5.2s ease-in-out infinite; }
+.dp-aqua-kelp svg .dp-kelp-strand.s2 { animation: dp-kelp-sway-b 6.8s ease-in-out infinite -1.5s; }
+.dp-aqua-kelp svg .dp-kelp-strand.s3 { animation: dp-kelp-sway-a 4.4s ease-in-out infinite -3s; }
+.dp-aqua-kelp svg .dp-kelp-strand.s4 { animation: dp-kelp-sway-b 7.1s ease-in-out infinite -2s; }
+.dp-aqua-kelp svg .dp-kelp-strand.s5 { animation: dp-kelp-sway-a 5.6s ease-in-out infinite -4s; }
+
+@keyframes dp-kelp-sway-a {
+  0%, 100% { transform: rotate(-3deg) skewX(-1.5deg); }
+  50%      { transform: rotate(3deg)  skewX(1.5deg); }
+}
+@keyframes dp-kelp-sway-b {
+  0%, 100% { transform: rotate(2deg)  skewX(1deg); }
+  50%      { transform: rotate(-2deg) skewX(-1deg); }
+}
+
+/* Frond shimmer accents — small leaf-like shapes that twist on top of
+   the strands' sway. Fast period, staggered. */
+.dp-aqua-kelp svg .dp-kelp-frond {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: dp-kelp-frond 3.4s ease-in-out infinite;
+}
+.dp-aqua-kelp svg .dp-kelp-frond.f2 { animation-delay: -0.7s; }
+.dp-aqua-kelp svg .dp-kelp-frond.f3 { animation-delay: -1.4s; }
+.dp-aqua-kelp svg .dp-kelp-frond.f4 { animation-delay: -2.1s; }
+.dp-aqua-kelp svg .dp-kelp-frond.f5 { animation-delay: -2.8s; }
+
+@keyframes dp-kelp-frond {
+  0%, 100% { transform: scaleX(1)    rotate(-6deg); }
+  50%      { transform: scaleX(0.82) rotate(6deg); }
+}
+
 /* ─── Fish ─────────────────────────────────────────────────────────── */
 .dp-fish {
   position: fixed;
@@ -66,17 +104,76 @@
   pointer-events: none;
   will-change: transform;
   filter: drop-shadow(0 6px 10px oklch(20% 0.10 220 / 0.36));
-  /* Dropped from 0.7 → 0.56 (another 20% more translucent) */
   opacity: 0.56;
 }
-.dp-fish svg { width: 100%; height: 100%; display: block; }
-.dp-fish-tail {
+.dp-fish svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+/* Tail wiggle — rotate + slight scaleY squeeze for an organic motion
+   instead of a hard left-right pivot. */
+.dp-fish svg .dp-fish-tail {
+  transform-box: fill-box;
   transform-origin: 100% 50%;
-  animation: dp-fish-wiggle 320ms ease-in-out infinite;
+  animation: dp-fish-tail-wiggle 320ms ease-in-out infinite;
 }
-@keyframes dp-fish-wiggle {
-  0%, 100% { transform: rotate(-8deg); }
-  50%      { transform: rotate(8deg); }
+@keyframes dp-fish-tail-wiggle {
+  0%, 100% { transform: rotate(-12deg) scaleY(1); }
+  50%      { transform: rotate(12deg)  scaleY(0.92); }
+}
+
+/* Body flex — slow skew on the body ellipse to suggest a swimming
+   muscle pulse. Head-end pivot so the front stays put. */
+.dp-fish svg .dp-fish-body {
+  transform-box: fill-box;
+  transform-origin: 100% 50%;
+  animation: dp-fish-body-flex 640ms ease-in-out infinite alternate;
+}
+@keyframes dp-fish-body-flex {
+  0%   { transform: skewX(-2.5deg); }
+  100% { transform: skewX(2.5deg); }
+}
+
+/* Pectoral fin flutter — fast, asymmetric, pivots at body-side. */
+.dp-fish svg .dp-fish-pec {
+  transform-box: fill-box;
+  transform-origin: 100% 0%;
+  animation: dp-fish-pec-flutter 260ms ease-in-out infinite alternate;
+}
+@keyframes dp-fish-pec-flutter {
+  0%   { transform: rotate(-10deg); }
+  100% { transform: rotate(14deg); }
+}
+
+/* Eye blink — very brief vertical squish every few seconds. */
+.dp-fish svg .dp-fish-eye {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: dp-fish-blink 6.4s linear infinite;
+}
+@keyframes dp-fish-blink {
+  0%, 96%, 100% { transform: scaleY(1); }
+  98%           { transform: scaleY(0.08); }
+}
+
+/* Lionfish spines — top + bottom groups drift in opposite phases at a
+   slow tempo. Subtle scale + skew gives the spines a "drifting in
+   water" feel rather than rigid spikes. */
+.dp-fish svg .dp-lion-spines-top {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: dp-lion-spines-top 2.4s ease-in-out infinite;
+}
+.dp-fish svg .dp-lion-spines-bottom {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  animation: dp-lion-spines-bottom 2.4s ease-in-out infinite;
+}
+@keyframes dp-lion-spines-top {
+  0%, 100% { transform: skewX(-3deg) scaleY(1.02); }
+  50%      { transform: skewX(3deg)  scaleY(0.98); }
+}
+@keyframes dp-lion-spines-bottom {
+  0%, 100% { transform: skewX(3deg)  scaleY(1.02); }
+  50%      { transform: skewX(-3deg) scaleY(0.98); }
 }
 
 /* ─── Aquarium bubbles (clusters) ─────────────────────────────────── */
