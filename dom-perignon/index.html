@@ -149,13 +149,13 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; text-decoratio
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 56px;
-  /* Bottom-align both columns so the bullets sit flush with the
-     lede's last line — keeps the divider tight against both halves
-     instead of leaving a visible dead zone under the shorter (right)
-     column. */
   align-items: end;
-  margin-bottom: 64px;
-  padding-bottom: 56px;
+  /* Tightened gap from 64+56 to 24+28: the divider now hugs the bottom
+     of the lede / bullets, and the section-rule below sits ~52px below
+     instead of ~120. Less of a paragraph-break feel between hero and
+     gallery. */
+  margin-bottom: 24px;
+  padding-bottom: 28px;
   border-bottom: 1px solid var(--border-subtle);
 }
 @media (max-width: 880px) {
@@ -890,13 +890,21 @@ footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
 <script>
   // ─── Click-to-preview: applies a hijink to THIS page ────────────────
   // Lazy-load every hack script + inject.js on first click, then dispatch
-  // via NS.applySelection({ overlay, theme }) — the dual-slot API
-  // introduced in v1.5.3. Tracks one active button per slot so clicking
-  // an active button deactivates it.
+  // via NS.applySelection({ overlay, theme }).
+  //
+  // Single-active gallery behavior: clicking any tile clears whatever was
+  // running and starts the new one (regardless of slot). Click the active
+  // tile again to clear. The extension itself still supports dual-slot
+  // (one overlay + one theme together) — that just doesn't make sense on
+  // a small preview where most users want one effect at a time.
+  //
+  // Clicks are serialized through a single pending Promise so quick
+  // double-clicks can't race init() + teardown() of two hacks.
   (function () {
     let loadPromise = null;
-    let activeOverlay = null;
-    let activeTheme   = null;
+    let activeKind  = null;  // 'overlay' | 'theme' | null
+    let activeId    = null;
+    let pending     = Promise.resolve();
 
     function ensureLoaded() {
       if (loadPromise) return loadPromise;
@@ -935,25 +943,40 @@ footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
     }
 
     function refreshButtonState() {
+      const ovId = (activeKind === 'overlay') ? activeId : null;
+      const thId = (activeKind === 'theme')   ? activeId : null;
       document.querySelectorAll('[data-overlay]').forEach(b => {
-        b.classList.toggle('active', !!activeOverlay && b.dataset.overlay === activeOverlay);
+        b.classList.toggle('active', !!ovId && b.dataset.overlay === ovId);
       });
       document.querySelectorAll('[data-theme]').forEach(b => {
-        b.classList.toggle('active', !!activeTheme && b.dataset.theme === activeTheme);
+        b.classList.toggle('active', !!thId && b.dataset.theme === thId);
       });
     }
 
-    async function toggle(kind, id) {
-      try { await ensureLoaded(); } catch (e) { console.warn(e); return; }
-      const NS = window.__DOMPerignon;
-      if (!NS || typeof NS.applySelection !== 'function') return;
-      if (kind === 'overlay') {
-        activeOverlay = (activeOverlay === id) ? null : id;
-      } else {
-        activeTheme = (activeTheme === id) ? null : id;
-      }
-      NS.applySelection({ overlay: activeOverlay, theme: activeTheme });
-      refreshButtonState();
+    function toggle(kind, id) {
+      // Serialize: each click waits for the previous one to land before
+      // re-evaluating state. Without this, clicking two tiles in fast
+      // succession can teardown the new one before init finishes.
+      pending = pending.then(async () => {
+        try { await ensureLoaded(); } catch (e) { console.warn(e); return; }
+        const NS = window.__DOMPerignon;
+        if (!NS || typeof NS.applySelection !== 'function') return;
+
+        const wasActive = (activeKind === kind && activeId === id);
+        if (wasActive) {
+          activeKind = null;
+          activeId   = null;
+        } else {
+          activeKind = kind;
+          activeId   = id;
+        }
+        const overlay = (activeKind === 'overlay') ? activeId : null;
+        const theme   = (activeKind === 'theme')   ? activeId : null;
+        try { NS.applySelection({ overlay, theme }); }
+        catch (e) { console.warn('[gallery] applySelection threw', e); }
+        refreshButtonState();
+      }).catch(e => console.warn('[gallery] toggle chain rejected', e));
+      return pending;
     }
 
     document.querySelectorAll('.card-try[data-overlay], .card-try[data-theme]').forEach(btn => {

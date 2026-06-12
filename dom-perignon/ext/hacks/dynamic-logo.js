@@ -129,15 +129,11 @@
     LOGO_COUNT = Math.max(4, Math.round(LOGO_COUNT_BASE * (0.5 + 0.5 * scale)));
     const logoURL = detectLogoURL();
 
-    // Build a banner that shows what we found (useful when the logo is too
-    // small or visually weak to read mid-bounce)
-    const banner = document.createElement('div');
-    banner.className = 'dp-dynlogo-banner';
-    banner.innerHTML = `
-      <span class="dp-dynlogo-label">DETECTED LOGO</span>
-      <span class="dp-dynlogo-host">${window.location.hostname}</span>
-    `;
-    root.appendChild(banner);
+    // (The old "DETECTED LOGO" debug banner that printed the host name in
+    // a chip up-top was removed in v1.5.10 — it was scaffolding from when
+    // the detection waterfall was unstable, and it leaks the host name
+    // into the bounce. Logos still pick up whatever the waterfall finds;
+    // no banner is needed.)
 
     logos = [];
     const vw = window.innerWidth;
