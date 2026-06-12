@@ -84,9 +84,14 @@ html.dp-vapor-on body *:not(svg):not(svg *) {
    covering the pastel canvas. Form chrome, code, media, iframes
    excluded. ALSO: descendants of clickable hosts excluded so icon-only
    buttons (background-image/mask-image glyphs) stay visible. */
+/* v1.5.17 — only strip background-COLOR on the broad sweep, not
+   background-IMAGE. Sites like Spotify render album / playlist / avatar
+   art as `background-image` on <div>s, and killing it here made those
+   thumbnails appear as empty lavender squares until hover. Card colour
+   stripping still happens, which is what was actually doing the work
+   of letting the pastel canvas show through. */
 html.dp-vapor-on body *:not(button):not(input):not(textarea):not(select):not(code):not(pre):not(img):not(picture):not(video):not(canvas):not(svg):not(svg *):not(iframe):not(button *):not(a *):not(label *):not([role="button"] *):not([role="link"] *) {
   background-color: transparent !important;
-  background-image: none !important;
 }
 
 /* Icon rescue: SVGs inside clickable elements inherit the white text
