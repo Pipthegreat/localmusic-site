@@ -68,9 +68,10 @@ html.dp-chalkboard-on body *:not(svg):not(svg *) {
    covering the slate. Form chrome, code, media, iframes excluded.
    ALSO: descendants of clickable hosts excluded so icon-only buttons
    (background-image/mask-image glyphs) stay visible. */
+/* v1.5.18 — strip bg-color only, leave bg-image alone. See vapor.css
+   for the rationale. */
 html.dp-chalkboard-on body *:not(button):not(input):not(textarea):not(select):not(code):not(pre):not(img):not(picture):not(video):not(canvas):not(svg):not(svg *):not(iframe):not(button *):not(a *):not(label *):not([role="button"] *):not([role="link"] *) {
   background-color: transparent !important;
-  background-image: none !important;
 }
 
 /* Icon rescue: SVGs inside clickable elements inherit the chalk-white

@@ -77,9 +77,11 @@ html.dp-tubular-on body *:not(svg):not(svg *) {
    hosts — icon-only buttons render their glyph as a background-image
    or mask-image on a <span>/<i> inside the button, and sparing those
    descendants keeps every icon visible. */
+/* v1.5.18 — strip bg-color only, leave bg-image alone. See vapor.css
+   for the rationale (album art / playlist thumbnails / avatars on
+   sites like Spotify use background-image on divs). */
 html.dp-tubular-on body *:not(button):not(input):not(textarea):not(select):not(code):not(pre):not(img):not(picture):not(video):not(canvas):not(svg):not(svg *):not(iframe):not(button *):not(a *):not(label *):not([role="button"] *):not([role="link"] *) {
   background-color: transparent !important;
-  background-image: none !important;
 }
 
 /* Icon rescue: SVG icons inside clickable elements pick up the theme
