@@ -1,422 +1,368 @@
 {
   "page_title": "SF + Oakland Live Music",
-  "total_duration": 1375.48,
-  "track_count": 46,
-  "built_at": 1780988926,
+  "total_duration": 1196.25,
+  "track_count": 40,
+  "built_at": 1781247909,
   "tracks": [
     {
-      "artist": "ariana grande",
-      "title": "break free",
-      "spotify_uri": "spotify:track:12KUFSHFgT0XCoiSlvdQi4",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 0.0,
-      "end": 29.95
-    },
-    {
-      "artist": "ariana grande",
-      "title": "into you",
-      "spotify_uri": "spotify:track:63y6xWR4gXz7bnUGOk8iI6",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 29.95,
-      "end": 59.9
-    },
-    {
-      "artist": "ariana grande",
-      "title": "love me harder",
-      "spotify_uri": "spotify:track:5J4ZkQpzMUFojo1CtAZYpn",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 59.9,
-      "end": 89.86
-    },
-    {
-      "artist": "bleood",
-      "title": "alucard",
-      "spotify_uri": "spotify:track:7kOqJEbOHzb3XM7fWKKhGF",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 89.86,
-      "end": 119.81
-    },
-    {
-      "artist": "chrocktikal",
-      "title": "navi",
-      "spotify_uri": "spotify:track:5EMLCVDkaAWJRUfQlgpD3a",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 119.81,
-      "end": 149.76
-    },
-    {
-      "artist": "chrocktikal",
-      "title": "kalish",
-      "spotify_uri": "spotify:track:5Oxk5Fl3yVJkFtTz2L4uCY",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 149.76,
-      "end": 179.71
-    },
-    {
-      "artist": "chrocktikal",
-      "title": "peace",
-      "spotify_uri": "spotify:track:3oJeN9S8wUTK1zVA94gjek",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 179.71,
-      "end": 209.66
-    },
-    {
-      "artist": "jeff rosenstock",
-      "title": "nausea",
-      "spotify_uri": "spotify:track:4r2fQeZk6QqCPOexEAAETk",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 209.66,
-      "end": 239.61
-    },
-    {
-      "artist": "jeff rosenstock",
-      "title": "9/10",
-      "spotify_uri": "spotify:track:53XiAFWzn7cGwHF86nnUAt",
-      "audio_source": "itunes",
-      "duration": 29.63,
-      "start": 239.61,
-      "end": 269.24
-    },
-    {
-      "artist": "jeff rosenstock",
-      "title": "head",
-      "spotify_uri": "spotify:track:6BULZnYoUapTGJU0lAjjL8",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 269.24,
-      "end": 299.2
-    },
-    {
-      "artist": "pool kids",
-      "title": "easier said than done",
-      "spotify_uri": "spotify:track:3NL6gBLjP9R2C5Wpcd1Yzo",
-      "audio_source": "itunes",
-      "duration": 29.53,
-      "start": 299.2,
-      "end": 328.73
-    },
-    {
-      "artist": "pool kids",
-      "title": "that's physics, baby",
-      "spotify_uri": "spotify:track:5KWjZvEQlAbO24aYFOkzaD",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 328.73,
-      "end": 358.6
-    },
-    {
-      "artist": "pool kids",
-      "title": "conscious uncoupling",
-      "spotify_uri": "spotify:track:7giFF7RUd8K6NTHXcA96NY",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 358.6,
-      "end": 388.47
-    },
-    {
-      "artist": "samantha mckaige",
-      "title": "tiny montana town",
-      "spotify_uri": "spotify:track:43rYRXQl2BknYXnbLUkBTg",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 388.47,
-      "end": 418.42
-    },
-    {
-      "artist": "samantha mckaige",
-      "title": "right after it happened",
-      "spotify_uri": "spotify:track:4ugkfYxhSxParQmbobsygb",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 418.42,
-      "end": 448.38
-    },
-    {
-      "artist": "samantha mckaige",
-      "title": "wash away",
-      "spotify_uri": "spotify:track:0enYuEUq6ZY2Uam0rXslBN",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 448.38,
-      "end": 478.33
-    },
-    {
-      "artist": "searows",
-      "title": "house song",
-      "spotify_uri": "spotify:track:5swZvDSi78Znk4rlmwHNnj",
+      "artist": "august lee stevens",
+      "title": "sweet thing",
+      "spotify_uri": "spotify:track:2FHaFnXdNGjc1PjLNB6fPf",
       "audio_source": "itunes",
       "duration": 29.97,
-      "start": 478.33,
-      "end": 508.3
+      "start": 0.0,
+      "end": 29.97
     },
     {
-      "artist": "searows",
-      "title": "in violet",
-      "spotify_uri": "spotify:track:7z79MoOyPZFBvBlfkkfaPB",
+      "artist": "august lee stevens",
+      "title": "senses",
+      "spotify_uri": "spotify:track:4EHfY3UxrKyrh7E09Tx7Xq",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 29.97,
+      "end": 59.84
+    },
+    {
+      "artist": "august lee stevens",
+      "title": "in the dark",
+      "spotify_uri": "spotify:track:3PfU2YaBNOa2EPhPrUNQFQ",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 508.3,
-      "end": 538.25
+      "start": 59.84,
+      "end": 89.79
     },
     {
-      "artist": "searows",
-      "title": "end of the world",
-      "spotify_uri": "spotify:track:5RXjt2s4HBJw3TcaAzwSrD",
+      "artist": "bejalvin",
+      "title": "teeth (feat. bejalvin)",
+      "spotify_uri": "spotify:track:0HC2VZhRBHFvpYe0T7IHxI",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 538.25,
-      "end": 568.2
+      "start": 89.79,
+      "end": 119.74
     },
     {
-      "artist": "star 99",
-      "title": "elastic",
-      "spotify_uri": "spotify:track:1iSdLY4sd8v9u2rxTxQoPs",
+      "artist": "bond girl",
+      "title": "bird of prey",
+      "spotify_uri": "spotify:track:4SEgDxRJwKrAsGp72stiHd",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 568.2,
-      "end": 598.15
+      "start": 119.74,
+      "end": 149.69
     },
     {
-      "artist": "star 99",
-      "title": "kill",
-      "spotify_uri": "spotify:track:328ZjbpOr7cANqSp1uMXoB",
-      "audio_source": "itunes",
-      "duration": 29.77,
-      "start": 598.15,
-      "end": 627.92
-    },
-    {
-      "artist": "star 99",
-      "title": "brother",
-      "spotify_uri": "spotify:track:2FFUuoavz0bn9X9Zg2UaDS",
+      "artist": "bond girl",
+      "title": "want it all",
+      "spotify_uri": "spotify:track:2p1w1luh0jNOJPtrtayMI0",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 627.92,
-      "end": 657.79
+      "start": 149.69,
+      "end": 179.56
     },
     {
-      "artist": "syd taylor",
-      "title": "after the fact",
-      "spotify_uri": "spotify:track:2QHzQ0pUnuJUQlfT7ABDoF",
+      "artist": "bond girl",
+      "title": "dune daze",
+      "spotify_uri": "spotify:track:19ZU8olgQPjOVha5PMVmFO",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 657.79,
-      "end": 687.74
+      "start": 179.56,
+      "end": 209.51
     },
     {
-      "artist": "syd taylor",
-      "title": "heaven",
-      "spotify_uri": "spotify:track:153iZlFjQzMZO7tRpGyZPo",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 687.74,
-      "end": 717.69
-    },
-    {
-      "artist": "syd taylor",
-      "title": "the wind",
-      "spotify_uri": "spotify:track:1Xnqz4BGKkYHbQix7xZ6iC",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 717.69,
-      "end": 747.64
-    },
-    {
-      "artist": "tigers jaw",
-      "title": "plane vs. tank vs. submarine",
-      "spotify_uri": "spotify:track:1JxUKhB7QGd082YGskroob",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 747.64,
-      "end": 777.51
-    },
-    {
-      "artist": "tigers jaw",
-      "title": "the sun",
-      "spotify_uri": "spotify:track:5bJt0jOz9spwJ1rJwSQJ1a",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 777.51,
-      "end": 807.38
-    },
-    {
-      "artist": "tigers jaw",
-      "title": "constant headache",
-      "spotify_uri": "spotify:track:2xJV9FaGKNMIecMOtjGxX0",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 807.38,
-      "end": 837.25
-    },
-    {
-      "artist": "beachwood sparks",
-      "title": "by your side",
-      "spotify_uri": "spotify:track:1NOaXEOeXyVtwqKnhvCCwU",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 837.25,
-      "end": 867.2
-    },
-    {
-      "artist": "beachwood sparks",
-      "title": "desert skies",
-      "spotify_uri": "spotify:track:0PSRCSOnFkvHFOPhxYEqtq",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 867.2,
-      "end": 897.07
-    },
-    {
-      "artist": "beachwood sparks",
-      "title": "forget the song",
-      "spotify_uri": "spotify:track:689KtXeLMjnx8adgyemrt1",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 897.07,
-      "end": 926.94
-    },
-    {
-      "artist": "belle and sebastian",
-      "title": "piazza, new york catcher",
-      "spotify_uri": "spotify:track:12eefUObewFbvXYQ3bN7E4",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 926.94,
-      "end": 956.81
-    },
-    {
-      "artist": "belle and sebastian",
-      "title": "get me away from here, i'm dying",
-      "spotify_uri": "spotify:track:0T3j1KHC2U00Gw4gaLQBh9",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 956.81,
-      "end": 986.68
-    },
-    {
-      "artist": "belle and sebastian",
-      "title": "the boy with the arab strap",
-      "spotify_uri": "spotify:track:2PV8oZJo3K3bXENO7FRRtp",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 986.68,
-      "end": 1016.55
-    },
-    {
-      "artist": "flawed mangoes",
-      "title": "swimming",
-      "spotify_uri": "spotify:track:0sTjyzgd2K5htQpU8ienNe",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1016.55,
-      "end": 1046.5
-    },
-    {
-      "artist": "flawed mangoes",
-      "title": "surreal",
-      "spotify_uri": "spotify:track:4bzbaBvahwx1R0jyh5TO8U",
+      "artist": "by storm",
+      "title": "can i have you for myself?",
+      "spotify_uri": "spotify:track:0voef3sKYAKr5BgUDCXIuW",
       "audio_source": "itunes",
       "duration": 29.96,
-      "start": 1046.5,
-      "end": 1076.46
+      "start": 209.51,
+      "end": 239.47
     },
     {
-      "artist": "flawed mangoes",
-      "title": "killswitch lullaby",
-      "spotify_uri": "spotify:track:7g3g00RKlqSIe2G8KKCgsE",
-      "audio_source": "itunes",
-      "duration": 29.94,
-      "start": 1076.46,
-      "end": 1106.4
-    },
-    {
-      "artist": "grooblen",
-      "title": "gastropod",
-      "spotify_uri": "spotify:track:187zgkH9Ia8W34TnRU2dTA",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1106.4,
-      "end": 1136.27
-    },
-    {
-      "artist": "grooblen",
-      "title": "jane fonda of the ship",
-      "spotify_uri": "spotify:track:6817805ed0KKN3LeBza5iF",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1136.27,
-      "end": 1166.14
-    },
-    {
-      "artist": "grooblen",
-      "title": "hello again",
-      "spotify_uri": "spotify:track:3NEvADvkO5vsqnGHZnslzp",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1166.14,
-      "end": 1196.01
-    },
-    {
-      "artist": "heaven's club",
-      "title": "mnemonic",
-      "spotify_uri": "spotify:track:7GG3PGCSG3eWS6ziQaL9Fa",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1196.01,
-      "end": 1225.88
-    },
-    {
-      "artist": "heaven's club",
-      "title": "d (us) t",
-      "spotify_uri": "spotify:track:75HZtEkSZuJQ2AP1O4Jrus",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1225.88,
-      "end": 1255.75
-    },
-    {
-      "artist": "heaven's club",
-      "title": "destroyer",
-      "spotify_uri": "spotify:track:7zanEb8piia0faJaAjgpJc",
+      "artist": "by storm",
+      "title": "dead weight",
+      "spotify_uri": "spotify:track:2ZHALGLudOZWRLuOK4MZ0J",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 1255.75,
-      "end": 1285.7
+      "start": 239.47,
+      "end": 269.42
     },
     {
-      "artist": "scarlet house",
-      "title": "ghosts",
-      "spotify_uri": "spotify:track:33QpFUeut0hAVQ8dqhwsCM",
+      "artist": "by storm",
+      "title": "and i dance",
+      "spotify_uri": "spotify:track:2rbJiY6ghr3dwFY4ICdFIR",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 269.42,
+      "end": 299.37
+    },
+    {
+      "artist": "dj jaded",
+      "title": "belted or jaded?",
+      "spotify_uri": "spotify:track:0aKtCSWNhxwm9Vr2S9ltsv",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 299.37,
+      "end": 329.32
+    },
+    {
+      "artist": "dj maphorisa",
+      "title": "money constant",
+      "spotify_uri": "spotify:track:12jMMRyPNMTNp3CRmdWMve",
       "audio_source": "itunes",
       "duration": 29.96,
-      "start": 1285.7,
-      "end": 1315.66
+      "start": 329.32,
+      "end": 359.28
     },
     {
-      "artist": "scarlet house",
-      "title": "lost",
-      "spotify_uri": "spotify:track:3rPFU4sOlBJt8D1atzCe0y",
+      "artist": "dj maphorisa",
+      "title": "particula",
+      "spotify_uri": "spotify:track:2ugMZSROrPIEuCqWH0gVgK",
       "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1315.66,
-      "end": 1345.61
+      "duration": 29.79,
+      "start": 359.28,
+      "end": 389.07
     },
     {
-      "artist": "tucheetta",
-      "title": "we knew each other in a past life",
-      "spotify_uri": "spotify:track:3eHwg3RjhkuOz4t7PLnAqJ",
+      "artist": "dj maphorisa",
+      "title": "mnike (feat. dj maphorisa, nandipha808, ceeka rsa & tyron dee)",
+      "spotify_uri": "spotify:track:5tpft20jhQvRlG3O7XfwWy",
+      "audio_source": "itunes",
+      "duration": 29.96,
+      "start": 389.07,
+      "end": 419.03
+    },
+    {
+      "artist": "don carlos",
+      "title": "time",
+      "spotify_uri": "spotify:track:0A4PgMwxOU5TxCnbW8od9p",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 1345.61,
-      "end": 1375.48
+      "start": 419.03,
+      "end": 448.9
+    },
+    {
+      "artist": "don carlos",
+      "title": "mr. sun",
+      "spotify_uri": "spotify:track:163TEeFvyaexneVfGwHwm3",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 448.9,
+      "end": 478.77
+    },
+    {
+      "artist": "don carlos",
+      "title": "roots reggae music",
+      "spotify_uri": "spotify:track:1NyiB5s6uBWUjZffvWjEmo",
+      "audio_source": "itunes",
+      "duration": 29.97,
+      "start": 478.77,
+      "end": 508.74
+    },
+    {
+      "artist": "dorian electra",
+      "title": "feel good inc.",
+      "spotify_uri": "spotify:track:1E2iN1YwN2S4skzajwGgD6",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 508.74,
+      "end": 538.69
+    },
+    {
+      "artist": "dorian electra",
+      "title": "young folks",
+      "spotify_uri": "spotify:track:6miT6R8rW16iMhzeVBQ47S",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 538.69,
+      "end": 568.64
+    },
+    {
+      "artist": "dorian electra",
+      "title": "hips don’t lie",
+      "spotify_uri": "spotify:track:6Fbt79oZT7Hc7uFT76iQCD",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 568.64,
+      "end": 598.59
+    },
+    {
+      "artist": "eargasm god",
+      "title": "ecstasy",
+      "spotify_uri": "spotify:track:3QwGyhNsHsS5sNjEE4HK4a",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 598.59,
+      "end": 628.46
+    },
+    {
+      "artist": "eargasm god",
+      "title": "excuse me",
+      "spotify_uri": "spotify:track:6Fd1yqAaZJGnFGlPGQ3y1J",
+      "audio_source": "itunes",
+      "duration": 29.59,
+      "start": 628.46,
+      "end": 658.05
+    },
+    {
+      "artist": "eargasm god",
+      "title": "soñar",
+      "spotify_uri": "spotify:track:50nexV89Lzk96Nw2WYCpXj",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 658.05,
+      "end": 687.92
+    },
+    {
+      "artist": "flatwounds",
+      "title": "emulator",
+      "spotify_uri": "spotify:track:684SXwWxyTuXI6tV2MdU7A",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 687.92,
+      "end": 717.87
+    },
+    {
+      "artist": "flatwounds",
+      "title": "rust",
+      "spotify_uri": "spotify:track:6ewlHZLqq3Umea7ZGtYXpU",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 717.87,
+      "end": 747.74
+    },
+    {
+      "artist": "flatwounds",
+      "title": "in the sun",
+      "spotify_uri": "spotify:track:6vahU4oGdM0YjghvMyprQM",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 747.74,
+      "end": 777.69
+    },
+    {
+      "artist": "gene farris",
+      "title": "mesmerised",
+      "spotify_uri": "spotify:track:3t7F5qiNlS0OfZZlDxYkiq",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 777.69,
+      "end": 807.56
+    },
+    {
+      "artist": "gene farris",
+      "title": "three lines deep",
+      "spotify_uri": "spotify:track:3cXaJhYEvQxAVffledgN7G",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 807.56,
+      "end": 837.43
+    },
+    {
+      "artist": "gene farris",
+      "title": "it’s time (feat. gene farris)",
+      "spotify_uri": "spotify:track:1X9SbAdN4WAXJRobVtwvH3",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 837.43,
+      "end": 867.38
+    },
+    {
+      "artist": "griot b",
+      "title": "h.b.c.u there",
+      "spotify_uri": "spotify:track:3cbIojQxItglNHlCoXLjqJ",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 867.38,
+      "end": 897.25
+    },
+    {
+      "artist": "griot b",
+      "title": "columbian exchange (feat. warner brown)",
+      "spotify_uri": "spotify:track:4ioNflarQwxns54uRWYTj2",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 897.25,
+      "end": 927.12
+    },
+    {
+      "artist": "gryffin",
+      "title": "feel good (with daya)",
+      "spotify_uri": "spotify:track:0Ev562zA4pmUsBqjxsxxdx",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 927.12,
+      "end": 957.07
+    },
+    {
+      "artist": "gryffin",
+      "title": "save my love",
+      "spotify_uri": "spotify:track:5ObyGDxNWH0Uuuk3NvC5r8",
+      "audio_source": "itunes",
+      "duration": 29.96,
+      "start": 957.07,
+      "end": 987.03
+    },
+    {
+      "artist": "gryffin",
+      "title": "all you need to know (feat. calle lehmann)",
+      "spotify_uri": "spotify:track:4TIkSdsNSfqpuq6ZYvCjAz",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 987.03,
+      "end": 1016.9
+    },
+    {
+      "artist": "injury reserve",
+      "title": "all this money",
+      "spotify_uri": "spotify:track:6zEPJJzojnfOrvfyuJiPtF",
+      "audio_source": "itunes",
+      "duration": 29.67,
+      "start": 1016.9,
+      "end": 1046.57
+    },
+    {
+      "artist": "injury reserve",
+      "title": "oh shit!!!",
+      "spotify_uri": "spotify:track:6A3hUBzQ0k6chtNJlGxDQn",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1046.57,
+      "end": 1076.44
+    },
+    {
+      "artist": "jao",
+      "title": "torpe",
+      "spotify_uri": "spotify:track:3IgRFhLTRlMhYApdcQ8Bot",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1076.44,
+      "end": 1106.39
+    },
+    {
+      "artist": "jcore",
+      "title": "sensation",
+      "spotify_uri": "spotify:track:347PWb5BeCPp9kF5hKxfKq",
+      "audio_source": "itunes",
+      "duration": 29.96,
+      "start": 1106.39,
+      "end": 1136.35
+    },
+    {
+      "artist": "jeff straw",
+      "title": "chemical reaction - radio edit",
+      "spotify_uri": "spotify:track:4ftDQlGMPpbN0S11gXzCGv",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1136.35,
+      "end": 1166.3
+    },
+    {
+      "artist": "jeff straw",
+      "title": "i've been",
+      "spotify_uri": "spotify:track:3BJntn779Myc7fdXjVIlJr",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1166.3,
+      "end": 1196.25
     }
   ]
 }
