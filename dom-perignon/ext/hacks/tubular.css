@@ -22,21 +22,33 @@
   96% { transform: translate(-1px, -1px); }
 }
 
-/* Canvas: html → oxblood-deep with animated multi-radial gradient. */
+/* Canvas: html → oxblood-deep solid. The animated multi-radial
+   gradient that used to live on the html element directly was moved
+   to html::before in v1.5.20. Animating `background-position` on
+   the html element with `background-attachment: fixed` does not
+   reliably re-paint in Chromium on long real pages (Chrome
+   optimises fixed root backgrounds and skips the per-frame paint).
+   Moving the gradient stack to a fixed-position pseudo-element with
+   `z-index: -1` decouples it from that optimisation — the
+   animation actually runs. */
 html.dp-tubular-on {
   background-color: #2b1410 !important;
+  background-image: none !important;
+  color-scheme: dark !important;
+}
+html.dp-tubular-on::before {
+  content: '' !important;
+  position: fixed !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
   background-image:
     radial-gradient(circle at 0% 0%, #7a1f1a 0%, transparent 50%),
     radial-gradient(circle at 100% 100%, #3d1a6b 0%, transparent 55%),
     radial-gradient(circle at 50% 50%, #ff5a1f 0%, transparent 45%),
     radial-gradient(circle at 0% 100%, #b8ff3d 0%, transparent 50%) !important;
   background-size: 200% 200%, 200% 200%, 200% 200%, 200% 200% !important;
-  background-attachment: fixed !important;
   animation: dp-tubular-bgshift 18s ease-in-out infinite !important;
-  /* color-scheme tells browser-rendered defaults (scrollbars, form
-     controls without explicit styling) to render dark so they don't
-     pop in as bright light-mode chrome over the dark canvas. */
-  color-scheme: dark !important;
 }
 html.dp-tubular-on body {
   background-color: transparent !important;

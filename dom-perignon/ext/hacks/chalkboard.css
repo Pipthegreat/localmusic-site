@@ -94,7 +94,12 @@ html.dp-chalkboard-on body h6 {
   text-transform: uppercase !important;
   letter-spacing: 1px !important;
   text-shadow: 0 0 1px #fefdfa, 2px 2px 0 rgba(0,0,0,0.25) !important;
-  animation: dp-chalk-scribble 0.3s steps(4) infinite !important;
+  /* v1.5.20 — `dp-chalk-scribble` removed from headings. The 0.3px
+     translate vibration was barely visible at full page scale but
+     read as obvious shake on the gallery and at thumbnail size. The
+     handwritten Caveat already carries the "chalk" feel; the
+     vibration wasn't doing extra work. Keyframe definition kept
+     in case it's wanted back later. */
   text-decoration: underline !important;
   text-decoration-color: #ffeb6e !important;
   text-decoration-thickness: 3px !important;
