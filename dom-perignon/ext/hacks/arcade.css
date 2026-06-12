@@ -20,6 +20,14 @@
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0; }
 }
+@keyframes dp-arcade-twinkle {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 0.95; }
+}
+@keyframes dp-arcade-horizon {
+  0%, 100% { opacity: 0.65; transform: scaleY(1); }
+  50%      { opacity: 0.92; transform: scaleY(1.15); }
+}
 
 html.dp-arcade-on {
   background-color: #000 !important;
@@ -46,15 +54,15 @@ html.dp-arcade-on body::before {
   mix-blend-mode: screen !important;
 }
 
-/* Perspective grid floor — extends meaningfully higher up the viewport
-   now that the ceiling grid (html::after) meets it at the horizon. The
-   mask reaches full opacity at 55% instead of 72% so the floor's
-   visible portion roughly DOUBLES vertically. */
+/* Perspective grid floor — extended 30% further up in v1.5.14. Mask
+   reaches full opacity at 40% from the top (was 55%, was originally
+   72%), opacity bumped to 0.62. The floor now visibly meets the
+   horizon at roughly 40% viewport height instead of 55%. */
 html.dp-arcade-on body::after {
   content: '' !important;
   position: fixed !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
-  height: 110vh !important;
-  pointer-events: none !important; z-index: 0 !important; opacity: 0.55 !important;
+  height: 115vh !important;
+  pointer-events: none !important; z-index: 0 !important; opacity: 0.62 !important;
   background-image:
     linear-gradient(#ff5a1f 2px, transparent 2px),
     linear-gradient(90deg, #ff5a1f 2px, transparent 2px) !important;
@@ -63,15 +71,68 @@ html.dp-arcade-on body::after {
   transform: perspective(540px) rotateX(68deg) !important;
   animation: dp-arcade-grid 1.6s linear infinite !important;
   filter: drop-shadow(0 -6px 18px #ff5a1f) drop-shadow(0 -14px 42px #ff5a1f) !important;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.40) 12%, rgba(0,0,0,0.85) 32%, #000 55%) !important;
-          mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.40) 12%, rgba(0,0,0,0.85) 32%, #000 55%) !important;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 8%, rgba(0,0,0,0.80) 24%, #000 40%) !important;
+          mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 8%, rgba(0,0,0,0.80) 24%, #000 40%) !important;
 }
 
-/* v1.5.12 — ceiling grid removed. It sat where page headers usually
-   live (top of viewport) and visually fought with them. The floor
-   grid's extended mask (still in place above) is enough to satisfy
-   the "lines extend higher up the page" intent without colliding
-   with header text. */
+/* ─── Star field (html::before) ──────────────────────────────────────
+   Pixel-style stars across the sky in arcade neon — acid green, hot
+   magenta, cyan, persimmon. z-index: -1 puts them BEHIND body text so
+   they never compete with reading. Masked off below the horizon so
+   the floor grid handles that half of the viewport. Twinkles via the
+   slow opacity animation. */
+html.dp-arcade-on::before {
+  content: '' !important;
+  position: fixed !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+  background-color: transparent !important;
+  background-image:
+    radial-gradient(1.5px 1.5px at  8% 12%, #b8ff3d 60%, transparent 100%),
+    radial-gradient(1px   1px   at 15% 24%, #ff2d8a 60%, transparent 100%),
+    radial-gradient(2px   2px   at 22%  6%, #00f0ff 60%, transparent 100%),
+    radial-gradient(1px   1px   at 33% 18%, #b8ff3d 60%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 41% 28%, #ff5a1f 60%, transparent 100%),
+    radial-gradient(1px   1px   at 49% 10%, #b8ff3d 60%, transparent 100%),
+    radial-gradient(2px   2px   at 58% 22%, #00f0ff 60%, transparent 100%),
+    radial-gradient(1px   1px   at 66%  8%, #ff2d8a 60%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 74% 16%, #b8ff3d 60%, transparent 100%),
+    radial-gradient(1px   1px   at 81% 26%, #00f0ff 60%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 90% 12%, #ff5a1f 60%, transparent 100%),
+    radial-gradient(1px   1px   at 96% 30%, #b8ff3d 60%, transparent 100%),
+    radial-gradient(1.5px 1.5px at  4% 34%, #ff2d8a 60%, transparent 100%),
+    radial-gradient(1px   1px   at 28% 32%, #00f0ff 60%, transparent 100%),
+    radial-gradient(2px   2px   at 52% 36%, #b8ff3d 60%, transparent 100%) !important;
+  /* Mask hides stars below the horizon — they only live in the sky. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 45%) !important;
+          mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 45%) !important;
+  opacity: 0.85 !important;
+  animation: dp-arcade-twinkle 5s ease-in-out infinite !important;
+}
+
+/* ─── Horizon glow (html::after) ──────────────────────────────────────
+   Bright persimmon ribbon where floor meets sky. Soft ellipse blurred
+   to feel like a sun receding behind the floor. z-index: -1 keeps it
+   behind body text so it reads as atmosphere, not chrome. */
+html.dp-arcade-on::after {
+  content: '' !important;
+  position: fixed !important;
+  left: -10% !important;
+  right: -10% !important;
+  bottom: 60vh !important;
+  height: 80px !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+  background:
+    radial-gradient(ellipse 60% 100% at 50% 100%,
+      #ff5a1f 0%,
+      rgba(255,90,31,0.55) 18%,
+      rgba(255,45,138,0.30) 38%,
+      transparent 72%) !important;
+  filter: blur(12px) !important;
+  animation: dp-arcade-horizon 4.5s ease-in-out infinite !important;
+}
 
 /* Broad recolor */
 html.dp-arcade-on body,
