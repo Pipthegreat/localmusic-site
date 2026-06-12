@@ -11,12 +11,6 @@
   0%   { transform: perspective(400px) rotateX(60deg) translateY(0); }
   100% { transform: perspective(400px) rotateX(60deg) translateY(40px); }
 }
-/* Ceiling counterpart — same scroll speed in the same direction so
-   the floor + ceiling read as one continuous travelling tunnel. */
-@keyframes dp-arcade-ceiling {
-  0%   { transform: perspective(400px) rotateX(-60deg) translateY(0); }
-  100% { transform: perspective(400px) rotateX(-60deg) translateY(40px); }
-}
 @keyframes dp-arcade-flicker {
   0%, 100% { opacity: 1; }
   47% { opacity: 0.92; }
@@ -73,27 +67,11 @@ html.dp-arcade-on body::after {
           mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.40) 12%, rgba(0,0,0,0.85) 32%, #000 55%) !important;
 }
 
-/* Perspective grid CEILING — mirrors the floor, scrolling in the same
-   forward direction. Sits on html::after so it doesn't fight body's
-   pseudo-elements (which carry scanlines + floor). Acid cyan instead
-   of persimmon so the eye can tell the two halves apart at the
-   horizon. */
-html.dp-arcade-on::after {
-  content: '' !important;
-  position: fixed !important; left: 0 !important; right: 0 !important; top: 0 !important;
-  height: 110vh !important;
-  pointer-events: none !important; z-index: 0 !important; opacity: 0.55 !important;
-  background-image:
-    linear-gradient(#00f0ff 2px, transparent 2px),
-    linear-gradient(90deg, #00f0ff 2px, transparent 2px) !important;
-  background-size: 44px 44px !important;
-  transform-origin: center top !important;
-  transform: perspective(540px) rotateX(-68deg) !important;
-  animation: dp-arcade-ceiling 1.6s linear infinite !important;
-  filter: drop-shadow(0 6px 18px #00f0ff) drop-shadow(0 14px 42px #00f0ff) !important;
-  -webkit-mask-image: linear-gradient(to top, transparent 0%, rgba(0,0,0,0.40) 12%, rgba(0,0,0,0.85) 32%, #000 55%) !important;
-          mask-image: linear-gradient(to top, transparent 0%, rgba(0,0,0,0.40) 12%, rgba(0,0,0,0.85) 32%, #000 55%) !important;
-}
+/* v1.5.12 — ceiling grid removed. It sat where page headers usually
+   live (top of viewport) and visually fought with them. The floor
+   grid's extended mask (still in place above) is enough to satisfy
+   the "lines extend higher up the page" intent without colliding
+   with header text. */
 
 /* Broad recolor */
 html.dp-arcade-on body,

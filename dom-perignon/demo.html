@@ -384,6 +384,27 @@ footer .meta span + span::before { content: "·"; margin: 0 8px; color: var(--bo
     sendMessage: () => Promise.resolve(),
   };
 </script>
+<!-- v1.5.12 — kill the subtle heading-shake on tubular/chalkboard inside
+     thumbnail previews. The 2px-at-92% jitter and 0.3s scribble vibration
+     read as subtle on a full-size page but as dramatic shake at 296×185
+     thumbnail scale, which made gallery viewers think the actual theme
+     was shaking the whole page. The override only lives in demo.html, so
+     the extension's behaviour on real pages is unchanged. -->
+<style>
+  html.dp-tubular-on body h1,
+  html.dp-tubular-on body h2,
+  html.dp-tubular-on body h3,
+  html.dp-tubular-on body h4,
+  html.dp-tubular-on body h5,
+  html.dp-tubular-on body h6,
+  html.dp-chalkboard-on body h2,
+  html.dp-chalkboard-on body h3,
+  html.dp-chalkboard-on body h4,
+  html.dp-chalkboard-on body h5,
+  html.dp-chalkboard-on body h6 {
+    animation: none !important;
+  }
+</style>
 <script src="ext/hacks/ants.js"></script>
 <script src="ext/hacks/dvd.js"></script>
 <script src="ext/hacks/quotes.js"></script>
