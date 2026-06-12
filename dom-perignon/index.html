@@ -8,8 +8,7 @@
 <link rel="canonical" href="https://customprojects.info/dom-perignon/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400..900;9..144,1,400..900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@400;700&family=Architects+Daughter&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="previews.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400..900;9..144,1,400..900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ─── Carbon & Cobalt palette — borrowed from the Kestrel Fabrications
    sibling project. One primary accent (cobalt 240°), one supporting
@@ -35,7 +34,7 @@
   --carbon-700: oklch(36% 0.018 240);
   --carbon-900: oklch(20% 0.014 240);
 
-  /* v1.5.23 — canvas darkened from carbon-50 (≈98.5% L) to a soft
+  /* v1.5.24 — canvas darkened from carbon-50 (≈98.5% L) to a soft
      cool-tinted neutral around 93% L. Distinct from tan, still light
      enough to read against, but with enough body that pale-gold
      champagne bubbles + cream highlights stop disappearing into it. */
@@ -313,12 +312,13 @@ h1.display em {
    underneath has room to read. Reads as a more cinematic "tall poster"
    tile next to the wider overlay tiles. */
 .card.is-theme .card-preview { aspect-ratio: 16 / 13; }
-.card-preview iframe {
+.card-preview img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  border: 0;
+  object-fit: cover;
+  object-position: top center;
   display: block;
 }
 /* Preview-unavailable placeholder (Gravity Well). Pure black box with
@@ -588,7 +588,7 @@ h1.display em {
 /* Flex (not grid) on the li so inline content — <strong>, links —
    stays in the same flex item as its surrounding text. Grid was making
    <strong>Developer mode</strong> jump to its own row, which is what
-   was breaking the install steps before v1.5.23. */
+   was breaking the install steps before v1.5.24. */
 .install-right li {
   counter-increment: step;
   display: flex;
@@ -675,8 +675,8 @@ footer .copyhide:hover {
       DOM Pérignon
     </div>
     <div class="head-right">
-      <span class="version-chip">v1.5.23</span>
-      <a class="download-pill" href="downloads/dom-perignon-v1.5.23.zip" download>
+      <span class="version-chip">v1.5.24</span>
+      <a class="download-pill" href="downloads/dom-perignon-v1.5.24.zip" download>
         Download <span class="arrow">↓</span>
       </a>
     </div>
@@ -714,20 +714,7 @@ footer .copyhide:hover {
     <div class="card popular">
       <div class="card-preview">
         <span class="card-num">01</span>
-        <div class="preview-mini preview-ants">
-          <div class="mock-page">
-            <div class="mock-h"></div>
-            <div class="mock-line"></div>
-            <div class="mock-line med"></div>
-            <div class="mock-line short"></div>
-            <div class="mock-card"></div>
-          </div>
-          <div class="ant a1"></div>
-          <div class="ant a2"></div>
-          <div class="ant a3"></div>
-          <div class="ant a4"></div>
-          <div class="ant a5"></div>
-        </div>
+        <img src="previews/ants.png" alt="Ants preview" loading="lazy">
       </div>
       <div class="card-meta">
         <h3 class="card-title">Ants <span class="card-badge card-badge-popular">Popular</span></h3>
@@ -739,21 +726,7 @@ footer .copyhide:hover {
     <div class="card signature">
       <div class="card-preview">
         <span class="card-num">02</span>
-        <div class="preview-mini preview-champagne">
-          <div class="mock-page">
-            <div class="mock-h"></div>
-            <div class="mock-line"></div>
-            <div class="mock-line med"></div>
-            <div class="mock-line short"></div>
-            <div class="mock-card"></div>
-          </div>
-          <div class="bubble b1"></div>
-          <div class="bubble b2"></div>
-          <div class="bubble b3"></div>
-          <div class="bubble b4"></div>
-          <div class="bubble b5"></div>
-          <div class="bubble b6"></div>
-        </div>
+        <img src="previews/champagne.png" alt="Champagne Bubbles preview" loading="lazy">
       </div>
       <div class="card-meta">
         <h3 class="card-title">Champagne Bubbles <span class="card-badge card-badge-signature">House</span></h3>
@@ -765,17 +738,7 @@ footer .copyhide:hover {
     <div class="card">
       <div class="card-preview">
         <span class="card-num">03</span>
-        <div class="preview-mini preview-logo">
-          <div class="mock-page">
-            <div class="mock-h"></div>
-            <div class="mock-line"></div>
-            <div class="mock-line med"></div>
-            <div class="mock-line short"></div>
-          </div>
-          <div class="logo l1">K</div>
-          <div class="logo l2">K</div>
-          <div class="logo l3">K</div>
-        </div>
+        <img src="previews/dynamic-logo.png" alt="Logo Bounce House preview" loading="lazy">
       </div>
       <div class="card-meta">
         <h3 class="card-title">Logo Bounce House</h3>
@@ -787,17 +750,7 @@ footer .copyhide:hover {
     <div class="card">
       <div class="card-preview">
         <span class="card-num">04</span>
-        <div class="preview-mini preview-quotes">
-          <div class="mock-page">
-            <div class="mock-h"></div>
-            <div class="mock-line"></div>
-            <div class="mock-line med"></div>
-            <div class="mock-line short"></div>
-          </div>
-          <div class="q q1">trust the process</div>
-          <div class="q q2">keep going</div>
-          <div class="q q3">you got this</div>
-        </div>
+        <img src="previews/quotes.png" alt="You Got This preview" loading="lazy">
       </div>
       <div class="card-meta">
         <h3 class="card-title">You Got This</h3>
@@ -824,39 +777,7 @@ footer .copyhide:hover {
     <div class="card">
       <div class="card-preview">
         <span class="card-num">06</span>
-        <div class="preview-mini preview-aquarium">
-          <div class="aq-caustic"></div>
-          <svg class="aq-kelp aq-kelp-l" viewBox="0 0 40 100" preserveAspectRatio="none">
-            <path d="M 6 100 C 4 70 14 50 6 30 C 2 15 12 0 10 0 L 16 0 C 16 15 22 30 14 50 C 6 70 22 90 16 100 Z" fill="#1a5a3b" opacity="0.85"/>
-            <path d="M 22 100 C 18 70 30 50 22 30 C 16 15 26 0 24 0 L 30 0 C 30 15 36 30 28 50 C 22 70 34 90 30 100 Z" fill="#2b7a4f" opacity="0.7"/>
-          </svg>
-          <svg class="aq-kelp aq-kelp-r" viewBox="0 0 40 100" preserveAspectRatio="none">
-            <path d="M 6 100 C 4 70 14 50 6 30 C 2 15 12 0 10 0 L 16 0 C 16 15 22 30 14 50 C 6 70 22 90 16 100 Z" fill="#1a5a3b" opacity="0.85"/>
-            <path d="M 22 100 C 18 70 30 50 22 30 C 16 15 26 0 24 0 L 30 0 C 30 15 36 30 28 50 C 22 70 34 90 30 100 Z" fill="#2b7a4f" opacity="0.7"/>
-          </svg>
-          <svg class="aq-fish f1" viewBox="0 0 60 30">
-            <polygon points="10,15 -1,3 -1,27" fill="#ff8a36"/>
-            <ellipse cx="30" cy="15" rx="22" ry="9" fill="#ff9a3a"/>
-            <path d="M 22 8 Q 30 0 40 8 L 38 11 Q 30 5 24 11 Z" fill="#d76326"/>
-            <circle cx="44" cy="13" r="2" fill="#fff"/>
-            <circle cx="44.5" cy="13" r="1.2" fill="#0a0a0a"/>
-          </svg>
-          <svg class="aq-fish f2" viewBox="0 0 60 30">
-            <polygon points="10,15 -1,3 -1,27" fill="#f7d24a"/>
-            <ellipse cx="30" cy="15" rx="22" ry="9" fill="#2a6f9c"/>
-            <path d="M 18 8 Q 30 14 18 22" fill="#0a1b2e" opacity="0.7"/>
-            <circle cx="44" cy="13" r="2" fill="#fff"/>
-            <circle cx="44.5" cy="13" r="1.2" fill="#0a0a0a"/>
-          </svg>
-          <svg class="aq-fish f3" viewBox="0 0 60 30">
-            <polygon points="8,15 -2,5 0,25" fill="#b8d4dc"/>
-            <ellipse cx="30" cy="15" rx="22" ry="7" fill="#e0ecf1"/>
-            <circle cx="44" cy="13" r="1.5" fill="#0a0a0a"/>
-          </svg>
-          <div class="aq-bubble bb1"></div>
-          <div class="aq-bubble bb2"></div>
-          <div class="aq-bubble bb3"></div>
-        </div>
+        <img src="previews/aquarium.png" alt="Aquarium preview" loading="lazy">
       </div>
       <div class="card-meta">
         <h3 class="card-title">Aquarium</h3>
@@ -868,19 +789,7 @@ footer .copyhide:hover {
     <div class="card">
       <div class="card-preview">
         <span class="card-num">07</span>
-        <div class="preview-mini preview-googly">
-          <div class="mock-page">
-            <div class="mock-h"></div>
-            <div class="mock-line"></div>
-            <div class="mock-line med"></div>
-            <div class="mock-line short"></div>
-          </div>
-          <div class="eye e1"></div>
-          <div class="eye e2"></div>
-          <div class="eye e3"></div>
-          <div class="eye e4"></div>
-          <div class="eye e5"></div>
-        </div>
+        <img src="previews/googly.png" alt="Watchers preview" loading="lazy">
       </div>
       <div class="card-meta">
         <h3 class="card-title">Watchers</h3>
@@ -892,9 +801,7 @@ footer .copyhide:hover {
     <div class="card">
       <div class="card-preview">
         <span class="card-num">08</span>
-        <div class="preview-mini preview-dvd">
-          <div class="dvd"><em>D</em>OM</div>
-        </div>
+        <img src="previews/dvd.png" alt="DVD Bouncer preview" loading="lazy">
       </div>
       <div class="card-meta">
         <h3 class="card-title">DVD Bouncer</h3>
@@ -917,9 +824,7 @@ footer .copyhide:hover {
     <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">09</span>
-        <div class="preview-mini preview-tubular">
-          <div class="t-head">Tubular</div>
-        </div>
+        <img src="previews/tubular.png" alt="Tubular preview" loading="lazy">
       </div>
       <div class="card-meta">
         <h3 class="card-title">Tubular</h3>
@@ -931,9 +836,7 @@ footer .copyhide:hover {
     <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">10</span>
-        <div class="preview-mini preview-arcade">
-          <div class="arc-head">ARCADE</div>
-        </div>
+        <img src="previews/arcade.png" alt="Arcade preview" loading="lazy">
       </div>
       <div class="card-meta">
         <h3 class="card-title">Arcade</h3>
@@ -945,9 +848,7 @@ footer .copyhide:hover {
     <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">11</span>
-        <div class="preview-mini preview-buzzbin">
-          <div class="bz-head">BUZZBIN</div>
-        </div>
+        <img src="previews/buzzbin.png" alt="Buzzbin preview" loading="lazy">
       </div>
       <div class="card-meta">
         <h3 class="card-title">Buzzbin</h3>
@@ -959,9 +860,7 @@ footer .copyhide:hover {
     <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">12</span>
-        <div class="preview-mini preview-vapor">
-          <div class="vp-head">Vaporwave</div>
-        </div>
+        <img src="previews/vapor.png" alt="Vaporwave preview" loading="lazy">
       </div>
       <div class="card-meta">
         <h3 class="card-title">Vaporwave</h3>
@@ -973,15 +872,7 @@ footer .copyhide:hover {
     <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">13</span>
-        <div class="preview-mini preview-press">
-          <div class="pr-head">The Press</div>
-          <div class="pr-lines">
-            <span></span><span></span><span></span><span></span><span></span><span></span>
-          </div>
-          <div class="pr-right-lines">
-            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-          </div>
-        </div>
+        <img src="previews/press.png" alt="Press preview" loading="lazy">
       </div>
       <div class="card-meta">
         <h3 class="card-title">Press</h3>
@@ -993,10 +884,7 @@ footer .copyhide:hover {
     <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">14</span>
-        <div class="preview-mini preview-blueprint">
-          <div class="bp-head">Blueprint</div>
-          <div class="bp-spec">Scale 1:24 — Rev. A</div>
-        </div>
+        <img src="previews/blueprint.png" alt="Blueprint preview" loading="lazy">
       </div>
       <div class="card-meta">
         <h3 class="card-title">Blueprint</h3>
@@ -1008,10 +896,7 @@ footer .copyhide:hover {
     <div class="card is-theme">
       <div class="card-preview">
         <span class="card-num">15</span>
-        <div class="preview-mini preview-chalkboard">
-          <div class="cb-head">Chalkboard</div>
-          <div class="cb-sub">schoolroom slate</div>
-        </div>
+        <img src="previews/chalkboard.png" alt="Chalkboard preview" loading="lazy">
       </div>
       <div class="card-meta">
         <h3 class="card-title">Chalkboard</h3>
@@ -1047,9 +932,9 @@ footer .copyhide:hover {
   <div class="install">
     <div class="install-left">
       <h3>Get the extension</h3>
-      <span class="filename">dom-perignon-v1.5.23.zip · ~120 KB · MV3 · no telemetry</span>
+      <span class="filename">dom-perignon-v1.5.24.zip · ~120 KB · MV3 · no telemetry</span>
       <p class="note">A self-contained Chrome extension. No servers, no analytics. Loads in unpacked mode.</p>
-      <a class="cta" href="downloads/dom-perignon-v1.5.23.zip" download>↓ Download the zip</a>
+      <a class="cta" href="downloads/dom-perignon-v1.5.24.zip" download>↓ Download the zip</a>
     </div>
     <div class="install-right">
       <ol>
@@ -1067,7 +952,7 @@ footer .copyhide:hover {
 
   <footer>
     <span><a class="copyhide" href="downloads/stage-watermark-v1.0.0.zip" download title="">© 2026</a> · customprojects.info · <a href="privacy.html">Privacy</a></span>
-    <span>DOM Pérignon v1.5.23</span>
+    <span>DOM Pérignon v1.5.24</span>
   </footer>
 
 </div>
@@ -1083,7 +968,7 @@ footer .copyhide:hover {
   //
   // The "what's active" check reads inject.js's NS.currentOverlay /
   // NS.currentTheme directly instead of tracking it in a local var. In
-  // v1.5.23 the local tracker could desync from the actual runtime
+  // v1.5.24 the local tracker could desync from the actual runtime
   // (page interactions, late-arriving init resolves) so a "deactivate"
   // click sometimes hit the wrong branch and needed a second tap.
   // Reading from NS at the start of each click means we always operate
