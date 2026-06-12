@@ -12,55 +12,55 @@
   /* Warm dawn-terracotta canvas. The saturated 7-9% chroma is intentional
      -- it's the design identity, not a readability bug to neutralize.
      Foreground colors carry contrast; the canvas just stays warm. */
-  --dawn-300: oklch(75% 0.06 35);
-  --dawn-400: oklch(62% 0.07 33);
-  --dawn-500: oklch(52% 0.08 32);
-  --dawn-600: oklch(44% 0.085 30);
-  --dawn-700: oklch(37% 0.09 30);
-  --dawn-800: oklch(31% 0.085 30);
-  --dawn-850: oklch(28% 0.08 30);
-  --dawn-900: oklch(25% 0.075 32);
-  --dawn-950: oklch(22% 0.07 32);
+  --dawn-300: oklch(75% 0.060 42);
+  --dawn-400: oklch(62% 0.070 42);
+  --dawn-500: oklch(52% 0.080 42);
+  --dawn-600: oklch(44% 0.085 42);
+  --dawn-700: oklch(37% 0.090 42);
+  --dawn-800: oklch(31% 0.085 42);
+  --dawn-850: oklch(28% 0.080 42);
+  --dawn-900: oklch(25% 0.075 42);
+  --dawn-950: oklch(22% 0.070 42);
 
   /* Coral — the single primary accent. Earns every appearance. */
-  --coral-300: oklch(82% 0.12 32);
-  --coral-400: oklch(76% 0.16 30);
-  --coral-500: oklch(70% 0.18 28);
-  --coral-600: oklch(62% 0.17 28);
-  --coral-700: oklch(52% 0.15 28);
-  --coral-800: oklch(42% 0.12 28);
-  --coral-glow: oklch(76% 0.20 30 / 0.40);
-  --coral-wash: oklch(74% 0.18 30 / 0.10);
+  --coral-300: oklch(82% 0.120 42);
+  --coral-400: oklch(76% 0.155 42);
+  --coral-500: oklch(70% 0.155 42);
+  --coral-600: oklch(62% 0.155 42);
+  --coral-700: oklch(52% 0.150 42);
+  --coral-800: oklch(42% 0.120 42);
+  --coral-glow: oklch(76% 0.155 42 / 0.40);
+  --coral-wash: oklch(74% 0.155 42 / 0.10);
 
   /* Goldenrod scale — used now only where the design genuinely wants gold
      weight (the Oakland Week pill). Stat numerals moved to ivory. */
-  --gold-300: oklch(79% 0.14 78);
-  --gold-400: oklch(71% 0.16 75);
-  --gold-500: oklch(63% 0.15 73);
+  --gold-300: oklch(79% 0.126 250);
+  --gold-400: oklch(71% 0.126 250);
+  --gold-500: oklch(63% 0.126 250);
 
   /* Apricot — DJ name links. Pulled to a low-chroma warm rose so it
      doesn't fight coral; reads as "tinted neutral, not a second accent." */
-  --apricot: oklch(74% 0.06 50);
-  --apricot-deep: oklch(64% 0.06 48);
+  --apricot: oklch(74% 0.060 42);
+  --apricot-deep: oklch(64% 0.060 42);
 
   /* Sage — legacy alias only (no longer used on dates). */
-  --sage: oklch(78% 0.05 75);
-  --sage-deep: oklch(58% 0.04 75);
+  --sage: oklch(78% 0.050 250);
+  --sage-deep: oklch(58% 0.040 250);
 
   /* Cream-ivory text, never pure white. Warm cream that sits on the dawn
      canvas as a single continuous tonal family. */
-  --ivory: oklch(96% 0.03 80);
-  --ivory-strong: oklch(98% 0.02 78);
-  --ivory-muted: oklch(86% 0.05 70);
-  --ivory-subtle: oklch(68% 0.05 55);
+  --ivory: oklch(96% 0.030 42);
+  --ivory-strong: oklch(98% 0.020 42);
+  --ivory-muted: oklch(86% 0.050 42);
+  --ivory-subtle: oklch(68% 0.050 42);
 
   /* Oakland accents — black + Athletics gold, shared between this page and
      the SF + Oakland page. The Week prefix becomes a gold-on-black pill,
      and the Fri/Sat/Sun (formerly green) becomes black-with-white-outline
      jersey text. */
-  --oakland-yellow: oklch(71% 0.16 75);
-  --oakland-yellow-soft: oklch(63% 0.13 73);
-  --oakland-black: oklch(8% 0 0);
+  --oakland-yellow: oklch(71% 0.126 250);
+  --oakland-yellow-soft: oklch(63% 0.126 250);
+  --oakland-black: oklch(8% 0.000 42);
 
   /* Compatibility aliases so the rest of the stylesheet keeps its old token
      names while we shift the palette underneath. */
@@ -90,7 +90,7 @@
   --bg-canvas: var(--dawn-900);
   --bg-elevated: var(--dawn-850);
   --bg-row-hover: var(--dawn-800);
-  --bg-row-active: oklch(34% 0.07 38);
+  --bg-row-active: oklch(34% 0.070 42);
   --fg-default: var(--ivory);
   --fg-strong: var(--ivory-strong);
   --fg-muted: var(--ivory-muted);
@@ -121,9 +121,9 @@ body {
   font: 400 15px/1.55 var(--sans);
   -webkit-font-smoothing: antialiased;
   background-image:
-    radial-gradient(ellipse 80% 45% at 70% -10%, oklch(72% 0.18 35 / 0.22), transparent 65%),
-    radial-gradient(ellipse 60% 35% at 10% 0%, oklch(80% 0.14 65 / 0.14), transparent 65%),
-    radial-gradient(ellipse 70% 40% at 50% 110%, oklch(70% 0.10 90 / 0.10), transparent 65%);
+    radial-gradient(ellipse 80% 45% at 70% -10%, oklch(72% 0.155 42 / 0.22), transparent 65%),
+    radial-gradient(ellipse 60% 35% at 10% 0%, oklch(80% 0.126 250 / 0.14), transparent 65%),
+    radial-gradient(ellipse 70% 40% at 50% 110%, oklch(70% 0.100 250 / 0.10), transparent 65%);
   background-attachment: fixed;
   padding-bottom: 110px;
 }
@@ -151,9 +151,9 @@ body {
   animation: ah-pulse 2.4s ease-out infinite;
 }
 @keyframes ah-pulse {
-  0%   { box-shadow: 0 0 0 0 oklch(72% 0.20 52 / 0.5); }
-  70%  { box-shadow: 0 0 0 10px oklch(72% 0.20 52 / 0); }
-  100% { box-shadow: 0 0 0 0 oklch(72% 0.20 52 / 0); }
+  0%   { box-shadow: 0 0 0 0 oklch(72% 0.155 42 / 0.5); }
+  70%  { box-shadow: 0 0 0 10px oklch(72% 0.155 42 / 0); }
+  100% { box-shadow: 0 0 0 0 oklch(72% 0.155 42 / 0); }
 }
 .ah-link {
   font: 500 16px/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase;
@@ -272,7 +272,7 @@ details.ms[open] > summary {
   position: absolute; left: 0; right: 0; top: calc(100% + 6px);
   background: var(--dawn-850); border: 1px solid var(--border-default); border-radius: 6px;
   padding: 6px 0; max-height: 360px; overflow: auto; z-index: 30;
-  box-shadow: 0 16px 40px -10px oklch(15% 0.04 30 / 0.5);
+  box-shadow: 0 16px 40px -10px oklch(15% 0.040 42 / 0.5);
 }
 .ms-panel-head {
   display: flex; justify-content: space-between; align-items: center;
@@ -395,9 +395,9 @@ details.ms[open] > summary {
   border-color: var(--coral-600); color: var(--coral-300);
   background: var(--coral-wash);
 }
-.t-platforms a.sc:hover { border-color: oklch(58% 0.16 30); color: oklch(78% 0.16 30); }
+.t-platforms a.sc:hover { border-color: oklch(58% 0.155 42); color: oklch(78% 0.155 42); }
 .t-platforms a.sp:hover { border-color: oklch(58% 0.18 145); color: oklch(78% 0.18 145); }
-.t-platforms a.yt:hover { border-color: oklch(58% 0.20 25); color: oklch(78% 0.20 25); }
+.t-platforms a.yt:hover { border-color: oklch(58% 0.155 42); color: oklch(78% 0.155 42); }
 .t-set { color: var(--fg-muted); font-size: 13px; font-style: italic; }
 .t-set.solo { color: var(--fg-subtle); font-style: normal; opacity: 0.55; }
 .t-stage { color: var(--fg-default); font-size: 13px; }
