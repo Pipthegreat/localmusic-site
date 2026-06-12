@@ -446,18 +446,45 @@ footer .meta span + span::before { content: "·"; margin: 0 8px; color: var(--bo
               'matrix-green','matrix-red','ezr-claude','ezr-chatgpt'].includes(id);
     }
 
+    // v1.5.22 — fire on DOMContentLoaded with a retry loop instead of
+    // waiting for window.load. Earlier code waited for window.load,
+    // which doesn't fire until every subresource (Google Fonts
+    // stylesheet, every <link>, every <img>) is fully fetched. On a
+    // network where any of those is slow or blocked — corporate proxy,
+    // ad blocker that swallows fonts.googleapis.com, captive portal,
+    // bandwidth-constrained mobile — window.load can be delayed by
+    // many seconds or never fire at all, and the overlay/theme never
+    // activates. The iframe's mock content renders (the DOM is parsed
+    // long before load), but the page sits inert. By the time
+    // DOMContentLoaded fires, every <script> tag in this file has
+    // executed, so window.__DOMPerignon.applySelection is guaranteed
+    // to be defined — no need to wait for stylesheets.
     const fire = () => {
       const NS = window.__DOMPerignon;
-      if (!NS) return;
+      if (!NS) return false;
       if (typeof NS.applySelection === 'function') {
         NS.applySelection({ overlay, theme });
-      } else if (typeof NS.activate === 'function') {
-        // Pre-v1.5.3 fallback — pick whichever slot is non-empty.
-        NS.activate(theme || overlay);
+        return true;
       }
+      if (typeof NS.activate === 'function') {
+        NS.activate(theme || overlay);
+        return true;
+      }
+      return false;
     };
-    if (document.readyState === 'complete') setTimeout(fire, 80);
-    else window.addEventListener('load', () => setTimeout(fire, 80));
+    // Retry up to ~3s in case any of the hack <script> tags above had
+    // a parser hiccup and NS wasn't quite ready when DOMContentLoaded
+    // fired. Most of the time the first call succeeds.
+    let tries = 0;
+    const tryFire = () => {
+      if (fire()) return;
+      if (tries++ < 30) setTimeout(tryFire, 100);
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => setTimeout(tryFire, 50));
+    } else {
+      setTimeout(tryFire, 50);
+    }
   })();
 </script>
 

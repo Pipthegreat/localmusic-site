@@ -187,10 +187,20 @@
     }
   });
 
-  // v1.5.21 — listen to chrome.storage directly so EVERY tab catches
-  // storage changes the moment they happen, not only when the popup
-  // remembers to broadcast and only to tabs the broadcast reaches.
-  // popup.js's broadcastReactivate stays in place as belt-and-braces.
+  // v1.5.21 / v1.5.22 — storage.onChanged + pageshow listeners. Both
+  // gated behind `chrome.storage.onChanged` availability because it's
+  // present ONLY in the real extension content-script context. The
+  // gallery's "Try on this page" preview and the demo.html iframes
+  // both run inject.js inside a stubbed chrome.* shim that doesn't
+  // include onChanged — those contexts MUST NOT install these
+  // listeners, because:
+  //   - storage.onChanged would never fire there (no real storage)
+  //   - pageshow with persisted=true (bfcache restore) would call
+  //     reactivateFromStorage, which reads the stub's default values
+  //     (null/null) and would teardown whatever theme the page was
+  //     showing — blanking the preview after any back-navigation.
+  // Real extension on a real page has real chrome.storage.onChanged,
+  // so both listeners install and the bfcache rescue works as intended.
   if (chrome.storage && chrome.storage.onChanged) {
     chrome.storage.onChanged.addListener((changes, area) => {
       if (area !== 'local') return;
@@ -199,21 +209,11 @@
         reactivateFromStorage();
       }
     });
-  }
 
-  // v1.5.21 — bfcache rescue. When the user navigates away from a page
-  // with a theme/overlay applied and then back, Chrome restores the
-  // page from the back-forward cache complete with all injected DOM
-  // (class on <html>, <style> elements, overlay roots) but does NOT
-  // re-run the content script. If the user disabled the extension or
-  // changed selection while we were "gone", the bfcached page would
-  // come back showing the OLD state. pageshow with persisted=true
-  // fires only on bfcache restore, so calling reactivateFromStorage
-  // there re-syncs with whatever storage now says — including tearing
-  // everything down if the user turned the extension off entirely.
-  window.addEventListener('pageshow', (event) => {
-    if (event.persisted) reactivateFromStorage();
-  });
+    window.addEventListener('pageshow', (event) => {
+      if (event.persisted) reactivateFromStorage();
+    });
+  }
 
   reactivateFromStorage();
 })();
