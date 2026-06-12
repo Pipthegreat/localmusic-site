@@ -54,15 +54,15 @@ html.dp-arcade-on body::before {
   mix-blend-mode: screen !important;
 }
 
-/* Perspective grid floor — extended 30% further up in v1.5.14. Mask
-   reaches full opacity at 40% from the top (was 55%, was originally
-   72%), opacity bumped to 0.62. The floor now visibly meets the
-   horizon at roughly 40% viewport height instead of 55%. */
+/* Perspective grid floor — extended another 30% further up in v1.5.16.
+   Mask now reaches full opacity at 28% from the top (was 40%, was 55%,
+   originally 72%). The floor meets the horizon at roughly the top
+   third of the viewport. Opacity bumped to 0.68. */
 html.dp-arcade-on body::after {
   content: '' !important;
   position: fixed !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
-  height: 115vh !important;
-  pointer-events: none !important; z-index: 0 !important; opacity: 0.62 !important;
+  height: 120vh !important;
+  pointer-events: none !important; z-index: 0 !important; opacity: 0.68 !important;
   background-image:
     linear-gradient(#ff5a1f 2px, transparent 2px),
     linear-gradient(90deg, #ff5a1f 2px, transparent 2px) !important;
@@ -71,8 +71,8 @@ html.dp-arcade-on body::after {
   transform: perspective(540px) rotateX(68deg) !important;
   animation: dp-arcade-grid 1.6s linear infinite !important;
   filter: drop-shadow(0 -6px 18px #ff5a1f) drop-shadow(0 -14px 42px #ff5a1f) !important;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 8%, rgba(0,0,0,0.80) 24%, #000 40%) !important;
-          mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 8%, rgba(0,0,0,0.80) 24%, #000 40%) !important;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 6%, rgba(0,0,0,0.80) 16%, #000 28%) !important;
+          mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 6%, rgba(0,0,0,0.80) 16%, #000 28%) !important;
 }
 
 /* ─── Star field (html::before) ──────────────────────────────────────
@@ -80,7 +80,12 @@ html.dp-arcade-on body::after {
    magenta, cyan, persimmon. z-index: -1 puts them BEHIND body text so
    they never compete with reading. Masked off below the horizon so
    the floor grid handles that half of the viewport. Twinkles via the
-   slow opacity animation. */
+   slow opacity animation.
+
+   v1.5.16: doubled from 15 stars to 30 + bumped sizes a half-pixel
+   each so they actually register at full-viewport scale. Vertical
+   range tightened to 4-22% to sit inside the now-shorter sky band
+   (floor extended up to 28%). Mask updated to match. */
 html.dp-arcade-on::before {
   content: '' !important;
   position: fixed !important;
@@ -89,38 +94,57 @@ html.dp-arcade-on::before {
   z-index: -1 !important;
   background-color: transparent !important;
   background-image:
+    radial-gradient(2px   2px   at  4% 16%, #ff2d8a 60%, transparent 100%),
     radial-gradient(1.5px 1.5px at  8% 12%, #b8ff3d 60%, transparent 100%),
-    radial-gradient(1px   1px   at 15% 24%, #ff2d8a 60%, transparent 100%),
-    radial-gradient(2px   2px   at 22%  6%, #00f0ff 60%, transparent 100%),
-    radial-gradient(1px   1px   at 33% 18%, #b8ff3d 60%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 41% 28%, #ff5a1f 60%, transparent 100%),
-    radial-gradient(1px   1px   at 49% 10%, #b8ff3d 60%, transparent 100%),
-    radial-gradient(2px   2px   at 58% 22%, #00f0ff 60%, transparent 100%),
-    radial-gradient(1px   1px   at 66%  8%, #ff2d8a 60%, transparent 100%),
+    radial-gradient(2.5px 2.5px at 12%  4%, #00f0ff 60%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 15%  9%, #b8ff3d 60%, transparent 100%),
+    radial-gradient(2px   2px   at 19% 22%, #ff5a1f 60%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 22%  6%, #00f0ff 60%, transparent 100%),
+    radial-gradient(2px   2px   at 25% 14%, #ff2d8a 60%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 28% 20%, #b8ff3d 60%, transparent 100%),
+    radial-gradient(2.5px 2.5px at 32%  8%, #ffd166 60%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 33% 18%, #b8ff3d 60%, transparent 100%),
+    radial-gradient(2px   2px   at 36% 12%, #00f0ff 60%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 41% 22%, #ff5a1f 60%, transparent 100%),
+    radial-gradient(2px   2px   at 44%  6%, #ff2d8a 60%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 49% 10%, #b8ff3d 60%, transparent 100%),
+    radial-gradient(2.5px 2.5px at 53%  4%, #00f0ff 60%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 56% 18%, #ffd166 60%, transparent 100%),
+    radial-gradient(2px   2px   at 58% 14%, #00f0ff 60%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 62% 12%, #b8ff3d 60%, transparent 100%),
+    radial-gradient(2px   2px   at 64% 22%, #ff5a1f 60%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 66%  8%, #ff2d8a 60%, transparent 100%),
+    radial-gradient(2.5px 2.5px at 70% 20%, #b8ff3d 60%, transparent 100%),
     radial-gradient(1.5px 1.5px at 74% 16%, #b8ff3d 60%, transparent 100%),
-    radial-gradient(1px   1px   at 81% 26%, #00f0ff 60%, transparent 100%),
+    radial-gradient(2px   2px   at 78%  6%, #00f0ff 60%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 81% 18%, #00f0ff 60%, transparent 100%),
+    radial-gradient(2.5px 2.5px at 84% 10%, #ff5a1f 60%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 86% 22%, #ffd166 60%, transparent 100%),
+    radial-gradient(2px   2px   at 88% 24%, #ff2d8a 60%, transparent 100%),
     radial-gradient(1.5px 1.5px at 90% 12%, #ff5a1f 60%, transparent 100%),
-    radial-gradient(1px   1px   at 96% 30%, #b8ff3d 60%, transparent 100%),
-    radial-gradient(1.5px 1.5px at  4% 34%, #ff2d8a 60%, transparent 100%),
-    radial-gradient(1px   1px   at 28% 32%, #00f0ff 60%, transparent 100%),
-    radial-gradient(2px   2px   at 52% 36%, #b8ff3d 60%, transparent 100%) !important;
-  /* Mask hides stars below the horizon — they only live in the sky. */
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 45%) !important;
-          mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 45%) !important;
-  opacity: 0.85 !important;
+    radial-gradient(2px   2px   at 93%  8%, #b8ff3d 60%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 96% 18%, #b8ff3d 60%, transparent 100%) !important;
+  /* Mask: stars fully visible above the horizon (~22%), fade out by 32%
+     so they don't bleed onto the floor grid. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 22%, transparent 32%) !important;
+          mask-image: linear-gradient(to bottom, #000 0%, #000 22%, transparent 32%) !important;
+  opacity: 0.95 !important;
   animation: dp-arcade-twinkle 5s ease-in-out infinite !important;
 }
 
 /* ─── Horizon glow (html::after) ──────────────────────────────────────
    Bright persimmon ribbon where floor meets sky. Soft ellipse blurred
    to feel like a sun receding behind the floor. z-index: -1 keeps it
-   behind body text so it reads as atmosphere, not chrome. */
+   behind body text so it reads as atmosphere, not chrome.
+
+   v1.5.16: repositioned to 72vh-from-bottom (was 60vh) so it tracks
+   the floor's new horizon at ~28% from the top. */
 html.dp-arcade-on::after {
   content: '' !important;
   position: fixed !important;
   left: -10% !important;
   right: -10% !important;
-  bottom: 60vh !important;
+  bottom: 72vh !important;
   height: 80px !important;
   pointer-events: none !important;
   z-index: -1 !important;
