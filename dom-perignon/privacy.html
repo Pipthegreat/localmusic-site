@@ -115,7 +115,7 @@ footer {
   </div>
 
   <h1><em>DOM</em> Pérignon - Privacy</h1>
-  <p class="updated">Last updated: 2026-05-24</p>
+  <p class="updated">Last updated: 2026-06-12</p>
 
   <p class="lede">
     DOM Pérignon stores nothing on a server, sends nothing to anyone,
@@ -124,14 +124,21 @@ footer {
 
   <h2>What we store</h2>
   <p>
-    Four small preferences, all in <code>chrome.storage.local</code> on your machine:
+    A handful of preferences, all in <code>chrome.storage.local</code> on your machine:
   </p>
   <ul>
-    <li>The hijink you've selected (e.g. <code>champagne</code>, <code>ants</code>, or <code>off</code>).</li>
+    <li>The overlay you've selected, if any (e.g. <code>champagne</code>, <code>ants</code>).</li>
+    <li>The theme world you've selected, if any (e.g. <code>tubular</code>, <code>arcade</code>).</li>
     <li>Whether the master Active toggle is on or off.</li>
     <li>Whether the green <code>&gt;_</code> override is on.</li>
     <li>Whether the red <code>&gt;_</code> override is on.</li>
   </ul>
+  <p>
+    Versions before 1.5.3 used a single combined selection key
+    (<code>activeHack</code>). On first launch after upgrading, that
+    legacy value is silently migrated into whichever of the two new slots
+    it belongs to and the old key is cleared.
+  </p>
   <p>
     This data never leaves your browser. We have no servers, no analytics,
     no third-party tracking, no account.
@@ -149,6 +156,7 @@ footer {
     <li><strong>Gravity Well</strong> looks at images, buttons, headings (h1/h2/h3), and link-styled buttons so they can fall.</li>
     <li><strong>You Got This</strong>, <strong>Champagne Bubbles</strong>, <strong>Ants</strong>, <strong>DVD Bouncer</strong>, and <strong>Aquarium</strong> don't read page content - they paint over it.</li>
     <li>The <strong>green <code>&gt;_</code></strong> and <strong>red <code>&gt;_</code></strong> overrides don't read page content either. The green override paints a falling-glyph overlay on every site; on <code>claude.ai</code> it loads a more elaborate stylesheet targeting Claude's chat UI. The red override does the same with a blood-red palette and its elaborate version applies on <code>chatgpt.com</code>.</li>
+    <li>The <strong>theme worlds</strong> — Tubular, Arcade, Buzzbin, Vaporwave, Press, Blueprint, Chalkboard — are CSS only. They don't read page content; they apply a stylesheet scoped under <code>html.dp-&lt;name&gt;-on</code> that recolors and re-types whatever the page already shows.</li>
   </ul>
   <p>
     Nothing read from any page is transmitted anywhere. Information stays
@@ -159,22 +167,31 @@ footer {
   <p>
     When you open the DOM Pérignon popup, it loads the Fraunces, Inter, and
     JetBrains Mono fonts from Google Fonts (<code>fonts.googleapis.com</code>)
-    so its own UI displays in the intended typefaces. The
-    <strong>You Got This</strong> hijink also loads Fraunces from the same
-    place so the motivational quotes display correctly. Google may log
-    these requests per its own privacy policy. No information about you or
-    the page you're on is sent - only standard requests for the font files.
+    so its own UI displays in the intended typefaces. Several hijinks load
+    additional typefaces from the same source on activation:
   </p>
+  <ul>
+    <li><strong>You Got This</strong> — Fraunces, for the drifting quotes.</li>
+    <li><strong>Tubular</strong> — Fraunces.</li>
+    <li><strong>Arcade</strong> — Press Start 2P.</li>
+    <li><strong>Buzzbin</strong> — Anton and other display sans for the sticker headlines.</li>
+    <li><strong>Vaporwave</strong> — DM Serif Display.</li>
+    <li><strong>Press</strong> — a newsprint serif.</li>
+    <li><strong>Blueprint</strong> — Architects Daughter.</li>
+    <li><strong>Chalkboard</strong> — Caveat.</li>
+  </ul>
   <p>
-    No other DOM Pérignon code makes any external network call. The other
-    hijinks and the <code>&gt;_</code> overrides load their CSS from inside
-    the extension bundle, not from the network.
+    Google may log these requests per its own privacy policy. No
+    information about you or the page you're on is sent — only standard
+    requests for the font files. No other DOM Pérignon code makes any
+    external network call; the overlays and <code>&gt;_</code> overrides
+    load their CSS from inside the extension bundle, not the network.
   </p>
 
   <h2>Permission justifications</h2>
   <ul>
-    <li><code>storage</code> - to remember the four preferences listed above between browser sessions.</li>
-    <li><code>host_permissions: &lt;all_urls&gt;</code> - because the user explicitly picks what to apply (a hijink, the green <code>&gt;_</code>, or the red <code>&gt;_</code>) and that effect renders on whichever page the user is viewing.</li>
+    <li><code>storage</code> - to remember the five preferences listed above between browser sessions.</li>
+    <li><code>host_permissions: &lt;all_urls&gt;</code> - because the user explicitly picks what to apply (one overlay, one theme world, the green <code>&gt;_</code>, or the red <code>&gt;_</code>) and that effect renders on whichever page the user is viewing.</li>
   </ul>
 
   <h2>Changes to this policy</h2>

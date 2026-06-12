@@ -392,13 +392,43 @@ footer .meta span + span::before { content: "·"; margin: 0 8px; color: var(--bo
 <script src="ext/hacks/gravity-well.js"></script>
 <script src="ext/hacks/googly.js"></script>
 <script src="ext/hacks/aquarium.js"></script>
+<script src="ext/hacks/tubular.js"></script>
+<script src="ext/hacks/arcade.js"></script>
+<script src="ext/hacks/buzzbin.js"></script>
+<script src="ext/hacks/vapor.js"></script>
+<script src="ext/hacks/press.js"></script>
+<script src="ext/hacks/blueprint.js"></script>
+<script src="ext/hacks/chalkboard.js"></script>
+<script src="ext/hacks/matrix-green.js"></script>
+<script src="ext/hacks/matrix-red.js"></script>
 <script src="ext/inject.js"></script>
 <script>
+  // v1.5.9 dual-slot demo runner. Accepts:
+  //   ?hack=<id>     legacy single-slot (kept for old iframe URLs)
+  //   ?overlay=<id>  the overlay slot (ants, champagne, ...)
+  //   ?theme=<id>    the theme world slot (tubular, arcade, ...)
+  //   Both can be set; activeSelection runs them together.
   (function () {
-    const params = new URLSearchParams(location.search);
-    const hack = params.get('hack');
-    if (!hack || !window.__DOMPerignon) return;
-    const fire = () => window.__DOMPerignon.activate(hack);
+    const params  = new URLSearchParams(location.search);
+    const legacy  = params.get('hack');
+    const overlay = params.get('overlay') || (legacy && !isThemeWorld(legacy) ? legacy : null);
+    const theme   = params.get('theme')   || (legacy &&  isThemeWorld(legacy) ? legacy : null);
+
+    function isThemeWorld(id) {
+      return ['tubular','arcade','buzzbin','vapor','press','blueprint','chalkboard',
+              'matrix-green','matrix-red','ezr-claude','ezr-chatgpt'].includes(id);
+    }
+
+    const fire = () => {
+      const NS = window.__DOMPerignon;
+      if (!NS) return;
+      if (typeof NS.applySelection === 'function') {
+        NS.applySelection({ overlay, theme });
+      } else if (typeof NS.activate === 'function') {
+        // Pre-v1.5.3 fallback — pick whichever slot is non-empty.
+        NS.activate(theme || overlay);
+      }
+    };
     if (document.readyState === 'complete') setTimeout(fire, 80);
     else window.addEventListener('load', () => setTimeout(fire, 80));
   })();

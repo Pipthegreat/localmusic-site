@@ -1,0 +1,281 @@
+/* buzzbin — MTV '92 sticker bomb. Yellow halftone canvas, magenta + cyan
+   pops, brutal black ink. Anton/Archivo Black headings with hard offset
+   drop shadows.
+
+   Adapted from the Checklist Supreme "Buzzbin" theme world. Scoped under
+   html.dp-buzzbin-on.
+
+   READABILITY NOTES
+   The Checklist Supreme version dialled the personality up to 11 because
+   every text node was a checklist label (short, one line, all-caps). On
+   an arbitrary page (Reddit, docs, articles) the same dial is unreadable:
+   Reddit's post titles are h-tags, so the skewed/chromatic-aberration h1
+   treatment lands on every post; sidebar nav links are <a> so heavy
+   underlines pile up; avatars and emoji are <img> so a sticker outline
+   on every image turns the page into chrome. This file pulls the loud
+   treatment back to ONLY the elements where it sells the look:
+     • h1 / h2  → full sticker treatment (huge Anton, skew, chromatic shadow)
+     • h3       → calmer Anton, no skew, no text-stroke, tighter shadow
+     • h4-h6    → bold Inter, no chromatic shadow at all
+     • body p / span / li → normal weight black, no shadow
+     • a        → underlined but 2px not 3px
+     • img      → subtle sticker shadow, no fat outline */
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Inter:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap');
+
+html.dp-buzzbin-on {
+  background-color: #ffd200 !important;
+  /* Halftone dots tuned for legibility:
+       alpha 0.30  — was 0.55. Dots read as texture, not punctuation.
+       grid  32px  — was 26px (and originally 22px). More breathing room
+                     between dots so running text isn't crowded.
+       radius 1.0px — was 1.2px. Smaller dots disappear into the canvas
+                     between lines of text but still register as halftone
+                     when viewed at the page scale.
+     The combination keeps the MTV-sticker-bomb texture without making
+     body paragraphs look stippled. */
+  background-image:
+    radial-gradient(rgba(17,17,17,0.30) 1.0px, transparent 1.3px),
+    radial-gradient(rgba(17,17,17,0.30) 1.0px, transparent 1.3px) !important;
+  background-size: 32px 32px, 32px 32px !important;
+  background-position: 0 0, 16px 16px !important;
+  background-attachment: fixed !important;
+  color-scheme: light !important;
+}
+html.dp-buzzbin-on body {
+  background-color: transparent !important;
+  background-image: none !important;
+  color: #111 !important;
+  font-family: 'Inter', 'Helvetica Neue', sans-serif !important;
+  /* Was font-weight: 700 — too heavy for body copy, made every paragraph
+     strain. Default to normal; headings/buttons assert their own weight. */
+}
+
+/* Pink + cyan vignette wash + center yellow glow. Softer opacities than
+   CS uses so the body text underneath stays readable. */
+html.dp-buzzbin-on body::before {
+  content: '' !important;
+  position: fixed !important; inset: 0 !important;
+  pointer-events: none !important; z-index: 0 !important;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255,45,138,0.28) 0%, transparent 30%),
+    radial-gradient(circle at 92% 88%, rgba(0,180,255,0.28) 0%, transparent 32%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.0) 60%, rgba(255,210,0,0.30) 100%) !important;
+}
+
+/* Broad recolor */
+html.dp-buzzbin-on body,
+html.dp-buzzbin-on body *:not(svg):not(svg *) {
+  color: #111 !important;
+  border-color: #111 !important;
+}
+
+/* Sweep ALL layout elements transparent so light-mode site cards stop
+   covering the halftone canvas. Form chrome, code, media, iframes
+   excluded. ALSO: descendants of clickable hosts excluded so icon-only
+   buttons (background-image/mask-image glyphs) stay visible. */
+html.dp-buzzbin-on body *:not(button):not(input):not(textarea):not(select):not(code):not(pre):not(img):not(picture):not(video):not(canvas):not(svg):not(svg *):not(iframe):not(button *):not(a *):not(label *):not([role="button"] *):not([role="link"] *) {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Icon rescue: SVGs inside clickable elements inherit the ink-black
+   text color via currentColor so light fills (if any) don't sit
+   invisible on the yellow canvas. */
+html.dp-buzzbin-on body :is(button, a, label, [role="button"], [role="link"]) :is(svg, svg *) {
+  fill: currentColor !important;
+}
+
+/* ───── Headings — graded loudness ───── */
+
+/* h1: the showstopper. Big Anton, skew, full chromatic shadow stack. */
+html.dp-buzzbin-on body h1 {
+  font-family: 'Anton', 'Impact', sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  letter-spacing: -1px !important;
+  color: #111 !important;
+  text-transform: uppercase !important;
+  transform: skewX(-6deg) !important;
+  -webkit-text-stroke: 2px #111 !important;
+  text-shadow: 4px 4px 0 #ff2d8a, 8px 8px 0 #00b4ff !important;
+  line-height: 0.9 !important;
+  font-size: 56px !important;
+}
+
+/* h2: same energy, lighter dose. Less skew, no text-stroke. */
+html.dp-buzzbin-on body h2 {
+  font-family: 'Anton', 'Impact', sans-serif !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.5px !important;
+  color: #111 !important;
+  text-transform: uppercase !important;
+  transform: skewX(-3deg) !important;
+  text-shadow: 2px 2px 0 #ff2d8a, 4px 4px 0 #00b4ff !important;
+  line-height: 1 !important;
+  font-size: 36px !important;
+}
+
+/* h3: this is what most article subheads (and Reddit post titles) are —
+   it MUST stay readable. Anton without the chromatic shadow. */
+html.dp-buzzbin-on body h3 {
+  font-family: 'Anton', 'Impact', sans-serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  color: #111 !important;
+  text-transform: uppercase !important;
+  text-shadow: 1px 1px 0 #ff2d8a !important;
+  line-height: 1.1 !important;
+  font-size: 26px !important;
+}
+
+/* h4–h6: calm bold Inter so deeply-nested content (sidebar widgets, form
+   labels, doc subheads) stays scannable. */
+html.dp-buzzbin-on body h4,
+html.dp-buzzbin-on body h5,
+html.dp-buzzbin-on body h6 {
+  font-family: 'Archivo Black', 'Inter', sans-serif !important;
+  font-weight: 900 !important;
+  letter-spacing: 0 !important;
+  color: #111 !important;
+  text-transform: uppercase !important;
+  text-shadow: none !important;
+  line-height: 1.2 !important;
+}
+html.dp-buzzbin-on body h4 { font-size: 18px !important; }
+html.dp-buzzbin-on body h5 { font-size: 15px !important; }
+html.dp-buzzbin-on body h6 { font-size: 13px !important; }
+
+/* ───── Body copy — plain ───── */
+
+/* Body text gets a yellow halo so each character punches the halftone
+   dots out of the area immediately around it. On a yellow halftone
+   canvas, plain black text reads as stippled because the dots show
+   through letter gaps; the multi-offset shadow in #ffd200 erases the
+   dots in a ~2px ring around every glyph. Side benefit: it doubles as a
+   sticker-cutout aesthetic that matches the rest of the theme.
+   font-weight: 500 widens strokes just enough to swallow the largest
+   gap dots without making the page feel uniformly bold. */
+html.dp-buzzbin-on body p,
+html.dp-buzzbin-on body span,
+html.dp-buzzbin-on body li,
+html.dp-buzzbin-on body td,
+html.dp-buzzbin-on body th,
+html.dp-buzzbin-on body dd,
+html.dp-buzzbin-on body dt,
+html.dp-buzzbin-on body label,
+html.dp-buzzbin-on body small,
+html.dp-buzzbin-on body figcaption {
+  font-family: 'Inter', 'Helvetica Neue', sans-serif !important;
+  font-weight: 500 !important;
+  text-shadow:
+    1px 0 0 #ffd200,
+    -1px 0 0 #ffd200,
+    0 1px 0 #ffd200,
+    0 -1px 0 #ffd200,
+    0 0 3px #ffd200 !important;
+}
+html.dp-buzzbin-on body strong,
+html.dp-buzzbin-on body b {
+  font-weight: 800 !important;
+}
+/* Smaller heads (h4-h6) live in the same readability bracket as body
+   text — same halo treatment so they pop off the halftone too. */
+html.dp-buzzbin-on body h4,
+html.dp-buzzbin-on body h5,
+html.dp-buzzbin-on body h6 {
+  text-shadow:
+    1px 0 0 #ffd200,
+    -1px 0 0 #ffd200,
+    0 1px 0 #ffd200,
+    0 -1px 0 #ffd200,
+    0 0 3px #ffd200 !important;
+}
+
+/* ───── Links — magenta, thin underline ───── */
+
+html.dp-buzzbin-on body a,
+html.dp-buzzbin-on body a * {
+  color: #d8156e !important;
+  font-family: inherit !important;
+  text-decoration: underline !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 2px !important;
+  text-decoration-color: #00b4ff !important;
+}
+html.dp-buzzbin-on body a:hover,
+html.dp-buzzbin-on body a:hover * {
+  color: #ff2d8a !important;
+  text-decoration-color: #111 !important;
+}
+
+/* ───── Form chrome — full sticker treatment (sells the look) ───── */
+
+html.dp-buzzbin-on body button,
+html.dp-buzzbin-on body input,
+html.dp-buzzbin-on body textarea,
+html.dp-buzzbin-on body select {
+  background-color: #fff !important;
+  background-image: none !important;
+  color: #111 !important;
+  border: 3px solid #111 !important;
+  box-shadow: 4px 4px 0 #111 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  border-radius: 0 !important;
+}
+/* Buttons get extra personality; inputs stay readable as inputs. */
+html.dp-buzzbin-on body button {
+  font-family: 'Anton', sans-serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  padding: 8px 16px !important;
+}
+html.dp-buzzbin-on body input,
+html.dp-buzzbin-on body textarea {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  font-weight: 400 !important;
+}
+html.dp-buzzbin-on body button:hover {
+  background: #b8ff3d !important;
+  transform: translate(2px, 2px) !important;
+  box-shadow: 2px 2px 0 #111 !important;
+}
+
+/* ───── Cards — only blockquote + article get the sticker shadow ─────
+   Was hitting every <li>, which lit up sidebar nav and post lists like
+   a pinball machine. Limited to obvious card-like containers. */
+
+html.dp-buzzbin-on body blockquote {
+  border: 3px solid #111 !important;
+  background: rgba(255,255,255,0.6) !important;
+  box-shadow: 6px 6px 0 #00b4ff !important;
+  padding: 14px !important;
+  font-style: italic !important;
+}
+
+/* ───── Code — cyan pop on black border ───── */
+
+html.dp-buzzbin-on body code,
+html.dp-buzzbin-on body pre {
+  background: #00b4ff !important;
+  color: #111 !important;
+  border: 2px solid #111 !important;
+  font-family: 'Space Mono', monospace !important;
+  font-weight: 700 !important;
+  box-shadow: 3px 3px 0 #111 !important;
+}
+
+/* ───── Images — subtle sticker shadow, no fat outline ─────
+   Was: every <img> got a 3px black outline + 6px hard offset shadow.
+   That made avatars/icons/emoji look like glued-on stickers all over
+   the page. Now: a soft dark shadow only, with reasonable saturation. */
+
+html.dp-buzzbin-on body img,
+html.dp-buzzbin-on body picture,
+html.dp-buzzbin-on body video {
+  filter: saturate(1.15) contrast(1.05) !important;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.55) !important;
+}

@@ -1,0 +1,180 @@
+/* chalkboard — schoolroom slate. Dark green slate canvas with chalk
+   speckle and yellow-stain dust, Caveat handwriting throughout, dashed
+   chalk borders on cards, wood-rail underbar at the bottom.
+
+   Adapted from the Checklist Supreme "Chalkboard" theme world. Scoped
+   under html.dp-chalkboard-on. */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Architects+Daughter&display=swap');
+
+@keyframes dp-chalk-scribble {
+  0%, 100% { transform: translate(0,0) rotate(0deg); }
+  25%      { transform: translate(0.3px, -0.3px) rotate(0.2deg); }
+  50%      { transform: translate(-0.3px, 0.3px) rotate(-0.2deg); }
+  75%      { transform: translate(0.2px, 0.2px) rotate(0.1deg); }
+}
+
+html.dp-chalkboard-on {
+  background-color: #1f4830 !important;
+  background-image:
+    radial-gradient(ellipse at 30% 25%, rgba(255,255,255,0.05) 0%, transparent 35%),
+    radial-gradient(ellipse at 75% 60%, rgba(255,255,255,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 15% 80%, rgba(255,235,110,0.04) 0%, transparent 35%) !important;
+  background-attachment: fixed !important;
+  color-scheme: dark !important;
+}
+html.dp-chalkboard-on body {
+  background-color: transparent !important;
+  background-image: none !important;
+  color: #fefdfa !important;
+  font-family: 'Caveat', 'Architects Daughter', cursive !important;
+  font-size: 22px !important;
+}
+
+/* Chalk dust speckles */
+html.dp-chalkboard-on body::before {
+  content: '' !important;
+  position: fixed !important; inset: 0 !important;
+  pointer-events: none !important; z-index: 1 !important;
+  background:
+    radial-gradient(ellipse 1px 0.5px at 8% 22%, rgba(255,255,255,0.45) 0px, transparent 2px),
+    radial-gradient(ellipse 1px 0.5px at 18% 88%, rgba(255,255,255,0.35) 0px, transparent 2px),
+    radial-gradient(ellipse 1px 0.5px at 35% 12%, rgba(255,255,255,0.4) 0px, transparent 2px),
+    radial-gradient(ellipse 1px 0.5px at 55% 42%, rgba(255,255,255,0.35) 0px, transparent 2px),
+    radial-gradient(ellipse 1px 0.5px at 72% 72%, rgba(255,255,255,0.4) 0px, transparent 2px),
+    radial-gradient(ellipse 1px 0.5px at 88% 35%, rgba(255,255,255,0.35) 0px, transparent 2px) !important;
+}
+
+/* Wood chalk rail at the bottom */
+html.dp-chalkboard-on body::after {
+  content: '' !important;
+  position: fixed !important; bottom: 0 !important; left: 0 !important; right: 0 !important;
+  height: 14px !important;
+  background: linear-gradient(180deg, #6b4423 0%, #4a2f18 60%, #2a1810 100%) !important;
+  border-top: 2px solid #2a1810 !important;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.5) !important;
+  z-index: 100 !important;
+  pointer-events: none !important;
+}
+
+html.dp-chalkboard-on body,
+html.dp-chalkboard-on body *:not(svg):not(svg *) {
+  color: #fefdfa !important;
+  border-color: rgba(254,253,250,0.5) !important;
+  text-shadow: 0 0 1px rgba(254,253,250,0.6) !important;
+}
+
+/* Sweep ALL layout elements transparent so light-mode site cards stop
+   covering the slate. Form chrome, code, media, iframes excluded.
+   ALSO: descendants of clickable hosts excluded so icon-only buttons
+   (background-image/mask-image glyphs) stay visible. */
+html.dp-chalkboard-on body *:not(button):not(input):not(textarea):not(select):not(code):not(pre):not(img):not(picture):not(video):not(canvas):not(svg):not(svg *):not(iframe):not(button *):not(a *):not(label *):not([role="button"] *):not([role="link"] *) {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Icon rescue: SVGs inside clickable elements inherit the chalk-white
+   text color via currentColor so dark fills don't sit invisible on
+   the slate canvas. */
+html.dp-chalkboard-on body :is(button, a, label, [role="button"], [role="link"]) :is(svg, svg *) {
+  fill: currentColor !important;
+}
+
+/* Headings: chalked Caveat with scribble jitter */
+html.dp-chalkboard-on body h1,
+html.dp-chalkboard-on body h2,
+html.dp-chalkboard-on body h3,
+html.dp-chalkboard-on body h4,
+html.dp-chalkboard-on body h5,
+html.dp-chalkboard-on body h6 {
+  font-family: 'Caveat', cursive !important;
+  font-weight: 700 !important;
+  color: #fefdfa !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  text-shadow: 0 0 1px #fefdfa, 2px 2px 0 rgba(0,0,0,0.25) !important;
+  animation: dp-chalk-scribble 0.3s steps(4) infinite !important;
+  text-decoration: underline !important;
+  text-decoration-color: #ffeb6e !important;
+  text-decoration-thickness: 3px !important;
+  text-underline-offset: 6px !important;
+}
+html.dp-chalkboard-on body h1 { font-size: 70px !important; line-height: 0.9 !important; color: #ffaad4 !important; text-shadow: 0 0 2px #ffaad4, 3px 3px 0 rgba(0,0,0,0.3) !important; }
+html.dp-chalkboard-on body h2 { font-size: 54px !important; color: #ffeb6e !important; text-shadow: 0 0 2px #ffeb6e, 2px 2px 0 rgba(0,0,0,0.3) !important; }
+html.dp-chalkboard-on body h3 { font-size: 40px !important; }
+html.dp-chalkboard-on body h4 { font-size: 32px !important; color: #ffaad4 !important; text-shadow: 0 0 2px #ffaad4, 2px 2px 0 rgba(0,0,0,0.3) !important; }
+html.dp-chalkboard-on body h5,
+html.dp-chalkboard-on body h6 { font-size: 26px !important; }
+
+/* Links: chalk-yellow */
+html.dp-chalkboard-on body a,
+html.dp-chalkboard-on body a * {
+  color: #ffeb6e !important;
+  text-shadow: 0 0 2px #ffeb6e !important;
+  text-decoration: underline !important;
+  text-decoration-thickness: 2px !important;
+}
+
+/* Form chrome: chalk-dashed fields */
+html.dp-chalkboard-on body button,
+html.dp-chalkboard-on body input,
+html.dp-chalkboard-on body textarea,
+html.dp-chalkboard-on body select {
+  background-color: transparent !important;
+  background-image: none !important;
+  color: #fefdfa !important;
+  border: 2px dashed rgba(254,253,250,0.55) !important;
+  border-radius: 4px !important;
+  font-family: 'Caveat', cursive !important;
+  font-size: 22px !important;
+}
+html.dp-chalkboard-on body button {
+  border-color: #ffeb6e !important;
+  color: #ffeb6e !important;
+  font-weight: 700 !important;
+  border-style: solid !important;
+  border-width: 2.5px !important;
+  text-shadow: 0 0 2px #ffeb6e !important;
+}
+html.dp-chalkboard-on body button:hover {
+  background: #ffeb6e !important;
+  color: #1f4830 !important;
+  box-shadow: 0 0 20px #ffeb6e !important;
+  text-shadow: none !important;
+}
+html.dp-chalkboard-on body input:focus,
+html.dp-chalkboard-on body textarea:focus {
+  border-color: #ffeb6e !important;
+  border-style: solid !important;
+  box-shadow: 0 0 18px rgba(255,235,110,0.4) !important;
+  outline: none !important;
+}
+
+/* Cards / list items: dashed chalk boxes with star bullets */
+html.dp-chalkboard-on body li,
+html.dp-chalkboard-on body article,
+html.dp-chalkboard-on body blockquote {
+  border: 2px dashed rgba(254,253,250,0.5) !important;
+  border-radius: 4px !important;
+  padding: 12px 14px !important;
+  margin-bottom: 12px !important;
+  position: relative !important;
+}
+html.dp-chalkboard-on body li:nth-child(2n) { border-style: dotted !important; }
+html.dp-chalkboard-on body li:nth-child(3n) { border-style: solid !important; border-color: rgba(255,235,110,0.5) !important; }
+
+html.dp-chalkboard-on body code,
+html.dp-chalkboard-on body pre {
+  background: rgba(0,0,0,0.25) !important;
+  color: #ffeb6e !important;
+  border: 2px dashed rgba(255,235,110,0.5) !important;
+  font-family: 'Architects Daughter', cursive !important;
+}
+
+html.dp-chalkboard-on body img,
+html.dp-chalkboard-on body picture,
+html.dp-chalkboard-on body video,
+html.dp-chalkboard-on body canvas {
+  filter: contrast(0.95) brightness(0.85) sepia(0.2) !important;
+  border: 2px dashed rgba(254,253,250,0.55) !important;
+}

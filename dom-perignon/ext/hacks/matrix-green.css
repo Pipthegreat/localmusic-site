@@ -4,10 +4,13 @@
    class-based selectors most sites use in their own CSS. */
 
 /* Canvas: html → black, body → transparent so the rain (z-index: -1)
-   shows through whatever isn't covered by site UI. */
+   shows through whatever isn't covered by site UI. color-scheme: dark
+   nudges browser-rendered defaults (scrollbars, unstyled form
+   controls) so they don't pop as bright light chrome over the canvas. */
 html.dp-matrix-green-on {
   background-color: #000 !important;
   background-image: none !important;
+  color-scheme: dark !important;
 }
 html.dp-matrix-green-on body {
   background-color: transparent !important;
@@ -39,19 +42,32 @@ html.dp-matrix-green-on body select {
   box-shadow: 0 0 6px rgba(0, 255, 65, 0.35) !important;
 }
 
-/* Site UI sometimes paints its own opaque container backgrounds
-   over the body. Force the common ones transparent so the rain
-   keeps showing through. */
-html.dp-matrix-green-on body header,
-html.dp-matrix-green-on body main,
-html.dp-matrix-green-on body nav,
-html.dp-matrix-green-on body article,
-html.dp-matrix-green-on body section,
-html.dp-matrix-green-on body aside,
-html.dp-matrix-green-on body footer,
-html.dp-matrix-green-on body div {
+/* Site UI sometimes paints its own opaque container backgrounds over
+   the body. The earlier rule only caught header/main/nav/etc., so
+   light-mode site cards (post tiles, sidebars, dialogs, popovers) kept
+   their white backgrounds and covered the rain. This sweep catches
+   every body descendant; form chrome, code blocks, media, SVGs, and
+   embedded UIs (iframes) are excluded so they keep their own styling
+   and stay visible/usable.
+
+   ALSO excluded: descendants of clickable hosts (button, a, label,
+   [role=button], [role=link]). Many sites render icon-only buttons as
+   a <span> or <i> inside a <button> with background-image or mask-image
+   carrying the glyph — stripping those backgrounds made every play /
+   menu / chevron icon vanish. Sparing descendants of clickables
+   preserves them universally. */
+html.dp-matrix-green-on body *:not(button):not(input):not(textarea):not(select):not(code):not(pre):not(img):not(picture):not(video):not(canvas):not(svg):not(svg *):not(iframe):not(button *):not(a *):not(label *):not([role="button"] *):not([role="link"] *) {
   background-color: transparent !important;
   background-image: none !important;
+}
+
+/* ───── Icon visibility rescue ─────
+   Inline SVG icons inside clickable elements force fill to currentColor
+   so a site-defined dark fill (which would sit invisible against the
+   dark canvas) inherits the theme color instead. Sacrifices multi-color
+   SVG detail in those buttons; the icon shape stays legible. */
+html.dp-matrix-green-on body :is(button, a, label, [role="button"], [role="link"]) :is(svg, svg *) {
+  fill: currentColor !important;
 }
 
 /* Soften images / video so the rain reads as dominant. */

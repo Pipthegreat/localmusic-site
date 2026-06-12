@@ -1,0 +1,163 @@
+/* blueprint — architect's drafting. Navy canvas with cyan grid, hand-drawn
+   Architects Daughter headings, dashed-cyan element edges, drafting-detail
+   corner ticks on cards. Red is for "delete" / destructive accents.
+
+   Adapted from the Checklist Supreme "Blueprint" theme world. Scoped under
+   html.dp-blueprint-on. */
+
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Caveat:wght@400;700&family=Space+Mono:wght@400;700&display=swap');
+
+html.dp-blueprint-on {
+  background-color: #0d2138 !important;
+  background-image:
+    linear-gradient(rgba(125,200,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125,200,255,0.08) 1px, transparent 1px),
+    linear-gradient(rgba(125,200,255,0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125,200,255,0.18) 1px, transparent 1px) !important;
+  background-size: 12px 12px, 12px 12px, 60px 60px, 60px 60px !important;
+  background-attachment: fixed !important;
+  color-scheme: dark !important;
+}
+html.dp-blueprint-on body {
+  background-color: transparent !important;
+  background-image: none !important;
+  color: #e8f3ff !important;
+  font-family: 'Architects Daughter', 'Caveat', cursive, sans-serif !important;
+}
+
+/* Edge wash */
+html.dp-blueprint-on body::before {
+  content: '' !important;
+  position: fixed !important; inset: 0 !important;
+  pointer-events: none !important; z-index: 1 !important;
+  background:
+    radial-gradient(ellipse at top right, rgba(124,196,255,0.14), transparent 50%),
+    radial-gradient(ellipse at bottom left, rgba(124,196,255,0.08), transparent 50%) !important;
+}
+
+/* Drafting margin note */
+html.dp-blueprint-on body::after {
+  content: 'REV. A · DOM PÉRIGNON · SHEET 1 OF 1' !important;
+  position: fixed !important;
+  bottom: 8px !important; right: 14px !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 9px !important;
+  letter-spacing: 3px !important;
+  color: rgba(124,196,255,0.6) !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+html.dp-blueprint-on body,
+html.dp-blueprint-on body *:not(svg):not(svg *) {
+  color: #e8f3ff !important;
+  border-color: #7cc4ff !important;
+}
+
+/* Sweep ALL layout elements transparent so light-mode site cards stop
+   covering the drafting grid. Form chrome, code, media, iframes
+   excluded. ALSO: descendants of clickable hosts excluded so icon-only
+   buttons (background-image/mask-image glyphs) stay visible. */
+html.dp-blueprint-on body *:not(button):not(input):not(textarea):not(select):not(code):not(pre):not(img):not(picture):not(video):not(canvas):not(svg):not(svg *):not(iframe):not(button *):not(a *):not(label *):not([role="button"] *):not([role="link"] *) {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Icon rescue: SVGs inside clickable elements inherit the cyan text
+   color via currentColor so dark fills don't sit invisible on the
+   navy canvas. */
+html.dp-blueprint-on body :is(button, a, label, [role="button"], [role="link"]) :is(svg, svg *) {
+  fill: currentColor !important;
+}
+
+/* Headings: hand-drawn with cyan rule */
+html.dp-blueprint-on body h1,
+html.dp-blueprint-on body h2,
+html.dp-blueprint-on body h3,
+html.dp-blueprint-on body h4,
+html.dp-blueprint-on body h5,
+html.dp-blueprint-on body h6 {
+  font-family: 'Architects Daughter', sans-serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  color: #e8f3ff !important;
+  text-transform: uppercase !important;
+  border-bottom: 1.5px solid #7cc4ff !important;
+  padding-bottom: 4px !important;
+  text-shadow: 0 0 12px rgba(124,196,255,0.4) !important;
+}
+html.dp-blueprint-on body h1 { font-size: 50px !important; line-height: 1 !important; }
+html.dp-blueprint-on body h2 { font-size: 38px !important; color: #7cc4ff !important; text-shadow: 0 0 18px rgba(124,196,255,0.6) !important; }
+html.dp-blueprint-on body h3 { font-size: 28px !important; }
+html.dp-blueprint-on body h4 { font-size: 22px !important; }
+html.dp-blueprint-on body h5,
+html.dp-blueprint-on body h6 { font-size: 18px !important; }
+
+/* Links: bright cyan */
+html.dp-blueprint-on body a,
+html.dp-blueprint-on body a * {
+  color: #7cc4ff !important;
+  text-decoration: underline !important;
+  text-decoration-style: dashed !important;
+  text-shadow: 0 0 8px rgba(124,196,255,0.5) !important;
+}
+
+/* Form chrome: drafting-paper field with dashed edge */
+html.dp-blueprint-on body button,
+html.dp-blueprint-on body input,
+html.dp-blueprint-on body textarea,
+html.dp-blueprint-on body select {
+  background-color: rgba(124,196,255,0.05) !important;
+  background-image: none !important;
+  color: #e8f3ff !important;
+  border: 1px dashed #7cc4ff !important;
+  border-radius: 0 !important;
+  font-family: 'Architects Daughter', sans-serif !important;
+}
+html.dp-blueprint-on body button {
+  border-style: solid !important;
+  border-width: 1.5px !important;
+  color: #7cc4ff !important;
+  font-family: 'Space Mono', monospace !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase !important;
+}
+html.dp-blueprint-on body button:hover {
+  background: #7cc4ff !important;
+  color: #0d2138 !important;
+  box-shadow: 0 0 24px rgba(124,196,255,0.7) !important;
+}
+html.dp-blueprint-on body button:focus,
+html.dp-blueprint-on body input:focus,
+html.dp-blueprint-on body textarea:focus {
+  border-style: solid !important;
+  outline: none !important;
+  box-shadow: 0 0 18px rgba(124,196,255,0.4) !important;
+}
+
+/* Cards / list items: drafting-detail box with corner tick */
+html.dp-blueprint-on body li,
+html.dp-blueprint-on body article,
+html.dp-blueprint-on body blockquote {
+  border: 1px solid rgba(124,196,255,0.7) !important;
+  position: relative !important;
+  padding: 14px !important;
+  margin-bottom: 14px !important;
+  border-radius: 0 !important;
+}
+
+html.dp-blueprint-on body code,
+html.dp-blueprint-on body pre {
+  background: rgba(124,196,255,0.08) !important;
+  color: #e8f3ff !important;
+  border: 1px solid #7cc4ff !important;
+  font-family: 'Space Mono', monospace !important;
+}
+
+html.dp-blueprint-on body img,
+html.dp-blueprint-on body picture,
+html.dp-blueprint-on body video,
+html.dp-blueprint-on body canvas {
+  filter: hue-rotate(180deg) saturate(0.7) brightness(0.85) !important;
+  border: 1px dashed #7cc4ff !important;
+}

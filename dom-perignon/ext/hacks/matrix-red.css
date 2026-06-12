@@ -1,9 +1,13 @@
 /* matrix-red — blood-red counterpart to matrix-green.css. Same
    class-prefixed scoping (html.dp-matrix-red-on) for specificity. */
 
+/* color-scheme: dark nudges browser-rendered defaults (scrollbars,
+   unstyled form controls) so they don't pop as bright light chrome
+   over the black canvas. */
 html.dp-matrix-red-on {
   background-color: #000 !important;
   background-image: none !important;
+  color-scheme: dark !important;
 }
 html.dp-matrix-red-on body {
   background-color: transparent !important;
@@ -32,16 +36,22 @@ html.dp-matrix-red-on body select {
   box-shadow: 0 0 6px rgba(196, 30, 30, 0.4) !important;
 }
 
-html.dp-matrix-red-on body header,
-html.dp-matrix-red-on body main,
-html.dp-matrix-red-on body nav,
-html.dp-matrix-red-on body article,
-html.dp-matrix-red-on body section,
-html.dp-matrix-red-on body aside,
-html.dp-matrix-red-on body footer,
-html.dp-matrix-red-on body div {
+/* Sweep ALL layout elements transparent so light-mode site cards stop
+   covering the rain. Form chrome, code, media, SVG, iframes excluded.
+   ALSO excluded: descendants of clickable hosts (button/a/label/
+   role=button/link). Icon-only buttons render their glyph as a
+   background-image or mask-image on a <span>/<i> inside the button —
+   sparing those descendants keeps icons visible. */
+html.dp-matrix-red-on body *:not(button):not(input):not(textarea):not(select):not(code):not(pre):not(img):not(picture):not(video):not(canvas):not(svg):not(svg *):not(iframe):not(button *):not(a *):not(label *):not([role="button"] *):not([role="link"] *) {
   background-color: transparent !important;
   background-image: none !important;
+}
+
+/* Icon visibility rescue: SVG icons inside clickable elements inherit
+   the theme color via currentColor so a site's dark fill doesn't sit
+   invisible on the dark canvas. */
+html.dp-matrix-red-on body :is(button, a, label, [role="button"], [role="link"]) :is(svg, svg *) {
+  fill: currentColor !important;
 }
 
 html.dp-matrix-red-on body img,

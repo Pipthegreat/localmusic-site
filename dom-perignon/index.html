@@ -3,218 +3,303 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DOM Pérignon - a collection of UI hijinks for Chrome</title>
-<meta name="description" content="A Chrome extension named after the innovator Dom Pierre Pérignon. The DOM (Document Object Model) is the live tree of every web page's elements. DOM Pérignon uses that for eight different perspectives. Live previews and install.">
+<title>DOM Pérignon — a collection of UI hijinks for Chrome</title>
+<meta name="description" content="A Chrome extension named after the innovator Dom Pierre Pérignon. Eight live overlays plus seven full graphic-override theme worlds for any page you visit.">
 <link rel="canonical" href="https://customprojects.info/dom-perignon/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,1,300;9..144,1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400..900;9..144,1,400..900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* ─── Carbon & Cobalt palette — borrowed from the Kestrel Fabrications
+   sibling project. One primary accent (cobalt 240°), one supporting
+   hue (copper 55°) reserved for a single contrast moment (the download
+   pill). Neutrals tinted ~3% chroma toward cobalt so greys read as
+   designed, not stock. */
 :root {
-  /* Inherit the autumn cinnamon palette from the parent site */
-  --slate-300: oklch(82% 0.050 45);
-  --slate-500: oklch(52% 0.080 45);
-  --slate-700: oklch(36% 0.080 40);
-  --slate-800: oklch(30% 0.075 40);
-  --slate-900: oklch(23% 0.060 40);
-  --accent:      oklch(72% 0.085 130);
-  --accent-soft: oklch(80% 0.065 130);
-  --ember:       oklch(70% 0.16 40);
-  --ember-glow:  oklch(72% 0.20 42 / 0.45);
-  --fg-default:  oklch(96% 0.030 60);
-  --fg-muted:    oklch(83% 0.045 55);
-  --bubble-shadow: oklch(12% 0.035 40 / 0.55);
-  --serif: 'Fraunces', Georgia, serif;
-  --sans:  'Inter', system-ui, sans-serif;
-  --mono:  'JetBrains Mono', ui-monospace, monospace;
-  color-scheme: dark;
+  --cobalt-100: oklch(94% 0.020 240);
+  --cobalt-200: oklch(88% 0.035 240);
+  --cobalt-400: oklch(64% 0.10 240);
+  --cobalt-500: oklch(52% 0.11 240);
+  --cobalt-600: oklch(46% 0.095 240);
+  --cobalt-800: oklch(34% 0.075 240);
+  --cobalt-950: oklch(20% 0.04 240);
+  --copper-300: oklch(82% 0.10 55);
+  --copper-500: oklch(66% 0.135 55);
+  --copper-700: oklch(50% 0.12 55);
+  --carbon-50:  oklch(98.5% 0.004 240);
+  --carbon-100: oklch(96.5% 0.006 240);
+  --carbon-200: oklch(93% 0.009 240);
+  --carbon-300: oklch(87% 0.012 240);
+  --carbon-500: oklch(56% 0.016 240);
+  --carbon-700: oklch(36% 0.018 240);
+  --carbon-900: oklch(20% 0.014 240);
+
+  --bg-canvas:        var(--carbon-50);
+  --bg-surface:       #ffffff;
+  --bg-sunken:        var(--carbon-100);
+  --fg-default:       var(--carbon-900);
+  --fg-muted:         var(--carbon-500);
+  --fg-strong:        var(--cobalt-950);
+  --fg-on-accent:     #ffffff;
+  --border-subtle:    var(--carbon-200);
+  --border-emphasis:  var(--carbon-300);
+  --accent:           var(--cobalt-600);
+  --accent-soft-bg:   oklch(96% 0.018 240);
+  --supporting:       var(--copper-500);
+
+  --serif: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --sans:  'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  color-scheme: light;
 }
+
 * { box-sizing: border-box; }
-html { overflow-x: hidden; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: hidden;
+}
 html, body { margin: 0; padding: 0; }
 body {
   font: 400 16px/1.55 var(--sans);
   color: var(--fg-default);
-  background: var(--slate-900);
-  background-image:
-    radial-gradient(ellipse 80% 45% at 75% -8%, oklch(60% 0.10 38 / 0.30), transparent 62%),
-    radial-gradient(ellipse 55% 35% at 8% 4%, oklch(60% 0.08 130 / 0.18), transparent 62%),
-    radial-gradient(ellipse 90% 35% at 50% 105%, oklch(28% 0.07 40 / 0.45), transparent 70%);
-  background-attachment: fixed;
-  min-height: 100vh;
+  background: var(--bg-canvas);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
-a { color: inherit; }
+::selection { background: var(--cobalt-200); color: var(--fg-strong); }
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 
-.shell { max-width: 1080px; margin: 0 auto; padding: 48px 24px 80px; }
+.shell {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px 32px 96px;
+}
 
-/* ─── Header ───────────────────────────────────────────────────────── */
+/* ─── Masthead ────────────────────────────────────────────────────── */
+.masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0 22px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 56px;
+}
 .crumb {
   font: 500 11px/1 var(--mono);
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--fg-muted);
-  margin-bottom: 14px;
 }
-.crumb a { color: var(--fg-muted); text-decoration: none; border-bottom: 1px dotted oklch(83% 0.045 55 / 0.4); }
-.crumb a:hover { color: var(--fg-default); }
-.crumb-sep { margin: 0 8px; opacity: 0.5; }
+.crumb a { color: var(--fg-muted); border-bottom: 1px dotted oklch(56% 0.016 240 / 0.4); text-decoration: none; }
+.crumb a:hover { color: var(--fg-strong); }
+.crumb-sep { margin: 0 8px; opacity: 0.4; }
 
-.masthead {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 32px;
-  align-items: end;
-  margin-bottom: 48px;
-  padding-bottom: 28px;
-  border-bottom: 1px solid var(--slate-700);
-}
-h1 {
-  font: 400 64px/1.05 var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  letter-spacing: -0.015em;
-  margin: 0;
-  font-variation-settings: "opsz" 144;
-}
-h1 em {
-  /* italic inherited from parent h1. Weight + colour distinguish DOM from
-     Pérignon while both remain italic (matches the .brand-inline bullet). */
-  font-weight: 400;
-  color: var(--ember);
-}
-.subheader {
-  /* Header-family Fraunces, NOT italic (8% larger than the v1.1.12
-     subheader for more presence). Echoes h1's font but smaller. */
-  font: 300 24px/1.3 var(--serif);
-  font-variation-settings: "opsz" 144;
-  color: var(--fg-default);
-  margin: 18px 0 22px;
-  letter-spacing: -0.005em;
-  max-width: 60ch;
-}
-.subheader a {
-  color: var(--ember);
-  text-decoration: underline;
-  text-decoration-color: oklch(70% 0.16 40 / 0.4);
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-}
-.subheader a:hover { text-decoration-color: var(--ember); }
-
-/* Lede as a bulleted list rather than a single paragraph — easier to scan,
-   and lets "DOM Pérignon" inside bullet 2 wear its own brand styling. */
-.lede-bullets {
-  list-style: none;
-  margin: 4px 0 0;
-  padding: 0;
-  max-width: 60ch;
-}
-.lede-bullets li {
-  position: relative;
-  padding-left: 22px;
-  margin-bottom: 10px;
-  color: var(--fg-default);
-  font-size: 16px;
-  line-height: 1.55;
-}
-.lede-bullets li::before {
-  content: '';
-  position: absolute;
-  left: 6px;
-  top: 0.62em;
-  width: 6px;
-  height: 6px;
-  background: var(--ember);
-  border-radius: 50%;
-}
-/* Inline "DOM Pérignon" that mirrors the h1 styling — italic Fraunces
-   light with ember "DOM" — but at body size, so it pops without
-   dominating the bullet. */
-.brand-inline {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-variation-settings: "opsz" 24;
-  letter-spacing: -0.005em;
-  font-size: 1.05em;
-}
-.brand-inline em {
-  /* italic inherited from parent .brand-inline. Weight + colour distinguish
-     DOM from Pérignon while both remain italic. */
-  font-weight: 400;
-  color: var(--ember);
+.head-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 .version-chip {
   font: 500 10px/1 var(--mono);
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--ember);
-  background: oklch(30% 0.10 40 / 0.5);
-  border: 1px solid oklch(70% 0.16 40 / 0.35);
-  padding: 8px 14px;
+  color: var(--fg-strong);
+  background: var(--cobalt-100);
+  border: 1px solid var(--cobalt-200);
+  padding: 7px 12px;
   border-radius: 999px;
   white-space: nowrap;
-  align-self: end;
+}
+.download-pill {
+  /* The single contrast moment — copper supporting hue. Used here and
+     nowhere else on the page (Kestrel methodology). */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 600 12.5px/1 var(--sans);
+  letter-spacing: 0.02em;
+  color: var(--fg-strong);
+  background: var(--copper-300);
+  border: 1px solid var(--copper-500);
+  padding: 10px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 160ms, transform 160ms, box-shadow 160ms;
+}
+.download-pill:hover {
+  background: var(--copper-500);
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px oklch(50% 0.12 55 / 0.30);
+}
+.download-pill .arrow { font-family: var(--mono); font-weight: 500; }
+
+/* ─── Hero ────────────────────────────────────────────────────────── */
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 56px;
+  margin-bottom: 64px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+@media (max-width: 880px) {
+  .hero { grid-template-columns: 1fr; gap: 24px; }
+}
+.kicker {
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 18px;
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.kicker::before {
+  content: '';
+  width: 28px; height: 1px;
+  background: var(--accent);
+}
+h1.display {
+  font: 400 64px/1.02 var(--serif);
+  font-variation-settings: "opsz" 144;
+  letter-spacing: -0.025em;
+  color: var(--fg-strong);
+  margin: 0 0 24px;
+  max-width: 14ch;
+}
+h1.display em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+  font-variation-settings: "opsz" 144;
+}
+.lede {
+  font: 400 17px/1.5 var(--sans);
+  color: var(--fg-default);
+  margin: 0 0 28px;
+  max-width: 52ch;
+}
+.lede a {
+  color: var(--accent);
+  border-bottom: 1px solid var(--cobalt-200);
+}
+.bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+.bullets li {
+  font: 400 14.5px/1.45 var(--sans);
+  color: var(--fg-default);
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 10px;
+  align-items: baseline;
+}
+.bullets .num {
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-align: right;
+}
+.bullets strong {
+  font-weight: 600;
+  color: var(--fg-strong);
 }
 
-/* ─── Section labels ──────────────────────────────────────────────── */
-.section-label {
+/* ─── Section divider — TRL-style number plate ────────────────────── */
+.section-rule {
+  display: grid;
+  grid-template-columns: 96px 1fr auto;
+  gap: 22px;
+  align-items: end;
+  padding: 0 0 16px;
+  margin: 8px 0 24px;
+  border-bottom: 2px solid var(--cobalt-950);
+}
+.section-rule .num-plate {
+  font: 700 80px/0.85 var(--serif);
+  font-variation-settings: "opsz" 144;
+  letter-spacing: -0.04em;
+  color: var(--fg-strong);
+}
+.section-rule h2 {
+  margin: 0;
+  font: 500 28px/1.05 var(--serif);
+  letter-spacing: -0.01em;
+  color: var(--fg-strong);
+}
+.section-rule .meta {
   font: 500 11px/1 var(--mono);
   letter-spacing: 0.20em;
   text-transform: uppercase;
   color: var(--fg-muted);
-  margin: 56px 0 18px;
-  display: flex; align-items: center; gap: 12px;
+  white-space: nowrap;
+  padding-bottom: 6px;
 }
-.section-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--slate-700);
+@media (max-width: 720px) {
+  .section-rule { grid-template-columns: 64px 1fr; }
+  .section-rule .num-plate { font-size: 52px; }
+  .section-rule h2 { font-size: 22px; }
+  .section-rule .meta { display: none; }
 }
 
-/* ─── Hack gallery grid ───────────────────────────────────────────── */
-.gallery {
+/* ─── Card grid ──────────────────────────────────────────────────── */
+.grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 64px;
 }
-@media (max-width: 720px) { .gallery { grid-template-columns: 1fr; } }
+@media (max-width: 1080px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px)  { .grid { grid-template-columns: 1fr; } }
 
-.hack-card {
-  background: linear-gradient(135deg,
-              oklch(33% 0.075 40),
-              oklch(27% 0.065 40));
-  border: 1px solid var(--slate-700);
-  border-radius: 18px;
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
   overflow: hidden;
-  transition: border-color 200ms, box-shadow 200ms, transform 200ms;
+  transition: border-color 160ms, transform 160ms, box-shadow 160ms;
+  display: flex;
+  flex-direction: column;
 }
-.hack-card:hover {
-  border-color: var(--ember);
-  box-shadow: 0 12px 32px var(--bubble-shadow),
-              0 0 0 4px oklch(70% 0.16 40 / 0.10);
+.card:hover {
+  border-color: var(--accent);
   transform: translateY(-2px);
+  box-shadow: 0 10px 24px oklch(46% 0.095 240 / 0.10);
 }
-.hack-card.signature {
-  border-color: oklch(70% 0.16 40 / 0.65);
-  box-shadow: 0 0 0 1px oklch(70% 0.16 40 / 0.2);
+.card.signature {
+  border-color: var(--cobalt-400);
+  box-shadow: 0 0 0 1px oklch(64% 0.10 240 / 0.15);
 }
-.hack-card.popular {
-  border-color: oklch(72% 0.085 130 / 0.65);
-  box-shadow: 0 0 0 1px oklch(72% 0.085 130 / 0.2);
+.card.popular {
+  border-color: oklch(70% 0.06 55 / 0.5);
+  box-shadow: 0 0 0 1px oklch(70% 0.06 55 / 0.15);
 }
 
-.preview-frame {
+.card-preview {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
-  background: #fafaf6;
-  border-bottom: 1px solid var(--slate-700);
+  background: var(--bg-sunken);
   overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
 }
-.preview-frame iframe {
+.card-preview iframe {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -222,731 +307,594 @@ h1 em {
   border: 0;
   display: block;
 }
-/* "Preview unavailable" placeholder - used for Gravity Well, whose
-   in-iframe behavior doesn't translate to the small preview tile. */
 .preview-unavailable {
   position: absolute;
   inset: 0;
-  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  font: italic 300 22px/1.2 'Fraunces', Georgia, serif;
-  font-variation-settings: "opsz" 144, "SOFT" 50;
-  letter-spacing: -0.005em;
-  user-select: none;
+  color: var(--fg-muted);
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  background: var(--carbon-100);
 }
-/* Faint top-edge gradient hints "this is a window" */
-.preview-frame::after {
-  content: '';
+.card-num {
   position: absolute;
-  inset: 0 0 auto 0;
-  height: 22px;
-  background: linear-gradient(180deg, oklch(0% 0 0 / 0.08), transparent);
-  pointer-events: none;
+  top: 8px; left: 8px;
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.16em;
+  color: var(--fg-on-accent);
+  background: var(--cobalt-950);
+  padding: 5px 8px;
+  border-radius: 4px;
+  z-index: 2;
 }
-
-/* ─── Mysterious split-preview ───────────────────────────────────────
-   Single-column card with TWO iframes stacked vertically inside the
-   preview frame. Each iframe carries a "Show me" toggle button that
-   postMessages this gallery to apply the theme page-wide. */
-.hack-card.mystery .preview-frame {
-  aspect-ratio: auto;
-  background: #000;
+.card-meta {
+  padding: 14px 16px 16px;
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  flex: 1;
 }
-.hack-card.mystery .preview-frame iframe {
-  position: static;
-  width: 100%;
-  height: 220px;
-  border: 0;
-  transition: box-shadow 220ms, outline-color 220ms;
-}
-.hack-card.mystery .preview-frame iframe[data-ezr="green"] {
-  border-bottom: 1px solid oklch(20% 0.02 240);
-}
-/* Glow ring applied when this iframe's theme is the active page theme.
-   Inset box-shadow + outline so the ring sits on top of the iframe
-   without being clipped. */
-.hack-card.mystery .preview-frame iframe.ezr-glow {
-  outline: 2px solid currentColor;
-  outline-offset: -2px;
-  box-shadow:
-    inset 0 0 24px var(--ezr-glow, transparent),
-    0 0 28px var(--ezr-glow, transparent);
-}
-.hack-card.mystery .preview-frame iframe[data-ezr="green"].ezr-glow {
-  color: #39ff14;
-  --ezr-glow: #00ff41;
-}
-.hack-card.mystery .preview-frame iframe[data-ezr="red"].ezr-glow {
-  color: #ff3a1a;
-  --ezr-glow: #c41e1e;
-}
-.hack-card.mystery {
-  border-color: oklch(35% 0.06 280 / 0.5);
-}
-.hack-card.mystery:hover {
-  border-color: oklch(70% 0.16 40 / 0.55);
-}
-.hack-name .num.mystery-num {
-  color: oklch(72% 0.08 280);
-  background: oklch(25% 0.05 280 / 0.45);
-  letter-spacing: 0.18em;
-}
-
-/* ─── Page-wide easter-egg theme ─────────────────────────────────────
-   Activated when a user clicks "Show me" in either iframe. Body bg
-   goes black, glyph rain fills the page, top-of-page typography
-   picks up the theme tint. The .hack-card (01-08) tiles are left
-   alone — they sit above the rain on z-index and their internal
-   styles aren't overridden. */
-body.ezr-themed {
-  background: #000 !important;
-  background-image: none !important;
-}
-body.ezr-themed .crumb,
-body.ezr-themed .crumb a,
-body.ezr-themed .masthead h1,
-body.ezr-themed .subheader,
-body.ezr-themed .subheader a,
-body.ezr-themed .lede-bullets li,
-body.ezr-themed .lede-bullets li::before,
-body.ezr-themed .section-label,
-body.ezr-themed .install-shell h3,
-body.ezr-themed .install-steps li,
-body.ezr-themed .install-steps .hack-desc,
-body.ezr-themed .tutorial-link,
-body.ezr-themed footer,
-body.ezr-themed footer span,
-body.ezr-themed footer a {
-  color: var(--ezr-text) !important;
-}
-body.ezr-themed .lede-bullets li::before {
-  background: var(--ezr-bright) !important;
-}
-body.ezr-themed .masthead h1 em,
-body.ezr-themed .brand-inline em {
-  color: var(--ezr-bright) !important;
-}
-body.ezr-themed .version-chip {
-  color: var(--ezr-bright) !important;
-  background: rgba(0,0,0,0.6) !important;
-  border-color: var(--ezr-dim) !important;
-}
-body.ezr-themed .section-label::after {
-  background: var(--ezr-dim) !important;
-  opacity: 0.4;
-}
-body.ezr-green {
-  --ezr-text:   #c8ffc8;
-  --ezr-bright: #39ff14;
-  --ezr-dim:    #00b32d;
-  --ezr-glow:   #00ff41;
-}
-body.ezr-red {
-  --ezr-text:   #e8a8a8;
-  --ezr-bright: #ff3a1a;
-  --ezr-dim:    #7a0a0a;
-  --ezr-glow:   #c41e1e;
-}
-
-/* Page-wide glyph rain — sits behind the shell content on z-index 0.
-   Hidden by default; .ezr-themed body shows it.
-
-   Each column is 200vh tall with its glyph stream duplicated (top
-   half == bottom half). Animation translates by exactly 100vh per
-   cycle, so the visible viewport content at t=100% matches t=0% —
-   no visible reset, infinite flow. */
-.ezr-rain {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-  display: none;
-}
-body.ezr-themed .ezr-rain { display: block; }
-body.ezr-themed .shell { position: relative; z-index: 1; }
-.ezr-rain .ezr-col {
-  position: absolute;
-  top: -100vh;
-  height: 200vh;
-  width: 1ch;
-  text-align: center;
-  font: 16px/1.3 'Courier New', ui-monospace, monospace;
-  color: var(--ezr-dim);
-  text-shadow: 0 0 4px var(--ezr-bright);
-  white-space: pre;
-  opacity: 0.7;
-  animation: ezr-fall linear infinite;
-  will-change: transform;
-}
-.ezr-rain .ezr-col .head {
-  color: var(--ezr-bright);
-  text-shadow: 0 0 6px var(--ezr-bright), 0 0 12px var(--ezr-glow);
-}
-.ezr-rain .ezr-col .mid { color: var(--ezr-bright); }
-@keyframes ezr-fall {
-  0%   { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(0, 100vh, 0); }
-}
-
-/* ─── Themed card + install chrome ───────────────────────────────────
-   When .ezr-themed is on body, swap the brown/ember accents (card
-   gradients, download button, step numbers, code chips) for the
-   active theme palette. The iframe previews inside the cards are
-   cross-document and can't be reached from here — they stay native. */
-body.ezr-themed .hack-card {
-  background: linear-gradient(135deg, #060606, #000) !important;
-  border-color: var(--ezr-dim) !important;
-}
-body.ezr-themed .hack-card:hover {
-  border-color: var(--ezr-bright) !important;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.55), 0 0 0 4px rgba(0,0,0,0.4) !important;
-}
-body.ezr-themed .hack-card.signature,
-body.ezr-themed .hack-card.popular,
-body.ezr-themed .hack-card.mystery {
-  border-color: var(--ezr-dim) !important;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.4) !important;
-}
-body.ezr-themed .hack-card .preview-frame {
-  border-bottom-color: var(--ezr-dim) !important;
-}
-body.ezr-themed .hack-name {
-  color: var(--ezr-text) !important;
-}
-body.ezr-themed .hack-name .num {
-  color: var(--ezr-bright) !important;
-  background: rgba(0,0,0,0.55) !important;
-}
-body.ezr-themed .mystery-num {
-  color: var(--ezr-bright) !important;
-  background: rgba(0,0,0,0.55) !important;
-}
-body.ezr-themed .hack-desc {
-  color: var(--ezr-text) !important;
-  opacity: 0.78;
-}
-body.ezr-themed .hack-badge-signature,
-body.ezr-themed .hack-badge-popular {
-  color: var(--ezr-bright) !important;
-  background: rgba(0,0,0,0.55) !important;
-  border: 1px solid var(--ezr-dim) !important;
-}
-body.ezr-themed .preview-toggle {
-  background: rgba(0,0,0,0.55) !important;
-  border-color: var(--ezr-dim) !important;
-  color: var(--ezr-bright) !important;
-}
-body.ezr-themed .preview-toggle:hover {
-  box-shadow: 0 0 8px var(--ezr-glow) !important;
-}
-body.ezr-themed .preview-toggle.active {
-  background: var(--ezr-bright) !important;
-  color: #000 !important;
-  border-color: var(--ezr-bright) !important;
-  box-shadow: 0 0 14px var(--ezr-glow) !important;
-}
-
-body.ezr-themed .install-shell {
-  background: linear-gradient(135deg, #070707, #000) !important;
-  border-color: var(--ezr-dim) !important;
-}
-body.ezr-themed .download-card {
-  background: rgba(0,0,0,0.55) !important;
-  border-color: var(--ezr-dim) !important;
-}
-body.ezr-themed .download-title,
-body.ezr-themed .install-steps h3 {
-  color: var(--ezr-text) !important;
-}
-body.ezr-themed .download-meta {
-  color: var(--ezr-text) !important;
-  opacity: 0.7;
-}
-body.ezr-themed .download-btn {
-  background: var(--ezr-bright) !important;
-  color: #000 !important;
-  border-color: var(--ezr-bright) !important;
-}
-body.ezr-themed .download-btn:hover {
-  box-shadow: 0 0 24px var(--ezr-glow) !important;
-}
-body.ezr-themed .install-steps li {
-  color: var(--ezr-text) !important;
-  border-top-color: var(--ezr-dim) !important;
-}
-body.ezr-themed .install-steps li::before {
-  background: var(--ezr-bright) !important;
-  color: #000 !important;
-}
-body.ezr-themed .install-steps code {
-  color: var(--ezr-bright) !important;
-  background: rgba(0,0,0,0.55) !important;
-  border-color: var(--ezr-dim) !important;
-}
-body.ezr-themed .install-steps a,
-body.ezr-themed .tutorial-link a {
-  color: var(--ezr-bright) !important;
-  text-decoration-color: var(--ezr-dim) !important;
-}
-body.ezr-themed .tutorial-link {
-  color: var(--ezr-text) !important;
-  border-top-color: var(--ezr-dim) !important;
-  opacity: 0.85;
-}
-
-.hack-meta {
-  padding: 18px 22px 22px;
-}
-.hack-name {
-  font: 400 22px/1.2 var(--serif);
+.card-title {
+  font: 500 19px/1.15 var(--serif);
   letter-spacing: -0.005em;
-  margin: 0 0 6px;
-  color: var(--fg-default);
-  display: flex; align-items: center; gap: 10px;
-  flex-wrap: wrap;
-}
-.hack-name .hack-title-text { flex: 1; min-width: 0; }
-
-/* Click-to-preview toggle. Applies the corresponding hijink to this
-   gallery page itself (mutually exclusive with the easter-egg themes
-   and with the other preview buttons). Skipped on Gravity Well and
-   on the mystery card. */
-.preview-toggle {
-  font: 500 9px/1 var(--mono);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  background: oklch(30% 0.10 40 / 0.45);
-  border: 1px solid oklch(70% 0.16 40 / 0.4);
-  color: var(--ember);
-  padding: 6px 10px;
-  border-radius: 999px;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: background 180ms, border-color 180ms, box-shadow 180ms, color 180ms;
-}
-.preview-toggle:hover {
-  background: oklch(40% 0.12 40 / 0.55);
-  box-shadow: 0 0 8px oklch(70% 0.16 40 / 0.3);
-}
-.preview-toggle.active {
-  background: var(--ember);
-  color: oklch(15% 0.04 40);
-  border-color: var(--ember);
-  box-shadow: 0 0 14px var(--ember-glow);
-}
-.preview-toggle:focus-visible {
-  outline: 1px solid var(--ember);
-  outline-offset: 2px;
-}
-@media (max-width: 640px) {
-  .preview-toggle { padding: 5px 8px; font-size: 8.5px; letter-spacing: 0.12em; }
-}
-.hack-name .num {
-  font: 500 11px/1 var(--mono);
-  color: var(--ember);
-  letter-spacing: 0.18em;
-  background: oklch(30% 0.10 40 / 0.5);
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-.hack-desc {
-  color: var(--fg-muted);
-  font-size: 13.5px;
+  color: var(--fg-strong);
   margin: 0;
-  line-height: 1.45;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
-.hack-badge {
+.card-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+.card-desc {
+  font: 400 13px/1.4 var(--sans);
+  color: var(--fg-muted);
+  margin: 0;
+  flex: 1;
+}
+.card-badge {
   display: inline-block;
   font: 500 9px/1 var(--mono);
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 4px 8px;
-  border-radius: 4px;
-  margin-top: 10px;
+  padding: 4px 7px;
+  border-radius: 3px;
+  white-space: nowrap;
 }
-.hack-badge-signature {
-  color: var(--ember);
-  background: oklch(30% 0.10 40 / 0.45);
-  border: 1px solid oklch(70% 0.16 40 / 0.35);
+.card-badge-popular {
+  color: var(--copper-700);
+  background: oklch(96% 0.04 55);
+  border: 1px solid var(--copper-300);
 }
-.hack-badge-popular {
-  color: var(--accent-soft);
-  background: oklch(40% 0.06 130 / 0.4);
-  border: 1px solid oklch(72% 0.085 130 / 0.3);
+.card-badge-signature {
+  color: var(--cobalt-600);
+  background: var(--cobalt-100);
+  border: 1px solid var(--cobalt-200);
 }
 
-/* ─── Install section ─────────────────────────────────────────────── */
-.install-shell {
-  margin-top: 24px;
-  background: linear-gradient(135deg,
-              oklch(38% 0.080 40),
-              oklch(28% 0.070 40));
-  border: 1px solid var(--slate-700);
-  border-radius: 18px;
-  padding: 32px;
-}
-.install-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-}
-@media (max-width: 720px) { .install-grid { grid-template-columns: 1fr; } }
-
-.download-card {
-  background: oklch(20% 0.05 40 / 0.6);
-  border: 1px solid oklch(70% 0.16 40 / 0.35);
-  border-radius: 14px;
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.download-title {
-  font: 400 20px/1.2 var(--serif);
-  margin: 0;
-}
-.download-meta {
+/* The "try on this page" button. One per card, fills bottom of meta. */
+.card-try {
   font: 500 10px/1 var(--mono);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--fg-muted);
+  background: transparent;
+  border: 1px solid var(--border-emphasis);
+  color: var(--fg-default);
+  padding: 9px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 140ms, color 140ms, border-color 140ms;
+  margin-top: 4px;
+  white-space: nowrap;
 }
-.download-btn {
+.card-try:hover {
+  background: var(--cobalt-100);
+  border-color: var(--cobalt-400);
+  color: var(--fg-strong);
+}
+.card-try.active {
+  background: var(--cobalt-950);
+  color: var(--fg-on-accent);
+  border-color: var(--cobalt-950);
+}
+
+/* ─── Mystery tile (>_) ─────────────────────────────────────────── */
+.card.mystery .card-preview {
+  background: #0a0d12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card.mystery .ezr-glyph {
+  font: 500 56px/1 var(--mono);
+  color: oklch(70% 0.20 142);
+  text-shadow:
+    0 0 12px oklch(70% 0.20 142 / 0.65),
+    0 0 28px oklch(70% 0.20 142 / 0.35);
+  letter-spacing: -0.05em;
+  position: relative;
+}
+.card.mystery .ezr-glyph::after {
+  content: '';
+  display: inline-block;
+  width: 14px; height: 36px;
+  background: oklch(70% 0.20 142);
+  margin-left: 6px;
+  vertical-align: -5px;
+  animation: ezr-blink 1.1s steps(2) infinite;
+  box-shadow: 0 0 10px oklch(70% 0.20 142 / 0.7);
+}
+@keyframes ezr-blink { to { opacity: 0; } }
+.card.mystery {
+  border-color: var(--cobalt-300);
+}
+.card.mystery .ezr-buttons {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+.card.mystery .ezr-go {
+  flex: 1;
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 8px 6px;
+  border-radius: 4px;
+  border: 1px solid;
+  cursor: pointer;
+  transition: background 140ms, color 140ms, box-shadow 140ms;
+}
+.card.mystery .ezr-go.green {
+  background: transparent;
+  border-color: oklch(50% 0.18 142);
+  color: oklch(40% 0.18 142);
+}
+.card.mystery .ezr-go.green:hover,
+.card.mystery .ezr-go.green.active {
+  background: oklch(70% 0.20 142);
+  color: #04140a;
+  border-color: oklch(70% 0.20 142);
+  box-shadow: 0 0 12px oklch(70% 0.20 142 / 0.45);
+}
+.card.mystery .ezr-go.red {
+  background: transparent;
+  border-color: oklch(55% 0.18 28);
+  color: oklch(45% 0.18 28);
+}
+.card.mystery .ezr-go.red:hover,
+.card.mystery .ezr-go.red.active {
+  background: oklch(60% 0.22 28);
+  color: #1a0606;
+  border-color: oklch(60% 0.22 28);
+  box-shadow: 0 0 12px oklch(60% 0.22 28 / 0.45);
+}
+
+/* ─── Install ────────────────────────────────────────────────────── */
+.install {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 32px;
+  align-items: start;
+  padding: 40px;
+  background: var(--bg-sunken);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+@media (max-width: 760px) { .install { grid-template-columns: 1fr; padding: 28px; } }
+.install-left {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.install-left h3 {
+  font: 500 22px/1.1 var(--serif);
+  letter-spacing: -0.01em;
+  color: var(--fg-strong);
+  margin: 0;
+}
+.install-left .filename {
+  font: 500 12px/1 var(--mono);
+  color: var(--fg-muted);
+  letter-spacing: 0.04em;
+}
+.install-left .note {
+  font: 400 13.5px/1.5 var(--sans);
+  color: var(--fg-default);
+  margin: 0;
+}
+.install-left .cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 18px;
-  background: var(--ember);
-  color: oklch(15% 0.04 40);
-  text-decoration: none;
-  border-radius: 999px;
-  font: 500 14px/1 var(--sans);
+  font: 600 13px/1 var(--sans);
   letter-spacing: 0.02em;
-  transition: background 180ms, box-shadow 180ms, transform 180ms;
-  margin-top: auto;
+  background: var(--cobalt-950);
+  color: var(--fg-on-accent);
+  padding: 12px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 160ms, transform 160ms, box-shadow 160ms;
+  margin-top: 4px;
+  width: fit-content;
 }
-.download-btn:hover {
-  background: oklch(76% 0.18 42);
-  box-shadow: 0 0 24px var(--ember-glow);
+.install-left .cta:hover {
+  background: var(--cobalt-800);
+  text-decoration: none;
   transform: translateY(-1px);
+  box-shadow: 0 6px 14px oklch(34% 0.075 240 / 0.25);
 }
 
-.install-steps h3 {
-  font: 400 20px/1.2 var(--serif);
-  margin: 0 0 14px;
-}
-.install-steps ol {
+.install-right ol {
   margin: 0; padding: 0;
   list-style: none;
   counter-reset: step;
+  display: grid;
+  gap: 14px;
 }
-.install-steps li {
+.install-right li {
   counter-increment: step;
-  padding: 12px 0 12px 38px;
-  position: relative;
-  font-size: 14.5px;
-  line-height: 1.5;
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 12px;
+  align-items: baseline;
+  font: 400 14px/1.5 var(--sans);
   color: var(--fg-default);
-  border-top: 1px solid oklch(36% 0.080 40 / 0.5);
 }
-.install-steps li:first-child { border-top: none; padding-top: 0; }
-.install-steps li::before {
+.install-right li::before {
   content: counter(step);
-  position: absolute;
-  left: 0; top: 12px;
-  width: 26px; height: 26px;
-  background: var(--ember);
-  color: oklch(15% 0.04 40);
-  font: 500 12px/26px var(--mono);
+  font: 500 11px/1 var(--mono);
+  color: var(--accent);
+  background: var(--cobalt-100);
   text-align: center;
-  border-radius: 50%;
+  padding: 6px 0;
+  border-radius: 999px;
   letter-spacing: 0;
 }
-.install-steps li:first-child::before { top: 0; }
-.install-steps code {
+.install-right code {
   font: 500 12.5px/1 var(--mono);
-  background: oklch(20% 0.05 40 / 0.6);
-  border: 1px solid oklch(40% 0.08 40 / 0.5);
+  background: #fff;
+  border: 1px solid var(--border-subtle);
   padding: 2px 6px;
-  border-radius: 4px;
-  color: var(--accent-soft);
+  border-radius: 3px;
+  color: var(--cobalt-800);
 }
-.install-steps a {
-  color: var(--ember);
-  text-decoration: underline;
-  text-decoration-color: oklch(70% 0.16 40 / 0.4);
-  text-underline-offset: 3px;
-}
-.install-steps a:hover { text-decoration-color: var(--ember); }
-
-.tutorial-link {
-  margin-top: 18px;
-  padding-top: 16px;
-  border-top: 1px solid oklch(36% 0.080 40 / 0.5);
-  font-size: 13.5px;
+.install-right .tutorial-link {
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+  font: 400 12.5px/1.5 var(--sans);
   color: var(--fg-muted);
 }
-.tutorial-link a { color: var(--accent-soft); }
 
-/* ─── Footer ──────────────────────────────────────────────────────── */
+/* ─── Footer ─────────────────────────────────────────────────────── */
 footer {
-  margin-top: 56px;
-  padding-top: 28px;
-  border-top: 1px solid var(--slate-700);
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-subtle);
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
   font: 500 11px/1 var(--mono);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--fg-muted);
 }
+footer a { color: inherit; border-bottom: 1px dotted oklch(56% 0.016 240 / 0.4); }
+footer a:hover { color: var(--fg-strong); text-decoration: none; }
+/* The "© 2026" hides the Stage Watermark download. Plain text styling
+   so it doesn't read as a link. */
+footer .copyhide { color: inherit; text-decoration: none; border-bottom: none; }
 </style>
 </head>
 <body>
+
 <div class="shell">
 
-  <div class="crumb">
-    <a href="/">customprojects.info</a>
-    <span class="crumb-sep">/</span>
-    DOM Pérignon
-  </div>
-
   <header class="masthead">
-    <div>
-      <h1><em>DOM</em> Pérignon</h1>
-      <p class="subheader">A Chrome extension named after the innovator <a href="https://en.wikipedia.org/wiki/Dom_P%C3%A9rignon_(monk)" target="_blank" rel="noopener">Dom Pierre Pérignon</a></p>
-      <ul class="lede-bullets">
-        <li>The DOM (Document Object Model) is the live tree of every web page's elements</li>
-        <li><span class="brand-inline"><em>DOM</em> Pérignon</span> uses that for eight different perspectives</li>
-        <li>Live previews for the eight styles, against a sample 'Kestrel Fabrications' page</li>
-        <li>Each example can be clicked to apply it to the page</li>
-      </ul>
+    <div class="crumb">
+      <a href="/">customprojects.info</a>
+      <span class="crumb-sep">/</span>
+      DOM Pérignon
     </div>
-    <span class="version-chip">v1.4.8</span>
+    <div class="head-right">
+      <span class="version-chip">v1.5.9</span>
+      <a class="download-pill" href="downloads/dom-perignon-v1.5.9.zip" download>
+        Download <span class="arrow">↓</span>
+      </a>
+    </div>
   </header>
 
-  <div class="section-label">The collection</div>
-  <div class="gallery">
+  <section class="hero">
+    <div>
+      <p class="kicker">Customprojects.info / chrome extension</p>
+      <h1 class="display"><em>DOM</em> Pérignon</h1>
+      <p class="lede">
+        Named after the innovator <a href="https://en.wikipedia.org/wiki/Dom_P%C3%A9rignon_(monk)" target="_blank" rel="noopener">Dom Pierre Pérignon</a>.
+        The DOM is the live tree of every web page's elements — and this extension
+        uses it for fifteen different perspectives.
+      </p>
+    </div>
+    <ul class="bullets">
+      <li><span class="num">8</span><span><strong>Overlays</strong> — live DOM animations painted on top of the page</span></li>
+      <li><span class="num">7</span><span><strong>Theme worlds</strong> — full graphic overrides for the page underneath</span></li>
+      <li><span class="num">×</span><span>Run one of each at the same time, or just one, or neither</span></li>
+      <li><span class="num">↓</span><span>Click any tile below to <strong>apply it to this page</strong></span></li>
+    </ul>
+  </section>
 
-    <div class="hack-card popular">
-      <div class="preview-frame">
-        <iframe src="demo.html?hack=ants" loading="lazy" title="Ants preview"></iframe>
+  <!-- ═══════════════ Section 01 ═══════════════ -->
+  <div class="section-rule">
+    <span class="num-plate">01</span>
+    <h2>Overlays</h2>
+    <span class="meta">Live DOM animations · over any page</span>
+  </div>
+
+  <div class="grid">
+
+    <div class="card popular">
+      <div class="card-preview">
+        <span class="card-num">01</span>
+        <iframe src="demo.html?overlay=ants" loading="lazy" title="Ants preview"></iframe>
       </div>
-      <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">01</span> <span class="hack-title-text">Ants</span><button class="preview-toggle" type="button" data-hack="ants">Click to preview</button></h2>
-        <p class="hack-desc">A colony of crawling SVG ants with realistic leg gait. Bonus chaos on sites with empty white space.</p>
-        <span class="hack-badge hack-badge-popular">Most popular</span>
+      <div class="card-meta">
+        <h3 class="card-title">Ants <span class="card-badge card-badge-popular">Popular</span></h3>
+        <p class="card-desc">A colony marches across the page with realistic leg gait.</p>
+        <button class="card-try" type="button" data-overlay="ants">Try on this page</button>
       </div>
     </div>
 
-    <div class="hack-card signature">
-      <div class="preview-frame">
-        <iframe src="demo.html?hack=champagne" loading="lazy" title="Champagne preview"></iframe>
+    <div class="card signature">
+      <div class="card-preview">
+        <span class="card-num">02</span>
+        <iframe src="demo.html?overlay=champagne" loading="lazy" title="Champagne Bubbles preview"></iframe>
       </div>
-      <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">02</span> <span class="hack-title-text">Champagne Bubbles</span><button class="preview-toggle" type="button" data-hack="champagne">Click to preview</button></h2>
-        <p class="hack-desc">Pale bubbles rise with realistic fizz physics. Click to pop. Corks ricochet across every twenty-eight seconds or so.</p>
-        <span class="hack-badge hack-badge-signature">House signature</span>
-      </div>
-    </div>
-
-    <div class="hack-card">
-      <div class="preview-frame">
-        <iframe src="demo.html?hack=dynamic-logo" loading="lazy" title="Logo Bounce House preview"></iframe>
-      </div>
-      <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">03</span> <span class="hack-title-text">Logo Bounce House</span><button class="preview-toggle" type="button" data-hack="dynamic-logo">Click to preview</button></h2>
-        <p class="hack-desc">The site's logo, loose and bouncing - eight small copies. Sharper rendering on low-res favicons.</p>
+      <div class="card-meta">
+        <h3 class="card-title">Champagne Bubbles <span class="card-badge card-badge-signature">House</span></h3>
+        <p class="card-desc">Bubbles rise with fizz physics. ~20% pop mid-rise.</p>
+        <button class="card-try" type="button" data-overlay="champagne">Try on this page</button>
       </div>
     </div>
 
-    <div class="hack-card">
-      <div class="preview-frame">
-        <iframe src="demo.html?hack=quotes" loading="lazy" title="You Got This preview"></iframe>
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">03</span>
+        <iframe src="demo.html?overlay=dynamic-logo" loading="lazy" title="Logo Bounce House preview"></iframe>
       </div>
-      <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">04</span> <span class="hack-title-text">You Got This</span><button class="preview-toggle" type="button" data-hack="quotes">Click to preview</button></h2>
-        <p class="hack-desc">A little laid-back inspiration. Sixty affirmations in desert/autumn hues - saffron, terracotta, sienna, mustard, sage, rosewood, adobe clay.</p>
-      </div>
-    </div>
-
-    <div class="hack-card">
-      <div class="preview-frame">
-        <div class="preview-unavailable">Preview unavailable</div>
-      </div>
-      <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">05</span> Gravity Well</h2>
-        <p class="hack-desc">Page elements slowly fall and pile at the bottom. Click any falling piece to rescue it.</p>
+      <div class="card-meta">
+        <h3 class="card-title">Logo Bounce House</h3>
+        <p class="card-desc">The site's logo, loose and bouncing — eight small copies.</p>
+        <button class="card-try" type="button" data-overlay="dynamic-logo">Try on this page</button>
       </div>
     </div>
 
-    <div class="hack-card">
-      <div class="preview-frame">
-        <iframe src="demo.html?hack=aquarium" loading="lazy" title="Aquarium preview"></iframe>
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">04</span>
+        <iframe src="demo.html?overlay=quotes" loading="lazy" title="You Got This preview"></iframe>
       </div>
-      <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">06</span> <span class="hack-title-text">Aquarium</span><button class="preview-toggle" type="button" data-hack="aquarium">Click to preview</button></h2>
-        <p class="hack-desc">The page becomes the back wall of a tank. Kelp, bubbles, fish, ripples.</p>
-      </div>
-    </div>
-
-    <div class="hack-card">
-      <div class="preview-frame">
-        <iframe src="demo.html?hack=googly" loading="lazy" title="Watchers preview"></iframe>
-      </div>
-      <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">07</span> <span class="hack-title-text">Watchers</span><button class="preview-toggle" type="button" data-hack="googly">Click to preview</button></h2>
-        <p class="hack-desc">Eyes appear quietly across the page. They follow your cursor. They do not blink.</p>
+      <div class="card-meta">
+        <h3 class="card-title">You Got This</h3>
+        <p class="card-desc">Heavy-bold encouragement in four typographic registers.</p>
+        <button class="card-try" type="button" data-overlay="quotes">Try on this page</button>
       </div>
     </div>
 
-    <div class="hack-card">
-      <div class="preview-frame">
-        <iframe src="demo.html?hack=dvd" loading="lazy" title="DVD preview"></iframe>
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">05</span>
+        <div class="preview-unavailable">Preview off · open it on a real page</div>
       </div>
-      <div class="hack-meta">
-        <h2 class="hack-name"><span class="num">08</span> <span class="hack-title-text">DVD Bouncer</span><button class="preview-toggle" type="button" data-hack="dvd">Click to preview</button></h2>
-        <p class="hack-desc">If you're feeling nostalgic and uninspired.</p>
+      <div class="card-meta">
+        <h3 class="card-title">Gravity Well</h3>
+        <p class="card-desc">Page elements fall and pile. Click any falling piece to rescue.</p>
+        <button class="card-try" type="button" data-overlay="gravity-well" disabled>Open it elsewhere</button>
       </div>
     </div>
 
-    <div class="hack-card mystery">
-      <div class="preview-frame">
-        <iframe src="demo-ezr.html?theme=green" data-ezr="green" loading="lazy" title="—"></iframe>
-        <iframe src="demo-ezr.html?theme=red"   data-ezr="red"   loading="lazy" title="—"></iframe>
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">06</span>
+        <iframe src="demo.html?overlay=aquarium" loading="lazy" title="Aquarium preview"></iframe>
       </div>
-      <div class="hack-meta">
-        <h2 class="hack-name"><span class="num mystery-num">09/10</span> Two more easter eggs</h2>
-        <p class="hack-desc">Two rabbit holes behind the <code style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:0.92em;color:var(--accent-soft);">&gt;_</code>. One green, one red.</p>
+      <div class="card-meta">
+        <h3 class="card-title">Aquarium</h3>
+        <p class="card-desc">The page becomes the back wall of a tank. Kelp, bubbles, fish.</p>
+        <button class="card-try" type="button" data-overlay="aquarium">Try on this page</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">07</span>
+        <iframe src="demo.html?overlay=googly" loading="lazy" title="Watchers preview"></iframe>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">Watchers</h3>
+        <p class="card-desc">Eyes appear quietly. They follow your cursor. They do not blink.</p>
+        <button class="card-try" type="button" data-overlay="googly">Try on this page</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">08</span>
+        <iframe src="demo.html?overlay=dvd" loading="lazy" title="DVD Bouncer preview"></iframe>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">DVD Bouncer</h3>
+        <p class="card-desc">Nostalgic, uninspired, perfect.</p>
+        <button class="card-try" type="button" data-overlay="dvd">Try on this page</button>
       </div>
     </div>
 
   </div>
 
-  <div class="section-label">Install</div>
-  <div class="install-shell">
-    <div class="install-grid">
+  <!-- ═══════════════ Section 02 ═══════════════ -->
+  <div class="section-rule">
+    <span class="num-plate">02</span>
+    <h2>Theme worlds</h2>
+    <span class="meta">Full graphic overrides · CSS only</span>
+  </div>
 
-      <div class="download-card">
-        <span class="download-meta">Latest release</span>
-        <h3 class="download-title">dom-perignon-v1.4.8.zip</h3>
-        <p class="hack-desc">A self-contained Chrome extension. ~44 KB. Manifest V3. No network calls, no telemetry - it only paints over the pages you open.</p>
-        <a class="download-btn" href="downloads/dom-perignon-v1.4.8.zip" download>↓ Download zip</a>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">09</span>
+        <iframe src="demo.html?theme=tubular" loading="lazy" title="Tubular preview"></iframe>
       </div>
+      <div class="card-meta">
+        <h3 class="card-title">Tubular</h3>
+        <p class="card-desc">Glitch noir — oxblood and persimmon, italic Fraunces, scanlines.</p>
+        <button class="card-try" type="button" data-theme="tubular">Try on this page</button>
+      </div>
+    </div>
 
-      <div class="install-steps">
-        <h3>Load as an unpacked extension</h3>
-        <ol>
-          <li>Unzip the file anywhere stable on your machine (e.g. <code>Documents/dom-perignon</code>).</li>
-          <li>Open Chrome and visit <code>chrome://extensions</code>.</li>
-          <li>Toggle <strong>Developer mode</strong> on (top-right corner of the page).</li>
-          <li>Click <strong>Load unpacked</strong> and select the unzipped folder.</li>
-          <li>Pin the toolbar icon (the puzzle-piece menu, then the pin next to "DOM Pérignon"). Click it, flip <strong>Active</strong> on, pick a hijink.</li>
-        </ol>
-        <div class="tutorial-link">
-          Never installed an unpacked extension before? Chrome's official walkthrough is here:
-          <a href="https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked" target="_blank" rel="noopener">developer.chrome.com - Load unpacked</a>.
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">10</span>
+        <iframe src="demo.html?theme=arcade" loading="lazy" title="Arcade preview"></iframe>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">Arcade</h3>
+        <p class="card-desc">1985 cabinet — neon CRT, Press Start 2P, blinking attract sequence.</p>
+        <button class="card-try" type="button" data-theme="arcade">Try on this page</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">11</span>
+        <iframe src="demo.html?theme=buzzbin" loading="lazy" title="Buzzbin preview"></iframe>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">Buzzbin</h3>
+        <p class="card-desc">MTV '92 sticker bomb — halftone dots, magenta and cyan, all caps.</p>
+        <button class="card-try" type="button" data-theme="buzzbin">Try on this page</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">12</span>
+        <iframe src="demo.html?theme=vapor" loading="lazy" title="Vaporwave preview"></iframe>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">Vaporwave</h3>
+        <p class="card-desc">Pastel grid horizon, DM Serif Display, ¥€$ everywhere.</p>
+        <button class="card-try" type="button" data-theme="vapor">Try on this page</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">13</span>
+        <iframe src="demo.html?theme=press" loading="lazy" title="Press preview"></iframe>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">Press</h3>
+        <p class="card-desc">Brutalist newsprint — black on cream with a single red column rule.</p>
+        <button class="card-try" type="button" data-theme="press">Try on this page</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">14</span>
+        <iframe src="demo.html?theme=blueprint" loading="lazy" title="Blueprint preview"></iframe>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">Blueprint</h3>
+        <p class="card-desc">Drafting — cyan rules on navy, Architects Daughter handwriting.</p>
+        <button class="card-try" type="button" data-theme="blueprint">Try on this page</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">15</span>
+        <iframe src="demo.html?theme=chalkboard" loading="lazy" title="Chalkboard preview"></iframe>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">Chalkboard</h3>
+        <p class="card-desc">Schoolroom slate — chalky Caveat handwriting, wood rail at the bottom.</p>
+        <button class="card-try" type="button" data-theme="chalkboard">Try on this page</button>
+      </div>
+    </div>
+
+    <div class="card mystery">
+      <div class="card-preview">
+        <span class="card-num">??</span>
+        <div class="ezr-glyph">&gt;_</div>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">Two more easter eggs</h3>
+        <p class="card-desc">Two rabbit holes behind the <code style="font:500 12px var(--mono);color:var(--accent);">&gt;_</code>. One green, one red.</p>
+        <div class="ezr-buttons">
+          <button class="ezr-go green" type="button" data-theme="matrix-green">Green</button>
+          <button class="ezr-go red"   type="button" data-theme="matrix-red">Red</button>
         </div>
       </div>
+    </div>
 
+  </div>
+
+  <!-- ═══════════════ Section 03 ═══════════════ -->
+  <div class="section-rule">
+    <span class="num-plate">03</span>
+    <h2>Install</h2>
+    <span class="meta">Load unpacked · ~30s setup</span>
+  </div>
+
+  <div class="install">
+    <div class="install-left">
+      <h3>Get the extension</h3>
+      <span class="filename">dom-perignon-v1.5.9.zip · ~120 KB · MV3 · no telemetry</span>
+      <p class="note">A self-contained Chrome extension. No servers, no analytics. Loads in unpacked mode.</p>
+      <a class="cta" href="downloads/dom-perignon-v1.5.9.zip" download>↓ Download the zip</a>
+    </div>
+    <div class="install-right">
+      <ol>
+        <li>Unzip anywhere stable, e.g. <code>Documents/dom-perignon</code>.</li>
+        <li>Open Chrome, visit <code>chrome://extensions</code>.</li>
+        <li>Toggle <strong>Developer mode</strong> on (top right).</li>
+        <li>Click <strong>Load unpacked</strong> and select the unzipped folder.</li>
+        <li>Pin the toolbar icon. Click it, pick an overlay and/or a theme world. Done.</li>
+      </ol>
+      <div class="tutorial-link">
+        New to unpacked extensions? Chrome's walkthrough is at <a href="https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked" target="_blank" rel="noopener">developer.chrome.com</a>.
+      </div>
     </div>
   </div>
 
   <footer>
-    <span><a href="downloads/stage-watermark-v1.0.0.zip" download style="color:inherit;text-decoration:none;" title="">© 2026</a> · customprojects.info · <a href="privacy.html" style="color:inherit;text-decoration:underline;text-decoration-color:oklch(83% 0.045 55 / 0.4);text-underline-offset:3px;">Privacy</a></span>
-    <span>DOM Pérignon v1.4.8</span>
+    <span><a class="copyhide" href="downloads/stage-watermark-v1.0.0.zip" download title="">© 2026</a> · customprojects.info · <a href="privacy.html">Privacy</a></span>
+    <span>DOM Pérignon v1.5.9</span>
   </footer>
+
 </div>
 
-<!-- Page-wide easter-egg rain. Hidden until body.ezr-themed is set. -->
-<div class="ezr-rain" id="ezrRain" aria-hidden="true"></div>
-
 <script>
-  // ─── Easter-egg theme bridge + click-to-preview ──────────────────────
-  // Two activation paths share this gallery:
-  //   1. Easter-egg iframes ("Show me" buttons) postMessage to apply a
-  //      page-wide phosphor/blood theme.
-  //   2. Per-card "Click to preview" buttons load + activate a hijink
-  //      against the gallery DOM itself.
-  // The two paths are mutually exclusive — activating either clears
-  // whatever else was on. Skipped: Gravity Well (no button on its card)
-  // and the mystery card (its iframes have their own toggles).
+  // ─── Click-to-preview: applies a hijink to THIS page ────────────────
+  // Lazy-load every hack script + inject.js on first click, then dispatch
+  // via NS.applySelection({ overlay, theme }) — the dual-slot API
+  // introduced in v1.5.3. Tracks one active button per slot so clicking
+  // an active button deactivates it.
   (function () {
-    const body = document.body;
-    const rain = document.getElementById('ezrRain');
-    let rainSeeded = false;
-    let currentHack = null;
-    let hackLoadPromise = null;
+    let loadPromise = null;
+    let activeOverlay = null;
+    let activeTheme   = null;
 
-    function seedRain() {
-      if (rainSeeded) return;
-      rainSeeded = true;
-      const GLYPHS = 'ﾋﾘｱｾﾜﾗﾇﾈﾏﾜﾓｴﾆﾃﾂﾐｼﾎｵﾖﾅﾑﾌｺｿﾅκλμπσχθαβγδ01:_>/';
-      const cols = 32;
-      const spacing = 100 / cols;
-      const vh = Math.max(window.innerHeight, 720);
-      // Mobile gets a wider dim-side opacity range so the rain doesn't
-      // wash out on small screens where every column reads brighter.
-      const isMobile = window.matchMedia('(max-width: 720px)').matches;
-      const minOp = isMobile ? 0.45 : 0.55;
-      const maxOp = 0.70;
-      const frag = document.createDocumentFragment();
-      for (let i = 0; i < cols; i++) {
-        const col = document.createElement('div');
-        col.className = 'ezr-col';
-        const x = i * spacing + (Math.random() - 0.5) * spacing * 0.6;
-        col.style.left = `${x}%`;
-        col.style.animationDuration = (10 + Math.random() * 14).toFixed(2) + 's';
-        col.style.animationDelay   = (-Math.random() * 24).toFixed(2) + 's';
-        col.style.opacity = (minOp + Math.random() * (maxOp - minOp)).toFixed(2);
-        const fontSize = 13 + Math.random() * 5;
-        col.style.fontSize = fontSize.toFixed(1) + 'px';
-
-        // Build one viewport-height worth of glyphs, then duplicate.
-        // Top-half == bottom-half means the column shifts by exactly
-        // one viewport per cycle with no visible seam.
-        const lineHeight  = fontSize * 1.3;
-        const perHalf     = Math.ceil(vh / lineHeight) + 2;
-        let half = '';
-        for (let g = 0; g < perHalf; g++) {
-          const ch = GLYPHS[(Math.random() * GLYPHS.length) | 0];
-          if (g === 0)        half += `<span class="head">${ch}</span>\n`;
-          else if (g < 4)     half += `<span class="mid">${ch}</span>\n`;
-          else                half += ch + '\n';
-        }
-        col.innerHTML = half + half;
-        frag.appendChild(col);
-      }
-      rain.appendChild(frag);
-    }
-
-    function setActive(theme /* 'green' | 'red' | null */) {
-      body.classList.remove('ezr-green', 'ezr-red', 'ezr-themed');
-      if (theme) {
-        body.classList.add('ezr-themed', `ezr-${theme}`);
-      }
-      document.querySelectorAll('iframe[data-ezr]').forEach(f => {
-        f.classList.toggle('ezr-glow', !!theme && f.dataset.ezr === theme);
-      });
-    }
-
-    // ─── Hack loader + toggle ──────────────────────────────────────────
-    // Lazy-loads the extension's hijink modules + inject.js into the
-    // gallery page on first click. Provides the same chrome.* stubs that
-    // demo.html uses so the modules run as if inside the extension. After
-    // load, window.__DOMPerignon.activate(name) switches hijinks; passing
-    // 'off' tears down the current one.
-    function ensureHacksLoaded() {
-      if (hackLoadPromise) return hackLoadPromise;
-
+    function ensureLoaded() {
+      if (loadPromise) return loadPromise;
       window.chrome = window.chrome || {};
       window.chrome.runtime = window.chrome.runtime || {
         getURL: (rel) => 'ext/' + rel,
@@ -954,110 +902,64 @@ footer {
         sendMessage: () => Promise.resolve(),
       };
       window.chrome.storage = window.chrome.storage || {
-        local: {
-          get: (def) => Promise.resolve(def),
-          set: () => Promise.resolve(),
-        },
+        local: { get: (def) => Promise.resolve(def), set: () => Promise.resolve() },
       };
       window.chrome.tabs = window.chrome.tabs || {
         query: () => Promise.resolve([]),
         sendMessage: () => Promise.resolve(),
       };
-
-      // Skip ezr-* (those are scoped to claude.ai/chatgpt.com only) and
-      // gravity-well (no preview button on its card per design).
       const scripts = [
-        'ext/hacks/ants.js',
-        'ext/hacks/dvd.js',
-        'ext/hacks/quotes.js',
-        'ext/hacks/dynamic-logo.js',
-        'ext/hacks/champagne.js',
-        'ext/hacks/googly.js',
-        'ext/hacks/aquarium.js',
+        'ext/hacks/ants.js', 'ext/hacks/dvd.js', 'ext/hacks/quotes.js',
+        'ext/hacks/dynamic-logo.js', 'ext/hacks/champagne.js',
+        'ext/hacks/googly.js', 'ext/hacks/aquarium.js',
+        'ext/hacks/tubular.js', 'ext/hacks/arcade.js', 'ext/hacks/buzzbin.js',
+        'ext/hacks/vapor.js', 'ext/hacks/press.js', 'ext/hacks/blueprint.js',
+        'ext/hacks/chalkboard.js',
+        'ext/hacks/matrix-green.js', 'ext/hacks/matrix-red.js',
         'ext/inject.js',
       ];
-      hackLoadPromise = new Promise((resolve, reject) => {
-        let pending = scripts.length;
-        scripts.forEach(src => {
-          const s = document.createElement('script');
-          s.src = src;
-          s.onload  = () => { if (--pending === 0) resolve(); };
-          s.onerror = (err) => reject(err);
-          document.head.appendChild(s);
-        });
+      loadPromise = Promise.all(scripts.map(src => new Promise((res, rej) => {
+        const s = document.createElement('script');
+        s.src = src;
+        s.async = false;
+        s.onload  = () => res();
+        s.onerror = (e) => rej(e);
+        document.head.appendChild(s);
+      })));
+      return loadPromise;
+    }
+
+    function refreshButtonState() {
+      document.querySelectorAll('[data-overlay]').forEach(b => {
+        b.classList.toggle('active', !!activeOverlay && b.dataset.overlay === activeOverlay);
       });
-      return hackLoadPromise;
-    }
-
-    function setHackButtonState(activeName) {
-      document.querySelectorAll('.preview-toggle[data-hack]').forEach(b => {
-        b.classList.toggle('active', b.dataset.hack === activeName);
+      document.querySelectorAll('[data-theme]').forEach(b => {
+        b.classList.toggle('active', !!activeTheme && b.dataset.theme === activeTheme);
       });
     }
 
-    async function toggleHack(name) {
-      try {
-        await ensureHacksLoaded();
-      } catch (err) {
-        console.warn('[gallery] hack load failed', err);
-        return;
-      }
-      if (!window.__DOMPerignon) return;
-
-      // Click the active button again → turn off
-      if (currentHack === name) {
-        window.__DOMPerignon.activate('off');
-        currentHack = null;
-        setHackButtonState(null);
-        return;
-      }
-
-      // Switching hacks (or starting one): clear any active theme first
-      if (body.classList.contains('ezr-themed')) {
-        setActive(null);
-        document.querySelectorAll('iframe[data-ezr]').forEach(f => {
-          if (f.contentWindow) {
-            f.contentWindow.postMessage({ type: 'ezr-deactivate' }, '*');
-          }
-        });
-      }
-
-      window.__DOMPerignon.activate(name);
-      currentHack = name;
-      setHackButtonState(name);
-    }
-
-    document.querySelectorAll('.preview-toggle[data-hack]').forEach(btn => {
-      btn.addEventListener('click', () => toggleHack(btn.dataset.hack));
-    });
-
-    // ─── Easter-egg messages ───────────────────────────────────────────
-    window.addEventListener('message', (e) => {
-      const msg = e.data;
-      if (!msg || msg.type !== 'ezr-toggle') return;
-      const { theme, activated } = msg;
-      if (theme !== 'green' && theme !== 'red') return;
-
-      seedRain();
-
-      if (activated) {
-        // Mutual exclusion with the click-to-preview hijinks.
-        if (currentHack && window.__DOMPerignon) {
-          window.__DOMPerignon.activate('off');
-          currentHack = null;
-          setHackButtonState(null);
-        }
-        // Tell the OTHER iframe to clear its button state.
-        const other = theme === 'green' ? 'red' : 'green';
-        document.querySelectorAll(`iframe[data-ezr="${other}"]`).forEach(f => {
-          if (f.contentWindow) {
-            f.contentWindow.postMessage({ type: 'ezr-deactivate' }, '*');
-          }
-        });
-        setActive(theme);
+    async function toggle(kind, id) {
+      try { await ensureLoaded(); } catch (e) { console.warn(e); return; }
+      const NS = window.__DOMPerignon;
+      if (!NS || typeof NS.applySelection !== 'function') return;
+      if (kind === 'overlay') {
+        activeOverlay = (activeOverlay === id) ? null : id;
       } else {
-        setActive(null);
+        activeTheme = (activeTheme === id) ? null : id;
       }
+      NS.applySelection({ overlay: activeOverlay, theme: activeTheme });
+      refreshButtonState();
+    }
+
+    document.querySelectorAll('.card-try[data-overlay], .card-try[data-theme]').forEach(btn => {
+      if (btn.disabled) return;
+      btn.addEventListener('click', () => {
+        if (btn.dataset.overlay) toggle('overlay', btn.dataset.overlay);
+        else if (btn.dataset.theme) toggle('theme', btn.dataset.theme);
+      });
+    });
+    document.querySelectorAll('.ezr-go[data-theme]').forEach(btn => {
+      btn.addEventListener('click', () => toggle('theme', btn.dataset.theme));
     });
   })();
 </script>

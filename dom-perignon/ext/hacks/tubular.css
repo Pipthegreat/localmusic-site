@@ -1,0 +1,161 @@
+/* tubular — glitch noir takeover. Oxblood + persimmon + acid green,
+   italic Georgia headings with chromatic-aberration text-shadow,
+   scanline overlay, animated radial-gradient background.
+
+   Adapted from the Checklist Supreme "Tubular" theme world. Scoped
+   under html.dp-tubular-on so every rule wins specificity contests
+   against most sites' own CSS. */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@keyframes dp-tubular-bgshift {
+  0%   { background-position: 0% 0%, 100% 100%, 50% 50%, 0% 100%; }
+  25%  { background-position: 30% 20%, 70% 80%, 80% 20%, 20% 80%; }
+  50%  { background-position: 100% 50%, 0% 50%, 20% 80%, 80% 20%; }
+  75%  { background-position: 70% 80%, 30% 20%, 50% 50%, 50% 50%; }
+  100% { background-position: 0% 0%, 100% 100%, 50% 50%, 0% 100%; }
+}
+@keyframes dp-tubular-glitch {
+  0%, 90%, 100% { transform: translate(0); }
+  92% { transform: translate(-2px, 1px); }
+  94% { transform: translate(2px, -1px); }
+  96% { transform: translate(-1px, -1px); }
+}
+
+/* Canvas: html → oxblood-deep with animated multi-radial gradient. */
+html.dp-tubular-on {
+  background-color: #2b1410 !important;
+  background-image:
+    radial-gradient(circle at 0% 0%, #7a1f1a 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, #3d1a6b 0%, transparent 55%),
+    radial-gradient(circle at 50% 50%, #ff5a1f 0%, transparent 45%),
+    radial-gradient(circle at 0% 100%, #b8ff3d 0%, transparent 50%) !important;
+  background-size: 200% 200%, 200% 200%, 200% 200%, 200% 200% !important;
+  background-attachment: fixed !important;
+  animation: dp-tubular-bgshift 18s ease-in-out infinite !important;
+  /* color-scheme tells browser-rendered defaults (scrollbars, form
+     controls without explicit styling) to render dark so they don't
+     pop in as bright light-mode chrome over the dark canvas. */
+  color-scheme: dark !important;
+}
+html.dp-tubular-on body {
+  background-color: transparent !important;
+  background-image: none !important;
+  color: #f4e4c1 !important;
+  font-family: 'Fraunces', Georgia, 'Times New Roman', serif !important;
+}
+
+/* Scanline overlay */
+html.dp-tubular-on body::before {
+  content: '' !important;
+  position: fixed !important; inset: 0 !important;
+  pointer-events: none !important; z-index: 2147483640 !important;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.08) 0px, rgba(0,0,0,0.08) 1px, transparent 1px, transparent 2px),
+    repeating-linear-gradient(90deg, rgba(255,90,31,0.02) 0px, rgba(255,90,31,0.02) 1px, transparent 1px, transparent 4px) !important;
+  mix-blend-mode: overlay !important;
+}
+/* Vignette */
+html.dp-tubular-on body::after {
+  content: '' !important;
+  position: fixed !important; inset: 0 !important;
+  pointer-events: none !important; z-index: 2147483639 !important;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%) !important;
+}
+
+/* Broad recolor — beats most sites' text/border rules. */
+html.dp-tubular-on body,
+html.dp-tubular-on body *:not(svg):not(svg *) {
+  color: #f4e4c1 !important;
+  border-color: rgba(255,90,31,0.35) !important;
+}
+
+/* Force EVERY layout element transparent. Earlier rule only listed
+   header/main/nav/etc., which let light-mode site cards cover the
+   canvas. Form chrome, code, media, SVGs, iframes excluded so they
+   keep their own backgrounds. ALSO excluded: descendants of clickable
+   hosts — icon-only buttons render their glyph as a background-image
+   or mask-image on a <span>/<i> inside the button, and sparing those
+   descendants keeps every icon visible. */
+html.dp-tubular-on body *:not(button):not(input):not(textarea):not(select):not(code):not(pre):not(img):not(picture):not(video):not(canvas):not(svg):not(svg *):not(iframe):not(button *):not(a *):not(label *):not([role="button"] *):not([role="link"] *) {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Icon rescue: SVG icons inside clickable elements pick up the theme
+   cream via currentColor so dark fills don't sit invisible on the
+   oxblood canvas. */
+html.dp-tubular-on body :is(button, a, label, [role="button"], [role="link"]) :is(svg, svg *) {
+  fill: currentColor !important;
+}
+
+/* Headings: huge italic with chromatic aberration */
+html.dp-tubular-on body h1,
+html.dp-tubular-on body h2,
+html.dp-tubular-on body h3,
+html.dp-tubular-on body h4,
+html.dp-tubular-on body h5,
+html.dp-tubular-on body h6 {
+  font-family: 'Fraunces', Georgia, serif !important;
+  font-weight: 900 !important;
+  font-style: italic !important;
+  letter-spacing: -1.5px !important;
+  color: #f4e4c1 !important;
+  text-transform: uppercase !important;
+  text-shadow:
+    3px 0 0 #ff5a1f,
+    -3px 0 0 #b8ff3d,
+    0 0 30px rgba(255,90,31,0.6),
+    0 0 60px rgba(139,61,255,0.4) !important;
+  animation: dp-tubular-glitch 6s infinite !important;
+}
+
+/* Links: persimmon with glow */
+html.dp-tubular-on body a,
+html.dp-tubular-on body a * {
+  color: #ff8c42 !important;
+  text-decoration-color: #b8ff3d !important;
+  text-shadow: 0 0 8px rgba(255,90,31,0.5) !important;
+}
+
+/* Form chrome: oxblood-deep panel with persimmon edge + soft glow */
+html.dp-tubular-on body button,
+html.dp-tubular-on body input,
+html.dp-tubular-on body textarea,
+html.dp-tubular-on body select {
+  background-color: rgba(43,20,16,0.85) !important;
+  background-image: none !important;
+  color: #f4e4c1 !important;
+  border: 1px solid rgba(255,90,31,0.6) !important;
+  box-shadow: 0 0 12px rgba(255,90,31,0.25), inset 0 0 8px rgba(0,0,0,0.4) !important;
+  font-family: 'Fraunces', Georgia, serif !important;
+}
+html.dp-tubular-on body button:hover {
+  border-color: #b8ff3d !important;
+  box-shadow: 0 0 18px rgba(184,255,61,0.45) !important;
+}
+
+/* Cards / list items: glass panel with persimmon hairline */
+html.dp-tubular-on body li,
+html.dp-tubular-on body article,
+html.dp-tubular-on body blockquote {
+  border-left: 3px solid #ff5a1f !important;
+  padding-left: 12px !important;
+}
+
+/* Code: soft glow on monospace */
+html.dp-tubular-on body code,
+html.dp-tubular-on body pre {
+  background: rgba(43,20,16,0.85) !important;
+  color: #b8ff3d !important;
+  text-shadow: 0 0 6px rgba(184,255,61,0.5) !important;
+  border: 1px solid rgba(255,90,31,0.35) !important;
+}
+
+/* Soften media so the world reads as dominant */
+html.dp-tubular-on body img,
+html.dp-tubular-on body picture,
+html.dp-tubular-on body video,
+html.dp-tubular-on body canvas {
+  filter: saturate(0.85) contrast(1.05) !important;
+}
