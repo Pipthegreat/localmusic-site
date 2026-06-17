@@ -34,7 +34,7 @@
   --carbon-700: oklch(36% 0.018 240);
   --carbon-900: oklch(20% 0.014 240);
 
-  /* v1.5.25 — canvas darkened from carbon-50 (≈98.5% L) to a soft
+  /* v1.5.26 — canvas darkened from carbon-50 (≈98.5% L) to a soft
      cool-tinted neutral around 93% L. Distinct from tan, still light
      enough to read against, but with enough body that pale-gold
      champagne bubbles + cream highlights stop disappearing into it. */
@@ -592,7 +592,7 @@ h1.display em {
 /* Flex (not grid) on the li so inline content — <strong>, links —
    stays in the same flex item as its surrounding text. Grid was making
    <strong>Developer mode</strong> jump to its own row, which is what
-   was breaking the install steps before v1.5.25. */
+   was breaking the install steps before v1.5.26. */
 .install-right li {
   counter-increment: step;
   display: flex;
@@ -679,8 +679,8 @@ footer .copyhide:hover {
       DOM Pérignon
     </div>
     <div class="head-right">
-      <span class="version-chip">v1.5.25</span>
-      <a class="download-pill" href="downloads/dom-perignon-v1.5.25.zip" download>
+      <span class="version-chip">v1.5.26</span>
+      <a class="download-pill" href="downloads/dom-perignon-v1.5.26.zip" download>
         Download <span class="arrow">↓</span>
       </a>
     </div>
@@ -699,8 +699,8 @@ footer .copyhide:hover {
       </p>
     </div>
     <ul class="bullets">
-      <li><span class="num">8</span><span><strong>Overlays</strong> — live DOM animations painted on top of the page</span></li>
       <li><span class="num">7</span><span><strong>Theme Worlds</strong> — full graphic overrides for the page underneath</span></li>
+      <li><span class="num">8</span><span><strong>Overlays</strong> — live DOM animations painted on top of the page</span></li>
       <li><span class="num">×</span><span>Run one of each at the same time, or just one, or neither</span></li>
       <li><span class="num">↓</span><span>Click any tile below to <strong>apply it to this page</strong></span></li>
     </ul>
@@ -709,116 +709,6 @@ footer .copyhide:hover {
   <!-- ═══════════════ Section 01 ═══════════════ -->
   <div class="section-rule">
     <span class="num-plate">01</span>
-    <h2>Overlays</h2>
-    <span class="meta">Live DOM animations · over any page</span>
-  </div>
-
-  <div class="grid">
-
-    <div class="card popular">
-      <div class="card-preview">
-        <span class="card-num">01</span>
-        <iframe src="demo.html?overlay=ants" data-png="previews/ants.png" loading="lazy" title="Ants preview"></iframe>
-      </div>
-      <div class="card-meta">
-        <h3 class="card-title">Ants <span class="card-badge card-badge-popular">Popular</span></h3>
-        <p class="card-desc">A colony marches across the page with realistic leg gait.</p>
-        <button class="card-try" type="button" data-overlay="ants">Try on this page</button>
-      </div>
-    </div>
-
-    <div class="card signature">
-      <div class="card-preview">
-        <span class="card-num">02</span>
-        <iframe src="demo.html?overlay=champagne" data-png="previews/champagne.png" loading="lazy" title="Champagne Bubbles preview"></iframe>
-      </div>
-      <div class="card-meta">
-        <h3 class="card-title">Champagne Bubbles <span class="card-badge card-badge-signature">House</span></h3>
-        <p class="card-desc">Bubbles rise with fizz physics. ~20% pop mid-rise.</p>
-        <button class="card-try" type="button" data-overlay="champagne">Try on this page</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-preview">
-        <span class="card-num">03</span>
-        <iframe src="demo.html?overlay=dynamic-logo" data-png="previews/dynamic-logo.png" loading="lazy" title="Logo Bounce House preview"></iframe>
-      </div>
-      <div class="card-meta">
-        <h3 class="card-title">Logo Bounce House</h3>
-        <p class="card-desc">The site's logo, loose and bouncing — eight small copies.</p>
-        <button class="card-try" type="button" data-overlay="dynamic-logo">Try on this page</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-preview">
-        <span class="card-num">04</span>
-        <iframe src="demo.html?overlay=quotes" data-png="previews/quotes.png" loading="lazy" title="You Got This preview"></iframe>
-      </div>
-      <div class="card-meta">
-        <h3 class="card-title">You Got This</h3>
-        <p class="card-desc">Heavy-bold encouragement in four typographic registers.</p>
-        <button class="card-try" type="button" data-overlay="quotes">Try on this page</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-preview">
-        <span class="card-num">05</span>
-        <div class="preview-unavailable">
-          <span class="pu-headline">Preview off</span>
-          <span class="pu-sub">Gravity Well tears the page apart — needs a real one, not a thumbnail.</span>
-        </div>
-      </div>
-      <div class="card-meta">
-        <h3 class="card-title">Gravity Well</h3>
-        <p class="card-desc">Page elements fall and pile. Click any falling piece to rescue.</p>
-        <button class="card-try" type="button" data-overlay="gravity-well" disabled>Not previewable</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-preview">
-        <span class="card-num">06</span>
-        <iframe src="demo.html?overlay=aquarium" data-png="previews/aquarium.png" loading="lazy" title="Aquarium preview"></iframe>
-      </div>
-      <div class="card-meta">
-        <h3 class="card-title">Aquarium</h3>
-        <p class="card-desc">The page becomes the back wall of a tank. Kelp, bubbles, fish.</p>
-        <button class="card-try" type="button" data-overlay="aquarium">Try on this page</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-preview">
-        <span class="card-num">07</span>
-        <iframe src="demo.html?overlay=googly" data-png="previews/googly.png" loading="lazy" title="Watchers preview"></iframe>
-      </div>
-      <div class="card-meta">
-        <h3 class="card-title">Watchers</h3>
-        <p class="card-desc">Eyes appear quietly. They follow your cursor. They do not blink.</p>
-        <button class="card-try" type="button" data-overlay="googly">Try on this page</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-preview">
-        <span class="card-num">08</span>
-        <iframe src="demo.html?overlay=dvd" data-png="previews/dvd.png" loading="lazy" title="DVD Bouncer preview"></iframe>
-      </div>
-      <div class="card-meta">
-        <h3 class="card-title">DVD Bouncer</h3>
-        <p class="card-desc">Nostalgic, uninspired, perfect.</p>
-        <button class="card-try" type="button" data-overlay="dvd">Try on this page</button>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ═══════════════ Section 02 ═══════════════ -->
-  <div class="section-rule">
-    <span class="num-plate">02</span>
     <h2>Theme Worlds</h2>
     <span class="meta">Full graphic overrides · CSS only</span>
   </div>
@@ -827,7 +717,7 @@ footer .copyhide:hover {
 
     <div class="card is-theme">
       <div class="card-preview">
-        <span class="card-num">09</span>
+        <span class="card-num">01</span>
         <iframe src="demo.html?theme=tubular" data-png="previews/tubular.png" loading="lazy" title="Tubular preview"></iframe>
       </div>
       <div class="card-meta">
@@ -839,7 +729,7 @@ footer .copyhide:hover {
 
     <div class="card is-theme">
       <div class="card-preview">
-        <span class="card-num">10</span>
+        <span class="card-num">02</span>
         <iframe src="demo.html?theme=arcade" data-png="previews/arcade.png" loading="lazy" title="Arcade preview"></iframe>
       </div>
       <div class="card-meta">
@@ -851,7 +741,7 @@ footer .copyhide:hover {
 
     <div class="card is-theme">
       <div class="card-preview">
-        <span class="card-num">11</span>
+        <span class="card-num">03</span>
         <iframe src="demo.html?theme=buzzbin" data-png="previews/buzzbin.png" loading="lazy" title="Buzzbin preview"></iframe>
       </div>
       <div class="card-meta">
@@ -863,7 +753,7 @@ footer .copyhide:hover {
 
     <div class="card is-theme">
       <div class="card-preview">
-        <span class="card-num">12</span>
+        <span class="card-num">04</span>
         <iframe src="demo.html?theme=vapor" data-png="previews/vapor.png" loading="lazy" title="Vaporwave preview"></iframe>
       </div>
       <div class="card-meta">
@@ -875,7 +765,7 @@ footer .copyhide:hover {
 
     <div class="card is-theme">
       <div class="card-preview">
-        <span class="card-num">13</span>
+        <span class="card-num">05</span>
         <iframe src="demo.html?theme=press" data-png="previews/press.png" loading="lazy" title="Press preview"></iframe>
       </div>
       <div class="card-meta">
@@ -887,7 +777,7 @@ footer .copyhide:hover {
 
     <div class="card is-theme">
       <div class="card-preview">
-        <span class="card-num">14</span>
+        <span class="card-num">06</span>
         <iframe src="demo.html?theme=blueprint" data-png="previews/blueprint.png" loading="lazy" title="Blueprint preview"></iframe>
       </div>
       <div class="card-meta">
@@ -899,7 +789,7 @@ footer .copyhide:hover {
 
     <div class="card is-theme">
       <div class="card-preview">
-        <span class="card-num">15</span>
+        <span class="card-num">07</span>
         <iframe src="demo.html?theme=chalkboard" data-png="previews/chalkboard.png" loading="lazy" title="Chalkboard preview"></iframe>
       </div>
       <div class="card-meta">
@@ -926,6 +816,116 @@ footer .copyhide:hover {
 
   </div>
 
+  <!-- ═══════════════ Section 02 ═══════════════ -->
+  <div class="section-rule">
+    <span class="num-plate">02</span>
+    <h2>Overlays</h2>
+    <span class="meta">Live DOM animations · over any page</span>
+  </div>
+
+  <div class="grid">
+
+    <div class="card popular">
+      <div class="card-preview">
+        <span class="card-num">08</span>
+        <iframe src="demo.html?overlay=ants" data-png="previews/ants.png" loading="lazy" title="Ants preview"></iframe>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">Ants <span class="card-badge card-badge-popular">Popular</span></h3>
+        <p class="card-desc">A colony marches across the page with realistic leg gait.</p>
+        <button class="card-try" type="button" data-overlay="ants">Try on this page</button>
+      </div>
+    </div>
+
+    <div class="card signature">
+      <div class="card-preview">
+        <span class="card-num">09</span>
+        <iframe src="demo.html?overlay=champagne" data-png="previews/champagne.png" loading="lazy" title="Champagne Bubbles preview"></iframe>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">Champagne Bubbles <span class="card-badge card-badge-signature">House</span></h3>
+        <p class="card-desc">Bubbles rise with fizz physics. ~20% pop mid-rise.</p>
+        <button class="card-try" type="button" data-overlay="champagne">Try on this page</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">10</span>
+        <iframe src="demo.html?overlay=dynamic-logo" data-png="previews/dynamic-logo.png" loading="lazy" title="Logo Bounce House preview"></iframe>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">Logo Bounce House</h3>
+        <p class="card-desc">The site's logo, loose and bouncing — eight small copies.</p>
+        <button class="card-try" type="button" data-overlay="dynamic-logo">Try on this page</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">11</span>
+        <iframe src="demo.html?overlay=quotes" data-png="previews/quotes.png" loading="lazy" title="You Got This preview"></iframe>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">You Got This</h3>
+        <p class="card-desc">Heavy-bold encouragement in four typographic registers.</p>
+        <button class="card-try" type="button" data-overlay="quotes">Try on this page</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">12</span>
+        <div class="preview-unavailable">
+          <span class="pu-headline">Preview off</span>
+          <span class="pu-sub">Gravity Well tears the page apart — needs a real one, not a thumbnail.</span>
+        </div>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">Gravity Well</h3>
+        <p class="card-desc">Page elements fall and pile. Click any falling piece to rescue.</p>
+        <button class="card-try" type="button" data-overlay="gravity-well" disabled>Not previewable</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">13</span>
+        <iframe src="demo.html?overlay=aquarium" data-png="previews/aquarium.png" loading="lazy" title="Aquarium preview"></iframe>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">Aquarium</h3>
+        <p class="card-desc">The page becomes the back wall of a tank. Kelp, bubbles, fish.</p>
+        <button class="card-try" type="button" data-overlay="aquarium">Try on this page</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">14</span>
+        <iframe src="demo.html?overlay=googly" data-png="previews/googly.png" loading="lazy" title="Watchers preview"></iframe>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">Watchers</h3>
+        <p class="card-desc">Eyes appear quietly. They follow your cursor. They do not blink.</p>
+        <button class="card-try" type="button" data-overlay="googly">Try on this page</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-preview">
+        <span class="card-num">15</span>
+        <iframe src="demo.html?overlay=dvd" data-png="previews/dvd.png" loading="lazy" title="DVD Bouncer preview"></iframe>
+      </div>
+      <div class="card-meta">
+        <h3 class="card-title">DVD Bouncer</h3>
+        <p class="card-desc">Nostalgic, uninspired, perfect.</p>
+        <button class="card-try" type="button" data-overlay="dvd">Try on this page</button>
+      </div>
+    </div>
+
+  </div>
+
   <!-- ═══════════════ Section 03 ═══════════════ -->
   <div class="section-rule">
     <span class="num-plate">03</span>
@@ -936,9 +936,9 @@ footer .copyhide:hover {
   <div class="install">
     <div class="install-left">
       <h3>Get the extension</h3>
-      <span class="filename">dom-perignon-v1.5.25.zip · ~120 KB · MV3 · no telemetry</span>
+      <span class="filename">dom-perignon-v1.5.26.zip · ~120 KB · MV3 · no telemetry</span>
       <p class="note">A self-contained Chrome extension. No servers, no analytics. Loads in unpacked mode.</p>
-      <a class="cta" href="downloads/dom-perignon-v1.5.25.zip" download>↓ Download the zip</a>
+      <a class="cta" href="downloads/dom-perignon-v1.5.26.zip" download>↓ Download the zip</a>
     </div>
     <div class="install-right">
       <ol>
@@ -956,7 +956,7 @@ footer .copyhide:hover {
 
   <footer>
     <span><a class="copyhide" href="downloads/stage-watermark-v1.0.0.zip" download title="">© 2026</a> · customprojects.info · <a href="privacy.html">Privacy</a></span>
-    <span>DOM Pérignon v1.5.25</span>
+    <span>DOM Pérignon v1.5.26</span>
   </footer>
 
 </div>
@@ -972,7 +972,7 @@ footer .copyhide:hover {
   //
   // The "what's active" check reads inject.js's NS.currentOverlay /
   // NS.currentTheme directly instead of tracking it in a local var. In
-  // v1.5.25 the local tracker could desync from the actual runtime
+  // v1.5.26 the local tracker could desync from the actual runtime
   // (page interactions, late-arriving init resolves) so a "deactivate"
   // click sometimes hit the wrong branch and needed a second tap.
   // Reading from NS at the start of each click means we always operate
@@ -1074,7 +1074,7 @@ footer .copyhide:hover {
 </script>
 
 <!-- ── Preview-iframe fallback to static PNG ─────────────────────────────
-     v1.5.25. The preview iframes load demo.html?overlay=X / ?theme=X and
+     v1.5.26. The preview iframes load demo.html?overlay=X / ?theme=X and
      run the real hijink JS. On most networks this works perfectly. On
      corporate networks (proxy blocks fonts.googleapis.com, ad blocker
      swallows ext/hacks/* by extension, captive portal, ...) the iframe
