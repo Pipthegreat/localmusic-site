@@ -1,8 +1,8 @@
 {
   "page_title": "SF + Oakland Live Music",
-  "total_duration": 1251.25,
-  "track_count": 42,
-  "built_at": 1781859007,
+  "total_duration": 1223.37,
+  "track_count": 41,
+  "built_at": 1781889052,
   "tracks": [
     {
       "artist": "accidents at sundown",
@@ -131,13 +131,31 @@
       "end": 418.76
     },
     {
+      "artist": "brooklyn terry",
+      "title": "got to have the paper",
+      "spotify_uri": "spotify:track:7yZhYbKhy40pThKhK5ZztC",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 418.76,
+      "end": 448.63
+    },
+    {
+      "artist": "brooklyn terry",
+      "title": "rz 440 - original mix",
+      "spotify_uri": "spotify:track:3aQpltkrV4cJp3pbR41Gag",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 448.63,
+      "end": 478.58
+    },
+    {
       "artist": "cathedral bells",
       "title": "dayflower",
       "spotify_uri": "spotify:track:7xYQZUWkPOlo7yYqQLdjPc",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 418.76,
-      "end": 448.71
+      "start": 478.58,
+      "end": 508.53
     },
     {
       "artist": "cathedral bells",
@@ -145,8 +163,8 @@
       "spotify_uri": "spotify:track:7dTPJ3wGBcLzAaMhJfY7Qd",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 448.71,
-      "end": 478.58
+      "start": 508.53,
+      "end": 538.4
     },
     {
       "artist": "cathedral bells",
@@ -154,8 +172,8 @@
       "spotify_uri": "spotify:track:3cCCpA8OKqmzSKcfv6bcA8",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 478.58,
-      "end": 508.45
+      "start": 538.4,
+      "end": 568.27
     },
     {
       "artist": "chase icon",
@@ -163,8 +181,8 @@
       "spotify_uri": "spotify:track:51NYFGDXYKS4FkRqkw98hx",
       "audio_source": "itunes",
       "duration": 29.96,
-      "start": 508.45,
-      "end": 538.41
+      "start": 568.27,
+      "end": 598.23
     },
     {
       "artist": "chase icon",
@@ -172,8 +190,8 @@
       "spotify_uri": "spotify:track:4vtVKiQKFFgeOpibhO3MtQ",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 538.41,
-      "end": 568.36
+      "start": 598.23,
+      "end": 628.18
     },
     {
       "artist": "chuck gunn",
@@ -181,8 +199,8 @@
       "spotify_uri": "spotify:track:3lkYmHf6ggYgEikoTJS17V",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 568.36,
-      "end": 598.31
+      "start": 628.18,
+      "end": 658.13
     },
     {
       "artist": "crystallmess",
@@ -190,8 +208,8 @@
       "spotify_uri": "spotify:track:0ehrDpPGhgKJgZjtCeOG5j",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 598.31,
-      "end": 628.18
+      "start": 658.13,
+      "end": 688.0
     },
     {
       "artist": "crystallmess",
@@ -199,8 +217,8 @@
       "spotify_uri": "spotify:track:3pKNysUoe9aUnYIBedeVLn",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 628.18,
-      "end": 658.05
+      "start": 688.0,
+      "end": 717.87
     },
     {
       "artist": "david harness",
@@ -208,8 +226,8 @@
       "spotify_uri": "spotify:track:4OiX0I5zJ6EDHDWhuT8nAZ",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 658.05,
-      "end": 687.92
+      "start": 717.87,
+      "end": 747.74
     },
     {
       "artist": "david harness",
@@ -217,8 +235,8 @@
       "spotify_uri": "spotify:track:0rCcFd8gmgYBgSucbrCGtT",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 687.92,
-      "end": 717.79
+      "start": 747.74,
+      "end": 777.61
     },
     {
       "artist": "david harness",
@@ -226,8 +244,17 @@
       "spotify_uri": "spotify:track:3ZqgxQ8dBG11dQ5Khp9UvJ",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 717.79,
-      "end": 747.66
+      "start": 777.61,
+      "end": 807.48
+    },
+    {
+      "artist": "dj jaded",
+      "title": "belted or jaded?",
+      "spotify_uri": "spotify:track:0aKtCSWNhxwm9Vr2S9ltsv",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 807.48,
+      "end": 837.43
     },
     {
       "artist": "eastcoastghost",
@@ -235,8 +262,17 @@
       "spotify_uri": "spotify:track:3V0JmHcBLAZkx2bWADZvn4",
       "audio_source": "itunes",
       "duration": 28.37,
-      "start": 747.66,
-      "end": 776.03
+      "start": 837.43,
+      "end": 865.8
+    },
+    {
+      "artist": "eastcoastghost",
+      "title": "neura-link",
+      "spotify_uri": "spotify:track:2m1FowOSZJrB86xU81pa35",
+      "audio_source": "itunes",
+      "duration": 29.92,
+      "start": 865.8,
+      "end": 895.72
     },
     {
       "artist": "eastcoastghost",
@@ -244,17 +280,8 @@
       "spotify_uri": "spotify:track:1UJLLoGz0vnL174rMtlbys",
       "audio_source": "itunes",
       "duration": 28.55,
-      "start": 776.03,
-      "end": 804.58
-    },
-    {
-      "artist": "eastcoastghost",
-      "title": "murdermandan",
-      "spotify_uri": "spotify:track:4jxzWnQHnOCsIY8x8qPDCB",
-      "audio_source": "itunes",
-      "duration": 28.01,
-      "start": 804.58,
-      "end": 832.59
+      "start": 895.72,
+      "end": 924.27
     },
     {
       "artist": "emanate",
@@ -262,8 +289,8 @@
       "spotify_uri": "spotify:track:3x1wz8ZtjxUd7eEvP0I1KD",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 832.59,
-      "end": 862.54
+      "start": 924.27,
+      "end": 954.22
     },
     {
       "artist": "emanate",
@@ -271,8 +298,8 @@
       "spotify_uri": "spotify:track:7ueNwjaeGwopASlOgPGJMI",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 862.54,
-      "end": 892.41
+      "start": 954.22,
+      "end": 984.09
     },
     {
       "artist": "emanate",
@@ -280,8 +307,8 @@
       "spotify_uri": "spotify:track:3DTotfr7d5obnVJeIYlJup",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 892.41,
-      "end": 922.36
+      "start": 984.09,
+      "end": 1014.04
     },
     {
       "artist": "four color zack",
@@ -289,8 +316,8 @@
       "spotify_uri": "spotify:track:18g0BnU3G42J5GMQMU80kV",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 922.36,
-      "end": 952.23
+      "start": 1014.04,
+      "end": 1043.91
     },
     {
       "artist": "four color zack",
@@ -298,8 +325,8 @@
       "spotify_uri": "spotify:track:5QlIdmVxwC4CJqIx2AeD15",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 952.23,
-      "end": 982.1
+      "start": 1043.91,
+      "end": 1073.78
     },
     {
       "artist": "four color zack",
@@ -307,8 +334,8 @@
       "spotify_uri": "spotify:track:51K7TOa2FP6wP47Pyw53FN",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 982.1,
-      "end": 1011.97
+      "start": 1073.78,
+      "end": 1103.65
     },
     {
       "artist": "freshie",
@@ -316,8 +343,8 @@
       "spotify_uri": "spotify:track:5h37zE13ONSUuhir0JDW9M",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 1011.97,
-      "end": 1041.92
+      "start": 1103.65,
+      "end": 1133.6
     },
     {
       "artist": "garage spiders",
@@ -325,8 +352,8 @@
       "spotify_uri": "spotify:track:4EAeoPBoYs8ArNWu40W2GN",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 1041.92,
-      "end": 1071.87
+      "start": 1133.6,
+      "end": 1163.55
     },
     {
       "artist": "garage spiders",
@@ -334,8 +361,8 @@
       "spotify_uri": "spotify:track:14v8x3yejArSzPTZKNVgEa",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 1071.87,
-      "end": 1101.82
+      "start": 1163.55,
+      "end": 1193.5
     },
     {
       "artist": "hannah lee",
@@ -343,44 +370,8 @@
       "spotify_uri": "spotify:track:4N5TJQlRZPjWIZvmgpq69z",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 1101.82,
-      "end": 1131.69
-    },
-    {
-      "artist": "hannah lee",
-      "title": "drown",
-      "spotify_uri": "spotify:track:5pyHzlaYghnOrE7dBmkAzU",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1131.69,
-      "end": 1161.56
-    },
-    {
-      "artist": "honne",
-      "title": "someone that loves you",
-      "spotify_uri": "spotify:track:2a5Ml671R56tzRB0WMaCfC",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1161.56,
-      "end": 1191.43
-    },
-    {
-      "artist": "honne",
-      "title": "day 1 ◑",
-      "spotify_uri": "spotify:track:6ZzYETKetIfNUsZUb23jgG",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1191.43,
-      "end": 1221.38
-    },
-    {
-      "artist": "honne",
-      "title": "warm on a cold night",
-      "spotify_uri": "spotify:track:5pJPgy2jGvvNUNfHPvG3Zp",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1221.38,
-      "end": 1251.25
+      "start": 1193.5,
+      "end": 1223.37
     }
   ]
 }
