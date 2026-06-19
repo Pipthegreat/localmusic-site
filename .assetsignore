@@ -1,0 +1,8 @@
+# Files that must never be served as public static assets.
+# wrangler reads this from the assets-directory root at deploy time.
+.git
+.git/**
+.gitignore
+.assetsignore
+wrangler.jsonc
+wrangler.toml
