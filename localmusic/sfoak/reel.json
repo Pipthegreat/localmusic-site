@@ -1,98 +1,179 @@
 {
   "page_title": "SF + Oakland Live Music",
-  "total_duration": 1374.32,
-  "track_count": 46,
-  "built_at": 1781832237,
+  "total_duration": 1251.25,
+  "track_count": 42,
+  "built_at": 1781853260,
   "tracks": [
     {
-      "artist": "acid barbie",
-      "title": "anything anything",
-      "spotify_uri": "spotify:track:1z7OFpL6c7VHengX5jF3Z4",
+      "artist": "accidents at sundown",
+      "title": "with you",
+      "spotify_uri": "spotify:track:0haWObITcUBpikrqhkpt2C",
       "audio_source": "itunes",
-      "duration": 29.95,
+      "duration": 29.97,
       "start": 0.0,
-      "end": 29.95
+      "end": 29.97
     },
     {
-      "artist": "acid barbie",
-      "title": "star girl",
-      "spotify_uri": "spotify:track:0zItJItq8nRstjMbEZubH0",
+      "artist": "almas",
+      "title": "fuego lento",
+      "spotify_uri": "spotify:track:5pdypynAfak1VmG5AXSDHD",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 29.95,
-      "end": 59.9
+      "start": 29.97,
+      "end": 59.92
     },
     {
-      "artist": "acid barbie",
-      "title": "silly little me",
-      "spotify_uri": "spotify:track:5jY4i9mSWRmQupnhyPwHO5",
+      "artist": "almas",
+      "title": "mientes",
+      "spotify_uri": "spotify:track:0l49H3WEYgONsfd9gsr64B",
+      "audio_source": "itunes",
+      "duration": 29.96,
+      "start": 59.92,
+      "end": 89.88
+    },
+    {
+      "artist": "almas",
+      "title": "hot cherry bomb",
+      "spotify_uri": "spotify:track:6vFqACvmDtCtcLB2OdiBA2",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 59.9,
-      "end": 89.85
+      "start": 89.88,
+      "end": 119.83
     },
     {
-      "artist": "alex isley",
-      "title": "good & plenty",
-      "spotify_uri": "spotify:track:1VAKnb1btGrQXcVZVSRkPe",
+      "artist": "aluna",
+      "title": "beggin'",
+      "spotify_uri": "spotify:track:74nEGIzIefJhJ5qX7NeIAz",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 119.83,
+      "end": 149.78
+    },
+    {
+      "artist": "aluna",
+      "title": "drum go dum",
+      "spotify_uri": "spotify:track:3CEW3iffD2QvNZMK20sMqW",
+      "audio_source": "itunes",
+      "duration": 29.62,
+      "start": 149.78,
+      "end": 179.4
+    },
+    {
+      "artist": "ash leone",
+      "title": "terracotta walls",
+      "spotify_uri": "spotify:track:7HvEbqKZeEv6a6jpcO5745",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 179.4,
+      "end": 209.35
+    },
+    {
+      "artist": "ash leone",
+      "title": "i might",
+      "spotify_uri": "spotify:track:5iJ6UXO8uQHMXwlyINX9US",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 209.35,
+      "end": 239.3
+    },
+    {
+      "artist": "bastiengoat",
+      "title": "bend that thang",
+      "spotify_uri": "spotify:track:3uCOr2O41weMs3KfZ9C9JE",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 239.3,
+      "end": 269.25
+    },
+    {
+      "artist": "bastiengoat",
+      "title": "tell me if you like it",
+      "spotify_uri": "spotify:track:5yfC4dXMw1d2IaXATeQe2m",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 89.85,
-      "end": 119.72
+      "start": 269.25,
+      "end": 299.12
     },
     {
-      "artist": "alex isley",
-      "title": "mine",
-      "spotify_uri": "spotify:track:1IxfE1rd0ngSFP8MSqYiv0",
+      "artist": "bastiengoat",
+      "title": "everybody in the club",
+      "spotify_uri": "spotify:track:2QTXOh2l8LUMQZrbnLvxhr",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 119.72,
-      "end": 149.59
+      "start": 299.12,
+      "end": 328.99
     },
     {
-      "artist": "alex isley",
-      "title": "love again",
-      "spotify_uri": "spotify:track:6ZwNOYjJ06J77YF1ggXtaT",
+      "artist": "black pope",
+      "title": "goth girl",
+      "spotify_uri": "spotify:track:6DKLyvzjA1KtS1w4Tn3diA",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 149.59,
-      "end": 179.46
+      "start": 328.99,
+      "end": 358.86
     },
     {
-      "artist": "applesaucer",
-      "title": "arena",
-      "spotify_uri": "spotify:track:4uqMriENR0PUmGP17nNFvy",
+      "artist": "black pope",
+      "title": "atom bomb",
+      "spotify_uri": "spotify:track:5hT1cD8usi9RSob0miKd3x",
       "audio_source": "itunes",
-      "duration": 29.78,
-      "start": 179.46,
-      "end": 209.24
+      "duration": 29.95,
+      "start": 358.86,
+      "end": 388.81
     },
     {
-      "artist": "applesaucer",
-      "title": "there's a light",
-      "spotify_uri": "spotify:track:5YLb9EpXzZtBWPAKC3NTua",
+      "artist": "black pope",
+      "title": "she's alive",
+      "spotify_uri": "spotify:track:507hy6SGNULvbhxZZW8IMg",
       "audio_source": "itunes",
-      "duration": 29.85,
-      "start": 209.24,
-      "end": 239.09
+      "duration": 29.95,
+      "start": 388.81,
+      "end": 418.76
     },
     {
-      "artist": "applesaucer",
-      "title": "sticks",
-      "spotify_uri": "spotify:track:4CD5RiqXfugVdXoog3smd2",
+      "artist": "cathedral bells",
+      "title": "dayflower",
+      "spotify_uri": "spotify:track:7xYQZUWkPOlo7yYqQLdjPc",
       "audio_source": "itunes",
-      "duration": 29.91,
-      "start": 239.09,
-      "end": 269.0
+      "duration": 29.95,
+      "start": 418.76,
+      "end": 448.71
     },
     {
-      "artist": "carlos souffront",
-      "title": "w.a.t.b.",
-      "spotify_uri": "spotify:track:7rwALdjOckq12g2zp9CZnz",
+      "artist": "cathedral bells",
+      "title": "heavy rain",
+      "spotify_uri": "spotify:track:7dTPJ3wGBcLzAaMhJfY7Qd",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 269.0,
-      "end": 298.87
+      "start": 448.71,
+      "end": 478.58
+    },
+    {
+      "artist": "cathedral bells",
+      "title": "in absentia",
+      "spotify_uri": "spotify:track:3cCCpA8OKqmzSKcfv6bcA8",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 478.58,
+      "end": 508.45
+    },
+    {
+      "artist": "chase icon",
+      "title": "like me",
+      "spotify_uri": "spotify:track:51NYFGDXYKS4FkRqkw98hx",
+      "audio_source": "itunes",
+      "duration": 29.96,
+      "start": 508.45,
+      "end": 538.41
+    },
+    {
+      "artist": "chase icon",
+      "title": "socal girl",
+      "spotify_uri": "spotify:track:4vtVKiQKFFgeOpibhO3MtQ",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 538.41,
+      "end": 568.36
     },
     {
       "artist": "chuck gunn",
@@ -100,269 +181,179 @@
       "spotify_uri": "spotify:track:3lkYmHf6ggYgEikoTJS17V",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 298.87,
-      "end": 328.82
+      "start": 568.36,
+      "end": 598.31
     },
     {
-      "artist": "clayton william",
-      "title": "bomboleo",
-      "spotify_uri": "spotify:track:6JiStZ7OEfijy9jROf7dmI",
+      "artist": "crystallmess",
+      "title": "issa revenge",
+      "spotify_uri": "spotify:track:0ehrDpPGhgKJgZjtCeOG5j",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 598.31,
+      "end": 628.18
+    },
+    {
+      "artist": "crystallmess",
+      "title": "just because it's a funeral doesn't mean we can't rave",
+      "spotify_uri": "spotify:track:3pKNysUoe9aUnYIBedeVLn",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 628.18,
+      "end": 658.05
+    },
+    {
+      "artist": "david harness",
+      "title": "we got it",
+      "spotify_uri": "spotify:track:4OiX0I5zJ6EDHDWhuT8nAZ",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 658.05,
+      "end": 687.92
+    },
+    {
+      "artist": "david harness",
+      "title": "al greenz (dance)",
+      "spotify_uri": "spotify:track:0rCcFd8gmgYBgSucbrCGtT",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 687.92,
+      "end": 717.79
+    },
+    {
+      "artist": "david harness",
+      "title": "let it fall - harlum mix",
+      "spotify_uri": "spotify:track:3ZqgxQ8dBG11dQ5Khp9UvJ",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 717.79,
+      "end": 747.66
+    },
+    {
+      "artist": "eastcoastghost",
+      "title": "manhunt",
+      "spotify_uri": "spotify:track:3V0JmHcBLAZkx2bWADZvn4",
+      "audio_source": "itunes",
+      "duration": 28.37,
+      "start": 747.66,
+      "end": 776.03
+    },
+    {
+      "artist": "eastcoastghost",
+      "title": "in it for the loot",
+      "spotify_uri": "spotify:track:1UJLLoGz0vnL174rMtlbys",
+      "audio_source": "itunes",
+      "duration": 28.55,
+      "start": 776.03,
+      "end": 804.58
+    },
+    {
+      "artist": "eastcoastghost",
+      "title": "murdermandan",
+      "spotify_uri": "spotify:track:4jxzWnQHnOCsIY8x8qPDCB",
+      "audio_source": "itunes",
+      "duration": 28.01,
+      "start": 804.58,
+      "end": 832.59
+    },
+    {
+      "artist": "emanate",
+      "title": "at night",
+      "spotify_uri": "spotify:track:3x1wz8ZtjxUd7eEvP0I1KD",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 328.82,
-      "end": 358.77
+      "start": 832.59,
+      "end": 862.54
     },
     {
-      "artist": "clayton william",
-      "title": "smoke show",
-      "spotify_uri": "spotify:track:1gE3sciCUKBQxPklcRWctl",
+      "artist": "emanate",
+      "title": "in the air",
+      "spotify_uri": "spotify:track:7ueNwjaeGwopASlOgPGJMI",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 862.54,
+      "end": 892.41
+    },
+    {
+      "artist": "emanate",
+      "title": "mass appeal - radio edit",
+      "spotify_uri": "spotify:track:3DTotfr7d5obnVJeIYlJup",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 358.77,
-      "end": 388.72
+      "start": 892.41,
+      "end": 922.36
     },
     {
-      "artist": "conrad taylor",
-      "title": "berghain - remix",
-      "spotify_uri": "spotify:track:7CI5IAi2z70tyJIVXxsHfw",
+      "artist": "four color zack",
+      "title": "year one (mix)",
+      "spotify_uri": "spotify:track:18g0BnU3G42J5GMQMU80kV",
       "audio_source": "itunes",
-      "duration": 29.79,
-      "start": 388.72,
-      "end": 418.51
+      "duration": 29.87,
+      "start": 922.36,
+      "end": 952.23
     },
     {
-      "artist": "conrad taylor",
-      "title": "i like girls (i like boys)",
-      "spotify_uri": "spotify:track:5hqlKqkdVNyBkI2sjHgkdK",
+      "artist": "four color zack",
+      "title": "rebel",
+      "spotify_uri": "spotify:track:5QlIdmVxwC4CJqIx2AeD15",
       "audio_source": "itunes",
-      "duration": 29.79,
-      "start": 418.51,
-      "end": 448.3
+      "duration": 29.87,
+      "start": 952.23,
+      "end": 982.1
     },
     {
-      "artist": "das pharaoh",
-      "title": "blissful thinking - supacooks remix",
-      "spotify_uri": "spotify:track:1Eiy2zphG6tBGFKRFEppWy",
+      "artist": "four color zack",
+      "title": "happiness - four color zack remix",
+      "spotify_uri": "spotify:track:51K7TOa2FP6wP47Pyw53FN",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 982.1,
+      "end": 1011.97
+    },
+    {
+      "artist": "freshie",
+      "title": "never stressin",
+      "spotify_uri": "spotify:track:5h37zE13ONSUuhir0JDW9M",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 448.3,
-      "end": 478.25
+      "start": 1011.97,
+      "end": 1041.92
     },
     {
-      "artist": "das pharaoh",
-      "title": "whispers in the wind (fsoe959)",
-      "spotify_uri": "spotify:track:5p0lHjSayG6CuphonmAypF",
+      "artist": "garage spiders",
+      "title": "spider",
+      "spotify_uri": "spotify:track:4EAeoPBoYs8ArNWu40W2GN",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 478.25,
-      "end": 508.2
+      "start": 1041.92,
+      "end": 1071.87
     },
     {
-      "artist": "das pharaoh",
-      "title": "blissful thinking (fsoe964) - supacooks remix",
-      "spotify_uri": "spotify:track:6ROCEI81GsSNlc4WkCeEGQ",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 508.2,
-      "end": 538.16
-    },
-    {
-      "artist": "dj vortex",
-      "title": "fuck u - radio edit",
-      "spotify_uri": "spotify:track:5gX0IKjGAdbTku6MRR5u5X",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 538.16,
-      "end": 568.03
-    },
-    {
-      "artist": "double dutch",
-      "title": "here comes the noise",
-      "spotify_uri": "spotify:track:0sbP0ZYPgjxEHMlG6I2XcI",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 568.03,
-      "end": 597.9
-    },
-    {
-      "artist": "double dutch",
-      "title": "eternity - darwin mix",
-      "spotify_uri": "spotify:track:3Ps0hBriYEeHCuI1A5zvnV",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 597.9,
-      "end": 627.77
-    },
-    {
-      "artist": "double dutch",
-      "title": "worlds collide - brisk & fracus mix",
-      "spotify_uri": "spotify:track:5BazRiLIARL9YM2BCLgU8X",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 627.77,
-      "end": 657.64
-    },
-    {
-      "artist": "duserock",
-      "title": "sleepless nights - dirtyhertz remix",
-      "spotify_uri": "spotify:track:3CSvxtSHUs3WHakiOCOnK6",
+      "artist": "garage spiders",
+      "title": "learning to fly",
+      "spotify_uri": "spotify:track:14v8x3yejArSzPTZKNVgEa",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 657.64,
-      "end": 687.59
+      "start": 1071.87,
+      "end": 1101.82
     },
     {
-      "artist": "duserock",
-      "title": "sleepless nights",
-      "spotify_uri": "spotify:track:68Fufr1KYuYL0Lwrrv5IDq",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 687.59,
-      "end": 717.54
-    },
-    {
-      "artist": "duserock",
-      "title": "viennese dream - audiowhores uk remix",
-      "spotify_uri": "spotify:track:0SeIkt0S6XfKtERQQqROJM",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 717.54,
-      "end": 747.49
-    },
-    {
-      "artist": "every move a picture",
-      "title": "signs of life - demo",
-      "spotify_uri": "spotify:track:1QUHxho3IeJCWYhN5WMxms",
-      "audio_source": "itunes",
-      "duration": 29.27,
-      "start": 747.49,
-      "end": 776.76
-    },
-    {
-      "artist": "every move a picture",
-      "title": "signs of life - remix",
-      "spotify_uri": "spotify:track:1GF7KGJc1WS16V8NDw4qjb",
+      "artist": "hannah lee",
+      "title": "kappa rap 2",
+      "spotify_uri": "spotify:track:4N5TJQlRZPjWIZvmgpq69z",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 776.76,
-      "end": 806.63
+      "start": 1101.82,
+      "end": 1131.69
     },
     {
-      "artist": "every move a picture",
-      "title": "on the dance floor",
-      "spotify_uri": "spotify:track:7swCzXN63XL1uOUBecdRM6",
+      "artist": "hannah lee",
+      "title": "drown",
+      "spotify_uri": "spotify:track:5pyHzlaYghnOrE7dBmkAzU",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 806.63,
-      "end": 836.5
-    },
-    {
-      "artist": "fai laci",
-      "title": "elephant",
-      "spotify_uri": "spotify:track:3dYCcKVfnYslBNx57BlGVA",
-      "audio_source": "itunes",
-      "duration": 29.97,
-      "start": 836.5,
-      "end": 866.47
-    },
-    {
-      "artist": "fai laci",
-      "title": "sarasota",
-      "spotify_uri": "spotify:track:6JuPvEz73eRUkXa0lYhrBp",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 866.47,
-      "end": 896.42
-    },
-    {
-      "artist": "fake your own death",
-      "title": "leave your luggage by the pool",
-      "spotify_uri": "spotify:track:1EFoahY04VGOqaGl7KWlM8",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 896.42,
-      "end": 926.37
-    },
-    {
-      "artist": "fake your own death",
-      "title": "dead won't die",
-      "spotify_uri": "spotify:track:0ebbJZ8I0aWVab2byV4gYi",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 926.37,
-      "end": 956.24
-    },
-    {
-      "artist": "fake your own death",
-      "title": "mouth to speak",
-      "spotify_uri": "spotify:track:5E71JOApHBlBh6LripewVP",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 956.24,
-      "end": 986.11
-    },
-    {
-      "artist": "fuego",
-      "title": "una vaina loca",
-      "spotify_uri": "spotify:track:6YYmoV9YbBefsspGmqFHbs",
-      "audio_source": "itunes",
-      "duration": 29.64,
-      "start": 986.11,
-      "end": 1015.75
-    },
-    {
-      "artist": "habstrakt",
-      "title": "surge",
-      "spotify_uri": "spotify:track:4ZgjsB7wOo7GYjOVGZtEY5",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 1015.75,
-      "end": 1045.71
-    },
-    {
-      "artist": "habstrakt",
-      "title": "show me",
-      "spotify_uri": "spotify:track:3dpdP07LDb0tMDkRePbLVT",
-      "audio_source": "itunes",
-      "duration": 29.57,
-      "start": 1045.71,
-      "end": 1075.28
-    },
-    {
-      "artist": "habstrakt",
-      "title": "the one - nghtmre remix",
-      "spotify_uri": "spotify:track:0z6BBM8lek2dzvnuIOX1Wx",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1075.28,
-      "end": 1105.15
-    },
-    {
-      "artist": "hernan cattaneo",
-      "title": "attention - hernan cattaneo & mercurio remix",
-      "spotify_uri": "spotify:track:30DM7ulLASrlTCJFtB624S",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 1105.15,
-      "end": 1135.11
-    },
-    {
-      "artist": "hernan cattaneo",
-      "title": "astron - davi remix",
-      "spotify_uri": "spotify:track:4toPlwcAaj1RYN9q19DLpQ",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1135.11,
-      "end": 1164.98
-    },
-    {
-      "artist": "hernan cattaneo",
-      "title": "love is coming back",
-      "spotify_uri": "spotify:track:65AafJRMh7LGHKTjoINJ0L",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1164.98,
-      "end": 1194.85
+      "start": 1131.69,
+      "end": 1161.56
     },
     {
       "artist": "honne",
@@ -370,8 +361,8 @@
       "spotify_uri": "spotify:track:2a5Ml671R56tzRB0WMaCfC",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 1194.85,
-      "end": 1224.72
+      "start": 1161.56,
+      "end": 1191.43
     },
     {
       "artist": "honne",
@@ -379,8 +370,8 @@
       "spotify_uri": "spotify:track:6ZzYETKetIfNUsZUb23jgG",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 1224.72,
-      "end": 1254.67
+      "start": 1191.43,
+      "end": 1221.38
     },
     {
       "artist": "honne",
@@ -388,35 +379,8 @@
       "spotify_uri": "spotify:track:5pJPgy2jGvvNUNfHPvG3Zp",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 1254.67,
-      "end": 1284.54
-    },
-    {
-      "artist": "justin martin",
-      "title": "don't go - original mix",
-      "spotify_uri": "spotify:track:3U23fmr36vUY4Qkf41rQOX",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 1284.54,
-      "end": 1314.5
-    },
-    {
-      "artist": "justin martin",
-      "title": "hello clouds vip",
-      "spotify_uri": "spotify:track:2NeWXl1UYvYTI1iz80jm91",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1314.5,
-      "end": 1344.45
-    },
-    {
-      "artist": "justin martin",
-      "title": "stay - tchami remix",
-      "spotify_uri": "spotify:track:1utIIuIYIvQAjUdkdxiX8j",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1344.45,
-      "end": 1374.32
+      "start": 1221.38,
+      "end": 1251.25
     }
   ]
 }
