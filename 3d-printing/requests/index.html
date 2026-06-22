@@ -21,9 +21,9 @@
   --navy:#0d2138;
   --navy-2:#0a1a2e;
   --cyan:#7cc4ff;
-  --cyan-dim:#a6d3f7;
+  --cyan-dim:#ccd8e6;
   --cyan-faint:rgba(124,196,255,0.18);
-  --ink:#e8f3ff;
+  --ink:#f3f6fa;
   --red:#ff5050;
   --ok:#7dffb0;
   --mono:'Space Mono',ui-monospace,monospace;
@@ -57,7 +57,7 @@ body::after{
   content:'REV. A · 3D PRINT INTAKE · WORK ORDER · SHEET 1 OF 1';
   position:fixed;bottom:12px;right:16px;left:16px;text-align:right;
   font-family:var(--mono);font-size:9px;letter-spacing:3px;
-  color:rgba(170,212,247,0.85);z-index:1;pointer-events:none;
+  color:rgba(201,213,229,0.9);z-index:1;pointer-events:none;
 }
 .wrap{max-width:1040px;margin:0 auto;position:relative;z-index:2}
 
@@ -141,7 +141,7 @@ label.lbl{
   text-transform:uppercase;color:var(--cyan-dim);margin-bottom:7px;
 }
 label.lbl .req{color:var(--red)}
-.hint{font-family:var(--mono);font-size:9.5px;letter-spacing:0.5px;color:rgba(170,212,247,0.85);margin-top:6px;line-height:1.5}
+.hint{font-family:var(--mono);font-size:9.5px;letter-spacing:0.5px;color:rgba(201,213,229,0.9);margin-top:6px;line-height:1.5}
 input[type=text],input[type=email],input[type=number],input[type=date],select,textarea{
   width:100%;background:rgba(124,196,255,0.05);border:1px dashed rgba(124,196,255,0.5);
   color:var(--ink);font-family:var(--hand);font-size:18px;padding:11px 13px;border-radius:0;
@@ -156,7 +156,7 @@ select{
   background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:38px;
 }
 select option{background:var(--navy);color:var(--ink)}
-input::placeholder,textarea::placeholder{color:rgba(162,200,238,0.6);font-style:italic}
+input::placeholder,textarea::placeholder{color:rgba(190,204,222,0.62);font-style:italic}
 input:focus,select:focus,textarea:focus{
   border-color:var(--cyan);border-style:solid;background:rgba(124,196,255,0.08);
   box-shadow:0 0 16px rgba(124,196,255,0.35);
@@ -172,7 +172,7 @@ input.invalid,select.invalid,textarea.invalid{border-color:var(--red);border-sty
 
 /* ---------- dropzone ---------- */
 .drop{
-  border:1.5px dashed rgba(170,212,247,0.85);background:rgba(124,196,255,0.04);
+  border:1.5px dashed rgba(201,213,229,0.9);background:rgba(124,196,255,0.04);
   padding:24px 16px;text-align:center;cursor:pointer;transition:all .25s;position:relative;
 }
 .drop:hover,.drop.drag{border-color:var(--cyan);background:rgba(124,196,255,0.1);box-shadow:0 0 20px rgba(124,196,255,0.3)}
@@ -197,7 +197,7 @@ input.invalid,select.invalid,textarea.invalid{border-color:var(--red);border-sty
 .grams-readout.has .g-val{color:var(--ok);text-shadow:0 0 12px rgba(125,255,176,0.5)}
 .grams-readout .g-status{font-family:var(--mono);font-size:10px;letter-spacing:0.5px;color:var(--cyan-dim);line-height:1.5;flex:1}
 .grams-readout.has .g-status{color:var(--ok)}
-.auto-tag{font-family:var(--mono);font-size:9px;letter-spacing:1px;color:rgba(170,212,247,0.85);text-transform:uppercase}
+.auto-tag{font-family:var(--mono);font-size:9px;letter-spacing:1px;color:rgba(201,213,229,0.9);text-transform:uppercase}
 
 /* ---------- estimate title block ---------- */
 .estimate{position:relative}
@@ -223,7 +223,7 @@ input.invalid,select.invalid,textarea.invalid{border-color:var(--red);border-sty
 .tb-total .k{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:var(--cyan-dim);text-transform:uppercase}
 .tb-total .v{font-family:var(--hand);font-size:34px;color:var(--cyan);text-shadow:0 0 18px rgba(124,196,255,0.6);line-height:1.05;margin-top:2px}
 .tb-total .v.tbd{font-size:18px;color:var(--cyan-dim);text-shadow:none}
-.tb-note{font-family:var(--mono);font-size:8.5px;letter-spacing:0.5px;color:rgba(170,212,247,0.85);margin-top:8px;line-height:1.6}
+.tb-note{font-family:var(--mono);font-size:8.5px;letter-spacing:0.5px;color:rgba(201,213,229,0.9);margin-top:8px;line-height:1.6}
 
 /* ---------- actions ---------- */
 .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
@@ -270,8 +270,7 @@ footer.foot a:hover{border-bottom-style:solid}
   <header>
     <span class="eyebrow">— DRAWING · WORK ORDER —</span>
     <h1><span class="l1">3D&nbsp;Printing</span><span class="l2">Intake</span></h1>
-    <p class="lede">Tell us what to build. Pick a material, drop in your model, and watch the estimate
-      draw itself. Hit <em>FILE REQUEST</em> and your part lands on the bench as a work order.</p>
+    <p class="lede">Custom print request form.</p>
     <div class="spec-strip">
       <span><b>Printer</b> Prusa Core One</span>
       <span><b>Process</b> FDM</span>
