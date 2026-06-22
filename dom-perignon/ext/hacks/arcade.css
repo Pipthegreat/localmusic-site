@@ -31,12 +31,10 @@
 
 html.dp-arcade-on {
   background-color: #000 !important;
-  background-image: none !important;
   color-scheme: dark !important;
 }
 html.dp-arcade-on body {
   background-color: transparent !important;
-  background-image: none !important;
   color: #b8ff3d !important;
   font-family: 'VT323', 'Share Tech Mono', 'Courier New', monospace !important;
   font-size: 18px !important;
@@ -224,7 +222,6 @@ html.dp-arcade-on body input,
 html.dp-arcade-on body textarea,
 html.dp-arcade-on body select {
   background-color: #000 !important;
-  background-image: none !important;
   color: #b8ff3d !important;
   border: 2px solid #b8ff3d !important;
   box-shadow: 0 0 12px rgba(184,255,61,0.5), inset 0 0 8px rgba(184,255,61,0.15) !important;

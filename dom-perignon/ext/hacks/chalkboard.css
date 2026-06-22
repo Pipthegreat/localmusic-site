@@ -25,7 +25,6 @@ html.dp-chalkboard-on {
 }
 html.dp-chalkboard-on body {
   background-color: transparent !important;
-  background-image: none !important;
   color: #fefdfa !important;
   font-family: 'Caveat', 'Architects Daughter', cursive !important;
   font-size: 22px !important;
@@ -127,7 +126,6 @@ html.dp-chalkboard-on body input,
 html.dp-chalkboard-on body textarea,
 html.dp-chalkboard-on body select {
   background-color: transparent !important;
-  background-image: none !important;
   color: #fefdfa !important;
   border: 2px dashed rgba(254,253,250,0.55) !important;
   border-radius: 4px !important;

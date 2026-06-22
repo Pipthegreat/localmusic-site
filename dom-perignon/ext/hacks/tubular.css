@@ -33,7 +33,6 @@
    animation actually runs. */
 html.dp-tubular-on {
   background-color: #2b1410 !important;
-  background-image: none !important;
   color-scheme: dark !important;
 }
 html.dp-tubular-on::before {
@@ -52,7 +51,6 @@ html.dp-tubular-on::before {
 }
 html.dp-tubular-on body {
   background-color: transparent !important;
-  background-image: none !important;
   color: #f4e4c1 !important;
   font-family: 'Fraunces', Georgia, 'Times New Roman', serif !important;
 }
@@ -138,7 +136,6 @@ html.dp-tubular-on body input,
 html.dp-tubular-on body textarea,
 html.dp-tubular-on body select {
   background-color: rgba(43,20,16,0.85) !important;
-  background-image: none !important;
   color: #f4e4c1 !important;
   border: 1px solid rgba(255,90,31,0.6) !important;
   box-shadow: 0 0 12px rgba(255,90,31,0.25), inset 0 0 8px rgba(0,0,0,0.4) !important;

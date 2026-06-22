@@ -37,7 +37,6 @@ html.dp-vapor-on {
 }
 html.dp-vapor-on body {
   background-color: transparent !important;
-  background-image: none !important;
   color: #1a0033 !important;
   font-family: 'Space Grotesk', 'Inter', sans-serif !important;
 }
@@ -159,7 +158,6 @@ html.dp-vapor-on body a[jsaction],
 html.dp-vapor-on body div[jsaction][role],
 html.dp-vapor-on body span[jsaction][role] {
   background-color: rgba(255, 255, 255, 0.62) !important;
-  background-image: none !important;
   background-clip: border-box !important;
   -webkit-background-clip: border-box !important;
   color: #6a3aa5 !important;

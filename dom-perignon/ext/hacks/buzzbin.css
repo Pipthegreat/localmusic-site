@@ -44,7 +44,6 @@ html.dp-buzzbin-on {
 }
 html.dp-buzzbin-on body {
   background-color: transparent !important;
-  background-image: none !important;
   color: #111 !important;
   font-family: 'Inter', 'Helvetica Neue', sans-serif !important;
   /* Was font-weight: 700 — too heavy for body copy, made every paragraph
@@ -109,7 +108,6 @@ html.dp-buzzbin-on body a[jsaction],
 html.dp-buzzbin-on body div[jsaction][role],
 html.dp-buzzbin-on body span[jsaction][role] {
   background-color: #fff !important;
-  background-image: none !important;
   color: #111 !important;
   border: 3px solid #111 !important;
   box-shadow: 4px 4px 0 #111 !important;
@@ -248,7 +246,6 @@ html.dp-buzzbin-on body input,
 html.dp-buzzbin-on body textarea,
 html.dp-buzzbin-on body select {
   background-color: #fff !important;
-  background-image: none !important;
   color: #111 !important;
   border: 3px solid #111 !important;
   box-shadow: 4px 4px 0 #111 !important;

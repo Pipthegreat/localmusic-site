@@ -6,12 +6,10 @@
    over the black canvas. */
 html.dp-matrix-red-on {
   background-color: #000 !important;
-  background-image: none !important;
   color-scheme: dark !important;
 }
 html.dp-matrix-red-on body {
   background-color: transparent !important;
-  background-image: none !important;
 }
 
 html.dp-matrix-red-on body,
@@ -44,7 +42,6 @@ html.dp-matrix-red-on body select {
    sparing those descendants keeps icons visible. */
 html.dp-matrix-red-on body *:not(button):not(input):not(textarea):not(select):not(code):not(pre):not(img):not(picture):not(video):not(canvas):not(svg):not(svg *):not(iframe):not(button *):not(a *):not(label *):not([role="button"] *):not([role="link"] *) {
   background-color: transparent !important;
-  background-image: none !important;
 }
 
 /* Icon visibility rescue: SVG icons inside clickable elements inherit

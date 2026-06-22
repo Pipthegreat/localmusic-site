@@ -659,10 +659,45 @@ body.play-stalled .play-stall-notice { display: block; }
               var(--track-tint, oklch(60% 0.16 40)) 35%, transparent);
   transition: background 320ms, box-shadow 320ms;
 }
+/* Desktop: the player bar rests off-screen and rises only once a track is
+   picked (body.np-up, toggled in DesktopPlayer._reflect). Mobile keeps its
+   always-present mini-player, so this is gated to the desktop breakpoint. */
+@media (min-width: 901px) {
+  .player { transform: translateY(135%); transition: transform 440ms cubic-bezier(.22, 1, .36, 1), background 320ms, box-shadow 320ms; }
+  body:not(.np-up) .player { box-shadow: none; pointer-events: none; }
+  body.np-up .player { transform: translateY(0); }
+  .player.player-disabled { transform: none; pointer-events: auto; box-shadow: none; }
+  /* Dynamic bottom spacing: zero reserved gap until the bar is up, then exactly
+     the bar's measured height (--player-h, set by a ResizeObserver) so it stays
+     clean at any zoom / font size — no fixed pixel guess. */
+  body { padding-bottom: 0; transition: padding-bottom 440ms cubic-bezier(.22, 1, .36, 1); }
+  body.np-up { padding-bottom: var(--player-h, 92px); }
+}
 .player-inner {
   max-width: 800px; margin: 0 auto;
-  display: flex; align-items: center; gap: 12px;
+  display: flex; align-items: center; gap: 16px;
 }
+/* SDK now-playing bar — real component CSS (page type + palette), not inline
+   styles. Flex layout + clamp()s keep it composed across widths and zoom. */
+.sdk-np { display: flex; align-items: center; gap: clamp(10px, 1.2vw, 16px); width: 100%; min-width: 0; font-family: var(--sans); }
+.sdk-np .np-art { width: clamp(44px, 4.4vw, 54px); aspect-ratio: 1; border-radius: 9px; flex: none; overflow: hidden; display: grid; place-items: center; background: color-mix(in oklch, var(--track-tint, oklch(46% 0.14 38)) 24%, var(--slate-900, #15110f)); box-shadow: 0 2px 14px -5px oklch(0% 0 0 / 0.6); }
+.sdk-np .np-art img { width: 100%; height: 100%; object-fit: cover; }
+.sdk-np .np-art svg { width: 22px; height: 22px; color: var(--ember-300, #e8965a); opacity: .85; }
+.sdk-np .np-meta { flex: 0 1 210px; min-width: 0; }
+.sdk-np .np-title { font-weight: 600; font-size: clamp(13px, 1.1vw, 14px); color: var(--fg-default); letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sdk-np .np-artist { font-size: 12px; color: var(--fg-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+.sdk-np .np-toggle { flex: none; width: clamp(38px, 3.4vw, 44px); aspect-ratio: 1; border-radius: 50%; border: none; cursor: pointer; background: var(--fg-default); color: var(--slate-950, #0d0a08); display: grid; place-items: center; transition: transform .12s ease, filter .16s; }
+.sdk-np .np-toggle:hover { transform: scale(1.07); filter: brightness(1.04); }
+.sdk-np .np-toggle:active { transform: scale(.95); }
+.sdk-np .np-toggle svg { width: 48%; height: 48%; }
+.sdk-np .np-scrub { flex: 1 1 auto; display: flex; align-items: center; gap: 10px; min-width: 90px; }
+.sdk-np .np-time { font: 500 11px/1 var(--mono); color: var(--fg-subtle); font-variant-numeric: tabular-nums; width: 38px; flex: none; }
+.sdk-np .np-time.r { text-align: right; }
+.sdk-np .np-bar { flex: 1; height: 6px; border-radius: 999px; background: oklch(100% 0 0 / .14); position: relative; cursor: pointer; }
+.sdk-np .np-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 999px; background: var(--ember-400, #e8965a); }
+.sdk-np .np-knob { position: absolute; top: 50%; left: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--fg-default); transform: translate(-50%, -50%); opacity: 0; transition: opacity .14s; box-shadow: 0 1px 4px oklch(0% 0 0 / .5); }
+.sdk-np .np-bar:hover .np-knob { opacity: 1; }
+@media (max-width: 1100px) { .sdk-np .np-meta { flex-basis: 150px; } .sdk-np .np-time { width: 34px; } }
 /* Disabled state — no Spotify playlist has been created yet. Hide the
    broken iframe + skip buttons, surface a clear "coming soon" message.
    Without this the bar reads as a dead UI element. */
@@ -1369,7 +1404,7 @@ applyFilter();
 // Each resolved artist appears as a new playable row.
 // =====================================================================
 const WORKER_URL = 'https://localmusic-search.mr-raleigh-j.workers.dev';
-const UNRESOLVED_EDM = [{"artist": "Late Night Clubbing #057", "venue": "TBA", "city": "San Francisco", "date": "2026-07-12", "date_human": "Sun Jul 12"}, {"artist": "Aki", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-07-25", "date_human": "Sat Jul 25"}, {"artist": "Late Night Clubbing #064", "venue": "TBA", "city": "San Francisco", "date": "2026-08-08", "date_human": "Sat Aug 08"}, {"artist": "Chellzz", "venue": "Audio", "city": "San Francisco", "date": "2026-07-31", "date_human": "Fri Jul 31"}, {"artist": "Late Night Clubbing #060", "venue": "TBA", "city": "San Francisco", "date": "2026-07-25", "date_human": "Sat Jul 25"}, {"artist": "Pride - Sequoixa", "venue": "Q Bar", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Afakasi Papi", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Mostly Cloudy Pride: Amarji King", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Owell", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-27", "date_human": "Sat Jun 27"}, {"artist": "GIRLS ON DECK", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Just Another Bitch", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Estellita", "venue": "TBA", "city": "Oakland", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Late Night Clubbing #059", "venue": "TBA", "city": "San Francisco", "date": "2026-07-19", "date_human": "Sun Jul 19"}, {"artist": "Giuliano", "venue": "Q Bar", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Sunset Rooftop Party", "venue": "Via Hotel Rooftop", "city": "San Francisco", "date": "2026-07-19", "date_human": "Sun Jul 19"}, {"artist": "Just Jovani", "venue": "Halcyon", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "After Life: Rebellion", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Rebellion", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Queermom", "venue": "TBA", "city": "Oakland", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Elderbrook Day Party", "venue": "Gold Bar Treasure Island", "city": "San Francisco", "date": "2026-07-03", "date_human": "Fri Jul 03"}, {"artist": "Outside Lands", "venue": "Golden Gate Park", "city": "San Francisco", "date": "2026-08-07", "date_human": "Fri Aug 07"}, {"artist": "Mees Salome", "venue": "The Great Northern", "city": "San Francisco", "date": "2026-07-31", "date_human": "Fri Jul 31"}, {"artist": "Late Night Clubbing #055", "venue": "TBA", "city": "San Francisco", "date": "2026-07-05", "date_human": "Sun Jul 05"}, {"artist": "Late Night Clubbing #065", "venue": "TBA", "city": "San Francisco", "date": "2026-08-09", "date_human": "Sun Aug 09"}, {"artist": "Galvanize", "venue": "Q Bar", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Padre Bless", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-27", "date_human": "Sat Jun 27"}, {"artist": "Jubilee", "venue": "F8 1192 Folsom", "city": "San Francisco", "date": "2026-08-07", "date_human": "Fri Aug 07"}, {"artist": "Ali Farahani", "venue": "Via Hotel Rooftop", "city": "San Francisco", "date": "2026-07-19", "date_human": "Sun Jul 19"}, {"artist": "Amarji King", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Slurrp: Pride - Sequoixa", "venue": "Q Bar", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Late Night Clubbing #052", "venue": "TBA", "city": "San Francisco", "date": "2026-06-27", "date_human": "Sat Jun 27"}, {"artist": "Coffintexts b2b Jonny From Space", "venue": "F8 1192 Folsom", "city": "San Francisco", "date": "2026-08-07", "date_human": "Fri Aug 07"}, {"artist": "DJ Bunny Bexxx", "venue": "TBA", "city": "Oakland", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Late Night Clubbing #058", "venue": "TBA", "city": "San Francisco", "date": "2026-07-18", "date_human": "Sat Jul 18"}, {"artist": "Discnogirl", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Late Night Clubbing #061", "venue": "TBA", "city": "San Francisco", "date": "2026-07-26", "date_human": "Sun Jul 26"}, {"artist": "Late Night Clubbing #056", "venue": "TBA", "city": "San Francisco", "date": "2026-07-11", "date_human": "Sat Jul 11"}, {"artist": "Oksional First Thursdays: Amatric", "venue": "Mothership Bar", "city": "San Francisco", "date": "2026-07-02", "date_human": "Thu Jul 02"}, {"artist": "Colorize: Praana", "venue": "The Great Northern", "city": "San Francisco", "date": "2026-07-31", "date_human": "Fri Jul 31"}, {"artist": "Sinego (Timbales DJ Set", "venue": "Madarae", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "felipe d", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Zedd Pride Weekend Block Party", "venue": "The Midway", "city": "San Francisco", "date": "2026-06-28", "date_human": "Sun Jun 28"}, {"artist": "Stormy Deep Nights - Night01", "venue": "Mr. Mahjong's", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Uya Edition - Paul Goodyear", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-07-25", "date_human": "Sat Jul 25"}, {"artist": "Pink Block Pride 2026", "venue": "The Great Northern", "city": "San Francisco", "date": "2026-06-27", "date_human": "Sat Jun 27"}, {"artist": "Late Night Clubbing #054", "venue": "TBA", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Late Night Clubbing #053", "venue": "TBA", "city": "San Francisco", "date": "2026-06-28", "date_human": "Sun Jun 28"}, {"artist": "Cristoph b2b Rebuke", "venue": "The MIdway", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Late Night Clubbing #063", "venue": "TBA", "city": "San Francisco", "date": "2026-08-02", "date_human": "Sun Aug 02"}, {"artist": "Amatric", "venue": "Mothership Bar", "city": "San Francisco", "date": "2026-07-02", "date_human": "Thu Jul 02"}, {"artist": "Late Night Clubbing #062", "venue": "TBA", "city": "San Francisco", "date": "2026-08-01", "date_human": "Sat Aug 01"}, {"artist": "Xavier b2b Piste", "venue": "Audio", "city": "San Francisco", "date": "2026-07-31", "date_human": "Fri Jul 31"}, {"artist": "Todd Terje (DJ Set", "venue": "Public Works", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}];
+const UNRESOLVED_EDM = [{"artist": "Slurrp: Pride - Sequoixa", "venue": "Q Bar", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "felipe d", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Queermom", "venue": "TBA", "city": "Oakland", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Ali Farahani", "venue": "Via Hotel Rooftop", "city": "San Francisco", "date": "2026-07-19", "date_human": "Sun Jul 19"}, {"artist": "Just Jovani", "venue": "Halcyon", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Late Night Clubbing #060", "venue": "TBA", "city": "San Francisco", "date": "2026-07-25", "date_human": "Sat Jul 25"}, {"artist": "Estellita", "venue": "TBA", "city": "Oakland", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Late Night Clubbing #064", "venue": "TBA", "city": "San Francisco", "date": "2026-08-08", "date_human": "Sat Aug 08"}, {"artist": "Late Night Clubbing #065", "venue": "TBA", "city": "San Francisco", "date": "2026-08-09", "date_human": "Sun Aug 09"}, {"artist": "Late Night Clubbing #054", "venue": "TBA", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Owell", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-27", "date_human": "Sat Jun 27"}, {"artist": "Pink Block Pride 2026", "venue": "The Great Northern", "city": "San Francisco", "date": "2026-06-27", "date_human": "Sat Jun 27"}, {"artist": "Mostly Cloudy Pride: Amarji King", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Discnogirl", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Giuliano", "venue": "Q Bar", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Jubilee", "venue": "F8 1192 Folsom", "city": "San Francisco", "date": "2026-08-07", "date_human": "Fri Aug 07"}, {"artist": "Amatric", "venue": "Mothership Bar", "city": "San Francisco", "date": "2026-07-02", "date_human": "Thu Jul 02"}, {"artist": "Late Night Clubbing #062", "venue": "TBA", "city": "San Francisco", "date": "2026-08-01", "date_human": "Sat Aug 01"}, {"artist": "Padre Bless", "venue": "Halcyon", "city": "San Francisco", "date": "2026-06-27", "date_human": "Sat Jun 27"}, {"artist": "Late Night Clubbing #052", "venue": "TBA", "city": "San Francisco", "date": "2026-06-27", "date_human": "Sat Jun 27"}, {"artist": "Chellzz", "venue": "Audio", "city": "San Francisco", "date": "2026-07-31", "date_human": "Fri Jul 31"}, {"artist": "Late Night Clubbing #058", "venue": "TBA", "city": "San Francisco", "date": "2026-07-18", "date_human": "Sat Jul 18"}, {"artist": "Sinego (Timbales DJ Set", "venue": "Madarae", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Late Night Clubbing #063", "venue": "TBA", "city": "San Francisco", "date": "2026-08-02", "date_human": "Sun Aug 02"}, {"artist": "Pride - Sequoixa", "venue": "Q Bar", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Late Night Clubbing #053", "venue": "TBA", "city": "San Francisco", "date": "2026-06-28", "date_human": "Sun Jun 28"}, {"artist": "Stormy Deep Nights - Night01", "venue": "Mr. Mahjong's", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Afakasi Papi", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Late Night Clubbing #061", "venue": "TBA", "city": "San Francisco", "date": "2026-07-26", "date_human": "Sun Jul 26"}, {"artist": "Rebellion", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Outside Lands", "venue": "Golden Gate Park", "city": "San Francisco", "date": "2026-08-07", "date_human": "Fri Aug 07"}, {"artist": "Late Night Clubbing #056", "venue": "TBA", "city": "San Francisco", "date": "2026-07-11", "date_human": "Sat Jul 11"}, {"artist": "Zedd Pride Weekend Block Party", "venue": "The Midway", "city": "San Francisco", "date": "2026-06-28", "date_human": "Sun Jun 28"}, {"artist": "Mees Salome", "venue": "The Great Northern", "city": "San Francisco", "date": "2026-07-31", "date_human": "Fri Jul 31"}, {"artist": "Colorize: Praana", "venue": "The Great Northern", "city": "San Francisco", "date": "2026-07-31", "date_human": "Fri Jul 31"}, {"artist": "Late Night Clubbing #059", "venue": "TBA", "city": "San Francisco", "date": "2026-07-19", "date_human": "Sun Jul 19"}, {"artist": "DJ Bunny Bexxx", "venue": "TBA", "city": "Oakland", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Late Night Clubbing #057", "venue": "TBA", "city": "San Francisco", "date": "2026-07-12", "date_human": "Sun Jul 12"}, {"artist": "Sunset Rooftop Party", "venue": "Via Hotel Rooftop", "city": "San Francisco", "date": "2026-07-19", "date_human": "Sun Jul 19"}, {"artist": "Just Another Bitch", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "After Life: Rebellion", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Amarji King", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "GIRLS ON DECK", "venue": "Monarch", "city": "San Francisco", "date": "2026-06-26", "date_human": "Fri Jun 26"}, {"artist": "Todd Terje (DJ Set", "venue": "Public Works", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Late Night Clubbing #055", "venue": "TBA", "city": "San Francisco", "date": "2026-07-05", "date_human": "Sun Jul 05"}, {"artist": "Galvanize", "venue": "Q Bar", "city": "San Francisco", "date": "2026-06-25", "date_human": "Thu Jun 25"}, {"artist": "Elderbrook Day Party", "venue": "Gold Bar Treasure Island", "city": "San Francisco", "date": "2026-07-03", "date_human": "Fri Jul 03"}, {"artist": "Coffintexts b2b Jonny From Space", "venue": "F8 1192 Folsom", "city": "San Francisco", "date": "2026-08-07", "date_human": "Fri Aug 07"}, {"artist": "Aki", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-07-25", "date_human": "Sat Jul 25"}, {"artist": "Oksional First Thursdays: Amatric", "venue": "Mothership Bar", "city": "San Francisco", "date": "2026-07-02", "date_human": "Thu Jul 02"}, {"artist": "Cristoph b2b Rebuke", "venue": "The MIdway", "city": "San Francisco", "date": "2026-07-04", "date_human": "Sat Jul 04"}, {"artist": "Uya Edition - Paul Goodyear", "venue": "DNA Lounge", "city": "San Francisco", "date": "2026-07-25", "date_human": "Sat Jul 25"}, {"artist": "Xavier b2b Piste", "venue": "Audio", "city": "San Francisco", "date": "2026-07-31", "date_human": "Fri Jul 31"}];
 const LIVE_LS_KEY = 'sfo-live-';      // localStorage cache for live results
 let edmLoadTriggered = false;
 
@@ -2858,6 +2893,18 @@ class DesktopPlayer {
     // mode so the validator drives advances deterministically via _onUpdate.
     var self_ = this;
     this._endWatch = setInterval(function () { if (!self_._testMode) self_._checkEnd(); }, 1000);
+    this._sdkNpTick = setInterval(function () { self_._sdkTick(); }, 500);   // smooth progress for the SDK now-playing bar
+    // Match the page's reserved bottom space to the bar's REAL height at any
+    // zoom / font size — the --player-h var the dynamic padding-bottom reads.
+    try {
+      var _pl = document.querySelector('.player');
+      if (_pl) {
+        var _setH = function () { document.body.style.setProperty('--player-h', _pl.offsetHeight + 'px'); };
+        _setH();
+        if (window.ResizeObserver) new ResizeObserver(_setH).observe(_pl);
+        window.addEventListener('resize', _setH);
+      }
+    } catch (e) {}
     // The silent anchor's AudioContext can get auto-suspended while the tab is
     // hidden; re-resume on return so the parent keeps media engagement across
     // click-aways. (Anchor is first started in load()/togglePlay() on the user
@@ -3154,6 +3201,7 @@ class DesktopPlayer {
       this._paintTint();
     }
     document.body.classList.toggle('is-playing', !this.paused && this.curUri != null);
+    document.body.classList.toggle('np-up', this.curUri != null);   // raise the bottom player bar once a track is picked
   }
   _paintName(row) {
     var name = (window.TRACK_NAMES || {})[this.curUri];
@@ -3300,26 +3348,41 @@ class DesktopPlayer {
     SfoakPlayer.connect({
       name: 'SF + Oakland Live · sfoak',
       onReady: function () {
-        self._reflectConnect();
+        self._reflectConnect(); self._sdkUpdateNP();   // show the now-playing bar immediately (not blank embed)
         if (self._pendingSdkPlay) { var p = self._pendingSdkPlay; self._pendingSdkPlay = null; self._sdkPlayFrom(p.row, p.trackIdx); }
       },
       onNotReady: function () { self._reflectConnect(); },
       onState: function (s) { self._sdkState(s); },
       onError: function (ev) { self._reflectConnect(); }
     });
+    // Unlock the SDK audio element on the first user gesture anywhere on the page
+    // (autoplay policy) so even a deferred / non-row first interaction enables sound.
+    document.addEventListener('click', function onG() {
+      try { if (SfoakPlayer.player && SfoakPlayer.player.activateElement) { SfoakPlayer.player.activateElement(); document.removeEventListener('click', onG, true); } } catch (e) {}
+    }, true);
   }
   // Play the forward slice of the queue starting at (row, trackIdx) as ONE
   // server-side context; Spotify advances through it. Defers until the device
   // is ready so a logged-in user never falls back to the embed (no dual audio).
   _sdkPlayFrom(row, trackIdx) {
+    // IMPORTANT: this runs INSIDE the row-click gesture. Call activateElement()
+    // synchronously here to unlock the SDK audio element under the browser's
+    // autoplay policy — otherwise the async PUT /play starts no sound until the
+    // user hits a real play button ("nothing loads until play is pressed").
+    try { if (SfoakPlayer.player && SfoakPlayer.player.activateElement) SfoakPlayer.player.activateElement(); } catch (e) {}
     var q = this.queue(), start = 0;
     for (var i = 0; i < q.length; i++) { if (q[i].row === row && q[i].trackIdx === trackIdx) { start = i; break; } }
     var uris = this.queueUris().slice(start, start + 50);
     if (!uris.length) return;
     this._sdkSlice = uris; this._sdkBase = start; this._sdkPos = 0;
     this.cur = { row: row, trackIdx: trackIdx }; this.curUri = uris[0]; this.paused = false;
-    currentUri = this.curUri; isPaused = false; lastPlaybackUpdateAt = Date.now();
-    this._reflect(); this._enrich(row, trackIdx); this.refresh();
+    // Fill the now-playing bar immediately from the row (album art arrives with
+    // the first SDK state event); don't wait on the network round-trip.
+    this._sdkTitle = (window.TRACK_NAMES || {})[this.curUri] || '';
+    var aEl = row.querySelector('.primary-artist'); this._sdkArtist = aEl ? aEl.textContent.trim() : '';
+    this._sdkArt = ''; this.pos = 0; this.dur = 0;
+    currentUri = this.curUri; isPaused = false; lastPlaybackUpdateAt = Date.now(); this.lastUpdateAt = Date.now();
+    this._reflect(); this._enrich(row, trackIdx); this.refresh(); this._sdkUpdateNP();
     if (!SfoakPlayer.ready) { this._pendingSdkPlay = { row: row, trackIdx: trackIdx }; return; }
     this._pendingSdkPlay = null;
     SfoakPlayer.playUris(uris).catch(function (e) {
@@ -3343,10 +3406,13 @@ class DesktopPlayer {
     this.pos = s.position || 0;
     this.dur = s.duration || (s.track && s.track.duration) || 0;
     this.paused = !!s.paused;
+    this._sdkTitle = (s.track && s.track.name) || '';
+    this._sdkArtist = (s.track && s.track.artist) || '';
+    this._sdkArt = (s.track && s.track.art) || '';
     currentUri = uri; isPaused = this.paused; currentPositionMs = this.pos;
     if (this.dur > 0) lastDurationMs = this.dur;
-    lastPlaybackUpdateAt = Date.now();
-    this._reflect(); this.refresh();
+    lastPlaybackUpdateAt = Date.now(); this.lastUpdateAt = Date.now();
+    this._reflect(); this.refresh(); this._sdkUpdateNP();
   }
   // The Connect Spotify control (injected into the header). Connecting unlocks
   // gapless background playback; not connecting leaves the embed player as-is.
@@ -3363,6 +3429,71 @@ class DesktopPlayer {
     if (this._useSdk() && SfoakPlayer.ready) { el.textContent = '✓ Premium · background on'; el.style.color = 'var(--ember-300,#e8965a)'; }
     else if (this._useSdk()) { el.textContent = 'Connecting Spotify…'; el.style.color = 'var(--fg-muted,#9aa)'; }
     else { el.textContent = '♪ Connect Spotify'; el.style.color = 'var(--peacock,#5bb0c0)'; }
+  }
+  // ---- SDK now-playing bar -------------------------------------------------
+  // In SDK mode the bottom embed is unused (the SDK device has no visible UI),
+  // so fill that slot with a real now-playing display: art / title / artist /
+  // play-pause / scrubbable progress. Built once, lazily, on first SDK state.
+  _sdkNP() {
+    var host = document.querySelector('.player-embed');
+    if (!host) return null;
+    var np = document.getElementById('sdk-np');
+    if (np) return np;
+    var emb = document.getElementById('spotify-embed'); if (emb) emb.style.display = 'none';
+    np = document.createElement('div');
+    np.id = 'sdk-np'; np.className = 'sdk-np';
+    np.innerHTML =
+      '<div class="np-art" id="sdk-np-art"></div>' +
+      '<div class="np-meta"><div class="np-title" id="sdk-np-title">—</div><div class="np-artist" id="sdk-np-artist"></div></div>' +
+      '<button class="np-toggle" id="sdk-np-toggle" type="button" aria-label="Play or pause"></button>' +
+      '<div class="np-scrub">' +
+        '<span class="np-time" id="sdk-np-pos">0:00</span>' +
+        '<div class="np-bar" id="sdk-np-bar"><div class="np-fill" id="sdk-np-fill"></div><div class="np-knob" id="sdk-np-knob"></div></div>' +
+        '<span class="np-time r" id="sdk-np-dur">0:00</span>' +
+      '</div>';
+    host.appendChild(np);
+    var self = this;
+    np.querySelector('#sdk-np-toggle').addEventListener('click', function () { self.togglePlay(); });
+    np.querySelector('#sdk-np-bar').addEventListener('click', function (e) {
+      if (!self.dur) return;
+      var r = this.getBoundingClientRect();
+      var frac = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+      try { SfoakPlayer.seek(Math.round(frac * self.dur)); } catch (x) {}
+      self.pos = Math.round(frac * self.dur); self.lastUpdateAt = Date.now();
+    });
+    return np;
+  }
+  _fmtTime(ms) {
+    if (!ms || ms < 0) ms = 0;
+    var s = Math.floor(ms / 1000);
+    return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+  }
+  _sdkUpdateNP() {
+    if (!this._useSdk()) return;
+    var np = this._sdkNP(); if (!np) return;
+    var title = this._sdkTitle || (window.TRACK_NAMES || {})[this.curUri] || '';
+    if (!title && this.cur) { var tEl = this.cur.row.querySelector('.primary-track'); if (tEl) title = tEl.textContent; }
+    var idle = !this.curUri && !title;
+    var t = np.querySelector('#sdk-np-title'); if (t) { t.textContent = idle ? 'Pick a show to play' : (title || '—'); t.style.opacity = idle ? '0.55' : '1'; }
+    var a = np.querySelector('#sdk-np-artist'); if (a) a.textContent = idle ? '' : (this._sdkArtist || '');
+    var artEl = np.querySelector('#sdk-np-art');
+    if (artEl) artEl.innerHTML = this._sdkArt ? ('<img src="' + this._sdkArt + '" alt="">') : '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>';
+    var tog = np.querySelector('#sdk-np-toggle');
+    if (tog) tog.innerHTML = this.paused
+      ? '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.79-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14Z"/></svg>'
+      : '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 4h3v16H7zM14 4h3v16h-3z"/></svg>';
+    this._sdkTick();
+  }
+  _sdkTick() {
+    if (!this._useSdk()) return;
+    var np = document.getElementById('sdk-np'); if (!np) return;
+    var eff = this.paused ? this.pos : this.pos + (Date.now() - (this.lastUpdateAt || Date.now()));
+    if (this.dur > 0 && eff > this.dur) eff = this.dur;
+    var pct = this.dur > 0 ? (eff / this.dur * 100) : 0;
+    var fill = np.querySelector('#sdk-np-fill'); if (fill) fill.style.width = pct + '%';
+    var knob = np.querySelector('#sdk-np-knob'); if (knob) knob.style.left = pct + '%';
+    var pos = np.querySelector('#sdk-np-pos'); if (pos) pos.textContent = this._fmtTime(eff);
+    var dur = np.querySelector('#sdk-np-dur'); if (dur) dur.textContent = this._fmtTime(this.dur);
   }
 }
 

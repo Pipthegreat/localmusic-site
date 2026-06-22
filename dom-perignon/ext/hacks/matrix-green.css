@@ -9,12 +9,10 @@
    controls) so they don't pop as bright light chrome over the canvas. */
 html.dp-matrix-green-on {
   background-color: #000 !important;
-  background-image: none !important;
   color-scheme: dark !important;
 }
 html.dp-matrix-green-on body {
   background-color: transparent !important;
-  background-image: none !important;
 }
 
 /* Broad recolor. body * keeps the rain element styling out of scope
@@ -58,7 +56,6 @@ html.dp-matrix-green-on body select {
    preserves them universally. */
 html.dp-matrix-green-on body *:not(button):not(input):not(textarea):not(select):not(code):not(pre):not(img):not(picture):not(video):not(canvas):not(svg):not(svg *):not(iframe):not(button *):not(a *):not(label *):not([role="button"] *):not([role="link"] *) {
   background-color: transparent !important;
-  background-image: none !important;
 }
 
 /* ───── Icon visibility rescue ─────
