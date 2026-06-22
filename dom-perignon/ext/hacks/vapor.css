@@ -141,15 +141,33 @@ html.dp-vapor-on body a * {
    over translucent-white over light-blue = no contrast). Switched to a
    dark-purple frosted backing with a bright pink border + glow so the
    button always dominates whatever the site's native button looked
-   like. Also added `[role="button"]` to the selector list so custom
-   buttons (e.g. Google's div-based AI Mode) pick up the theme too. */
+   like.
+   v1.5.31 — extended the selector list to include MORE button shapes
+   sites use beyond plain <button>: `a[role="button"]`, `[type="button"]`,
+   `[type="submit"]`, and any `<a>` / `<div>` that's both styled inline-
+   flex-row (`display: inline-flex`/`flex`) AND has a `jsaction` attribute,
+   which is Google's signature for interactive cells. Google's "AI Mode"
+   chip and the doodle share/about pill on the right of the homepage
+   use these patterns; without the extra selectors they fall through
+   to vapor's generic light-on-light styling and stay invisible.
+   Also forced `background-clip: border-box` so the dark purple actually
+   paints behind text on elements where the site used
+   `background-clip: text`. */
 html.dp-vapor-on body button,
 html.dp-vapor-on body input,
 html.dp-vapor-on body textarea,
 html.dp-vapor-on body select,
-html.dp-vapor-on body [role="button"] {
+html.dp-vapor-on body [role="button"],
+html.dp-vapor-on body a[role="button"],
+html.dp-vapor-on body [type="button"],
+html.dp-vapor-on body [type="submit"],
+html.dp-vapor-on body a[jsaction],
+html.dp-vapor-on body div[jsaction][role],
+html.dp-vapor-on body span[jsaction][role] {
   background-color: rgba(60, 20, 80, 0.82) !important;
   background-image: none !important;
+  background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
   color: #fff !important;
   border: 2px solid #ff6ec7 !important;
   backdrop-filter: blur(8px) !important;
@@ -171,7 +189,11 @@ html.dp-vapor-on body textarea {
   text-shadow: none !important;
 }
 html.dp-vapor-on body button:hover,
-html.dp-vapor-on body [role="button"]:hover {
+html.dp-vapor-on body [role="button"]:hover,
+html.dp-vapor-on body a[role="button"]:hover,
+html.dp-vapor-on body [type="button"]:hover,
+html.dp-vapor-on body [type="submit"]:hover,
+html.dp-vapor-on body a[jsaction]:hover {
   background-color: #ff6ec7 !important;
   color: #fff !important;
   border-color: #fff !important;
