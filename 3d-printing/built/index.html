@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What We've Built — 3D Printing · customprojects.info</title>
+<meta name="description" content="A gallery of finished 3D-printed commissions and parts from customprojects.info — printed on a Prusa Core One.">
+<link rel="canonical" href="https://customprojects.info/3d-printing/built/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Caveat:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   3D PRINTING — build log / gallery. Blueprint "DRAWING" world.
+   The .build cards below are a TEMPLATE — duplicate one, drop in
+   a photo (replace .photo contents with <img src="..." />) and
+   edit the title / spec / blurb. Delete the demo note when ready.
+   ============================================================ */
+:root{
+  --navy:#0d2138; --navy-2:#0a1a2e; --cyan:#7cc4ff; --cyan-dim:rgba(124,196,255,0.7);
+  --cyan-faint:rgba(124,196,255,0.18); --ink:#e8f3ff; --red:#ff5050;
+  --mono:'Space Mono',ui-monospace,monospace; --hand:'Architects Daughter','Caveat',cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;overflow-x:hidden}
+html{-webkit-text-size-adjust:100%}
+body{
+  min-height:100vh;font-family:var(--hand);color:var(--ink);background:var(--navy);
+  background-image:
+    linear-gradient(rgba(125,200,255,0.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(125,200,255,0.08) 1px,transparent 1px),
+    linear-gradient(rgba(125,200,255,0.18) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(125,200,255,0.18) 1px,transparent 1px);
+  background-size:12px 12px,12px 12px,60px 60px,60px 60px;
+  padding:0 16px 120px;line-height:1.4;position:relative;
+}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at top right,rgba(124,196,255,0.14),transparent 50%),
+            radial-gradient(ellipse at bottom left,rgba(124,196,255,0.08),transparent 50%);}
+body::after{content:'REV. A · BUILD LOG · SHEET A OF 2';position:fixed;bottom:12px;right:16px;left:16px;text-align:right;
+  font-family:var(--mono);font-size:9px;letter-spacing:3px;color:rgba(124,196,255,0.55);z-index:1;pointer-events:none;}
+.wrap{max-width:1040px;margin:0 auto;position:relative;z-index:2}
+
+.topnav{padding-top:20px;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase}
+.topnav a{color:var(--cyan-dim);text-decoration:none;border-bottom:1px dashed var(--cyan-faint)}
+.topnav a:hover{color:var(--cyan);border-bottom-style:solid}
+
+header{padding:24px 0 20px;text-align:center}
+.eyebrow{display:block;font-family:var(--mono);font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--cyan-dim);margin-bottom:12px}
+h1{display:inline-block;font-family:var(--hand);font-weight:400;font-size:clamp(44px,9vw,76px);line-height:0.96;
+  text-transform:uppercase;color:var(--ink);letter-spacing:1px;border-bottom:1.5px solid var(--cyan);padding-bottom:8px;
+  text-shadow:0 0 12px rgba(124,196,255,0.4)}
+.lede{max-width:58ch;margin:20px auto 0;font-size:clamp(16px,2.3vw,18px);color:var(--ink);opacity:0.9;letter-spacing:0.3px}
+
+.note{max-width:760px;margin:26px auto 0;border:1px dashed var(--red);background:rgba(255,80,80,0.07);
+  padding:12px 16px;font-family:var(--mono);font-size:10px;line-height:1.7;letter-spacing:0.5px;color:#ffb3b3;text-align:center}
+
+.gallery{display:grid;grid-template-columns:1fr;gap:24px;margin-top:34px}
+@media(min-width:640px){.gallery{grid-template-columns:1fr 1fr}}
+@media(min-width:980px){.gallery{grid-template-columns:1fr 1fr 1fr}}
+.build{position:relative;border:1px solid var(--cyan-dim);background:rgba(10,26,46,0.4);padding:0 0 18px;display:flex;flex-direction:column}
+.build::before{content:attr(data-tag);position:absolute;top:-9px;left:14px;background:var(--navy);padding:0 6px;
+  font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--cyan);z-index:2}
+.build::after{content:'';position:absolute;right:-5px;bottom:-5px;width:10px;height:10px;border-right:1px solid var(--cyan);border-bottom:1px solid var(--cyan)}
+.photo{position:relative;aspect-ratio:4/3;width:100%;overflow:hidden;border-bottom:1px dashed var(--cyan-faint);
+  background:repeating-linear-gradient(45deg,rgba(124,196,255,0.05) 0 10px,transparent 10px 20px);
+  display:flex;align-items:center;justify-content:center}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo .ph{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(124,196,255,0.5)}
+.photo .ph::before{content:'⌖';display:block;font-size:32px;margin-bottom:6px;color:rgba(124,196,255,0.4)}
+.build .body{padding:16px 16px 0}
+.build h3{font-family:var(--hand);font-weight:400;font-size:24px;color:var(--ink);line-height:1.05;margin-bottom:6px}
+.build .spec{font-family:var(--mono);font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:10px}
+.build p{font-size:16px;color:var(--cyan-dim);line-height:1.45}
+
+.cta{margin:46px auto 0;max-width:640px;text-align:center;border:1.5px solid var(--cyan);background:var(--navy-2);
+  box-shadow:0 0 0 4px var(--navy),0 0 0 5px rgba(124,196,255,0.4);padding:26px 22px}
+.cta h2{font-family:var(--hand);font-weight:400;font-size:30px;text-transform:uppercase;letter-spacing:1px;color:var(--ink);margin-bottom:6px}
+.cta p{font-size:16px;color:var(--cyan-dim);margin-bottom:16px}
+.cta a{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--navy);background:var(--cyan);padding:14px 26px;text-decoration:none;font-weight:700;transition:all .25s}
+.cta a:hover{background:#fff;box-shadow:0 0 26px rgba(124,196,255,0.8)}
+
+footer.foot{text-align:center;margin-top:40px;font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--cyan-dim);text-transform:uppercase}
+footer.foot a{color:var(--cyan);text-decoration:none;border-bottom:1px dashed var(--cyan-faint)}
+footer.foot a:hover{border-bottom-style:solid}
+</style>
+</head>
+<body data-theme="blueprint">
+<div class="wrap">
+  <nav class="topnav"><a href="/3d-printing/">← 3D Printing</a></nav>
+
+  <header>
+    <span class="eyebrow">— DRAWING · BUILD LOG —</span>
+    <h1>What we've built</h1>
+    <p class="lede">Finished commissions and parts off the Prusa Core One. Every job starts as a drawing
+      and ends as a real object in someone's hands.</p>
+    <div class="note">▲ TEMPLATE — these are placeholder entries. Swap in real photos
+      (replace each card's photo block with <code>&lt;img src="…"&gt;</code>) and edit the text. Delete this note when ready.</div>
+  </header>
+
+  <div class="gallery">
+    <article class="build" data-tag="BUILD 01">
+      <div class="photo"><span class="ph">Photo</span></div>
+      <div class="body">
+        <h3>LED curtain-rod end caps</h3>
+        <div class="spec">PETG · matte black · 0.2 mm · ~34 g</div>
+        <p>Press-fit caps that hide the LED strip channel and anchor the rod. Tuned for a snug slip fit over 25 mm tube.</p>
+      </div>
+    </article>
+
+    <article class="build" data-tag="BUILD 02">
+      <div class="photo"><span class="ph">Photo</span></div>
+      <div class="body">
+        <h3>Under-desk cable tray</h3>
+        <div class="spec">PLA · graphite · 0.3 mm draft · ~120 g</div>
+        <p>Screw-mount trough that keeps a power strip and cabling off the floor. Printed in two interlocking sections.</p>
+      </div>
+    </article>
+
+    <article class="build" data-tag="BUILD 03">
+      <div class="photo"><span class="ph">Photo</span></div>
+      <div class="body">
+        <h3>Replacement appliance knob</h3>
+        <div class="spec">ABS · white · 0.15 mm fine · ~9 g</div>
+        <p>Reverse-measured from a snapped original — D-shaft bore and indicator line restored. Good as new.</p>
+      </div>
+    </article>
+
+    <article class="build" data-tag="BUILD 04">
+      <div class="photo"><span class="ph">Photo</span></div>
+      <div class="body">
+        <h3>Articulated camera mount</h3>
+        <div class="spec">PETG-CF · black · 0.2 mm · ~58 g</div>
+        <p>Stiff bracket with a 1/4-20 insert and a clamp foot. Carbon-fill keeps it rigid under a loaded arm.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="cta">
+    <h2>Want one like these?</h2>
+    <p>Upload your file or describe the part — we'll quote it.</p>
+    <a href="/3d-printing/requests/">Request a print →</a>
+  </div>
+
+  <footer class="foot">
+    <a href="/3d-printing/">← 3D Printing</a> · customprojects.info · <a href="/">all projects</a>
+  </footer>
+</div>
+</body>
+</html>
