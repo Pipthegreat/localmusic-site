@@ -117,6 +117,7 @@ window.SfoakPlayer = (function () {
   async function getQueue() { return api("/me/player/queue"); }
   async function apiPause() { return api("/me/player/pause" + dq(), "PUT"); }
   async function apiNext() { return api("/me/player/next" + dq(), "POST"); }
+  async function apiPrev() { return api("/me/player/previous" + dq(), "POST"); }
   async function apiSeek(ms) { return api("/me/player/seek" + dq("position_ms=" + Math.round(ms)), "PUT"); }
 
   // --- SDK-local controls (no network, instant on this device) ---
@@ -132,7 +133,7 @@ window.SfoakPlayer = (function () {
 
   return {
     connect, api, playUris, playContext, addToQueue, transferHere, getRemote, getQueue,
-    apiPause, apiNext, apiSeek,
+    apiPause, apiNext, apiPrev, apiSeek,
     resume, pause, toggle, next, prev, seek, setVolume, getCurrentState, disconnect,
     normalize,
     get deviceId() { return deviceId; },

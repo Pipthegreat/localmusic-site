@@ -34,8 +34,14 @@ window.SfoakBoot = (function () {
 
     S.accountButton(accEl, { onLogin: () => SfoakAuth.login(location.href), onLogout: () => location.reload() });
 
+    // Skip via the Web API — it drives the same server-side context that already
+    // auto-advances. The SDK-local nextTrack()/previousTrack() doesn't reliably
+    // navigate a Web-API-initiated context (it dead-ends and stops). SDK fallback.
+    async function skipNext() { try { await P.apiNext(); } catch (e) { try { P.next(); } catch (_) {} } }
+    async function skipPrev() { try { await P.apiPrev(); } catch (e) { try { P.prev(); } catch (_) {} } }
+
     const np = S.nowPlaying({
-      onToggle: () => P.toggle(), onNext: () => P.next(), onPrev: () => P.prev(),
+      onToggle: () => P.toggle(), onNext: skipNext, onPrev: skipPrev,
       onSeek: (ms) => P.seek(ms), onVolume: (v) => P.setVolume(v),
     });
 
@@ -43,8 +49,8 @@ window.SfoakBoot = (function () {
     if (countEl) countEl.textContent = tracks.length + " tracks · " + D.row_count + " shows";
     const list = S.renderList(listEl, tracks, {
       onPlay,
-      onPrev: () => P.prev(),
-      onNext: () => P.next(),
+      onPrev: skipPrev,
+      onNext: skipNext,
       onToggle: () => P.toggle(),
     });
 
