@@ -1381,6 +1381,45 @@ body[data-theme="studio"] .victory-dismiss:active {
 }
 body[data-theme="studio"] .victory-ring { border-color: #fa0f00 !important; opacity: 0.4; }
 
+/* ============================================================
+   MOBILE — narrow viewports. The display faces are tuned for
+   desktop; on a phone the title clipped (overflow-x:hidden hid
+   the runoff) and the 340px min-height ate half the screen.
+   Each theme's font has a different width-per-character, so cap
+   every size with min(<desktop px>, <N>vw): identical on desktop,
+   scales down continuously on narrow screens, never overflows.
+   ============================================================ */
+@media (max-width: 600px) {
+  header { min-height: 0; padding: 8px 0 16px; margin-bottom: 20px; }
+
+  body[data-theme="tubular"]    h1        { font-size: min(64px, 14vw); }
+  body[data-theme="tubular"]    h1 .word2 { font-size: min(88px, 16vw); }
+
+  body[data-theme="arcade"]     h1        { font-size: min(28px, 9.3vw); }
+  body[data-theme="arcade"]     h1 .word2 { font-size: min(44px, 12vw); }
+
+  body[data-theme="buzzbin"]    h1        { font-size: min(76px, 21vw); }
+  body[data-theme="buzzbin"]    h1 .word2 { font-size: min(104px, 23vw); }
+
+  body[data-theme="vapor"]      h1        { font-size: min(64px, 13.5vw); letter-spacing: 3px; }
+  body[data-theme="vapor"]      h1 .word2 { font-size: min(96px, 15vw); letter-spacing: 5px; }
+
+  body[data-theme="press"]      h1        { font-size: min(61px, 14.5vw); }
+  body[data-theme="press"]      h1 .word2 { font-size: min(77px, 17vw); }
+
+  body[data-theme="matrix"]     h1        { font-size: min(44px, 12.5vw); }
+  body[data-theme="matrix"]     h1 .word2 { font-size: min(58px, 14vw); }
+
+  body[data-theme="blueprint"]  h1        { font-size: min(56px, 15.5vw); }
+  body[data-theme="blueprint"]  h1 .word2 { font-size: min(80px, 18vw); }
+
+  body[data-theme="chalkboard"] h1        { font-size: min(76px, 19vw); }
+  body[data-theme="chalkboard"] h1 .word2 { font-size: min(96px, 21vw); }
+
+  body[data-theme="studio"]     h1        { font-size: min(88px, 15vw); }
+  body[data-theme="studio"]     h1 .word2 { font-size: min(116px, 17.5vw); }
+}
+
 </style>
 </head>
 <body data-theme="tubular">
