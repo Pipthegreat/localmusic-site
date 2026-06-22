@@ -35,7 +35,7 @@ body {
   transition: background-color 0.6s ease, color 0.6s ease;
 }
 .container { max-width: 100%; position: relative; z-index: 3; }
-header { margin-bottom: 28px; padding: 18px 0 24px; text-align: center; position: relative; min-height: 340px; display: flex; flex-direction: column; justify-content: center; }
+header { margin-bottom: 28px; padding: 18px 0 24px; text-align: center; position: relative; min-height: min(340px, 46vw); display: flex; flex-direction: column; justify-content: center; }
 h1 { display: inline-block; }
 h1 .word2 { display: block; }
 .meta { margin-top: 16px; }
@@ -263,13 +263,13 @@ body[data-theme="tubular"]::after {
 body[data-theme="tubular"] h1 {
   font-family: 'Georgia', serif;
   font-weight: 900; font-style: italic;
-  font-size: 64px; line-height: 0.9; letter-spacing: -3px;
+  font-size: min(64px, 14vw); line-height: 0.9; letter-spacing: -3px;
   color: var(--cream); text-transform: uppercase;
   animation: glitch 6s infinite;
   text-shadow: 3px 0 0 var(--persimmon), -3px 0 0 var(--acid), 0 0 30px rgba(255,90,31,0.6), 0 0 60px rgba(139,61,255,0.4);
 }
 body[data-theme="tubular"] h1 .word2 {
-  font-size: 88px; margin-top: -8px;
+  font-size: min(88px, 16vw); margin-top: -8px;
   background: linear-gradient(180deg, var(--persimmon) 0%, var(--oxblood) 50%, var(--violet) 100%);
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 0 20px rgba(255,90,31,0.5)); text-shadow: none;
@@ -384,11 +384,11 @@ body[data-theme="arcade"]::after {
 }
 body[data-theme="arcade"] h1 {
   font-family: 'Press Start 2P', 'Courier New', monospace;
-  font-weight: 400; font-size: 28px; line-height: 1.4; letter-spacing: 0;
+  font-weight: 400; font-size: min(28px, 9.3vw); line-height: 1.4; letter-spacing: 0;
   color: var(--acid); text-transform: uppercase;
   text-shadow: 0 0 8px var(--acid), 0 0 16px var(--acid), 0 0 32px var(--acid), -2px 0 0 var(--magenta), 2px 0 0 var(--persimmon);
 }
-body[data-theme="arcade"] h1 .word2 { font-size: 44px; margin-top: 16px; color: var(--persimmon); text-shadow: 0 0 8px var(--persimmon), 0 0 16px var(--persimmon), 0 0 32px var(--persimmon-glow), -2px 0 0 var(--acid), 2px 0 0 var(--magenta); }
+body[data-theme="arcade"] h1 .word2 { font-size: min(44px, 12vw); margin-top: 16px; color: var(--persimmon); text-shadow: 0 0 8px var(--persimmon), 0 0 16px var(--persimmon), 0 0 32px var(--persimmon-glow), -2px 0 0 var(--acid), 2px 0 0 var(--magenta); }
 body[data-theme="arcade"] .meta { font-family: 'Press Start 2P', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--acid); }
 body[data-theme="arcade"] .count-badge { display: inline-block; padding: 8px 14px; background: #000; color: var(--acid); border: 2px solid var(--acid); margin: 0 6px; box-shadow: 0 0 12px var(--acid), inset 0 0 12px rgba(0,255,255,0.2); transition: all 0.4s ease; }
 body[data-theme="arcade"] .count-badge .count { color: var(--persimmon); text-shadow: 0 0 6px var(--persimmon); }
@@ -475,14 +475,14 @@ body[data-theme="buzzbin"]::before {
 body[data-theme="buzzbin"] h1 {
   font-family: 'Anton', 'Impact', sans-serif;
   font-weight: 400; font-style: normal;
-  font-size: 76px; line-height: 0.85; letter-spacing: -1px;
+  font-size: min(76px, 21vw); line-height: 0.85; letter-spacing: -1px;
   color: #111; text-transform: uppercase;
   transform: skewX(-6deg);
   -webkit-text-stroke: 2px #111;
   text-shadow: 4px 4px 0 #ff2d8a, 8px 8px 0 #00b4ff;
 }
 body[data-theme="buzzbin"] h1 .word2 {
-  font-size: 104px; margin-top: 4px; color: #fff;
+  font-size: min(104px, 23vw); margin-top: 4px; color: #fff;
   -webkit-text-stroke: 3px #111;
   text-shadow: 5px 5px 0 #ff2d8a, 10px 10px 0 #00b4ff, 14px 14px 0 #111;
   transform: skewX(-6deg);
@@ -603,13 +603,13 @@ body[data-theme="vapor"] header::before {
 body[data-theme="vapor"] h1 {
   font-family: 'DM Serif Display', 'Playfair Display', serif;
   font-weight: 400; font-style: italic;
-  font-size: 64px; line-height: 0.95; letter-spacing: 8px;
+  font-size: min(64px, 13.5vw); line-height: 0.95; letter-spacing: 0.125em;
   color: #fff; text-transform: uppercase;
   text-shadow: 0 0 30px rgba(255,180,255,0.9), 4px 4px 0 #ff6ec7, 8px 8px 0 #7adfff;
 }
 body[data-theme="vapor"] h1 .word2 {
   font-family: 'DM Serif Display', serif; font-style: normal;
-  font-size: 96px; margin-top: 10px; letter-spacing: 18px; color: transparent;
+  font-size: min(96px, 15vw); margin-top: 10px; letter-spacing: 0.1875em; color: transparent;
   background: linear-gradient(180deg, #fff 0%, #ff6ec7 45%, #7adfff 100%);
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
   text-shadow: none; filter: drop-shadow(4px 4px 0 #c1a4ff) drop-shadow(0 0 24px rgba(255,180,255,0.7));
@@ -705,12 +705,12 @@ body[data-theme="press"] header::before { content: 'VOL. ONE · NO. I · ALL THE
 body[data-theme="press"] h1 {
   font-family: 'Playfair Display', serif;
   font-weight: 900; font-style: normal;
-  font-size: 61px; line-height: 0.88; letter-spacing: -2.5px;
+  font-size: min(61px, 14.5vw); line-height: 0.88; letter-spacing: -2.5px;
   color: #0a0a0a; text-transform: uppercase;
   display: block;
 }
 body[data-theme="press"] h1 .word2 {
-  font-style: italic; font-weight: 900; font-size: 77px;
+  font-style: italic; font-weight: 900; font-size: min(77px, 17vw);
   color: #c0282d; letter-spacing: -2.5px; margin-top: 2px;
 }
 body[data-theme="press"] .meta { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #0a0a0a; text-align: left; margin-top: 14px; border-top: 1px solid #0a0a0a; padding-top: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
@@ -842,14 +842,14 @@ body[data-theme="matrix"]::after {
 }
 body[data-theme="matrix"] h1 {
   font-family: 'Major Mono Display', 'Share Tech Mono', monospace;
-  font-weight: 400; font-size: 44px; line-height: 1.05; letter-spacing: 0;
+  font-weight: 400; font-size: min(44px, 12.5vw); line-height: 1.05; letter-spacing: 0;
   color: #00ff41; text-transform: uppercase;
   text-shadow: 0 0 4px #00ff41, 0 0 12px #00ff41, 0 0 24px rgba(0,255,65,0.6);
   animation: matrixGlow 2s ease-in-out infinite;
 }
 body[data-theme="matrix"] h1 .word2 {
   font-family: 'Major Mono Display', 'Share Tech Mono', monospace;
-  font-size: 58px; margin-top: 6px; color: transparent;
+  font-size: min(58px, 14vw); margin-top: 6px; color: transparent;
   background: linear-gradient(180deg, #aaff88 0%, #00ff41 50%, #007722 100%);
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
   text-shadow: none; filter: drop-shadow(0 0 16px rgba(0,255,65,0.8));
@@ -950,14 +950,14 @@ body[data-theme="blueprint"] header::before {
 }
 body[data-theme="blueprint"] h1 {
   font-family: 'Architects Daughter', sans-serif;
-  font-weight: 400; font-size: 56px; line-height: 1; letter-spacing: 0;
+  font-weight: 400; font-size: min(56px, 15.5vw); line-height: 1; letter-spacing: 0;
   color: #e8f3ff; text-transform: uppercase;
   border-bottom: 1.5px solid #7cc4ff; padding-bottom: 8px;
   text-shadow: 0 0 12px rgba(124,196,255,0.4);
 }
 body[data-theme="blueprint"] h1 .word2 {
   font-family: 'Architects Daughter', sans-serif;
-  font-size: 80px; margin-top: 8px; color: #7cc4ff;
+  font-size: min(80px, 18vw); margin-top: 8px; color: #7cc4ff;
   border-bottom: 1.5px solid #7cc4ff;
   text-shadow: 0 0 18px rgba(124,196,255,0.6);
 }
@@ -1057,13 +1057,13 @@ body[data-theme="chalkboard"] header::before {
 body[data-theme="chalkboard"] h1 {
   font-family: 'Caveat', cursive;
   font-weight: 700; font-style: normal;
-  font-size: 76px; line-height: 0.9; letter-spacing: 1px;
+  font-size: min(76px, 19vw); line-height: 0.9; letter-spacing: 1px;
   color: #fefdfa; text-transform: uppercase;
   text-shadow: 0 0 1px #fefdfa, 2px 2px 0 rgba(0,0,0,0.25);
   animation: chalkScribble 0.3s steps(4) infinite;
 }
 body[data-theme="chalkboard"] h1 .word2 {
-  font-size: 96px; margin-top: 0; color: #ffaad4;
+  font-size: min(96px, 21vw); margin-top: 0; color: #ffaad4;
   text-shadow: 0 0 2px #ffaad4, 3px 3px 0 rgba(0,0,0,0.3);
   text-decoration: underline; text-decoration-color: #ffeb6e; text-decoration-thickness: 3px; text-underline-offset: 8px;
 }
@@ -1168,7 +1168,7 @@ body[data-theme="studio"] header::before {
 body[data-theme="studio"] h1 {
   font-family: 'Adobe Clean', 'adobe-clean', 'Inter', -apple-system, BlinkMacSystemFont, 'Source Sans 3', 'Source Sans Pro', sans-serif;
   font-weight: 700; font-style: normal;
-  font-size: 88px; line-height: 0.95; letter-spacing: -2.5px;
+  font-size: min(88px, 15vw); line-height: 0.95; letter-spacing: -2.5px;
   color: #1f1f1f; text-transform: none;
   display: block; position: relative;
 }
@@ -1181,7 +1181,7 @@ body[data-theme="studio"] h1::before {
 body[data-theme="studio"] h1 .word2 {
   font-family: 'Adobe Clean', 'adobe-clean', 'Inter', -apple-system, BlinkMacSystemFont, 'Source Sans 3', 'Source Sans Pro', sans-serif;
   font-weight: 900; font-style: normal;
-  font-size: 116px; margin-top: -4px;
+  font-size: min(116px, 17.5vw); margin-top: -4px;
   color: #fa0f00; letter-spacing: -3.5px;
   text-transform: uppercase; line-height: 0.95;
 }
@@ -1380,45 +1380,6 @@ body[data-theme="studio"] .victory-dismiss:active {
   transform: translate(6px,6px); box-shadow: 0 0 0 #fa0f00;
 }
 body[data-theme="studio"] .victory-ring { border-color: #fa0f00 !important; opacity: 0.4; }
-
-/* ============================================================
-   MOBILE — narrow viewports. The display faces are tuned for
-   desktop; on a phone the title clipped (overflow-x:hidden hid
-   the runoff) and the 340px min-height ate half the screen.
-   Each theme's font has a different width-per-character, so cap
-   every size with min(<desktop px>, <N>vw): identical on desktop,
-   scales down continuously on narrow screens, never overflows.
-   ============================================================ */
-@media (max-width: 600px) {
-  header { min-height: 0; padding: 8px 0 16px; margin-bottom: 20px; }
-
-  body[data-theme="tubular"]    h1        { font-size: min(64px, 14vw); }
-  body[data-theme="tubular"]    h1 .word2 { font-size: min(88px, 16vw); }
-
-  body[data-theme="arcade"]     h1        { font-size: min(28px, 9.3vw); }
-  body[data-theme="arcade"]     h1 .word2 { font-size: min(44px, 12vw); }
-
-  body[data-theme="buzzbin"]    h1        { font-size: min(76px, 21vw); }
-  body[data-theme="buzzbin"]    h1 .word2 { font-size: min(104px, 23vw); }
-
-  body[data-theme="vapor"]      h1        { font-size: min(64px, 13.5vw); letter-spacing: 3px; }
-  body[data-theme="vapor"]      h1 .word2 { font-size: min(96px, 15vw); letter-spacing: 5px; }
-
-  body[data-theme="press"]      h1        { font-size: min(61px, 14.5vw); }
-  body[data-theme="press"]      h1 .word2 { font-size: min(77px, 17vw); }
-
-  body[data-theme="matrix"]     h1        { font-size: min(44px, 12.5vw); }
-  body[data-theme="matrix"]     h1 .word2 { font-size: min(58px, 14vw); }
-
-  body[data-theme="blueprint"]  h1        { font-size: min(56px, 15.5vw); }
-  body[data-theme="blueprint"]  h1 .word2 { font-size: min(80px, 18vw); }
-
-  body[data-theme="chalkboard"] h1        { font-size: min(76px, 19vw); }
-  body[data-theme="chalkboard"] h1 .word2 { font-size: min(96px, 21vw); }
-
-  body[data-theme="studio"]     h1        { font-size: min(88px, 15vw); }
-  body[data-theme="studio"]     h1 .word2 { font-size: min(116px, 17.5vw); }
-}
 
 </style>
 </head>
