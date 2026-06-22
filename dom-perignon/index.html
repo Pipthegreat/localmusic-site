@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DOM Pérignon — a collection of UI hijinks for Chrome</title>
-<meta name="description" content="A Chrome extension named after the innovator Dom Pierre Pérignon. Eight live overlays plus seven full graphic-override theme worlds for any page you visit.">
+<meta name="description" content="Named after the innovator Dom Pérignon. Stylistic ways to mess with your DOM: 9 theme worlds and eight live overlays to explore.">
 <link rel="canonical" href="https://customprojects.info/dom-perignon/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +34,7 @@
   --carbon-700: oklch(36% 0.018 240);
   --carbon-900: oklch(20% 0.014 240);
 
-  /* v1.5.27 — canvas darkened from carbon-50 (≈98.5% L) to a soft
+  /* v1.5.28 — canvas darkened from carbon-50 (≈98.5% L) to a soft
      cool-tinted neutral around 93% L. Distinct from tan, still light
      enough to read against, but with enough body that pale-gold
      champagne bubbles + cream highlights stop disappearing into it. */
@@ -592,7 +592,7 @@ h1.display em {
 /* Flex (not grid) on the li so inline content — <strong>, links —
    stays in the same flex item as its surrounding text. Grid was making
    <strong>Developer mode</strong> jump to its own row, which is what
-   was breaking the install steps before v1.5.27. */
+   was breaking the install steps before v1.5.28. */
 .install-right li {
   counter-increment: step;
   display: flex;
@@ -731,8 +731,8 @@ footer .copyhide:hover {
       DOM Pérignon
     </div>
     <div class="head-right">
-      <span class="version-chip">v1.5.27</span>
-      <a class="download-pill" href="downloads/dom-perignon-v1.5.27.zip" download>
+      <span class="version-chip">v1.5.28</span>
+      <a class="download-pill" href="downloads/dom-perignon-v1.5.28.zip" download>
         Download <span class="arrow">↓</span>
       </a>
     </div>
@@ -744,14 +744,11 @@ footer .copyhide:hover {
       <h1 class="display"><em>DOM</em> Pérignon</h1>
       <p class="lede">
         Named after the innovator <a href="https://en.wikipedia.org/wiki/Dom_P%C3%A9rignon_(monk)" target="_blank" rel="noopener">Dom Pérignon</a>.
-        The DOM is the live tree of every web page's elements. This extension
-        gives you fifteen ways to mess with it: eight live overlays that
-        paint on top of any page, and seven theme worlds that recolor and
-        re-type everything underneath.
+        Stylistic ways to mess with your DOM: 9 theme worlds and eight live overlays to explore.
       </p>
     </div>
     <ul class="bullets">
-      <li><span class="num">7</span><span><strong>Theme Worlds</strong> — full graphic overrides for the page underneath</span></li>
+      <li><span class="num">9</span><span><strong>Theme Worlds</strong> — full graphic overrides for the page underneath (7 visible, 2 easter-egg)</span></li>
       <li><span class="num">8</span><span><strong>Overlays</strong> — live DOM animations painted on top of the page</span></li>
       <li><span class="num">×</span><span>Run one of each at the same time, or just one, or neither</span></li>
       <li><span class="num">↓</span><span>Click any tile below to <strong>apply it to this page</strong></span></li>
@@ -1010,7 +1007,7 @@ footer .copyhide:hover {
           Install from Chrome Web Store
         </a>
         <div class="advanced-link">
-          Or, for developers: <a href="downloads/dom-perignon-v1.5.27.zip" download>download the zip</a> and load unpacked.
+          Or, for developers: <a href="downloads/dom-perignon-v1.5.28.zip" download>download the zip</a> and load unpacked.
         </div>
       </div>
     </div>
@@ -1019,9 +1016,9 @@ footer .copyhide:hover {
     <div class="install-manual" id="install-manual">
       <div class="install-left">
         <h3>Get the extension</h3>
-        <span class="filename">dom-perignon-v1.5.27.zip · ~120 KB · MV3 · no telemetry</span>
+        <span class="filename">dom-perignon-v1.5.28.zip · ~120 KB · MV3 · no telemetry</span>
         <p class="note">A self-contained Chrome extension. No servers, no analytics. Loads in unpacked mode. <em>Chrome Web Store listing in review.</em></p>
-        <a class="cta" href="downloads/dom-perignon-v1.5.27.zip" download>↓ Download the zip</a>
+        <a class="cta" href="downloads/dom-perignon-v1.5.28.zip" download>↓ Download the zip</a>
       </div>
       <div class="install-right">
         <ol>
@@ -1040,7 +1037,7 @@ footer .copyhide:hover {
 
   <footer>
     <span><a class="copyhide" href="downloads/stage-watermark-v1.0.0.zip" download title="">© 2026</a> · customprojects.info · <a href="privacy.html">Privacy</a></span>
-    <span>DOM Pérignon v1.5.27</span>
+    <span>DOM Pérignon v1.5.28</span>
   </footer>
 
 </div>
@@ -1056,7 +1053,7 @@ footer .copyhide:hover {
   //
   // The "what's active" check reads inject.js's NS.currentOverlay /
   // NS.currentTheme directly instead of tracking it in a local var. In
-  // v1.5.27 the local tracker could desync from the actual runtime
+  // v1.5.28 the local tracker could desync from the actual runtime
   // (page interactions, late-arriving init resolves) so a "deactivate"
   // click sometimes hit the wrong branch and needed a second tap.
   // Reading from NS at the start of each click means we always operate
@@ -1158,7 +1155,7 @@ footer .copyhide:hover {
 </script>
 
 <!-- ── Preview-iframe fallback to static PNG ─────────────────────────────
-     v1.5.27. The preview iframes load demo.html?overlay=X / ?theme=X and
+     v1.5.28. The preview iframes load demo.html?overlay=X / ?theme=X and
      run the real hijink JS. On most networks this works perfectly. On
      corporate networks (proxy blocks fonts.googleapis.com, ad blocker
      swallows ext/hacks/* by extension, captive portal, ...) the iframe
