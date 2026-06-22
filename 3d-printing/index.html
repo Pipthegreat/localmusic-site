@@ -179,6 +179,13 @@ input.invalid,select.invalid,textarea.invalid{border-color:var(--red);border-sty
 .detected{color:var(--ok);text-shadow:0 0 8px rgba(125,255,176,0.5)}
 .warn-box{display:none;margin-top:10px;border:1px solid var(--red);background:rgba(255,80,80,0.08);padding:10px 12px;font-family:var(--mono);font-size:10px;line-height:1.6;letter-spacing:0.5px;color:#ffb3b3}
 .warn-box.show{display:block}
+/* filament auto-read readout (replaces manual entry) */
+.grams-readout{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border:1px solid var(--cyan-faint);background:rgba(10,26,46,0.5);padding:14px}
+.grams-readout .g-val{font-family:var(--hand);font-size:30px;line-height:1;color:var(--cyan-dim);min-width:54px}
+.grams-readout.has .g-val{color:var(--ok);text-shadow:0 0 12px rgba(125,255,176,0.5)}
+.grams-readout .g-status{font-family:var(--mono);font-size:10px;letter-spacing:0.5px;color:var(--cyan-dim);line-height:1.5;flex:1}
+.grams-readout.has .g-status{color:var(--ok)}
+.auto-tag{font-family:var(--mono);font-size:9px;letter-spacing:1px;color:rgba(124,196,255,0.55);text-transform:uppercase}
 
 /* ---------- estimate title block ---------- */
 .estimate{position:relative}
@@ -366,7 +373,7 @@ footer.foot a:hover{border-bottom-style:solid}
       <!-- 04 FILE & FILAMENT -->
       <fieldset class="section" data-tag="BLOCK 04">
         <h2>File &amp; filament</h2>
-        <p class="sub">Upload the model — emailed as an attachment</p>
+        <p class="sub">Upload your model — we read the filament weight automatically</p>
         <div class="field">
           <div class="drop" id="dropzone">
             <div class="big" id="dropTitle">⬆ Drop file or tap to browse</div>
@@ -379,16 +386,17 @@ footer.foot a:hover{border-bottom-style:solid}
             <button type="button" class="clearfile" id="clearFile">CLEAR</button>
           </div>
           <div class="warn-box" id="sizeWarn"></div>
-          <div class="hint">G-code is parsed automatically for filament weight. STL/STEP carry no
-            weight data — enter grams below from your slicer, or leave blank and we'll slice &amp; quote it.</div>
+          <div class="hint">Sliced files (<b>.gcode</b>, Prusa <b>.bgcode</b>) are read automatically for
+            filament weight. STL / STEP / 3MF carry no weight — those get a slice-and-quote.</div>
         </div>
         <div class="field">
-          <label class="lbl" for="f_grams">Filament needed <span id="gramsAuto"></span></label>
-          <div class="with-unit">
-            <input type="number" id="f_grams" name="Filament (grams)" min="0" step="0.1" placeholder="e.g. 42">
-            <span class="unit">g</span>
+          <label class="lbl">Filament needed <span class="auto-tag">· auto-read, no manual entry</span></label>
+          <div class="grams-readout" id="gramsReadout">
+            <span class="g-val" id="gramsVal">—</span>
+            <span class="g-status" id="gramsStatus">Upload a sliced .gcode or .bgcode — the weight reads itself.</span>
           </div>
-          <div class="hint">The core driver of the estimate. Don't know it? Leave blank — quote follows after slicing.</div>
+          <input type="hidden" id="f_grams" name="Filament (grams)" value="">
+          <div class="hint">Read straight from your sliced file — no typing. It's the core driver of the estimate.</div>
         </div>
       </fieldset>
 
@@ -414,7 +422,7 @@ footer.foot a:hover{border-bottom-style:solid}
 
       <!-- hidden computed mirror so the email carries the on-screen quote -->
       <input type="hidden" name="Estimated quote" id="fs_estimate" value="(not computed)">
-      <input type="hidden" name="Filament source" id="fs_source" value="manual / not provided">
+      <input type="hidden" name="Filament source" id="fs_source" value="no file uploaded">
 
       <div class="actions">
         <button type="submit" class="btn btn-go" id="submitBtn">▸ File request</button>
@@ -502,7 +510,8 @@ footer.foot a:hover{border-bottom-style:solid}
     file:$("f_file"), name:$("f_name"), email:$("f_email"), project:$("f_project"),
     dropzone:$("dropzone"), dropTitle:$("dropTitle"),
     fileReadout:$("fileReadout"), fileName:$("fileName"), fileMeta:$("fileMeta"),
-    clearFile:$("clearFile"), sizeWarn:$("sizeWarn"), gramsAuto:$("gramsAuto"),
+    clearFile:$("clearFile"), sizeWarn:$("sizeWarn"),
+    gramsReadout:$("gramsReadout"), gramsVal:$("gramsVal"), gramsStatus:$("gramsStatus"),
     o:{material:$("o_material"), rate:$("o_rate"), grams:$("o_grams"), quality:$("o_quality"),
        qty:$("o_qty"), matcost:$("o_matcost"), machine:$("o_machine"), setup:$("o_setup"),
        total:$("o_total"), note:$("o_note")},
@@ -530,8 +539,8 @@ footer.foot a:hover{border-bottom-style:solid}
       el.o.matcost.textContent = "—";
       el.o.machine.textContent = "—";
       el.o.total.classList.add("tbd");
-      el.o.total.textContent = m ? "— add filament" : "— pick material";
-      el.o.note.textContent = "Indicative only. Pick a material and enter (or upload) the filament weight to draw the estimate. Final quote is confirmed after we slice your file.";
+      el.o.total.textContent = m ? "— upload sliced file" : "— pick material";
+      el.o.note.textContent = "Indicative only. Pick a material and upload a sliced file (.gcode / .bgcode) — we read the filament weight and draw the estimate. STL/STEP get a slice-and-quote.";
       el.estimateField.value = "(pending — material/filament not set)";
       return;
     }
@@ -585,6 +594,61 @@ footer.foot a:hover{border-bottom-style:solid}
     return null;
   }
 
+  // inflate a deflate-compressed byte slice to text (tries zlib then raw)
+  function inflateToText(u8){
+    var fmts = ["deflate","deflate-raw"];
+    return (function tryNext(i){
+      if(i >= fmts.length || typeof DecompressionStream === "undefined") return Promise.resolve(null);
+      try{
+        var ds = new DecompressionStream(fmts[i]);
+        return new Response(new Blob([u8]).stream().pipeThrough(ds)).arrayBuffer()
+          .then(function(ab){ return new TextDecoder("utf-8").decode(ab); })
+          .catch(function(){ return tryNext(i+1); });
+      }catch(e){ return tryNext(i+1); }
+    })(0);
+  }
+
+  // Parse Prusa binary G-code (.bgcode). Walks the block table, reads metadata
+  // blocks for "filament used [g]". Skips the heatshrink-packed GCode block.
+  // Spec: prusa3d/libbgcode. Returns Promise<{grams,how}|null>.
+  function parseBgcode(buf, dens){
+    try{
+      var dv = new DataView(buf), u8 = new Uint8Array(buf);
+      if(buf.byteLength < 12) return Promise.resolve(null);
+      if(!(u8[0]===0x47 && u8[1]===0x43 && u8[2]===0x44 && u8[3]===0x45)) return Promise.resolve(null); // "GCDE"
+      var checksum = dv.getUint16(8, true);          // 0=none, 1=CRC32
+      var off = 10, meta = [];
+      while(off + 8 <= buf.byteLength){
+        var type = dv.getUint16(off, true);
+        var comp = dv.getUint16(off+2, true);
+        var unc  = dv.getUint32(off+4, true);
+        off += 8;
+        var dataSize = unc;
+        if(comp !== 0){ if(off+4 > buf.byteLength) break; dataSize = dv.getUint32(off, true); off += 4; }
+        off += (type === 5) ? 6 : 2;                 // params: thumbnail 6 bytes, else encoding (2)
+        if(off + dataSize > buf.byteLength) break;
+        // metadata block types: 0 File, 2 Slicer, 3 Printer, 4 Print
+        if(type===0 || type===2 || type===3 || type===4){
+          meta.push({comp:comp, bytes:u8.subarray(off, off + dataSize), pref:(type===4)});
+        }
+        off += dataSize + (checksum === 1 ? 4 : 0);
+      }
+      meta.sort(function(a,b){ return (b.pref?1:0) - (a.pref?1:0); });  // Print Metadata first
+      return (function scan(i){
+        if(i >= meta.length) return Promise.resolve(null);
+        var s = meta[i], textP;
+        if(s.comp === 0) textP = Promise.resolve(new TextDecoder("utf-8").decode(s.bytes));
+        else if(s.comp === 1) textP = inflateToText(s.bytes);
+        else textP = Promise.resolve(null);          // heatshrink — unsupported in-browser
+        return textP.then(function(text){
+          var res = text ? parseFilament(text, dens) : null;
+          if(res && res.grams > 0){ res.how = res.how.replace("G-code","binary .bgcode"); return res; }
+          return scan(i+1);
+        });
+      })(0);
+    }catch(e){ return Promise.resolve(null); }
+  }
+
   function densNow(){
     var m = MAT[el.material.value];
     return m ? m.dens : 1.24;
@@ -597,15 +661,38 @@ footer.foot a:hover{border-bottom-style:solid}
   }
 
   var TEXT_EXT = /\.(gcode|gco|g|nc|txt)$/i;
+  var BG_EXT   = /\.bgcode$/i;
+  var READ_CAP = 80 * 1024 * 1024;   // don't read absurdly huge files into memory
+
+  // single point of truth for the (read-only) filament value
+  function setGrams(grams, how){
+    if(grams && grams > 0){
+      el.grams.value = grams.toFixed(1);
+      el.gramsVal.textContent = grams.toFixed(1) + " g";
+      el.gramsStatus.textContent = "✓ " + how;
+      el.gramsReadout.classList.add("has");
+    } else {
+      el.grams.value = "";
+      el.gramsVal.textContent = "—";
+      el.gramsReadout.classList.remove("has");
+    }
+    compute();
+  }
+  function markSource(how, tooBig){
+    var base = tooBig ? el.sourceField.value
+                      : ("file attached: " + (el.file.files[0] ? el.file.files[0].name : ""));
+    el.sourceField.value = base + " · " + how;
+  }
 
   function onFile(){
     var f = el.file.files && el.file.files[0];
     el.sizeWarn.classList.remove("show"); el.sizeWarn.textContent = "";
-    el.gramsAuto.textContent = "";
     if(!f){
       el.fileReadout.classList.remove("show");
       el.dropTitle.textContent = "⬆ Drop file or tap to browse";
-      el.sourceField.value = "manual / not provided";
+      el.sourceField.value = "no file uploaded";
+      el.gramsStatus.textContent = "Upload a sliced .gcode or .bgcode — the weight reads itself.";
+      setGrams(0, "");
       return;
     }
     el.fileReadout.classList.add("show");
@@ -613,32 +700,43 @@ footer.foot a:hover{border-bottom-style:solid}
     el.fileMeta.textContent = "· " + humanSize(f.size);
     el.dropTitle.textContent = "✓ File attached";
 
-    // size gate (FormSubmit caps the email at 10 MB total)
-    if(f.size > MAX_BYTES){
+    // size gate — FormSubmit caps the *email* at 10 MB. Filament is still read
+    // client-side regardless of size; only the attachment is dropped.
+    var tooBig = f.size > MAX_BYTES;
+    if(tooBig){
       el.sizeWarn.classList.add("show");
-      el.sizeWarn.innerHTML = "⚠ " + humanSize(f.size) + " exceeds the 10&nbsp;MB email limit. " +
-        "It will NOT be attached. Export a smaller .3mf, zip it, or paste a download link below — " +
-        "the request still sends with everything else.";
+      el.sizeWarn.innerHTML = "⚠ " + humanSize(f.size) + " is over the 10&nbsp;MB email limit, so the file " +
+        "itself won't attach — but we still read its filament weight below. Paste a download link in Block&nbsp;05, " +
+        "or send a smaller .bgcode / .3mf. Everything else sends normally.";
       el.sourceField.value = "file too large to attach (" + humanSize(f.size) + ")";
     } else {
       el.sourceField.value = "file attached: " + f.name;
     }
 
-    // best-effort filament auto-detect from text-based G-code
-    if(TEXT_EXT.test(f.name) && f.size < 60*1024*1024){
-      var reader = new FileReader();
-      reader.onload = function(){
-        var res = parseFilament(String(reader.result), densNow());
-        if(res && res.grams > 0){
-          el.grams.value = res.grams.toFixed(1);
-          el.gramsAuto.innerHTML = '<span class="detected">✓ auto-detected</span>';
-          el.sourceField.value = (el.file.files[0] && el.file.files[0].size > MAX_BYTES)
-            ? el.sourceField.value + " · " + res.how
-            : ("file attached: " + f.name + " · " + res.how);
-          compute();
-        }
+    if(TEXT_EXT.test(f.name) && f.size < READ_CAP){
+      el.gramsStatus.textContent = "reading G-code…";
+      var rt = new FileReader();
+      rt.onload = function(){
+        var res = parseFilament(String(rt.result), densNow());
+        if(res && res.grams > 0){ setGrams(res.grams, res.how); markSource(res.how, tooBig); }
+        else { setGrams(0, ""); el.gramsStatus.textContent = "no filament line found in this G-code."; }
       };
-      reader.readAsText(f);
+      rt.onerror = function(){ setGrams(0, ""); el.gramsStatus.textContent = "couldn't read the file."; };
+      rt.readAsText(f);
+    } else if(BG_EXT.test(f.name) && f.size < READ_CAP){
+      el.gramsStatus.textContent = "reading .bgcode…";
+      var rb = new FileReader();
+      rb.onload = function(){
+        parseBgcode(rb.result, densNow()).then(function(res){
+          if(res && res.grams > 0){ setGrams(res.grams, res.how); markSource(res.how, tooBig); }
+          else { setGrams(0, ""); el.gramsStatus.textContent = "couldn't read weight from this .bgcode."; }
+        });
+      };
+      rb.onerror = function(){ setGrams(0, ""); el.gramsStatus.textContent = "couldn't read the file."; };
+      rb.readAsArrayBuffer(f);
+    } else {
+      setGrams(0, "");
+      el.gramsStatus.textContent = "no slice data in this format — we'll slice & quote.";
     }
     compute();
   }
@@ -729,10 +827,7 @@ footer.foot a:hover{border-bottom-style:solid}
 
   /* live recompute */
   ["change","input"].forEach(function(e){
-    el.material.addEventListener(e, function(){ // re-density-convert nothing, just recompute
-      compute();
-    });
-    el.grams.addEventListener(e, compute);
+    el.material.addEventListener(e, compute);
     el.qty.addEventListener(e, compute);
     el.quality.addEventListener(e, compute);
   });
