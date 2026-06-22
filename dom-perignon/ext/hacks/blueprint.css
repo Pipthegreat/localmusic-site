@@ -15,7 +15,11 @@ html.dp-blueprint-on {
     linear-gradient(rgba(125,200,255,0.18) 1px, transparent 1px),
     linear-gradient(90deg, rgba(125,200,255,0.18) 1px, transparent 1px) !important;
   background-size: 12px 12px, 12px 12px, 60px 60px, 60px 60px !important;
-  background-attachment: fixed !important;
+  /* v1.5.37 — removed `background-attachment: fixed`. It anchored the
+     grid to the viewport instead of scrolling with the page, which
+     created a "venetian blinds" striped effect through the Spotify
+     artist-header image as it faded on scroll. Grid now scrolls with
+     content, so the header fade looks clean. */
   color-scheme: dark !important;
 }
 html.dp-blueprint-on body {
@@ -223,5 +227,29 @@ html.dp-blueprint-on body picture,
 html.dp-blueprint-on body video,
 html.dp-blueprint-on body canvas {
   filter: hue-rotate(180deg) saturate(0.7) brightness(0.85) !important;
-  border: 1px dashed #7cc4ff !important;
+  /* v1.5.37 — dropped the dashed cyan border on every <img>. It made
+     Spotify's tiny action-button icons, hover overlays, and any small
+     img-shaped element render as visible outlined empty squares all
+     over the page even when the underlying content was transparent or
+     loading. */
+}
+
+/* v1.5.37 — hide ghost buttons. Sites (notably Spotify) render a lot
+   of overlay buttons that are normally invisible until hover — play,
+   add, options. Blueprint's `[role="button"]` styling at line 119+
+   was painting them as outlined empty squares regardless of hover
+   state. Empty buttons (no children at all) get their border + bg
+   stripped so they're invisible again unless they actually contain
+   content. */
+html.dp-blueprint-on body button:empty,
+html.dp-blueprint-on body [role="button"]:empty,
+html.dp-blueprint-on body a[role="button"]:empty,
+html.dp-blueprint-on body [type="button"]:empty,
+html.dp-blueprint-on body [type="submit"]:empty,
+html.dp-blueprint-on body a[jsaction]:empty,
+html.dp-blueprint-on body div[jsaction][role]:empty,
+html.dp-blueprint-on body span[jsaction][role]:empty {
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
 }
