@@ -192,10 +192,12 @@ input.invalid,select.invalid,textarea.invalid{border-color:var(--red);border-sty
 .warn-box{display:none;margin-top:10px;border:1px solid var(--red);background:rgba(255,80,80,0.08);padding:10px 12px;font-family:var(--mono);font-size:10px;line-height:1.6;letter-spacing:0.5px;color:#ffb3b3}
 .warn-box.show{display:block}
 /* filament auto-read readout (replaces manual entry) */
-.grams-readout{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border:1px solid var(--cyan-faint);background:rgba(10,26,46,0.5);padding:14px}
-.grams-readout .g-val{font-family:var(--hand);font-size:30px;line-height:1;color:var(--cyan-dim);min-width:54px}
+/* grey "waiting" state until grams are auto-read, then green */
+.grams-readout{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border:1px solid rgba(150,162,178,0.45);background:rgba(22,26,32,0.55);padding:14px}
+.grams-readout .g-val{font-family:var(--hand);font-size:30px;line-height:1;color:#9aa3b0;min-width:54px}
+.grams-readout .g-status{font-family:var(--mono);font-size:10px;letter-spacing:0.5px;color:#9aa3b0;line-height:1.5;flex:1}
+.grams-readout.has{border-color:var(--ok);background:rgba(125,255,176,0.06)}
 .grams-readout.has .g-val{color:var(--ok);text-shadow:0 0 12px rgba(125,255,176,0.5)}
-.grams-readout .g-status{font-family:var(--mono);font-size:10px;letter-spacing:0.5px;color:var(--cyan-dim);line-height:1.5;flex:1}
 .grams-readout.has .g-status{color:var(--ok)}
 .auto-tag{font-family:var(--mono);font-size:9px;letter-spacing:1px;color:rgba(201,213,229,0.9);text-transform:uppercase}
 
