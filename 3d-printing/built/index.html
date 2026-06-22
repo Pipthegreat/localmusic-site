@@ -17,7 +17,7 @@
    edit the title / spec / blurb. Delete the demo note when ready.
    ============================================================ */
 :root{
-  --navy:#0d2138; --navy-2:#0a1a2e; --cyan:#7cc4ff; --cyan-dim:rgba(124,196,255,0.7);
+  --navy:#0d2138; --navy-2:#0a1a2e; --cyan:#7cc4ff; --cyan-dim:#a6d3f7;
   --cyan-faint:rgba(124,196,255,0.18); --ink:#e8f3ff; --red:#ff5050;
   --mono:'Space Mono',ui-monospace,monospace; --hand:'Architects Daughter','Caveat',cursive;
 }
@@ -29,8 +29,8 @@ body{
   background-image:
     linear-gradient(rgba(125,200,255,0.08) 1px,transparent 1px),
     linear-gradient(90deg,rgba(125,200,255,0.08) 1px,transparent 1px),
-    linear-gradient(rgba(125,200,255,0.18) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(125,200,255,0.18) 1px,transparent 1px);
+    linear-gradient(rgba(125,200,255,0.11) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(125,200,255,0.11) 1px,transparent 1px);
   background-size:12px 12px,12px 12px,60px 60px,60px 60px;
   padding:0 16px 120px;line-height:1.4;position:relative;
 }
@@ -38,7 +38,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background:radial-gradient(ellipse at top right,rgba(124,196,255,0.14),transparent 50%),
             radial-gradient(ellipse at bottom left,rgba(124,196,255,0.08),transparent 50%);}
 body::after{content:'REV. A · BUILD LOG · SHEET A OF 2';position:fixed;bottom:12px;right:16px;left:16px;text-align:right;
-  font-family:var(--mono);font-size:9px;letter-spacing:3px;color:rgba(124,196,255,0.55);z-index:1;pointer-events:none;}
+  font-family:var(--mono);font-size:9px;letter-spacing:3px;color:rgba(170,212,247,0.85);z-index:1;pointer-events:none;}
 .wrap{max-width:1040px;margin:0 auto;position:relative;z-index:2}
 
 .topnav{padding-top:20px;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase}
@@ -58,7 +58,7 @@ h1{display:inline-block;font-family:var(--hand);font-weight:400;font-size:clamp(
 .gallery{display:grid;grid-template-columns:1fr;gap:24px;margin-top:34px}
 @media(min-width:640px){.gallery{grid-template-columns:1fr 1fr}}
 @media(min-width:980px){.gallery{grid-template-columns:1fr 1fr 1fr}}
-.build{position:relative;border:1px solid var(--cyan-dim);background:rgba(10,26,46,0.4);padding:0 0 18px;display:flex;flex-direction:column}
+.build{position:relative;border:1px solid var(--cyan-dim);background:rgba(6,16,30,0.7);padding:0 0 18px;display:flex;flex-direction:column}
 .build::before{content:attr(data-tag);position:absolute;top:-9px;left:14px;background:var(--navy);padding:0 6px;
   font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--cyan);z-index:2}
 .build::after{content:'';position:absolute;right:-5px;bottom:-5px;width:10px;height:10px;border-right:1px solid var(--cyan);border-bottom:1px solid var(--cyan)}
