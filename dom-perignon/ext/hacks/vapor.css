@@ -135,24 +135,18 @@ html.dp-vapor-on body a * {
 }
 
 /* Form chrome: frosted glass pill.
-   v1.5.30 — was `rgba(255,255,255,0.4)` background + `#fff` text, which
-   went invisible on any site element with a light interior (e.g.
-   Google's "AI Mode" pill sitting inside the search bar — white text
-   over translucent-white over light-blue = no contrast). Switched to a
-   dark-purple frosted backing with a bright pink border + glow so the
-   button always dominates whatever the site's native button looked
-   like.
-   v1.5.31 — extended the selector list to include MORE button shapes
-   sites use beyond plain <button>: `a[role="button"]`, `[type="button"]`,
-   `[type="submit"]`, and any `<a>` / `<div>` that's both styled inline-
-   flex-row (`display: inline-flex`/`flex`) AND has a `jsaction` attribute,
-   which is Google's signature for interactive cells. Google's "AI Mode"
-   chip and the doodle share/about pill on the right of the homepage
-   use these patterns; without the extra selectors they fall through
-   to vapor's generic light-on-light styling and stay invisible.
-   Also forced `background-clip: border-box` so the dark purple actually
-   paints behind text on elements where the site used
-   `background-clip: text`. */
+   v1.5.32 — back to the dreamy pastel frosted-pill aesthetic vapor is
+   supposed to be. v1.5.30's dark-purple-with-pink-neon-border solved
+   the white-on-white invisibility but read as edgy/goth, the opposite
+   of vaporwave's soft palette.
+   New approach: keep the bright translucent-white frosted backing so
+   the button still feels light and dreamy, but switch the TEXT from
+   white to dark purple. Contrast comes from text color, not bg weight,
+   so the pill stays soft-looking while always being readable —
+   regardless of whether the underlying site element is light or dark.
+   Wider selector list kept from v1.5.31: catches plain <button>,
+   form fields, role="button"/link, [type="button"]/"submit", and
+   Google's a/div[jsaction][role] interactive cells. */
 html.dp-vapor-on body button,
 html.dp-vapor-on body input,
 html.dp-vapor-on body textarea,
@@ -164,27 +158,26 @@ html.dp-vapor-on body [type="submit"],
 html.dp-vapor-on body a[jsaction],
 html.dp-vapor-on body div[jsaction][role],
 html.dp-vapor-on body span[jsaction][role] {
-  background-color: rgba(60, 20, 80, 0.82) !important;
+  background-color: rgba(255, 255, 255, 0.62) !important;
   background-image: none !important;
   background-clip: border-box !important;
   -webkit-background-clip: border-box !important;
-  color: #fff !important;
-  border: 2px solid #ff6ec7 !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
+  color: #6a3aa5 !important;
+  border: 1.5px solid #ff6ec7 !important;
+  backdrop-filter: blur(12px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(1.2) !important;
   border-radius: 99px !important;
   box-shadow:
-    0 0 14px rgba(255,110,199,0.55),
-    0 4px 24px rgba(60,20,80,0.5),
-    inset 0 0 8px rgba(255,110,199,0.18) !important;
+    0 0 12px rgba(255, 110, 199, 0.45),
+    0 4px 20px rgba(168, 80, 255, 0.28) !important;
   font-family: 'Space Mono', monospace !important;
   letter-spacing: 2px !important;
   text-transform: uppercase !important;
-  text-shadow: 0 0 6px rgba(255,110,199,0.5) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55) !important;
 }
 html.dp-vapor-on body textarea {
   border-radius: 14px !important;
-  background-color: rgba(255,255,255,0.7) !important;
+  background-color: rgba(255, 255, 255, 0.78) !important;
   color: #1a0033 !important;
   text-shadow: none !important;
 }
@@ -194,12 +187,12 @@ html.dp-vapor-on body a[role="button"]:hover,
 html.dp-vapor-on body [type="button"]:hover,
 html.dp-vapor-on body [type="submit"]:hover,
 html.dp-vapor-on body a[jsaction]:hover {
-  background-color: #ff6ec7 !important;
-  color: #fff !important;
-  border-color: #fff !important;
+  background-color: rgba(255, 255, 255, 0.88) !important;
+  color: #4a1f7a !important;
+  border-color: #ff8ec7 !important;
   box-shadow:
-    0 0 18px rgba(255,110,199,0.85),
-    0 6px 28px rgba(255,110,199,0.6) !important;
+    0 0 18px rgba(255, 110, 199, 0.6),
+    0 6px 24px rgba(168, 80, 255, 0.4) !important;
 }
 
 /* Cards / list items: glass tile with pink hairline */
