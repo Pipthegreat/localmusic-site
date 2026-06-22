@@ -270,13 +270,11 @@ footer.foot a:hover{border-bottom-style:solid}
   </header>
 
   <form id="intakeForm" class="grid"
-        action="https://formsubmit.co/mr.raleigh.j@gmail.com"
-        method="POST" enctype="multipart/form-data" target="fs_sink" novalidate>
+        action="/3d-printing/api/submit"
+        method="POST" enctype="multipart/form-data" novalidate>
 
     <!-- ===== FormSubmit control fields ===== -->
-    <input type="hidden" name="_subject" id="fs_subject" value="New 3D print request — customprojects.info">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="table">
+    <!-- honeypot: bots that fill this are silently accepted + dropped by the Worker -->
     <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
 
     <!-- ============ LEFT: the sheet ============ -->
@@ -377,7 +375,7 @@ footer.foot a:hover{border-bottom-style:solid}
         <div class="field">
           <div class="drop" id="dropzone">
             <div class="big" id="dropTitle">⬆ Drop file or tap to browse</div>
-            <div class="small">STL · 3MF · OBJ · STEP · GCODE · BGCODE · ZIP — max 10 MB</div>
+            <div class="small">STL · 3MF · OBJ · STEP · GCODE · BGCODE · ZIP — up to 100 MB</div>
             <input type="file" id="f_file" name="attachment"
                    accept=".stl,.3mf,.obj,.step,.stp,.gcode,.gco,.g,.bgcode,.zip,model/stl,model/3mf,application/sla">
           </div>
@@ -410,7 +408,7 @@ footer.foot a:hover{border-bottom-style:solid}
             <input type="date" id="f_deadline" name="Needed by">
           </div>
           <div class="field">
-            <label class="lbl" for="f_link">Large-file link (if &gt;10 MB)</label>
+            <label class="lbl" for="f_link">Reference link (optional)</label>
             <input type="text" id="f_link" name="File link" placeholder="Drive / Dropbox URL">
           </div>
         </div>
@@ -428,6 +426,7 @@ footer.foot a:hover{border-bottom-style:solid}
         <button type="submit" class="btn btn-go" id="submitBtn">▸ File request</button>
         <button type="reset" class="btn btn-reset" id="resetBtn">Reset</button>
       </div>
+      <div class="warn-box" id="submitErr"></div>
     </div>
 
     <!-- ============ RIGHT: estimate title block ============ -->
@@ -465,8 +464,8 @@ footer.foot a:hover{border-bottom-style:solid}
   </footer>
 </div>
 
-<!-- hidden sink: keeps the page in place while FormSubmit takes the multipart POST -->
-<iframe name="fs_sink" id="fs_sink" style="display:none" title="submission sink"></iframe>
+<!-- submissions upload via XHR to the intake-3d Worker at /3d-printing/api/submit -->
+
 
 <!-- ===== success overlay ===== -->
 <div class="done" id="doneOverlay" role="dialog" aria-modal="true" aria-label="Request filed">
@@ -499,7 +498,7 @@ footer.foot a:hover{border-bottom-style:solid}
   var MACHINE_RATE = 0.04;   // $/g proxy for print-time + handling
   var SETUP_FEE    = 6.00;
   var MIN_ORDER    = 12.00;
-  var MAX_BYTES    = 10 * 1024 * 1024;
+  var MAX_BYTES    = 100 * 1024 * 1024;   // Worker body ceiling; files are stored in R2
 
   var $ = function(id){ return document.getElementById(id); };
   var fmt = function(n){ return "$" + n.toFixed(2); };
@@ -515,7 +514,7 @@ footer.foot a:hover{border-bottom-style:solid}
     o:{material:$("o_material"), rate:$("o_rate"), grams:$("o_grams"), quality:$("o_quality"),
        qty:$("o_qty"), matcost:$("o_matcost"), machine:$("o_machine"), setup:$("o_setup"),
        total:$("o_total"), note:$("o_note")},
-    estimateField:$("fs_estimate"), sourceField:$("fs_source"), subjectField:$("fs_subject"),
+    estimateField:$("fs_estimate"), sourceField:$("fs_source"), submitErr:$("submitErr"),
     form:$("intakeForm"), submitBtn:$("submitBtn")
   };
 
@@ -680,7 +679,7 @@ footer.foot a:hover{border-bottom-style:solid}
   }
   function markSource(how, tooBig){
     var base = tooBig ? el.sourceField.value
-                      : ("file attached: " + (el.file.files[0] ? el.file.files[0].name : ""));
+                      : ("file: " + (el.file.files[0] ? el.file.files[0].name : ""));
     el.sourceField.value = base + " · " + how;
   }
 
@@ -700,17 +699,16 @@ footer.foot a:hover{border-bottom-style:solid}
     el.fileMeta.textContent = "· " + humanSize(f.size);
     el.dropTitle.textContent = "✓ File attached";
 
-    // size gate — FormSubmit caps the *email* at 10 MB. Filament is still read
-    // client-side regardless of size; only the attachment is dropped.
+    // size gate — the Worker accepts up to 100 MB; files go to R2 and a download
+    // link is emailed (attached inline when small). No more 10 MB email cap.
     var tooBig = f.size > MAX_BYTES;
     if(tooBig){
       el.sizeWarn.classList.add("show");
-      el.sizeWarn.innerHTML = "⚠ " + humanSize(f.size) + " is over the 10&nbsp;MB email limit, so the file " +
-        "itself won't attach — but we still read its filament weight below. Paste a download link in Block&nbsp;05, " +
-        "or send a smaller .bgcode / .3mf. Everything else sends normally.";
-      el.sourceField.value = "file too large to attach (" + humanSize(f.size) + ")";
+      el.sizeWarn.innerHTML = "⚠ " + humanSize(f.size) + " is over the 100&nbsp;MB upload limit. " +
+        "Trim or zip the file, or paste a download link in Block&nbsp;05 — the rest still sends.";
+      el.sourceField.value = "file too large to upload (" + humanSize(f.size) + ")";
     } else {
-      el.sourceField.value = "file attached: " + f.name;
+      el.sourceField.value = "file: " + f.name;
     }
 
     if(TEXT_EXT.test(f.name) && f.size < READ_CAP){
@@ -757,51 +755,71 @@ footer.foot a:hover{border-bottom-style:solid}
     return ok;
   }
 
-  var submitted = false, loadTimer = null;
+  var submitting = false;
 
   el.form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    if(submitting) return;
+    el.submitErr.classList.remove("show");
     if(!validate()){
-      ev.preventDefault();
       var first = document.querySelector(".invalid");
       if(first) first.scrollIntoView({behavior:"smooth", block:"center"});
       return;
     }
-    // sync hidden mirrors + subject
-    compute();
-    el.subjectField.value = "New 3D print request — " +
-      (el.project.value.trim() || "untitled") + " (" + (el.material.value || "?") + ")";
+    compute(); // refresh hidden estimate/source mirrors before sending
 
-    // if attachment is over the limit, drop it from the multipart so the rest still sends
-    if(el.file.files && el.file.files[0] && el.file.files[0].size > MAX_BYTES){
-      el.file.disabled = true;            // disabled inputs are not submitted
-    }
+    var f = el.file.files && el.file.files[0];
+    if(f && f.size > MAX_BYTES){ el.sizeWarn.scrollIntoView({behavior:"smooth", block:"center"}); return; }
 
-    submitted = true;
+    submitting = true;
     el.submitBtn.disabled = true;
-    el.submitBtn.textContent = "▸ Filing…";
-    // fallback: if the iframe load never fires, still show success
-    loadTimer = setTimeout(showDone, 12000);
-    // let the native multipart POST proceed into the hidden iframe
+    setProgress(0, "▸ Uploading…");
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", el.form.getAttribute("action"), true);
+    xhr.upload.onprogress = function(e){
+      if(e.lengthComputable){
+        var pct = Math.round(e.loaded / e.total * 100);
+        setProgress(pct, pct < 100 ? ("▸ Uploading " + pct + "%") : "▸ Sending…");
+      }
+    };
+    xhr.onload = function(){
+      var ok = false;
+      try { ok = JSON.parse(xhr.responseText).ok === true; } catch(e){}
+      if(xhr.status >= 200 && xhr.status < 300 && ok) showDone();
+      else failSubmit("Couldn't send (server said " + xhr.status + "). Try again, or email mr.raleigh.j@gmail.com directly.");
+    };
+    xhr.onerror = function(){ failSubmit("Network error — nothing was sent. Check your connection and try again."); };
+    xhr.send(new FormData(el.form));
   });
 
-  function showDone(){
-    if(!submitted) return;
-    if(loadTimer){ clearTimeout(loadTimer); loadTimer = null; }
-    $("doneEmail").textContent = el.email.value.trim() || "your email";
-    $("doneOverlay").classList.add("show");
+  function setProgress(pct, label){
+    el.submitBtn.textContent = label;
+    el.submitBtn.style.backgroundImage =
+      "linear-gradient(90deg, var(--cyan) " + pct + "%, rgba(124,196,255,0.3) " + pct + "%)";
+  }
+  function resetBtn(){
+    submitting = false;
     el.submitBtn.disabled = false;
+    el.submitBtn.style.backgroundImage = "";
     el.submitBtn.textContent = "▸ File request";
-    el.file.disabled = false; // re-enable for a possible next submission
+  }
+  function failSubmit(msg){
+    resetBtn();
+    el.submitErr.textContent = "⚠ " + msg;
+    el.submitErr.classList.add("show");
+    el.submitErr.scrollIntoView({behavior:"smooth", block:"center"});
   }
 
-  // the hidden iframe finishing its load == FormSubmit accepted the POST
-  $("fs_sink").addEventListener("load", function(){
-    if(submitted) showDone();
-  });
+  function showDone(){
+    $("doneEmail").textContent = el.email.value.trim() || "your email";
+    $("doneOverlay").classList.add("show");
+    resetBtn();
+  }
 
   $("fileAnother").addEventListener("click", function(){
     $("doneOverlay").classList.remove("show");
-    submitted = false;
+    submitting = false;
     el.form.reset();
     onFile(); compute();
     window.scrollTo({top:0, behavior:"smooth"});
