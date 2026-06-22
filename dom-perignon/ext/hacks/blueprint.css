@@ -227,7 +227,9 @@ html.dp-blueprint-on body picture,
 html.dp-blueprint-on body video,
 html.dp-blueprint-on body canvas,
 html.dp-blueprint-on body [role="img"],
-html.dp-blueprint-on body [aria-roledescription="image"] {
+html.dp-blueprint-on body [aria-roledescription="image"],
+html.dp-blueprint-on body div[style*="background-image"]:not(:has(> *)),
+html.dp-blueprint-on body a[style*="background-image"]:not(:has(> *)) {
   filter: hue-rotate(180deg) saturate(0.7) brightness(0.85) !important;
   /* v1.5.37 — dropped the dashed cyan border on every <img>. It made
      Spotify's tiny action-button icons, hover overlays, and any small
@@ -239,7 +241,15 @@ html.dp-blueprint-on body [aria-roledescription="image"] {
      covers get tinted too. Spotify renders most album/artist art as
      `<div style="background-image: url(...)" role="img">` rather than
      <img>, so the v1.5.34 rule was leaving them at original sepia/
-     brown colors while only true <img> thumbnails got blueprinted. */
+     brown colors while only true <img> thumbnails got blueprinted.
+     v1.5.39 — also catches `div[style*="background-image"]` and
+     `a[style*="background-image"]` with NO child elements — the
+     "leaf node with inline bg-image" pattern Spotify uses for the
+     Made For / Daily Mix / Discover Weekly tiles whose covers
+     were still escaping the v1.5.38 ARIA-based filter. The
+     `:not(:has(> *))` guard keeps the filter off any container
+     that wraps text children, so child text doesn't get hue-rotated
+     into garbage colors. */
 }
 
 /* v1.5.37 — hide ghost buttons. Sites (notably Spotify) render a lot
@@ -248,7 +258,15 @@ html.dp-blueprint-on body [aria-roledescription="image"] {
    was painting them as outlined empty squares regardless of hover
    state. Empty buttons (no children at all) get their border + bg
    stripped so they're invisible again unless they actually contain
-   content. */
+   content.
+   v1.5.39 — extended the rule with a `:has()`-based "icon-only or
+   text-less" test. Empty isn't enough — Spotify's overlay buttons
+   usually wrap an aria-hidden <svg> or an aria-label spacer, so they
+   fail the structural `:empty` check but render visually empty.
+   The new selector says: strip border/bg from any button-shaped
+   element whose ONLY descendants are svg/picture/img/path/use
+   elements (i.e. no real text content). Buttons with a span/div
+   label keep the dashed cyan pill. */
 html.dp-blueprint-on body button:empty,
 html.dp-blueprint-on body [role="button"]:empty,
 html.dp-blueprint-on body a[role="button"]:empty,
@@ -256,7 +274,8 @@ html.dp-blueprint-on body [type="button"]:empty,
 html.dp-blueprint-on body [type="submit"]:empty,
 html.dp-blueprint-on body a[jsaction]:empty,
 html.dp-blueprint-on body div[jsaction][role]:empty,
-html.dp-blueprint-on body span[jsaction][role]:empty {
+html.dp-blueprint-on body span[jsaction][role]:empty,
+html.dp-blueprint-on body :is(button, [role="button"], a[role="button"], [type="button"], [type="submit"], a[jsaction], div[jsaction][role], span[jsaction][role]):not(:has(*:not(svg):not(svg *):not(path):not(use):not(img):not(picture))) {
   border: none !important;
   background-color: transparent !important;
   box-shadow: none !important;
