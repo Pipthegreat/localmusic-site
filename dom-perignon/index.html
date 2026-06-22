@@ -34,7 +34,7 @@
   --carbon-700: oklch(36% 0.018 240);
   --carbon-900: oklch(20% 0.014 240);
 
-  /* v1.5.26 — canvas darkened from carbon-50 (≈98.5% L) to a soft
+  /* v1.5.27 — canvas darkened from carbon-50 (≈98.5% L) to a soft
      cool-tinted neutral around 93% L. Distinct from tan, still light
      enough to read against, but with enough body that pale-gold
      champagne bubbles + cream highlights stop disappearing into it. */
@@ -592,7 +592,7 @@ h1.display em {
 /* Flex (not grid) on the li so inline content — <strong>, links —
    stays in the same flex item as its surrounding text. Grid was making
    <strong>Developer mode</strong> jump to its own row, which is what
-   was breaking the install steps before v1.5.26. */
+   was breaking the install steps before v1.5.27. */
 .install-right li {
   counter-increment: step;
   display: flex;
@@ -628,6 +628,58 @@ h1.display em {
   font: 400 12.5px/1.5 var(--sans);
   color: var(--fg-muted);
 }
+
+/* ─── Chrome Web Store install state ─────────────────────────────────
+   Shown when CHROME_WEB_STORE_URL is set (see script at bottom).
+   Replaces the two-column "download zip + load unpacked" layout with a
+   single-column centred CTA. The whole .install grid collapses to one
+   column via .install.cws-mode below. */
+.install.cws-mode { grid-template-columns: 1fr; }
+.install-cws-main {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+  max-width: 560px;
+}
+.install-cws-main h3 {
+  font: 500 22px/1.1 var(--serif);
+  letter-spacing: -0.01em;
+  color: var(--fg-strong);
+  margin: 0;
+}
+.install-cws-main .note {
+  font: 400 13.5px/1.5 var(--sans);
+  color: var(--fg-default);
+  margin: 0;
+}
+.cta-cws {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: 600 14px/1 var(--sans);
+  letter-spacing: 0.02em;
+  background: var(--cobalt-950);
+  color: var(--fg-on-accent);
+  padding: 14px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 160ms, transform 160ms, box-shadow 160ms;
+  margin-top: 6px;
+}
+.cta-cws:hover {
+  background: var(--cobalt-800);
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px oklch(34% 0.075 240 / 0.25);
+}
+.advanced-link {
+  margin-top: 10px;
+  font: 400 12.5px/1.5 var(--sans);
+  color: var(--fg-muted);
+}
+.advanced-link a { color: var(--fg-muted); text-decoration: underline; text-decoration-color: var(--border-emphasis); }
+.advanced-link a:hover { color: var(--accent); }
 
 /* ─── Footer ─────────────────────────────────────────────────────── */
 footer {
@@ -679,8 +731,8 @@ footer .copyhide:hover {
       DOM Pérignon
     </div>
     <div class="head-right">
-      <span class="version-chip">v1.5.26</span>
-      <a class="download-pill" href="downloads/dom-perignon-v1.5.26.zip" download>
+      <span class="version-chip">v1.5.27</span>
+      <a class="download-pill" href="downloads/dom-perignon-v1.5.27.zip" download>
         Download <span class="arrow">↓</span>
       </a>
     </div>
@@ -933,30 +985,62 @@ footer .copyhide:hover {
     <span class="meta">Load unpacked · ~30s setup</span>
   </div>
 
-  <div class="install">
-    <div class="install-left">
-      <h3>Get the extension</h3>
-      <span class="filename">dom-perignon-v1.5.26.zip · ~120 KB · MV3 · no telemetry</span>
-      <p class="note">A self-contained Chrome extension. No servers, no analytics. Loads in unpacked mode.</p>
-      <a class="cta" href="downloads/dom-perignon-v1.5.26.zip" download>↓ Download the zip</a>
+  <!-- ── Install section ─────────────────────────────────────────────────
+       Two states, controlled by the CHROME_WEB_STORE_URL constant in the
+       script at the bottom of this file:
+
+         CHROME_WEB_STORE_URL === ''   → show .install-manual (current
+                                          load-unpacked instructions)
+         CHROME_WEB_STORE_URL non-empty → show .install-cws (Chrome Web
+                                          Store CTA + small "advanced"
+                                          fallback link to the zip)
+
+       After CWS approval, paste the listing URL into that constant and
+       re-publish — every install path pivots automatically. ─────── -->
+  <div class="install" id="install-section">
+    <!-- v1: Chrome Web Store path (hidden until URL is set) -->
+    <div class="install-cws" id="install-cws" hidden>
+      <div class="install-cws-main">
+        <h3>Get the extension</h3>
+        <p class="note">Listed on the Chrome Web Store. One-click install — no developer mode, no unpacked-folder setup, auto-updates.</p>
+        <a class="cta cta-cws" id="cwsLink" href="#" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="margin-right:8px;vertical-align:-3px;">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-1.85.63-3.54 1.69-4.9l11.21 11.21A7.93 7.93 0 0 1 12 20zm6.31-3.1L7.1 5.69A7.93 7.93 0 0 1 12 4c4.41 0 8 3.59 8 8 0 1.85-.63 3.54-1.69 4.9z"/>
+          </svg>
+          Install from Chrome Web Store
+        </a>
+        <div class="advanced-link">
+          Or, for developers: <a href="downloads/dom-perignon-v1.5.27.zip" download>download the zip</a> and load unpacked.
+        </div>
+      </div>
     </div>
-    <div class="install-right">
-      <ol>
-        <li>Unzip anywhere stable, e.g. <code>Documents/dom-perignon</code>.</li>
-        <li>Open Chrome, visit <code>chrome://extensions</code>.</li>
-        <li>Toggle <strong>Developer mode</strong> on (top right).</li>
-        <li>Click <strong>Load unpacked</strong> and select the unzipped folder.</li>
-        <li>Pin the toolbar icon. Click it, pick an overlay and/or a theme world. Done.</li>
-      </ol>
-      <div class="tutorial-link">
-        New to unpacked extensions? Chrome's walkthrough is at <a href="https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked" target="_blank" rel="noopener">developer.chrome.com</a>.
+
+    <!-- v0: load-unpacked path (default until URL is set) -->
+    <div class="install-manual" id="install-manual">
+      <div class="install-left">
+        <h3>Get the extension</h3>
+        <span class="filename">dom-perignon-v1.5.27.zip · ~120 KB · MV3 · no telemetry</span>
+        <p class="note">A self-contained Chrome extension. No servers, no analytics. Loads in unpacked mode. <em>Chrome Web Store listing in review.</em></p>
+        <a class="cta" href="downloads/dom-perignon-v1.5.27.zip" download>↓ Download the zip</a>
+      </div>
+      <div class="install-right">
+        <ol>
+          <li>Unzip anywhere stable, e.g. <code>Documents/dom-perignon</code>.</li>
+          <li>Open Chrome, visit <code>chrome://extensions</code>.</li>
+          <li>Toggle <strong>Developer mode</strong> on (top right).</li>
+          <li>Click <strong>Load unpacked</strong> and select the unzipped folder.</li>
+          <li>Pin the toolbar icon. Click it, pick an overlay and/or a theme world. Done.</li>
+        </ol>
+        <div class="tutorial-link">
+          New to unpacked extensions? Chrome's walkthrough is at <a href="https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked" target="_blank" rel="noopener">developer.chrome.com</a>.
+        </div>
       </div>
     </div>
   </div>
 
   <footer>
     <span><a class="copyhide" href="downloads/stage-watermark-v1.0.0.zip" download title="">© 2026</a> · customprojects.info · <a href="privacy.html">Privacy</a></span>
-    <span>DOM Pérignon v1.5.26</span>
+    <span>DOM Pérignon v1.5.27</span>
   </footer>
 
 </div>
@@ -972,7 +1056,7 @@ footer .copyhide:hover {
   //
   // The "what's active" check reads inject.js's NS.currentOverlay /
   // NS.currentTheme directly instead of tracking it in a local var. In
-  // v1.5.26 the local tracker could desync from the actual runtime
+  // v1.5.27 the local tracker could desync from the actual runtime
   // (page interactions, late-arriving init resolves) so a "deactivate"
   // click sometimes hit the wrong branch and needed a second tap.
   // Reading from NS at the start of each click means we always operate
@@ -1074,7 +1158,7 @@ footer .copyhide:hover {
 </script>
 
 <!-- ── Preview-iframe fallback to static PNG ─────────────────────────────
-     v1.5.26. The preview iframes load demo.html?overlay=X / ?theme=X and
+     v1.5.27. The preview iframes load demo.html?overlay=X / ?theme=X and
      run the real hijink JS. On most networks this works perfectly. On
      corporate networks (proxy blocks fonts.googleapis.com, ad blocker
      swallows ext/hacks/* by extension, captive portal, ...) the iframe
@@ -1131,6 +1215,36 @@ footer .copyhide:hover {
   }
   if (document.readyState === 'complete') schedule();
   else window.addEventListener('load', schedule);
+})();
+</script>
+
+<!-- ── Chrome Web Store link config ───────────────────────────────────
+     Single source of truth for the CWS listing URL. Paste the URL from
+     the Chrome Web Store dev console here once the extension is
+     approved. Empty string = "not listed yet"; the install section
+     stays on the load-unpacked instructions and the gallery shows a
+     small "in review" note. Non-empty = the install section flips to
+     a single "Install from Chrome Web Store" CTA with the zip
+     download demoted to a small "for developers" link.
+
+     See DOM Perignon\CHROME_WEB_STORE.md for the full submission
+     walkthrough. -->
+<script>
+(function () {
+  const CHROME_WEB_STORE_URL = '';
+
+  if (!CHROME_WEB_STORE_URL) return;  // stay on the load-unpacked path
+
+  const installEl = document.getElementById('install-section');
+  const cwsEl     = document.getElementById('install-cws');
+  const manualEl  = document.getElementById('install-manual');
+  const linkEl    = document.getElementById('cwsLink');
+  if (!installEl || !cwsEl || !manualEl || !linkEl) return;
+
+  linkEl.href     = CHROME_WEB_STORE_URL;
+  installEl.classList.add('cws-mode');
+  manualEl.hidden = true;
+  cwsEl.hidden    = false;
 })();
 </script>
 

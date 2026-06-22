@@ -41,7 +41,12 @@ window.SfoakBoot = (function () {
 
     const tracks = cfg.tracks || D.tracks;
     if (countEl) countEl.textContent = tracks.length + " tracks · " + D.row_count + " shows";
-    const list = S.renderList(listEl, tracks, { onPlay });
+    const list = S.renderList(listEl, tracks, {
+      onPlay,
+      onPrev: () => P.prev(),
+      onNext: () => P.next(),
+      onToggle: () => P.toggle(),
+    });
 
     const ctx = {
       P, U, S, data: D, tracks, toast: U.toast, status, np, list,

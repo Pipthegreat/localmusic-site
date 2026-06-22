@@ -52,8 +52,17 @@
   const status = SfoakShell.statusChip(document.getElementById("status"));
   document.getElementById("count").textContent = tracks.length + " tracks";
   let ctrl = null, curIdx = -1, advancing = false, advances = 0, events = 0;
+  function playIndex(i) {
+    if (i < 0 || i >= tracks.length || !ctrl) return;
+    curIdx = i; advancing = false;
+    ctrl.loadUri(tracks[i].uri); ctrl.play();
+    list.setPlaying(tracks[i].uri, false); status.set("playing (embed)", "ok");
+  }
   const list = SfoakShell.renderList(document.getElementById("list"), tracks, {
-    onPlay: (t, i) => { curIdx = i; advancing = false; if (ctrl) { ctrl.loadUri(t.uri); ctrl.play(); list.setPlaying(t.uri, false); status.set("playing (embed)", "ok"); } },
+    onPlay: (t, i) => playIndex(i),
+    onPrev: () => playIndex(curIdx - 1),
+    onNext: () => playIndex(curIdx + 1),
+    onToggle: () => { if (ctrl) ctrl.togglePlay(); },
   });
   window.onSpotifyIframeApiReady = (IFrameAPI) => {
     IFrameAPI.createController(document.getElementById("embed"),

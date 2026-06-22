@@ -16,15 +16,40 @@ window.SfoakShell = (function () {
     opts = opts || {};
     container.classList.add("tracklist");
     container.innerHTML = "";
-    const rows = new Map(); // uri -> {el, idxEl}
+    const rows = new Map(); // uri -> el
+    const idxOf = (uri) => [...rows.keys()].indexOf(uri);
+    const clamp = (i) => Math.max(0, Math.min(tracks.length - 1, i));
+
+    // idle control cell: track number + a hover play button
+    function idleCtl(i) {
+      return '<span class="idx">' + (i + 1) + "</span>" +
+             '<button class="icon-btn rowplay" tabindex="-1" aria-label="Play this track">' + ico("i-play") + "</button>";
+    }
+    // playing control cell: inline prev / play-pause / next — skip from the list itself
+    function transportCtl(paused) {
+      return '<button class="icon-btn rowskip" data-a="prev" tabindex="-1" aria-label="Previous track">' + ico("i-prev") + "</button>" +
+             '<button class="icon-btn rowskip rowtoggle" data-a="toggle" tabindex="-1" aria-label="Play or pause">' + (paused ? ico("i-play") : ico("i-pause")) + "</button>" +
+             '<button class="icon-btn rowskip" data-a="next" tabindex="-1" aria-label="Next track">' + ico("i-next") + "</button>";
+    }
+    function bindIdle(el, i) {
+      const b = el.querySelector(".rowplay");
+      if (b) b.addEventListener("click", (e) => { e.stopPropagation(); opts.onPlay && opts.onPlay(tracks[i], i, tracks); });
+    }
+    function bindTransport(el, i) {
+      el.querySelectorAll("[data-a]").forEach((b) => b.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const a = b.getAttribute("data-a");
+        if (a === "prev") opts.onPrev ? opts.onPrev() : (opts.onPlay && opts.onPlay(tracks[clamp(i - 1)], clamp(i - 1), tracks));
+        else if (a === "next") opts.onNext ? opts.onNext() : (opts.onPlay && opts.onPlay(tracks[clamp(i + 1)], clamp(i + 1), tracks));
+        else opts.onToggle ? opts.onToggle() : (opts.onPlay && opts.onPlay(tracks[i], i, tracks));
+      }));
+    }
+
     tracks.forEach((t, i) => {
       const el = document.createElement("div");
       el.className = "trk"; el.dataset.uri = t.uri; el.tabIndex = 0; el.setAttribute("role", "button");
       el.innerHTML =
-        '<div class="cell-idx">' +
-          '<span class="idx">' + (i + 1) + "</span>" +
-          '<button class="icon-btn playbtn" tabindex="-1" aria-label="Play">' + ico("i-play") + "</button>" +
-        "</div>" +
+        '<div class="cell-idx">' + idleCtl(i) + "</div>" +
         '<div class="meta"><div class="title">' + esc(t.title || t.name || "") + '</div>' +
           '<div class="sub">' + esc(t.artist || "") + "</div></div>" +
         '<div class="art" aria-hidden="true">' + letterTile(t.artist) + "</div>";
@@ -33,29 +58,22 @@ window.SfoakShell = (function () {
       el.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fire(); } });
       container.appendChild(el);
       rows.set(t.uri, el);
+      bindIdle(el, i);
     });
-    // grid: idx | meta | art  (re-order vs css default: idx, meta, art)
-    container.querySelectorAll(".trk").forEach((el) => { el.style.gridTemplateColumns = "44px 1fr 44px"; });
+    container.querySelectorAll(".trk").forEach((el) => { el.style.gridTemplateColumns = "96px 1fr 44px"; });
 
-    let curUri = null;
+    let curUri = null, curPaused = null;
     function setPlaying(uri, paused) {
-      if (curUri && rows.has(curUri)) {
-        const prev = rows.get(curUri);
-        prev.classList.remove("playing");
-        prev.querySelector(".cell-idx").innerHTML =
-          '<span class="idx">' + ([...rows.keys()].indexOf(curUri) + 1) + "</span>" +
-          '<button class="icon-btn playbtn" tabindex="-1" aria-label="Play">' + ico("i-play") + "</button>";
+      if (uri === curUri && paused === curPaused) return;
+      if (curUri && curUri !== uri && rows.has(curUri)) {
+        const prev = rows.get(curUri); prev.classList.remove("playing");
+        const pi = idxOf(curUri);
+        prev.querySelector(".cell-idx").innerHTML = idleCtl(pi); bindIdle(prev, pi);
       }
-      curUri = uri;
+      curUri = uri; curPaused = paused;
       if (uri && rows.has(uri)) {
-        const el = rows.get(uri);
-        el.classList.add("playing");
-        el.querySelector(".cell-idx").innerHTML = paused
-          ? '<button class="icon-btn playbtn" style="display:grid" tabindex="-1" aria-label="Play">' + ico("i-play") + "</button>"
-          : '<span class="eqbars" aria-label="Now playing"><i></i><i></i><i></i></span>';
-        // re-bind the freshly-created play button
-        const pb = el.querySelector(".playbtn");
-        if (pb) pb.addEventListener("click", (e) => { e.stopPropagation(); el.click(); });
+        const el = rows.get(uri); el.classList.add("playing");
+        el.querySelector(".cell-idx").innerHTML = transportCtl(paused); bindTransport(el, idxOf(uri));
       }
     }
     return { setPlaying, rows };

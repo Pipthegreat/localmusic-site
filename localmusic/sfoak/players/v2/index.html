@@ -55,12 +55,17 @@
   document.getElementById("count").textContent = tracks.length + " tracks";
   let ctrl = null, curIdx = -1, advancing = false, advances = 0, ticks = 0;
   let last = { pos: 0, dur: 0, paused: true, ts: Date.now() };
+  function startAt(i) {
+    if (i < 0 || i >= tracks.length || !ctrl) return;
+    curIdx = i; advancing = false; last = { pos: 0, dur: 0, paused: false, ts: Date.now() };
+    SfoakUI.KeepAlive.start(); document.getElementById("anchor").style.background = SfoakUI.KeepAlive.active ? "var(--success)" : "var(--slate-500)";
+    ctrl.loadUri(tracks[i].uri); ctrl.play(); list.setPlaying(tracks[i].uri, false); status.set("playing · watchdog armed", "ok");
+  }
   const list = SfoakShell.renderList(document.getElementById("list"), tracks, {
-    onPlay: (t, i) => {
-      curIdx = i; advancing = false; last = { pos: 0, dur: 0, paused: false, ts: Date.now() };
-      SfoakUI.KeepAlive.start(); document.getElementById("anchor").style.background = SfoakUI.KeepAlive.active ? "var(--success)" : "var(--slate-500)";
-      if (ctrl) { ctrl.loadUri(t.uri); ctrl.play(); list.setPlaying(t.uri, false); status.set("playing · watchdog armed", "ok"); }
-    },
+    onPlay: (t, i) => startAt(i),
+    onPrev: () => startAt(curIdx - 1),
+    onNext: () => startAt(curIdx + 1),
+    onToggle: () => { if (ctrl) ctrl.togglePlay(); },
   });
   function advanceNext() {
     const ni = curIdx + 1;

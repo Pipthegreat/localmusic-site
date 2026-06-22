@@ -191,10 +191,15 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
 .trk .title { font-weight: 600; font-size: var(--t-14); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .trk.playing .title { color: var(--ember-300); }
 .trk .sub { color: var(--fg-subtle); font-size: var(--t-12); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.trk .idx { font: 600 var(--t-14)/1 var(--mono); color: var(--fg-subtle); width: 44px; text-align: center; }
+.trk .cell-idx { display: flex; align-items: center; justify-content: center; gap: 2px; }
+.trk .idx { font: 600 var(--t-14)/1 var(--mono); color: var(--fg-subtle); text-align: center; }
 .trk:hover .idx, .trk.playing .idx { display: none; }
-.trk .playbtn { display: none; }
-.trk:hover .playbtn, .trk.playing .playbtn { display: grid; }
+.trk .rowplay { display: none; }
+.trk:hover .rowplay { display: grid; }
+.trk.playing .rowplay { display: none; }
+.trk .cell-idx .rowskip { width: 28px; height: 28px; }
+.trk .cell-idx .rowskip svg { width: 15px; height: 15px; }
+.trk.playing .rowtoggle { color: var(--ember-300); }
 .trk .dur { font: 500 var(--t-12)/1 var(--mono); color: var(--fg-subtle); font-feature-settings: "tnum"; }
 .eqbars { display: inline-flex; align-items: flex-end; gap: 2px; height: 16px; }
 .eqbars i { width: 3px; background: var(--ember-400); border-radius: 1px; animation: eq 900ms var(--ease-io) infinite; }
