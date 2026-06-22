@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>v8 · Connect remote — sfoak players</title>
+<meta name="description" content="A full Spotify Connect remote: see your devices, transfer playback, reconcile on focus.">
+<link rel="stylesheet" href="../_shared/app.css">
+<style>
+  .devs { display:flex; flex-direction:column; gap:var(--s2); margin-top:var(--s4); }
+  .dev { display:flex; align-items:center; gap:var(--s3); padding:10px var(--s4); border:1px solid var(--border-subtle); border-radius:var(--radius); background:var(--bg-canvas); }
+  .dev.active { border-color:oklch(46% 0.14 38 / 0.6); background:var(--ember-wash); }
+  .dev .ic { color:var(--ember-300); display:grid; place-items:center; }
+  .dev .ic svg { width:20px; height:20px; }
+  .dev .nm { font-weight:600; font-size:var(--t-14); }
+  .dev .ty { font-size:var(--t-12); color:var(--fg-subtle); }
+  .dev .sp { flex:1; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="dot"></span> sfoak <span class="subtle" style="font-weight:500">players</span></div>
+  <span class="chip" id="status"><span class="led"></span>…</span>
+  <div class="spacer"></div>
+  <a class="btn btn-ghost" href="../">↑ All 10</a>
+  <span id="account"></span>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Attempt 8 / 10 · The player is a remote</div>
+    <h1>A Spotify Connect remote, not just a player</h1>
+    <p>This is the one that <em>actually</em> guarantees background playback — by refusing to depend on a browser tab at all. Transfer the music to your phone or the Spotify desktop app: real devices that aren't tabs, so they advance natively while this page closes, sleeps, or just sits in the background as the remote. See everywhere Spotify is running, hand playback around, and reconcile on focus. This is how cohesive multi-device listening actually behaves.</p>
+    <div class="tag-strip">
+      <span class="tag accent">Device transfer</span>
+      <span class="tag accent">Live reconciliation</span>
+      <span class="tag accent">Forward context</span>
+      <span class="tag">Background-proof</span>
+    </div>
+  </section>
+  <div id="gate"></div>
+  <section class="card" id="panel" style="margin-top:var(--s6)">
+    <div style="display:flex;align-items:center;gap:var(--s3);justify-content:space-between;flex-wrap:wrap">
+      <div class="kpi"><span class="v" id="ondev" style="font-size:var(--t-18)">—</span><span class="k">Now playing on</span></div>
+      <button class="btn" id="refresh">↻ Refresh devices</button>
+    </div>
+    <div class="devs" id="devs"></div>
+  </section>
+  <div class="section-h"><h2>SF + Oakland · live shows</h2><span class="count" id="count"></span></div>
+  <div id="list"></div>
+</main>
+<script src="../_shared/tracks.js"></script>
+<script src="../_shared/ui.js"></script>
+<script src="../_shared/auth.js"></script>
+<script src="../_shared/player.js"></script>
+<script src="../_shared/shell.js"></script>
+<script src="../_shared/boot.js"></script>
+<script>
+(function () {
+  const CTX = SfoakBoot.sdkPage({
+    name: "sfoak v8 · Connect remote",
+    playingLabel: "playing · this device",
+    reconcileOnVisible: true, mediaSession: true,
+    strategy: async (track, i, all, ctx) => { await ctx.P.playUris(SfoakBoot.forwardUris(all, i, 50)); setTimeout(() => refresh(), 700); },
+    onReady: () => refresh(),
+    onReconcile: (r) => { paintActive(r && r.device); refresh(); },
+  });
+  async function refresh() {
+    try {
+      const d = await CTX.P.api("/me/player/devices");
+      const devs = (d && d.devices) || [];
+      const wrap = document.getElementById("devs");
+      wrap.innerHTML = devs.map((dv) =>
+        '<div class="dev' + (dv.is_active ? " active" : "") + '" data-id="' + dv.id + '">' +
+          '<span class="ic">' + SfoakUI.ico(dv.type === "Smartphone" ? "i-spotify" : "i-cast") + '</span>' +
+          '<div><div class="nm">' + SfoakUI.esc(dv.name) + (dv.id === CTX.P.deviceId ? '  · this browser' : '') + '</div>' +
+          '<div class="ty">' + SfoakUI.esc(dv.type) + (dv.is_active ? ' · active' : '') + (dv.volume_percent != null ? ' · vol ' + dv.volume_percent + '%' : '') + '</div></div>' +
+          '<span class="sp"></span>' +
+          (dv.is_active ? '<span class="chip ok"><span class="led"></span>playing here</span>' : '<button class="btn" data-x="' + dv.id + '">Transfer here</button>') +
+        '</div>'
+      ).join("") || '<p class="subtle">No active Spotify devices. Press play on a track to light this browser up as a device.</p>';
+      wrap.querySelectorAll("button[data-x]").forEach((b) => b.addEventListener("click", () => transfer(b.getAttribute("data-x"))));
+      const active = devs.find((x) => x.is_active);
+      paintActive(active);
+    } catch (e) {}
+  }
+  function paintActive(dev) { document.getElementById("ondev").textContent = dev ? dev.name : "—"; }
+  async function transfer(id) {
+    try { await CTX.P.api("/me/player", "PUT", { device_ids: [id], play: true }); CTX.toast("Transferred playback"); setTimeout(refresh, 900); }
+    catch (e) { CTX.toast("Transfer failed: " + (e.message || e), "err"); }
+  }
+  document.getElementById("refresh").addEventListener("click", refresh);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>v2 · Embed + worker watchdog — sfoak players</title>
+<meta name="description" content="Embed playback with a Web Worker heartbeat, silent audio anchor, and wall-clock position extrapolation to beat tab throttling.">
+<link rel="stylesheet" href="../_shared/app.css">
+<style>
+  .embedbar { position:fixed; left:0; right:0; bottom:0; z-index:50; padding:10px var(--s5); background:oklch(11% 0.012 250 / 0.92); backdrop-filter:blur(16px); border-top:1px solid var(--border-subtle); }
+  .embedbar .inner { max-width:1040px; margin:0 auto; }
+  .embedbar iframe { border-radius:12px; border:0; width:100%; height:80px; display:block; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="dot"></span> sfoak <span class="subtle" style="font-weight:500">players</span></div>
+  <span class="chip" id="status"><span class="led"></span>idle</span>
+  <div class="spacer"></div>
+  <a class="btn btn-ghost" href="../">↑ All 10</a>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Attempt 2 / 10 · Beat the throttle</div>
+    <h1>Embed + an un-throttled watchdog</h1>
+    <p>Keep the embed, but stop trusting its events. A <span class="mono">Web Worker</span> (whose timers browsers don't throttle) ticks once a second, a silent <span class="mono">AudioContext</span> anchor keeps the tab media-active, and we <em>extrapolate</em> the song position from wall-clock time — so when the iframe goes quiet in the background, we can still tell when the track ends and load the next one. The ceiling of client-side cleverness.</p>
+    <div class="tag-strip">
+      <span class="tag accent">Web Worker watchdog</span>
+      <span class="tag accent">Silent audio anchor</span>
+      <span class="tag accent">Position extrapolation</span>
+      <span class="tag">Spotify embed</span>
+    </div>
+  </section>
+  <section class="card" id="panel" style="margin-top:var(--s6)">
+    <div style="display:flex;gap:var(--s6);flex-wrap:wrap">
+      <div class="kpi"><span class="v" id="adv">0</span><span class="k">Auto-advances</span></div>
+      <div class="kpi"><span class="v" id="hb">0</span><span class="k">Worker ticks</span></div>
+      <div class="kpi"><span class="v mono" id="est">0:00</span><span class="k">Extrapolated position</span></div>
+      <div class="kpi"><span class="v"><span id="anchor" class="led" style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--slate-500)"></span></span><span class="k">Audio anchor</span></div>
+    </div>
+    <p class="subtle" style="margin-top:var(--s4);font-size:var(--t-12);max-width:72ch">Better — the worker keeps counting in a hidden tab. But the embed is a cross-origin iframe we can't truly control while it's frozen, so a <span class="mono">loadUri</span> can still arrive late. The honest conclusion: to fix this properly, the advancing has to happen on Spotify's side, not ours. That's attempt 3 onward.</p>
+  </section>
+  <div class="section-h"><h2>SF + Oakland · live shows</h2><span class="count" id="count"></span></div>
+  <div id="list"></div>
+</main>
+<div class="embedbar"><div class="inner"><div id="embed"></div></div></div>
+<script src="../_shared/tracks.js"></script>
+<script src="../_shared/ui.js"></script>
+<script src="../_shared/shell.js"></script>
+<script>
+(function () {
+  SfoakUI.injectSprite();
+  const D = window.SFOAK_DATA, tracks = D.tracks;
+  const status = SfoakShell.statusChip(document.getElementById("status"));
+  document.getElementById("count").textContent = tracks.length + " tracks";
+  let ctrl = null, curIdx = -1, advancing = false, advances = 0, ticks = 0;
+  let last = { pos: 0, dur: 0, paused: true, ts: Date.now() };
+  const list = SfoakShell.renderList(document.getElementById("list"), tracks, {
+    onPlay: (t, i) => {
+      curIdx = i; advancing = false; last = { pos: 0, dur: 0, paused: false, ts: Date.now() };
+      SfoakUI.KeepAlive.start(); document.getElementById("anchor").style.background = SfoakUI.KeepAlive.active ? "var(--success)" : "var(--slate-500)";
+      if (ctrl) { ctrl.loadUri(t.uri); ctrl.play(); list.setPlaying(t.uri, false); status.set("playing · watchdog armed", "ok"); }
+    },
+  });
+  function advanceNext() {
+    const ni = curIdx + 1;
+    if (ni >= tracks.length) { advancing = false; return; }
+    curIdx = ni; advances++; document.getElementById("adv").textContent = advances;
+    last = { pos: 0, dur: 0, paused: false, ts: Date.now() };
+    if (ctrl) { ctrl.loadUri(tracks[ni].uri); ctrl.play(); list.setPlaying(tracks[ni].uri, false); }
+    setTimeout(() => (advancing = false), 1500);
+  }
+  window.onSpotifyIframeApiReady = (IFrameAPI) => {
+    IFrameAPI.createController(document.getElementById("embed"),
+      { uri: tracks[0].uri, width: "100%", height: "80" },
+      (controller) => {
+        ctrl = controller;
+        controller.addListener("playback_update", (e) => {
+          const d = e.data || {};
+          last = { pos: d.position || 0, dur: d.duration || last.dur, paused: !!d.isPaused, ts: Date.now() };
+        });
+      });
+  };
+  // un-throttled heartbeat: extrapolate position and advance when the song ends
+  const wt = SfoakUI.WorkerTimer(1000, () => {
+    ticks++; document.getElementById("hb").textContent = ticks;
+    const elapsed = last.paused ? 0 : (Date.now() - last.ts);
+    const est = last.pos + elapsed;
+    document.getElementById("est").textContent = SfoakUI.fmt(est);
+    if (!advancing && last.dur && est >= last.dur - 800 && curIdx >= 0) { advancing = true; advanceNext(); }
+  });
+  wt.start();
+})();
+</script>
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+</body>
+</html>

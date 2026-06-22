@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>v7 · Real playlist context — sfoak players</title>
+<meta name="description" content="Play the actual saved Spotify playlist as a context — shuffle, repeat, and cross-device pickup, all server-side.">
+<link rel="stylesheet" href="../_shared/app.css">
+<style>
+  .toggles { display:flex; gap:var(--s2); margin-top:var(--s4); }
+  .toggles .btn.on { background:var(--ember-wash); color:var(--ember-300); border-color:oklch(46% 0.14 38 / 0.5); }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="dot"></span> sfoak <span class="subtle" style="font-weight:500">players</span></div>
+  <span class="chip" id="status"><span class="led"></span>…</span>
+  <div class="spacer"></div>
+  <a class="btn btn-ghost" href="../">↑ All 10</a>
+  <span id="account"></span>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Attempt 7 / 10 · The real thing</div>
+    <h1>Play the saved playlist as a Spotify context</h1>
+    <p>Instead of an ad-hoc list, this plays the actual <strong class="muted" id="plname">SF + Oakland</strong> playlist as a first-class Spotify context. Spotify owns advancement, shuffle and repeat — and because it's a real context, playback shows up in your phone's Spotify and you can pick it up on any device. The most "Spotify-native" of the fixes.</p>
+    <div class="tag-strip">
+      <span class="tag accent">Real playlist context</span>
+      <span class="tag accent">Shuffle / repeat</span>
+      <span class="tag accent">Cross-device pickup</span>
+      <span class="tag">Best-effort background</span>
+    </div>
+  </section>
+  <div id="gate"></div>
+  <section class="card" id="panel" style="margin-top:var(--s6)">
+    <div class="kpi"><span class="v mono" id="ctx" style="font-size:var(--t-14);word-break:break-all">spotify:playlist:…</span><span class="k">Active context</span></div>
+    <div class="toggles">
+      <button class="btn" id="shuffle">Shuffle</button>
+      <button class="btn" id="repeat">Repeat</button>
+      <button class="btn" id="playall">▶ Play whole playlist</button>
+    </div>
+    <p class="subtle" style="margin-top:var(--s4);font-size:var(--t-12);max-width:70ch">
+      Some shows on the list below run beyond this month's saved playlist; if a track isn't in the playlist, the player falls back to a server-side context of the surrounding songs so play never dead-ends.</p>
+  </section>
+  <div class="section-h"><h2>SF + Oakland · live shows</h2><span class="count" id="count"></span></div>
+  <div id="list"></div>
+</main>
+<script src="../_shared/tracks.js"></script>
+<script src="../_shared/ui.js"></script>
+<script src="../_shared/auth.js"></script>
+<script src="../_shared/player.js"></script>
+<script src="../_shared/shell.js"></script>
+<script src="../_shared/boot.js"></script>
+<script>
+(function () {
+  const PL = SFOAK_DATA.playlist_uri;
+  let shuffle = false, repeat = 0;
+  document.getElementById("plname").textContent = SFOAK_DATA.playlist_name || "SF + Oakland";
+  document.getElementById("ctx").textContent = PL;
+  const CTX = SfoakBoot.sdkPage({
+    name: "sfoak v7 · playlist context",
+    playingLabel: "playing · playlist context",
+    reconcileOnVisible: true, mediaSession: true,
+    strategy: async (track, i, all, ctx) => {
+      try {
+        await ctx.P.playContext(PL, track.uri);     // start at the clicked track within the playlist
+      } catch (e) {
+        // clicked track isn't in the saved playlist — fall back to a forward server-side context
+        await ctx.P.playUris(SfoakBoot.forwardUris(all, i, 50));
+      }
+    },
+  });
+  async function playWhole() {
+    try { await CTX.P.playContext(PL); } catch (e) { CTX.toast("Couldn't start the playlist: " + (e.message || e), "err"); }
+  }
+  document.getElementById("playall").addEventListener("click", playWhole);
+  document.getElementById("shuffle").addEventListener("click", async (e) => {
+    shuffle = !shuffle; e.target.classList.toggle("on", shuffle);
+    try { await CTX.P.api("/me/player/shuffle?state=" + shuffle + (CTX.P.deviceId ? "&device_id=" + CTX.P.deviceId : ""), "PUT"); } catch (err) { CTX.toast("Start playback first", "err"); }
+  });
+  document.getElementById("repeat").addEventListener("click", async (e) => {
+    repeat = (repeat + 1) % 3; const modes = ["off", "context", "track"];
+    e.target.classList.toggle("on", repeat !== 0); e.target.textContent = "Repeat: " + modes[repeat];
+    try { await CTX.P.api("/me/player/repeat?state=" + modes[repeat] + (CTX.P.deviceId ? "&device_id=" + CTX.P.deviceId : ""), "PUT"); } catch (err) { CTX.toast("Start playback first", "err"); }
+  });
+})();
+</script>
+</body>
+</html>

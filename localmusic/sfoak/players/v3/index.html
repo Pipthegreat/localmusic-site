@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>v3 · Web Playback SDK baseline — sfoak players</title>
+<meta name="description" content="Full Spotify tracks via the Web Playback SDK with client-side auto-advance.">
+<link rel="stylesheet" href="../_shared/app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="dot"></span> sfoak <span class="subtle" style="font-weight:500">players</span></div>
+  <span class="chip" id="status"><span class="led"></span>…</span>
+  <div class="spacer"></div>
+  <a class="btn btn-ghost" href="../">↑ All 10</a>
+  <span id="account"></span>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Attempt 3 / 10 · The leap to real control</div>
+    <h1>Web Playback SDK — full tracks, your Premium</h1>
+    <p>Drops the 30-second preview embed entirely. Logs you into Spotify and spins up a real Connect device <em>inside this page</em>, so every track plays in full. Auto-advance is still detected in JavaScript here — the honest SDK baseline that later attempts harden.</p>
+    <div class="tag-strip">
+      <span class="tag accent">Web Playback SDK</span>
+      <span class="tag">Full tracks</span>
+      <span class="tag">OAuth · PKCE</span>
+      <span class="tag">Client-side advance</span>
+    </div>
+  </section>
+  <div id="gate"></div>
+  <section class="card" id="panel" style="margin-top:var(--s6)">
+    <div class="kpi" style="grid-template-columns:repeat(3,auto);display:grid;gap:var(--s8);justify-content:start">
+      <div class="kpi"><span class="v" id="dev">—</span><span class="k">Connect device</span></div>
+      <div class="kpi"><span class="v" id="adv">0</span><span class="k">Auto-advances</span></div>
+      <div class="kpi"><span class="v" id="mode">single-track</span><span class="k">Queue mode</span></div>
+    </div>
+    <p class="subtle" style="margin-top:var(--s4);font-size:var(--t-12);max-width:70ch">
+      <strong class="muted">How advance works here:</strong> we play one track, watch its position in JS, and when it ends we send the next one. Real, full-length, and great while the tab is focused — but if the browser freezes this tab at a song boundary, the hand-off can stall. That's the exact bug attempts 5–10 move onto Spotify's servers.</p>
+  </section>
+  <div class="section-h"><h2>SF + Oakland · live shows</h2><span class="count" id="count"></span></div>
+  <div id="list"></div>
+</main>
+<script src="../_shared/tracks.js"></script>
+<script src="../_shared/ui.js"></script>
+<script src="../_shared/auth.js"></script>
+<script src="../_shared/player.js"></script>
+<script src="../_shared/shell.js"></script>
+<script src="../_shared/boot.js"></script>
+<script>
+(function () {
+  let idx = -1, maxPos = 0, advancing = false, advances = 0;
+  SfoakBoot.sdkPage({
+    name: "sfoak v3 · SDK baseline",
+    playingLabel: "playing · client advance",
+    strategy: async (track, i, all, ctx) => {
+      idx = i; maxPos = 0; advancing = false;
+      await ctx.P.playUris([track.uri]);   // one track; we advance it ourselves
+      tel();
+    },
+    onState: (s, ctx) => {
+      if (!s) return;
+      maxPos = Math.max(maxPos, s.position || 0);
+      if (!advancing && s.paused && s.duration && maxPos >= s.duration - 1500) {
+        advancing = true;
+        const ni = idx + 1;
+        if (ni < ctx.tracks.length) {
+          idx = ni; maxPos = 0; advances++; tel();
+          ctx.P.playUris([ctx.tracks[ni].uri]).then(() => { advancing = false; });
+        } else advancing = false;
+      }
+    },
+  });
+  function tel() {
+    const d = document.getElementById("dev");
+    if (d) d.textContent = SfoakPlayer.deviceId ? SfoakPlayer.deviceId.slice(0, 8) + "…" : "—";
+    const a = document.getElementById("adv"); if (a) a.textContent = advances;
+  }
+})();
+</script>
+</body>
+</html>

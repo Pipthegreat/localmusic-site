@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3D PRINTING — INTAKE · customprojects.info</title>
+<meta name="description" content="Request a custom 3D print. Pick a material, upload your model, get an instant cost estimate, and file a work order — printed on a Prusa Core One.">
+<link rel="canonical" href="https://customprojects.info/3d-printing/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Caveat:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   3D PRINTING — INTAKE
+   Visual world: BLUEPRINT / "DRAWING" — architect's drafting,
+   cyan on navy. Cloned from the checklist's blueprint theme.
+   Composition discipline: editorial (eyebrow / masthead / lede,
+   sectioned spec-sheet, sticky title-block estimate).
+   ============================================================ */
+:root{
+  --navy:#0d2138;
+  --navy-2:#0a1a2e;
+  --cyan:#7cc4ff;
+  --cyan-dim:rgba(124,196,255,0.7);
+  --cyan-faint:rgba(124,196,255,0.18);
+  --ink:#e8f3ff;
+  --red:#ff5050;
+  --ok:#7dffb0;
+  --mono:'Space Mono',ui-monospace,monospace;
+  --hand:'Architects Daughter','Caveat',cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;overflow-x:hidden}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  font-family:var(--hand);
+  color:var(--ink);
+  background:var(--navy);
+  background-image:
+    linear-gradient(rgba(125,200,255,0.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(125,200,255,0.08) 1px,transparent 1px),
+    linear-gradient(rgba(125,200,255,0.18) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(125,200,255,0.18) 1px,transparent 1px);
+  background-size:12px 12px,12px 12px,60px 60px,60px 60px;
+  padding:0 16px 120px;
+  line-height:1.4;
+  position:relative;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse at top right,rgba(124,196,255,0.14),transparent 50%),
+    radial-gradient(ellipse at bottom left,rgba(124,196,255,0.08),transparent 50%);
+}
+body::after{
+  content:'REV. A · 3D PRINT INTAKE · WORK ORDER · SHEET 1 OF 1';
+  position:fixed;bottom:12px;right:16px;left:16px;text-align:right;
+  font-family:var(--mono);font-size:9px;letter-spacing:3px;
+  color:rgba(124,196,255,0.55);z-index:1;pointer-events:none;
+}
+.wrap{max-width:1040px;margin:0 auto;position:relative;z-index:2}
+
+/* ---------- header ---------- */
+header{padding:46px 0 26px;text-align:center;position:relative}
+.eyebrow{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:5px;
+  text-transform:uppercase;color:var(--cyan-dim);margin-bottom:12px;
+}
+h1{display:inline-block;line-height:0.98}
+h1 .l1{
+  display:block;font-family:var(--hand);font-weight:400;
+  font-size:clamp(40px,8vw,58px);text-transform:uppercase;color:var(--ink);
+  letter-spacing:1px;border-bottom:1.5px solid var(--cyan);padding-bottom:6px;
+  text-shadow:0 0 12px rgba(124,196,255,0.4);
+}
+h1 .l2{
+  display:block;font-family:var(--hand);font-weight:400;
+  font-size:clamp(58px,13vw,96px);color:var(--cyan);margin-top:6px;
+  border-bottom:1.5px solid var(--cyan);text-transform:uppercase;letter-spacing:1px;
+  text-shadow:0 0 18px rgba(124,196,255,0.6);
+}
+.lede{
+  max-width:60ch;margin:22px auto 0;font-family:var(--hand);
+  font-size:clamp(16px,2.4vw,19px);color:var(--ink);opacity:0.9;letter-spacing:0.3px;
+}
+.spec-strip{
+  margin:22px auto 0;max-width:880px;display:flex;flex-wrap:wrap;justify-content:center;
+  gap:8px 10px;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--cyan-dim);
+}
+.spec-strip span{border:1px dashed var(--cyan-faint);padding:5px 10px}
+.spec-strip b{color:var(--ink);font-weight:700}
+
+/* ---------- layout ---------- */
+.grid{
+  display:grid;grid-template-columns:1fr;gap:26px;margin-top:34px;
+}
+@media(min-width:880px){
+  .grid{grid-template-columns:1fr 340px;align-items:start;gap:34px}
+}
+
+/* ---------- sheet / sections ---------- */
+.sheet{position:relative}
+.section{
+  position:relative;border:1px solid var(--cyan-dim);background:rgba(10,26,46,0.35);
+  padding:26px 18px 22px;margin-bottom:22px;
+}
+.section::before{
+  content:attr(data-tag);position:absolute;top:-9px;left:14px;background:var(--navy);
+  padding:0 8px;font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--cyan);
+}
+.section::after{
+  content:'';position:absolute;right:-5px;bottom:-5px;width:10px;height:10px;
+  border-right:1px solid var(--cyan);border-bottom:1px solid var(--cyan);
+}
+.section h2{
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--ink);margin-bottom:4px;
+}
+.section .sub{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--cyan-dim);margin-bottom:18px;text-transform:uppercase}
+
+/* ---------- fields ---------- */
+.field{margin-bottom:16px}
+.row{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:520px){.row.two{grid-template-columns:1fr 1fr}}
+label.lbl{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--cyan-dim);margin-bottom:7px;
+}
+label.lbl .req{color:var(--red)}
+.hint{font-family:var(--mono);font-size:9.5px;letter-spacing:0.5px;color:rgba(124,196,255,0.55);margin-top:6px;line-height:1.5}
+input[type=text],input[type=email],input[type=number],input[type=date],select,textarea{
+  width:100%;background:rgba(124,196,255,0.05);border:1px dashed rgba(124,196,255,0.5);
+  color:var(--ink);font-family:var(--hand);font-size:18px;padding:11px 13px;border-radius:0;
+  outline:none;transition:border-color .25s,box-shadow .25s,background .25s;
+}
+textarea{min-height:104px;resize:vertical;line-height:1.45}
+select{
+  font-family:var(--hand);cursor:pointer;
+  appearance:none;-webkit-appearance:none;
+  background-image:linear-gradient(45deg,transparent 50%,var(--cyan) 50%),linear-gradient(135deg,var(--cyan) 50%,transparent 50%);
+  background-position:calc(100% - 18px) calc(50% - 3px),calc(100% - 12px) calc(50% - 3px);
+  background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:38px;
+}
+select option{background:var(--navy);color:var(--ink)}
+input::placeholder,textarea::placeholder{color:rgba(124,196,255,0.4);font-style:italic}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--cyan);border-style:solid;background:rgba(124,196,255,0.08);
+  box-shadow:0 0 16px rgba(124,196,255,0.35);
+}
+input.invalid,select.invalid,textarea.invalid{border-color:var(--red);border-style:solid;box-shadow:0 0 14px rgba(255,80,80,0.4)}
+.err-msg{display:none;font-family:var(--mono);font-size:9.5px;letter-spacing:0.5px;color:var(--red);margin-top:6px}
+.err-msg.show{display:block}
+
+/* number row with unit */
+.with-unit{position:relative}
+.with-unit .unit{position:absolute;right:13px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:11px;color:var(--cyan-dim);pointer-events:none}
+.with-unit input{padding-right:42px}
+
+/* ---------- dropzone ---------- */
+.drop{
+  border:1.5px dashed rgba(124,196,255,0.55);background:rgba(124,196,255,0.04);
+  padding:24px 16px;text-align:center;cursor:pointer;transition:all .25s;position:relative;
+}
+.drop:hover,.drop.drag{border-color:var(--cyan);background:rgba(124,196,255,0.1);box-shadow:0 0 20px rgba(124,196,255,0.3)}
+.drop .big{font-family:var(--hand);font-size:21px;color:var(--ink);letter-spacing:0.5px}
+.drop .small{font-family:var(--mono);font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--cyan-dim);margin-top:8px}
+.drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.file-readout{
+  display:none;margin-top:12px;border:1px solid var(--cyan-faint);background:rgba(10,26,46,0.5);
+  padding:11px 13px;font-family:var(--mono);font-size:11px;letter-spacing:0.5px;color:var(--ink);
+  align-items:center;gap:10px;justify-content:space-between;
+}
+.file-readout.show{display:flex}
+.file-readout .meta{color:var(--cyan-dim);font-size:10px}
+.file-readout .clearfile{background:transparent;border:1px dashed var(--red);color:var(--red);font-family:var(--mono);font-size:11px;padding:3px 9px;cursor:pointer;letter-spacing:1px}
+.file-readout .clearfile:hover{background:var(--red);color:var(--navy)}
+.detected{color:var(--ok);text-shadow:0 0 8px rgba(125,255,176,0.5)}
+.warn-box{display:none;margin-top:10px;border:1px solid var(--red);background:rgba(255,80,80,0.08);padding:10px 12px;font-family:var(--mono);font-size:10px;line-height:1.6;letter-spacing:0.5px;color:#ffb3b3}
+.warn-box.show{display:block}
+
+/* ---------- estimate title block ---------- */
+.estimate{position:relative}
+@media(min-width:880px){.estimate{position:sticky;top:18px}}
+.tb{
+  border:1.5px solid var(--cyan);background:var(--navy-2);position:relative;
+  box-shadow:0 0 0 4px var(--navy),0 0 0 5px rgba(124,196,255,0.4);
+}
+.tb-head{
+  border-bottom:1.5px solid var(--cyan);padding:14px 16px 12px;position:relative;
+}
+.tb-head .k{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:var(--cyan-dim);text-transform:uppercase}
+.tb-head .t{font-family:var(--hand);font-size:26px;color:var(--ink);letter-spacing:1px;text-transform:uppercase;line-height:1;margin-top:3px}
+.tb-corner{position:absolute;top:8px;right:12px;font-family:var(--mono);font-size:8px;letter-spacing:2px;color:rgba(124,196,255,0.6)}
+.tb-body{padding:14px 16px 6px}
+.tb-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:6px 0;font-family:var(--mono);font-size:11px;letter-spacing:0.5px}
+.tb-row .lk{color:var(--cyan-dim);text-transform:uppercase;font-size:10px}
+.tb-row .lv{color:var(--ink);text-align:right}
+.tb-rule{height:1px;background:var(--cyan-faint);margin:8px 0}
+.tb-total{
+  border-top:1.5px solid var(--cyan);margin-top:6px;padding:14px 16px 16px;background:rgba(124,196,255,0.06);
+}
+.tb-total .k{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:var(--cyan-dim);text-transform:uppercase}
+.tb-total .v{font-family:var(--hand);font-size:34px;color:var(--cyan);text-shadow:0 0 18px rgba(124,196,255,0.6);line-height:1.05;margin-top:2px}
+.tb-total .v.tbd{font-size:18px;color:var(--cyan-dim);text-shadow:none}
+.tb-note{font-family:var(--mono);font-size:8.5px;letter-spacing:0.5px;color:rgba(124,196,255,0.55);margin-top:8px;line-height:1.6}
+
+/* ---------- actions ---------- */
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.btn{
+  font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  padding:14px 26px;cursor:pointer;border-radius:0;transition:all .25s;background:transparent;
+}
+.btn-go{border:1.5px solid var(--cyan);color:var(--navy);background:var(--cyan);font-weight:700;flex:1;min-width:200px}
+.btn-go:hover{background:#fff;box-shadow:0 0 26px rgba(124,196,255,0.8)}
+.btn-go:active{transform:scale(0.98)}
+.btn-go[disabled]{opacity:0.6;cursor:wait}
+.btn-reset{border:1.5px dashed var(--red);color:var(--red)}
+.btn-reset:hover{background:var(--red);color:var(--navy)}
+
+/* ---------- success overlay ---------- */
+.done{
+  position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;
+  padding:24px;background:rgba(7,18,32,0.93);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.done.show{display:flex;animation:fade .35s ease-out}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.done-card{
+  max-width:460px;width:100%;border:1.5px solid var(--cyan);background:var(--navy-2);
+  box-shadow:0 0 0 4px var(--navy),0 0 0 5px rgba(124,196,255,0.4),0 0 60px rgba(124,196,255,0.3);
+  padding:36px 28px 28px;text-align:center;position:relative;animation:rise .6s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes rise{0%{opacity:0;transform:translateY(40px) scale(0.85)}60%{opacity:1;transform:translateY(-4px) scale(1.02)}100%{transform:translateY(0) scale(1)}}
+.done-card .stamp{font-family:var(--mono);font-size:10px;letter-spacing:4px;color:var(--cyan-dim);text-transform:uppercase}
+.done-card h3{font-family:var(--hand);font-size:52px;color:var(--ink);text-transform:uppercase;letter-spacing:2px;margin:8px 0 4px;text-shadow:0 0 16px var(--cyan),0 0 40px rgba(124,196,255,0.5);border-bottom:2px solid var(--cyan);padding-bottom:10px;line-height:1}
+.done-card p{font-family:var(--hand);font-size:18px;color:var(--ink);opacity:0.9;margin:16px 0 0;line-height:1.5}
+.done-card .em{color:var(--cyan)}
+.done-card .again{margin-top:24px;border:1.5px solid var(--cyan);color:var(--cyan);background:transparent;font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:12px 22px;cursor:pointer}
+.done-card .again:hover{background:var(--cyan);color:var(--navy);box-shadow:0 0 26px rgba(124,196,255,0.7)}
+
+footer.foot{text-align:center;margin-top:40px;font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--cyan-dim);text-transform:uppercase}
+footer.foot a{color:var(--cyan);text-decoration:none;border-bottom:1px dashed var(--cyan-faint)}
+footer.foot a:hover{border-bottom-style:solid}
+.hp{position:absolute;left:-9999px;top:-9999px;opacity:0;height:0;width:0}
+</style>
+</head>
+<body data-theme="blueprint">
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">— DRAWING · WORK ORDER —</span>
+    <h1><span class="l1">3D&nbsp;Printing</span><span class="l2">Intake</span></h1>
+    <p class="lede">Tell us what to build. Pick a material, drop in your model, and watch the estimate
+      draw itself. Hit <em>FILE REQUEST</em> and your part lands on the bench as a work order.</p>
+    <div class="spec-strip">
+      <span><b>Printer</b> Prusa Core One</span>
+      <span><b>Process</b> FDM</span>
+      <span><b>Build vol</b> 300 × 300 × 330</span>
+      <span><b>Nozzle</b> 0.4 mm</span>
+      <span><b>Turnaround</b> quote in 24–48 h</span>
+    </div>
+  </header>
+
+  <form id="intakeForm" class="grid"
+        action="https://formsubmit.co/mr.raleigh.j@gmail.com"
+        method="POST" enctype="multipart/form-data" target="fs_sink" novalidate>
+
+    <!-- ===== FormSubmit control fields ===== -->
+    <input type="hidden" name="_subject" id="fs_subject" value="New 3D print request — customprojects.info">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <!-- ============ LEFT: the sheet ============ -->
+    <div class="sheet">
+
+      <!-- 01 CONTACT -->
+      <fieldset class="section" data-tag="BLOCK 01">
+        <h2>Who's asking</h2>
+        <p class="sub">So we can send the quote back</p>
+        <div class="row two">
+          <div class="field">
+            <label class="lbl" for="f_name">Name <span class="req">*</span></label>
+            <input type="text" id="f_name" name="Name" placeholder="Your name" required>
+            <div class="err-msg" id="e_name">Required.</div>
+          </div>
+          <div class="field">
+            <label class="lbl" for="f_email">Email <span class="req">*</span></label>
+            <input type="email" id="f_email" name="email" placeholder="you@email.com" required>
+            <div class="err-msg" id="e_email">Enter a valid email.</div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 02 THE PART -->
+      <fieldset class="section" data-tag="BLOCK 02">
+        <h2>The part</h2>
+        <p class="sub">What are we making</p>
+        <div class="field">
+          <label class="lbl" for="f_project">Project title <span class="req">*</span></label>
+          <input type="text" id="f_project" name="Project" placeholder="e.g. LED curtain-rod end cap" required>
+          <div class="err-msg" id="e_project">Give it a name.</div>
+        </div>
+        <div class="field">
+          <label class="lbl" for="f_desc">Description</label>
+          <textarea id="f_desc" name="Description" placeholder="What it's for, key dimensions, fit/tolerance needs, must-have features…"></textarea>
+        </div>
+      </fieldset>
+
+      <!-- 03 MATERIAL & SPEC -->
+      <fieldset class="section" data-tag="BLOCK 03">
+        <h2>Material &amp; spec</h2>
+        <p class="sub">Drives the estimate</p>
+        <div class="row two">
+          <div class="field">
+            <label class="lbl" for="f_material">Material <span class="req">*</span></label>
+            <select id="f_material" name="Material" required>
+              <option value="" disabled selected>Select material…</option>
+              <option value="PLA">PLA — everyday, rigid</option>
+              <option value="PLA Silk/Specialty">PLA Silk / Specialty</option>
+              <option value="PETG">PETG — tough, outdoor-ok</option>
+              <option value="ABS">ABS — heat/impact</option>
+              <option value="ASA">ASA — UV-stable outdoor</option>
+              <option value="TPU (Flexible)">TPU — flexible / rubbery</option>
+              <option value="Nylon (PA)">Nylon (PA) — wear parts</option>
+              <option value="Polycarbonate (PC)">Polycarbonate — high strength</option>
+              <option value="Carbon-fiber (CF)">Carbon-fiber filled</option>
+              <option value="Wood / Composite">Wood / Composite fill</option>
+            </select>
+            <div class="err-msg" id="e_material">Pick a material.</div>
+          </div>
+          <div class="field">
+            <label class="lbl" for="f_color">Color / finish</label>
+            <input type="text" id="f_color" name="Color / finish" placeholder="e.g. matte black, natural">
+          </div>
+        </div>
+        <div class="row two">
+          <div class="field">
+            <label class="lbl" for="f_quality">Quality (layer height)</label>
+            <select id="f_quality" name="Quality">
+              <option value="Draft (0.30mm)" data-mult="0.85">Draft — 0.30 mm (fast)</option>
+              <option value="Standard (0.20mm)" data-mult="1.0" selected>Standard — 0.20 mm</option>
+              <option value="Fine (0.15mm)" data-mult="1.2">Fine — 0.15 mm</option>
+              <option value="Ultra (0.10mm)" data-mult="1.5">Ultra — 0.10 mm (detail)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="lbl" for="f_qty">Quantity</label>
+            <div class="with-unit">
+              <input type="number" id="f_qty" name="Quantity" min="1" step="1" value="1">
+              <span class="unit">pcs</span>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="lbl" for="f_infill">Infill (optional)</label>
+          <div class="with-unit">
+            <input type="number" id="f_infill" name="Infill %" min="0" max="100" step="5" placeholder="15">
+            <span class="unit">%</span>
+          </div>
+          <div class="hint">Leave blank if your uploaded file is already sliced — we'll read its settings.</div>
+        </div>
+      </fieldset>
+
+      <!-- 04 FILE & FILAMENT -->
+      <fieldset class="section" data-tag="BLOCK 04">
+        <h2>File &amp; filament</h2>
+        <p class="sub">Upload the model — emailed as an attachment</p>
+        <div class="field">
+          <div class="drop" id="dropzone">
+            <div class="big" id="dropTitle">⬆ Drop file or tap to browse</div>
+            <div class="small">STL · 3MF · OBJ · STEP · GCODE · BGCODE · ZIP — max 10 MB</div>
+            <input type="file" id="f_file" name="attachment"
+                   accept=".stl,.3mf,.obj,.step,.stp,.gcode,.gco,.g,.bgcode,.zip,model/stl,model/3mf,application/sla">
+          </div>
+          <div class="file-readout" id="fileReadout">
+            <span><span id="fileName">—</span> <span class="meta" id="fileMeta"></span></span>
+            <button type="button" class="clearfile" id="clearFile">CLEAR</button>
+          </div>
+          <div class="warn-box" id="sizeWarn"></div>
+          <div class="hint">G-code is parsed automatically for filament weight. STL/STEP carry no
+            weight data — enter grams below from your slicer, or leave blank and we'll slice &amp; quote it.</div>
+        </div>
+        <div class="field">
+          <label class="lbl" for="f_grams">Filament needed <span id="gramsAuto"></span></label>
+          <div class="with-unit">
+            <input type="number" id="f_grams" name="Filament (grams)" min="0" step="0.1" placeholder="e.g. 42">
+            <span class="unit">g</span>
+          </div>
+          <div class="hint">The core driver of the estimate. Don't know it? Leave blank — quote follows after slicing.</div>
+        </div>
+      </fieldset>
+
+      <!-- 05 NOTES -->
+      <fieldset class="section" data-tag="BLOCK 05">
+        <h2>Anything else</h2>
+        <p class="sub">Deadline, links to large files, references</p>
+        <div class="row two">
+          <div class="field">
+            <label class="lbl" for="f_deadline">Needed by</label>
+            <input type="date" id="f_deadline" name="Needed by">
+          </div>
+          <div class="field">
+            <label class="lbl" for="f_link">Large-file link (if &gt;10 MB)</label>
+            <input type="text" id="f_link" name="File link" placeholder="Drive / Dropbox URL">
+          </div>
+        </div>
+        <div class="field">
+          <label class="lbl" for="f_notes">Notes</label>
+          <textarea id="f_notes" name="Notes" placeholder="Post-processing, threaded inserts, assembly, anything we should know…"></textarea>
+        </div>
+      </fieldset>
+
+      <!-- hidden computed mirror so the email carries the on-screen quote -->
+      <input type="hidden" name="Estimated quote" id="fs_estimate" value="(not computed)">
+      <input type="hidden" name="Filament source" id="fs_source" value="manual / not provided">
+
+      <div class="actions">
+        <button type="submit" class="btn btn-go" id="submitBtn">▸ File request</button>
+        <button type="reset" class="btn btn-reset" id="resetBtn">Reset</button>
+      </div>
+    </div>
+
+    <!-- ============ RIGHT: estimate title block ============ -->
+    <aside class="estimate">
+      <div class="tb">
+        <div class="tb-head">
+          <span class="tb-corner">EST. №01</span>
+          <div class="k">Cost estimate</div>
+          <div class="t">Bill of materials</div>
+        </div>
+        <div class="tb-body">
+          <div class="tb-row"><span class="lk">Material</span><span class="lv" id="o_material">—</span></div>
+          <div class="tb-row"><span class="lk">Rate</span><span class="lv" id="o_rate">—</span></div>
+          <div class="tb-row"><span class="lk">Filament</span><span class="lv" id="o_grams">—</span></div>
+          <div class="tb-row"><span class="lk">Quality</span><span class="lv" id="o_quality">Standard ×1.0</span></div>
+          <div class="tb-row"><span class="lk">Quantity</span><span class="lv" id="o_qty">1 pc</span></div>
+          <div class="tb-rule"></div>
+          <div class="tb-row"><span class="lk">Material cost</span><span class="lv" id="o_matcost">—</span></div>
+          <div class="tb-row"><span class="lk">Machine + labour</span><span class="lv" id="o_machine">—</span></div>
+          <div class="tb-row"><span class="lk">Setup / handling</span><span class="lv" id="o_setup">$6.00</span></div>
+        </div>
+        <div class="tb-total">
+          <div class="k">Estimated total</div>
+          <div class="v tbd" id="o_total">— add filament</div>
+          <div class="tb-note" id="o_note">Indicative only. Pick a material and enter (or upload) the
+            filament weight to draw the estimate. Final quote is confirmed after we slice your file.</div>
+        </div>
+      </div>
+    </aside>
+
+  </form>
+
+  <footer class="foot">
+    customprojects.info · <a href="/">all projects</a> · printed to order
+  </footer>
+</div>
+
+<!-- hidden sink: keeps the page in place while FormSubmit takes the multipart POST -->
+<iframe name="fs_sink" id="fs_sink" style="display:none" title="submission sink"></iframe>
+
+<!-- ===== success overlay ===== -->
+<div class="done" id="doneOverlay" role="dialog" aria-modal="true" aria-label="Request filed">
+  <div class="done-card">
+    <span class="stamp">▣ stamped · rev. a</span>
+    <h3>Filed</h3>
+    <p>Your work order is in. We'll reply to <span class="em" id="doneEmail">your email</span>
+       with a confirmed quote within 24–48 h.</p>
+    <button type="button" class="again" id="fileAnother">File another</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- pricing model (loaded $/g: spool + waste + margin) ---- */
+  var MAT = {
+    "PLA":                {rate:0.025, dens:1.24},
+    "PLA Silk/Specialty": {rate:0.030, dens:1.24},
+    "PETG":               {rate:0.030, dens:1.27},
+    "ABS":                {rate:0.030, dens:1.04},
+    "ASA":                {rate:0.035, dens:1.07},
+    "TPU (Flexible)":     {rate:0.045, dens:1.21},
+    "Nylon (PA)":         {rate:0.055, dens:1.14},
+    "Polycarbonate (PC)": {rate:0.060, dens:1.20},
+    "Carbon-fiber (CF)":  {rate:0.075, dens:1.25},
+    "Wood / Composite":   {rate:0.040, dens:1.28}
+  };
+  var MACHINE_RATE = 0.04;   // $/g proxy for print-time + handling
+  var SETUP_FEE    = 6.00;
+  var MIN_ORDER    = 12.00;
+  var MAX_BYTES    = 10 * 1024 * 1024;
+
+  var $ = function(id){ return document.getElementById(id); };
+  var fmt = function(n){ return "$" + n.toFixed(2); };
+
+  var el = {
+    material:$("f_material"), color:$("f_color"), quality:$("f_quality"),
+    qty:$("f_qty"), grams:$("f_grams"), infill:$("f_infill"),
+    file:$("f_file"), name:$("f_name"), email:$("f_email"), project:$("f_project"),
+    dropzone:$("dropzone"), dropTitle:$("dropTitle"),
+    fileReadout:$("fileReadout"), fileName:$("fileName"), fileMeta:$("fileMeta"),
+    clearFile:$("clearFile"), sizeWarn:$("sizeWarn"), gramsAuto:$("gramsAuto"),
+    o:{material:$("o_material"), rate:$("o_rate"), grams:$("o_grams"), quality:$("o_quality"),
+       qty:$("o_qty"), matcost:$("o_matcost"), machine:$("o_machine"), setup:$("o_setup"),
+       total:$("o_total"), note:$("o_note")},
+    estimateField:$("fs_estimate"), sourceField:$("fs_source"), subjectField:$("fs_subject"),
+    form:$("intakeForm"), submitBtn:$("submitBtn")
+  };
+
+  /* ---------------- cost estimate ---------------- */
+  function compute(){
+    var mname = el.material.value;
+    var m = MAT[mname];
+    var grams = parseFloat(el.grams.value) || 0;
+    var qty = Math.max(1, parseInt(el.qty.value,10) || 1);
+    var qOpt = el.quality.options[el.quality.selectedIndex];
+    var qMult = parseFloat(qOpt && qOpt.getAttribute("data-mult")) || 1.0;
+    var qLabel = (qOpt ? qOpt.text.split(" — ")[0] : "Standard") + " ×" + qMult;
+
+    el.o.material.textContent = mname || "—";
+    el.o.rate.textContent     = m ? ("$" + m.rate.toFixed(3) + " /g") : "—";
+    el.o.grams.textContent    = grams ? (grams.toFixed(1) + " g") : "—";
+    el.o.quality.textContent  = qLabel;
+    el.o.qty.textContent      = qty + (qty===1 ? " pc" : " pcs");
+
+    if(!m || !grams){
+      el.o.matcost.textContent = "—";
+      el.o.machine.textContent = "—";
+      el.o.total.classList.add("tbd");
+      el.o.total.textContent = m ? "— add filament" : "— pick material";
+      el.o.note.textContent = "Indicative only. Pick a material and enter (or upload) the filament weight to draw the estimate. Final quote is confirmed after we slice your file.";
+      el.estimateField.value = "(pending — material/filament not set)";
+      return;
+    }
+
+    var matCost  = grams * m.rate;
+    var machine  = grams * MACHINE_RATE * qMult;
+    var perUnit  = matCost + machine;
+    var subtotal = SETUP_FEE + qty * perUnit;
+    var total    = Math.max(subtotal, MIN_ORDER);
+    var low  = Math.max(MIN_ORDER, total * 0.9);
+    var high = total * 1.15;
+
+    el.o.matcost.textContent = fmt(matCost * qty);
+    el.o.machine.textContent = fmt(machine * qty);
+    el.o.setup.textContent   = fmt(SETUP_FEE);
+    el.o.total.classList.remove("tbd");
+    el.o.total.textContent   = "≈ " + fmt(low) + " – " + fmt(high);
+    el.o.note.textContent    = "Indicative estimate at " + (m.rate).toFixed(3) + " $/g material + " +
+        MACHINE_RATE.toFixed(2) + " $/g machine ×" + qMult + " quality, ×" + qty +
+        ", +" + fmt(SETUP_FEE) + " setup. Final quote confirmed after slicing.";
+
+    el.estimateField.value = "~" + fmt(low) + "-" + fmt(high) + "  [" + mname +
+        ", " + grams.toFixed(1) + "g, " + qLabel + ", x" + qty +
+        " | matr " + fmt(matCost*qty) + " + mach " + fmt(machine*qty) + " + setup " + fmt(SETUP_FEE) + "]";
+  }
+
+  /* ---------------- filament parsing ---------------- */
+  // returns {grams:Number, how:String} or null
+  function parseFilament(text, dens){
+    if(!text) return null;
+    var m;
+    // PrusaSlicer / SuperSlicer / Slic3r — grams directly
+    m = text.match(/(?:total\s+)?filament\s+used\s*\[g\]\s*=\s*([0-9]*\.?[0-9]+)/i);
+    if(m) return {grams:parseFloat(m[1]), how:"read from G-code (grams)"};
+    // volume in cm3 -> grams via density
+    m = text.match(/filament\s+used\s*\[cm3\]\s*=\s*([0-9]*\.?[0-9]+)/i);
+    if(m) return {grams:parseFloat(m[1]) * dens, how:"from G-code volume × density"};
+    // length in mm -> volume(1.75mm) -> grams
+    m = text.match(/filament\s+used\s*\[mm\]\s*=\s*([0-9]*\.?[0-9]+)/i);
+    if(m){
+      var mm = parseFloat(m[1]);
+      var g = (mm * 2.405 / 1000) * dens; // area of 1.75mm filament = 2.405 mm^2
+      return {grams:g, how:"from G-code length × density"};
+    }
+    // Cura — "Filament used: 1.234m"
+    m = text.match(/filament\s+used\s*:\s*([0-9]*\.?[0-9]+)\s*m\b/i);
+    if(m){
+      var mm2 = parseFloat(m[1]) * 1000;
+      return {grams:(mm2 * 2.405 / 1000) * dens, how:"from Cura length × density"};
+    }
+    return null;
+  }
+
+  function densNow(){
+    var m = MAT[el.material.value];
+    return m ? m.dens : 1.24;
+  }
+
+  function humanSize(b){
+    if(b < 1024) return b + " B";
+    if(b < 1024*1024) return (b/1024).toFixed(0) + " KB";
+    return (b/1024/1024).toFixed(2) + " MB";
+  }
+
+  var TEXT_EXT = /\.(gcode|gco|g|nc|txt)$/i;
+
+  function onFile(){
+    var f = el.file.files && el.file.files[0];
+    el.sizeWarn.classList.remove("show"); el.sizeWarn.textContent = "";
+    el.gramsAuto.textContent = "";
+    if(!f){
+      el.fileReadout.classList.remove("show");
+      el.dropTitle.textContent = "⬆ Drop file or tap to browse";
+      el.sourceField.value = "manual / not provided";
+      return;
+    }
+    el.fileReadout.classList.add("show");
+    el.fileName.textContent = f.name;
+    el.fileMeta.textContent = "· " + humanSize(f.size);
+    el.dropTitle.textContent = "✓ File attached";
+
+    // size gate (FormSubmit caps the email at 10 MB total)
+    if(f.size > MAX_BYTES){
+      el.sizeWarn.classList.add("show");
+      el.sizeWarn.innerHTML = "⚠ " + humanSize(f.size) + " exceeds the 10&nbsp;MB email limit. " +
+        "It will NOT be attached. Export a smaller .3mf, zip it, or paste a download link below — " +
+        "the request still sends with everything else.";
+      el.sourceField.value = "file too large to attach (" + humanSize(f.size) + ")";
+    } else {
+      el.sourceField.value = "file attached: " + f.name;
+    }
+
+    // best-effort filament auto-detect from text-based G-code
+    if(TEXT_EXT.test(f.name) && f.size < 60*1024*1024){
+      var reader = new FileReader();
+      reader.onload = function(){
+        var res = parseFilament(String(reader.result), densNow());
+        if(res && res.grams > 0){
+          el.grams.value = res.grams.toFixed(1);
+          el.gramsAuto.innerHTML = '<span class="detected">✓ auto-detected</span>';
+          el.sourceField.value = (el.file.files[0] && el.file.files[0].size > MAX_BYTES)
+            ? el.sourceField.value + " · " + res.how
+            : ("file attached: " + f.name + " · " + res.how);
+          compute();
+        }
+      };
+      reader.readAsText(f);
+    }
+    compute();
+  }
+
+  /* ---------------- validation + submit ---------------- */
+  function setErr(input, msgId, show){
+    input.classList.toggle("invalid", show);
+    var m = $(msgId); if(m) m.classList.toggle("show", show);
+  }
+  function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  function validate(){
+    var ok = true;
+    var nameBad = !el.name.value.trim();        setErr(el.name,"e_name",nameBad);       ok = ok && !nameBad;
+    var emailBad = !validEmail(el.email.value.trim()); setErr(el.email,"e_email",emailBad); ok = ok && !emailBad;
+    var projBad = !el.project.value.trim();      setErr(el.project,"e_project",projBad);  ok = ok && !projBad;
+    var matBad  = !el.material.value;            setErr(el.material,"e_material",matBad);  ok = ok && !matBad;
+    return ok;
+  }
+
+  var submitted = false, loadTimer = null;
+
+  el.form.addEventListener("submit", function(ev){
+    if(!validate()){
+      ev.preventDefault();
+      var first = document.querySelector(".invalid");
+      if(first) first.scrollIntoView({behavior:"smooth", block:"center"});
+      return;
+    }
+    // sync hidden mirrors + subject
+    compute();
+    el.subjectField.value = "New 3D print request — " +
+      (el.project.value.trim() || "untitled") + " (" + (el.material.value || "?") + ")";
+
+    // if attachment is over the limit, drop it from the multipart so the rest still sends
+    if(el.file.files && el.file.files[0] && el.file.files[0].size > MAX_BYTES){
+      el.file.disabled = true;            // disabled inputs are not submitted
+    }
+
+    submitted = true;
+    el.submitBtn.disabled = true;
+    el.submitBtn.textContent = "▸ Filing…";
+    // fallback: if the iframe load never fires, still show success
+    loadTimer = setTimeout(showDone, 12000);
+    // let the native multipart POST proceed into the hidden iframe
+  });
+
+  function showDone(){
+    if(!submitted) return;
+    if(loadTimer){ clearTimeout(loadTimer); loadTimer = null; }
+    $("doneEmail").textContent = el.email.value.trim() || "your email";
+    $("doneOverlay").classList.add("show");
+    el.submitBtn.disabled = false;
+    el.submitBtn.textContent = "▸ File request";
+    el.file.disabled = false; // re-enable for a possible next submission
+  }
+
+  // the hidden iframe finishing its load == FormSubmit accepted the POST
+  $("fs_sink").addEventListener("load", function(){
+    if(submitted) showDone();
+  });
+
+  $("fileAnother").addEventListener("click", function(){
+    $("doneOverlay").classList.remove("show");
+    submitted = false;
+    el.form.reset();
+    onFile(); compute();
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+
+  el.clearFile.addEventListener("click", function(){
+    el.file.value = ""; onFile();
+  });
+
+  /* drag + drop */
+  ["dragenter","dragover"].forEach(function(e){
+    el.dropzone.addEventListener(e, function(ev){ ev.preventDefault(); el.dropzone.classList.add("drag"); });
+  });
+  ["dragleave","drop"].forEach(function(e){
+    el.dropzone.addEventListener(e, function(ev){ ev.preventDefault(); el.dropzone.classList.remove("drag"); });
+  });
+  el.dropzone.addEventListener("drop", function(ev){
+    if(ev.dataTransfer && ev.dataTransfer.files && ev.dataTransfer.files.length){
+      el.file.files = ev.dataTransfer.files;
+      onFile();
+    }
+  });
+
+  /* live recompute */
+  ["change","input"].forEach(function(e){
+    el.material.addEventListener(e, function(){ // re-density-convert nothing, just recompute
+      compute();
+    });
+    el.grams.addEventListener(e, compute);
+    el.qty.addEventListener(e, compute);
+    el.quality.addEventListener(e, compute);
+  });
+  el.file.addEventListener("change", onFile);
+  el.form.addEventListener("reset", function(){
+    setTimeout(function(){ onFile(); compute();
+      [el.name,el.email,el.project,el.material].forEach(function(i){ i.classList.remove("invalid"); });
+      document.querySelectorAll(".err-msg").forEach(function(m){ m.classList.remove("show"); });
+    },0);
+  });
+
+  // initial paint
+  compute();
+})();
+</script>
+</body>
+</html>

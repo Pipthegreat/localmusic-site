@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>v10 · The cohesive player — sfoak players</title>
+<meta name="description" content="The flagship: server-side advancement, full hardening, live queue, device transfer, and graceful fallback — a complete, cohesive Spotify player.">
+<meta name="theme-color" content="#0b0f14">
+<link rel="stylesheet" href="../_shared/app.css">
+<style>
+  .stage { display:grid; grid-template-columns:300px 1fr; gap:var(--s8); align-items:start; }
+  @media (max-width:820px){ .stage { grid-template-columns:1fr; } }
+  .stage .cover { width:300px; height:300px; max-width:100%; border-radius:var(--radius-lg); background:linear-gradient(135deg,var(--slate-700),var(--slate-900)); box-shadow:var(--shadow); display:grid; place-items:center; overflow:hidden; aspect-ratio:1; }
+  .stage .cover img { width:100%; height:100%; object-fit:cover; }
+  .stage .cover .ph { color:var(--ember-300); font:800 64px var(--sans); opacity:.5; }
+  .stage .meta .ctxrow { display:flex; align-items:center; gap:var(--s2); flex-wrap:wrap; margin-bottom:var(--s3); }
+  .stage .meta h2 { font-size:clamp(1.5rem,1rem+2vw,var(--t-32)); letter-spacing:-0.02em; line-height:1.1; }
+  .stage .meta .by { color:var(--fg-muted); font-size:var(--t-18); margin-top:4px; }
+  .stage .qh { margin:var(--s6) 0 var(--s2); font-size:var(--t-12); text-transform:uppercase; letter-spacing:.1em; color:var(--fg-subtle); }
+  .q { display:flex; flex-direction:column; gap:1px; }
+  .q .u { display:flex; align-items:center; gap:var(--s3); padding:5px 6px; border-radius:8px; }
+  .q .u img { width:28px; height:28px; border-radius:5px; background:var(--slate-800); object-fit:cover; }
+  .q .u .nm { font-size:var(--t-14); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .q .u .ar { font-size:var(--t-12); color:var(--fg-subtle); }
+  .banner { margin-top:var(--s4); padding:var(--s4); border-radius:var(--radius); background:var(--ember-wash); border:1px solid oklch(46% 0.14 38 / 0.4); font-size:var(--t-14); }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="dot"></span> sfoak <span class="subtle" style="font-weight:500">players</span> <span class="chip" style="margin-left:6px">flagship</span></div>
+  <span class="chip" id="status"><span class="led"></span>…</span>
+  <div class="spacer"></div>
+  <a class="btn btn-ghost" href="../">↑ All 10</a>
+  <span id="account"></span>
+</header>
+<main class="wrap">
+  <section class="hero" style="padding-bottom:var(--s5)">
+    <div class="eyebrow">Attempt 10 / 10 · The cohesive player</div>
+    <h1>Everything, working as one</h1>
+    <p>The synthesis — and the honest one. Full tracks via Premium; advancement moved onto Spotify's servers (the most a browser tab can reliably do); MediaSession lock-screen controls; focus reconciliation. And because a tab can still be suspended at a song gap, <strong>one-tap handoff to your phone or desktop app</strong> for a background that's actually guaranteed. Non-Premium gracefully gets previews. The candidate to become the real sfoak player.</p>
+  </section>
+  <div id="gate"></div>
+  <section class="card stage" id="stage" style="margin-top:var(--s4)">
+    <div class="cover" id="cover"><span class="ph" id="coverPh">♪</span><img id="coverImg" alt="" hidden></div>
+    <div class="meta">
+      <div class="ctxrow">
+        <span class="chip" id="ctxchip"><span class="led"></span>nothing playing</span>
+        <span class="chip" id="devchip" hidden><span class="led"></span></span>
+      </div>
+      <h2 id="stageTitle">Pick a show to start</h2>
+      <div class="by" id="stageBy">SF + Oakland live music · full tracks via your Premium</div>
+      <div id="banner"></div>
+      <div class="qh">Up next — handed to Spotify</div>
+      <div class="q" id="stageQueue"><p class="subtle">Press play on any track below.</p></div>
+      <div class="qh">Guaranteed background — hand off to a real device</div>
+      <div id="devices"><button class="btn" id="handoff">↗ Show my Spotify devices</button></div>
+    </div>
+  </section>
+  <div class="section-h"><h2>SF + Oakland · live shows</h2><span class="count" id="count"></span></div>
+  <div id="list"></div>
+</main>
+<script src="../_shared/tracks.js"></script>
+<script src="../_shared/ui.js"></script>
+<script src="../_shared/auth.js"></script>
+<script src="../_shared/player.js"></script>
+<script src="../_shared/shell.js"></script>
+<script src="../_shared/boot.js"></script>
+<script>
+(function () {
+  let lastClickedUri = null, premiumOk = true;
+  const CTX = SfoakBoot.sdkPage({
+    name: "SF + Oakland Live · sfoak (flagship)",
+    playingLabel: "playing · cohesive",
+    reconcileOnVisible: true, mediaSession: true, keepAlive: true, worker: true, workerMs: 2000,
+    strategy: async (track, i, all, ctx) => {
+      lastClickedUri = track.uri;
+      await ctx.P.playUris(SfoakBoot.forwardUris(all, i, 50));
+      document.getElementById("banner").innerHTML = "";
+      setTimeout(refreshQueue, 700);
+    },
+    onState: (s, ctx) => { if (s) paintStage(s); },
+    onReconcile: () => refreshQueue(),
+    onHeartbeat: () => { if (!document.hidden) return; /* stays warm; audio is server-driven */ },
+    onError: (ev) => { if (ev === "account_error") { premiumOk = false; showEmbedFallback(); } },
+  });
+
+  function paintStage(s) {
+    const t = s.track; if (!t) return;
+    document.getElementById("stageTitle").textContent = t.name || "—";
+    document.getElementById("stageBy").textContent = t.artist || "";
+    const img = document.getElementById("coverImg"), ph = document.getElementById("coverPh");
+    if (t.art) { img.src = t.art; img.hidden = false; ph.style.display = "none"; } else { img.hidden = true; ph.style.display = ""; }
+    const ctxchip = document.getElementById("ctxchip");
+    ctxchip.className = "chip " + (s.paused ? "warn" : "ok");
+    ctxchip.innerHTML = '<span class="led"></span>' + (s.paused ? "paused" : "playing · server-driven");
+    const items = (s.next || []).slice(0, 6);
+    if (items.length) document.getElementById("stageQueue").innerHTML = items.map((u) =>
+      '<div class="u">' + (u.art ? '<img src="' + u.art + '">' : '<span style="width:28px;height:28px"></span>') +
+      '<div><div class="nm">' + SfoakUI.esc(u.name || "") + '</div><div class="ar">' + SfoakUI.esc(u.artist || "") + '</div></div></div>').join("");
+  }
+  let busy = false;
+  async function refreshQueue() {
+    if (busy) return; busy = true;
+    try {
+      const r = await CTX.P.getRemote();
+      if (r && r.device) {
+        const d = document.getElementById("devchip");
+        d.hidden = false; d.className = "chip ok"; d.innerHTML = '<span class="led"></span>' + SfoakUI.esc(r.device.name);
+      }
+    } catch (e) {} finally { busy = false; }
+  }
+  function showEmbedFallback() {
+    CTX.status.set("preview mode (no Premium)", "warn");
+    const id = lastClickedUri ? lastClickedUri.split(":").pop() : "";
+    document.getElementById("banner").innerHTML =
+      '<div class="banner">Full tracks need Spotify <strong>Premium</strong>. Showing a 30-second preview instead — the rest of the experience still works.' +
+      (id ? '<div style="margin-top:10px"><iframe style="border-radius:12px;border:0" src="https://open.spotify.com/embed/track/' + id + '?utm_source=oembed" width="100%" height="80" allow="encrypted-media"></iframe></div>' : '') + '</div>';
+  }
+
+  // Guaranteed background: hand playback to a non-tab device (phone / desktop app).
+  document.getElementById("handoff").addEventListener("click", showDevices);
+  async function showDevices() {
+    const wrap = document.getElementById("devices");
+    wrap.innerHTML = '<p class="subtle"><span class="spinner" style="display:inline-block;vertical-align:middle"></span> Finding devices…</p>';
+    try {
+      const d = await CTX.P.api("/me/player/devices");
+      const others = ((d && d.devices) || []).filter((x) => x.id !== CTX.P.deviceId);
+      if (!others.length) {
+        wrap.innerHTML = '<p class="subtle">No other devices yet. Open Spotify on your phone or computer, then refresh — those keep playing when this tab can\'t. <button class="btn" id="handoff2">↻ Refresh</button></p>';
+      } else {
+        wrap.innerHTML = others.map((dv) =>
+          '<div class="u" style="gap:10px"><span style="width:26px;text-align:center">' + (dv.type === "Smartphone" ? "📱" : "💻") + '</span>' +
+          '<div><div class="nm">' + SfoakUI.esc(dv.name) + '</div><div class="ar">' + SfoakUI.esc(dv.type) + (dv.is_active ? ' · active' : '') + '</div></div>' +
+          '<button class="btn" data-id="' + dv.id + '" style="margin-left:auto">Play here ↗</button></div>'
+        ).join("") + '<button class="btn btn-ghost" id="handoff2" style="margin-top:8px">↻ Refresh</button>';
+        wrap.querySelectorAll("button[data-id]").forEach((b) => b.addEventListener("click", () => transfer(b.getAttribute("data-id"))));
+      }
+      const r = document.getElementById("handoff2"); if (r) r.addEventListener("click", showDevices);
+    } catch (e) {
+      wrap.innerHTML = '<p class="subtle">Press play first to start a session, then try again. <button class="btn" id="handoff2">↻ Retry</button></p>';
+      document.getElementById("handoff2").addEventListener("click", showDevices);
+    }
+  }
+  async function transfer(id) {
+    try { await CTX.P.api("/me/player", "PUT", { device_ids: [id], play: true }); CTX.toast("Handed off — that device now advances natively, even with this tab closed."); }
+    catch (e) { CTX.toast("Handoff failed: " + (e.message || e), "err"); }
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>v4 · SDK + OS media integration — sfoak players</title>
+<meta name="description" content="Web Playback SDK hardened with MediaSession, a silent audio anchor, and an un-throttled Web Worker heartbeat.">
+<link rel="stylesheet" href="../_shared/app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="dot"></span> sfoak <span class="subtle" style="font-weight:500">players</span></div>
+  <span class="chip" id="status"><span class="led"></span>…</span>
+  <div class="spacer"></div>
+  <a class="btn btn-ghost" href="../">↑ All 10</a>
+  <span id="account"></span>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Attempt 4 / 10 · Hardening the client</div>
+    <h1>SDK + the OS: MediaSession, audio anchor, worker heartbeat</h1>
+    <p>Same full-track SDK device, now wired into the operating system. Lock-screen controls via <span class="mono">MediaSession</span>, a silent <span class="mono">AudioContext</span> anchor so the browser keeps the tab media-active, and an un-throttled <span class="mono">Web Worker</span> heartbeat that re-checks for track-end even when the main thread is frozen. The most aggressive a <em>client-side</em> fix can get.</p>
+    <div class="tag-strip">
+      <span class="tag accent">MediaSession</span>
+      <span class="tag accent">Silent audio anchor</span>
+      <span class="tag accent">Web Worker heartbeat</span>
+      <span class="tag">Client-side advance</span>
+    </div>
+  </section>
+  <div id="gate"></div>
+  <section class="card" id="panel" style="margin-top:var(--s6)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--s5)">
+      <div class="kpi"><span class="v" id="adv">0</span><span class="k">Auto-advances</span></div>
+      <div class="kpi"><span class="v"><span id="led-media" class="led" style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--slate-500)"></span></span><span class="k">MediaSession</span></div>
+      <div class="kpi"><span class="v"><span id="led-anchor" class="led" style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--slate-500)"></span></span><span class="k">Audio anchor</span></div>
+      <div class="kpi"><span class="v" id="hb">0</span><span class="k">Worker ticks</span></div>
+    </div>
+    <p class="subtle" style="margin-top:var(--s4);font-size:var(--t-12);max-width:70ch">
+      <strong class="muted">The idea:</strong> keep the page "alive" enough that JS advance survives a hidden tab. It helps a lot — but advancement still ultimately runs here, in your browser. The next attempts stop fighting the browser and let Spotify's servers do the advancing.</p>
+  </section>
+  <div class="section-h"><h2>SF + Oakland · live shows</h2><span class="count" id="count"></span></div>
+  <div id="list"></div>
+</main>
+<script src="../_shared/tracks.js"></script>
+<script src="../_shared/ui.js"></script>
+<script src="../_shared/auth.js"></script>
+<script src="../_shared/player.js"></script>
+<script src="../_shared/shell.js"></script>
+<script src="../_shared/boot.js"></script>
+<script>
+(function () {
+  let idx = -1, maxPos = 0, advancing = false, advances = 0, lastDur = 0, ticks = 0;
+  function advanceCheck(paused, position, duration, ctx) {
+    maxPos = Math.max(maxPos, position || 0);
+    if (duration) lastDur = duration;
+    if (!advancing && paused && lastDur && maxPos >= lastDur - 1500) {
+      advancing = true;
+      const ni = idx + 1;
+      if (ni < ctx.tracks.length) {
+        idx = ni; maxPos = 0; advances++;
+        const a = document.getElementById("adv"); if (a) a.textContent = advances;
+        ctx.P.playUris([ctx.tracks[ni].uri]).then(() => { advancing = false; });
+      } else advancing = false;
+    }
+  }
+  let CTX = null;
+  CTX = SfoakBoot.sdkPage({
+    name: "sfoak v4 · SDK + OS",
+    playingLabel: "playing · OS-integrated",
+    mediaSession: true, keepAlive: true, worker: true, workerMs: 1500,
+    strategy: async (track, i, all, ctx) => {
+      idx = i; maxPos = 0; advancing = false; lastDur = 0;
+      await ctx.P.playUris([track.uri]);
+      document.getElementById("led-media").style.background = "var(--success)";
+      document.getElementById("led-anchor").style.background = SfoakUI.KeepAlive.active ? "var(--success)" : "var(--slate-500)";
+    },
+    onState: (s, ctx) => { if (s) advanceCheck(s.paused, s.position, s.duration, ctx); },
+    onHeartbeat: (ctx) => {
+      ticks++; const h = document.getElementById("hb"); if (h) h.textContent = ticks;
+      // when hidden, the SDK's own state events may be throttled — re-poll and re-check
+      ctx.P.getCurrentState().then((raw) => { const s = ctx.P.normalize(raw); if (s) advanceCheck(s.paused, s.position, s.duration, ctx); });
+    },
+  });
+})();
+</script>
+</body>
+</html>

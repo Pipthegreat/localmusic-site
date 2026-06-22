@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>v6 · Forward context (one call) — sfoak players</title>
+<meta name="description" content="Hand Spotify the whole forward run in a single play call; Spotify advances the context server-side.">
+<link rel="stylesheet" href="../_shared/app.css">
+<style>
+  .upnext { display:flex; flex-direction:column; gap:2px; margin-top:var(--s4); }
+  .upnext .u { display:flex; align-items:center; gap:var(--s3); padding:6px 8px; border-radius:8px; }
+  .upnext .u .n { font:600 var(--t-12)/1 var(--mono); color:var(--fg-subtle); width:18px; }
+  .upnext .u img { width:30px; height:30px; border-radius:6px; background:var(--slate-800); object-fit:cover; }
+  .upnext .u .nm { font-size:var(--t-14); font-weight:600; }
+  .upnext .u .ar { font-size:var(--t-12); color:var(--fg-subtle); }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="dot"></span> sfoak <span class="subtle" style="font-weight:500">players</span></div>
+  <span class="chip" id="status"><span class="led"></span>…</span>
+  <div class="spacer"></div>
+  <a class="btn btn-ghost" href="../">↑ All 10</a>
+  <span id="account"></span>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Attempt 6 / 10 · One call, whole run</div>
+    <h1>Forward context — hand off the entire run at once</h1>
+    <p>Cleaner than queuing track by track: a single <span class="mono">play</span> call with the next fifty song URIs makes Spotify treat them as one context and the SDK's own engine walks it — no per-track POSTs, no parent timer to freeze. The "up next" below is read straight from the device's own context window. Whether the SDK engine keeps advancing under a fully suspended tab is the open question this whole set exists to measure; for a guaranteed background, hand off to a native device (<a href="../v8/">v8</a>).</p>
+    <div class="tag-strip">
+      <span class="tag accent">Forward URI context</span>
+      <span class="tag accent">Single play call</span>
+      <span class="tag">Best-effort background</span>
+      <span class="tag">Focus reconciliation</span>
+    </div>
+  </section>
+  <div id="gate"></div>
+  <section class="card" id="panel" style="margin-top:var(--s6)">
+    <div style="display:flex;align-items:baseline;gap:var(--s6);flex-wrap:wrap">
+      <div class="kpi"><span class="v" id="ctxlen">0</span><span class="k">Tracks in the handed-off context</span></div>
+      <p class="subtle" style="font-size:var(--t-12);max-width:54ch;margin:0">
+        Spotify now owns the whole forward run. Track-end advancement is handled by the SDK engine and shows up here when the tab is awake. The current song always keeps playing while hidden; the song-to-song hop under a suspended tab is the thing to measure with a real speaker meter.</p>
+    </div>
+    <div class="upnext" id="upnext"></div>
+  </section>
+  <div class="section-h"><h2>SF + Oakland · live shows</h2><span class="count" id="count"></span></div>
+  <div id="list"></div>
+</main>
+<script src="../_shared/tracks.js"></script>
+<script src="../_shared/ui.js"></script>
+<script src="../_shared/auth.js"></script>
+<script src="../_shared/player.js"></script>
+<script src="../_shared/shell.js"></script>
+<script src="../_shared/boot.js"></script>
+<script>
+(function () {
+  SfoakBoot.sdkPage({
+    name: "sfoak v6 · forward context",
+    playingLabel: "playing · server context",
+    reconcileOnVisible: true, mediaSession: true,
+    strategy: async (track, i, all, ctx) => {
+      const uris = SfoakBoot.forwardUris(all, i, 50);
+      await ctx.P.playUris(uris);
+      document.getElementById("ctxlen").textContent = uris.length;
+    },
+    onState: (s, ctx) => {
+      if (!s) return;
+      const items = (s.next || []).slice(0, 6);
+      document.getElementById("upnext").innerHTML = items.map((t, n) =>
+        '<div class="u"><span class="n">' + (n + 1) + '</span>' +
+        (t.art ? '<img src="' + t.art + '" alt="">' : '<span style="width:30px;height:30px"></span>') +
+        '<div><div class="nm">' + SfoakUI.esc(t.name || "") + '</div><div class="ar">' + SfoakUI.esc(t.artist || "") + '</div></div></div>'
+      ).join("");
+    },
+  });
+})();
+</script>
+</body>
+</html>

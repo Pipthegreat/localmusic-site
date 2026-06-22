@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10 ways to fix background playback — sfoak players</title>
+<meta name="description" content="Ten escalating attempts at a cohesive desktop Spotify player for SF + Oakland live music — from the embed baseline to a server-driven flagship.">
+<meta name="theme-color" content="#0b0f14">
+<link rel="stylesheet" href="_shared/app.css">
+<style>
+  .act { margin-top:var(--s12); }
+  .act-h { display:flex; align-items:baseline; gap:var(--s3); margin-bottom:var(--s4); }
+  .act-h .n { font:800 var(--t-12)/1 var(--mono); color:var(--ember-400); letter-spacing:.12em; }
+  .act-h h2 { font-size:var(--t-21); letter-spacing:-0.01em; }
+  .act-h .d { color:var(--fg-subtle); font-size:var(--t-14); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:var(--s4); }
+  .pcard { display:grid; grid-template-columns:auto 1fr; gap:var(--s4); padding:var(--s5); border-radius:var(--radius); background:var(--bg-elevated); border:1px solid var(--border-subtle); transition:border-color var(--base) var(--ease-out), transform var(--base) var(--ease-out), background var(--base); }
+  .pcard:hover { border-color:var(--border-strong); transform:translateY(-3px); background:var(--bg-row-hover); }
+  .pcard .num { font:800 var(--t-32)/1 var(--mono); color:var(--slate-600); letter-spacing:-0.02em; }
+  .pcard:hover .num { color:var(--ember-400); }
+  .pcard h3 { font-size:var(--t-18); letter-spacing:-0.01em; }
+  .pcard p { color:var(--fg-muted); font-size:var(--t-14); margin:6px 0 var(--s3); }
+  .pcard .row { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+  .bgpill { font:700 var(--t-12)/1 var(--sans); padding:5px 9px; border-radius:999px; display:inline-flex; gap:6px; align-items:center; }
+  .bgpill.ok { background:oklch(64% 0.13 150 / 0.14); color:oklch(78% 0.12 150); }
+  .bgpill.part { background:var(--ember-wash); color:var(--ember-300); }
+  .bgpill.no { background:oklch(60% 0.17 25 / 0.12); color:oklch(74% 0.15 25); }
+  .ttag { font:600 var(--t-12)/1 var(--mono); color:var(--fg-subtle); }
+  .flag { border-color:oklch(46% 0.14 38 / 0.55); background:linear-gradient(180deg, var(--ember-wash), var(--bg-elevated)); }
+  .footer { margin-top:var(--s16); padding:var(--s12) 0 var(--s8); border-top:1px solid var(--border-subtle); }
+  .footer h2 { font-size:clamp(1.6rem,1rem+3vw,var(--t-42)); letter-spacing:-0.03em; line-height:1.05; max-width:18ch; }
+  .footer p { color:var(--fg-muted); max-width:60ch; margin-top:var(--s4); }
+  .note { display:flex; gap:var(--s3); align-items:flex-start; padding:var(--s4) var(--s5); border-radius:var(--radius); background:var(--bg-elevated); border:1px solid var(--border-subtle); margin-top:var(--s6); }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="dot"></span> sfoak <span class="subtle" style="font-weight:500">players</span></div>
+  <div class="spacer"></div>
+  <a class="btn btn-ghost" href="../">← sfoak</a>
+  <span id="account"></span>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">10 attempts · 1 problem</div>
+    <h1>Make the music keep playing — even when you look away.</h1>
+    <p>A cohesive desktop Spotify player for SF&nbsp;+&nbsp;Oakland live shows has one stubborn bug: when you switch tabs or minimize, the current song finishes and playback stops dead instead of rolling into the next track. Below are ten escalating fixes, each bolder than the last. The arc is a single idea getting more committed: <strong class="accent">stop advancing tracks in the browser — and where the browser still gets in the way, hand off to a device that isn't a browser tab.</strong></p>
+  </section>
+
+  <div class="note">
+    <span style="font-size:20px">🎧</span>
+    <div><strong>To hear full tracks:</strong> attempts 3–10 use the Spotify Web Playback SDK and need <strong>Spotify Premium</strong> — connect once (top right) and it works across all of them. Attempts 1–2 use the embed and play full tracks if you're already signed into Spotify in this browser. No Premium? You still get 30-second previews.</div>
+  </div>
+
+  <div class="note" style="border-color:oklch(46% 0.14 38 / 0.4)">
+    <span style="font-size:20px">⚠️</span>
+    <div><strong>The honest part (no overclaiming):</strong> a browser tab is a <em>suspendable</em> device. The current song keeps playing in the background, but at the silent gap <em>between</em> songs Chrome can suspend the tab — and a suspended tab can't start the next stream, no matter whose “queue” it is. So 5–7 &amp; 9 are the <strong>best a pure in-tab player can do</strong>, and must be verified on a real machine with a speaker meter (headless can't reproduce the freeze). The only <strong>guaranteed</strong> background is <a href="v8/">attempt 8</a>: hand playback to your phone or the Spotify desktop app — they aren't tabs, so they advance natively while this page is just the remote.</div>
+  </div>
+
+  <!-- ACT I -->
+  <section class="act">
+    <div class="act-h"><span class="n">ACT I</span><h2>Client-side: clever, but fighting the browser</h2><span class="d">— the music advances in your tab, so the browser can freeze it</span></div>
+    <div class="grid">
+      <a class="pcard" href="v1/"><div class="num">01</div><div><h3>Embed baseline</h3><p>A Spotify iframe + JavaScript that loads the next song at track-end. Reproduces the bug honestly.</p><div class="row"><span class="bgpill no">Stops in background</span> <span class="ttag">embed</span></div></div></a>
+      <a class="pcard" href="v2/"><div class="num">02</div><div><h3>Worker watchdog</h3><p>An un-throttled Web Worker + silent audio anchor + position extrapolation to beat tab throttling.</p><div class="row"><span class="bgpill part">Partial</span> <span class="ttag">embed · worker</span></div></div></a>
+    </div>
+  </section>
+
+  <!-- ACT II -->
+  <section class="act">
+    <div class="act-h"><span class="n">ACT II</span><h2>Real control: the Web Playback SDK</h2><span class="d">— full tracks via your Premium, a real device in the page</span></div>
+    <div class="grid">
+      <a class="pcard" href="v3/"><div class="num">03</div><div><h3>SDK baseline</h3><p>Drops the embed. Full tracks through a real Connect device — but advance is still detected here in JS.</p><div class="row"><span class="bgpill no">Client advance</span> <span class="ttag">SDK</span></div></div></a>
+      <a class="pcard" href="v4/"><div class="num">04</div><div><h3>SDK + the OS</h3><p>MediaSession lock-screen controls, a silent audio anchor, and a worker heartbeat re-checking for track-end.</p><div class="row"><span class="bgpill part">Hardened client</span> <span class="ttag">SDK · MediaSession</span></div></div></a>
+    </div>
+  </section>
+
+  <!-- ACT III -->
+  <section class="act">
+    <div class="act-h"><span class="n">ACT III</span><h2>Move the advancing off your tab</h2><span class="d">— the best a browser tab can do; the one real guarantee is a device that isn't a tab (08)</span></div>
+    <div class="grid">
+      <a class="pcard" href="v5/"><div class="num">05</div><div><h3>Server-side queue</h3><p>Push the next 15 songs to Spotify's own <span class="mono">/queue</span> so advancing is Spotify's job, not a client timer's. The strongest in-tab attempt.</p><div class="row"><span class="bgpill part">Best-effort bg*</span> <span class="ttag">SDK · queue</span></div></div></a>
+      <a class="pcard" href="v6/"><div class="num">06</div><div><h3>Forward context</h3><p>Hand off the whole forward run in one play call and let the SDK's own engine walk it — no parent involvement to freeze.</p><div class="row"><span class="bgpill part">Best-effort bg*</span> <span class="ttag">SDK · uris[]</span></div></div></a>
+      <a class="pcard" href="v7/"><div class="num">07</div><div><h3>Playlist context</h3><p>Play the real saved playlist as a Spotify context — shuffle, repeat, and (the key bit) <em>cross-device pickup</em>.</p><div class="row"><span class="bgpill part">Best-effort bg*</span> <span class="ttag">SDK · context</span></div></div></a>
+      <a class="pcard flag" href="v8/"><div class="num">08</div><div><h3>Connect remote ★</h3><p>The honest fix: transfer playback to your phone or desktop app — a real device that isn't a tab and advances natively. This page is just the remote.</p><div class="row"><span class="bgpill ok">Guaranteed (native device)</span> <span class="ttag">SDK · Connect</span></div></div></a>
+      <a class="pcard" href="v9/"><div class="num">09</div><div><h3>Installable app</h3><p>A PWA with a service worker, a live server-queue panel, and search-to-queue any artist.</p><div class="row"><span class="bgpill part">Best-effort bg*</span> <span class="ttag">PWA · SW</span></div></div></a>
+      <a class="pcard flag" href="v10/"><div class="num">10</div><div><h3>The cohesive player ★</h3><p>Everything at once, polished: server-driven advance for in-tab, one-tap handoff to a native device for guaranteed background, full hardening, graceful fallback.</p><div class="row"><span class="bgpill ok">Best-effort + native</span> <span class="ttag">flagship</span></div></div></a>
+    </div>
+    <p class="subtle" style="font-size:var(--t-12);margin-top:var(--s4);max-width:74ch">*Best-effort background = advancement is moved onto Spotify's servers/the SDK engine, which is the most a pure browser tab can do. Whether it survives <em>your</em> Chrome's tab-suspension is machine-dependent (memory-saver, pinned tab, OS) and is verified with a real speaker meter, not headless. For a hard guarantee, use 08's native-device handoff.</p>
+  </section>
+
+  <footer class="footer">
+    <h2>The lesson, in one line.</h2>
+    <p>You can't make a hidden browser tab reliably advance its own music — a tab is a device the OS is allowed to suspend. The win isn't a cleverer keep-alive; it's refusing to depend on the tab at all: hand the music to Spotify's servers, and for a real guarantee, to a device that was never a tab. <span class="subtle">Built for <a href="../">customprojects.info/localmusic/sfoak</a>.</span></p>
+  </footer>
+</main>
+<script src="_shared/auth.js"></script>
+<script src="_shared/ui.js"></script>
+<script src="_shared/shell.js"></script>
+<script>
+  SfoakShell.accountButton(document.getElementById("account"), {
+    onLogin: () => SfoakAuth.login(location.href),
+    onLogout: () => location.reload(),
+  });
+</script>
+</body>
+</html>

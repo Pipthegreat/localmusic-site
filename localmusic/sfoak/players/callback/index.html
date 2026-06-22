@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connecting Spotify… · sfoak</title>
+<link rel="stylesheet" href="../_shared/app.css">
+<style>
+  body { display: grid; place-items: center; min-height: 100vh; }
+  .cb { text-align: center; display: grid; gap: 16px; justify-items: center; padding: 32px; max-width: 460px; }
+  .cb .big { width: 40px; height: 40px; }
+  .cb h1 { font-size: 1.3rem; letter-spacing: -0.02em; }
+  .cb code { font-family: var(--mono); font-size: 0.8rem; color: var(--fg-subtle); word-break: break-all; }
+</style>
+</head>
+<body>
+  <div class="cb">
+    <div class="spinner big" id="sp"></div>
+    <h1 id="msg">Connecting your Spotify…</h1>
+    <p class="muted" id="detail">Finishing the secure handshake.</p>
+    <div id="actions"></div>
+  </div>
+  <script src="../_shared/auth.js"></script>
+  <script>
+    (async function () {
+      const msg = document.getElementById("msg");
+      const detail = document.getElementById("detail");
+      const sp = document.getElementById("sp");
+      const actions = document.getElementById("actions");
+      try {
+        const res = await SfoakAuth.handleCallback();
+        if (res.ok) {
+          msg.textContent = "Connected ✓";
+          detail.textContent = "Returning to the player…";
+          sp.style.display = "none";
+          setTimeout(() => location.replace(res.returnTo || "../v10/"), 500);
+        } else {
+          sp.style.display = "none";
+          msg.textContent = "Couldn't connect Spotify";
+          detail.innerHTML = "Reason: <code>" + SfoakUI_esc(res.error) + "</code>";
+          actions.innerHTML =
+            '<a class="btn btn-primary" href="' + (res.returnTo || "../v10/") + '">Back to the player</a>';
+          if (/redirect/i.test(res.error || "")) {
+            detail.innerHTML += '<br><span class="subtle" style="font-size:.8rem">This redirect URI must be registered in the Spotify app dashboard:<br><code>' +
+              SfoakUI_esc(SfoakAuth.REDIRECT_URI) + "</code></span>";
+          }
+        }
+      } catch (e) {
+        sp.style.display = "none";
+        msg.textContent = "Something went wrong";
+        detail.innerHTML = "<code>" + SfoakUI_esc(String(e)) + "</code>";
+      }
+      function SfoakUI_esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+    })();
+  </script>
+</body>
+</html>

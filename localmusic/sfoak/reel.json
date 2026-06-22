@@ -1,377 +1,449 @@
 {
   "page_title": "SF + Oakland Live Music",
-  "total_duration": 1223.37,
-  "track_count": 41,
-  "built_at": 1781898264,
+  "total_duration": 1464.98,
+  "track_count": 49,
+  "built_at": 1782025551,
   "tracks": [
     {
-      "artist": "accidents at sundown",
-      "title": "with you",
-      "spotify_uri": "spotify:track:0haWObITcUBpikrqhkpt2C",
-      "audio_source": "itunes",
-      "duration": 29.97,
-      "start": 0.0,
-      "end": 29.97
-    },
-    {
-      "artist": "almas",
-      "title": "fuego lento",
-      "spotify_uri": "spotify:track:5pdypynAfak1VmG5AXSDHD",
+      "artist": "bayou",
+      "title": "neshar belel",
+      "spotify_uri": "spotify:track:1SlTnEDM4gK4U56jQPmgzW",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 29.97,
-      "end": 59.92
+      "start": 0.0,
+      "end": 29.95
     },
     {
-      "artist": "almas",
-      "title": "mientes",
-      "spotify_uri": "spotify:track:0l49H3WEYgONsfd9gsr64B",
+      "artist": "bayou",
+      "title": "maghreb",
+      "spotify_uri": "spotify:track:16h7mb2i2hjhu83RkHASWV",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 29.95,
+      "end": 59.82
+    },
+    {
+      "artist": "bomba estéreo",
+      "title": "soy yo",
+      "spotify_uri": "spotify:track:4Egb5xP6cniUx0kgZd5zLB",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 59.82,
+      "end": 89.69
+    },
+    {
+      "artist": "bomba estéreo",
+      "title": "to my love",
+      "spotify_uri": "spotify:track:6z1VtU0MCGo666iKiajfhp",
       "audio_source": "itunes",
       "duration": 29.96,
-      "start": 59.92,
-      "end": 89.88
+      "start": 89.69,
+      "end": 119.65
     },
     {
-      "artist": "almas",
-      "title": "hot cherry bomb",
-      "spotify_uri": "spotify:track:6vFqACvmDtCtcLB2OdiBA2",
+      "artist": "bomba estéreo",
+      "title": "me pasa (piscis)",
+      "spotify_uri": "spotify:track:63ZVyUi9weRwuMf1QsbDnY",
       "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 89.88,
-      "end": 119.83
+      "duration": 29.96,
+      "start": 119.65,
+      "end": 149.61
     },
     {
-      "artist": "aluna",
-      "title": "beggin'",
-      "spotify_uri": "spotify:track:74nEGIzIefJhJ5qX7NeIAz",
+      "artist": "broken social scene",
+      "title": "lover's spit",
+      "spotify_uri": "spotify:track:3Cl35xMXJUEhpPaYBeNUQR",
       "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 119.83,
-      "end": 149.78
+      "duration": 29.87,
+      "start": 149.61,
+      "end": 179.48
     },
     {
-      "artist": "aluna",
-      "title": "drum go dum",
-      "spotify_uri": "spotify:track:3CEW3iffD2QvNZMK20sMqW",
+      "artist": "broken social scene",
+      "title": "cause = time",
+      "spotify_uri": "spotify:track:17z65LFVRqSVJCMyjfrBm9",
       "audio_source": "itunes",
-      "duration": 29.62,
-      "start": 149.78,
-      "end": 179.4
-    },
-    {
-      "artist": "ash leone",
-      "title": "terracotta walls",
-      "spotify_uri": "spotify:track:7HvEbqKZeEv6a6jpcO5745",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 179.4,
+      "duration": 29.87,
+      "start": 179.48,
       "end": 209.35
     },
     {
-      "artist": "ash leone",
-      "title": "i might",
-      "spotify_uri": "spotify:track:5iJ6UXO8uQHMXwlyINX9US",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 209.35,
-      "end": 239.3
-    },
-    {
-      "artist": "bastiengoat",
-      "title": "bend that thang",
-      "spotify_uri": "spotify:track:3uCOr2O41weMs3KfZ9C9JE",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 239.3,
-      "end": 269.25
-    },
-    {
-      "artist": "bastiengoat",
-      "title": "tell me if you like it",
-      "spotify_uri": "spotify:track:5yfC4dXMw1d2IaXATeQe2m",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 269.25,
-      "end": 299.12
-    },
-    {
-      "artist": "bastiengoat",
-      "title": "everybody in the club",
-      "spotify_uri": "spotify:track:2QTXOh2l8LUMQZrbnLvxhr",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 299.12,
-      "end": 328.99
-    },
-    {
-      "artist": "black pope",
-      "title": "goth girl",
-      "spotify_uri": "spotify:track:6DKLyvzjA1KtS1w4Tn3diA",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 328.99,
-      "end": 358.86
-    },
-    {
-      "artist": "black pope",
-      "title": "atom bomb",
-      "spotify_uri": "spotify:track:5hT1cD8usi9RSob0miKd3x",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 358.86,
-      "end": 388.81
-    },
-    {
-      "artist": "black pope",
-      "title": "she's alive",
-      "spotify_uri": "spotify:track:507hy6SGNULvbhxZZW8IMg",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 388.81,
-      "end": 418.76
-    },
-    {
-      "artist": "brooklyn terry",
-      "title": "got to have the paper",
-      "spotify_uri": "spotify:track:7yZhYbKhy40pThKhK5ZztC",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 418.76,
-      "end": 448.63
-    },
-    {
-      "artist": "brooklyn terry",
-      "title": "rz 440 - original mix",
-      "spotify_uri": "spotify:track:3aQpltkrV4cJp3pbR41Gag",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 448.63,
-      "end": 478.58
-    },
-    {
-      "artist": "cathedral bells",
-      "title": "dayflower",
-      "spotify_uri": "spotify:track:7xYQZUWkPOlo7yYqQLdjPc",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 478.58,
-      "end": 508.53
-    },
-    {
-      "artist": "cathedral bells",
-      "title": "heavy rain",
-      "spotify_uri": "spotify:track:7dTPJ3wGBcLzAaMhJfY7Qd",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 508.53,
-      "end": 538.4
-    },
-    {
-      "artist": "cathedral bells",
-      "title": "in absentia",
-      "spotify_uri": "spotify:track:3cCCpA8OKqmzSKcfv6bcA8",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 538.4,
-      "end": 568.27
-    },
-    {
-      "artist": "chase icon",
-      "title": "like me",
-      "spotify_uri": "spotify:track:51NYFGDXYKS4FkRqkw98hx",
+      "artist": "broken social scene",
+      "title": "anthems for a seventeen year-old girl",
+      "spotify_uri": "spotify:track:0VXp4zDspR993l2hIKW17g",
       "audio_source": "itunes",
       "duration": 29.96,
-      "start": 568.27,
-      "end": 598.23
+      "start": 209.35,
+      "end": 239.31
     },
     {
-      "artist": "chase icon",
-      "title": "socal girl",
-      "spotify_uri": "spotify:track:4vtVKiQKFFgeOpibhO3MtQ",
+      "artist": "chudson",
+      "title": "push 2 shove",
+      "spotify_uri": "spotify:track:7nyRvE5rBa0YIHVTdBmu5Y",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 598.23,
-      "end": 628.18
+      "start": 239.31,
+      "end": 269.26
     },
     {
-      "artist": "chuck gunn",
-      "title": "heart racin’",
-      "spotify_uri": "spotify:track:3lkYmHf6ggYgEikoTJS17V",
+      "artist": "chudson",
+      "title": "noise pollution!",
+      "spotify_uri": "spotify:track:0hqrJ1V039wRhkN1kj5uB7",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 628.18,
-      "end": 658.13
+      "start": 269.26,
+      "end": 299.21
     },
     {
-      "artist": "crystallmess",
-      "title": "issa revenge",
-      "spotify_uri": "spotify:track:0ehrDpPGhgKJgZjtCeOG5j",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 658.13,
-      "end": 688.0
-    },
-    {
-      "artist": "crystallmess",
-      "title": "just because it's a funeral doesn't mean we can't rave",
-      "spotify_uri": "spotify:track:3pKNysUoe9aUnYIBedeVLn",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 688.0,
-      "end": 717.87
-    },
-    {
-      "artist": "david harness",
-      "title": "we got it",
-      "spotify_uri": "spotify:track:4OiX0I5zJ6EDHDWhuT8nAZ",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 717.87,
-      "end": 747.74
-    },
-    {
-      "artist": "david harness",
-      "title": "al greenz (dance)",
-      "spotify_uri": "spotify:track:0rCcFd8gmgYBgSucbrCGtT",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 747.74,
-      "end": 777.61
-    },
-    {
-      "artist": "david harness",
-      "title": "let it fall - harlum mix",
-      "spotify_uri": "spotify:track:3ZqgxQ8dBG11dQ5Khp9UvJ",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 777.61,
-      "end": 807.48
-    },
-    {
-      "artist": "dj jaded",
-      "title": "belted or jaded?",
-      "spotify_uri": "spotify:track:0aKtCSWNhxwm9Vr2S9ltsv",
+      "artist": "diljit dosanjh",
+      "title": "ranjha",
+      "spotify_uri": "spotify:track:6LiCNxTWT6gDKE4aYZEObC",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 807.48,
-      "end": 837.43
+      "start": 299.21,
+      "end": 329.16
     },
     {
-      "artist": "eastcoastghost",
-      "title": "manhunt",
-      "spotify_uri": "spotify:track:3V0JmHcBLAZkx2bWADZvn4",
-      "audio_source": "itunes",
-      "duration": 28.37,
-      "start": 837.43,
-      "end": 865.8
-    },
-    {
-      "artist": "eastcoastghost",
-      "title": "neura-link",
-      "spotify_uri": "spotify:track:2m1FowOSZJrB86xU81pa35",
-      "audio_source": "itunes",
-      "duration": 29.92,
-      "start": 865.8,
-      "end": 895.72
-    },
-    {
-      "artist": "eastcoastghost",
-      "title": "in it for the loot",
-      "spotify_uri": "spotify:track:1UJLLoGz0vnL174rMtlbys",
-      "audio_source": "itunes",
-      "duration": 28.55,
-      "start": 895.72,
-      "end": 924.27
-    },
-    {
-      "artist": "emanate",
-      "title": "at night",
-      "spotify_uri": "spotify:track:3x1wz8ZtjxUd7eEvP0I1KD",
+      "artist": "diljit dosanjh",
+      "title": "lover",
+      "spotify_uri": "spotify:track:0XwRlvv3KlOu4HWlOH34XG",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 924.27,
-      "end": 954.22
+      "start": 329.16,
+      "end": 359.11
     },
     {
-      "artist": "emanate",
-      "title": "in the air",
-      "spotify_uri": "spotify:track:7ueNwjaeGwopASlOgPGJMI",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 954.22,
-      "end": 984.09
-    },
-    {
-      "artist": "emanate",
-      "title": "mass appeal - radio edit",
-      "spotify_uri": "spotify:track:3DTotfr7d5obnVJeIYlJup",
+      "artist": "diljit dosanjh",
+      "title": "dealer",
+      "spotify_uri": "spotify:track:7k65xsOjTqONQhfpVWYAWG",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 984.09,
-      "end": 1014.04
+      "start": 359.11,
+      "end": 389.06
     },
     {
-      "artist": "four color zack",
-      "title": "year one (mix)",
-      "spotify_uri": "spotify:track:18g0BnU3G42J5GMQMU80kV",
+      "artist": "euphonique",
+      "title": "idiot sound",
+      "spotify_uri": "spotify:track:7xYWN2Xu3ro3mWibxsq5ho",
       "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1014.04,
-      "end": 1043.91
+      "duration": 29.96,
+      "start": 389.06,
+      "end": 419.02
     },
     {
-      "artist": "four color zack",
-      "title": "rebel",
-      "spotify_uri": "spotify:track:5QlIdmVxwC4CJqIx2AeD15",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1043.91,
-      "end": 1073.78
-    },
-    {
-      "artist": "four color zack",
-      "title": "happiness - four color zack remix",
-      "spotify_uri": "spotify:track:51K7TOa2FP6wP47Pyw53FN",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1073.78,
-      "end": 1103.65
-    },
-    {
-      "artist": "freshie",
-      "title": "never stressin",
-      "spotify_uri": "spotify:track:5h37zE13ONSUuhir0JDW9M",
+      "artist": "euphonique",
+      "title": "smokeable - original mix - mixed",
+      "spotify_uri": "spotify:track:3w72WISv2Obkw35gciyqfw",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 1103.65,
-      "end": 1133.6
+      "start": 419.02,
+      "end": 448.97
     },
     {
-      "artist": "garage spiders",
-      "title": "spider",
-      "spotify_uri": "spotify:track:4EAeoPBoYs8ArNWu40W2GN",
+      "artist": "euphonique",
+      "title": "we bring the vibe",
+      "spotify_uri": "spotify:track:4VCtXzXutLoRSFVYndmMpp",
+      "audio_source": "itunes",
+      "duration": 29.96,
+      "start": 448.97,
+      "end": 478.93
+    },
+    {
+      "artist": "franky boissy",
+      "title": "soul science - harness nu nu remix",
+      "spotify_uri": "spotify:track:5IKM2p4pE8BwLR0ByPXeC3",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 1133.6,
-      "end": 1163.55
+      "start": 478.93,
+      "end": 508.88
     },
     {
-      "artist": "garage spiders",
-      "title": "learning to fly",
-      "spotify_uri": "spotify:track:14v8x3yejArSzPTZKNVgEa",
+      "artist": "franky boissy",
+      "title": "soul science - homero espinosa and mark farina frisco disco remix",
+      "spotify_uri": "spotify:track:5fNvJeMsWvrzX3Lw9s6kyF",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 1163.55,
-      "end": 1193.5
+      "start": 508.88,
+      "end": 538.83
     },
     {
-      "artist": "hannah lee",
-      "title": "kappa rap 2",
-      "spotify_uri": "spotify:track:4N5TJQlRZPjWIZvmgpq69z",
+      "artist": "franky boissy",
+      "title": "back to roots",
+      "spotify_uri": "spotify:track:2WG2DkxQVgEN8BdBzhKkqY",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 538.83,
+      "end": 568.78
+    },
+    {
+      "artist": "half past two",
+      "title": "dominoes",
+      "spotify_uri": "spotify:track:1OBHZCNyUJud1USA3wd7MA",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 568.78,
+      "end": 598.73
+    },
+    {
+      "artist": "half past two",
+      "title": "three small words",
+      "spotify_uri": "spotify:track:152UGVEFKkLpjff84P2bxg",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 1193.5,
-      "end": 1223.37
+      "start": 598.73,
+      "end": 628.6
+    },
+    {
+      "artist": "half past two",
+      "title": "somebody that i used to know",
+      "spotify_uri": "spotify:track:21gtTs6NbYDJKicXC1Rsez",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 628.6,
+      "end": 658.47
+    },
+    {
+      "artist": "ivy queen",
+      "title": "quiero bailar",
+      "spotify_uri": "spotify:track:5JLV62rg4jtnoElc4P9F6K",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 658.47,
+      "end": 688.34
+    },
+    {
+      "artist": "ivy queen",
+      "title": "la vida es así",
+      "spotify_uri": "spotify:track:4zK05ecddIq3vfd08Aqi8y",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 688.34,
+      "end": 718.21
+    },
+    {
+      "artist": "ivy queen",
+      "title": "dime",
+      "spotify_uri": "spotify:track:4kPxQjl9d12EtbhYte5e3j",
+      "audio_source": "itunes",
+      "duration": 29.62,
+      "start": 718.21,
+      "end": 747.83
+    },
+    {
+      "artist": "julius papp",
+      "title": "warm chill",
+      "spotify_uri": "spotify:track:1y8SVaLM0UHByyqFKAzqjy",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 747.83,
+      "end": 777.7
+    },
+    {
+      "artist": "julius papp",
+      "title": "seems to know",
+      "spotify_uri": "spotify:track:59HC3mCvgf8sbhmfaAcslS",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 777.7,
+      "end": 807.57
+    },
+    {
+      "artist": "julius papp",
+      "title": "pacific state",
+      "spotify_uri": "spotify:track:0leg6EIzgp1fE6BMSw124r",
+      "audio_source": "itunes",
+      "duration": 29.74,
+      "start": 807.57,
+      "end": 837.31
+    },
+    {
+      "artist": "kim anh",
+      "title": "nắng chiều",
+      "spotify_uri": "spotify:track:6NnZRv9YqGKzKSkGsCmz5W",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 837.31,
+      "end": 867.18
+    },
+    {
+      "artist": "kim anh",
+      "title": "mùa thu lá bay",
+      "spotify_uri": "spotify:track:1vQ8Up5z3NNq0F1aZHuakD",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 867.18,
+      "end": 897.05
+    },
+    {
+      "artist": "kim anh",
+      "title": "in the stars",
+      "spotify_uri": "spotify:track:4qGbp46oPBwOpicBqkfnNS",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 897.05,
+      "end": 927.0
+    },
+    {
+      "artist": "la misa negra",
+      "title": "sancocho",
+      "spotify_uri": "spotify:track:7u0DdAesrFXVgeJvRTbhX2",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 927.0,
+      "end": 956.87
+    },
+    {
+      "artist": "la misa negra",
+      "title": "pistola",
+      "spotify_uri": "spotify:track:5z8Jrx4TPiMrAv7Q8NEqoY",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 956.87,
+      "end": 986.74
+    },
+    {
+      "artist": "la misa negra",
+      "title": "dueña de mi",
+      "spotify_uri": "spotify:track:6DU07zLVPOlPqqybYpQZDn",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 986.74,
+      "end": 1016.61
+    },
+    {
+      "artist": "metric",
+      "title": "help i'm alive",
+      "spotify_uri": "spotify:track:0cahtHEywK64NSWqm2SDTi",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1016.61,
+      "end": 1046.56
+    },
+    {
+      "artist": "metric",
+      "title": "black sheep - brie larson vocal version",
+      "spotify_uri": "spotify:track:60TThBDrPpek5k520l0W0L",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1046.56,
+      "end": 1076.51
+    },
+    {
+      "artist": "metric",
+      "title": "gimme sympathy",
+      "spotify_uri": "spotify:track:4z2xy1UYMu70xCkWudeL96",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1076.51,
+      "end": 1106.38
+    },
+    {
+      "artist": "miguel migs",
+      "title": "the distance",
+      "spotify_uri": "spotify:track:2CzA9jD66ckRJyfh8WxHof",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1106.38,
+      "end": 1136.25
+    },
+    {
+      "artist": "miguel migs",
+      "title": "restless nights",
+      "spotify_uri": "spotify:track:0E3VonUYzuuZDgxWx3xsP8",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1136.25,
+      "end": 1166.2
+    },
+    {
+      "artist": "miguel migs",
+      "title": "to the other side",
+      "spotify_uri": "spotify:track:1xcQtpfC0zlbSQtdNrR1eR",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1166.2,
+      "end": 1196.15
+    },
+    {
+      "artist": "mood ii swing",
+      "title": "free (mood ii swing radio edit)",
+      "spotify_uri": "spotify:track:2mkdZTHKimOJ86Hg0RWSKc",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1196.15,
+      "end": 1226.02
+    },
+    {
+      "artist": "mood ii swing",
+      "title": "move me",
+      "spotify_uri": "spotify:track:4USxDK8DgwYH2JxnOSBYyG",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1226.02,
+      "end": 1255.89
+    },
+    {
+      "artist": "mood ii swing",
+      "title": "do it your way - original mix",
+      "spotify_uri": "spotify:track:6bxeekI9n4mFVw4GoeQZMa",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1255.89,
+      "end": 1285.76
+    },
+    {
+      "artist": "our lady peace",
+      "title": "clumsy",
+      "spotify_uri": "spotify:track:1xvJRCgomvGcxyA2IUyE94",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1285.76,
+      "end": 1315.63
+    },
+    {
+      "artist": "our lady peace",
+      "title": "somewhere out there",
+      "spotify_uri": "spotify:track:6fQJg7MdQssgZJDhTJtFtd",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1315.63,
+      "end": 1345.5
+    },
+    {
+      "artist": "our lady peace",
+      "title": "superman's dead",
+      "spotify_uri": "spotify:track:5AqdEGne9bWAMPTI5UUmQY",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1345.5,
+      "end": 1375.37
+    },
+    {
+      "artist": "roy davis jr.",
+      "title": "gabriel - live garage mix",
+      "spotify_uri": "spotify:track:6fSdR81YvNG8Wo6i2ytLPR",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1375.37,
+      "end": 1405.24
+    },
+    {
+      "artist": "roy davis jr.",
+      "title": "all i do",
+      "spotify_uri": "spotify:track:0CrJAjfz8Wthr1dfBDgcNx",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1405.24,
+      "end": 1435.11
+    },
+    {
+      "artist": "roy davis jr.",
+      "title": "rock shock",
+      "spotify_uri": "spotify:track:0eQH8gzH0FlYeLZTnmKUcj",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1435.11,
+      "end": 1464.98
     }
   ]
 }

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>v1 · Embed baseline — sfoak players</title>
+<meta name="description" content="The starting point: a Spotify embed with client-side auto-advance. Shows the background-stop bug honestly.">
+<link rel="stylesheet" href="../_shared/app.css">
+<style>
+  .embedbar { position:fixed; left:0; right:0; bottom:0; z-index:50; padding:10px var(--s5); background:oklch(11% 0.012 250 / 0.92); backdrop-filter:blur(16px); border-top:1px solid var(--border-subtle); }
+  .embedbar .inner { max-width:1040px; margin:0 auto; }
+  .embedbar iframe { border-radius:12px; border:0; width:100%; height:80px; display:block; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="dot"></span> sfoak <span class="subtle" style="font-weight:500">players</span></div>
+  <span class="chip" id="status"><span class="led"></span>idle</span>
+  <div class="spacer"></div>
+  <a class="btn btn-ghost" href="../">↑ All 10</a>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Attempt 1 / 10 · Where we started</div>
+    <h1>The embed baseline</h1>
+    <p>The original approach: a single Spotify <span class="mono">iframe</span> embed, with this page detecting track-end in JavaScript and loading the next song. If you're signed into Spotify Premium in this browser, it plays full tracks. It also faithfully reproduces the bug — minimize the window and, when the song ends, the hand-off stalls and the music stops. Everything after this is an attempt to beat that.</p>
+    <div class="tag-strip">
+      <span class="tag">Spotify embed (IFrame API)</span>
+      <span class="tag">No login required</span>
+      <span class="tag" style="color:var(--danger)">⚠ Stops in background</span>
+    </div>
+  </section>
+  <section class="card" id="panel" style="margin-top:var(--s6)">
+    <div style="display:flex;gap:var(--s8);flex-wrap:wrap">
+      <div class="kpi"><span class="v" id="adv">0</span><span class="k">Auto-advances</span></div>
+      <div class="kpi"><span class="v" id="ev">0</span><span class="k">playback_update events</span></div>
+      <div class="kpi"><span class="v" id="vis">visible</span><span class="k">Tab state</span></div>
+    </div>
+    <p class="subtle" style="margin-top:var(--s4);font-size:var(--t-12);max-width:70ch">Watch the event counter freeze the moment you switch tabs — that's the cross-origin iframe being throttled, and why client-side advance can't be trusted in the background.</p>
+  </section>
+  <div class="section-h"><h2>SF + Oakland · live shows</h2><span class="count" id="count"></span></div>
+  <div id="list"></div>
+</main>
+<div class="embedbar"><div class="inner"><div id="embed"></div></div></div>
+<script src="../_shared/tracks.js"></script>
+<script src="../_shared/ui.js"></script>
+<script src="../_shared/shell.js"></script>
+<script>
+(function () {
+  SfoakUI.injectSprite();
+  const D = window.SFOAK_DATA, tracks = D.tracks;
+  const status = SfoakShell.statusChip(document.getElementById("status"));
+  document.getElementById("count").textContent = tracks.length + " tracks";
+  let ctrl = null, curIdx = -1, advancing = false, advances = 0, events = 0;
+  const list = SfoakShell.renderList(document.getElementById("list"), tracks, {
+    onPlay: (t, i) => { curIdx = i; advancing = false; if (ctrl) { ctrl.loadUri(t.uri); ctrl.play(); list.setPlaying(t.uri, false); status.set("playing (embed)", "ok"); } },
+  });
+  window.onSpotifyIframeApiReady = (IFrameAPI) => {
+    IFrameAPI.createController(document.getElementById("embed"),
+      { uri: tracks[0].uri, width: "100%", height: "80" },
+      (controller) => {
+        ctrl = controller;
+        controller.addListener("playback_update", (e) => {
+          events++; document.getElementById("ev").textContent = events;
+          const d = e.data || {};
+          if (!advancing && d.duration && d.position >= d.duration - 1200 && d.position > 1000) {
+            advancing = true;
+            const ni = curIdx + 1;
+            if (ni < tracks.length) { curIdx = ni; advances++; document.getElementById("adv").textContent = advances; controller.loadUri(tracks[ni].uri); controller.play(); list.setPlaying(tracks[ni].uri, false); setTimeout(() => (advancing = false), 1500); }
+          }
+        });
+      });
+  };
+  document.addEventListener("visibilitychange", () => { document.getElementById("vis").textContent = document.hidden ? "HIDDEN" : "visible"; });
+})();
+</script>
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+</body>
+</html>

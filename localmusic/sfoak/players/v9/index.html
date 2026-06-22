@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>v9 · Installable app — sfoak players</title>
+<meta name="description" content="A full installable PWA: service worker, live server queue, and add-to-queue search.">
+<meta name="theme-color" content="#0b0f14">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="../_shared/app.css">
+<style>
+  .q { display:flex; flex-direction:column; gap:2px; }
+  .q .u { display:flex; align-items:center; gap:var(--s3); padding:6px 8px; border-radius:8px; }
+  .q .u.cur { background:var(--ember-wash); }
+  .q .u .n { font:600 var(--t-12)/1 var(--mono); color:var(--fg-subtle); width:20px; }
+  .q .u img { width:32px; height:32px; border-radius:6px; background:var(--slate-800); object-fit:cover; }
+  .q .u .nm { font-size:var(--t-14); font-weight:600; }
+  .q .u .ar { font-size:var(--t-12); color:var(--fg-subtle); }
+  .q .u .add { margin-left:auto; }
+  .search { display:flex; gap:var(--s2); margin:var(--s4) 0; }
+  .search input { flex:1; padding:10px var(--s4); border-radius:999px; background:var(--bg-canvas); border:1px solid var(--border); color:var(--fg); font:inherit; }
+  .search input:focus-visible { border-color:var(--ember-500); }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:var(--s6); }
+  @media (max-width:760px){ .grid2 { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="dot"></span> sfoak <span class="subtle" style="font-weight:500">players</span></div>
+  <span class="chip" id="status"><span class="led"></span>…</span>
+  <div class="spacer"></div>
+  <a class="btn btn-ghost" href="../">↑ All 10</a>
+  <span id="account"></span>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Attempt 9 / 10 · A real app</div>
+    <h1>Installable app: service worker, live queue, search-to-queue</h1>
+    <p>Everything from the server-side fix, packaged as a Progressive Web App. Install it to your dock, and a service worker makes it open instantly even offline. A live queue panel reads straight from Spotify's servers, and you can search any artist and drop tracks into the queue on the fly — powered by the project's own Cloudflare search worker.</p>
+    <div class="tag-strip">
+      <span class="tag accent">PWA · installable</span>
+      <span class="tag accent">Service worker</span>
+      <span class="tag accent">Live server queue</span>
+      <span class="tag accent">Add-to-queue search</span>
+    </div>
+  </section>
+  <div id="gate"></div>
+  <section class="grid2" style="margin-top:var(--s6)">
+    <div class="card">
+      <div class="section-h" style="margin:0 0 var(--s3)"><h2>Add to queue</h2></div>
+      <div class="search"><input id="q" placeholder="Search an artist…" autocomplete="off"><button class="btn btn-primary" id="go">Search</button></div>
+      <div class="q" id="results"></div>
+    </div>
+    <div class="card">
+      <div class="section-h" style="margin:0 0 var(--s3)"><h2>Spotify's queue</h2><span class="count" id="qlen"></span></div>
+      <div class="q" id="queueView"><p class="subtle">Press play to fill the queue.</p></div>
+    </div>
+  </section>
+  <div class="section-h"><h2>SF + Oakland · live shows</h2><span class="count" id="count"></span></div>
+  <div id="list"></div>
+</main>
+<script src="../_shared/tracks.js"></script>
+<script src="../_shared/ui.js"></script>
+<script src="../_shared/auth.js"></script>
+<script src="../_shared/player.js"></script>
+<script src="../_shared/shell.js"></script>
+<script src="../_shared/boot.js"></script>
+<script>
+(function () {
+  if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+  const CTX = SfoakBoot.sdkPage({
+    name: "sfoak v9 · app",
+    playingLabel: "playing · queued app",
+    reconcileOnVisible: true, mediaSession: true, keepAlive: true,
+    strategy: async (track, i, all, ctx) => { await ctx.P.playUris(SfoakBoot.forwardUris(all, i, 50)); setTimeout(() => refreshQueue(), 700); },
+    onState: () => setTimeout(refreshQueue, 400),
+    onReconcile: () => refreshQueue(),
+  });
+  let busy = false;
+  async function refreshQueue() {
+    if (busy) return; busy = true;
+    try {
+      const q = await CTX.P.getQueue();
+      const cur = q && q.currently_playing;
+      const items = (q && q.queue || []).slice(0, 8);
+      document.getElementById("qlen").textContent = (q && q.queue ? q.queue.length : 0) + " upcoming";
+      const row = (t, n, isCur) => {
+        const art = (t.album && t.album.images && (t.album.images[t.album.images.length - 1] || {}).url) || "";
+        const ar = (t.artists || []).map((a) => a.name).join(", ");
+        return '<div class="u' + (isCur ? " cur" : "") + '">' + (isCur ? '<span class="n">▶</span>' : '<span class="n">' + n + '</span>') +
+          (art ? '<img src="' + art + '">' : '<span style="width:32px;height:32px"></span>') +
+          '<div><div class="nm">' + SfoakUI.esc(t.name || "") + '</div><div class="ar">' + SfoakUI.esc(ar) + '</div></div></div>';
+      };
+      document.getElementById("queueView").innerHTML = (cur ? row(cur, 0, true) : "") + items.map((t, n) => row(t, n + 1, false)).join("");
+    } catch (e) {} finally { busy = false; }
+  }
+  // search → queue (via the project's Cloudflare worker)
+  async function search() {
+    const term = document.getElementById("q").value.trim();
+    if (!term) return;
+    const res = document.getElementById("results");
+    res.innerHTML = '<p class="subtle"><span class="spinner" style="display:inline-block;vertical-align:middle"></span> Searching…</p>';
+    try {
+      const r = await fetch(SfoakAuth.WORKER + "/api/search", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ artist: term }) });
+      const d = await r.json();
+      const tracks = (d && d.tracks) || [];
+      if (!tracks.length) { res.innerHTML = '<p class="subtle">No tracks found.</p>'; return; }
+      res.innerHTML = tracks.map((t) =>
+        '<div class="u">' + (t.thumb ? '<img src="' + t.thumb + '">' : '<span style="width:32px;height:32px"></span>') +
+        '<div><div class="nm">' + SfoakUI.esc(t.name) + '</div><div class="ar">' + SfoakUI.esc(term) + '</div></div>' +
+        '<button class="btn add" data-uri="' + t.uri + '">+ Queue</button></div>'
+      ).join("");
+      res.querySelectorAll("button[data-uri]").forEach((b) => b.addEventListener("click", async () => {
+        try { await CTX.P.addToQueue(b.getAttribute("data-uri")); CTX.toast("Added to queue"); setTimeout(refreshQueue, 500); }
+        catch (e) { CTX.toast("Press play first to start a session", "err"); }
+      }));
+    } catch (e) { res.innerHTML = '<p class="subtle">Search failed.</p>'; }
+  }
+  document.getElementById("go").addEventListener("click", search);
+  document.getElementById("q").addEventListener("keydown", (e) => { if (e.key === "Enter") search(); });
+})();
+</script>
+</body>
+</html>

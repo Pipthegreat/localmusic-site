@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>v5 · Server-side queue — sfoak players</title>
+<meta name="description" content="Hand the upcoming tracks to Spotify's own server queue so advancement survives a frozen tab.">
+<link rel="stylesheet" href="../_shared/app.css">
+<style>
+  .upnext { display:flex; flex-direction:column; gap:2px; margin-top:var(--s4); }
+  .upnext .u { display:flex; align-items:center; gap:var(--s3); padding:6px 8px; border-radius:8px; }
+  .upnext .u .n { font:600 var(--t-12)/1 var(--mono); color:var(--fg-subtle); width:18px; }
+  .upnext .u img { width:30px; height:30px; border-radius:6px; background:var(--slate-800); }
+  .upnext .u .nm { font-size:var(--t-14); font-weight:600; }
+  .upnext .u .ar { font-size:var(--t-12); color:var(--fg-subtle); }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="dot"></span> sfoak <span class="subtle" style="font-weight:500">players</span></div>
+  <span class="chip" id="status"><span class="led"></span>…</span>
+  <div class="spacer"></div>
+  <a class="btn btn-ghost" href="../">↑ All 10</a>
+  <span id="account"></span>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Attempt 5 / 10 · Stop fighting the browser</div>
+    <h1>Push the queue to Spotify's servers</h1>
+    <p>The turning point. When you press play, we start the track <em>and</em> POST the next fifteen songs to Spotify's own <span class="mono">/me/player/queue</span>. Advancing track-to-track becomes Spotify's job, not a client timer's — the strongest defense a browser tab has against the background-stop bug. <strong>Honest caveat:</strong> the tab is still a suspendable device, so at a song boundary a hard-suspended tab can stall; for a guaranteed background, hand off to a native device (see <a href="../v8/">v8</a>).</p>
+    <div class="tag-strip">
+      <span class="tag accent">Server-side queue</span>
+      <span class="tag">Best-effort background</span>
+      <span class="tag">Web Playback SDK</span>
+      <span class="tag">Focus reconciliation</span>
+    </div>
+  </section>
+  <div id="gate"></div>
+  <section class="card" id="panel" style="margin-top:var(--s6)">
+    <div style="display:flex;align-items:baseline;gap:var(--s6);flex-wrap:wrap">
+      <div class="kpi"><span class="v" id="pushed">0</span><span class="k">Tracks in Spotify's queue</span></div>
+      <p class="subtle" style="font-size:var(--t-12);max-width:54ch;margin:0">
+        These are held by <strong class="muted">Spotify's servers</strong>, not this tab — so a throttled tab can't lose the queue. Whether a fully <em>suspended</em> tab still starts the next stream at a song gap is machine-dependent; come back and it reconciles either way.</p>
+    </div>
+    <div class="upnext" id="queueView"></div>
+  </section>
+  <div class="section-h"><h2>SF + Oakland · live shows</h2><span class="count" id="count"></span></div>
+  <div id="list"></div>
+</main>
+<script src="../_shared/tracks.js"></script>
+<script src="../_shared/ui.js"></script>
+<script src="../_shared/auth.js"></script>
+<script src="../_shared/player.js"></script>
+<script src="../_shared/shell.js"></script>
+<script src="../_shared/boot.js"></script>
+<script>
+(function () {
+  let pushed = 0;
+  SfoakBoot.sdkPage({
+    name: "sfoak v5 · server queue",
+    playingLabel: "playing · Spotify-queued",
+    reconcileOnVisible: true, mediaSession: true,
+    strategy: async (track, i, all, ctx) => {
+      pushed = 0; document.getElementById("queueView").innerHTML = "";
+      await ctx.P.playUris([track.uri]);
+      const upcoming = all.slice(i + 1, i + 16);
+      for (const t of upcoming) { try { await ctx.P.addToQueue(t.uri); pushed++; } catch (e) { break; } }
+      document.getElementById("pushed").textContent = pushed;
+      setTimeout(() => refreshQueue(ctx), 800);
+    },
+    onState: (s, ctx) => { if (s && !s.paused) setTimeout(() => refreshQueue(ctx), 400); },
+    onReconcile: (r, ctx) => refreshQueue(ctx),
+  });
+  let busy = false;
+  async function refreshQueue(ctx) {
+    if (busy) return; busy = true;
+    try {
+      const q = await ctx.P.getQueue();
+      const items = (q && q.queue || []).slice(0, 6);
+      document.getElementById("queueView").innerHTML = items.map((t, n) => {
+        const art = (t.album && t.album.images && (t.album.images[t.album.images.length - 1] || {}).url) || "";
+        const ar = (t.artists || []).map((a) => a.name).join(", ");
+        return '<div class="u"><span class="n">' + (n + 1) + '</span>' +
+          (art ? '<img src="' + art + '" alt="">' : '<span style="width:30px;height:30px"></span>') +
+          '<div><div class="nm">' + SfoakUI.esc(t.name || "") + '</div><div class="ar">' + SfoakUI.esc(ar) + '</div></div></div>';
+      }).join("");
+    } catch (e) {} finally { busy = false; }
+  }
+})();
+</script>
+</body>
+</html>
