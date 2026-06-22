@@ -175,7 +175,13 @@ html.dp-blueprint-on body span[jsaction][role] * {
 html.dp-blueprint-on body :is(button, [role="button"], a[role="button"], [type="button"], [type="submit"], a[jsaction], div[jsaction][role], span[jsaction][role]) :is(svg, svg *, path, use) {
   fill: #7cc4ff !important;
   stroke: #7cc4ff !important;
-  opacity: 1 !important;
+  /* v1.5.40 — dropped `opacity: 1 !important` from this rule. Sites
+     hide their hover-overlay button icons by setting `opacity: 0`
+     inline on the SVG (so the icon "appears" on hover via opacity
+     transition); forcing opacity to 1 here lit them up all the time,
+     contributing to the ghost-square look on Spotify rows. SVG fill
+     + stroke are still forced so icons that ARE meant to be visible
+     paint blueprint cyan. */
 }
 
 /* Active/selected tab state — solid cyan fill, navy ink. The "ALL"
@@ -203,8 +209,15 @@ html.dp-blueprint-on body :is([aria-pressed="true"], [aria-selected="true"], [ar
   stroke: #0d2138 !important;
 }
 
-/* Cards / list items: drafting-detail box with corner tick */
-html.dp-blueprint-on body li,
+/* Cards / list items: drafting-detail box with corner tick.
+   v1.5.40 — restricted to `<article>` and `<blockquote>`. The earlier
+   rule covered every `<li>` too, which on Spotify's home page tagged
+   each carousel cell with a 1px cyan border + 14px padding + 14px
+   margin. Cells without visible content (loading slots, scroll-
+   padding entries, lazy-loaded tiles) showed as outlined empty
+   squares — the "ghost tiles" the user kept flagging across iterations.
+   <li> elements now get default styling so navigation/list items
+   stop announcing themselves as cards. */
 html.dp-blueprint-on body article,
 html.dp-blueprint-on body blockquote {
   border: 1px solid rgba(124,196,255,0.7) !important;
