@@ -102,13 +102,29 @@ html.dp-blueprint-on body a * {
   text-shadow: 0 0 8px rgba(124,196,255,0.5) !important;
 }
 
-/* Form chrome: drafting-paper field with dashed edge */
+/* Form chrome: drafting-paper field with dashed edge.
+   v1.5.35 — extended selector set (catches `[role="button"]`,
+   `a[role="button"]`, `[type="button/submit"]`, Google/Spotify's
+   `a/div[jsaction][role]` patterns) so custom buttons get the dashed
+   blueprint treatment instead of falling through to invisible.
+   Also bumped bg opacity from 5% to 14% and made the default ink
+   bright cyan (was pale `#e8f3ff` which read as washed-out on the
+   95%-transparent blue bg — Spotify's compact playlist tiles became
+   blue-on-blue ghost squares). Forced descendant color + SVG fill
+   cascade so child spans and icons can't override back to invisible. */
 html.dp-blueprint-on body button,
 html.dp-blueprint-on body input,
 html.dp-blueprint-on body textarea,
-html.dp-blueprint-on body select {
-  background-color: rgba(124,196,255,0.05) !important;
-  color: #e8f3ff !important;
+html.dp-blueprint-on body select,
+html.dp-blueprint-on body [role="button"],
+html.dp-blueprint-on body a[role="button"],
+html.dp-blueprint-on body [type="button"],
+html.dp-blueprint-on body [type="submit"],
+html.dp-blueprint-on body a[jsaction],
+html.dp-blueprint-on body div[jsaction][role],
+html.dp-blueprint-on body span[jsaction][role] {
+  background-color: rgba(13, 33, 56, 0.55) !important;
+  color: #7cc4ff !important;
   border: 1px dashed #7cc4ff !important;
   border-radius: 0 !important;
   font-family: 'Architects Daughter', sans-serif !important;
@@ -121,7 +137,12 @@ html.dp-blueprint-on body button {
   letter-spacing: 3px !important;
   text-transform: uppercase !important;
 }
-html.dp-blueprint-on body button:hover {
+html.dp-blueprint-on body button:hover,
+html.dp-blueprint-on body [role="button"]:hover,
+html.dp-blueprint-on body a[role="button"]:hover,
+html.dp-blueprint-on body [type="button"]:hover,
+html.dp-blueprint-on body [type="submit"]:hover,
+html.dp-blueprint-on body a[jsaction]:hover {
   background: #7cc4ff !important;
   color: #0d2138 !important;
   box-shadow: 0 0 24px rgba(124,196,255,0.7) !important;
@@ -132,6 +153,50 @@ html.dp-blueprint-on body textarea:focus {
   border-style: solid !important;
   outline: none !important;
   box-shadow: 0 0 18px rgba(124,196,255,0.4) !important;
+}
+
+/* Force descendant color + icon cascade. Without this, Spotify's
+   button labels (wrapped in child spans with their own class color)
+   stay at site-default and disappear against the blueprint bg. */
+html.dp-blueprint-on body button *,
+html.dp-blueprint-on body [role="button"] *,
+html.dp-blueprint-on body a[role="button"] *,
+html.dp-blueprint-on body [type="button"] *,
+html.dp-blueprint-on body [type="submit"] *,
+html.dp-blueprint-on body a[jsaction] *,
+html.dp-blueprint-on body div[jsaction][role] *,
+html.dp-blueprint-on body span[jsaction][role] * {
+  color: #7cc4ff !important;
+}
+html.dp-blueprint-on body :is(button, [role="button"], a[role="button"], [type="button"], [type="submit"], a[jsaction], div[jsaction][role], span[jsaction][role]) :is(svg, svg *, path, use) {
+  fill: #7cc4ff !important;
+  stroke: #7cc4ff !important;
+  opacity: 1 !important;
+}
+
+/* Active/selected tab state — solid cyan fill, navy ink. The "ALL"
+   filter chip on Spotify and similar `[aria-pressed/selected]=true`
+   chips otherwise look identical to their unselected siblings,
+   defeating the "which one is current" affordance. Now they invert:
+   solid cyan plate + navy text + bold weight. */
+html.dp-blueprint-on body [aria-pressed="true"],
+html.dp-blueprint-on body [aria-selected="true"],
+html.dp-blueprint-on body [aria-current="true"],
+html.dp-blueprint-on body [aria-current="page"] {
+  background-color: #7cc4ff !important;
+  color: #0d2138 !important;
+  border-color: #fff !important;
+  font-weight: 700 !important;
+}
+html.dp-blueprint-on body [aria-pressed="true"] *,
+html.dp-blueprint-on body [aria-selected="true"] *,
+html.dp-blueprint-on body [aria-current="true"] *,
+html.dp-blueprint-on body [aria-current="page"] * {
+  color: #0d2138 !important;
+}
+html.dp-blueprint-on body :is([aria-pressed="true"], [aria-selected="true"], [aria-current="true"], [aria-current="page"]) :is(svg, svg *, path, use) {
+  fill: #0d2138 !important;
+  stroke: #0d2138 !important;
 }
 
 /* Cards / list items: drafting-detail box with corner tick */
