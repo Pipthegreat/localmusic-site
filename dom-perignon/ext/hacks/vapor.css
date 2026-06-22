@@ -195,6 +195,32 @@ html.dp-vapor-on body a[jsaction]:hover {
     0 6px 24px rgba(168, 80, 255, 0.4) !important;
 }
 
+/* v1.5.33 — force text + icon color CASCADE through button descendants.
+   The button-level color works, but Google's button labels are wrapped
+   in child spans/divs with their own color set via class selectors —
+   those beat the parent's color via cascade unless we explicitly target
+   the descendants too. Same for SVG icons inside the mic/camera/share
+   buttons: they had `fill="..."` set inline that needed forcing.
+   This rule says: anywhere inside a vapor-themed button, force the
+   dark-purple ink so labels and icons read against the frosted-white
+   pill regardless of what color the site originally painted them. */
+html.dp-vapor-on body button *,
+html.dp-vapor-on body [role="button"] *,
+html.dp-vapor-on body a[role="button"] *,
+html.dp-vapor-on body [type="button"] *,
+html.dp-vapor-on body [type="submit"] *,
+html.dp-vapor-on body a[jsaction] *,
+html.dp-vapor-on body div[jsaction][role] *,
+html.dp-vapor-on body span[jsaction][role] * {
+  color: #6a3aa5 !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55) !important;
+}
+html.dp-vapor-on body :is(button, [role="button"], a[role="button"], [type="button"], [type="submit"], a[jsaction], div[jsaction][role], span[jsaction][role]) :is(svg, svg *, path) {
+  fill: #6a3aa5 !important;
+  stroke: #6a3aa5 !important;
+  opacity: 1 !important;
+}
+
 /* Cards / list items: glass tile with pink hairline */
 html.dp-vapor-on body li,
 html.dp-vapor-on body article,

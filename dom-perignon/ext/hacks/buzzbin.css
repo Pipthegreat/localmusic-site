@@ -82,9 +82,40 @@ html.dp-buzzbin-on body *:not(button):not(input):not(textarea):not(select):not(c
 
 /* Icon rescue: SVGs inside clickable elements inherit the ink-black
    text color via currentColor so light fills (if any) don't sit
-   invisible on the yellow canvas. */
-html.dp-buzzbin-on body :is(button, a, label, [role="button"], [role="link"]) :is(svg, svg *) {
-  fill: currentColor !important;
+   invisible on the yellow canvas.
+   v1.5.33 — extended to force fill + stroke on every path/use too.
+   Google's "+" icon on the homepage search bar was rendering as a
+   transparent slot because its inline svg had `fill="..."` set with
+   specificity that beat plain `currentColor` inheritance. Forcing
+   the value AND covering stroke (some icons stroke instead of fill)
+   makes ink-black always paint. */
+html.dp-buzzbin-on body :is(button, a, label, [role="button"], [role="link"], [type="button"], [type="submit"], a[jsaction], div[jsaction][role]) :is(svg, svg *, path, use) {
+  fill: #111 !important;
+  stroke: #111 !important;
+  opacity: 1 !important;
+}
+
+/* Also extend buzzbin's white-pill button styling to the same broader
+   set of button-shaped elements that vapor catches — `[role="button"]`,
+   `[type="button/submit"]`, Google's `a/div[jsaction][role]` interactive
+   cells. Without this, custom buttons (like Google's "+" attach,
+   share-doodle, AI Mode) wouldn't get the sticker-bomb pill — they'd
+   look like naked text against the yellow halftone. */
+html.dp-buzzbin-on body [role="button"],
+html.dp-buzzbin-on body a[role="button"],
+html.dp-buzzbin-on body [type="button"],
+html.dp-buzzbin-on body [type="submit"],
+html.dp-buzzbin-on body a[jsaction],
+html.dp-buzzbin-on body div[jsaction][role],
+html.dp-buzzbin-on body span[jsaction][role] {
+  background-color: #fff !important;
+  background-image: none !important;
+  color: #111 !important;
+  border: 3px solid #111 !important;
+  box-shadow: 4px 4px 0 #111 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  border-radius: 0 !important;
 }
 
 /* ───── Headings — graded loudness ───── */
