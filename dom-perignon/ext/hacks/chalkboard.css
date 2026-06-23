@@ -179,10 +179,8 @@ html.dp-chalkboard-on body img,
 html.dp-chalkboard-on body picture,
 html.dp-chalkboard-on body video,
 html.dp-chalkboard-on body canvas {
-  /* v1.5.41 — dropped the dashed chalk border on every image. It read
-     as a "disjoined sticker frame" around real photos / album art /
-     avatars, especially on image-dense sites (Spotify, social feeds).
-     Sepia + brightness filter still gives images a slatey-chalk feel
-     without the boxed-in frame. */
+  /* v1.5.42 — restored the dashed chalk border (v1.5.41 removed it,
+     but the user preferred the framed look). */
   filter: contrast(0.95) brightness(0.85) sepia(0.2) !important;
+  border: 2px dashed rgba(254,253,250,0.55) !important;
 }
