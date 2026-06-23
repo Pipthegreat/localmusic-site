@@ -817,7 +817,7 @@ footer.foot a:hover{border-bottom-style:solid}
       var ok = false;
       try { ok = JSON.parse(xhr.responseText).ok === true; } catch(e){}
       if(xhr.status >= 200 && xhr.status < 300 && ok) showDone();
-      else failSubmit("Couldn't send (server said " + xhr.status + "). Try again, or email mr.raleigh.j@gmail.com directly.");
+      else failSubmit("Couldn't send (server said " + xhr.status + "). Try again, or email person@customprojects.info directly.");
     };
     xhr.onerror = function(){ failSubmit("Network error — nothing was sent. Check your connection and try again."); };
     xhr.send(new FormData(el.form));
