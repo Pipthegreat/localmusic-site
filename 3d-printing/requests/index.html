@@ -814,12 +814,15 @@ footer.foot a:hover{border-bottom-style:solid}
       }
     };
     xhr.onload = function(){
-      var ok = false;
-      try { ok = JSON.parse(xhr.responseText).ok === true; } catch(e){}
-      if(xhr.status >= 200 && xhr.status < 300 && ok) showDone();
-      else failSubmit("Couldn't send (server said " + xhr.status + ") — your file is still attached, tap File Request to retry, or email person@customprojects.info.");
+      var res = {};
+      try { res = JSON.parse(xhr.responseText); } catch(e){}
+      if(xhr.status >= 200 && xhr.status < 300 && res.ok === true){ showDone(); return; }
+      // capture the failure (with the file) so nothing is lost and the shop is alerted
+      if(xhr.status === 404 || xhr.status >= 500) sendErrorReport("HTTP " + xhr.status);
+      var msg = res.message || ("Couldn't send (server said " + xhr.status + "). Email person@customprojects.info if this keeps happening.");
+      failSubmit(msg + " Your file is still attached — tap File Request to retry.");
     };
-    xhr.onerror = function(){ failSubmit("Network error — your file is still attached. Tap File Request to retry."); };
+    xhr.onerror = function(){ sendErrorReport("network/blocked"); failSubmit("Couldn't reach the server — your file is still attached. Tap File Request to retry."); };
     xhr.send(new FormData(el.form));
   });
 
@@ -839,6 +842,17 @@ footer.foot a:hover{border-bottom-style:solid}
     el.submitErr.textContent = "⚠ " + msg;
     el.submitErr.classList.add("show");
     el.submitErr.scrollIntoView({behavior:"smooth", block:"center"});
+  }
+  // On a real failure, re-send the file + form to the apex /api/error endpoint so
+  // the upload is captured and the shop gets an alert even though the submit failed.
+  function sendErrorReport(detail){
+    try {
+      var fd = new FormData(el.form);          // all fields + the selected file
+      fd.append("_error", detail);
+      fd.append("_failed_url", el.form.getAttribute("action"));
+      fd.append("_page", location.href);
+      fetch("https://customprojects.info/3d-printing/api/error", { method: "POST", body: fd, keepalive: true }).catch(function(){});
+    } catch(e){}
   }
 
   function showDone(){
