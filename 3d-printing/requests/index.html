@@ -289,7 +289,7 @@ footer.foot a:hover{border-bottom-style:solid}
   <p class="mode-hint" id="modeHint">Have a sliced file? Upload it and we'll quote from it — minimal questions.</p>
 
   <form id="intakeForm" class="grid" data-mode="simple"
-        action="/3d-printing/api/submit"
+        action="https://customprojects.info/3d-printing/api/submit"
         method="POST" enctype="multipart/form-data" novalidate>
 
     <!-- ===== FormSubmit control fields ===== -->
@@ -817,9 +817,9 @@ footer.foot a:hover{border-bottom-style:solid}
       var ok = false;
       try { ok = JSON.parse(xhr.responseText).ok === true; } catch(e){}
       if(xhr.status >= 200 && xhr.status < 300 && ok) showDone();
-      else failSubmit("Couldn't send (server said " + xhr.status + "). Try again, or email person@customprojects.info directly.");
+      else failSubmit("Couldn't send (server said " + xhr.status + ") — your file is still attached, tap File Request to retry, or email person@customprojects.info.");
     };
-    xhr.onerror = function(){ failSubmit("Network error — nothing was sent. Check your connection and try again."); };
+    xhr.onerror = function(){ failSubmit("Network error — your file is still attached. Tap File Request to retry."); };
     xhr.send(new FormData(el.form));
   });
 
