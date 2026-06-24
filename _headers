@@ -1,0 +1,7 @@
+# Security headers for the 3D-printing pages (scoped so other subprojects are untouched).
+/3d-printing/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Strict-Transport-Security: max-age=31536000
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
