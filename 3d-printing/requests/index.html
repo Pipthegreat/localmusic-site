@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>3D PRINTING — INTAKE · customprojects.info</title>
-<meta name="description" content="Request a custom 3D print. Pick a material, upload your model, get an instant cost estimate, and file a work order — printed on a Prusa Core One L.">
+<meta name="description" content="Request a free custom 3D print. Pick a material, upload your model, and send it in — printed on a Prusa Core One L.">
 <link rel="canonical" href="https://customprojects.info/3d-printing/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
    Visual world: BLUEPRINT / "DRAWING" — architect's drafting,
    cyan on navy. Cloned from the checklist's blueprint theme.
    Composition discipline: editorial (eyebrow / masthead / lede,
-   sectioned spec-sheet, sticky title-block estimate).
+   sectioned spec-sheet).
    ============================================================ */
 :root{
   --navy:#0d2138;
@@ -54,7 +54,7 @@ body::before{
     radial-gradient(ellipse at bottom left,rgba(124,196,255,0.08),transparent 50%);
 }
 body::after{
-  content:'REV. A · 3D PRINT INTAKE · WORK ORDER · SHEET 1 OF 1';
+  content:'REV. A · 3D PRINT INTAKE · PRINT REQUEST · SHEET 1 OF 1';
   position:fixed;bottom:12px;right:16px;left:16px;text-align:right;
   font-family:var(--mono);font-size:9px;letter-spacing:3px;
   color:rgba(201,213,229,0.9);z-index:1;pointer-events:none;
@@ -94,10 +94,7 @@ h1 .l2{
 
 /* ---------- layout ---------- */
 .grid{
-  display:grid;grid-template-columns:1fr;gap:26px;margin-top:34px;
-}
-@media(min-width:880px){
-  .grid{grid-template-columns:1fr 340px;align-items:start;gap:34px}
+  display:grid;grid-template-columns:1fr;gap:26px;margin:34px auto 0;max-width:720px;
 }
 
 /* ---------- sheet / sections ---------- */
@@ -118,10 +115,8 @@ h1 .l2{
 .mode-opt:not(.active):hover{background:rgba(124,196,255,0.12);color:var(--ink)}
 .mode-hint{text-align:center;font-family:var(--hand);font-size:15px;color:var(--cyan-dim);margin:0 auto 26px;max-width:540px;letter-spacing:0.3px}
 .drop.invalid{border-color:var(--red);box-shadow:0 0 14px rgba(255,80,80,0.4)}
-/* simple mode: hide full-only blocks + estimator; narrow single column */
+/* simple mode: hide the full-only blocks (the part / material-spec sections) */
 form[data-mode="simple"] [data-when="full"]{display:none}
-form[data-mode="simple"]{grid-template-columns:1fr}
-@media(min-width:880px){ form[data-mode="simple"]{max-width:700px;margin-left:auto;margin-right:auto} }
 .section::after{
   content:'';position:absolute;right:-5px;bottom:-5px;width:10px;height:10px;
   border-right:1px solid var(--cyan);border-bottom:1px solid var(--cyan);
@@ -201,31 +196,6 @@ input.invalid,select.invalid,textarea.invalid{border-color:var(--red);border-sty
 .grams-readout.has .g-status{color:var(--ok)}
 .auto-tag{font-family:var(--mono);font-size:9px;letter-spacing:1px;color:rgba(201,213,229,0.9);text-transform:uppercase}
 
-/* ---------- estimate title block ---------- */
-.estimate{position:relative}
-@media(min-width:880px){.estimate{position:sticky;top:18px}}
-.tb{
-  border:1.5px solid var(--cyan);background:var(--navy-2);position:relative;
-  box-shadow:0 0 0 4px var(--navy),0 0 0 5px rgba(124,196,255,0.4);
-}
-.tb-head{
-  border-bottom:1.5px solid var(--cyan);padding:14px 16px 12px;position:relative;
-}
-.tb-head .k{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:var(--cyan-dim);text-transform:uppercase}
-.tb-head .t{font-family:var(--hand);font-size:26px;color:var(--ink);letter-spacing:1px;text-transform:uppercase;line-height:1;margin-top:3px}
-.tb-corner{position:absolute;top:8px;right:12px;font-family:var(--mono);font-size:8px;letter-spacing:2px;color:rgba(124,196,255,0.6)}
-.tb-body{padding:14px 16px 6px}
-.tb-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:6px 0;font-family:var(--mono);font-size:11px;letter-spacing:0.5px}
-.tb-row .lk{color:var(--cyan-dim);text-transform:uppercase;font-size:10px}
-.tb-row .lv{color:var(--ink);text-align:right}
-.tb-rule{height:1px;background:var(--cyan-faint);margin:8px 0}
-.tb-total{
-  border-top:1.5px solid var(--cyan);margin-top:6px;padding:14px 16px 16px;background:rgba(124,196,255,0.06);
-}
-.tb-total .k{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:var(--cyan-dim);text-transform:uppercase}
-.tb-total .v{font-family:var(--hand);font-size:34px;color:var(--cyan);text-shadow:0 0 18px rgba(124,196,255,0.6);line-height:1.05;margin-top:2px}
-.tb-total .v.tbd{font-size:18px;color:var(--cyan-dim);text-shadow:none}
-.tb-note{font-family:var(--mono);font-size:8.5px;letter-spacing:0.5px;color:rgba(201,213,229,0.9);margin-top:8px;line-height:1.6}
 
 /* ---------- actions ---------- */
 .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
@@ -270,15 +240,16 @@ footer.foot a:hover{border-bottom-style:solid}
 <div class="wrap">
 
   <header>
-    <span class="eyebrow">— DRAWING · WORK ORDER —</span>
+    <span class="eyebrow">— DRAWING · PRINT REQUEST —</span>
     <h1><span class="l1">3D&nbsp;Printing</span><span class="l2">Intake</span></h1>
-    <p class="lede">Custom print request form.</p>
+    <p class="lede">Free custom 3D printing — just tell us what you need.</p>
     <div class="spec-strip">
       <span><b>Printer</b> Prusa Core One L</span>
       <span><b>Process</b> FDM</span>
       <span><b>Build vol</b> 300 × 300 × 330</span>
       <span><b>Nozzle</b> 0.4 mm</span>
-      <span><b>Turnaround</b> quote in 2–3 days</span>
+      <span><b>Turnaround</b> reply in 2–3 days</span>
+      <span><b>Free</b> service</span>
     </div>
   </header>
 
@@ -286,7 +257,7 @@ footer.foot a:hover{border-bottom-style:solid}
     <button type="button" class="mode-opt active" data-mode="simple">✓ I have a Print File</button>
     <button type="button" class="mode-opt" data-mode="full">No Print File</button>
   </div>
-  <p class="mode-hint" id="modeHint">Have a sliced file? Upload it and we'll quote from it — minimal questions.</p>
+  <p class="mode-hint" id="modeHint">Have a sliced file? Upload it and we'll print it — minimal questions.</p>
 
   <form id="intakeForm" class="grid" data-mode="simple"
         action="https://customprojects.info/3d-printing/api/submit"
@@ -302,7 +273,7 @@ footer.foot a:hover{border-bottom-style:solid}
       <!-- 01 CONTACT -->
       <fieldset class="section" data-tag="BLOCK 01">
         <h2>Who's asking</h2>
-        <p class="sub">So we can send the quote back</p>
+        <p class="sub">So we can get back to you</p>
         <div class="row two">
           <div class="field">
             <label class="lbl" for="f_name">Name <span class="req">*</span></label>
@@ -335,7 +306,7 @@ footer.foot a:hover{border-bottom-style:solid}
       <!-- 03 MATERIAL & SPEC -->
       <fieldset class="section" data-tag="BLOCK 03" data-when="full">
         <h2>Material &amp; spec</h2>
-        <p class="sub">Drives the estimate</p>
+        <p class="sub">How you'd like it printed</p>
         <div class="row two">
           <div class="field">
             <label class="lbl" for="f_material">Material <span class="req">*</span></label>
@@ -405,7 +376,7 @@ footer.foot a:hover{border-bottom-style:solid}
           <div class="warn-box" id="sizeWarn"></div>
           <div class="err-msg" id="e_file">Please attach your print file.</div>
           <div class="hint">Sliced files (<b>.gcode</b>, Prusa <b>.bgcode</b>) are read automatically for
-            filament weight. STL / STEP / 3MF carry no weight — those get a slice-and-quote.</div>
+            filament weight. STL / STEP / 3MF carry no weight — we'll slice those for you.</div>
         </div>
         <div class="field">
           <label class="lbl">Filament needed <span class="auto-tag">· auto-read, no manual entry</span></label>
@@ -414,7 +385,7 @@ footer.foot a:hover{border-bottom-style:solid}
             <span class="g-status" id="gramsStatus">Upload a sliced .gcode or .bgcode — the weight reads itself.</span>
           </div>
           <input type="hidden" id="f_grams" name="Filament (grams)" value="">
-          <div class="hint">Read straight from your sliced file — no typing. It's the core driver of the estimate.</div>
+          <div class="hint">Read straight from your sliced file — no typing, just confirms we've got the right part.</div>
         </div>
       </fieldset>
 
@@ -438,8 +409,6 @@ footer.foot a:hover{border-bottom-style:solid}
         </div>
       </fieldset>
 
-      <!-- hidden computed mirror so the email carries the on-screen quote -->
-      <input type="hidden" name="Estimated quote" id="fs_estimate" value="(not computed)">
       <input type="hidden" name="Filament source" id="fs_source" value="no file uploaded">
 
       <div class="actions">
@@ -449,33 +418,6 @@ footer.foot a:hover{border-bottom-style:solid}
       <div class="warn-box" id="submitErr"></div>
     </div>
 
-    <!-- ============ RIGHT: estimate title block ============ -->
-    <aside class="estimate" data-when="full">
-      <div class="tb">
-        <div class="tb-head">
-          <span class="tb-corner">EST. №01</span>
-          <div class="k">Cost estimate</div>
-          <div class="t">Bill of materials</div>
-        </div>
-        <div class="tb-body">
-          <div class="tb-row"><span class="lk">Material</span><span class="lv" id="o_material">—</span></div>
-          <div class="tb-row"><span class="lk">Rate</span><span class="lv" id="o_rate">—</span></div>
-          <div class="tb-row"><span class="lk">Filament</span><span class="lv" id="o_grams">—</span></div>
-          <div class="tb-row"><span class="lk">Quality</span><span class="lv" id="o_quality">Standard ×1.0</span></div>
-          <div class="tb-row"><span class="lk">Quantity</span><span class="lv" id="o_qty">1 pc</span></div>
-          <div class="tb-rule"></div>
-          <div class="tb-row"><span class="lk">Material cost</span><span class="lv" id="o_matcost">—</span></div>
-          <div class="tb-row"><span class="lk">Machine + labour</span><span class="lv" id="o_machine">—</span></div>
-          <div class="tb-row"><span class="lk">Setup / handling</span><span class="lv" id="o_setup">$6.00</span></div>
-        </div>
-        <div class="tb-total">
-          <div class="k">Estimated total</div>
-          <div class="v tbd" id="o_total">— add filament</div>
-          <div class="tb-note" id="o_note">Indicative only. Pick a material and enter (or upload) the
-            filament weight to draw the estimate. Final quote is confirmed after we slice your file.</div>
-        </div>
-      </div>
-    </aside>
 
   </form>
 
@@ -492,8 +434,8 @@ footer.foot a:hover{border-bottom-style:solid}
   <div class="done-card">
     <span class="stamp">▣ stamped · rev. a</span>
     <h3>Filed</h3>
-    <p>Your work order is in. We'll reply to <span class="em" id="doneEmail">your email</span>
-       with a confirmed quote within 2–3 days.</p>
+    <p>Your request is in. We'll reply to <span class="em" id="doneEmail">your email</span>
+       within 2–3 days.</p>
     <button type="button" class="again" id="fileAnother">File another</button>
   </div>
 </div>
@@ -502,26 +444,15 @@ footer.foot a:hover{border-bottom-style:solid}
 (function(){
   "use strict";
 
-  /* ---- pricing model (loaded $/g: spool + waste + margin) ---- */
-  var MAT = {
-    "PLA":                {rate:0.025, dens:1.24},
-    "PLA Silk/Specialty": {rate:0.030, dens:1.24},
-    "PETG":               {rate:0.030, dens:1.27},
-    "ABS":                {rate:0.030, dens:1.04},
-    "ASA":                {rate:0.035, dens:1.07},
-    "TPU (Flexible)":     {rate:0.045, dens:1.21},
-    "Nylon (PA)":         {rate:0.055, dens:1.14},
-    "Polycarbonate (PC)": {rate:0.060, dens:1.20},
-    "Carbon-fiber (CF)":  {rate:0.075, dens:1.25},
-    "Wood / Composite":   {rate:0.040, dens:1.28}
+  /* ---- material densities (used only for filament length → grams conversion) ---- */
+  var DENS = {
+    "PLA":1.24, "PLA Silk/Specialty":1.24, "PETG":1.27, "ABS":1.04, "ASA":1.07,
+    "TPU (Flexible)":1.21, "Nylon (PA)":1.14, "Polycarbonate (PC)":1.20,
+    "Carbon-fiber (CF)":1.25, "Wood / Composite":1.28
   };
-  var MACHINE_RATE = 0.04;   // $/g proxy for print-time + handling
-  var SETUP_FEE    = 6.00;
-  var MIN_ORDER    = 12.00;
-  var MAX_BYTES    = 100 * 1024 * 1024;   // Worker body ceiling; files are stored in R2
+  var MAX_BYTES = 100 * 1024 * 1024;   // Worker body ceiling; files are stored in R2
 
   var $ = function(id){ return document.getElementById(id); };
-  var fmt = function(n){ return "$" + n.toFixed(2); };
 
   var el = {
     material:$("f_material"), color:$("f_color"), quality:$("f_quality"),
@@ -531,60 +462,12 @@ footer.foot a:hover{border-bottom-style:solid}
     fileReadout:$("fileReadout"), fileName:$("fileName"), fileMeta:$("fileMeta"),
     clearFile:$("clearFile"), sizeWarn:$("sizeWarn"),
     gramsReadout:$("gramsReadout"), gramsVal:$("gramsVal"), gramsStatus:$("gramsStatus"),
-    o:{material:$("o_material"), rate:$("o_rate"), grams:$("o_grams"), quality:$("o_quality"),
-       qty:$("o_qty"), matcost:$("o_matcost"), machine:$("o_machine"), setup:$("o_setup"),
-       total:$("o_total"), note:$("o_note")},
-    estimateField:$("fs_estimate"), sourceField:$("fs_source"), submitErr:$("submitErr"),
+    sourceField:$("fs_source"), submitErr:$("submitErr"),
     form:$("intakeForm"), submitBtn:$("submitBtn")
   };
 
-  /* ---------------- cost estimate ---------------- */
-  function compute(){
-    var mname = el.material.value;
-    var m = MAT[mname];
-    var grams = parseFloat(el.grams.value) || 0;
-    var qty = Math.max(1, parseInt(el.qty.value,10) || 1);
-    var qOpt = el.quality.options[el.quality.selectedIndex];
-    var qMult = parseFloat(qOpt && qOpt.getAttribute("data-mult")) || 1.0;
-    var qLabel = (qOpt ? qOpt.text.split(" — ")[0] : "Standard") + " ×" + qMult;
-
-    el.o.material.textContent = mname || "—";
-    el.o.rate.textContent     = m ? ("$" + m.rate.toFixed(3) + " /g") : "—";
-    el.o.grams.textContent    = grams ? (grams.toFixed(1) + " g") : "—";
-    el.o.quality.textContent  = qLabel;
-    el.o.qty.textContent      = qty + (qty===1 ? " pc" : " pcs");
-
-    if(!m || !grams){
-      el.o.matcost.textContent = "—";
-      el.o.machine.textContent = "—";
-      el.o.total.classList.add("tbd");
-      el.o.total.textContent = m ? "— upload sliced file" : "— pick material";
-      el.o.note.textContent = "Indicative only. Pick a material and upload a sliced file (.gcode / .bgcode) — we read the filament weight and draw the estimate. STL/STEP get a slice-and-quote.";
-      el.estimateField.value = (el.form.dataset.mode === "simple") ? "" : "(pending — material/filament not set)";
-      return;
-    }
-
-    var matCost  = grams * m.rate;
-    var machine  = grams * MACHINE_RATE * qMult;
-    var perUnit  = matCost + machine;
-    var subtotal = SETUP_FEE + qty * perUnit;
-    var total    = Math.max(subtotal, MIN_ORDER);
-    var low  = Math.max(MIN_ORDER, total * 0.9);
-    var high = total * 1.15;
-
-    el.o.matcost.textContent = fmt(matCost * qty);
-    el.o.machine.textContent = fmt(machine * qty);
-    el.o.setup.textContent   = fmt(SETUP_FEE);
-    el.o.total.classList.remove("tbd");
-    el.o.total.textContent   = "≈ " + fmt(low) + " – " + fmt(high);
-    el.o.note.textContent    = "Indicative estimate at " + (m.rate).toFixed(3) + " $/g material + " +
-        MACHINE_RATE.toFixed(2) + " $/g machine ×" + qMult + " quality, ×" + qty +
-        ", +" + fmt(SETUP_FEE) + " setup. Final quote confirmed after slicing.";
-
-    el.estimateField.value = "~" + fmt(low) + "-" + fmt(high) + "  [" + mname +
-        ", " + grams.toFixed(1) + "g, " + qLabel + ", x" + qty +
-        " | matr " + fmt(matCost*qty) + " + mach " + fmt(machine*qty) + " + setup " + fmt(SETUP_FEE) + "]";
-  }
+  // Printing is free — the estimator was removed. Kept as a no-op so existing call sites stay valid.
+  function compute(){}
 
   /* ---------------- filament parsing ---------------- */
   // returns {grams:Number, how:String} or null
@@ -669,8 +552,7 @@ footer.foot a:hover{border-bottom-style:solid}
   }
 
   function densNow(){
-    var m = MAT[el.material.value];
-    return m ? m.dens : 1.24;
+    return DENS[el.material.value] || 1.24;
   }
 
   function humanSize(b){
@@ -754,7 +636,7 @@ footer.foot a:hover{border-bottom-style:solid}
       rb.readAsArrayBuffer(f);
     } else {
       setGrams(0, "");
-      el.gramsStatus.textContent = "no slice data in this format — we'll slice & quote.";
+      el.gramsStatus.textContent = "no slice data in this format — we'll slice it here.";
     }
     compute();
   }
@@ -796,8 +678,6 @@ footer.foot a:hover{border-bottom-style:solid}
       if(first) first.scrollIntoView({behavior:"smooth", block:"center"});
       return;
     }
-    compute(); // refresh hidden estimate/source mirrors before sending
-
     var f = el.file.files && el.file.files[0];
     if(f && f.size > MAX_BYTES){ el.sizeWarn.scrollIntoView({behavior:"smooth", block:"center"}); return; }
 
@@ -908,8 +788,8 @@ footer.foot a:hover{border-bottom-style:solid}
     modeOpts.forEach(function(b){ b.classList.toggle("active", b.dataset.mode === mode); });
     var hint = $("modeHint");
     if(hint) hint.textContent = (mode === "simple")
-      ? "Have a sliced file? Upload it and we'll quote from it — minimal questions."
-      : "No file yet? Tell us the part + material and we'll estimate and slice it for you.";
+      ? "Have a sliced file? Upload it and we'll print it — minimal questions."
+      : "No file yet? Tell us the part + material and we'll slice and print it for you.";
     document.querySelectorAll(".err-msg").forEach(function(m){ m.classList.remove("show"); });
     document.querySelectorAll(".invalid").forEach(function(i){ i.classList.remove("invalid"); });
     compute();
