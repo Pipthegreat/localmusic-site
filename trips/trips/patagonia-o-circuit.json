@@ -1,0 +1,409 @@
+{
+ "trip_id": "patagonia-o-circuit",
+ "name": "Torres del Paine - O Circuit",
+ "region": "Magallanes, Chilean Patagonia",
+ "date_range": "2027-11 – 2028-03 season",
+ "duration_days": 10,
+ "theme": "backpacking",
+ "summary": "The honest default for 'backpacking Patagonia': the O Circuit — an ~8-day, ~120 km counterclockwise-only loop around the Paine massif that adds the remote backside (Serón, Dickson, Los Perros, John Gardner Pass, the Grey glacier ladders) to everything the W-trek has; the W (4–5 days) is the fallback if beds are gone. The Huemul Circuit is wilder but needs harness/glacier gear and a CONAF permit, and Fitz Roy is day-hiking from El Chaltén, not a committed loop. The real limiter is not fitness but the booking system: every night must be reserved in advance with two separate concessionaires (Vertice and Las Torres/Fantástico Sur), wild camping is illegal, and Dec–Feb dates sell out months ahead — lock the chain of camps first (bookings open around April for the following season), then flights. Second limiter: the wind — sustained 60–80 km/h with gusts past 100 km/h is a normal forecast line here, worst Nov–Jan. Third: John Gardner Pass, where rangers at Los Perros control the morning start window and close the crossing outright in bad weather — build a buffer day. Park entry is sold only online via CONAF's pasesparques.cl (US$35 high season through April 2026; a route-based Circuit ticket replaces it from May 2026 — prices unpublished, confirm ahead). Season Nov–Mar; the backside is closed to unguided hikers outside it. Base: Puerto Natales, reached by bus, then bus + catamaran into the park.",
+ "activities": [
+  {
+   "activity_id": "tdp-natales-prep",
+   "name": "Puerto Natales Prep Day — Permits, Gear, 3 O'Clock Talk",
+   "type": "historic",
+   "order_index": 1,
+   "lat": -51.7314939,
+   "lng": -72.4995684,
+   "time_window": "12:00–18:00",
+   "duration": "5–6 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "The old wool-port town is the O's staging base. Print/offline-save both concessionaire bookings (Vertice: Dickson, Los Perros, Grey, Paine Grande; Las Torres: Central, Serón, Francés, Cuernos, Chileno) and your pasesparques.cl entry QR — there is no reliable signal in the park. Rent gas canisters and any gear in town (canisters can't fly with you), buy bus tickets for the 06:45 departure, and catch Erratic Rock's long-running free trail talk at 15:00 — confirm ahead that the talk still runs and their current rental stock.",
+   "reference_link": "https://www.erraticrock.com/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "erratic-rock"
+   ]
+  },
+  {
+   "activity_id": "tdp-baguales-night",
+   "name": "Baguales Brewpub — Last Meal Before the Trail",
+   "type": "food",
+   "order_index": 2,
+   "lat": -51.7256909,
+   "lng": -72.5067702,
+   "time_window": "18:00–21:00",
+   "duration": "2 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Patagonia's first brewpub (brewery 2006, bar 2010), in a refurbished early-1900s house at Bories 430 facing the plaza — burgers, quesadillas, and house beer before eight days of dehydrated dinners. It also works as the post-trek celebration on the way out. Confirm current opening hours locally; kitchens in Natales run on their own schedule.",
+   "reference_link": "https://cervezabaguales.cl/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "baguales-brewpub"
+   ]
+  },
+  {
+   "activity_id": "tdp-stage1-seron",
+   "name": "Stage 1 — Central to Serón",
+   "type": "outdoor",
+   "order_index": 3,
+   "lat": -50.9666937,
+   "lng": -72.8700867,
+   "time_window": "10:00–15:00",
+   "duration": "4–5 hr",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "Off the 06:45 bus at Laguna Amarga, shuttle to the Central sector, then 13 km of rolling grassland and lenga forest up the Río Paine to Campamento Serón — the gentlest day, deliberately first. From here the loop is one-way counterclockwise by park rule; there is no turning back over the pass. Cooking anywhere on the O is legal only in each camp's designated shelter, gas-canister stoves only — open flame is penalized by law after the 2011-12 fire burned ~17,600 ha of the park.",
+   "reference_link": "https://torreshike.com/blog/how-to-make-a-reservation-in-torres-del-paine/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "camping-central",
+    "camping-seron"
+   ]
+  },
+  {
+   "activity_id": "tdp-stage2-dickson",
+   "name": "Stage 2 — Serón to Dickson",
+   "type": "outdoor",
+   "order_index": 4,
+   "lat": -50.8658514,
+   "lng": -72.8928274,
+   "time_window": "08:00–15:00",
+   "duration": "6–7 hr",
+   "difficulty": "hard",
+   "cash_only": false,
+   "description": "18.5 km around Lago Paine's shoulder — the first real wind lesson: the exposed bluff above the lake funnels gusts that can stop you mid-stride, so keep poles out and hip belts cinched. CONAF checks bookings at the Coirón ranger post mid-stage; carry the reservation chain on paper. Ends at Refugio Dickson's grassy flat on the lakeshore, the remotest camp on the circuit.",
+   "reference_link": "https://www.vertice.travel/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "camping-seron",
+    "refugio-dickson"
+   ]
+  },
+  {
+   "activity_id": "tdp-dickson-evening",
+   "name": "Lago Dickson Shore Evening",
+   "type": "scenery",
+   "order_index": 5,
+   "lat": -50.879431,
+   "lng": -73.0747594,
+   "time_window": "17:00–21:00",
+   "duration": "2–3 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Dickson sits on a glacial lake with the Dickson Glacier calving face across the water and midsummer light lingering past 21:00 at this latitude — the one camp where an evening actually feels like a reward rather than recovery. Stay inside camp boundaries; camping and cooking outside designated sites is prohibited parkwide.",
+   "reference_link": "https://www.vertice.travel/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "refugio-dickson"
+   ]
+  },
+  {
+   "activity_id": "tdp-stage3-perros",
+   "name": "Stage 3 — Dickson to Los Perros",
+   "type": "outdoor",
+   "order_index": 6,
+   "lat": -50.879431,
+   "lng": -73.0747594,
+   "time_window": "08:30–13:30",
+   "duration": "4–5 hr",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "12 km climbing steadily through old-growth lenga to the moraine-dammed Los Perros glacier lagoon, then the last, coldest camp before the pass. Arrive early, dry everything, and report to the rangers: Los Perros is the control gate for John Gardner Pass — they set (and enforce) the next morning's departure window and will hold everyone in camp if the forecast is bad. Ask them for the verdict the evening you arrive.",
+   "reference_link": "https://blog.lastorres.com/discover-john-gardner-pass",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "refugio-dickson",
+    "camping-los-perros"
+   ]
+  },
+  {
+   "activity_id": "tdp-stage4-gardner-pass",
+   "name": "Stage 4 — John Gardner Pass to Grey (The Crux)",
+   "type": "outdoor",
+   "order_index": 7,
+   "lat": -50.9322957,
+   "lng": -73.1343036,
+   "time_window": "06:00–17:00",
+   "duration": "10–12 hr",
+   "difficulty": "hard",
+   "cash_only": false,
+   "description": "The day the whole trip is built around: ~15 km from Los Perros over the 1,200 m pass, where gusts above 100 km/h are documented and rangers close the crossing in bad weather — start inside their window, no exceptions, and treat Campamento Paso on the far side as the bail-out. From the crest the entire Grey Glacier unrolls below, then a brutal knee-eating descent through forest to three ladder-accessed suspension bridges strung over side canyons — the first one is climbed via a steel ladder and is genuinely airy with a full pack. If the pass closes, your only option is to wait: this is why the itinerary carries a buffer day.",
+   "reference_link": "https://blog.lastorres.com/discover-john-gardner-pass",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "camping-los-perros",
+    "paso-john-gardner",
+    "puente-john-gardner",
+    "refugio-grey"
+   ]
+  },
+  {
+   "activity_id": "tdp-grey-bridges-morning",
+   "name": "Grey Glacier Bridges & Miradores (Light Day)",
+   "type": "scenery",
+   "order_index": 8,
+   "lat": -51.0082192,
+   "lng": -73.1760488,
+   "time_window": "08:30–11:30",
+   "duration": "2–3 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Packless recovery morning from Refugio Grey: walk back north ~30–40 min to the first suspension bridge for the head-on view of the glacier's blue seracs and iceberg-littered lake — the view W-trekkers detour a full day for, and you slept next to it. Vertice sells kayak and glacier-walk add-ons from Grey in season; book long before arrival if wanted — confirm ahead, departures cancel in wind.",
+   "reference_link": "https://www.alltrails.com/trail/chile/magallanes/campamento-grey-puente-john-gardner",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "puente-john-gardner",
+    "refugio-grey"
+   ]
+  },
+  {
+   "activity_id": "tdp-stage5-paine-grande",
+   "name": "Stage 5 — Grey to Paine Grande",
+   "type": "outdoor",
+   "order_index": 9,
+   "lat": -51.0082192,
+   "lng": -73.1760488,
+   "time_window": "12:30–17:00",
+   "duration": "3.5–4.5 hr",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "11 km along Lago Grey's cliffline to Paine Grande on Lago Pehoé — short on paper, but this corridor and the Pehoé basin are the park's most infamous wind tunnel: the katabatic flow off the ice cap has knocked hikers off their feet here, so stow anything loose. Paine Grande is the circuit's biggest, most exposed camp — stake the tent for a hurricane, because the site's reputation is tents folded flat by morning.",
+   "reference_link": "https://www.vertice.travel/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "refugio-grey",
+    "refugio-paine-grande"
+   ]
+  },
+  {
+   "activity_id": "tdp-stage6-frances",
+   "name": "Stage 6 — French Valley to Mirador Británico, on to Los Cuernos",
+   "type": "outdoor",
+   "order_index": 10,
+   "lat": -51.0726521,
+   "lng": -73.0937822,
+   "time_window": "07:30–17:00",
+   "duration": "9–11 hr",
+   "difficulty": "hard",
+   "cash_only": false,
+   "description": "The W's centerpiece, earned from inside: 7.6 km to Campamento Italiano, drop packs at the ranger post, then the out-and-back climb past Mirador Francés (Paine Grande's hanging glaciers cracking off avalanches across the valley) to Mirador Británico's granite amphitheater. Reshoulder packs and finish along Lago Nordenskjöld to the Cuernos/Francés sector (~18 km total). The upper valley closes in bad weather at the rangers' call — if it's shut, take the miradores you can get and keep moving; there is no spare night here.",
+   "reference_link": "https://lastorres.com/en/where-to-lodge/camping-in-torres-del-paine/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "refugio-paine-grande",
+    "campamento-italiano",
+    "mirador-britanico",
+    "refugio-los-cuernos"
+   ]
+  },
+  {
+   "activity_id": "tdp-stage7-chileno",
+   "name": "Stage 7 — Los Cuernos to Chileno",
+   "type": "outdoor",
+   "order_index": 11,
+   "lat": -51.0238463,
+   "lng": -72.9853709,
+   "time_window": "08:30–14:30",
+   "duration": "5–6 hr",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "~12 km traversing above turquoise Lago Nordenskjöld, then up the shortcut (atajo) that cuts the corner into the Ascencio valley to Refugio Chileno — the launchpad camp for the towers. Chileno is the single hardest booking on the whole circuit (smallest capacity, everyone wants sunrise position) and cooking here is restricted to the refugio's own service because of fire risk in the valley — no personal stoves, so budget for the meal plan. Confirm current stove policy when booking.",
+   "reference_link": "https://helpcenter.lastorres.com/en/help-center-las-torres-patagonia/admission-pass",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "refugio-los-cuernos",
+    "refugio-chileno"
+   ]
+  },
+  {
+   "activity_id": "tdp-stage8-base-torres",
+   "name": "Stage 8 — Base Torres for Sunrise, Out to Central",
+   "type": "outdoor",
+   "order_index": 12,
+   "lat": -50.9572451,
+   "lng": -72.9106479,
+   "time_window": "04:30–13:00",
+   "duration": "7–8 hr",
+   "difficulty": "hard",
+   "cash_only": false,
+   "description": "Headlamp start from Chileno up the moraine scramble to Mirador Base Torres for the dawn light turning the three granite towers red over the lagoon — the circuit's closing argument. Park rules restrict night hiking (puma country, rockfall on the moraine); pre-dawn starts from Chileno are the established exception in practice, but the sanctioned start time changes — confirm with the Chileno rangers the night before, and have a plan B of catching the light from camp. Then 12+ km all the way down to Central for the shuttle, bus, and that second Baguales burger in Natales.",
+   "reference_link": "https://blog.lastorres.com/base-torres-trail-torres-del-paine-w-trek",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "refugio-chileno",
+    "mirador-base-torres",
+    "camping-central"
+   ]
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "camping-central",
+   "type": "outdoor",
+   "name": "Central sector (trek start/end, Las Torres)",
+   "lat": -50.9666937,
+   "lng": -72.8700867,
+   "difficulty": "easy",
+   "description": "Las Torres' base camp below the towers valley — the O starts and ends here. Shuttle connects to the Laguna Amarga bus stop; confirm shuttle times on arrival.",
+   "reference_link": "https://lastorres.com/en/where-to-lodge/camping-in-torres-del-paine/"
+  },
+  {
+   "poi_id": "camping-seron",
+   "type": "outdoor",
+   "name": "Campamento Serón (night 1, Las Torres)",
+   "lat": -50.8658514,
+   "lng": -72.8928274,
+   "description": "Meadow camp on the Río Paine, first night of the backside. Cooking only in the designated shelter, gas stoves only.",
+   "reference_link": "https://lastorres.com/en/where-to-lodge/camping-in-torres-del-paine/"
+  },
+  {
+   "poi_id": "refugio-dickson",
+   "type": "outdoor",
+   "name": "Refugio Dickson (night 2, Vertice)",
+   "lat": -50.879431,
+   "lng": -73.0747594,
+   "description": "Remotest camp on the circuit, on the shore of glacial Lago Dickson. Basic provisions sold in season — confirm ahead, don't count on resupply.",
+   "reference_link": "https://www.vertice.travel/"
+  },
+  {
+   "poi_id": "camping-los-perros",
+   "type": "outdoor",
+   "name": "Camping Los Perros (night 3, ranger gate for the pass)",
+   "lat": -50.9322957,
+   "lng": -73.1343036,
+   "difficulty": "moderate",
+   "description": "Cold forest camp below the moraine; the rangers here control the John Gardner Pass departure window and close it in bad weather. No pass verdict = no crossing.",
+   "reference_link": "https://www.vertice.travel/"
+  },
+  {
+   "poi_id": "paso-john-gardner",
+   "type": "outdoor",
+   "name": "Paso John Gardner (1,200 m — circuit high point)",
+   "lat": -50.9409142,
+   "lng": -73.1856903,
+   "difficulty": "hard",
+   "description": "The crux: fully exposed crest with documented 100+ km/h gusts and the full sweep of Grey Glacier below. Closed Apr–Sep and in any bad-weather window; Campamento Paso on the west side is the emergency bail-out.",
+   "reference_link": "https://blog.lastorres.com/discover-john-gardner-pass"
+  },
+  {
+   "poi_id": "puente-john-gardner",
+   "type": "scenery",
+   "name": "Puente John Gardner (first hanging bridge + ladder)",
+   "lat": -50.9907579,
+   "lng": -73.1796218,
+   "difficulty": "moderate",
+   "description": "First of three suspension bridges on the descent to Grey, reached by a steel ladder — airy, spectacular, and the classic head-on glacier viewpoint.",
+   "reference_link": "https://www.alltrails.com/trail/chile/magallanes/campamento-grey-puente-john-gardner"
+  },
+  {
+   "poi_id": "refugio-grey",
+   "type": "outdoor",
+   "name": "Refugio Grey (night 4, Vertice)",
+   "lat": -51.0082192,
+   "lng": -73.1760488,
+   "description": "Camp beside the iceberg-calving snout of Grey Glacier; kayak and glacier-walk concessions run from here in season — book well ahead, wind cancels departures.",
+   "reference_link": "https://www.vertice.travel/"
+  },
+  {
+   "poi_id": "refugio-paine-grande",
+   "type": "outdoor",
+   "name": "Refugio Paine Grande (night 5, Vertice — the wind camp)",
+   "lat": -51.0726521,
+   "lng": -73.0937822,
+   "description": "Biggest and most exposed camp, on Lago Pehoé where the catamaran docks. Notorious for flattened tents — use every guyline.",
+   "reference_link": "https://www.vertice.travel/"
+  },
+  {
+   "poi_id": "campamento-italiano",
+   "type": "outdoor",
+   "name": "Campamento Italiano (pack drop, ranger post)",
+   "lat": -51.0269235,
+   "lng": -73.0404284,
+   "description": "CONAF post at the mouth of the French Valley — drop packs here for the Británico out-and-back. Day-use only; no overnight camping.",
+   "reference_link": "https://torresdelpaine.com/en/"
+  },
+  {
+   "poi_id": "mirador-britanico",
+   "type": "scenery",
+   "name": "Mirador Británico (French Valley head)",
+   "lat": -50.9826766,
+   "lng": -73.0537544,
+   "difficulty": "hard",
+   "description": "Granite amphitheater at the top of the French Valley spur — Cuernos, Espada, Fortaleza in a single sweep. Upper valley closes in bad weather at the rangers' call.",
+   "reference_link": "https://torresdelpaine.com/en/"
+  },
+  {
+   "poi_id": "refugio-los-cuernos",
+   "type": "outdoor",
+   "name": "Sector Los Cuernos / Francés (night 6, Las Torres)",
+   "lat": -51.0238463,
+   "lng": -72.9853709,
+   "description": "Camp under the Cuernos' banded rock on Lago Nordenskjöld. Francés and Cuernos both work for night 6 — take whichever the booking engine still has.",
+   "reference_link": "https://lastorres.com/en/where-to-lodge/camping-in-torres-del-paine/"
+  },
+  {
+   "poi_id": "refugio-chileno",
+   "type": "outdoor",
+   "name": "Refugio Chileno (night 7 — hardest booking on the O)",
+   "lat": -50.9572451,
+   "lng": -72.9106479,
+   "difficulty": "moderate",
+   "description": "Sunrise launchpad in the Ascencio valley. Smallest capacity on the circuit and personal stoves are banned in this sector — budget for the refugio meal plan; confirm current policy when booking.",
+   "reference_link": "https://helpcenter.lastorres.com/en/help-center-las-torres-patagonia/admission-pass"
+  },
+  {
+   "poi_id": "mirador-base-torres",
+   "type": "scenery",
+   "name": "Mirador Base Torres (sunrise objective)",
+   "lat": -50.942668,
+   "lng": -72.949663,
+   "difficulty": "hard",
+   "description": "The three granite towers over their glacial lagoon — the park's signature view, reached by a steep moraine scramble. Night-hiking rules apply to the pre-dawn start; confirm the sanctioned start time with rangers at Chileno.",
+   "reference_link": "https://blog.lastorres.com/base-torres-trail-torres-del-paine-w-trek"
+  },
+  {
+   "poi_id": "erratic-rock",
+   "type": "outdoor",
+   "name": "Erratic Rock (gear + daily 15:00 trail talk)",
+   "lat": -51.7314939,
+   "lng": -72.4995684,
+   "difficulty": "easy",
+   "description": "Trekker institution on Baquedano: 20 years of the free 3 O'Clock Info Talk plus tent/stove/pole rental. Confirm ahead that talk and rentals are running.",
+   "reference_link": "https://www.erraticrock.com/"
+  },
+  {
+   "poi_id": "baguales-brewpub",
+   "type": "food",
+   "name": "Cervecería Baguales (Bories 430)",
+   "lat": -51.7256909,
+   "lng": -72.5067702,
+   "description": "Patagonia's first brewpub, facing the plaza — burgers and house beer, pre-trek carb-load or post-trek celebration. Confirm current hours locally.",
+   "reference_link": "https://cervezabaguales.cl/"
+  }
+ ],
+ "transit": [
+  {
+   "name": "Rodoviario Puerto Natales (bus terminal)",
+   "lat": -51.7287812,
+   "lng": -72.4880132,
+   "description": "All park buses leave from here — Bus Sur and others run ~06:45 and ~12:00 to Laguna Amarga (~2 hr) and on to Pudeto. Buy the day before in high season; confirm current timetable at the counter.",
+   "reference_link": "https://www.bussur.com/"
+  },
+  {
+   "name": "Portería Laguna Amarga (park entrance + booking check)",
+   "lat": -50.9721152,
+   "lng": -72.7823515,
+   "description": "Main O-circuit entrance: CONAF scans your pasesparques.cl ticket and checks the full chain of camp reservations. Entry is online-only — no ticket sales at the gate. Paid shuttle continues to the Central sector; confirm ahead.",
+   "reference_link": "https://www.pasesparques.cl/en/parks/torres-del-paine"
+  },
+  {
+   "name": "Pudeto catamaran dock (Lago Pehoé crossing)",
+   "lat": -51.0622824,
+   "lng": -72.9937378,
+   "description": "25-minute catamaran to/from Paine Grande — the exit valve if you bail at stage 5, and the W-trek's western access. ~USD 40 / CLP 26,000 one way; sailings flex with demand and weather, so confirm the current schedule before relying on it.",
+   "reference_link": "https://torres-del-paine.org/torres-del-paine-w-trek-2/catamaran-torres-del-paine/"
+  }
+ ]
+}

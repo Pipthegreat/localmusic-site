@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180">
+  <rect width="320" height="180" fill="#e0dccf"/>
+  <path d="M0 140 L90 80 L150 120 L220 60 L320 130 L320 180 L0 180 Z" fill="#cfc9ba"/>
+  <circle cx="255" cy="45" r="20" fill="#d8d2c2"/>
+  <text x="160" y="98" font-family="sans-serif" font-size="13" fill="#9a9584" text-anchor="middle" letter-spacing="1">image placeholder</text>
+</svg>

@@ -1,0 +1,285 @@
+{
+ "trip_id": "rae-lakes-loop",
+ "name": "Rae Lakes - Sierra Loop",
+ "region": "Sierra Nevada, California",
+ "date_range": "2027-07/09",
+ "duration_days": 5,
+ "theme": "backpacking",
+ "summary": "The Sierra's benchmark loop: 41.4 mi and ~7,000 ft of gain from Roads End (5,035 ft) up Paradise Valley, over the Woods Creek suspension bridge to the Rae Lakes basin, across Glen Pass (11,978 ft per NPS), and out down Bubbs Creek — bookended by the Kings Canyon Scenic Byway drive-in and the Grant Grove sequoias. Hard limiters: a recreation.gov wilderness permit (quota season roughly late May–late Sept; 2026 dates May 22–Sept 26; slots release daily 7:00 AM PT on a rolling 6-month window and the Woods Creek/Bubbs Creek trailheads sell out fast; $15 + $5/person), a MANDATORY portable bear canister (NPS: metal boxes at camps are for PCT/JMT thru-hikers only, and canister rentals are NOT offered at Cedar Grove during quota season — rent at Kings Canyon Visitor Center on the way in or bring your own), and camping limits (2 nights in Paradise Valley designated sites, ONE night per lake between Dollar Lake and Glen Pass, Bullfrog Lake closed). Expectations: nights above 10,500 ft, snow on Glen Pass into mid-late July in bigger years, a bridgeless ford of the South Fork Kings at Upper Paradise Valley (bridge washed out 2016–17; replacement not before 2027), and Highway 180 to Roads End only open roughly late April–mid November. Done clockwise (Woods Creek entry, NPS permit language) so the altitude comes gradually and Glen Pass is climbed from its gentler north side.",
+ "activities": [
+  {
+   "activity_id": "raelakes-byway-arrival",
+   "name": "Drive-in: Fresno → Kings Canyon Scenic Byway → permit pickup",
+   "type": "scenery",
+   "order_index": 1,
+   "lat": 36.7948,
+   "lng": -118.583,
+   "time_window": "12:00–18:00",
+   "duration": "3–4 hr drive + errands",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Highway 180 east from Fresno climbs to the Big Stump entrance and Grant Grove Village (rent your bear canister HERE at the Kings Canyon Visitor Center if you don't own one — NPS says rentals are not available at Cedar Grove during quota season), then the Scenic Byway drops ~4,000 ft into the deepest stretch of Kings Canyon with pull-outs over the Middle/South Fork confluence. Pick up your reserved permit at the Roads End Permit Station from 1:00 PM the day before entry (or by 10:00 AM day-of; call 559-565-3766 if late), then sleep low at a Cedar Grove campground. Verified caveat: the road to Cedar Grove/Roads End only opens in spring — April 24 in 2026 — and closes around mid-November; confirm status before driving.",
+   "reference_link": "https://www.nps.gov/seki/planyourvisit/road-conditions.htm",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "raelakes-stage1-paradise-valley",
+   "name": "Stage 1: Roads End → Mist Falls → Middle Paradise Valley",
+   "type": "outdoor",
+   "order_index": 2,
+   "lat": 36.8493061,
+   "lng": -118.5353261,
+   "time_window": "07:00–14:00",
+   "duration": "~8 mi / ~1,700 ft up",
+   "difficulty": "hard",
+   "description": "Start at first light: the first two miles from Roads End (5,035 ft) are flat, sandy, and open, and the canyon becomes an oven by mid-morning. The grade arrives with the Mist Falls climb — 600 ft in the last wooded mile — then granite switchbacks above the falls level into Paradise Valley. Camp at Middle Paradise Valley (~6,700 ft) in designated sites; Paradise Valley has a two-night limit. Food in the canister, not the boxes — NPS reserves the metal lockers for PCT/JMT thru-hikers. Verified caveat: NPS warns spray-slicked rock at Mist Falls has caused falls — admire from dry granite.",
+   "reference_link": "https://www.nps.gov/seki/planyourvisit/rae-lakes-loop.htm",
+   "poi_ids": [
+    "raelakes-mist-falls",
+    "raelakes-middle-paradise-camp"
+   ]
+  },
+  {
+   "activity_id": "raelakes-stage2-woods-creek",
+   "name": "Stage 2: Paradise Valley → South Fork ford → Woods Creek crossing",
+   "type": "outdoor",
+   "order_index": 3,
+   "lat": 36.87247,
+   "lng": -118.43782,
+   "time_window": "07:30–14:30",
+   "duration": "~7 mi / ~1,800 ft up",
+   "difficulty": "moderate",
+   "description": "Through Upper Paradise Valley to the crux of the early season: the South Fork Kings crossing where the footbridge washed out in 2016–17 — NPS says replacement construction won't begin before 2027, so this is a ford. Cross early in the day when flows are lowest, unbuckle hip belts, and turn around if it's pushing thigh-deep. Beyond, the trail climbs steadily up the Woods Creek drainage to the John Muir Trail junction and camp at the suspension bridge (~8,500 ft). Verified caveat: NPS calls this crossing 'extremely hazardous' in high water (May–early June especially) — ask the Roads End ranger about current conditions at pickup.",
+   "reference_link": "https://www.nps.gov/seki/planyourvisit/rae-lakes-loop.htm",
+   "poi_ids": [
+    "raelakes-upper-paradise-ford",
+    "raelakes-woods-creek-bridge"
+   ]
+  },
+  {
+   "activity_id": "raelakes-stage3-rae-basin",
+   "name": "Stage 3: Woods Creek → Dollar & Arrowhead Lakes → Rae Lakes",
+   "type": "outdoor",
+   "order_index": 4,
+   "lat": 36.80688,
+   "lng": -118.39943,
+   "time_window": "07:00–13:30",
+   "duration": "~7 mi / ~2,100 ft up",
+   "difficulty": "hard",
+   "description": "Cross the suspension bridge (one person at a time — the deck sways and the signs mean it) and turn south on the JMT, climbing all day at altitude: Dollar Lake (~10,200 ft) is where the one-night-per-lake zone begins, then Arrowhead Lake, then the Rae Lakes basin with Fin Dome's granite blade above the water. Camp at Middle Rae Lake (~10,600 ft); a seasonal ranger station sits nearby. Short mileage on paper, but you're hauling a loaded pack past 10,000 ft — treat the afternoon as acclimatization, not a layover you don't have. Verified caveat: camping between Dollar Lake and Glen Pass is ONE night per lake (NPS) — moving to a different lake for a second night is the legal way to linger.",
+   "reference_link": "https://www.nps.gov/seki/planyourvisit/minimum-impact-restrictions.htm",
+   "poi_ids": [
+    "raelakes-arrowhead-lake",
+    "raelakes-fin-dome",
+    "raelakes-middle-rae-camp"
+   ]
+  },
+  {
+   "activity_id": "raelakes-stage4-glen-pass",
+   "name": "Stage 4: Rae Lakes → Glen Pass (11,978 ft) → Vidette / Junction Meadow",
+   "type": "outdoor",
+   "order_index": 5,
+   "lat": 36.7888242,
+   "lng": -118.4125975,
+   "time_window": "06:00–15:00",
+   "duration": "~9.5 mi / ~1,500 ft up, ~3,900 ft down",
+   "difficulty": "hard",
+   "description": "Alpine start — you want the pass before afternoon buildup. The JMT climbs past the upper lakes under the banded face of the Painted Lady, then attacks Glen Pass on tight rock-and-talus switchbacks; the notch itself is a knife-edge of a saddle barely wide enough to sit on (11,978 ft on the NPS page; USGS maps show 11,926). The south-side descent is steeper and holds snow longer. Pass the Kearsarge and Charlotte Lake junctions (two-night limits there; Bullfrog Lake closed to camping within a quarter mile) and drop to Vidette Meadow (~9,500 ft) — or continue down Bubbs Creek to Junction Meadow to shorten the last day. Verified caveat: NPS says Glen Pass 'may be impassable to hikers until mid-late July' after big winters — early-season parties need ice axe competence or a later date.",
+   "reference_link": "https://www.nps.gov/seki/planyourvisit/rae-lakes-loop.htm",
+   "poi_ids": [
+    "raelakes-painted-lady",
+    "raelakes-glen-pass",
+    "raelakes-vidette-meadow-camp",
+    "raelakes-junction-meadow-camp"
+   ]
+  },
+  {
+   "activity_id": "raelakes-stage5-bubbs-creek-out",
+   "name": "Stage 5: Junction Meadow → Bubbs Creek switchbacks → Roads End",
+   "type": "outdoor",
+   "order_index": 6,
+   "lat": 36.75189,
+   "lng": -118.44063,
+   "time_window": "06:30–13:00",
+   "duration": "~10 mi / ~3,600 ft down",
+   "difficulty": "moderate",
+   "description": "The long walk out: Bubbs Creek crashes beside the trail the whole way, and the canyon walls close in as you lose elevation. Below Sphinx Creek the trail drops the famous stacked switchbacks with the twin granite horns of the Sphinx dead ahead across the gorge, then runs the flat, sandy last two miles along the South Fork to Roads End. Knees take the beating today, and the lower canyon is hot by late morning — start early and be at the car by early afternoon with time for the sequoia bookend. Verified caveat: the descent is ~3,600 ft of relentless downhill on rock steps — trekking poles are worth their weight here more than anywhere on the loop.",
+   "reference_link": "https://www.nps.gov/seki/planyourvisit/rae-lakes-loop.htm",
+   "poi_ids": [
+    "raelakes-the-sphinx",
+    "raelakes-junction-meadow-camp"
+   ]
+  },
+  {
+   "activity_id": "raelakes-grant-grove-walk",
+   "name": "General Grant Tree loop — the sequoia bookend",
+   "type": "scenery",
+   "order_index": 7,
+   "lat": 36.7488,
+   "lng": -118.9709,
+   "time_window": "15:00–16:30",
+   "duration": "0.5 mi loop, 30–60 min",
+   "difficulty": "easy",
+   "description": "On the drive out, stop where the trip started climbing five days ago: the General Grant Grove, 154 acres of giant sequoias just off Highway 180. The paved half-mile loop passes the General Grant Tree — 267 ft tall, roughly 1,650 years old, the world's second-largest tree, proclaimed the Nation's Christmas Tree by Coolidge in 1926 and the only living thing designated a National Shrine. Trail-legs-friendly grade after the loop. Verified caveat: the small Grant Tree parking lot backs up on summer afternoons — mid-to-late afternoon after the weekend crowd thins is the calmer window.",
+   "reference_link": "https://en.wikipedia.org/wiki/General_Grant_(tree)",
+   "poi_ids": [
+    "raelakes-general-grant-tree"
+   ]
+  },
+  {
+   "activity_id": "raelakes-grant-grove-dinner",
+   "name": "Post-trail dinner at Grant Grove Restaurant",
+   "type": "food",
+   "order_index": 8,
+   "lat": 36.7405464,
+   "lng": -118.9629904,
+   "time_window": "17:00–19:30",
+   "duration": "1–1.5 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "The earned meal: the concessioner-run restaurant in Grant Grove Village, next to John Muir Lodge — American standards, big portions, forest views from the deck, and the only full-service dining on this side of the park. Reported summer hours run breakfast 7:00–10:00 AM and 11:30 AM–8:00 PM for lunch/dinner, which fits an off-trail-by-early-afternoon exit with room to spare. Verified caveat: hours are set seasonally by the concessioner (visitsequoia.com) — confirm ahead rather than betting a post-hike appetite on the posted close.",
+   "reference_link": "https://www.visitsequoia.com/kings-canyon-dining/grant-grove-restaurant/",
+   "poi_ids": [
+    "raelakes-grant-grove-restaurant"
+   ]
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "raelakes-mist-falls",
+   "type": "scenery",
+   "name": "Mist Falls",
+   "lat": 36.8135497,
+   "lng": -118.5489949,
+   "description": "Broad cascade where the South Fork Kings pours ~100 ft down a granite ramp, 4 miles from Roads End. NPS warns the spray-slicked rocks have caused serious falls — stay on dry granite.",
+   "reference_link": "https://www.nps.gov/places/000/mist-falls.htm"
+  },
+  {
+   "poi_id": "raelakes-middle-paradise-camp",
+   "type": "outdoor",
+   "name": "Middle Paradise Valley camp (~6,700 ft)",
+   "lat": 36.8493061,
+   "lng": -118.5353261,
+   "description": "Night-1 camp in the designated-site corridor; Paradise Valley carries a two-night limit. A metal food box exists here but NPS reserves boxes for PCT/JMT thru-hikers — your canister is still mandatory.",
+   "reference_link": "https://www.nps.gov/seki/planyourvisit/bear_box.htm"
+  },
+  {
+   "poi_id": "raelakes-upper-paradise-ford",
+   "type": "outdoor",
+   "name": "South Fork Kings ford (bridge out)",
+   "lat": 36.8696,
+   "lng": -118.51703,
+   "description": "The Upper Paradise Valley footbridge washed out in 2016–17 and NPS says replacement construction won't start before 2027. Ford early in the day; NPS calls the crossing 'extremely hazardous' in high water.",
+   "reference_link": "https://www.nps.gov/seki/planyourvisit/rae-lakes-loop.htm"
+  },
+  {
+   "poi_id": "raelakes-woods-creek-bridge",
+   "type": "outdoor",
+   "name": "Woods Creek suspension bridge camp (~8,500 ft)",
+   "lat": 36.87247,
+   "lng": -118.43782,
+   "description": "The swaying steel-catwalk suspension bridge where the loop meets the JMT — signed for ONE person at a time. Night-2 camp on both banks; two thru-hiker food boxes nearby.",
+   "reference_link": "https://socalhiker.net/thru-hiking-the-jmt-woods-creek-to-the-rae-lakes/"
+  },
+  {
+   "poi_id": "raelakes-arrowhead-lake",
+   "type": "scenery",
+   "name": "Arrowhead Lake (~10,300 ft)",
+   "lat": 36.82755,
+   "lng": -118.4096,
+   "description": "First big water of the high basin after Dollar Lake, with campsites off the north shore. Inside the one-night-per-lake zone that runs from Dollar Lake to Glen Pass.",
+   "reference_link": "https://www.nps.gov/seki/planyourvisit/minimum-impact-restrictions.htm"
+  },
+  {
+   "poi_id": "raelakes-fin-dome",
+   "type": "scenery",
+   "name": "Fin Dome (11,673 ft)",
+   "lat": 36.8135563,
+   "lng": -118.4123019,
+   "description": "The granite dorsal fin that owns the skyline over the Rae Lakes basin — the classic reflection shot is from the lakeshores below at calm morning light.",
+   "reference_link": "https://en.wikipedia.org/wiki/Fin_Dome"
+  },
+  {
+   "poi_id": "raelakes-middle-rae-camp",
+   "type": "outdoor",
+   "name": "Middle Rae Lake camp (~10,600 ft)",
+   "lat": 36.80688,
+   "lng": -118.39943,
+   "description": "Night-3 camp in a sandy flat off the east shore, near the seasonal ranger station; two thru-hiker food boxes. One night per lake here — no layover without moving lakes.",
+   "reference_link": "https://en.wikipedia.org/wiki/Rae_Lakes"
+  },
+  {
+   "poi_id": "raelakes-painted-lady",
+   "type": "scenery",
+   "name": "Painted Lady (12,126 ft)",
+   "lat": 36.7928233,
+   "lng": -118.3994638,
+   "description": "Banded red-and-white pyramid rising 1,500+ ft straight out of the upper Rae Lakes — the wall you climb beneath all the way to Glen Pass.",
+   "reference_link": "https://en.wikipedia.org/wiki/Painted_Lady_(mountain)"
+  },
+  {
+   "poi_id": "raelakes-glen-pass",
+   "type": "outdoor",
+   "name": "Glen Pass (11,978 ft)",
+   "lat": 36.7888242,
+   "lng": -118.4125975,
+   "difficulty": "hard",
+   "description": "The loop's high point — a knife-edge saddle on the JMT/PCT (11,978 ft per NPS; USGS maps show 11,926). Talus switchbacks both sides; NPS: may hold hiker-stopping snow into mid-late July.",
+   "reference_link": "https://en.wikipedia.org/wiki/Glen_Pass"
+  },
+  {
+   "poi_id": "raelakes-vidette-meadow-camp",
+   "type": "outdoor",
+   "name": "Vidette Meadow camp (~9,500 ft)",
+   "lat": 36.75912,
+   "lng": -118.41379,
+   "description": "Night-4 option under East Vidette where the JMT meets Bubbs Creek; established sites and thru-hiker boxes at the meadow's west end. Bullfrog Lake, just above, is closed to camping.",
+   "reference_link": "https://www.nps.gov/seki/planyourvisit/bear_box.htm"
+  },
+  {
+   "poi_id": "raelakes-junction-meadow-camp",
+   "type": "outdoor",
+   "name": "Junction Meadow camp (Bubbs Creek)",
+   "lat": 36.75189,
+   "lng": -118.44063,
+   "description": "Lower night-4 option at the East Creek/East Lake junction down Bubbs Creek — taking it here shortens the final descent day. Food box near the junction; canister still required.",
+   "reference_link": "https://climber.org/data/BearBoxes/BC05.html"
+  },
+  {
+   "poi_id": "raelakes-the-sphinx",
+   "type": "scenery",
+   "name": "The Sphinx (9,143 ft)",
+   "lat": 36.7711,
+   "lng": -118.5508,
+   "description": "Twin-horned granite pillar staring across the lower Bubbs Creek gorge — it dominates the view straight ahead on the final stacked switchbacks of the descent.",
+   "reference_link": "https://en.wikipedia.org/wiki/The_Sphinx_(Kings_Canyon_National_Park)"
+  },
+  {
+   "poi_id": "raelakes-general-grant-tree",
+   "type": "scenery",
+   "name": "General Grant Tree",
+   "lat": 36.7488,
+   "lng": -118.9709,
+   "description": "267 ft, ~1,650 years old, the world's second-largest tree — the Nation's Christmas Tree (1926) and a National Shrine (1956), on a paved 0.5-mile loop off Highway 180.",
+   "reference_link": "https://en.wikipedia.org/wiki/General_Grant_(tree)"
+  },
+  {
+   "poi_id": "raelakes-grant-grove-restaurant",
+   "type": "food",
+   "name": "Grant Grove Restaurant",
+   "lat": 36.7405464,
+   "lng": -118.9629904,
+   "description": "Full-service restaurant in Grant Grove Village next to John Muir Lodge; American menu, deck seating. Reported summer hours 7:00–10:00 AM and 11:30 AM–8:00 PM — confirm ahead.",
+   "reference_link": "https://www.visitsequoia.com/kings-canyon-dining/grant-grove-restaurant/"
+  }
+ ],
+ "transit": [
+  {
+   "name": "Roads End Permit Station",
+   "lat": 36.794844,
+   "lng": -118.582972,
+   "description": "Wilderness permit pickup at the Highway 180 terminus, 6 mi east of Cedar Grove village: reserved permits from 1:00 PM the day before entry or by 10:00 AM day-of (call 559-565-3766 if late); unclaimed quota re-releases to walk-ups. NPS: no canister rentals here during quota season — sort that at Grant Grove. Station hours vary; call 559-565-3341.",
+   "reference_link": "https://www.nps.gov/seki/planyourvisit/wilderness_permits.htm"
+  }
+ ]
+}

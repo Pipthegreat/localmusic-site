@@ -1,0 +1,500 @@
+{
+ "trip_id": "ohrid-2026-07",
+ "name": "Ohrid - Car-Free Lake Week",
+ "region": "Lake Ohrid, North Macedonia",
+ "date_range": "2026-07",
+ "duration_days": 7,
+ "summary": "A car-free week on Lake Ohrid, North Macedonia: two earned hikes (the 2,255 m Magaro ascent and the Velestovo village traverse), the south-shore monastery by boat, the UNESCO old town, and real afternoon and evening options every day — Bay of Bones, Vevcani springs by local bus, festival nights in the 2,000-year-old theatre, sunset swims at Kaneo. The limiters: everything moves by minivan, boat or foot, and the transit spine's timetables are unreliable — confirm times with drivers, not websites; the summer forest-movement ban requires registering with the national park before hiking; and village spots run on cash. Expect early starts for the mountains, long slow lakeside lunches, and evenings that belong to the promenade.",
+ "activities": [
+  {
+   "activity_id": "magaro",
+   "name": "Magaro Peak Ascent",
+   "type": "outdoor",
+   "order_index": 1,
+   "lat": 40.9440267,
+   "lng": 20.789616,
+   "time_window": "06:00–14:00",
+   "duration": "7–9 hr",
+   "difficulty": "hard",
+   "cash_only": false,
+   "description": "Car-free ascent to the 2,255 m summit from the Galičica park entrance — ~17 km / 1,400 m, both lakes from the top. The gap to the summit pin IS the climb.",
+   "reference_link": "https://galicica.org.mk/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "gali-ica-np-entrance-bus-drop-permit-che",
+    "magaro-summit-2-255-m",
+    "korita-spring"
+   ]
+  },
+  {
+   "activity_id": "traverse",
+   "name": "Velestovo–Konjsko–Elshani Traverse",
+   "type": "outdoor",
+   "order_index": 2,
+   "lat": 41.0866901,
+   "lng": 20.8284698,
+   "time_window": "08:00–14:00",
+   "duration": "4–6 hr",
+   "difficulty": "moderate",
+   "description": "Village-to-village ridge traverse above the eastern shore. Foot-only terrain, not road-shadowing — the good kind.",
+   "reference_link": "https://www.openstreetmap.org/#map=13/41.05/20.82",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "velestovo-traverse-start",
+    "konjsko-waypoint",
+    "elshani-traverse-end"
+   ]
+  },
+  {
+   "activity_id": "naum",
+   "name": "Sveti Naum & South Shore",
+   "type": "scenery",
+   "order_index": 3,
+   "lat": 40.9140127,
+   "lng": 20.7406778,
+   "time_window": "09:00–17:00",
+   "duration": "full day",
+   "difficulty": "easy",
+   "description": "Monastery on the far south shore reached by morning boat or minivan; springs, peacocks, and swimming.",
+   "reference_link": "https://en.wikipedia.org/wiki/Monastery_of_Saint_Naum",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "sveti-naum-monastery",
+    "trpejca-swim-long-lunch",
+    "zaum-monastery",
+    "ljubanista-beach"
+   ]
+  },
+  {
+   "activity_id": "oldtown",
+   "name": "Ohrid Old Town Circuit",
+   "type": "historic",
+   "order_index": 4,
+   "lat": 41.1110753,
+   "lng": 20.7887506,
+   "time_window": "10:00–18:00",
+   "duration": "3–4 hr",
+   "difficulty": "easy",
+   "description": "The UNESCO core — lakeside church, hilltop fortress, and a Hellenistic theatre, all walkable in one loop.",
+   "reference_link": "https://whc.unesco.org/en/list/99/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "sveti-jovan-kaneo",
+    "samuel-s-fortress",
+    "ancient-theatre-200-bc",
+    "st-sophia-church",
+    "gorna-porta",
+    "bogorodica-perivlepta"
+   ]
+  },
+  {
+   "activity_id": "charshija",
+   "name": "Charshija Café Block",
+   "type": "food",
+   "order_index": 5,
+   "lat": 41.1132756,
+   "lng": 20.7996756,
+   "time_window": "09:00–13:00",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "The old bazaar café strip — the daily uninterrupted work block. Reliable power and WiFi, unlike the village spots.",
+   "reference_link": "https://www.tripadvisor.com/Restaurants-g295109-Ohrid.html",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "star-chinar"
+   ]
+  },
+  {
+   "activity_id": "vevcani-springs-village",
+   "name": "Vevčani Springs & Village by Bus",
+   "type": "outdoor",
+   "order_index": 6,
+   "lat": 41.2394,
+   "lng": 20.5846,
+   "time_window": "12:00–18:00",
+   "duration": "5–6 hr",
+   "difficulty": "easy",
+   "description": "Two-leg local-bus mission the tour vans mostly skip: Struga minibus from Ohrid (every ~15 min, ~70 MKD), change at Struga for the Vevčani minibus up the Jablanica slopes, then walk the karst spring pools and the stubborn village that once declared itself a republic. Springs are free; end with a late lunch of Vevčani pies and house grape rakija before the bus down. Bus details come from traveler forums — returns roughly on the half hour until about 21:00, but confirm the return time at the stop before you wander.",
+   "reference_link": "https://www.tripadvisor.com/Attraction_Review-g1808461-d9986285-Reviews-Vevchani_Springs-Vevcani_Southwestern_Region.html",
+   "poi_ids": [
+    "kutmicevica-restaurant",
+    "struga-poetry-bridge"
+   ]
+  },
+  {
+   "activity_id": "bay-of-bones-gradiste",
+   "name": "Bay of Bones Museum on Water & Gradište Swim",
+   "type": "historic",
+   "order_index": 7,
+   "lat": 40.9943,
+   "lng": 20.7982,
+   "time_window": "13:00–16:30",
+   "duration": "3–4 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Reconstructed Bronze Age pile-dwelling settlement standing on stilts over the lake at Gradište, south of Peštani — built over a real underwater excavation, not a theme-park invention. Entry 150 MKD (~€2.50, denars or card); flag down any Sveti Naum–bound minivan on the lake road and ask for Gradište, then swim off the rocks below before heading back. Closed Mondays, and summer hours end at 16:30 — go early afternoon, not late.",
+   "reference_link": "https://muzejohrid.mk/museum-on-water/",
+   "poi_ids": [
+    "gradiste-beach-camp"
+   ]
+  },
+  {
+   "activity_id": "handmade-paper-workshop",
+   "name": "National Workshop for Handmade Paper",
+   "type": "historic",
+   "order_index": 8,
+   "lat": 41.1124,
+   "lng": 20.7954,
+   "time_window": "14:00–15:00",
+   "duration": "30–45 min",
+   "description": "Tiny family-run atelier on Car Samoil street where paper is pulled by hand the old way and printed on a working replica of Gutenberg's press — one of only two in use anywhere. The demo is free; the only spend is a hand-printed sheet if one earns it, which at these prices it usually does. Posted hours vary wildly across sources — couldn't confirm; poke your head in while passing.",
+   "reference_link": "https://www.inyourpocket.com/ohrid/national-workshop-for-handmade-paper_154202v",
+   "poi_ids": [
+    "robevi-house"
+   ]
+  },
+  {
+   "activity_id": "plaosnik-st-panteleimon",
+   "name": "Plaošnik & Sts. Clement and Panteleimon",
+   "type": "historic",
+   "order_index": 9,
+   "lat": 41.1125,
+   "lng": 20.7909,
+   "time_window": "16:00–18:00",
+   "duration": "1–1.5 hr",
+   "description": "The hill where St. Clement ran what researchers call Europe's oldest university, with his 916 CE tomb and relics inside the church rebuilt on the original foundations in 2002, surrounded by early-Christian basilica mosaics. Going late afternoon dodges the mid-day tour groups and sets you up to walk down to Kaneo for sunset. Reported entry fees conflict (100 MKD to ~€3) — carry small denar notes; summer hours reported roughly 09:00–19:00 but confirm locally.",
+   "reference_link": "https://en.wikipedia.org/wiki/Church_of_Saints_Clement_and_Panteleimon",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "kaneo-sunset-swim-dinner",
+   "name": "Kaneo Sunset Swim & Lake-Fish Dinner",
+   "type": "food",
+   "order_index": 10,
+   "lat": 41.111,
+   "lng": 20.7901,
+   "time_window": "17:30–21:30",
+   "duration": "3–4 hr",
+   "description": "Swim off the rocks and platforms below the Kaneo cliffs while the light goes gold, then dry off at Letna Bavcha, the family-run fish house on the water here since 1993 — order the plašica (tiny fried lake fish), the local specialty it is known for. Pricier than a town grill but the water-line table and the fish earn it. Arrive before sunset to get a lakeside table; it fills fast in July.",
+   "reference_link": "https://www.tripadvisor.com/Restaurant_Review-g303864-d6764871-Reviews-Kaneo_Letna_Bavcha_Restaurant-Ohrid_Southwestern_Region.html",
+   "poi_ids": [
+    "sveti-jovan-kaneo",
+    "potpesh-beach"
+   ]
+  },
+  {
+   "activity_id": "ohrid-summer-festival-night",
+   "name": "Ohrid Summer Festival Evening Performance",
+   "type": "nightlife",
+   "order_index": 11,
+   "lat": 41.1146,
+   "lng": 20.7937,
+   "time_window": "20:30–23:00",
+   "duration": "2–2.5 hr",
+   "description": "The 2026 festival season (traditional 12 July opening through 20 August) has July performances already listed — classical, opera, and theatre staged in the 2,000-year-old Ancient Theatre and in church courtyards around town, an entirely different animal from sitting in the empty theatre by day. Not every night is at the Ancient Theatre and the full program publishes late — check the board at the festival office or ohridskoleto.com.mk once in town and buy at the box office.",
+   "reference_link": "https://ohridskoleto.com.mk/en/homepage/",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "kej-makedonija-cuba-libre",
+   "name": "Kej Makedonija Promenade & Cuba Libre Night",
+   "type": "nightlife",
+   "order_index": 12,
+   "lat": 41.1118,
+   "lng": 20.8016,
+   "time_window": "20:00–00:00",
+   "duration": "3–4 hr",
+   "description": "Join the whole town for the evening corzo along the Kej Makedonija lakefront — this is where Ohrid actually is on a July night, not a show for visitors — and keep walking south along the water to Cuba Libre, the beach bar that anchors the town's nightlife with cocktails and salsa on the sand. Note it moved from its old Kosta Abraš address to the lakefront near Biljanini Izvori, so ignore older maps; current hours couldn't be confirmed — it runs late in summer, but check ahead.",
+   "reference_link": "https://macedonia.for91days.com/a-walk-down-ohrids-promenade/",
+   "poi_ids": [
+    "cuba-libre-beach-bar",
+    "biljanini-izvori"
+   ]
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "gali-ica-np-entrance-bus-drop-permit-che",
+   "type": "outdoor",
+   "name": "Galičica NP entrance (bus drop + permit check)",
+   "lat": 40.9440267,
+   "lng": 20.789616,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Minivan drop and permit checkpoint. Register via galicica@galicica.org.mk before hiking during the summer forest-movement ban (Jul 1–Aug 31).",
+   "reference_link": "https://galicica.org.mk/",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "magaro-summit-2-255-m",
+   "type": "outdoor",
+   "name": "Magaro summit (2,255 m)",
+   "lat": 40.9322222,
+   "lng": 20.8205556,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "hard",
+   "cash_only": false,
+   "description": "Highpoint views over both Lake Ohrid and Lake Prespa.",
+   "reference_link": "https://galicica.org.mk/",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "velestovo-traverse-start",
+   "type": "outdoor",
+   "name": "Velestovo (traverse start)",
+   "lat": 41.0866901,
+   "lng": 20.8284698,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "Trailhead village with a lake-view café for a pre-hike coffee.",
+   "reference_link": "",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "konjsko-waypoint",
+   "type": "outdoor",
+   "name": "Konjsko (waypoint)",
+   "lat": 41.0523687,
+   "lng": 20.8120787,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "Midpoint hamlet.",
+   "reference_link": "",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "elshani-traverse-end",
+   "type": "outdoor",
+   "name": "Elshani (traverse end)",
+   "lat": 41.0269159,
+   "lng": 20.8158039,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "End village; catch the minivan back along the St. Naum road.",
+   "reference_link": "",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "sveti-naum-monastery",
+   "type": "scenery",
+   "name": "Sveti Naum Monastery",
+   "lat": 40.9140127,
+   "lng": 20.7406778,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "10th-century monastery above the lake with the Black Drin springs alongside.",
+   "reference_link": "https://en.wikipedia.org/wiki/Monastery_of_Saint_Naum",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "trpejca-swim-long-lunch",
+   "type": "food",
+   "name": "Trpejca (swim + long lunch)",
+   "lat": 40.9621101,
+   "lng": 20.7833017,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": true,
+   "description": "The prettiest village on the lake — swim off the pebble beach, then a slow fish lunch (farmed trout only; wild Ohrid trout is protected).",
+   "reference_link": "https://www.tripadvisor.com/Attraction_Review-g2542478-Trpejca.html",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "sveti-jovan-kaneo",
+   "type": "historic",
+   "name": "Sveti Jovan Kaneo",
+   "lat": 41.1110753,
+   "lng": 20.7887506,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "The postcard cliff church over the lake — on the Old Town circuit by day, and the definitive free west-facing sunset perch by evening.",
+   "reference_link": "https://en.wikipedia.org/wiki/Church_of_St._John_at_Kaneo",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "samuel-s-fortress",
+   "type": "historic",
+   "name": "Samuel's Fortress",
+   "lat": 41.1151825,
+   "lng": 20.7908451,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "Ramparts over the old town; best at late-afternoon light.",
+   "reference_link": "https://en.wikipedia.org/wiki/Samuel%27s_Fortress",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "ancient-theatre-200-bc",
+   "type": "historic",
+   "name": "Ancient Theatre (200 BC)",
+   "lat": 41.1146656,
+   "lng": 20.7938049,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "Hellenistic theatre still used for summer performances.",
+   "reference_link": "https://en.wikipedia.org/wiki/Ancient_theatre_of_Ohrid",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "kutmicevica-restaurant",
+   "type": "food",
+   "name": "Kutmičevica",
+   "lat": 41.2401,
+   "lng": 20.5882,
+   "description": "Ethno restaurant in a restored centuries-old house a few steps from the springs — Vevčani tiny pies, gjomleze, kačamak, their own vineyard's wine and grape brandy, terrace views down to the lake. Worth the modest premium over a town grill; it is the reason to eat here and not in Struga.",
+   "reference_link": "https://www.tripadvisor.com/Restaurant_Review-g1808461-d3911287-Reviews-Kutmicevica-Vevcani_Southwestern_Region.html"
+  },
+  {
+   "poi_id": "cuba-libre-beach-bar",
+   "type": "nightlife",
+   "name": "Cuba Libre Beach & Bar",
+   "lat": 41.1011,
+   "lng": 20.8059,
+   "description": "Day beach club that flips into the region's main open-air party after dark, with salsa nights a recurring fixture. About a 15-minute walk along the quay from the Old Town.",
+   "reference_link": "https://www.tripadvisor.com/Restaurant_Review-g303864-d26282510-Reviews-Cuba_Libre_Beach_and_Bar-Ohrid_Southwestern_Region.html"
+  },
+  {
+   "poi_id": "st-sophia-church",
+   "type": "historic",
+   "name": "Church of St. Sophia",
+   "lat": 41.1121,
+   "lng": 20.7941,
+   "description": "The 11th-century cathedral whose fresco cycles rank among the top Byzantine painting of their era — it is the building on the 1000-denar note. Its courtyard doubles as a festival stage in summer, so you may pass it twice: once for the frescoes, once for a concert.",
+   "reference_link": "https://en.wikipedia.org/wiki/Church_of_Saint_Sophia,_Ohrid"
+  },
+  {
+   "poi_id": "gorna-porta",
+   "type": "historic",
+   "name": "Gorna Porta (Upper Gate)",
+   "lat": 41.115,
+   "lng": 20.7949,
+   "description": "The surviving upper gate of the old town walls and the natural high entrance to the circuit — come in here and the whole route runs downhill. The Peribleptos church and icon gallery sit just inside.",
+   "reference_link": "https://www.openstreetmap.org/#map=19/41.11502/20.79492"
+  },
+  {
+   "poi_id": "bogorodica-perivlepta",
+   "type": "historic",
+   "name": "Church of Holy Mother of God Peribleptos",
+   "lat": 41.1142,
+   "lng": 20.7956,
+   "description": "1295 church just inside Gorna Porta whose signed frescoes by Michael Astrapas and Eutychios mark a turning point in Byzantine painting — arguably a finer interior than anything else on the hill. Opening hours and entry fee couldn't be confirmed — check at the door.",
+   "reference_link": "https://www.openstreetmap.org/#map=19/41.11420/20.79556"
+  },
+  {
+   "poi_id": "robevi-house",
+   "type": "historic",
+   "name": "Robevi Family House (National Museum)",
+   "lat": 41.1124,
+   "lng": 20.7961,
+   "description": "Grand 19th-century merchant mansion at Car Samoil 62 — carved-wood ceilings upstairs, the town's archaeology collection below — literally two doors from the paper workshop, so pair them in one stop. Run by the same national museum institution as the Bay of Bones.",
+   "reference_link": "https://www.openstreetmap.org/#map=19/41.11236/20.79614"
+  },
+  {
+   "poi_id": "star-chinar",
+   "type": "scenery",
+   "name": "Stariot Chinar (Old Plane Tree)",
+   "lat": 41.116,
+   "lng": 20.8003,
+   "description": "The vast centuries-old plane tree at the head of the bazaar — the traditional meeting point of Ohrid and the pivot between the čaršija cafés and the market streets. Grab a burek nearby and claim a bench under it.",
+   "reference_link": "https://www.openstreetmap.org/#map=19/41.11602/20.80026"
+  },
+  {
+   "poi_id": "potpesh-beach",
+   "type": "outdoor",
+   "name": "Potpeš Beach",
+   "lat": 41.1108,
+   "lng": 20.7913,
+   "description": "The small pebble cove tucked under the Kaneo cliffs, steps from the fish restaurants — the swim spot for this evening, with clear deep water off the rocks. Gets tight at peak hour; the platforms further along the boardwalk absorb the overflow.",
+   "reference_link": "https://www.openstreetmap.org/#map=19/41.11081/20.79130"
+  },
+  {
+   "poi_id": "biljanini-izvori",
+   "type": "scenery",
+   "name": "Biljanini Izvori (Biljana's Springs)",
+   "lat": 41.1049,
+   "lng": 20.8141,
+   "description": "The cold springs of folk-song fame at the far end of the lakefront walk, past Cuba Libre — a green, local corner where the promenade crowd thins out. Mapped point is the adjacent sports complex that carries the name; the springs are right beside it.",
+   "reference_link": "https://www.openstreetmap.org/#map=18/41.10495/20.81414"
+  },
+  {
+   "poi_id": "struga-poetry-bridge",
+   "type": "scenery",
+   "name": "Bridge of Poetry, Struga (Black Drin)",
+   "lat": 41.1739,
+   "lng": 20.6781,
+   "description": "The footbridge over the Black Drin where the Struga Poetry Evenings festival has staged readings since 1962 — the river pours out of the lake here, startlingly clear and fast. You change buses in Struga anyway; walk the ten minutes to see it between legs.",
+   "reference_link": "https://www.openstreetmap.org/#map=19/41.17392/20.67808"
+  },
+  {
+   "poi_id": "gradiste-beach-camp",
+   "type": "outdoor",
+   "name": "Gradište Beach & Campsite",
+   "lat": 40.997,
+   "lng": 20.7997,
+   "description": "The campground cove immediately north of the Bay of Bones museum — this is where you swim after the pile dwellings, off pebbles and rock slabs rather than a paved lido. Snack bars are seasonal and basic; bring denar cash.",
+   "reference_link": "https://www.openstreetmap.org/#map=18/40.99697/20.79973"
+  },
+  {
+   "poi_id": "zaum-monastery",
+   "type": "historic",
+   "name": "Church of Sveta Bogorodica Zahumska (Zaum)",
+   "lat": 40.949,
+   "lng": 20.7747,
+   "description": "A 1361 frescoed church alone on the shore between Trpejca and Ljubaništa, reachable only by taxi-boat from Trpejca or a rough 3.5 km shoreline path — the kind of detour the tour boats skip. Reported entry 100 MKD; there is a tiny beach for a swim while you wait for your boat back.",
+   "reference_link": "https://travel2macedonia.com/tourist-attraction/saint-zaum-monastery-ohrid"
+  },
+  {
+   "poi_id": "ljubanista-beach",
+   "type": "outdoor",
+   "name": "Ljubaništa Beach",
+   "lat": 40.9167,
+   "lng": 20.7833,
+   "description": "Long natural beach and campground below the last village before the Albanian border, a short walk from the Sveti Naum monastery gates — swim here instead of the paying lido inside the monastery grounds. Facilities are seasonal and minimal.",
+   "reference_link": "https://en.wikipedia.org/wiki/Ljubani%C5%A1ta"
+  },
+  {
+   "poi_id": "korita-spring",
+   "type": "scenery",
+   "name": "Korita Spring (Galičica road)",
+   "lat": 40.9672,
+   "lng": 20.8147,
+   "description": "Drinking-water fountain on the R2332 road over Galičica, on the Magaro side of the park — a verified water top-up point before the dry summit slopes. Often described as a panoramic stop, but the viewpoint designation itself couldn't be confirmed — treat it as a water source first.",
+   "reference_link": "https://www.openstreetmap.org/#map=18/40.96715/20.81469"
+  }
+ ],
+ "transit": [
+  {
+   "name": "Ohrid Port (boats to Sveti Naum)",
+   "lat": 41.1112361,
+   "lng": 20.7985328,
+   "description": "Morning boats depart ~9:00–10:30, ~€10 return. Book the afternoon before.",
+   "reference_link": "https://www.tripadvisor.com/"
+  },
+  {
+   "name": "St. Naum minivan stop (Dame Gruev)",
+   "lat": 41.1161571,
+   "lng": 20.8039849,
+   "description": "The transit spine south. Pay the driver; confirm times in person — online timetables are unreliable.",
+   "reference_link": "https://www.tripadvisor.com/"
+  }
+ ]
+}

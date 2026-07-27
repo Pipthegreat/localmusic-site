@@ -1,0 +1,437 @@
+{
+ "trip_id": "trans-siberian-rail",
+ "name": "Trans-Siberian - Rail Epic",
+ "region": "Russia — Moscow to the Pacific",
+ "date_range": "any (see summary for current practicality)",
+ "duration_days": 14,
+ "theme": "rail-journey",
+ "summary": "The full Trans-Siberian: 9,288 km, seven time zones, ~162 hours of actual rolling between Moscow's Yaroslavsky terminal and the km-9288 stele on Vladivostok's platform, stretched to 14 days with stopovers in Kazan, Yekaterinburg, Novosibirsk, Krasnoyarsk, Irkutsk/Baikal and Ulan-Ude. BLUNT CURRENT-REALITY CAVEAT (verified July 2026): for most Western travelers this is an aspirational someday-file, not a bookable trip. The US State Department holds Russia at Level 4 Do Not Travel (reissued Dec 2025) citing significant wrongful-detention risk; all US consulates in Russia have suspended operations. Americans are NOT eligible for Russia's e-visa — it's a paper consular visa with an invitation letter, ~$300+ in fees, weeks of lead time. There are no direct US–Russia flights (transit via Istanbul/Dubai/Belgrade). Foreign Visa/Mastercard and Apple/Google Pay have been dead in Russia since March 2022 — this is a cash-only trip: crisp USD/EUR exchanged for rubles, roughly $1,500–2,500 carried on your person for two weeks. Travel insurance rarely covers Level 4 destinations. Domestically, though, the railway itself runs like clockwork: the Rossiya (001Э/002Э) departs daily, platzkart (~$175–275 through-fare) is the authentic open-bunk experience, kupe (~$215–390) buys a lockable door. Aboard: the samovar at the carriage end dispenses free boiling water for endless tea and instant noodles, the provodnitsa rules your carriage absolutely, and platform stops of 2–30 minutes are your shopping windows. Since August 2018 timetables show local time, not the old all-Moscow-time system — but booking apps still display both, so always double-check which clock your departure is on.",
+ "activities": [
+  {
+   "activity_id": "transsib-yaroslavsky-departure",
+   "name": "Moscow: provision up and depart from Yaroslavsky terminal",
+   "type": "historic",
+   "order_index": 1,
+   "lat": 55.7768,
+   "lng": 37.6574,
+   "time_window": "10:00–14:00",
+   "duration": "4h",
+   "difficulty": "easy",
+   "description": "Kilometre Zero of the Trans-Siberian: Fyodor Schechtel's 1904 neo-Russian fairytale station on Komsomolskaya Square. Stock up before boarding — instant noodles, tea, sausage, a proper mug — because dining-car prices double what any supermarket charges. Verified caveat: foreign Visa/Mastercard have not worked anywhere in Russia since March 2022, including station kiosks and ticket machines — you need rubles in cash before you ever reach the platform. Note: if you're stopping in Kazan first, your actual first leg departs from Kazansky terminal across the square; Yaroslavsky is where the daily Rossiya leaves.",
+   "reference_link": "https://en.wikipedia.org/wiki/Moscow_Yaroslavskaya_railway_station",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "transsib-kazan-kremlin",
+   "name": "Kazan stopover: Kremlin walls and the Kul Sharif Mosque",
+   "type": "historic",
+   "order_index": 2,
+   "lat": 55.7985,
+   "lng": 49.1048,
+   "time_window": "09:00–13:00",
+   "duration": "4h",
+   "difficulty": "easy",
+   "description": "Overnight from Moscow puts you in Tatarstan's capital by morning: a white-walled UNESCO kremlin where the turquoise-domed Kul Sharif Mosque (rebuilt 2005) stands metres from the Annunciation Cathedral — Russia's Islamic-Orthodox overlap in one frame. Free to wander the grounds; mosque visitor hours vary around prayer times, confirm ahead. Verified caveat: the flagship Rossiya has bypassed both Kazan and Nizhny Novgorod since its July 2020 reroute via Yaroslavl–Kostroma, so this stopover means taking a separate Moscow–Kazan overnight (from Kazansky terminal) and rejoining the main line at Yekaterinburg on another train.",
+   "reference_link": "https://en.wikipedia.org/wiki/Kul_Sharif_Mosque",
+   "poi_ids": [
+    "poi-kul-sharif"
+   ]
+  },
+  {
+   "activity_id": "transsib-kazan-tatar-dinner",
+   "name": "Kazan evening: Tatar cuisine in the Old Tatar Sloboda",
+   "type": "food",
+   "order_index": 3,
+   "lat": 55.7811,
+   "lng": 49.117,
+   "time_window": "18:30–21:00",
+   "duration": "2.5h",
+   "difficulty": "easy",
+   "description": "Walk the wooden merchant houses of the Staro-Tatarskaya Sloboda along Marjani Street and eat like a Tatar: echpochmak (meat triangles), kystyby, horsemeat kazylyk, and chak-chak with tea. Tatarskaya Usadba at Marjani 8 is the standby courtyard restaurant — booking and current hours, confirm ahead. Verified caveat: no foreign card will work at the terminal (blocked since March 2022) — count out enough rubles cash for dinner plus tomorrow's platform snacks; a filling Tatar meal here still runs budget-friendly by Western standards.",
+   "reference_link": "https://www.openstreetmap.org/?mlat=55.7811&mlon=49.1170#map=17/55.7811/49.1170",
+   "poi_ids": [
+    "poi-tatarskaya-usadba"
+   ]
+  },
+  {
+   "activity_id": "transsib-urals-crossing",
+   "name": "On-board: crossing the Urals and the Europe–Asia obelisk zone",
+   "type": "scenery",
+   "order_index": 4,
+   "lat": 56.8679,
+   "lng": 60.045,
+   "time_window": "08:00–12:00",
+   "duration": "4h",
+   "difficulty": "easy",
+   "description": "The Urals are a rumor more than a mountain range from the train — low wooded ridges — but somewhere near Pervouralsk (the 1837 obelisk on Beryozovaya Gora stands at 56.868N) you slide from Europe into Asia. Claim a corridor window with samovar tea in hand and watch for white boundary markers; the provodnitsa can tell you which side to sit. Verified caveat: since August 2018 all RZD station clocks and timetables show LOCAL time, not Moscow time — but booking apps and old guidebooks still mix the two, so verify which clock your Yekaterinburg arrival is quoted in before you nap.",
+   "reference_link": "https://www.openstreetmap.org/?mlat=56.8679&mlon=60.0450#map=15/56.8679/60.0450",
+   "poi_ids": [
+    "poi-europe-asia-obelisk"
+   ]
+  },
+  {
+   "activity_id": "transsib-yekaterinburg-church-blood",
+   "name": "Yekaterinburg stopover: Church on the Blood",
+   "type": "historic",
+   "order_index": 5,
+   "lat": 56.8444,
+   "lng": 60.6091,
+   "time_window": "10:00–13:00",
+   "duration": "3h",
+   "difficulty": "easy",
+   "description": "Built in 2003 over the site of the Ipatiev House basement where Nicholas II and his family were shot in July 1918 — the emotional center of Romanov pilgrimage Russia. The church is free to enter (working Orthodox dress code: covered shoulders, women's headscarves at hand); exact visiting hours around services, confirm ahead. A 25-minute walk from Yekaterinburg-Passazhirsky station makes this doable even on a long same-day stop. Verified caveat: the US consulate in Yekaterinburg — like every US consulate in Russia — has suspended operations, so if anything goes wrong here you are functionally on your own.",
+   "reference_link": "https://en.wikipedia.org/wiki/Church_on_Blood_in_Honour_of_All_Saints,_Resplendent_in_the_Russian_Land",
+   "poi_ids": [
+    "poi-church-on-blood"
+   ]
+  },
+  {
+   "activity_id": "transsib-barabinsk-platform-kiosks",
+   "name": "On-board: Barabinsk steppe day and platform-kiosk commerce",
+   "type": "scenery",
+   "order_index": 6,
+   "lat": 55.3552,
+   "lng": 78.3525,
+   "time_window": "11:00–15:00",
+   "duration": "4h",
+   "difficulty": "easy",
+   "description": "The Baraba steppe west of Novosibirsk is the hypnotic flat middle of Siberia — birch shelter belts, salt lakes, horizon. Barabinsk station is a classic longer stop where babushkas and kiosk vendors have sold smoked fish, pirozhki and boiled potatoes to trans-continental passengers for a century; whether vendors are out on your day, confirm on the platform. Verified caveat: stop lengths change with every timetable revision and the train will not wait — read the schedule placard by the carriage door (or ask the provodnitsa) and stay within sprinting distance; being left in platzkart clothes on a steppe platform is the canonical Trans-Sib disaster story.",
+   "reference_link": "https://ru.wikipedia.org/wiki/%D0%91%D0%B0%D1%80%D0%B0%D0%B1%D0%B8%D0%BD%D1%81%D0%BA_(%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F)",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "transsib-novosibirsk-opera",
+   "name": "Novosibirsk stopover: Lenin Square and the Opera House colossus",
+   "type": "historic",
+   "order_index": 7,
+   "lat": 55.0306,
+   "lng": 82.9244,
+   "time_window": "13:00–17:00",
+   "duration": "4h",
+   "difficulty": "easy",
+   "description": "Siberia's biggest city rewards a short stop rather than a long one: walk Krasny Prospekt from the station to Lenin Square, where the silver-domed Opera and Ballet Theatre — the largest theatre building in Russia, finished in 1945 — squats behind a full Soviet statue ensemble. Matinee or backstage-tour availability, confirm ahead; box office is cash-friendly. Verified caveat: you cannot buy tickets online with a foreign card (all foreign Visa/Mastercard payments blocked since 2022) — buy in person with rubles. Metro from Ploshchad Garina-Mikhailovskogo makes this an easy two-stop hop from Novosibirsk-Glavny.",
+   "reference_link": "https://en.wikipedia.org/wiki/Novosibirsk_Opera_and_Ballet_Theatre",
+   "poi_ids": [
+    "poi-novosibirsk-opera"
+   ]
+  },
+  {
+   "activity_id": "transsib-krasnoyarsk-stolby",
+   "name": "Krasnoyarsk stopover: hike the Stolby pillars",
+   "type": "outdoor",
+   "order_index": 8,
+   "lat": 55.9729,
+   "lng": 92.7759,
+   "time_window": "09:00–15:00",
+   "duration": "6h",
+   "difficulty": "moderate",
+   "description": "Krasnoyarsk Pillars National Park: volcanic syenite towers rising out of taiga 40 minutes by city bus from the station. The classic route climbs the Laletina valley entrance (~7 km each way on paved-then-forest track) to First Pillar and Ded — free entry, and local 'stolbisty' free-climb the rocks in canvas shoes; you don't have to. Verified caveat: it gained national-park status (upgraded from zapovednik in 2019) and rangers enforce trail closures — bears are a real spring/autumn issue, so heed posted signs and confirm current trail status at the Laletino gate before committing.",
+   "reference_link": "https://en.wikipedia.org/wiki/Krasnoyarsk_Pillars",
+   "poi_ids": [
+    "poi-stolby-laletino"
+   ]
+  },
+  {
+   "activity_id": "transsib-irkutsk-decembrists",
+   "name": "Irkutsk stopover: Decembrist exile houses and wooden lace quarter",
+   "type": "historic",
+   "order_index": 9,
+   "lat": 52.2872,
+   "lng": 104.3047,
+   "time_window": "11:00–14:00",
+   "duration": "3h",
+   "difficulty": "easy",
+   "description": "Irkutsk earned its 'Paris of Siberia' tag from the aristocrat rebels exiled here after 1825; the Decembrist Museum in the Volkonsky and Trubetskoy mansions preserves their salons, pianos and the strange gentility they rebuilt in exile. Around it, streets of carved-wood houses sag photogenically into the permafrost-free mud. Museum opening days/hours, confirm ahead — Siberian museums keep idiosyncratic Monday-Tuesday closures. Verified caveat: this stopover is your logistics hub for Baikal, and marshrutka minibuses to Listvyanka leave from the central market area with cash-only fares — no foreign cards, small notes preferred.",
+   "reference_link": "https://ru.wikipedia.org/wiki/%D0%98%D1%80%D0%BA%D1%83%D1%82%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D1%83%D0%B7%D0%B5%D0%B9_%D0%B4%D0%B5%D0%BA%D0%B0%D0%B1%D1%80%D0%B8%D1%81%D1%82%D0%BE%D0%B2",
+   "poi_ids": [
+    "poi-decembrist-museum"
+   ]
+  },
+  {
+   "activity_id": "transsib-listvyanka-baikal",
+   "name": "Lake Baikal day: Listvyanka shoreline and smoked omul",
+   "type": "outdoor",
+   "order_index": 10,
+   "lat": 51.868,
+   "lng": 104.8326,
+   "time_window": "09:00–16:00",
+   "duration": "7h",
+   "difficulty": "moderate",
+   "description": "An hour-plus marshrutka down the Angara brings you to Listvyanka on the shore of the world's deepest lake — 1,642 m of it, a fifth of Earth's unfrozen fresh water. Do the Baikal Museum (Akademicheskaya 1) for the live nerpa seals and submersible mock-up, then walk the shoreline path and buy hot-smoked omul from the fish market with your fingers for utensils. Winter version: walk on metre-thick black ice instead. Verified caveat: omul fishing has been under rolling conservation restrictions for years, so what's sold as omul may be pelyad some seasons — ask, and confirm the museum's current hours ahead; return marshrutkas thin out by early evening.",
+   "reference_link": "https://www.openstreetmap.org/?mlat=51.8680&mlon=104.8326#map=17/51.8680/104.8326",
+   "poi_ids": [
+    "poi-baikal-museum"
+   ]
+  },
+  {
+   "activity_id": "transsib-circum-baikal-shoreline",
+   "name": "On-board: Baikal shoreline running past Slyudyanka's marble station",
+   "type": "scenery",
+   "order_index": 11,
+   "lat": 51.6587,
+   "lng": 103.7243,
+   "time_window": "08:00–12:00",
+   "duration": "4h",
+   "difficulty": "easy",
+   "description": "East of Irkutsk the main line summits and then falls to Lake Baikal, hugging the southern shore for a spectacular hour — this is the stretch to be awake for, tea from the samovar, window seat claimed early. Slyudyanka I station, built in 1904 entirely of local white marble, is the anchor stop and the junction for the old Circum-Baikal loop line. Verified caveat: the scenic Circum-Baikal tourist train from Slyudyanka runs a seasonal, limited-days schedule — if you want that side trip, confirm departure days well ahead; otherwise the mainline shoreline run itself is free with your through ticket.",
+   "reference_link": "https://ru.wikipedia.org/wiki/%D0%A1%D0%BB%D1%8E%D0%B4%D1%8F%D0%BD%D0%BA%D0%B0_I",
+   "poi_ids": [
+    "poi-slyudyanka-station"
+   ]
+  },
+  {
+   "activity_id": "transsib-ivolginsky-datsan",
+   "name": "Ulan-Ude stopover: Ivolginsky Datsan, the center of Russian Buddhism",
+   "type": "historic",
+   "order_index": 12,
+   "lat": 51.7583,
+   "lng": 107.2033,
+   "time_window": "09:00–14:00",
+   "duration": "5h",
+   "difficulty": "easy",
+   "description": "Buryatia flips the whole journey's texture: prayer wheels instead of onion domes. The Ivolginsky Datsan, 23 km from Ulan-Ude by cash-fare marshrutka, is the seat of the Khambo Lama and home to the undecayed body of Lama Itigelov — walk the temple circuit clockwise, spinning wheels as you go. Back in town, pose with the 7.7-metre Lenin head on Soviets Square, the largest anywhere, and eat buuzy dumplings. Verified caveat: Itigelov's body is displayed only on major Buddhist holidays, not daily — confirm dates ahead if that's your reason for coming; the datsan grounds themselves are open to respectful visitors year-round.",
+   "reference_link": "https://en.wikipedia.org/wiki/Ivolginsky_Datsan",
+   "poi_ids": [
+    "poi-ivolginsky-datsan",
+    "poi-lenin-head"
+   ]
+  },
+  {
+   "activity_id": "transsib-amur-bridge-crossing",
+   "name": "On-board: the far-eastern haul and the Amur bridge at Khabarovsk",
+   "type": "scenery",
+   "order_index": 13,
+   "lat": 48.5363,
+   "lng": 135.001,
+   "time_window": "07:00–10:00",
+   "duration": "3h",
+   "difficulty": "easy",
+   "description": "The last long haul rolls through Zabaikalsky emptiness for two days before the payoff: the 2.6-km Khabarovsk Bridge over the Amur — the 'Amur Miracle,' completed 1916 as the final link of the Trans-Siberian, and the bridge printed on the 5,000-ruble note you've been spending. By now the carriage is a village: shared food, chess with conscripts, the provodnitsa's vacuum schedule governing your day. Verified caveat: in Level-4-advisory Russia, rail bridges are treated as strategic infrastructure and the State Department documents arbitrary enforcement against foreigners — be discreet with cameras on this crossing; a window seat and memory beat a detained-for-questioning story.",
+   "reference_link": "https://en.wikipedia.org/wiki/Khabarovsk_Bridge",
+   "poi_ids": [
+    "poi-khabarovsk-bridge"
+   ]
+  },
+  {
+   "activity_id": "transsib-vladivostok-arrival",
+   "name": "Vladivostok arrival: km 9288 stele and the Eagle's Nest viewpoint",
+   "type": "outdoor",
+   "order_index": 14,
+   "lat": 43.1224,
+   "lng": 131.8991,
+   "time_window": "10:00–14:00",
+   "duration": "4h",
+   "difficulty": "moderate",
+   "description": "Step off at Vladivostok's 1912 station and find the km 9288 stele on the platform — the official end of the longest railway on Earth; the Pacific is literally across the tracks. Then climb (or ride, if it's running) to Eagle's Nest Hill, the city's highest central viewpoint, for the full sweep of the Golden Horn Bay and the cable-stayed Golden Bridge. Verified caveat: the funicular partway up has a history of long maintenance closures — confirm it's operating or budget for a steep 30-minute walk; the viewpoint itself is free and open always.",
+   "reference_link": "https://en.wikipedia.org/wiki/Vladivostok_railway_station",
+   "poi_ids": [
+    "poi-eagles-nest"
+   ]
+  },
+  {
+   "activity_id": "transsib-vladivostok-seafood",
+   "name": "Vladivostok evening: Pacific seafood on Admiral Fokin Street",
+   "type": "food",
+   "order_index": 15,
+   "lat": 43.1166,
+   "lng": 131.8873,
+   "time_window": "18:00–21:30",
+   "duration": "3h",
+   "difficulty": "easy",
+   "description": "End 9,288 km with the Far East's real flex: Kamchatka crab, scallops, sea urchin and pyanse steamed buns — Vladivostok eats more like Busan than Moscow. Admiral Fokin Street, the pedestrian 'Arbat' running down toward Sportivnaya Harbor, is the browsing strip; pick whichever seafood spot has locals in it, and check crab prices per 100 g before ordering — whole king crab can quietly total a week of platzkart fares. Specific restaurant hours and reservations, confirm ahead. Verified caveat: it's rubles cash to the very last toast — your foreign cards have been dead weight since Moscow, so budget your remaining stack before you order the crab.",
+   "reference_link": "https://www.openstreetmap.org/?mlat=43.1166&mlon=131.8873#map=17/43.1166/131.8873",
+   "poi_ids": []
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "poi-kul-sharif",
+   "type": "historic",
+   "name": "Kul Sharif Mosque, Kazan Kremlin",
+   "lat": 55.7985,
+   "lng": 49.1048,
+   "description": "Turquoise-domed main mosque of Tatarstan inside the UNESCO-listed Kazan Kremlin, rebuilt in 2005 on the site of the mosque destroyed by Ivan the Terrible in 1552.",
+   "reference_link": "https://en.wikipedia.org/wiki/Kul_Sharif_Mosque"
+  },
+  {
+   "poi_id": "poi-tatarskaya-usadba",
+   "type": "food",
+   "name": "Tatarskaya Usadba, Old Tatar Sloboda",
+   "lat": 55.7811,
+   "lng": 49.117,
+   "description": "Courtyard restaurant at Marjani 8 in Kazan's historic Tatar quarter serving echpochmak, kystyby and chak-chak; anchor for an evening in the wooden-house sloboda along Lake Kaban.",
+   "reference_link": "https://www.openstreetmap.org/?mlat=55.7811&mlon=49.1170#map=18/55.7811/49.1170"
+  },
+  {
+   "poi_id": "poi-europe-asia-obelisk",
+   "type": "historic",
+   "name": "Europe–Asia Border Obelisk (Beryozovaya Gora, Pervouralsk)",
+   "lat": 56.8679,
+   "lng": 60.045,
+   "description": "The 1837 obelisk on the Continental divide near Pervouralsk, the oldest of the Urals' Europe–Asia markers; the railway crosses the watershed in this zone shortly before Yekaterinburg.",
+   "reference_link": "https://www.openstreetmap.org/?mlat=56.8679&mlon=60.0450#map=15/56.8679/60.0450"
+  },
+  {
+   "poi_id": "poi-church-on-blood",
+   "type": "historic",
+   "name": "Church on the Blood, Yekaterinburg",
+   "lat": 56.8444,
+   "lng": 60.6091,
+   "description": "Byzantine-revival cathedral consecrated in 2003 on the site of the Ipatiev House, where the last Tsar and his family were executed in 1918; Russia's principal Romanov memorial church.",
+   "reference_link": "https://en.wikipedia.org/wiki/Church_on_Blood_in_Honour_of_All_Saints,_Resplendent_in_the_Russian_Land"
+  },
+  {
+   "poi_id": "poi-novosibirsk-opera",
+   "type": "historic",
+   "name": "Novosibirsk Opera and Ballet Theatre",
+   "lat": 55.0306,
+   "lng": 82.9244,
+   "description": "Silver-domed 1945 colossus on Lenin Square — the largest theatre building in Russia — and the visual centerpiece of Siberia's biggest city.",
+   "reference_link": "https://en.wikipedia.org/wiki/Novosibirsk_Opera_and_Ballet_Theatre"
+  },
+  {
+   "poi_id": "poi-stolby-laletino",
+   "type": "outdoor",
+   "name": "Krasnoyarsk Pillars National Park — Laletino entrance",
+   "lat": 55.9729,
+   "lng": 92.7759,
+   "description": "Main tourist gateway into the Stolby syenite pillar country; ~7 km valley trail to First Pillar and Ded, cradle of the local free-climbing 'stolbism' tradition. National park since 2019, free entry.",
+   "reference_link": "https://en.wikipedia.org/wiki/Krasnoyarsk_Pillars"
+  },
+  {
+   "poi_id": "poi-decembrist-museum",
+   "type": "historic",
+   "name": "Irkutsk Decembrist Museum (Volkonsky House)",
+   "lat": 52.2872,
+   "lng": 104.3047,
+   "description": "Memorial museum in the Volkonsky and Trubetskoy mansions preserving the exile-era salons of the 1825 Decembrist rebels who made Irkutsk the 'Paris of Siberia'.",
+   "reference_link": "https://ru.wikipedia.org/wiki/%D0%98%D1%80%D0%BA%D1%83%D1%82%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D1%83%D0%B7%D0%B5%D0%B9_%D0%B4%D0%B5%D0%BA%D0%B0%D0%B1%D1%80%D0%B8%D1%81%D1%82%D0%BE%D0%B2"
+  },
+  {
+   "poi_id": "poi-baikal-museum",
+   "type": "historic",
+   "name": "Baikal Museum, Listvyanka",
+   "lat": 51.868,
+   "lng": 104.8326,
+   "description": "Limnological museum at Akademicheskaya 1 on the Baikal shore — live nerpa freshwater seals, deep-water aquaria and the science of the world's deepest lake (1,642 m).",
+   "reference_link": "https://www.openstreetmap.org/?mlat=51.8680&mlon=104.8326#map=17/51.8680/104.8326"
+  },
+  {
+   "poi_id": "poi-slyudyanka-station",
+   "type": "historic",
+   "name": "Slyudyanka I station (marble station)",
+   "lat": 51.6587,
+   "lng": 103.7243,
+   "description": "1904 station on Baikal's southern tip built of local white marble; mainline anchor of the lake-shore run and junction for the Circum-Baikal heritage line.",
+   "reference_link": "https://ru.wikipedia.org/wiki/%D0%A1%D0%BB%D1%8E%D0%B4%D1%8F%D0%BD%D0%BA%D0%B0_I"
+  },
+  {
+   "poi_id": "poi-ivolginsky-datsan",
+   "type": "historic",
+   "name": "Ivolginsky Datsan",
+   "lat": 51.7583,
+   "lng": 107.2033,
+   "description": "Seat of the Khambo Lama and center of Buddhism in Russia, founded 1945 near Ulan-Ude; home to the venerated body of Lama Itigelov, displayed on major Buddhist holidays.",
+   "reference_link": "https://en.wikipedia.org/wiki/Ivolginsky_Datsan"
+  },
+  {
+   "poi_id": "poi-lenin-head",
+   "type": "historic",
+   "name": "Lenin Head, Soviets Square, Ulan-Ude",
+   "lat": 51.8348,
+   "lng": 107.5852,
+   "description": "The world's largest Lenin head — 7.7 m of bronze scowl installed 1971 — presiding over Ulan-Ude's main square and every backpacker photo album on the eastern Trans-Sib.",
+   "reference_link": "https://www.openstreetmap.org/?mlat=51.8348&mlon=107.5852#map=18/51.8348/107.5852"
+  },
+  {
+   "poi_id": "poi-khabarovsk-bridge",
+   "type": "historic",
+   "name": "Khabarovsk Bridge over the Amur",
+   "lat": 48.5363,
+   "lng": 135.001,
+   "description": "2.6-km 'Amur Miracle' completed in 1916 as the final link of the Trans-Siberian; the current combined road-rail span is pictured on the 5,000-ruble banknote.",
+   "reference_link": "https://en.wikipedia.org/wiki/Khabarovsk_Bridge"
+  },
+  {
+   "poi_id": "poi-eagles-nest",
+   "type": "scenery",
+   "name": "Eagle's Nest Hill, Vladivostok",
+   "lat": 43.1224,
+   "lng": 131.8991,
+   "description": "Highest central viewpoint in Vladivostok, overlooking the Golden Horn Bay, the Golden Bridge and the Pacific terminus of the railway; free, open always.",
+   "reference_link": "https://www.openstreetmap.org/?mlat=43.1224&mlon=131.8991#map=17/43.1224/131.8991"
+  }
+ ],
+ "transit": [
+  {
+   "name": "Moscow Yaroslavsky Terminal (km 0)",
+   "lat": 55.7768,
+   "lng": 37.6574,
+   "description": "Historic 1904 departure terminal of the Trans-Siberian on Komsomolskaya Square; the daily Rossiya 001Э/002Э to Vladivostok leaves from here.",
+   "reference_link": "https://en.wikipedia.org/wiki/Moscow_Yaroslavskaya_railway_station"
+  },
+  {
+   "name": "Moscow Kazansky Terminal",
+   "lat": 55.7736,
+   "lng": 37.6556,
+   "description": "Across Komsomolskaya Square from Yaroslavsky; departure point for Moscow–Kazan overnights if you take the Kazan stopover variant of the route.",
+   "reference_link": "https://en.wikipedia.org/wiki/Moscow_Kazanskaya_railway_station"
+  },
+  {
+   "name": "Kazan-Passazhirskaya station",
+   "lat": 55.7881,
+   "lng": 49.1008,
+   "description": "Kazan's red-brick 1896 main station, a 25-minute walk from the Kremlin; rejoin the eastbound main line here toward Yekaterinburg.",
+   "reference_link": "https://en.wikipedia.org/wiki/Kazan_railway_station"
+  },
+  {
+   "name": "Yekaterinburg-Passazhirsky station",
+   "lat": 56.8589,
+   "lng": 60.6042,
+   "description": "Main Urals hub at km 1,816; roughly a 25-minute walk to the Church on the Blood.",
+   "reference_link": "https://en.wikipedia.org/wiki/Yekaterinburg_railway_station"
+  },
+  {
+   "name": "Barabinsk station",
+   "lat": 55.3552,
+   "lng": 78.3525,
+   "description": "Classic mid-steppe service stop between Omsk and Novosibirsk, famous for its platform vendors; check the door placard for stop length before stepping off.",
+   "reference_link": "https://ru.wikipedia.org/wiki/%D0%91%D0%B0%D1%80%D0%B0%D0%B1%D0%B8%D0%BD%D1%81%D0%BA_(%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F)"
+  },
+  {
+   "name": "Novosibirsk-Glavny station",
+   "lat": 55.0358,
+   "lng": 82.8962,
+   "description": "One of the largest stations in Russia, mint-green landmark of Siberia's biggest city; metro connects directly toward Lenin Square.",
+   "reference_link": "https://ru.wikipedia.org/wiki/%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D0%B8%D0%B1%D0%B8%D1%80%D1%81%D0%BA-%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D1%8B%D0%B9"
+  },
+  {
+   "name": "Krasnoyarsk-Passazhirsky station",
+   "lat": 56.0058,
+   "lng": 92.8293,
+   "description": "Yenisei-side hub at km 4,098; city buses from the forecourt reach the Stolby park entrances in about 40 minutes.",
+   "reference_link": "https://en.wikipedia.org/wiki/Krasnoyarsk_railway_station"
+  },
+  {
+   "name": "Irkutsk-Passazhirsky station",
+   "lat": 52.2831,
+   "lng": 104.2597,
+   "description": "Gateway station for Lake Baikal on the Angara's left bank, km 5,185; tram and marshrutka links across the river to the historic center.",
+   "reference_link": "https://ru.wikipedia.org/wiki/%D0%98%D1%80%D0%BA%D1%83%D1%82%D1%81%D0%BA-%D0%9F%D0%B0%D1%81%D1%81%D0%B0%D0%B6%D0%B8%D1%80%D1%81%D0%BA%D0%B8%D0%B9"
+  },
+  {
+   "name": "Ulan-Ude station",
+   "lat": 51.8412,
+   "lng": 107.5832,
+   "description": "Buryatia's capital station at km 5,642, junction of the Trans-Siberian and the Trans-Mongolian line to Ulaanbaatar (international service suspended).",
+   "reference_link": "https://en.wikipedia.org/wiki/Ulan-Ude_railway_station"
+  },
+  {
+   "name": "Vladivostok station (km 9288)",
+   "lat": 43.1112,
+   "lng": 131.8816,
+   "description": "Pacific terminus, opened 1912 in the same neo-Russian style as Yaroslavsky; the km 9288 stele on the platform marks the end of the world's longest railway.",
+   "reference_link": "https://en.wikipedia.org/wiki/Vladivostok_railway_station"
+  }
+ ]
+}

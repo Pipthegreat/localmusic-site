@@ -1,440 +1,368 @@
 {
   "page_title": "SF + Oakland Live Music",
-  "total_duration": 1435.8,
-  "track_count": 48,
-  "built_at": 1782198136,
+  "total_duration": 1197.11,
+  "track_count": 40,
+  "built_at": 1785102821,
   "tracks": [
     {
-      "artist": "brendan eder ensemble",
-      "title": "isn't it true",
-      "spotify_uri": "spotify:track:4IdMziFDDMDyUntgUx1mFD",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 0.0,
-      "end": 29.95
-    },
-    {
-      "artist": "brendan eder ensemble",
-      "title": "#20 (lichen)",
-      "spotify_uri": "spotify:track:4dYyQl4yWkPEj3F0oRQKuj",
+      "artist": "alejandro escovedo",
+      "title": "always a friend",
+      "spotify_uri": "spotify:track:7jks9PIkGKjVTZI1M2Inyt",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 29.95,
+      "start": 0.0,
+      "end": 29.87
+    },
+    {
+      "artist": "alejandro escovedo",
+      "title": "castanets",
+      "spotify_uri": "spotify:track:4Hh1N0jMb7X5DymhhUX1Ou",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 29.87,
       "end": 59.82
     },
     {
-      "artist": "brendan eder ensemble",
-      "title": "pure (ride the world)",
-      "spotify_uri": "spotify:track:0wsr2SEDcxoABYba0P3wbJ",
+      "artist": "alejandro escovedo",
+      "title": "i was drunk",
+      "spotify_uri": "spotify:track:2pFLqt2r4NWeoK5970ybjn",
       "audio_source": "itunes",
       "duration": 29.95,
       "start": 59.82,
       "end": 89.77
     },
     {
-      "artist": "dalmatia",
-      "title": "polyurethane",
-      "spotify_uri": "spotify:track:65MBkZdqpae9C9HYf2h7Ci",
+      "artist": "alexx gold",
+      "title": "que rico",
+      "spotify_uri": "spotify:track:1rKuOGm7n4dtYBwS9aIlBW",
       "audio_source": "itunes",
       "duration": 29.95,
       "start": 89.77,
       "end": 119.72
     },
     {
-      "artist": "dalmatia",
-      "title": "the replacement",
-      "spotify_uri": "spotify:track:6R2FuLoRG2GtrS1DylbjTq",
+      "artist": "alexx gold",
+      "title": "pierda la razon",
+      "spotify_uri": "spotify:track:5Ni1rqILvMVfrH1s3KNEBy",
       "audio_source": "itunes",
       "duration": 29.95,
       "start": 119.72,
       "end": 149.67
     },
     {
-      "artist": "dream arenas",
-      "title": "new worries",
-      "spotify_uri": "spotify:track:7qfhQwMWUcJMrFJ5QiebOz",
+      "artist": "alexx gold",
+      "title": "háblame",
+      "spotify_uri": "spotify:track:70u2ssV1BwxSVwHClHBUyp",
       "audio_source": "itunes",
       "duration": 29.95,
       "start": 149.67,
       "end": 179.62
     },
     {
-      "artist": "dream arenas",
-      "title": "deepstate",
-      "spotify_uri": "spotify:track:3Aeefbzmqjq4jHQbaoODnt",
+      "artist": "andyland",
+      "title": "satelite pop machine",
+      "spotify_uri": "spotify:track:32tQ07E986IalIAn4sXzHM",
       "audio_source": "itunes",
       "duration": 29.95,
       "start": 179.62,
       "end": 209.57
     },
     {
-      "artist": "dream arenas",
-      "title": "caterpillar",
-      "spotify_uri": "spotify:track:6PvpPskSgv317Gw8HoRyi2",
+      "artist": "andyland",
+      "title": "nervous in the sunshine",
+      "spotify_uri": "spotify:track:3pDEld2dcKB0FaQFOtiSvF",
       "audio_source": "itunes",
       "duration": 29.95,
       "start": 209.57,
       "end": 239.52
     },
     {
-      "artist": "gia margaret",
-      "title": "apathy",
-      "spotify_uri": "spotify:track:2KDXCctJkNx43Z4b8pE6pS",
+      "artist": "andyland",
+      "title": "future pta (this must be the place?)",
+      "spotify_uri": "spotify:track:3TEpYDolMfeT8q4lWJbPNJ",
       "audio_source": "itunes",
-      "duration": 29.87,
+      "duration": 29.95,
       "start": 239.52,
-      "end": 269.39
+      "end": 269.47
     },
     {
-      "artist": "gia margaret",
-      "title": "hinoki wood",
-      "spotify_uri": "spotify:track:24QnH4LamDh2UhhmHyXjE8",
+      "artist": "beverly chills",
+      "title": "stomp your feet - extended mix",
+      "spotify_uri": "spotify:track:4W04hSApcsL3DOXAZF6Wh1",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 269.39,
-      "end": 299.26
+      "start": 269.47,
+      "end": 299.34
     },
     {
-      "artist": "gia margaret",
-      "title": "moon not mine",
-      "spotify_uri": "spotify:track:1r8plFPk6rUylJmclniQAM",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 299.26,
-      "end": 329.21
-    },
-    {
-      "artist": "glass girl",
-      "title": "take your time",
-      "spotify_uri": "spotify:track:5c5tRMRmcBRzLVQCOdRHXZ",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 329.21,
-      "end": 359.16
-    },
-    {
-      "artist": "glass girl",
-      "title": "head for home",
-      "spotify_uri": "spotify:track:44ExXPp7G4Yp0hhSEGjiV8",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 359.16,
-      "end": 389.11
-    },
-    {
-      "artist": "glass girl",
-      "title": "every night",
-      "spotify_uri": "spotify:track:0SjpqnooSQOjjNsmBmv4dh",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 389.11,
-      "end": 419.06
-    },
-    {
-      "artist": "hollyn",
-      "title": "alone (feat. tru)",
-      "spotify_uri": "spotify:track:1SuWQ3NuGmi1CyT48INXVI",
-      "audio_source": "itunes",
-      "duration": 29.68,
-      "start": 419.06,
-      "end": 448.74
-    },
-    {
-      "artist": "hollyn",
-      "title": "love with your life",
-      "spotify_uri": "spotify:track:19hbXqM1ETowm640ZLxzPh",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 448.74,
-      "end": 478.69
-    },
-    {
-      "artist": "hollyn",
-      "title": "lights shine bright",
-      "spotify_uri": "spotify:track:36g3CdSXU0vBSOW4P1dtsZ",
+      "artist": "beverly chills",
+      "title": "me",
+      "spotify_uri": "spotify:track:6C08TVHEJ8T30Z2JUVwnoN",
       "audio_source": "itunes",
       "duration": 29.97,
-      "start": 478.69,
-      "end": 508.66
+      "start": 299.34,
+      "end": 329.31
     },
     {
-      "artist": "jenny haniver",
-      "title": "sleep song",
-      "spotify_uri": "spotify:track:1co6RuPempsduPQxihkRuj",
+      "artist": "corpse pile",
+      "title": "fed to the starved",
+      "spotify_uri": "spotify:track:3ZGey5uPBaqsynrt2iOe61",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 508.66,
-      "end": 538.61
+      "start": 329.31,
+      "end": 359.26
     },
     {
-      "artist": "jenny haniver",
-      "title": "sunk costs",
-      "spotify_uri": "spotify:track:5ahdl0IZsEGp7eFXKomJiw",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 538.61,
-      "end": 568.56
-    },
-    {
-      "artist": "jenny haniver",
-      "title": "unsolved mysteries",
-      "spotify_uri": "spotify:track:7b7jFxmWbVkwA6NioQ0wLj",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 568.56,
-      "end": 598.51
-    },
-    {
-      "artist": "kings kaleidoscope",
-      "title": "sticks & stones",
-      "spotify_uri": "spotify:track:236Joyhsvc06vmBkKjCFwf",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 598.51,
-      "end": 628.38
-    },
-    {
-      "artist": "kings kaleidoscope",
-      "title": "come thou fount",
-      "spotify_uri": "spotify:track:4KWqsra7XbtEdZTPYT1ZVJ",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 628.38,
-      "end": 658.33
-    },
-    {
-      "artist": "lulu simon",
-      "title": "strangers",
-      "spotify_uri": "spotify:track:53cHC1VwQ5qduJ63kCObMu",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 658.33,
-      "end": 688.28
-    },
-    {
-      "artist": "lulu simon",
-      "title": "misty",
-      "spotify_uri": "spotify:track:5RoWakKku448XJvoy7CX2F",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 688.28,
-      "end": 718.23
-    },
-    {
-      "artist": "lulu simon",
-      "title": "somewhere else",
-      "spotify_uri": "spotify:track:3D8mmKJNudPzIBR9VD8EjD",
+      "artist": "dante marino",
+      "title": "reason",
+      "spotify_uri": "spotify:track:42eerZlPVq1pu1koOZZRPH",
       "audio_source": "itunes",
       "duration": 29.97,
-      "start": 718.23,
-      "end": 748.2
+      "start": 359.26,
+      "end": 389.23
     },
     {
-      "artist": "madison beer",
-      "title": "make you mine",
-      "spotify_uri": "spotify:track:48vIfHaK7by6x0T6ucpODL",
+      "artist": "dante marino",
+      "title": "angels",
+      "spotify_uri": "spotify:track:3mA3SIGc6wy8uppNht8YQF",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 389.23,
+      "end": 419.18
+    },
+    {
+      "artist": "dante marino",
+      "title": "moments",
+      "spotify_uri": "spotify:track:2RdD5MasxBcEskteNgBpyg",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 419.18,
+      "end": 449.13
+    },
+    {
+      "artist": "evicshen",
+      "title": "current affair",
+      "spotify_uri": "spotify:track:6GHhxPJplAvGxpnNAnsfSq",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 449.13,
+      "end": 479.0
+    },
+    {
+      "artist": "evicshen",
+      "title": "under the stall door",
+      "spotify_uri": "spotify:track:3R6qyBjvB58HUwRAQxWKEl",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 479.0,
+      "end": 508.87
+    },
+    {
+      "artist": "evicshen",
+      "title": "funhouse mirror stage",
+      "spotify_uri": "spotify:track:4W9WbatitsGt2iGNaYbzam",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 508.87,
+      "end": 538.74
+    },
+    {
+      "artist": "fawks",
+      "title": "brightside - fawks remix",
+      "spotify_uri": "spotify:track:2rqzQWjPvPqQSHLFoYnmKx",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 538.74,
+      "end": 568.61
+    },
+    {
+      "artist": "fawks",
+      "title": "how to love (feat. sofia reyes) - fawks.i_o remix",
+      "spotify_uri": "spotify:track:3kp4mPqWS3JQUyCGoRioVQ",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 568.61,
+      "end": 598.48
+    },
+    {
+      "artist": "ghostmilk",
+      "title": "e4rthsh4ker",
+      "spotify_uri": "spotify:track:7g1BvL58Rw4Kb3RfC06PUp",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 598.48,
+      "end": 628.43
+    },
+    {
+      "artist": "ghostmilk",
+      "title": "i've found my soul",
+      "spotify_uri": "spotify:track:2ihTllLhpob39SaHpwpfJ2",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 628.43,
+      "end": 658.38
+    },
+    {
+      "artist": "hard reset",
+      "title": "bulls on parade",
+      "spotify_uri": "spotify:track:5T2g4slBU5kl9WZPLwwk26",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 658.38,
+      "end": 688.25
+    },
+    {
+      "artist": "hlllyh",
+      "title": "flex it, tagger",
+      "spotify_uri": "spotify:track:5Cfp5xUAfGO2odvrDPTAqR",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 688.25,
+      "end": 718.2
+    },
+    {
+      "artist": "hlllyh",
+      "title": "uru buru",
+      "spotify_uri": "spotify:track:1xYsBL34MBPEqs3azV8UyG",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 718.2,
+      "end": 748.15
+    },
+    {
+      "artist": "hlllyh",
+      "title": "s.o.s.o.s.o.s.",
+      "spotify_uri": "spotify:track:1TftU5f8N02RgE5zNGusvI",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 748.15,
+      "end": 778.1
+    },
+    {
+      "artist": "jasmine infiniti",
+      "title": "hott",
+      "spotify_uri": "spotify:track:31Xdw0ZM27KYZC4vLTY7Gw",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 778.1,
+      "end": 807.97
+    },
+    {
+      "artist": "jasmine infiniti",
+      "title": "ghettro",
+      "spotify_uri": "spotify:track:1o2oR4ty3OmGX2I2Ayoty0",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 807.97,
+      "end": 837.84
+    },
+    {
+      "artist": "jeff straw",
+      "title": "chemical reaction - radio edit",
+      "spotify_uri": "spotify:track:4ftDQlGMPpbN0S11gXzCGv",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 837.84,
+      "end": 867.79
+    },
+    {
+      "artist": "jeff straw",
+      "title": "i've been",
+      "spotify_uri": "spotify:track:3BJntn779Myc7fdXjVIlJr",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 867.79,
+      "end": 897.74
+    },
+    {
+      "artist": "jeff straw",
+      "title": "may flowers fall - original mix",
+      "spotify_uri": "spotify:track:6d6CjOWyhnKkwoafcmowZh",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 897.74,
+      "end": 927.69
+    },
+    {
+      "artist": "late bloomers",
+      "title": "look at her",
+      "spotify_uri": "spotify:track:6Iv8GJzEXlUQXFYSBFIrb6",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 927.69,
+      "end": 957.64
+    },
+    {
+      "artist": "late bloomers",
+      "title": "in time",
+      "spotify_uri": "spotify:track:44LQdkaEc3Mans31zEPa0M",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 957.64,
+      "end": 987.51
+    },
+    {
+      "artist": "late bloomers",
+      "title": "helpless",
+      "spotify_uri": "spotify:track:67LjBzwq8WYvOcGz2H7NxY",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 987.51,
+      "end": 1017.46
+    },
+    {
+      "artist": "medicine music",
+      "title": "twilight (delightful music textures for sleeping)",
+      "spotify_uri": "spotify:track:3n0zXFGAE9WY3fVdVX4gX0",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 1017.46,
+      "end": 1047.33
+    },
+    {
+      "artist": "papa xanny",
+      "title": "iktr - 23",
+      "spotify_uri": "spotify:track:4duKt0cvvkhR2sh5RDCOsZ",
       "audio_source": "itunes",
       "duration": 29.96,
-      "start": 748.2,
-      "end": 778.16
+      "start": 1047.33,
+      "end": 1077.29
     },
     {
-      "artist": "madison beer",
-      "title": "bittersweet",
-      "spotify_uri": "spotify:track:3A02hWQ2ebOFDWSbAMNnpw",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 778.16,
-      "end": 808.12
-    },
-    {
-      "artist": "madison beer",
-      "title": "yes baby",
-      "spotify_uri": "spotify:track:2uvLpXs8bZAjee0l3KNnhx",
+      "artist": "papa xanny",
+      "title": "nlm - 22",
+      "spotify_uri": "spotify:track:6fiZZZUXdtVvXUajrJwwfF",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 808.12,
-      "end": 838.07
+      "start": 1077.29,
+      "end": 1107.24
     },
     {
-      "artist": "scam likely",
-      "title": "domestic bliss",
-      "spotify_uri": "spotify:track:6U4cuWy3L12YkWCSPyJDwj",
+      "artist": "papa xanny",
+      "title": "twisted tops",
+      "spotify_uri": "spotify:track:0I7C6tueGwOWUuN8WsYlLH",
       "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 838.07,
-      "end": 867.94
+      "duration": 29.97,
+      "start": 1107.24,
+      "end": 1137.21
     },
     {
-      "artist": "scam likely",
-      "title": "nosebleed",
-      "spotify_uri": "spotify:track:1L3OQyGwGpnsnDglAnz8d5",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 867.94,
-      "end": 897.89
-    },
-    {
-      "artist": "the spinouts",
-      "title": "gimme your love",
-      "spotify_uri": "spotify:track:5bV373mYTAyKfqUmkVMep5",
+      "artist": "river moon",
+      "title": "hard 2.0",
+      "spotify_uri": "spotify:track:4pVeNLmkjJ4CHLyU54IPEL",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 897.89,
-      "end": 927.84
+      "start": 1137.21,
+      "end": 1167.16
     },
     {
-      "artist": "the spinouts",
-      "title": "tough luck",
-      "spotify_uri": "spotify:track:0jK3bF9PXNrd0CiP536QDR",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 927.84,
-      "end": 957.8
-    },
-    {
-      "artist": "the spinouts",
-      "title": "cruisin at night",
-      "spotify_uri": "spotify:track:39Y2M8XDkz4BwKhYal3Yb8",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 957.8,
-      "end": 987.67
-    },
-    {
-      "artist": "alvon johnson",
-      "title": "the stinger",
-      "spotify_uri": "spotify:track:6EBb9TJEqdxTUZhfoG4YSM",
+      "artist": "suki waterhouse",
+      "title": "back in love",
+      "spotify_uri": "spotify:track:3eFBPuf0y3Vguk6GUCNpwP",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 987.67,
-      "end": 1017.62
-    },
-    {
-      "artist": "alvon johnson",
-      "title": "look at the world",
-      "spotify_uri": "spotify:track:5bfCnjOfEdSFxKKCwyUSCq",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1017.62,
-      "end": 1047.49
-    },
-    {
-      "artist": "alvon johnson",
-      "title": "i love the blues",
-      "spotify_uri": "spotify:track:6zdBO7WB3PelOLtU99mYCa",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1047.49,
-      "end": 1077.36
-    },
-    {
-      "artist": "benny la mar",
-      "title": "good god sarah",
-      "spotify_uri": "spotify:track:4XVtLUspfm5LAY7brlFhXa",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1077.36,
-      "end": 1107.31
-    },
-    {
-      "artist": "benny la mar",
-      "title": "in a better place",
-      "spotify_uri": "spotify:track:4hwpAG3KOf9JDvJ5Ddr30h",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1107.31,
-      "end": 1137.26
-    },
-    {
-      "artist": "chime school",
-      "title": "wait your turn",
-      "spotify_uri": "spotify:track:2xUr98tM3JODEKt2GmL1WA",
-      "audio_source": "itunes",
-      "duration": 29.39,
-      "start": 1137.26,
-      "end": 1166.65
-    },
-    {
-      "artist": "chime school",
-      "title": "wandering song",
-      "spotify_uri": "spotify:track:36HTDCSCwbrbMPuuMkEd30",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1166.65,
-      "end": 1196.6
-    },
-    {
-      "artist": "chime school",
-      "title": "dead saturdays",
-      "spotify_uri": "spotify:track:6M8uNSxHV3xNYC3kPgYlZJ",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1196.6,
-      "end": 1226.47
-    },
-    {
-      "artist": "emory duncan",
-      "title": "halifax",
-      "spotify_uri": "spotify:track:07t5VayO3No7nRqYUMUROI",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1226.47,
-      "end": 1256.42
-    },
-    {
-      "artist": "emory duncan",
-      "title": "gone to seed",
-      "spotify_uri": "spotify:track:589C4vLPU0XHkIMoUayE6o",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1256.42,
-      "end": 1286.37
-    },
-    {
-      "artist": "emory duncan",
-      "title": "the high road",
-      "spotify_uri": "spotify:track:3Nd0EeUIUvVOKh6CCwxrFy",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1286.37,
-      "end": 1316.32
-    },
-    {
-      "artist": "heavenly",
-      "title": "p.u.n.k. girl",
-      "spotify_uri": "spotify:track:4IiXEeH2j5FAVfCncumgXw",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1316.32,
-      "end": 1346.19
-    },
-    {
-      "artist": "heavenly",
-      "title": "atta girl",
-      "spotify_uri": "spotify:track:5GynN0FKm3KfhPjQyJlUxp",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1346.19,
-      "end": 1376.06
-    },
-    {
-      "artist": "heavenly",
-      "title": "me and my madness",
-      "spotify_uri": "spotify:track:1wjOdtPwU94DIDb7x982GM",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1376.06,
-      "end": 1405.93
-    },
-    {
-      "artist": "laurin hunter",
-      "title": "silver and blue",
-      "spotify_uri": "spotify:track:6Mr4cV8JFBdcSrX0KDpiwH",
-      "audio_source": "itunes",
-      "duration": 29.87,
-      "start": 1405.93,
-      "end": 1435.8
+      "start": 1167.16,
+      "end": 1197.11
     }
   ]
 }

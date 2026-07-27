@@ -1,0 +1,462 @@
+{
+ "trip_id": "gr20-corsica",
+ "name": "GR20 - Island Backpacking",
+ "region": "Corsica, France",
+ "date_range": "2027-06/09 season",
+ "duration_days": 15,
+ "theme": "backpacking",
+ "summary": "The full Calenzana→Conca traverse of Corsica's spine — roughly 180 km, 16 official stages, ~12,000 m of climbing, walked here in 15 days with three honest double-stage days. This is the hardest entry in the catalog: the north is rock — chained slabs, notches, all-day scrambling — and the south is fast, exposed ridgeline. Limiters: every refuge bed AND every bivouac pitch must be pre-booked on the Parc Naturel Régional de Corse platform (pnr-resa.corsica — the 2026 sale opened 20 January for a 16 May–4 October season, dorm €20 / bivouac €12, and Ortu, Carrozzu and Usciolu sell out first; wild camping is banned); the Cirque de la Solitude is gone from the route — after the storm-triggered landslide that killed seven hikers there in June 2015, the GR20 was permanently rerouted in 2016 over Pointe des Éboulis (2,607 m) on Monte Cinto's flank, now the trail's high point; two refuges (Ortu di u Piobbu, burned 2019, and Asinau, burned 2016) remain tent-only. Expect 6–10 hr days, cash-only mountain meals, snow on the northern passes into late June, and two stages with no reliable water between refuges — this route gives nothing away.",
+ "activities": [
+  {
+   "activity_id": "gr20-calvi-calenzana-staging",
+   "name": "Calvi → Calenzana — Staging Day",
+   "type": "food",
+   "order_index": 1,
+   "lat": 42.5104,
+   "lng": 8.8511,
+   "time_window": "14:00–21:00",
+   "duration": "half day",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Land at Calvi Sainte-Catherine, get to Calenzana (Beaux Voyages/Corsicar bus ~€10, ~30 min, or taxi €35–40), claim your bunk at the gîte municipal and eat a real dinner in the village — the last one that arrives by road for two weeks. Buy gas canisters here or in Calvi; they can't fly with you. Caveat: the Calenzana bus has run only twice daily in high season and not on weekends — confirm the timetable or budget for the taxi.",
+   "reference_link": "https://lesbeauxvoyages.corsica/en/coach-routes-corsica",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "gr20-stage1-ortu",
+   "name": "Stage 1 — Calenzana → Ortu di u Piobbu",
+   "type": "outdoor",
+   "order_index": 2,
+   "lat": 42.465,
+   "lng": 8.90696,
+   "time_window": "06:30–14:00",
+   "duration": "6–7 hr",
+   "difficulty": "hard",
+   "cash_only": true,
+   "description": "Twelve kilometres and ~1,450 m of relentless up from the olive terraces into the granite — the stage that filters the field on day one. No mid-stage refreshment, one seasonal spring: leave at first light with 2–3 L. Caveat: the refuge building burned in May 2019 and the night here is still under tent (yours or a rented one) — pack accordingly.",
+   "reference_link": "https://pnr-resa.corsica/refuge.php?id_refuge=1",
+   "poi_ids": [
+    "refuge-ortu-di-u-piobbu"
+   ]
+  },
+  {
+   "activity_id": "gr20-stage2-carrozzu",
+   "name": "Stage 2 — Ortu di u Piobbu → Carrozzu",
+   "type": "outdoor",
+   "order_index": 3,
+   "lat": 42.42625,
+   "lng": 8.90047,
+   "time_window": "06:30–13:30",
+   "duration": "6–7 hr",
+   "difficulty": "hard",
+   "cash_only": true,
+   "description": "Only 8 km, but the map lies: a full day of granite ridgeline, slabs and hands-on-rock notches before the drop into Carrozzu's amphitheater — this is where the GR20's real character shows up. Caveat: Carrozzu is one of the three refuges the PNRC itself flags as selling out fastest — it must be locked in the day bookings open.",
+   "reference_link": "https://en.wikivoyage.org/wiki/GR_20",
+   "poi_ids": [
+    "refuge-carrozzu"
+   ]
+  },
+  {
+   "activity_id": "gr20-stage3-spasimata-asco",
+   "name": "Stage 3 — Carrozzu → Haut Asco over the Spasimata Slabs",
+   "type": "outdoor",
+   "order_index": 4,
+   "lat": 42.40349,
+   "lng": 8.92233,
+   "time_window": "06:30–13:00",
+   "duration": "4–6 hr",
+   "difficulty": "hard",
+   "cash_only": false,
+   "description": "Across the swaying Spasimata footbridge minutes from the refuge, then up the famous chained slabs and past Lac de la Muvrella to a 2,000 m gap before dropping to the old Haut Asco ski station — short, but zero-filler climbing. A hotel, hot food and the north's last easy road bail-out wait at the bottom. Caveat: the slabs are genuinely dangerous wet — if rain hit overnight, wait for the rock to dry.",
+   "reference_link": "https://en.wikivoyage.org/wiki/GR_20",
+   "poi_ids": [
+    "haut-asco-refuge"
+   ]
+  },
+  {
+   "activity_id": "gr20-stage4-cinto-flank",
+   "name": "Stage 4 — Haut Asco → Tighjettu over Monte Cinto's Flank",
+   "type": "outdoor",
+   "order_index": 5,
+   "lat": 42.375975,
+   "lng": 8.9368448,
+   "time_window": "06:00–14:30",
+   "duration": "7–8 hr",
+   "difficulty": "hard",
+   "cash_only": true,
+   "description": "The day that replaced the Cirque de la Solitude: since the 2016 reroute the trail climbs ~1,250 m to Pointe des Éboulis (2,607 m) under Monte Cinto — now the highest point of the entire GR20 — then descends the Bocca Crucetta boulder fields to Tighjettu. Corsica's summit (2,706 m) is a ~2 hr round-trip detour if you have the legs and the weather. Caveat: this is where old snow survives longest — into late June, carry microspikes early season and check conditions with the gardiens.",
+   "reference_link": "https://www.ffrandonnee.fr/s-informer/actualites/corse-gr-20-10-ans-apres-le-drame-du-cirque-de-la-solitude",
+   "poi_ids": [
+    "pointe-des-eboulis",
+    "refuge-tighjettu"
+   ]
+  },
+  {
+   "activity_id": "gr20-stage5-ciottulu",
+   "name": "Stage 5 — Tighjettu → Ciottulu di i Mori",
+   "type": "outdoor",
+   "order_index": 6,
+   "lat": 42.33494,
+   "lng": 8.86811,
+   "time_window": "07:30–12:00",
+   "duration": "3.5–4.5 hr",
+   "difficulty": "moderate",
+   "cash_only": true,
+   "description": "The recovery leg the north owes you: a short morning past the Ballone bergerie and up the Foggiale to the highest refuge on the route (~2,000 m), parked under the fang of Paglia Orba. Afternoon options: wash in the upper Golo pools below the col, or attempt Paglia Orba with the gardien's advice — it has scrambling that is not for everyone. Caveat: short day, but book it as its own night anyway — skipping ahead without a reservation leaves you pitch-less.",
+   "reference_link": "https://en.wikivoyage.org/wiki/GR_20",
+   "poi_ids": [
+    "refuge-ciottulu-di-i-mori"
+   ]
+  },
+  {
+   "activity_id": "gr20-stage6-lac-de-nino",
+   "name": "Stage 6 — Ciottulu di i Mori → Manganu by Lac de Nino",
+   "type": "outdoor",
+   "order_index": 7,
+   "lat": 42.2551746,
+   "lng": 8.940516,
+   "time_window": "06:30–15:00",
+   "duration": "7–8 hr",
+   "difficulty": "hard",
+   "cash_only": true,
+   "description": "The longest stage by distance (~24 km) and the gentlest underfoot: down the Golo, on soft forest track past the Castel di Vergio hotel — the only mid-stage shop between here and Vizzavona — then over Bocca San Petru to Lac de Nino, whose green pozzine terraces and free-ranging horses are the route's one pastoral exhale. On past the Vaccaghia bergerie to Manganu. Caveat: hours are on open, shadeless plateau — sun protection is not optional here.",
+   "reference_link": "https://en.wikivoyage.org/wiki/GR_20",
+   "poi_ids": [
+    "lac-de-nino",
+    "refuge-manganu"
+   ]
+  },
+  {
+   "activity_id": "gr20-stage7-breche-capitello",
+   "name": "Stage 7 — Manganu → Petra Piana over the Brèche de Capitello",
+   "type": "outdoor",
+   "order_index": 8,
+   "lat": 42.2082087,
+   "lng": 9.011729,
+   "time_window": "06:00–13:30",
+   "duration": "6–7 hr",
+   "difficulty": "hard",
+   "cash_only": true,
+   "description": "The postcard the GR20 is sold on: a dawn climb to the Brèche de Capitello (2,225 m), a notch in the ridge with both glacial lakes — Capitello and Melo — pooled a vertical world below, then a cabled, exposed ridgeline traverse to Petra Piana. Arguably the finest single day on the route. Caveat: this ridge is a lightning conductor — be over the high ground before the afternoon convection builds.",
+   "reference_link": "https://en.wikivoyage.org/wiki/GR_20",
+   "poi_ids": [
+    "breche-de-capitello",
+    "refuge-petra-piana"
+   ]
+  },
+  {
+   "activity_id": "gr20-stage8-9-vizzavona-double",
+   "name": "Stages 8–9 — Petra Piana → Vizzavona via l'Onda (double day)",
+   "type": "outdoor",
+   "order_index": 9,
+   "lat": 42.15215,
+   "lng": 9.07283,
+   "time_window": "05:30–16:30",
+   "duration": "8–10 hr",
+   "difficulty": "hard",
+   "cash_only": true,
+   "description": "Two booked stages walked as one: the crest out of Petra Piana, lunch at the l'Onda bergeries, then the long haul over Bocca Muratello and down the wooded Agnone valley — past the Cascades des Anglais pools — to Vizzavona, the traverse's official midpoint, where a train line and a hot meal cut the trail in half. Caveat: doubling means you book no bed at l'Onda — commit to this plan when reservations open; the platform allows changes only up to two days before a stage.",
+   "reference_link": "https://mongr20.com/en/gr20-refuge-booking",
+   "poi_ids": [
+    "refuge-petra-piana"
+   ]
+  },
+  {
+   "activity_id": "gr20-vizzavona-resupply",
+   "name": "Vizzavona — Resupply & Rest Half-Day",
+   "type": "food",
+   "order_index": 10,
+   "lat": 42.128611,
+   "lng": 9.133333,
+   "time_window": "12:30–17:00",
+   "duration": "half day",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "The only true rest point: sleep past dawn, give the morning to legs and laundry, then restock for the south — La Halte du Prince's hiker épicerie, the small station kiosk and L'Alzarella's shop cover trail food, gas and Corsican extras, and the station restaurant handles the feast. The Ajaccio–Bastia railway makes this the honest exit for anyone whose knees have voted. Caveat: these are trailhead épiceries, not supermarkets — plan the south's six days around what they actually stock, and confirm ahead outside July–August.",
+   "reference_link": "https://www.lahalteduprince.com/boutique/",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "gr20-stage10-11-prati-double",
+   "name": "Stages 10–11 — Vizzavona → Prati by E Capannelle (double day)",
+   "type": "outdoor",
+   "order_index": 11,
+   "lat": 42.00864,
+   "lng": 9.21827,
+   "time_window": "05:30–16:30",
+   "duration": "9–11 hr",
+   "difficulty": "hard",
+   "cash_only": true,
+   "description": "The southern GR20 announces itself: ~1,000 m of beech-forest climbing to the E Capannelle ski hamlet (hot lunch at the U Fugone gîte), then the easier open traverse under Monte Renoso, over the Col de Verde and up to Prati's grassy balcony — the first camp where you can see the sea on both sides of the island. Rested legs from Vizzavona make this double honest. Caveat: it is still the longest southern day — leave before dawn and keep the Col de Verde snack-bar stop short.",
+   "reference_link": "https://en.wikivoyage.org/wiki/GR_20",
+   "poi_ids": [
+    "refuge-prati"
+   ]
+  },
+  {
+   "activity_id": "gr20-stage12-usciolu-crest",
+   "name": "Stage 12 — Prati → Usciolu along the Crest",
+   "type": "outdoor",
+   "order_index": 12,
+   "lat": 41.93513,
+   "lng": 9.20597,
+   "time_window": "06:00–13:30",
+   "duration": "6–7 hr",
+   "difficulty": "hard",
+   "cash_only": true,
+   "description": "The south's answer to the northern scrambles: a full day balanced on the ridgeline over Punta della Cappella, hands on warm granite with the Tyrrhenian on one side and the Mediterranean's western basin on the other, finishing at Usciolu — whose gardien runs one of the best-stocked refuge épiceries on the route. Caveat: this is one of the two stages with no reliable water source between refuges — leave Prati with 3 L minimum.",
+   "reference_link": "https://gr20-infos.com/en/refuges/",
+   "poi_ids": [
+    "refuge-usciolu"
+   ]
+  },
+  {
+   "activity_id": "gr20-stage13-14-incudine-double",
+   "name": "Stages 13–14 — Usciolu → Asinau over the Coscione & Monte Incudine (double day)",
+   "type": "outdoor",
+   "order_index": 13,
+   "lat": 41.8494655,
+   "lng": 9.2073797,
+   "time_window": "05:30–16:00",
+   "duration": "8–10 hr",
+   "difficulty": "hard",
+   "cash_only": true,
+   "description": "The old single stage the PNRC later split at Matalza, walked whole: down across the Coscione plateau's pozzine streams and grazing herds, past the Matalza refuge, then the long pull onto Monte Incudine (2,134 m) — the last 2,000 m summit ridge of the traverse — and the steep, part-chained plunge to Asinau. Caveat: Asinau burned in 2016 and remains a makeshift camp — tents and rentals only, no dormitory — so confirm its current setup when you book.",
+   "reference_link": "https://www.le-gr20.fr/en/pages/refuges/asinau-refuge.html",
+   "poi_ids": [
+    "refuge-asinau"
+   ]
+  },
+  {
+   "activity_id": "gr20-stage15-bavella-paliri",
+   "name": "Stage 15 — Asinau → Paliri through the Bavella Needles",
+   "type": "outdoor",
+   "order_index": 14,
+   "lat": 41.8033907,
+   "lng": 9.214555,
+   "time_window": "06:30–13:30",
+   "duration": "6–7 hr",
+   "difficulty": "hard",
+   "cash_only": true,
+   "description": "Choose your finale in the granite cathedral: the alpine variant threads the Aiguilles de Bavella themselves — chains, exposed ledges, the route's last real scrambling — while the standard trail contours to the Col de Bavella road pass (auberge, crowds, cold drinks) before both drop to little Paliri, the final refuge. Caveat: take the variant only in dry, calm weather — its chained sections are the most exposed rock in the south; the col route loses nothing in scenery.",
+   "reference_link": "https://en.wikivoyage.org/wiki/GR_20",
+   "poi_ids": [
+    "aiguilles-de-bavella",
+    "refuge-paliri"
+   ]
+  },
+  {
+   "activity_id": "gr20-paliri-bavella-dusk",
+   "name": "Paliri — Last Light on the Bavella Towers",
+   "type": "scenery",
+   "order_index": 15,
+   "lat": 41.79415,
+   "lng": 9.25961,
+   "time_window": "18:30–20:30",
+   "duration": "1–2 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "The reward evening: Paliri sits at 1,055 m on a shelf below the Bavella towers, and at dusk the granite goes copper while the maquis and the distant sea go blue — the traverse's one built-in sunset show, fifteen days earned. Bring your dinner outside and watch it burn out. Caveat: this is the last night at altitude — settle the taxi plan for Conca now while other hikers are around to share it.",
+   "reference_link": "https://www.openstreetmap.org/#map=16/41.79415/9.25961",
+   "poi_ids": [
+    "refuge-paliri",
+    "aiguilles-de-bavella"
+   ]
+  },
+  {
+   "activity_id": "gr20-stage16-conca-finish",
+   "name": "Stage 16 — Paliri → Conca: the Finish",
+   "type": "outdoor",
+   "order_index": 16,
+   "lat": 41.7343259,
+   "lng": 9.3358428,
+   "time_window": "06:30–12:30",
+   "duration": "4.5–6 hr",
+   "difficulty": "moderate",
+   "cash_only": true,
+   "description": "Down through the maquis, squeezing through the granite slot of Bocca d'Usciolu, and the trail simply ends in Conca's lanes at ~250 m — where the traditional first act is a cold beer among fellow finishers at Bar le Soleil Levant, the village's GR20 bar. Sign nothing, summit nothing; just stop walking. Caveat: this leg bakes — it is the lowest, hottest morning of the route, so start early and carry more water than the short hours suggest.",
+   "reference_link": "https://www.alltrails.com/trail/france/corse-du-sud/gr-20-etape-15-d-i-paliri-a-conca",
+   "poi_ids": [
+    "refuge-paliri"
+   ]
+  },
+  {
+   "activity_id": "gr20-porto-vecchio-evening",
+   "name": "Porto-Vecchio — Finish-Line Evening",
+   "type": "nightlife",
+   "order_index": 17,
+   "lat": 41.5912387,
+   "lng": 9.2793595,
+   "time_window": "17:30–22:30",
+   "duration": "4–5 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Taxi the ~20 km down from Conca and land in Porto-Vecchio's old town for the celebration the trail earned: the café terraces of Place de la République, the 360° view from the Bastion de France terrace, and a long dinner on the marina quays below. Two weeks of refuge rations end here. Caveat: the long-running Conca hikers' shuttle is reported suspended as of 2026 — book a taxi (~€55, shareable) the day before via the contacts on corsicabus.org, and confirm ahead.",
+   "reference_link": "https://www.corsica.co.uk/guide/l-extreme-sud/porto-vecchio",
+   "poi_ids": []
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "refuge-ortu-di-u-piobbu",
+   "type": "outdoor",
+   "name": "Refuge d'Ortu di u Piobbu (1,520 m)",
+   "lat": 42.465,
+   "lng": 8.90696,
+   "description": "First PNRC refuge of the traverse, on a shoulder above Calenzana. The hut burned down in May 2019 and the night is still tent-based (own tent or rentals) while reconstruction proceeds — one of the first sites to sell out when booking opens.",
+   "reference_link": "https://pnr-resa.corsica/refuge.php?id_refuge=1"
+  },
+  {
+   "poi_id": "refuge-carrozzu",
+   "type": "outdoor",
+   "name": "Refuge de Carrozzu (1,270 m)",
+   "lat": 42.42625,
+   "lng": 8.90047,
+   "description": "Bunkhouse in a granite amphitheater ringed by walls climbers cross oceans for; the Spasimata suspension footbridge is minutes beyond the door. PNRC-flagged as one of the three fastest-selling refuges — book it the day the platform opens.",
+   "reference_link": "https://www.openstreetmap.org/#map=17/42.42625/8.90047"
+  },
+  {
+   "poi_id": "haut-asco-refuge",
+   "type": "outdoor",
+   "name": "Haut Asco / Ascu Stagnu (1,430 m)",
+   "lat": 42.40349,
+   "lng": 8.92233,
+   "description": "Old ski station at the head of the Asco valley: PNRC refuge, hotel beds, restaurant meals and the northern half's only easy road access — the sane bail-out point if the first three stages have said no. Confirm hotel availability separately from the PNRC platform.",
+   "reference_link": "https://www.openstreetmap.org/#map=17/42.40349/8.92233"
+  },
+  {
+   "poi_id": "pointe-des-eboulis",
+   "type": "scenery",
+   "name": "Pointe des Éboulis (2,607 m) — Monte Cinto flank",
+   "lat": 42.375975,
+   "lng": 8.9368448,
+   "difficulty": "hard",
+   "description": "High point of the entire GR20 since 2016, when the route was permanently moved out of the Cirque de la Solitude after the June 2015 landslide killed seven hikers; the old cirque was stripped of its chains and demoted. Monte Cinto's 2,706 m summit is an optional ~2 hr detour — snow lingers up here into late June.",
+   "reference_link": "https://gr20-infos.com/decouvrir/cirque-de-la-solitude/"
+  },
+  {
+   "poi_id": "refuge-tighjettu",
+   "type": "outdoor",
+   "name": "Refuge de Tighjettu (1,683 m)",
+   "lat": 42.36224,
+   "lng": 8.90882,
+   "description": "Stilted refuge hanging off Monte Cinto's southern flank at the end of the reroute's boulder descent; the Bergerie de Ballone, 40 minutes below, grills dinner for those who book. Cash for anything bought on site.",
+   "reference_link": "https://www.openstreetmap.org/#map=17/42.36224/8.90882"
+  },
+  {
+   "poi_id": "refuge-ciottulu-di-i-mori",
+   "type": "outdoor",
+   "name": "Refuge de Ciottulu di i Mori (2,000 m)",
+   "lat": 42.33494,
+   "lng": 8.86811,
+   "description": "The highest refuge on the GR20, set under the fang of Paglia Orba (2,525 m) — Corsica's most beautiful mountain by local consensus and a serious, scramble-grade side trip only in good conditions. Cold nights even in July; pack accordingly.",
+   "reference_link": "https://www.openstreetmap.org/#map=17/42.33494/8.86811"
+  },
+  {
+   "poi_id": "lac-de-nino",
+   "type": "scenery",
+   "name": "Lac de Nino (1,743 m)",
+   "lat": 42.2551746,
+   "lng": 8.940516,
+   "description": "Glacial lake ringed by pozzines — spongy green peat terraces threaded with streams — where semi-wild horses graze at altitude; the traverse's single softest scene. Protected site: no camping, no swimming, and the plateau is shadeless for hours either side.",
+   "reference_link": "https://www.openstreetmap.org/#map=15/42.25517/8.94052"
+  },
+  {
+   "poi_id": "refuge-manganu",
+   "type": "outdoor",
+   "name": "Refuge de Manganu (1,600 m)",
+   "lat": 42.21989,
+   "lng": 8.98066,
+   "description": "Gateway camp for the Capitello day, beside a bathing stream at the foot of the brèche climb. The Bergerie de Vaccaghia an hour before it sells cheese and meals in season — carry cash.",
+   "reference_link": "https://www.openstreetmap.org/#map=17/42.21989/8.98066"
+  },
+  {
+   "poi_id": "breche-de-capitello",
+   "type": "scenery",
+   "name": "Brèche de Capitello (2,225 m)",
+   "lat": 42.2082087,
+   "lng": 9.011729,
+   "difficulty": "hard",
+   "description": "The notch (Bocca alle Porte) above the twin glacial lakes of Capitello and Melo — the most photographed frame on the GR20, followed by a cabled, exposed ridgeline. Old snow holds in the couloirs here into early summer; check conditions with the Manganu gardien.",
+   "reference_link": "https://www.openstreetmap.org/#map=16/42.20821/9.01173"
+  },
+  {
+   "poi_id": "refuge-petra-piana",
+   "type": "outdoor",
+   "name": "Refuge de Petra Piana (1,842 m)",
+   "lat": 42.19807,
+   "lng": 9.05248,
+   "description": "Small, high and storm-swept camp at the end of the Capitello traverse, launchpad for the double-stage run to Vizzavona via the crest or the bergeries of l'Onda. Pitches are tight — another argument for booking the moment sales open.",
+   "reference_link": "https://www.openstreetmap.org/#map=17/42.19807/9.05248"
+  },
+  {
+   "poi_id": "refuge-prati",
+   "type": "outdoor",
+   "name": "Refuge de Prati (1,820 m)",
+   "lat": 42.00864,
+   "lng": 9.21827,
+   "description": "Grass-balcony refuge on the southern crest — the first camp of the route where both the east and west coasts of Corsica are visible from your tent. Fully exposed to weather off the ridge; stake everything down.",
+   "reference_link": "https://www.openstreetmap.org/#map=17/42.00864/9.21827"
+  },
+  {
+   "poi_id": "refuge-usciolu",
+   "type": "outdoor",
+   "name": "Refuge d'Usciolu (1,750 m)",
+   "lat": 41.93513,
+   "lng": 9.20597,
+   "description": "Crest-top refuge famous among GR20 hikers for its unusually well-stocked épicerie — the best mid-south restock point. Third of the PNRC's three fastest-selling refuges; treat it as a day-one booking priority.",
+   "reference_link": "https://gr20-infos.com/en/refuges/"
+  },
+  {
+   "poi_id": "refuge-asinau",
+   "type": "outdoor",
+   "name": "Refuge d'Asinau (1,536 m)",
+   "lat": 41.84147,
+   "lng": 9.21434,
+   "description": "Camp below Monte Incudine's south face. The hut burned in spring 2016 and has not been rebuilt — expect a makeshift site of tents and rentals with a seasonal gardien cooking meals; no dormitory beds exist to book. Confirm its current configuration on the PNRC platform.",
+   "reference_link": "https://www.le-gr20.fr/en/pages/refuges/asinau-refuge.html"
+  },
+  {
+   "poi_id": "aiguilles-de-bavella",
+   "type": "scenery",
+   "name": "Aiguilles de Bavella",
+   "lat": 41.8033907,
+   "lng": 9.214555,
+   "difficulty": "hard",
+   "description": "The seven granite towers that stage the route's finale: the GR20's alpine variant threads directly beneath them with chained, exposed passages, while the standard route rounds them via the Col de Bavella road pass and its auberge. Variant in dry weather only.",
+   "reference_link": "https://www.openstreetmap.org/#map=15/41.80339/9.21456"
+  },
+  {
+   "poi_id": "refuge-paliri",
+   "type": "outdoor",
+   "name": "Refuge de Paliri (1,055 m)",
+   "lat": 41.79415,
+   "lng": 9.25961,
+   "description": "The last refuge of the traverse, on a shelf facing the Bavella towers — small, warm-aired and famous for its dusk light. From here the trail only descends; water and heat, not gradient, are the final day's problems.",
+   "reference_link": "https://www.openstreetmap.org/#map=16/41.79415/9.25961"
+  }
+ ],
+ "transit": [
+  {
+   "name": "Calvi Sainte-Catherine Airport & Gare de Calvi",
+   "lat": 42.5251787,
+   "lng": 8.7901395,
+   "description": "Northern gateway: direct seasonal flights, ferries nearby, and the Calvi railhead of the Corsican network. Onward to Calenzana: Beaux Voyages/Corsicar bus (~€10, ~30 min, twice daily in high season, historically not weekends — confirm the current timetable) or taxi €35–40.",
+   "reference_link": "https://lesbeauxvoyages.corsica/en/coach-routes-corsica"
+  },
+  {
+   "name": "Gare de Vizzavona (906 m)",
+   "lat": 42.128611,
+   "lng": 9.133333,
+   "description": "Highest station on the Bastia–Ajaccio line and the GR20's midpoint escape hatch — several trains daily each way, plus a station restaurant and kiosk. The only place on the traverse where quitting, joining or splitting the route is simple.",
+   "reference_link": "https://fr.wikipedia.org/wiki/Gare_de_Vizzavona"
+  },
+  {
+   "name": "Conca village (taxi / shuttle point)",
+   "lat": 41.7343259,
+   "lng": 9.3358428,
+   "description": "Southern terminus, ~20 km from Porto-Vecchio. The long-running hikers' shuttle via the La Tonnelle gîte is reported suspended as of 2026 — plan on a pre-booked taxi (~€55, shareable) and check corsicabus.org's Conca page for current operators before you fly.",
+   "reference_link": "https://www.corsicabus.org/busPVecchio/Conca.html"
+  }
+ ]
+}

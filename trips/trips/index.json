@@ -1,0 +1,76 @@
+{
+  "trips": [
+    {
+      "file": "ohrid-2026-07.json",
+      "name": "Ohrid - Car-Free Lake Week"
+    },
+    {
+      "file": "san-francisco-2026.json",
+      "name": "San Francisco - Bay Week"
+    },
+    {
+      "file": "guerneville-2026.json",
+      "name": "Guerneville - River Weekend"
+    },
+    {
+      "file": "vn-north-laos-2026-12.json",
+      "name": "Vietnam Moto - Laos Link"
+    },
+    {
+      "file": "vn-north-central-2026-12.json",
+      "name": "Vietnam Moto - N + Central"
+    },
+    {
+      "file": "vn-south-cambodia-2026-12.json",
+      "name": "Vietnam Moto - Cambodia"
+    },
+    {
+      "file": "vn-south-central-2026-12.json",
+      "name": "Vietnam Moto - S + Central"
+    },
+    {
+      "file": "sapporo-snowboard-2027-01.json",
+      "name": "Sapporo - Powder Week"
+    },
+    {
+      "file": "korea-snowboard-2027-01.json",
+      "name": "High1 Korea - Snow Week"
+    },
+    {
+      "file": "southamerica-snowboard-2027-08.json",
+      "name": "Andes - Snowboard Fortnight"
+    },
+    {
+      "file": "trans-siberian-rail.json",
+      "name": "Trans-Siberian - Rail Epic"
+    },
+    {
+      "file": "silk-road-rail.json",
+      "name": "Silk Road - Rail Journey"
+    },
+    {
+      "file": "california-zephyr-rail.json",
+      "name": "California Zephyr - Rail"
+    },
+    {
+      "file": "auyuittuq-akshayuk.json",
+      "name": "Auyuittuq - Arctic Traverse"
+    },
+    {
+      "file": "rae-lakes-loop.json",
+      "name": "Rae Lakes - Sierra Loop"
+    },
+    {
+      "file": "lost-coast-trail.json",
+      "name": "Lost Coast - Tide Trek"
+    },
+    {
+      "file": "patagonia-o-circuit.json",
+      "name": "Torres del Paine - O Circuit"
+    },
+    {
+      "file": "gr20-corsica.json",
+      "name": "GR20 - Island Backpacking"
+    }
+  ]
+}

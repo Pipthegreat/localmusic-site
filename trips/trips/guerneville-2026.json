@@ -1,0 +1,413 @@
+{
+ "trip_id": "guerneville-2026",
+ "name": "Guerneville - River Weekend",
+ "region": "Guerneville & the Russian River, Sonoma County, California",
+ "date_range": "2026",
+ "duration_days": 4,
+ "summary": "A four-day Russian River weekend: redwoods, river paddling, and a genuinely good small-town food and bar scene, with the one real climb (Austin Creek's East Ridge, above the tourist-flat Armstrong loops) leading. The limiters: this is a working weekend, so mornings flex around a café work block; the river run needs early-season water levels; Johnson's Beach operates only June–Labor Day; and 2026 trail closures at Austin Creek must be re-verified at the kiosk. Expect the mellow counterpoint done well — ancient groves, a mid-float brewery beach-up, boon's 24 seats (reserve ahead), and show night at Monte Rio's quonset-hut theater.",
+ "activities": [
+  {
+   "activity_id": "austin-creek",
+   "name": "Austin Creek — East Ridge climb (above the redwoods)",
+   "type": "outdoor",
+   "order_index": 1,
+   "lat": 38.5551,
+   "lng": -123.0043,
+   "time_window": "09:00–15:00",
+   "duration": "4–6 hr",
+   "difficulty": "hard",
+   "description": "The earned pick, and the one almost no one does: everyone walks the flat, paved Armstrong redwood loops below — this climbs out of them. East Ridge Trail gains ~1,500 ft over 4 mi to Bullfrog Pond through oak woodland and open ridge with panoramic wilderness views, loopable back down Pool Ridge (steep upper section). 6,000 acres and usually empty. VERIFY before you go (2026): Gilliam Creek Trail is closed and Bullfrog Pond Campground is closed; East Ridge and Pool Ridge were open. Day use 8 AM–sunset, $10/vehicle, no water or restrooms up top, limited cell service, rattlesnakes in warm weather. Register/check status at the Armstrong kiosk.",
+   "reference_link": "https://www.parks.ca.gov/?page_id=452",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "armstrong-kiosk-entrance-status-check",
+    "east-ridge-trailhead",
+    "bullfrog-pond-turnaround-loop-point"
+   ]
+  },
+  {
+   "activity_id": "burkes-paddle",
+   "name": "Burke's Canoe Trips — self-guided river run",
+   "type": "outdoor",
+   "order_index": 2,
+   "lat": 38.49,
+   "lng": -122.899,
+   "time_window": "09:00–16:00",
+   "duration": "half day",
+   "difficulty": "moderate",
+   "description": "The on-profile river day: a ~10-mile self-guided canoe/kayak run from Burke's, put in 7.5 mi upstream and their crew shuttles you back to your car. Beach the boat at Stumptown Brewery mid-float for a beer. Go earlier in the season while river levels are high enough. A step up from renting a tube at the paid beach.",
+   "reference_link": "https://www.sonomacounty.com/outdoor-activities/itinerary-russian-river-valley-redwoods/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "burke-s-canoe-trips-put-in-shuttle",
+    "stumptown-brewery-mid-float-beer-stop",
+    "moms-beach-forestville",
+    "vacation-beach-dam"
+   ]
+  },
+  {
+   "activity_id": "armstrong",
+   "name": "Armstrong Redwoods — the ancient grove",
+   "type": "scenery",
+   "order_index": 3,
+   "lat": 38.5352,
+   "lng": -123.0043,
+   "time_window": "08:00–18:00",
+   "duration": "1–2 hr",
+   "difficulty": "easy",
+   "description": "The accessible counterpoint — and here it's the point: an easy flat walk among 300-ft coast redwoods, the 1,400-year-old Colonel Armstrong tree and the 310-ft Parson Jones. Rivals Muir Woods with a fraction of the crowds. Free to walk in (pay to drive/park). Pair it as the mellow half of an Austin Creek day.",
+   "reference_link": "https://www.sonomacounty.com/cities/guerneville/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "colonel-armstrong-tree-1-400-yrs",
+    "parson-jones-tree-310-ft",
+    "redwood-forest-theater"
+   ]
+  },
+  {
+   "activity_id": "boon",
+   "name": "boon eat + drink",
+   "type": "food",
+   "order_index": 4,
+   "lat": 38.5019,
+   "lng": -122.9967,
+   "time_window": "17:00–21:00",
+   "duration": "1.5 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "The town's standout: 24 seats, Sonoma-local seasonal cooking by chef-owner Crista Luedtke (who's largely behind Guerneville's food revival). Reserve ahead in season. This is the 'spend where it earns it' dinner.",
+   "reference_link": "https://www.sonomacounty.com/cities/guerneville/48-hours-guerneville/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "nimble-finn-s-ice-cream-dessert"
+   ]
+  },
+  {
+   "activity_id": "coffee-bazaar",
+   "name": "Coffee Bazaar — the work-morning café",
+   "type": "food",
+   "order_index": 5,
+   "lat": 38.5016,
+   "lng": -122.9975,
+   "time_window": "07:00–13:00",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "The café-work anchor for the working half of the weekend: eclectic 30-year spot attached to a bookstore, coffee, homemade baked goods and breakfast sandwiches. Downtown, walkable, reliable — the place to knock out a focused block before the river.",
+   "reference_link": "https://www.sonomacounty.com/cities/guerneville/48-hours-guerneville/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "guerneville-river-park"
+   ]
+  },
+  {
+   "activity_id": "el-barrio",
+   "name": "El Barrio — cocktails",
+   "type": "nightlife",
+   "order_index": 6,
+   "lat": 38.5018,
+   "lng": -122.997,
+   "time_window": "16:00–21:00",
+   "duration": "1.5 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "The town's good cocktail bar — another Luedtke spot, small and lively. Closes early (~9 PM), so it's a pre-dinner drink, not a late night. The evening warm-up before boon or Trillium.",
+   "reference_link": "https://wheresjessieb.com/blog/guerneville-travel-guide",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "pee-wee-golf-arcade"
+   ]
+  },
+  {
+   "activity_id": "johnsons-beach-river-swim",
+   "name": "Johnson's Beach afternoon swim",
+   "type": "outdoor",
+   "order_index": 7,
+   "lat": 38.4999706,
+   "lng": -122.9974471,
+   "time_window": "13:00–16:00",
+   "duration": "2–3 hr",
+   "difficulty": "easy",
+   "description": "The town beach since the 1920s: a calm, roped-off stretch of the Russian River a two-minute walk from Main Street, with beach and boat rentals 10:00–17:00 and a snack shack, free admission, $10 parking. It is the un-fancy local scene, not a resort. Verified caveats: beach operations run daily only June 1 to Labor Day, no outside alcohol, dogs banned on the beach; the lot closes at 18:00.",
+   "reference_link": "https://www.johnsonsbeach.com/faq",
+   "poi_ids": [
+    "rainbow-cattle-co",
+    "guerneville-bridge"
+   ]
+  },
+  {
+   "activity_id": "duncans-mills-village-wander",
+   "name": "Duncans Mills village afternoon",
+   "type": "historic",
+   "order_index": 8,
+   "lat": 38.4534282,
+   "lng": -123.0544771,
+   "time_window": "13:00–16:30",
+   "duration": "2–3 hr",
+   "difficulty": "easy",
+   "description": "A ten-minute drive downriver, this preserved railroad-era hamlet packs about 14 independent merchants — vinyl, antiques, a poetry bookshop, a proper general store with a full deli counter — into a few wooden blocks, with zero chain anything. Cap it with a flight at Sophie's Cellars, a local wine bar pouring limited-production Sonoma wines with artisan cheese: far better value than the tour-bus tasting rooms. Verified caveat: Sophie's Cellars is closed Tuesdays (otherwise open from noon); shop hours vary midweek — confirm ahead.",
+   "reference_link": "https://duncansmillsvillage.com/shopping/",
+   "poi_ids": [
+    "sophies-cellars",
+    "duncans-mills-general-store",
+    "duncans-mills-depot-museum"
+   ]
+  },
+  {
+   "activity_id": "stumptown-brewery-deck",
+   "name": "Stumptown Brewery riverside deck",
+   "type": "food",
+   "order_index": 9,
+   "lat": 38.513804,
+   "lng": -122.9834452,
+   "time_window": "17:00–19:30",
+   "duration": "2–2.5 hr",
+   "difficulty": "easy",
+   "description": "Small in-house brewery a mile east of town with a big deck hanging over two acres of Russian River frontage — house beers plus guest taps, smoked brisket and pulled-pork sandwiches off the pub menu, dogs welcome. It is the locals' golden-hour porch, not a tasting-room production. Caveat: the official site was unreachable when checked and the 11:00–23:00 daily hours come from third-party listings — confirm ahead.",
+   "reference_link": "https://www.sonomacounty.com/food-drink/restaurants/stumptown-brewery/",
+   "poi_ids": [
+    "stumptown-brewery-mid-float-beer-stop"
+   ]
+  },
+  {
+   "activity_id": "monte-rio-theater-night",
+   "name": "Monte Rio Theater show night",
+   "type": "historic",
+   "order_index": 10,
+   "lat": 38.4675738,
+   "lng": -123.0107123,
+   "time_window": "19:00–22:00",
+   "duration": "2–3 hr",
+   "difficulty": "easy",
+   "description": "A movie or live show inside a Quonset-hut theater on the Bohemian Highway whose auditorium ceiling is draped with the largest surviving piece of Christo and Jeanne-Claude's Running Fence — community-run, with films, live music, and a free Open Mic Wednesdays (18:00–22:00, backline provided). Verified caveat: programming is event-based rather than nightly showtimes, so check the calendar before driving over.",
+   "reference_link": "https://www.monteriotheater.com/",
+   "poi_ids": [
+    "monte-rio-community-beach",
+    "northwood-golf-club"
+   ]
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "armstrong-kiosk-entrance-status-check",
+   "type": "outdoor",
+   "name": "Armstrong kiosk (entrance + status check)",
+   "lat": 38.535,
+   "lng": -123.006,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Pay day use here and confirm current trail status — closures change. Same entrance as the redwood reserve.",
+   "reference_link": "https://stewardscr.org/austin-creek-hiking-trails/",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "east-ridge-trailhead",
+   "type": "outdoor",
+   "name": "East Ridge Trailhead",
+   "lat": 38.538,
+   "lng": -123.0043,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "Trail leaves the reserve and climbs; you're under redwoods at first, then out onto open ridge.",
+   "reference_link": "https://stewardscr.org/austin-creek-hiking-trails/",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "bullfrog-pond-turnaround-loop-point",
+   "type": "outdoor",
+   "name": "Bullfrog Pond (turnaround / loop point)",
+   "lat": 38.5551,
+   "lng": -123.0043,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "Top of the climb. Pond often dry by mid-summer. Loop back via Pool Ridge for a different line down.",
+   "reference_link": "",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "burke-s-canoe-trips-put-in-shuttle",
+   "type": "outdoor",
+   "name": "Burke's Canoe Trips (put-in + shuttle)",
+   "lat": 38.49,
+   "lng": -122.899,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "Forestville, at Mirabel Rd. Self-guided rentals with shuttle service; also riverside campsites.",
+   "reference_link": "https://www.russianrivergetaways.com/things-to-do/towns/guerneville",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "stumptown-brewery-mid-float-beer-stop",
+   "type": "food",
+   "name": "Stumptown Brewery (mid-float beer stop)",
+   "lat": 38.513804,
+   "lng": -122.9834452,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "Beach the boat and walk up. Farmhand deli next door is the better food call. Shared stop: mid-float on the paddle day, or the evening deck session.",
+   "reference_link": "https://www.sonomacounty.com/food-drink/restaurants/stumptown-brewery/",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "colonel-armstrong-tree-1-400-yrs",
+   "type": "scenery",
+   "name": "Colonel Armstrong Tree (~1,400 yrs)",
+   "lat": 38.5372453,
+   "lng": -123.0070951,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "Oldest tree in the grove, on an easy loop near the entrance.",
+   "reference_link": "",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "parson-jones-tree-310-ft",
+   "type": "scenery",
+   "name": "Parson Jones Tree (310 ft)",
+   "lat": 38.5339803,
+   "lng": -123.0038819,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "Tallest in the reserve — longer than a football field.",
+   "reference_link": "",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "nimble-finn-s-ice-cream-dessert",
+   "type": "food",
+   "name": "Nimble & Finn's ice cream (dessert)",
+   "lat": 38.5017,
+   "lng": -122.996,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "Handmade ice cream a few steps away; open late Fri/Sat. The after-dinner cone.",
+   "reference_link": "",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "rainbow-cattle-co",
+   "type": "nightlife",
+   "name": "Rainbow Cattle Company",
+   "lat": 38.5021531,
+   "lng": -122.9977509,
+   "description": "Historic gay dive bar one block from the beach, open 365 days a year ('Come Hell or High Water'; from 14:00 weekends, 16:00 weekdays). A Guerneville institution and a natural post-swim beer stop. Widely reported as cash-only in recent reviews — confirm ahead; the official site does not state it.",
+   "reference_link": "https://queersteer.com/contact-us/"
+  },
+  {
+   "poi_id": "sophies-cellars",
+   "type": "food",
+   "name": "Sophie's Cellars",
+   "lat": 38.4535959,
+   "lng": -123.0539377,
+   "description": "Wine bar specializing in limited-production wines from across Sonoma County, paired with locally sourced cheeses. Open from noon daily except Tuesday.",
+   "reference_link": "https://www.sophiescellars.com/"
+  },
+  {
+   "poi_id": "duncans-mills-general-store",
+   "type": "food",
+   "name": "Duncans Mills General Store",
+   "lat": 38.4534282,
+   "lng": -123.0544771,
+   "description": "Working general store with a full-service deli counter — sandwiches and salads made to order, good picnic provisioning for the riverbank. Listed hours 08:00–20:00 daily via third-party directories — confirm ahead.",
+   "reference_link": "https://duncansmillsvillage.com/merchants/duncans-mills-general-store/"
+  },
+  {
+   "poi_id": "monte-rio-community-beach",
+   "type": "scenery",
+   "name": "Monte Rio Community Beach",
+   "lat": 38.4666294,
+   "lng": -123.0098433,
+   "description": "Big public beach under the Monte Rio bridge, a short walk from the theater — an easy golden-hour stop before an evening show. Free access; facilities are seasonal — confirm ahead.",
+   "reference_link": "https://www.openstreetmap.org/search?query=Monte%20Rio%20Community%20Beach"
+  },
+  {
+   "poi_id": "redwood-forest-theater",
+   "type": "historic",
+   "name": "Redwood Forest Theater",
+   "lat": 38.5362042,
+   "lng": -123.0089832,
+   "description": "A stone-terraced amphitheater tucked into the grove, a short detour off the main trail and usually empty — one of the quietest spots in the reserve. State Parks lists it only for rare case-by-case event reservations, so expect it open to wander, not programmed.",
+   "reference_link": "https://www.parks.ca.gov/?page_id=450"
+  },
+  {
+   "poi_id": "moms-beach-forestville",
+   "type": "outdoor",
+   "name": "Mom's Beach (Forestville River Access)",
+   "lat": 38.5101569,
+   "lng": -122.9238355,
+   "description": "The locals' name for the county's Forestville River Access, a scenic rocky-shore beach minutes from Burke's launch — free parking, seasonal restrooms, and free loaner life vests in summer. The small lot fills on hot weekends and the gate closes when full; alcohol is banned on summer weekends and holidays.",
+   "reference_link": "https://parks.sonomacounty.ca.gov/visit/find-a-park/forestville-river-access"
+  },
+  {
+   "poi_id": "vacation-beach-dam",
+   "type": "outdoor",
+   "name": "Vacation Beach summer dam crossing",
+   "lat": 38.4840442,
+   "lng": -123.0111353,
+   "description": "Old-school river hamlet downstream of Guerneville where a seasonal summer dam slows the river into a warm swimming hole — pure unpolished Russian River, no facilities, no fee. Confirm ahead: the dam is only installed in summer and neighborhood lane access/parking is tight.",
+   "reference_link": "https://www.openstreetmap.org/search?query=Vacation%20Beach%20Guerneville"
+  },
+  {
+   "poi_id": "guerneville-bridge",
+   "type": "historic",
+   "name": "Guerneville Bridge (1922)",
+   "lat": 38.5007318,
+   "lng": -122.9951296,
+   "description": "A rare pin-connected Parker truss opened December 1922 and preserved as a pedestrian bridge since 1998 (National Register #89000945) — the best free mid-river view in town, steps from the beach. Foot and bike traffic only; cars use the modern Hwy 116 bridge beside it.",
+   "reference_link": "https://noehill.com/sonoma/nat1989000945.asp"
+  },
+  {
+   "poi_id": "guerneville-river-park",
+   "type": "outdoor",
+   "name": "Guerneville River Park",
+   "lat": 38.5003206,
+   "lng": -122.9948347,
+   "description": "Quiet 5.3-acre county day-use park at the south foot of the old bridge — lawns, picnic tables, walkways, and a non-motorized kayak/paddleboard launch, all with free parking; an easy post-café leg-stretch across the river. Open 07:00 to 30 minutes before sunset only.",
+   "reference_link": "https://parks.sonomacounty.ca.gov/visit/find-a-park/guerneville-river-park"
+  },
+  {
+   "poi_id": "pee-wee-golf-arcade",
+   "type": "outdoor",
+   "name": "Guerneville Pee Wee Golf & Arcade",
+   "lat": 38.4994466,
+   "lng": -122.9929862,
+   "description": "Gloriously kitsch vintage mini-golf under hand-painted dinosaurs and giant figures on Drake Road, just over the bridge — adults $9, kids 5-and-under free, cheap and genuinely local fun before or after cocktails. Confirm ahead: the official site listed weekend-only 11:00–17:00 hours when checked, while directories claim daily hours.",
+   "reference_link": "https://www.guernevillepeeweegolf.com/"
+  },
+  {
+   "poi_id": "northwood-golf-club",
+   "type": "outdoor",
+   "name": "Northwood Golf Club",
+   "lat": 38.4785401,
+   "lng": -122.9940333,
+   "description": "A 1928 Alister MacKenzie-designed 9-holer threaded through old redwoods on the way to Monte Rio — one of the country's best-rated nine-hole courses, with green fees starting around $25, a fraction of destination-course prices. Confirm 2026 rates and tee times via the club.",
+   "reference_link": "https://www.northwoodgolf.com/"
+  },
+  {
+   "poi_id": "duncans-mills-depot-museum",
+   "type": "historic",
+   "name": "Duncans Mills Depot Museum & rail cars",
+   "lat": 38.4529895,
+   "lng": -123.053679,
+   "description": "The 1907 Northwestern Pacific depot with restored narrow-gauge cars and the caboose from the last train out in 1935, sitting on the old tracks at the edge of the village. The museum interior keeps irregular hours — but the rail cars are outside and viewable anytime.",
+   "reference_link": "https://noehill.com/sonoma/poi_duncans_mills_depot.asp"
+  }
+ ],
+ "transit": []
+}

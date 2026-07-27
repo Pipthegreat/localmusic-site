@@ -1,0 +1,363 @@
+{
+ "trip_id": "korea-snowboard-2027-01",
+ "name": "High1 Korea - Snow Week",
+ "region": "Gangwon-do, South Korea (Seoul bookends)",
+ "date_range": "2027-01/02",
+ "duration_days": 8,
+ "theme": "snowboard-resort",
+ "summary": "Eight days built around High1 Resort in Jeongseon, Gangwon-do — picked over Yongpyong (bigger but icier and skier-oriented), Phoenix Pyeongchang (better Olympic slopestyle park, weaker everything else) and Vivaldi (night-party hill, short runs) because High1 is the strongest all-round snowboard hill in Korea: the country's best natural snow quality at the highest base (733 m to 1,376 m), 18 trails with genuine top-to-bottom fall lines, and lift lines that stay near zero even on weekends per repeated rider reports. Five ride days including two verified night sessions (official night operation 18:00–01:00), a coal-country rest day (mine-turned-art-museum, 7th-century Jeokmyeolbogung temple), gondre-bap and hanwoo BBQ nights in the ex-mining towns of Gohan and Sabuk, and Seoul food bookends. Limiters: all lifts pause 16:00–18:00 daily for grooming; posted prices are the official 2023–24 sheet (adult all-day ₩104,000 range — confirm current season); High1 is the farthest major resort from Seoul (~3h40m rail to Gohan Station plus free resort shuttle, or winter-only direct ski bus from Incheon T1); the surrounding towns are casino-economy mining settlements — authentic, cheap, and quiet on weeknights. Budget posture: local dolsot gukbap and station-front grills over resort food courts, time-based lift tickets over all-day passes when legs fade.",
+ "activities": [
+  {
+   "activity_id": "korea-gwangjang-food-crawl",
+   "name": "Gwangjang Market arrival food crawl",
+   "type": "food",
+   "order_index": 1,
+   "lat": 37.5702,
+   "lng": 126.9995,
+   "time_window": "17:30–20:30",
+   "duration": "3h",
+   "difficulty": "easy",
+   "description": "Land, drop bags, and eat: lard-griddled bindaetteok (₩4,000–5,000 a pancake), mayak gimbap dipped in mustard-soy, and yukhoe in Seoul's oldest surviving market. Caveat: the general market stalls wind down around 18:00 — it's the food alley, running to roughly 23:00, that you're here for, so come hungry rather than to shop.",
+   "reference_link": "https://en.wikipedia.org/wiki/Gwangjang_Market",
+   "poi_ids": [
+    "korea-poi-gwangjang-market"
+   ]
+  },
+  {
+   "activity_id": "korea-taebaek-line-rail",
+   "name": "Mugunghwa rail into the Taebaek mountains",
+   "type": "scenery",
+   "order_index": 2,
+   "lat": 37.5806,
+   "lng": 127.0483,
+   "time_window": "08:00–11:40",
+   "duration": "3h 40m",
+   "difficulty": "easy",
+   "description": "Board a Mugunghwa-ho at Cheongnyangni Station and climb through river gorges and old coal valleys to Gohan Station, where High1's free shuttle meets the line — the slow-rail approach is half the trip. Caveat: High1's official directions quote about 3h40m but only a handful of departures run daily — book the exact train on Korail (1544-7788) before travel day.",
+   "reference_link": "https://www.high1.com/eng/contents.do?key=1539",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "korea-high1-first-laps",
+   "name": "First afternoon laps on High1",
+   "type": "outdoor",
+   "order_index": 3,
+   "lat": 37.1939,
+   "lng": 128.8294,
+   "time_window": "13:00–16:00",
+   "duration": "3h",
+   "difficulty": "moderate",
+   "description": "Shake off travel legs with a 3-hour time ticket (adult ₩58,000 on the official 2023–24 sheet) and lap the wide groomers off the gondolas to learn the mountain's three zones before the big days. Caveat: hourly-ticket time starts counting from your first gate scan, not purchase — don't scan in until you're strapped and ready.",
+   "reference_link": "https://www.high1.com/ski_eng/contents.do?key=1079",
+   "poi_ids": [
+    "korea-poi-high1-slopes",
+    "korea-poi-high1-base"
+   ]
+  },
+  {
+   "activity_id": "korea-gohan-gondre-dinner",
+   "name": "Gondre-bap dinner on Gohan's station-front strip",
+   "type": "food",
+   "order_index": 4,
+   "lat": 37.2008,
+   "lng": 128.853,
+   "time_window": "18:00–19:30",
+   "duration": "1.5h",
+   "difficulty": "easy",
+   "description": "Skip the resort food court for Gohan town's local strip: Memilchon Makguksu near the station serves stone-pot gondre (thistle) rice and buckwheat makguksu from patented house recipes, with gondre set meals around ₩15,000 at neighbors like Hambaeksan Dolsotbap. Caveat: peak-season waits of 30+ minutes are commonly reported at the area's gondre spots at lunch — dinner is the calmer slot.",
+   "reference_link": "https://coloradosaram.com/high-1-resort-guide-south-korea/",
+   "poi_ids": [
+    "korea-poi-gohan-eat-street"
+   ]
+  },
+  {
+   "activity_id": "korea-high1-full-day-1",
+   "name": "Full ride day 1 — top-to-bottom fall lines",
+   "type": "outdoor",
+   "order_index": 5,
+   "lat": 37.1939,
+   "lng": 128.8294,
+   "time_window": "09:00–16:00",
+   "duration": "7h",
+   "difficulty": "hard",
+   "description": "Ride the official daytime session gate-to-gate: 18 trails off a 1,376 m summit with the best variety of true top-to-bottom runs at any single Korean resort, on snow riders consistently rate the country's cleanest. Caveat: all lifts stop for the daily grooming window 16:00–18:00 — day session ends hard at 16:00, so front-load your laps.",
+   "reference_link": "https://www.high1.com/ski_eng/contents.do?key=1079",
+   "poi_ids": [
+    "korea-poi-high1-slopes"
+   ]
+  },
+  {
+   "activity_id": "korea-high1-top-sauna",
+   "name": "High1 Top sauna soak",
+   "type": "nightlife",
+   "order_index": 6,
+   "lat": 37.2133,
+   "lng": 128.8217,
+   "time_window": "18:30–20:30",
+   "duration": "2h",
+   "difficulty": "easy",
+   "description": "Boil the ride day out of your legs Korean-style at High1 Top, the sauna on the 4th floor of the Grand Hotel Convention Tower (06:00–22:00, adult ₩28,000). Caveat: it stays closed until 14:00 every Monday — shift sauna night if your rest day lands wrong.",
+   "reference_link": "https://www.high1.com/eng/tnbsshmanage/bsshDetail.do?key=1897&bsshCode=187",
+   "poi_ids": [
+    "korea-poi-high1-top-sauna"
+   ]
+  },
+  {
+   "activity_id": "korea-high1-full-day-2",
+   "name": "Full ride day 2 — zones and tree lines",
+   "type": "outdoor",
+   "order_index": 7,
+   "lat": 37.1939,
+   "lng": 128.8294,
+   "time_window": "09:00–16:00",
+   "duration": "7h",
+   "difficulty": "hard",
+   "description": "Work the mountain's far zones and steeper Victoria-side pitches; weekday lift lines here are famously near-nonexistent, so lap counts run high even on a time ticket. Caveat: time tickets aren't sold during the 16:00–18:00 maintenance window, and if the window overlaps your ticket the usable time extends by 2 hours — plan purchases around it.",
+   "reference_link": "https://www.high1.com/ski_eng/contents.do?key=1079",
+   "poi_ids": [
+    "korea-poi-high1-slopes"
+   ]
+  },
+  {
+   "activity_id": "korea-high1-night-session-1",
+   "name": "Night session under the lights",
+   "type": "outdoor",
+   "order_index": 8,
+   "lat": 37.1939,
+   "lng": 128.8294,
+   "time_window": "18:00–22:00",
+   "duration": "4h",
+   "difficulty": "moderate",
+   "description": "Korea's signature riding hours: High1's official night operation runs 18:00–01:00, with freshly groomed corduroy the moment gates reopen after the two-hour reset. Caveat: 18:00–01:00 is the official session window, but which slopes stay lit varies with conditions — check the day's operations board before buying the night ticket.",
+   "reference_link": "https://www.high1.com/ski_eng/contents.do?key=1079",
+   "poi_ids": [
+    "korea-poi-high1-slopes"
+   ]
+  },
+  {
+   "activity_id": "korea-samtan-art-mine",
+   "name": "Samtan Art Mine — rest-day coal-to-art complex",
+   "type": "historic",
+   "order_index": 9,
+   "lat": 37.1854,
+   "lng": 128.8819,
+   "time_window": "10:00–12:30",
+   "duration": "2.5h",
+   "difficulty": "easy",
+   "description": "Korea's first 'art mine': the Samcheok Tanjwa colliery, worked for 40 years, reborn as galleries and preserved washrooms and winding-gear halls holding 100,000+ works from some 150 countries (admission ₩10,000–13,000). Caveat: closed every Monday, and winter weekday hours are only 10:00–17:00 (weekends 09:30–17:30) — call +82-33-591-3001 before heading up the valley.",
+   "reference_link": "https://www.jeongseon.go.kr/en/tourist_attractions/museum_gallery/samtan_artmine",
+   "poi_ids": [
+    "korea-poi-samtan-art-mine"
+   ]
+  },
+  {
+   "activity_id": "korea-jeongamsa-sumano",
+   "name": "Jeongamsa Temple and the Sumano Pagoda",
+   "type": "historic",
+   "order_index": 10,
+   "lat": 37.183,
+   "lng": 128.8927,
+   "time_window": "13:30–15:00",
+   "duration": "1.5h",
+   "difficulty": "moderate",
+   "description": "One of Korea's five Jeokmyeolbogung temples, founded by master Jajang in the 7th century to enshrine relics of the Buddha, with the Goryeo-era brick-stone Sumano Pagoda up a ten-minute forest path behind the main hall. Caveat: winter footing on the pagoda path isn't documented — confirm conditions ahead and wear real boots, not resort slides.",
+   "reference_link": "https://www.jeongseon.go.kr/en/tourist_attractions/famous_sight/jeongamsa_temple",
+   "poi_ids": [
+    "korea-poi-jeongamsa"
+   ]
+  },
+  {
+   "activity_id": "korea-sabuk-hanwoo-bbq",
+   "name": "Hanwoo BBQ and soju night in Sabuk",
+   "type": "food",
+   "order_index": 11,
+   "lat": 37.2262,
+   "lng": 128.817,
+   "time_window": "18:00–20:30",
+   "duration": "2.5h",
+   "difficulty": "easy",
+   "description": "Grill night in the old mining town below the resort: Donnara Unara near Sabuk Station does premium hanwoo beef and pork over charcoal, with the town's casual pubs for a soju nightcap after. Caveat: hanwoo is priced as the premium it is and the restaurant's exact hours aren't published in English — confirm ahead and let the pork shoulder carry the budget.",
+   "reference_link": "https://sa.trip.com/moments/detail/gangwon-state-1185-147139351?locale=en-SA",
+   "poi_ids": [
+    "korea-poi-sabuk-bbq-street"
+   ]
+  },
+  {
+   "activity_id": "korea-high1-full-day-3",
+   "name": "Full ride day 3 — powder-morning patrol",
+   "type": "outdoor",
+   "order_index": 12,
+   "lat": 37.1939,
+   "lng": 128.8294,
+   "time_window": "09:00–16:00",
+   "duration": "7h",
+   "difficulty": "hard",
+   "description": "Chase whatever fell overnight — High1's altitude keeps snow drier than anywhere else in Korea, and rested legs from the off-day are for the steepest lines on the hill. Caveat: the posted fee sheet (adult all-day ₩100,000, 3h ₩58,000) is the official 2023–24 season table — verify current-season pricing at the ticket office or high1.com before budgeting the week.",
+   "reference_link": "https://www.high1.com/ski_eng/contents.do?key=1079",
+   "poi_ids": [
+    "korea-poi-high1-slopes"
+   ]
+  },
+  {
+   "activity_id": "korea-kangwon-land-casino",
+   "name": "Kangwon Land casino look-in",
+   "type": "nightlife",
+   "order_index": 13,
+   "lat": 37.2116,
+   "lng": 128.8217,
+   "time_window": "20:00–23:00",
+   "duration": "2h",
+   "difficulty": "easy",
+   "description": "A one-of-a-kind Korean institution next to the slopes: the only casino in the country that Korean nationals may legally enter, built to revive these coal towns, with a foreigner-only gaming zone added in February 2025 and free admission for foreign passport holders (19+). Caveat: entry requires your physical passport — a driver's license is explicitly not accepted, so carry it from the hotel.",
+   "reference_link": "https://www.kangwonland.com/casino_eng/contents.do?key=1137",
+   "poi_ids": [
+    "korea-poi-kangwon-land"
+   ]
+  },
+  {
+   "activity_id": "korea-high1-final-day",
+   "name": "Final ride day — victory laps",
+   "type": "outdoor",
+   "order_index": 14,
+   "lat": 37.1939,
+   "lng": 128.8294,
+   "time_window": "09:00–16:00",
+   "duration": "7h",
+   "difficulty": "hard",
+   "description": "Last daytime session: repeat the week's best top-to-bottom lines and bank the legs you need for the farewell night ride. Caveat: if you're saving energy, the time-based tickets (3/5/7/9-hour tiers from ₩58,000, clock starting at first gate scan) beat the all-day pass — decide at the gate, not the night before.",
+   "reference_link": "https://www.high1.com/ski_eng/contents.do?key=1079",
+   "poi_ids": [
+    "korea-poi-high1-slopes"
+   ]
+  },
+  {
+   "activity_id": "korea-high1-farewell-night",
+   "name": "Farewell night session",
+   "type": "outdoor",
+   "order_index": 15,
+   "lat": 37.1939,
+   "lng": 128.8294,
+   "time_window": "18:00–22:00",
+   "duration": "4h",
+   "difficulty": "moderate",
+   "description": "Close the week the Korean way — empty corduroy under floodlights on the official 18:00–01:00 night session, then pack for the morning train back to Cheongnyangni and the airport run. Caveat: gates open exactly at 18:00 after the fixed 16:00–18:00 grooming shutdown — arriving at 17:00 buys you nothing but cold toes.",
+   "reference_link": "https://www.high1.com/ski_eng/contents.do?key=1079",
+   "poi_ids": [
+    "korea-poi-high1-slopes"
+   ]
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "korea-poi-high1-slopes",
+   "type": "outdoor",
+   "name": "High1 Resort slopes",
+   "lat": 37.1939,
+   "lng": 128.8294,
+   "description": "18 trails and 9 lifts (3 gondolas) between 733 m and a 1,376 m summit above the old coal towns of Sabuk and Gohan — Korea's highest-quality natural snow and its best single-resort variety of top-to-bottom runs, opened 2006 under public corporation Kangwon Land.",
+   "reference_link": "https://en.wikipedia.org/wiki/High1_Resort"
+  },
+  {
+   "poi_id": "korea-poi-high1-base",
+   "type": "outdoor",
+   "name": "High1 Resort base (Valley area)",
+   "lat": 37.2081,
+   "lng": 128.8261,
+   "description": "Main base area with ticket gates, rental halls and gondola loading; time-based lift tickets (3/5/7/9-hour and all-day) are the house system, with daytime 09:00–16:00 and night 18:00–01:00 sessions.",
+   "reference_link": "https://www.high1.com/ski_eng/index.do"
+  },
+  {
+   "poi_id": "korea-poi-high1-top-sauna",
+   "type": "nightlife",
+   "name": "High1 Top sauna (Grand Hotel Convention Tower 4F)",
+   "lat": 37.2133,
+   "lng": 128.8217,
+   "description": "Resort sauna and baths on the Grand Hotel Convention Tower's 4th floor; 06:00–22:00, adult ₩28,000, closed until 14:00 on Mondays.",
+   "reference_link": "https://www.high1.com/eng/tnbsshmanage/bsshDetail.do?key=1897&bsshCode=187"
+  },
+  {
+   "poi_id": "korea-poi-kangwon-land",
+   "type": "nightlife",
+   "name": "Kangwon Land Casino",
+   "lat": 37.2116,
+   "lng": 128.8217,
+   "description": "The only casino in South Korea open to Korean nationals, created to revitalize the coal-mining valley; foreigners enter free with a passport (19+), and a foreigner-only gaming zone opened on the 5th floor in February 2025.",
+   "reference_link": "https://www.kangwonland.com/casino_eng/contents.do?key=1137"
+  },
+  {
+   "poi_id": "korea-poi-gwangjang-market",
+   "type": "food",
+   "name": "Gwangjang Market",
+   "lat": 37.5702,
+   "lng": 126.9995,
+   "description": "Seoul's century-old covered market whose food alley — bindaetteok griddles, mayak gimbap counters, yukhoe stalls — runs into the late evening while the textile stalls close around 18:00.",
+   "reference_link": "https://en.wikipedia.org/wiki/Gwangjang_Market"
+  },
+  {
+   "poi_id": "korea-poi-gohan-eat-street",
+   "type": "food",
+   "name": "Gohan station-front eat street",
+   "lat": 37.2008,
+   "lng": 128.853,
+   "description": "The cluster of local restaurants around Gohan Station and its main street — Memilchon Makguksu (patented gondre-bap and buckwheat makguksu), Hambaeksan Dolsotbap (gondre stone-pot set ~₩15,000 with a spread of banchan) and casual grills — the authentic alternative to resort food courts.",
+   "reference_link": "https://coloradosaram.com/high-1-resort-guide-south-korea/"
+  },
+  {
+   "poi_id": "korea-poi-sabuk-bbq-street",
+   "type": "food",
+   "name": "Sabuk station-front dining strip (Donnara Unara)",
+   "lat": 37.2262,
+   "lng": 128.817,
+   "description": "Sabuk-eup's compact restaurant strip near the station, a short shuttle or taxi below the resort; Donnara Unara anchors it with premium hanwoo and pork charcoal BBQ, flanked by fried-chicken joints and local pubs.",
+   "reference_link": "https://sa.trip.com/moments/detail/gangwon-state-1185-147139351?locale=en-SA"
+  },
+  {
+   "poi_id": "korea-poi-samtan-art-mine",
+   "type": "historic",
+   "name": "Samtan Art Mine",
+   "lat": 37.1854,
+   "lng": 128.8819,
+   "description": "Former Samcheok Tanjwa coal mine turned art complex (opened 2013) preserving winding towers, miners' washrooms and coal infrastructure alongside 100,000+ artworks; winter weekdays 10:00–17:00, weekends 09:30–17:30, closed Mondays, admission ₩10,000–13,000.",
+   "reference_link": "https://www.jeongseon.go.kr/en/tourist_attractions/museum_gallery/samtan_artmine"
+  },
+  {
+   "poi_id": "korea-poi-jeongamsa",
+   "type": "historic",
+   "name": "Jeongamsa Temple & Sumano Pagoda",
+   "lat": 37.183,
+   "lng": 128.8927,
+   "description": "7th-century Jeokmyeolbogung temple founded by master Jajang to enshrine relics of the Buddha — one of only five such temples in Korea — with the Goryeo-era Sumano brick-stone pagoda a ten-minute climb behind the main hall.",
+   "reference_link": "https://www.jeongseon.go.kr/en/tourist_attractions/famous_sight/jeongamsa_temple"
+  }
+ ],
+ "transit": [
+  {
+   "name": "Incheon International Airport Terminal 1",
+   "lat": 37.4496,
+   "lng": 126.4521,
+   "description": "Arrival/departure hub; AREX trains connect to Seoul for the bookend days, and the winter-only High1 Ski Bus departs direct from the T1 1st-floor 1C stop (~4h, reservation via kdtour.rideus.net, +82-2-335-5889).",
+   "reference_link": "https://www.high1.com/eng/contents.do?key=1539"
+  },
+  {
+   "name": "Cheongnyangni Station (Seoul)",
+   "lat": 37.5806,
+   "lng": 127.0483,
+   "description": "Seoul railhead for the Taebaek Line: Mugunghwa-ho trains to Gohan take about 3h40m per High1's official directions — book seats on Korail (1544-7788), departures are limited.",
+   "reference_link": "https://www.high1.com/eng/contents.do?key=1539"
+  },
+  {
+   "name": "Gohan Station",
+   "lat": 37.2008,
+   "lng": 128.853,
+   "description": "Closest rail stop to High1; the resort runs a free pick-up shuttle from the station, and the town's eat street is directly out front.",
+   "reference_link": "https://www.high1.com/eng/contents.do?key=1539"
+  },
+  {
+   "name": "Sabuk Station",
+   "lat": 37.2262,
+   "lng": 128.817,
+   "description": "One stop before Gohan and closest to Sabuk town's BBQ strip and intercity bus terminal (Dong Seoul buses ~2h40m); taxis and resort shuttles link it to the base area.",
+   "reference_link": "https://www.high1.com/eng/contents.do?key=1539"
+  }
+ ]
+}

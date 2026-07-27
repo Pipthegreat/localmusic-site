@@ -1,0 +1,603 @@
+{
+ "trip_id": "san-francisco-2026",
+ "name": "San Francisco - Bay Week",
+ "region": "San Francisco & Bay Area, California",
+ "date_range": "2026",
+ "duration_days": 7,
+ "summary": "A week based in San Francisco with a ~1.5-hour driving range, working roughly half the weekdays — so the two big out-of-city days (the 13-mile Alamere Falls tidefall trek and the Dipsea–Steep Ravine loop climbed from the bottom) anchor the free days, and city days flex around work blocks. The limiters: trailhead lots fill before 8 AM (Palomarin especially), Alamere's beach stretch is tide-dependent, summer fog owns the coast until midday, and the food institutions (Swan Oyster Depot, Tommy's) run short hours with real lines. Expect earned urban terrain, the food that's genuinely worth queues, and evenings in the Mission rather than Fisherman's Wharf.",
+ "activities": [
+  {
+   "activity_id": "alamere",
+   "name": "Alamere Falls (Palomarin) — tidefall trek",
+   "type": "outdoor",
+   "order_index": 1,
+   "lat": 37.935,
+   "lng": -122.748,
+   "time_window": "07:00–16:00",
+   "duration": "6–8 hr",
+   "difficulty": "hard",
+   "description": "The hard, wild pick: a 13-mile round trip through Phillip Burton Wilderness to a rare tidefall that spills 40 ft onto Wildcat Beach. Earned ground — no road shortcuts the payoff. Time the beach approach to low tide; the final stretch is impassable at high surf. Ignore the unofficial 'Alamere Falls Trail' cliff scramble (eroding, poison oak, ticks) — take the maintained Coast Trail. Palomarin lot fills before ~8 AM on weekends and many summer weekdays; go early.",
+   "reference_link": "https://www.nps.gov/thingstodo/hike-to-alamere-falls.htm",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "palomarin-trailhead-parking-fills-early",
+    "bass-pelican-lake-overlooks",
+    "alamere-falls-tidefall-on-wildcat-beach",
+    "wildcat-camp-beach"
+   ]
+  },
+  {
+   "activity_id": "dipsea-steep",
+   "name": "Dipsea → Steep Ravine → Matt Davis Loop",
+   "type": "outdoor",
+   "order_index": 2,
+   "lat": 37.9008,
+   "lng": -122.644,
+   "time_window": "08:00–15:00",
+   "duration": "4–5 hr",
+   "difficulty": "hard",
+   "description": "The classic Marin loop, climbed from the bottom at Stinson Beach — redwood canyon, the Steep Ravine ladder, and open coastal ridge with ocean views, ~7.5 mi and a real climb. This is the earned version of Mt. Tam: you gain the ridge on foot rather than driving to a summit pullout. Steep leaf/wood-step descent — poles help, and it's slick when wet.",
+   "reference_link": "https://www.komoot.com/guide/1799844/hiking-in-marin-county",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "stinson-beach-trailhead-loop-start",
+    "steep-ravine-ladder-redwoods",
+    "cardiac-hill-dipsea"
+   ]
+  },
+  {
+   "activity_id": "lands-end",
+   "name": "Lands End Coastal Trail",
+   "type": "outdoor",
+   "order_index": 3,
+   "lat": 37.7783,
+   "lng": -122.513,
+   "time_window": "07:00–19:00",
+   "duration": "2–3 hr",
+   "difficulty": "moderate",
+   "description": "In-city coastal cliff walk from Sutro Baths ruins to Eagle's Point — shipwreck views, cypress, the Golden Gate framed the whole way. Best hiked east from the Sutro Baths so the bridge is ahead of you. Transit-friendly (Muni 38 down Geary). The on-profile city hike when a work morning eats the day.",
+   "reference_link": "https://www.sftravel.com/article/best-hikes-san-francisco-beyond",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "sutro-baths-ruins-start",
+    "mile-rock-painted-rock-labyrinth",
+    "uss-san-francisco-memorial",
+    "legion-of-honor-lincoln-park"
+   ]
+  },
+  {
+   "activity_id": "la-taqueria",
+   "name": "La Taqueria — the burrito",
+   "type": "food",
+   "order_index": 4,
+   "lat": 37.7509,
+   "lng": -122.4181,
+   "time_window": "11:00–20:00",
+   "duration": "1 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "The definitive Mission burrito — James Beard-honored, rice-less so the meat carries it, ~$12–15. Order it 'dorado-style' (seared golden on the plancha — not on the menu; staff clock you as a local). The El Farolito rivalry is real; do both if you're committed. Expect a line.",
+   "reference_link": "https://www.tastingtable.com/2077865/san-francisco-best-mission-style-burrito-local/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "el-farolito-the-rival-cash-heavy-late-ni",
+    "balmy-alley-murals"
+   ]
+  },
+  {
+   "activity_id": "swan",
+   "name": "Swan Oyster Depot",
+   "type": "food",
+   "order_index": 5,
+   "lat": 37.7917,
+   "lng": -122.422,
+   "time_window": "10:30–17:00",
+   "duration": "1 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "A 100-year-old marble counter with ~18 stools — Dungeness crab, oysters, and the freshest seafood in the city, no tables, no reservations. The line is the price of admission and it's worth it. A genuine SF institution, not a tourist trap dressed as one.",
+   "reference_link": "https://airporttransportation.com/blog/a-foodies-guide-to-san-francisco-best-restaurants-and-local-eats/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "richmond-dimsum",
+   "name": "Clement St / Richmond dim sum",
+   "type": "food",
+   "order_index": 6,
+   "lat": 37.783,
+   "lng": -122.464,
+   "time_window": "10:00–14:00",
+   "duration": "1.5 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "The 'other Chinatown' where locals actually eat — Clement St and Geary in the Outer Richmond. Hong Kong Lounge and neighbors do authentic Cantonese dim sum at reasonable prices; a weekday-lunch line of Cantonese speakers is the signal you're in the right place. Skip the Grant Ave tourist Chinatown for this.",
+   "reference_link": "https://www.eatcookexplore.com/foodie-guide-san-francisco/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "arsicault-bakery-best-croissant-in-the-c"
+   ]
+  },
+  {
+   "activity_id": "presidio",
+   "name": "Presidio & Baker Beach to the Bridge",
+   "type": "scenery",
+   "order_index": 7,
+   "lat": 37.7936,
+   "lng": -122.4839,
+   "time_window": "08:00–19:00",
+   "duration": "2–3 hr",
+   "difficulty": "moderate",
+   "description": "Batteries-to-Bluffs down to Baker Beach and up toward the Golden Gate — historic gun batteries, coastal scrub, and the bridge from below. Steps and short climbs; the scenic-but-earned end of the in-city options.",
+   "reference_link": "https://www.alltrails.com/us/california/san-francisco",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "baker-beach-bridge-view",
+    "battery-to-bluffs-trail",
+    "fort-point-under-the-bridge"
+   ]
+  },
+  {
+   "activity_id": "ferry-building",
+   "name": "Ferry Building Farmers Market (Sat)",
+   "type": "historic",
+   "order_index": 8,
+   "lat": 37.7955,
+   "lng": -122.3937,
+   "time_window": "08:00–14:00",
+   "duration": "2 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Saturday market at the 1898 Ferry Building — Acme bread, Hog Island oysters, Sonoma cheese and produce that feeds both Michelin kitchens and Mission taquerias. Graze your way through for under ~$25. Touristy but genuinely excellent, and the building itself is a landmark.",
+   "reference_link": "https://fogharbor.com/news-events/what-food-is-san-francisco-known-for/",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "hog-island-oyster-co",
+    "cupids-span-rincon-park"
+   ]
+  },
+  {
+   "activity_id": "mission-bars",
+   "name": "Mission / Valencia bar crawl",
+   "type": "nightlife",
+   "order_index": 9,
+   "lat": 37.7599,
+   "lng": -122.4214,
+   "time_window": "18:00–01:00",
+   "duration": "3–4 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "The Mission after dark — dive bars, cocktail rooms, and taquerias along Valencia and Mission. Pair with an El Farolito super burrito on the walk home. Neighborhood wine bars over tourist-heavy spots is the local move.",
+   "reference_link": "https://www.theinfatuation.com/san-francisco/guides/best-mission-restaurants-sf",
+   "image": "assets/placeholder.svg",
+   "poi_ids": [
+    "clarion-alley-murals",
+    "dolores-park-sw-corner"
+   ]
+  },
+  {
+   "activity_id": "angel-island-mt-livermore",
+   "name": "Angel Island ferry + Mount Livermore summit",
+   "type": "outdoor",
+   "order_index": 10,
+   "lat": 37.8614,
+   "lng": -122.4319,
+   "time_window": "12:30–17:30",
+   "duration": "4.5–5 hr incl. ferry",
+   "difficulty": "moderate",
+   "description": "Catch the Angel Island–Tiburon Ferry ($18 round trip, 15 min crossing) and earn the 788-ft summit of Mt Caroline Livermore on a ~4-mile Sunset/North Ridge loop — a full 360 of the Bay that drive-up viewpoints can't touch, with far fewer people than any Marin overlook. Verified caveat: summer weekday departures from Tiburon are only 10am/11am/1pm, so the afternoon version realistically needs a weekend, when boats run hourly to 4pm with a ~5:20pm last return — confirm the last boat on the live schedule before boarding.",
+   "reference_link": "https://angelislandferry.com/schedule",
+   "poi_ids": [
+    "mount-caroline-livermore-summit",
+    "angel-island-immigration-station"
+   ]
+  },
+  {
+   "activity_id": "north-beach-literary",
+   "name": "North Beach: City Lights, Caffe Trieste, Coit Tower",
+   "type": "historic",
+   "order_index": 11,
+   "lat": 37.7976,
+   "lng": -122.4066,
+   "time_window": "14:00–17:00",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "description": "Browse City Lights (publisher of Ginsberg's Howl, open daily to 10pm), take an espresso at Caffe Trieste — the West Coast's first espresso-based coffeehouse, pouring since 1956 — then walk up Telegraph Hill to Coit Tower before the 5pm elevator cutoff. All local institutions, zero Fisherman's Wharf funnel, and the hill climb costs nothing but legs. Verified caveat: Coit Tower's elevator closes at 5:00 pm (~$9 non-resident) and the ~90-year-old lift is occasionally out of service — confirm ahead if the deck view is the point.",
+   "reference_link": "https://citylights.com/",
+   "poi_ids": [
+    "caffe-trieste-vallejo",
+    "coit-tower-telegraph-hill",
+    "washington-square-north-beach",
+    "filbert-steps-napier-lane"
+   ]
+  },
+  {
+   "activity_id": "golden-gate-park-hamon",
+   "name": "Golden Gate Park + free Hamon Observation Tower",
+   "type": "scenery",
+   "order_index": 12,
+   "lat": 37.7715,
+   "lng": -122.4687,
+   "time_window": "13:00–16:30",
+   "duration": "2.5–3.5 hr",
+   "difficulty": "easy",
+   "description": "The better-value Golden Gate Park move: the de Young's 144-ft Hamon Observation Tower is completely free — no museum ticket needed, elevator right of the admissions desk — with 360-degree views to the Pacific, the Headlands and the bridge, which quietly beats paying for the tourist-queued Japanese Tea Garden next door. Wander the park's western meadows and Blue Heron Lake after. Verified caveat: the tower keeps museum days — Tuesday–Sunday only, last access ~4:30 pm, closed Mondays.",
+   "reference_link": "https://www.famsf.org/visit/de-young-tickets-hours",
+   "poi_ids": [
+    "hamon-observation-tower",
+    "dutch-windmill-tulip-garden"
+   ]
+  },
+  {
+   "activity_id": "tommys-mexican-margarita",
+   "name": "Tommy's Mexican Restaurant — original Tommy's Margarita",
+   "type": "food",
+   "order_index": 13,
+   "lat": 37.7799,
+   "lng": -122.4831,
+   "time_window": "17:00–19:30",
+   "duration": "2 hr",
+   "difficulty": "easy",
+   "description": "Family-run Outer Richmond institution (5929 Geary Blvd, since 1965) and birthplace of the Tommy's Margarita — 100% agave tequila, lime, agave syrup, recipe unchanged — backed by one of the world's deepest all-agave tequila lists (~300 bottles). This is the drink pilgrimage worth the extra dollars over any downtown cocktail bar; eat the Yucatecan plates while you're at it. Verified caveat: closed Mon–Tue, and weekday service runs 5:00–8:30 pm — go early, it fills fast; walk-in heavy, confirm ahead for a table.",
+   "reference_link": "https://www.tommysmexican.com/",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "oracle-park-giants-night",
+   "name": "Giants night game at Oracle Park",
+   "type": "nightlife",
+   "order_index": 14,
+   "lat": 37.7786,
+   "lng": -122.3892,
+   "time_window": "18:45–22:15",
+   "duration": "3.5 hr",
+   "difficulty": "easy",
+   "description": "A night game on the bay at 24 Willie Mays Plaza is one of the few big-ticket SF experiences locals actually do: View Reserve and bleacher seats go cheap on resale for non-rival opponents, and the McCovey Cove backdrop with garlic fries beats any paid observation deck. Verified caveat: strictly seasonal and date-dependent — check mlb.com/giants/schedule and buy before arriving. Bring a real layer; night fog off the bay is standard even in July.",
+   "reference_link": "https://www.mlb.com/giants/schedule",
+   "poi_ids": [
+    "mccovey-cove-portwalk"
+   ]
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "palomarin-trailhead-parking-fills-early",
+   "type": "outdoor",
+   "name": "Palomarin Trailhead (parking fills early)",
+   "lat": 37.935,
+   "lng": -122.748,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "End of Mesa Road outside Bolinas. ~1.5 hr from SF. Arrive before 8 AM in summer. No water past here — carry your own.",
+   "reference_link": "https://www.alltrails.com/trail/us/california/alamere-falls-via-coast-trail-from-palomarin-trailhead",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "bass-pelican-lake-overlooks",
+   "type": "outdoor",
+   "name": "Bass/Pelican Lake overlooks",
+   "lat": 37.926,
+   "lng": -122.762,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "Coast Trail passes a string of lakes with Farallon Islands views on a clear day.",
+   "reference_link": "",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "alamere-falls-tidefall-on-wildcat-beach",
+   "type": "outdoor",
+   "name": "Alamere Falls (tidefall on Wildcat Beach)",
+   "lat": 37.9128,
+   "lng": -122.783,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "The payoff: water over the cliff straight onto the sand. Check the tide chart before the beach walk in.",
+   "reference_link": "",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "stinson-beach-trailhead-loop-start",
+   "type": "outdoor",
+   "name": "Stinson Beach trailhead (loop start)",
+   "lat": 37.9008,
+   "lng": -122.644,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Free town lots fill on summer weekends; arrive early. Start on the Dipsea, return via Matt Davis.",
+   "reference_link": "",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "steep-ravine-ladder-redwoods",
+   "type": "outdoor",
+   "name": "Steep Ravine ladder & redwoods",
+   "lat": 37.904,
+   "lng": -122.618,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "hard",
+   "cash_only": false,
+   "description": "Fern-choked canyon with a fixed wooden ladder and creek crossings — the best stretch.",
+   "reference_link": "",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "sutro-baths-ruins-start",
+   "type": "outdoor",
+   "name": "Sutro Baths ruins (start)",
+   "lat": 37.7801,
+   "lng": -122.5137,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "Ruined 1890s bathhouse foundations right on the surf; worth poking around before the trail.",
+   "reference_link": "https://www.sftravel.com/article/best-hikes-san-francisco-beyond",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "mile-rock-painted-rock-labyrinth",
+   "type": "outdoor",
+   "name": "Mile Rock & Painted Rock Labyrinth",
+   "lat": 37.7876,
+   "lng": -122.5058,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "Short spur down to a stone labyrinth on a bluff over the entrance channel.",
+   "reference_link": "",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "el-farolito-the-rival-cash-heavy-late-ni",
+   "type": "food",
+   "name": "El Farolito (the rival, cash-heavy, late-night)",
+   "lat": 37.7529,
+   "lng": -122.418,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": true,
+   "description": "Bigger, rice-stuffed super burrito — the after-a-bar pick. The other side of the eternal Mission debate.",
+   "reference_link": "https://www.theinfatuation.com/san-francisco/guides/best-mission-restaurants-sf",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "arsicault-bakery-best-croissant-in-the-c",
+   "type": "food",
+   "name": "Arsicault Bakery (best croissant in the city)",
+   "lat": 37.783,
+   "lng": -122.459,
+   "time_window": "08:00–15:00",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "Presidio Heights corner bakery widely called the best croissant in SF. Line moves; go before the cyclists. Mornings ONLY — closes 3:00 pm weekdays, 3:30 pm weekends (verified Jul 2026).",
+   "reference_link": "https://violetcooks.substack.com/p/san-francisco-best-food-and-beverage",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "baker-beach-bridge-view",
+   "type": "scenery",
+   "name": "Baker Beach (bridge view)",
+   "lat": 37.7936,
+   "lng": -122.4839,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "North end frames the Golden Gate; wind and cold water, but the view is the thing.",
+   "reference_link": "",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "battery-to-bluffs-trail",
+   "type": "scenery",
+   "name": "Battery to Bluffs Trail",
+   "lat": 37.7962,
+   "lng": -122.4855,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "Cliffside steps past WWII-era batteries above the surf.",
+   "reference_link": "",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "hog-island-oyster-co",
+   "type": "food",
+   "name": "Hog Island Oyster Co.",
+   "lat": 37.7955,
+   "lng": -122.393,
+   "time_window": "",
+   "duration": "",
+   "difficulty": "",
+   "cash_only": false,
+   "description": "Tomales Bay oysters shucked to order inside the Ferry Building.",
+   "reference_link": "",
+   "image": "assets/placeholder.svg"
+  },
+  {
+   "poi_id": "mount-caroline-livermore-summit",
+   "type": "outdoor",
+   "name": "Mount Caroline Livermore summit (791 ft)",
+   "lat": 37.8614,
+   "lng": -122.4319,
+   "description": "High point of Angel Island State Park with 360-degree Bay views; reach it via the Sunset Trail–North Ridge loop (~4 mi, 140 trail stairs).",
+   "reference_link": "https://en.wikipedia.org/wiki/Mount_Caroline_Livermore"
+  },
+  {
+   "poi_id": "caffe-trieste-vallejo",
+   "type": "food",
+   "name": "Caffe Trieste",
+   "lat": 37.7987,
+   "lng": -122.4073,
+   "description": "601 Vallejo St, family-founded 1956; Beat-era hangout where Coppola reportedly worked on The Godfather screenplay. Order at the counter, sit with the regulars.",
+   "reference_link": "https://en.wikipedia.org/wiki/Caffe_Trieste"
+  },
+  {
+   "poi_id": "coit-tower-telegraph-hill",
+   "type": "scenery",
+   "name": "Coit Tower",
+   "lat": 37.8025,
+   "lng": -122.4058,
+   "description": "1933 Art Deco tower atop Telegraph Hill with WPA murals in the free lobby; elevator to the observation deck daily 10am–5pm. Walk up via the Filbert Steps to earn it.",
+   "reference_link": "https://en.wikipedia.org/wiki/Coit_Tower"
+  },
+  {
+   "poi_id": "hamon-observation-tower",
+   "type": "scenery",
+   "name": "Hamon Observation Tower, de Young Museum",
+   "lat": 37.7715,
+   "lng": -122.4687,
+   "description": "Ninth-floor free observation deck, the tallest point in Golden Gate Park; open Tue–Sun 9:30am–4:30pm.",
+   "reference_link": "https://en.wikipedia.org/wiki/De_Young_Museum"
+  },
+  {
+   "poi_id": "wildcat-camp-beach",
+   "type": "outdoor",
+   "name": "Wildcat Camp & Wildcat Beach",
+   "lat": 37.9706,
+   "lng": -122.791,
+   "description": "Bluff-top meadow camp on the Coast Trail where the route drops to Wildcat Beach — the final mile to Alamere Falls runs south along this sand and must be timed to low tide, not the crumbling 'shortcut' scramble the crowds take. Only 4 regular sites if you ever want to overnight it; reserve via recreation.gov.",
+   "reference_link": "https://www.nps.gov/pore/planyourvisit/wildcat-campground.htm"
+  },
+  {
+   "poi_id": "cardiac-hill-dipsea",
+   "type": "outdoor",
+   "name": "Cardiac Hill (Dipsea Trail high point)",
+   "lat": 37.8974,
+   "lng": -122.6016,
+   "description": "The summit of the Dipsea's infamous grind, where race volunteers hand out water in June and the reward is ocean floating above the fog line. Earned, not driven to — pause here before the Steep Ravine descent.",
+   "reference_link": "https://en.wikipedia.org/wiki/Dipsea_Race"
+  },
+  {
+   "poi_id": "uss-san-francisco-memorial",
+   "type": "historic",
+   "name": "USS San Francisco Memorial",
+   "lat": 37.7828,
+   "lng": -122.5115,
+   "description": "The actual shell-torn bridge wings of the cruiser USS San Francisco, set on a Lands End promontory aligned with the great circle course to Guadalcanal, where she took her worst damage in 1942. Most Coastal Trail walkers stride right past it; don't.",
+   "reference_link": "https://en.wikipedia.org/wiki/USS_San_Francisco_(CA-38)"
+  },
+  {
+   "poi_id": "legion-of-honor-lincoln-park",
+   "type": "historic",
+   "name": "Legion of Honor & Rodin's Thinker",
+   "lat": 37.7846,
+   "lng": -122.501,
+   "description": "Full-scale replica of the Paris Palais de la Légion d'Honneur sitting on the Lands End bluffs, with Rodin's Thinker free to see in the Court of Honor and George Segal's stark Holocaust Memorial just outside — no ticket needed for either. Go inside only if a show earns it.",
+   "reference_link": "https://en.wikipedia.org/wiki/Legion_of_Honor_(museum)"
+  },
+  {
+   "poi_id": "balmy-alley-murals",
+   "type": "scenery",
+   "name": "Balmy Alley murals",
+   "lat": 37.7518,
+   "lng": -122.4124,
+   "description": "One block of fence-to-fence Mission muralismo dating to 1972, still repainted by the neighborhood on Central American politics and gentrification — three blocks from La Taqueria and free. Skip the paid mural 'tours'; just walk it and read.",
+   "reference_link": "https://en.wikipedia.org/wiki/Balmy_Alley"
+  },
+  {
+   "poi_id": "clarion-alley-murals",
+   "type": "scenery",
+   "name": "Clarion Alley Mural Project",
+   "lat": 37.763,
+   "lng": -122.4207,
+   "description": "Balmy's louder, scrappier sibling between Mission and Valencia — activist murals that turn over constantly, so it never looks the same twice. Hit it at golden hour on the way into the bar crawl.",
+   "reference_link": "https://en.wikipedia.org/wiki/Clarion_Alley_Mural_Project"
+  },
+  {
+   "poi_id": "dolores-park-sw-corner",
+   "type": "scenery",
+   "name": "Dolores Park southwest corner viewpoint",
+   "lat": 37.7597,
+   "lng": -122.4261,
+   "description": "The park's slope tilts northeast, so the upper southwest corner gives the unobstructed downtown-skyline shot locals actually picnic for. Grab a pre-crawl hour on the grass with the whole Mission below you.",
+   "reference_link": "https://en.wikipedia.org/wiki/Mission_Dolores_Park"
+  },
+  {
+   "poi_id": "washington-square-north-beach",
+   "type": "scenery",
+   "name": "Washington Square & Saints Peter and Paul",
+   "lat": 37.8009,
+   "lng": -122.41,
+   "description": "One of the city's original 1847 parks, where North Beach still does tai chi at dawn and old-timers hold benches all afternoon, faced by Saints Peter and Paul Church — the Italian parish where Joe DiMaggio's funeral was held in 1999. Coffee on the grass beats any cafe queue.",
+   "reference_link": "https://en.wikipedia.org/wiki/Washington_Square,_San_Francisco"
+  },
+  {
+   "poi_id": "filbert-steps-napier-lane",
+   "type": "outdoor",
+   "name": "Filbert Steps & Napier Lane",
+   "lat": 37.8023,
+   "lng": -122.4038,
+   "description": "The garden-lined wooden stairway up Telegraph Hill's east face, past Napier Lane's plank boardwalk cottages and the squawking wild parrot flock — the correct way to arrive at Coit Tower instead of driving the loop road. Steep; that's the point.",
+   "reference_link": "https://en.wikipedia.org/wiki/Telegraph_Hill,_San_Francisco"
+  },
+  {
+   "poi_id": "angel-island-immigration-station",
+   "type": "historic",
+   "name": "Angel Island Immigration Station",
+   "lat": 37.8697,
+   "lng": -122.426,
+   "description": "The 'Ellis Island of the West' that detained roughly a million mostly-Asian immigrants from 1910 to 1940; more than 200 poems carved into the barracks walls by detainees have been recovered and restored. A sobering detour off the summit loop that most day-trippers skip.",
+   "reference_link": "https://en.wikipedia.org/wiki/Angel_Island_Immigration_Station"
+  },
+  {
+   "poi_id": "dutch-windmill-tulip-garden",
+   "type": "scenery",
+   "name": "Dutch Windmill & Queen Wilhelmina Tulip Garden",
+   "lat": 37.7707,
+   "lng": -122.5094,
+   "description": "A 1900s working-scale windmill at the park's ocean end with the Queen Wilhelmina Tulip Garden at its feet — full tulip bloom runs roughly February–April, so in summer it's the windmill and the walk to Ocean Beach that carry it. Pairs with the free Hamon Tower for a zero-dollar park afternoon.",
+   "reference_link": "https://en.wikipedia.org/wiki/Dutch_Windmill_(Golden_Gate_Park)"
+  },
+  {
+   "poi_id": "fort-point-under-the-bridge",
+   "type": "historic",
+   "name": "Fort Point National Historic Site",
+   "lat": 37.8106,
+   "lng": -122.4772,
+   "description": "Civil War-era brick fort crouched directly beneath the Golden Gate Bridge's south anchorage — Spanish-fortified ground since 1794 and the Vertigo filming spot, with the best under-the-deck angle in the city. Free, but interior open days are limited (historically Friday–Sunday) — confirm ahead on the NPS site.",
+   "reference_link": "https://en.wikipedia.org/wiki/Fort_Point,_San_Francisco"
+  },
+  {
+   "poi_id": "cupids-span-rincon-park",
+   "type": "scenery",
+   "name": "Cupid's Span & Bay Bridge view",
+   "lat": 37.7916,
+   "lng": -122.3901,
+   "description": "Oldenburg and van Bruggen's 70-foot bow-and-arrow planted in Rincon Park, a short Embarcadero stroll south of the Ferry Building with the Bay Bridge and its light installation stacked behind it. Better photo, zero Pier 39 sea-lion scrum.",
+   "reference_link": "https://en.wikipedia.org/wiki/Cupid%27s_Span"
+  },
+  {
+   "poi_id": "mccovey-cove-portwalk",
+   "type": "scenery",
+   "name": "McCovey Cove & free Portwalk knothole view",
+   "lat": 37.7772,
+   "lng": -122.3881,
+   "description": "The stretch of bay beyond right field where kayakers wait for 'splash hit' home runs, with a public waterfront promenade along the arcade where anyone can watch the game through the fence for free. The cheapest seat at Oracle Park isn't a seat at all.",
+   "reference_link": "https://en.wikipedia.org/wiki/McCovey_Cove"
+  }
+ ],
+ "transit": [
+  {
+   "name": "Muni 38 Geary (to Lands End / Richmond)",
+   "lat": 37.7844,
+   "lng": -122.4079,
+   "description": "Cross-town line to the Outer Richmond and Lands End trailhead — no car needed for the city days.",
+   "reference_link": "https://www.sfmta.com/"
+  }
+ ]
+}

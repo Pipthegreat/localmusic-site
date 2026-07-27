@@ -1,0 +1,399 @@
+{
+ "trip_id": "vn-south-cambodia-2026-12",
+ "name": "Vietnam Moto - Cambodia",
+ "region": "Mekong Delta, Phu Quoc & Phnom Penh / Cardamom Mountains",
+ "date_range": "2026-12-18 – 2026-12-30",
+ "duration_days": 12,
+ "summary": "Motorcycle route 3: Can Tho and the Mekong Delta, Phu Quoc by vehicle ferry, then Cambodia — Phnom Penh and a Cardamom Mountains excursion. DRY SEASON: this is the weather-optimal route for late December (calm seas, dusty-not-muddy Cardamom dirt) but it is also Cambodia and Phu Quoc's PEAK season — book rooms and Chi Phat treks 2+ weeks out. FERRIES: all major Phu Quoc ferries carry motorcycles; the Ha Tien car ferries (Thanh Thoi/Binh An, ~3h, 200-bike capacity) are the low-stress option over Rach Gia's tiny fast-boat quotas — carry passport + the bike's blue card, checks have increased. BORDER VERDICT (verified 2026): an OWNED Vietnamese bike with its blue card crosses at Prek Chak (Ha Tien) routinely; RENTALS cannot — the big firms prohibit it (Tigit's buy/buy-back scheme is the one clean workaround). Plan B is solid: bus Ha Tien→Phnom Penh (~5h) and rent a Honda XR-class dirt bike in PP (US$25–40/day, real established shops) — the right tool for the Cardamoms anyway. Cambodia visa: US$30 cash on arrival at Prek Chak (e-visa NOT accepted there). All Cardamom riding ends by 15:30 — never be on those roads at dusk.",
+ "activities": [
+  {
+   "activity_id": "r3-ride-hcmc-cantho",
+   "name": "Ride day: Saigon → Can Tho the good way (Ben Tre back roads)",
+   "type": "outdoor",
+   "order_index": 1,
+   "lat": 10.0334,
+   "lng": 105.7886,
+   "time_window": "05:30–12:30",
+   "duration": "170–210 km, 4.5–7 hr by route",
+   "difficulty": "moderate",
+   "description": "Honest version: direct QL1A is a grim truck crawl (and bikes are banned from the parallel expressway, so there's no fast escape). The good version: cross Rach Mieu Bridge at My Tho onto QL60 through Ben Tre 'Coconut Island', then thread the canal lanes and small ferries toward Tra Vinh/Can Tho — almost no trucks, pure delta, slower and worth it. Leave Saigon before 06:00 to beat both traffic waves; never ride this after dark.",
+   "reference_link": "https://www.vietnamcoracle.com/",
+   "poi_ids": [
+    "mekong-ninh-kieu-pier"
+   ]
+  },
+  {
+   "activity_id": "mekong-cai-rang-dawn-boat",
+   "name": "Cai Rang floating market by private boat at dawn",
+   "type": "food",
+   "order_index": 2,
+   "lat": 10.005,
+   "lng": 105.7461,
+   "time_window": "05:00–08:00",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Charter a small local boat (not the 9am group boats) from Ninh Kieu wharf at 05:00–05:30 — ~600k VND for a 4-person boat. Peak trading is 04:00–06:00; by 08:00 it's mostly tour boats. Breakfast off a noodle boat on the water (hu tieu ~40k) and buy fruit straight over the gunwale. VERIFIED (Al Jazeera 2025): the market has shrunk to ~200 boats, under half its 1990s peak — it is still real commerce at dawn, but treat this as now-or-never and skip anything departing after 07:00.",
+   "reference_link": "https://en.wikipedia.org/wiki/Cai_Rang_floating_market",
+   "poi_ids": [
+    "mekong-ninh-kieu-pier"
+   ]
+  },
+  {
+   "activity_id": "mekong-binh-thuy-house",
+   "name": "Binh Thuy ancient house + the old quarter",
+   "type": "historic",
+   "order_index": 3,
+   "lat": 10.067,
+   "lng": 105.7496,
+   "time_window": "13:30–15:30",
+   "duration": "2 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "1870s French-Vietnamese merchant house (finished 1911) — filming location for 'The Lover'. The Duong family still lives in it, which is exactly why it feels alive rather than museum-dead. Pair with the Binh Thuy communal temple across the road and a slow ride back along the Hau riverbank, stopping for banh cong (fried shrimp-and-mung-bean cakes) at a roadside stall. Hours are informal because it's a private family home — small donation expected; confirm ahead it's receiving visitors.",
+   "reference_link": "https://en.wikipedia.org/wiki/B%C3%ACnh_Th%E1%BB%A7y_ancient_house",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "mekong-ninh-kieu-evening",
+   "name": "Ninh Kieu riverfront, night market & nem nuong crawl",
+   "type": "nightlife",
+   "order_index": 4,
+   "lat": 10.031,
+   "lng": 105.7877,
+   "time_window": "17:30–20:30",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Walk the lit-up Hau riverfront, cross the pedestrian bridge to Cai Khe islet, then eat: nem nuong Cai Rang (DIY grilled-pork rolls with rice paper and herbs — Can Tho's signature; Thanh Van is the famous old house, confirm ahead) and banh cong. The night market runs from ~16:00 — verified honestly half souvenir stalls; the food is the point. Eat where locals sit on plastic stools, not at the river-view tourist restaurants.",
+   "reference_link": "https://en.wikipedia.org/wiki/C%E1%BA%A7n_Th%C6%A1",
+   "poi_ids": [
+    "mekong-ninh-kieu-pier"
+   ]
+  },
+  {
+   "activity_id": "r3-ride-cantho-hatien-ferry",
+   "name": "Ride day: Can Tho → Ha Tien canal road + car ferry to Phu Quoc",
+   "type": "outdoor",
+   "order_index": 5,
+   "lat": 10.3708,
+   "lng": 103.8447,
+   "time_window": "06:00–15:00",
+   "duration": "~200 km + 3 hr ferry",
+   "difficulty": "moderate",
+   "description": "QL61 through open rice country to Rach Gia, then QL80 northwest along the Rach Gia–Ha Tien canal — newly upgraded, flat, shrimp-pond scenery, light traffic. Fuel and food thin out after Rach Gia; top up. At Ha Tien, the Thanh Thoi or Binh An CAR FERRY to Phu Quoc (~3 hr, bike ~80k + ~185k passenger, up to 200 bikes — the bike-proof option vs Rach Gia's ~8-bike fast-boat quotas). Christmas peak: buy the ticket the day before, carry passport + blue card for the document check. December seas are calm.",
+   "reference_link": "https://www.vietnamcoracle.com/phu-quoc-island-ferry-times",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "phuquoc-north-loop-ride",
+   "name": "Phu Quoc wild north loop: fish sauce, pepper farms, Ganh Dau",
+   "type": "outdoor",
+   "order_index": 6,
+   "lat": 10.2199,
+   "lng": 103.9715,
+   "time_window": "08:00–17:45",
+   "duration": "full day",
+   "difficulty": "moderate",
+   "description": "Start at the Khai Hoan fish-sauce barrel house in Duong Dong (free, 07:00–20:00, hundreds of giant wooden vats — buy a bottle of 40°N), inland past working pepper farms, then DT973 through Phu Quoc National Park forest to Ganh Dau cape: fishing village, crab shacks on the sand, Cambodia visible 4 km across the water. Walk the ~5 km Ganh Dau forest trail (no fee or permit reported 2025 — confirm locally, tell someone your plan). The wild feeling only starts after you clear the VinWonders/Grand World mega-development. Finish with sunset at Ong Lang beach — far better value than the Long Beach resort strip. Fuel up in Duong Dong first.",
+   "reference_link": "https://en.wikipedia.org/wiki/Ph%C3%BA_Qu%E1%BB%91c",
+   "poi_ids": [
+    "phuquoc-khai-hoan-fish-sauce",
+    "phuquoc-ngoc-ha-pepper",
+    "phuquoc-duc-thanh-pepper",
+    "phuquoc-ganh-dau-cape",
+    "phuquoc-ong-lang-beach"
+   ]
+  },
+  {
+   "activity_id": "phuquoc-duong-dong-market",
+   "name": "Duong Dong wet market at first light + bun quay breakfast",
+   "type": "food",
+   "order_index": 7,
+   "lat": 10.2206,
+   "lng": 103.9592,
+   "time_window": "05:30–07:30",
+   "duration": "2 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Phu Quoc's real working market on the Duong Dong river — the night-boat catch landed and haggled over from 05:00–06:00: herring, squid, sea urchin, mounds of island pepper. Breakfast on bun quay, the made-to-order squid-and-fish-paste noodle unique to the island. Go before 08:00 — by mid-morning it's part souvenir stop; footing is wet and it smells like a fish market should.",
+   "reference_link": "https://en.wikipedia.org/wiki/Ph%C3%BA_Qu%E1%BB%91c",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "phuquoc-sao-beach-east-coast",
+   "name": "East coast run: Sao Beach (expectations calibrated) + Ham Ninh crab",
+   "type": "scenery",
+   "order_index": 8,
+   "lat": 10.0525,
+   "lng": 104.0352,
+   "time_window": "13:00–17:00",
+   "duration": "4 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Ride the east coast south to Sao Beach, the postcard white-sand crescent — with expectations set: VERIFIED (VnExpress 2026) it is periodically swamped by seasonal drift trash and water hyacinth in exactly the Dec–Jan window, and cleanup is limited; some days paradise, some days a cleanup zone — check a same-week photo before riding out. Back up via Ham Ninh village for flower crab boiled on the pier (agree the price per kilo BEFORE cooking). Khem Beach next door is beautiful but resort-ringed; non-guests are sometimes stopped — don't build the afternoon around it.",
+   "reference_link": "https://en.wikipedia.org/wiki/Ph%C3%BA_Qu%E1%BB%91c",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "phuquoc-dinh-cau-night",
+   "name": "Dinh Cau sunset rock + night market seafood",
+   "type": "nightlife",
+   "order_index": 9,
+   "lat": 10.2172,
+   "lng": 103.9564,
+   "time_window": "17:00–20:00",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Climb Dinh Cau — the 1937 sea-goddess temple on a rock at the river mouth — for sunset with the fishing fleet heading out, then the night market for grilled sea urchin with peanut and scallion oil, flower crab, peppered squid and sim (rose myrtle) wine. Seafood is priced by weight and disputes are common: agree the per-kilo price and watch the weighing before it goes on the grill. Night-squid-fishing boats are real (Nov–Mar dark nights are best) but quality varies wildly — book a reputable operator, never the sub-$8 beach touts.",
+   "reference_link": "https://en.wikipedia.org/wiki/Ph%C3%BA_Qu%E1%BB%91c",
+   "poi_ids": [
+    "phuquoc-night-market-street"
+   ]
+  },
+  {
+   "activity_id": "r3-ride-hatien-phnompenh",
+   "name": "Border day: Prek Chak crossing → Kep coast → Kampot → Phnom Penh",
+   "type": "outdoor",
+   "order_index": 10,
+   "lat": 11.5761,
+   "lng": 104.9232,
+   "time_window": "07:00–16:30",
+   "duration": "~225 km + border, full day",
+   "difficulty": "moderate",
+   "description": "Ferry back to Ha Tien, then 7 km to the Xa Xia gate and cross at Prek Chak (open ~07:00–18:00; budget 1–2 hr; visa-on-arrival US$30 cash + 1 photo — e-visa NOT accepted here). OWNED bikes with blue card cross routinely; rentals don't — bus to PP and rent there instead (see trip summary). Cambodian NR33 runs west along the coast past Kep, then NR3 through pepper and salt country to Phnom Penh (148 km, fully paved). The last 40 km and the city itself are chaotic — arrive before dark, park in guarded lots (moto theft is the real risk), and never hand your passport to a rental shop.",
+   "reference_link": "https://www.travelfish.org/visas/cambodia",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "cambodia-russian-market-breakfast",
+   "name": "Russian Market (Toul Tom Poung) food-stall breakfast",
+   "type": "food",
+   "order_index": 11,
+   "lat": 11.5405,
+   "lng": 104.9147,
+   "time_window": "07:00–08:30",
+   "duration": "1.5 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Go 07:00–09:00 when the interior food lane is at full tilt and the tin roof hasn't turned it into an oven: kuyteav pork noodle soup, num banh chok (fermented rice noodles with fish gravy — the real Khmer breakfast), grilled skewers, iced Khmer coffee thick with condensed milk. Sit on the plastic stools, point, eat. The souvenir aisles are tourist-priced; the food lane is not.",
+   "reference_link": "https://en.wikipedia.org/wiki/Russian_Market,_Phnom_Penh",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "cambodia-tuol-sleng-s21",
+   "name": "Tuol Sleng Genocide Museum (S-21) — audio-guide morning",
+   "type": "historic",
+   "order_index": 12,
+   "lat": 11.5495,
+   "lng": 104.9176,
+   "time_window": "08:00–10:30",
+   "duration": "2.5 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "The former Khmer Rouge interrogation prison, kept close to how it was found in 1979. Go at the 08:00 opening, before tour buses and the heat, and take the audio guide — measured, survivor-voiced, in 11 languages; it sets the pace the site deserves (US$5 entry; audio adds ~US$3–5 — carry small notes). Open daily 08:00–17:00. This is not a sight to tick off; leave the rest of the morning empty, and schedule nothing 'fun' straight after.",
+   "reference_link": "https://tuolsleng.gov.kh/en/",
+   "poi_ids": [
+    "cambodia-russian-market"
+   ]
+  },
+  {
+   "activity_id": "cambodia-choeung-ek",
+   "name": "Choeung Ek Genocidal Center (Killing Fields)",
+   "type": "historic",
+   "order_index": 13,
+   "lat": 11.484,
+   "lng": 104.9023,
+   "time_window": "13:00–16:00",
+   "duration": "3 hr incl. the ride out",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "The memorial 15 km southwest of the city — a quiet, orchard-like ground with the memorial stupa at its center. The included audio guide (~US$6 total, 1.5–2 hr) is essential; walk it slowly and skip nothing. Daily 07:30–17:30, last comfortable entry ~15:30 to finish the audio. It pairs with S-21 the same day (S-21 first), but doing both in one day is heavy — many split them, and this trip's pacing lets you.",
+   "reference_link": "https://en.wikipedia.org/wiki/Choeung_Ek",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "cambodia-riverside-sunset-bbq",
+   "name": "Sisowath Quay sunset, night market & Sovanna Khmer BBQ",
+   "type": "nightlife",
+   "order_index": 14,
+   "lat": 11.5743,
+   "lng": 104.9278,
+   "time_window": "17:00–21:00",
+   "duration": "4 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Sunset (~17:45 in December) where the Tonle Sap meets the Mekong — join the aerobics crowds near Wat Phnom, then the Phnom Penh Night Market for mat-seating snack plates, and finish where locals actually eat: Sovanna BBQ on Street 21 — evenings only, packed with Khmer families, US$2.50–6 plates of grilled beef and morning-glory with pitchers of Angkor. Fish amok honesty: if it arrives in 10 minutes soupy, it wasn't the real steamed-in-banana-leaf mousse — order it where they warn you of the wait, or default to the BBQ. Pickpockets work the quay after dark; nothing loose in back pockets.",
+   "reference_link": "https://en.wikipedia.org/wiki/Sisowath_Quay",
+   "poi_ids": [
+    "cambodia-wat-phnom",
+    "cambodia-sovanna-bbq"
+   ]
+  },
+  {
+   "activity_id": "r3-ride-nr48-cardamoms",
+   "name": "Ride day: Phnom Penh → the Cardamoms (Chi Phat turnoff)",
+   "type": "outdoor",
+   "order_index": 15,
+   "lat": 11.1947,
+   "lng": 103.4738,
+   "time_window": "07:00–15:00",
+   "duration": "195 km + 17 km dirt",
+   "difficulty": "hard",
+   "description": "NR4 west (verified as Cambodia's most dangerous highway for two-wheelers — speeding trucks; the calmer NR3-via-Kampot alternative is longer but saner), then NR48 from Sre Ambel: repaved, scenic, mangrove bridges, one of Cambodia's prettiest paved rides. Andoung Tuek is the second bridge — from there it's 17 km of dry-season dirt to Chi Phat (~45 min, rutted but rideable on a 110cc; or leave the bike and take the CBET long-tail boat up the Preak Piphot). Fuel at Sre Ambel or Andoung Tuek; roadside bottle petrol after that. All Cardamom riding ends by 15:30.",
+   "reference_link": "https://chi-phat.org/",
+   "poi_ids": [
+    "cambodia-andoung-tuek"
+   ]
+  },
+  {
+   "activity_id": "cambodia-chi-phat-cbet",
+   "name": "Chi Phat community ecotourism — jungle treks & sunrise river",
+   "type": "outdoor",
+   "order_index": 16,
+   "lat": 11.3275,
+   "lng": 103.5225,
+   "time_window": "06:00–14:00",
+   "duration": "full day (multi-day options)",
+   "difficulty": "hard",
+   "cash_only": true,
+   "description": "The Cardamoms' flagship community-based ecotourism village (est. 2007 by Wildlife Alliance): former loggers and poachers now guide 200+ km of trails — one-day waterfall treks, the post-Angkorian burial-jar site, multi-day jungle camps, and the sunrise bird-watching boat on the Preak Piphot. Book through the CBET visitor center so income rotates through the community (day trek ~US$15–25 with guide; homestay US$5–10). December is HIGH season — the office recommends booking a couple of weeks ahead (chi-phat.org, +855 96 733 9600); confirm you can secure the bike at the visitor center during treks.",
+   "reference_link": "https://chi-phat.org/",
+   "poi_ids": [
+    "cambodia-andoung-tuek"
+   ]
+  },
+  {
+   "activity_id": "cambodia-tatai-waterfall",
+   "name": "Tatai waterfall stop (NR48, KM134)",
+   "type": "scenery",
+   "order_index": 17,
+   "lat": 11.587,
+   "lng": 103.0972,
+   "time_window": "13:00–15:30",
+   "duration": "2 hr",
+   "difficulty": "moderate",
+   "description": "On the NR48 leg toward Koh Kong, the Tatai turnoff at the KM134 stone leads 2 km of dirt to the wide shelf falls — in the December dry season the river is low and the rock pools are swimmable, which is exactly when to stop. Slot it as the afternoon break the day you ride toward Koh Kong/Osoam; be rolling again by 15:30.",
+   "reference_link": "https://en.wikipedia.org/wiki/Tatai_River",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "cambodia-osoam-lake-evening",
+   "name": "Osoam village evening — Veal Veng lake sunset & community dinner",
+   "type": "food",
+   "order_index": 18,
+   "lat": 12.0789,
+   "lng": 103.2075,
+   "time_window": "17:00–20:00",
+   "duration": "3 hr (overnight)",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Osoam is the raw counterpoint to Chi Phat: a genuinely remote Cardamoms village reached by the wild 120 km road up from Koh Kong (sealed since ~2023 but one lane wide, steep, near-zero services — 3+ hr, carry water, patch kit and cash, in by mid-afternoon, never later). The evening IS the event: sunset over the Veal Veng reservoir from the lake-edge tables, family-style Khmer dinner at the Cardamom Community Center, and a village with almost no other tourists. One-family operation — arrange ahead with Mr Lim (+855 89 899 895, WhatsApp/Telegram). Squat toilets, generator power, no ATM for 100+ km.",
+   "reference_link": "https://osoamccc.weebly.com/",
+   "poi_ids": []
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "mekong-ninh-kieu-pier",
+   "type": "outdoor",
+   "name": "Ninh Kieu wharf & pier",
+   "lat": 10.0334,
+   "lng": 105.7886,
+   "description": "Dawn departure point for Cai Rang boats, and the heart of the lit-up evening riverfront — the trip's Can Tho anchor either end of the day.",
+   "reference_link": "https://en.wikipedia.org/wiki/C%E1%BA%A7n_Th%C6%A1"
+  },
+  {
+   "poi_id": "phuquoc-khai-hoan-fish-sauce",
+   "type": "food",
+   "name": "Khai Hoan fish sauce barrel house",
+   "lat": 10.2199,
+   "lng": 103.9715,
+   "description": "200-year tradition, hundreds of giant wooden vats, free to visit 07:00–20:00; buy the 40°N bottle here.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "phuquoc-ngoc-ha-pepper",
+   "type": "food",
+   "name": "Ngoc Ha pepper garden",
+   "lat": 10.2113,
+   "lng": 103.9835,
+   "description": "Working pepper farm on the 30 Thang 4 road — raw pepper and pepper honey tastings.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "phuquoc-duc-thanh-pepper",
+   "type": "food",
+   "name": "Duc Thanh pepper garden",
+   "lat": 10.2062,
+   "lng": 103.9903,
+   "description": "Second family pepper garden on the same inland stretch.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "phuquoc-ganh-dau-cape",
+   "type": "outdoor",
+   "name": "Ganh Dau cape & village",
+   "lat": 10.3708,
+   "lng": 103.8447,
+   "description": "Fishing village at the island's wild northwest tip — crab and sea-urchin shacks on the sand, Cambodia 4 km across the water, and the ~5 km forest trail.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "phuquoc-ong-lang-beach",
+   "type": "scenery",
+   "name": "Ong Lang Beach (sunset finish)",
+   "lat": 10.2705,
+   "lng": 103.9268,
+   "description": "The honest sunset beach — far better value than the Long Beach resort strip.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "phuquoc-night-market-street",
+   "type": "food",
+   "name": "Duong Dong night market street",
+   "lat": 10.2205,
+   "lng": 103.9598,
+   "description": "Grilled sea urchin, flower crab and peppered squid by weight — agree the per-kilo price and watch the weighing.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "cambodia-russian-market",
+   "type": "food",
+   "name": "Russian Market (Phsar Toul Tom Poung)",
+   "lat": 11.5405,
+   "lng": 104.9147,
+   "description": "The interior food lane 07:00–09:00 is the real thing — kuyteav, num banh chok, iced coffee; 1 km south of S-21 for the pre-visit breakfast.",
+   "reference_link": "https://en.wikipedia.org/wiki/Russian_Market,_Phnom_Penh"
+  },
+  {
+   "poi_id": "cambodia-wat-phnom",
+   "type": "historic",
+   "name": "Wat Phnom",
+   "lat": 11.5761,
+   "lng": 104.9232,
+   "description": "The hilltop stupa that named the city — dusk exterior stop at the quay's north end.",
+   "reference_link": "https://en.wikipedia.org/wiki/Wat_Phnom"
+  },
+  {
+   "poi_id": "cambodia-sovanna-bbq",
+   "type": "food",
+   "name": "Sovanna II BBQ, Street 21",
+   "lat": 11.5553,
+   "lng": 104.9309,
+   "description": "Evenings-only Khmer BBQ packed with local families — US$2.50–6 plates, pitchers of Angkor; consistently rated among PP's best.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "cambodia-andoung-tuek",
+   "type": "outdoor",
+   "name": "Andoung Tuek bridge & boat pier (NR48)",
+   "lat": 11.1947,
+   "lng": 103.4738,
+   "description": "The Chi Phat junction: 17 km dirt track north, or the CBET long-tail boat up the Preak Piphot river (1–2 hr, runs to demand). Last reliable fuel before the dirt.",
+   "reference_link": "https://chi-phat.org/"
+  }
+ ],
+ "transit": []
+}

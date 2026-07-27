@@ -1,0 +1,496 @@
+{
+ "trip_id": "vn-south-central-2026-12",
+ "name": "Vietnam Moto - S + Central",
+ "region": "Mekong Delta, Nha Trang & Hoi An/Hue, Vietnam",
+ "date_range": "2026-12-18 – 2026-12-30",
+ "duration_days": 12,
+ "summary": "Motorcycle route 4: Can Tho's delta, then the long ride northeast — the wild pick runs Can Tho→Dalat→Nha Trang over the 1,700 m Khanh Le (Omega) pass, one of Vietnam's great rides — Nha Trang, and the 2-day coastal run to Hoi An/Hue with the Hai Van Pass finale. RIDE-TIME REALITY: Can Tho→Nha Trang is 600+ km — a 2-day problem minimum (overnight Dalat on the mountain route, or Mui Ne on the coastal alternative); Nha Trang→Hoi An is ~520 km split at Quy Nhon; December daylight ends ~17:30 and QL1 after dark among trucks is the single biggest risk of the trip. ROUTE-CRITICAL: Khanh Le has had two catastrophic December-season events (a Nov 2025 landslide killed 6; major slope repairs through Oct 2026) — verify the pass is open ~3 days before, cross in the morning, and fall back to QL27 via Phan Rang if closed. WEATHER HONESTY: this is the rainy-season-tail route — Nha Trang seas are rough (island boats routinely cancelled; the mud bath is the water activity), Hue/Hoi An grey with flood risk on the old-town riverfront. It trades December sun (route 3 has it) for the two best passes in the country.",
+ "activities": [
+  {
+   "activity_id": "r4-ride-hcmc-cantho",
+   "name": "Ride day: Saigon → Can Tho the good way (Ben Tre back roads)",
+   "type": "outdoor",
+   "order_index": 1,
+   "lat": 10.0334,
+   "lng": 105.7886,
+   "time_window": "05:30–12:30",
+   "duration": "170–210 km, 4.5–7 hr by route",
+   "difficulty": "moderate",
+   "description": "Honest version: direct QL1A is a grim truck crawl (bikes banned from the parallel expressway — no fast escape). The good version: cross Rach Mieu Bridge at My Tho onto QL60 through Ben Tre 'Coconut Island', then thread the canal lanes and small ferries toward Tra Vinh/Can Tho — almost no trucks, pure delta. Leave Saigon before 06:00; never ride this after dark.",
+   "reference_link": "https://www.vietnamcoracle.com/",
+   "poi_ids": [
+    "mekong-ninh-kieu-pier"
+   ]
+  },
+  {
+   "activity_id": "mekong-cai-rang-dawn-boat",
+   "name": "Cai Rang floating market by private boat at dawn",
+   "type": "food",
+   "order_index": 2,
+   "lat": 10.005,
+   "lng": 105.7461,
+   "time_window": "05:00–08:00",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Charter a small local boat from Ninh Kieu wharf at 05:00–05:30 (~600k VND for 4). Peak trading is 04:00–06:00; by 08:00 it's mostly tour boats. Breakfast off a noodle boat on the water and buy fruit over the gunwale. VERIFIED (Al Jazeera 2025): the market has shrunk to ~200 boats, under half its 1990s peak — treat the dawn boat as now-or-never, and skip anything departing after 07:00.",
+   "reference_link": "https://en.wikipedia.org/wiki/Cai_Rang_floating_market",
+   "poi_ids": [
+    "mekong-ninh-kieu-pier"
+   ]
+  },
+  {
+   "activity_id": "mekong-binh-thuy-house",
+   "name": "Binh Thuy ancient house + the old quarter",
+   "type": "historic",
+   "order_index": 3,
+   "lat": 10.067,
+   "lng": 105.7496,
+   "time_window": "13:30–15:30",
+   "duration": "2 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "1870s French-Vietnamese merchant house (finished 1911), filming location for 'The Lover' — the Duong family still lives in it, which is exactly why it feels alive rather than museum-dead. Pair with the communal temple across the road and banh cong from a roadside stall on the ride back. Informal hours (private family home) — small donation, confirm ahead.",
+   "reference_link": "https://en.wikipedia.org/wiki/B%C3%ACnh_Th%E1%BB%A7y_ancient_house",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "mekong-ninh-kieu-evening",
+   "name": "Ninh Kieu riverfront, night market & nem nuong crawl",
+   "type": "nightlife",
+   "order_index": 4,
+   "lat": 10.031,
+   "lng": 105.7877,
+   "time_window": "17:30–20:30",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "The lit-up Hau riverfront and pedestrian bridge, then the eating: nem nuong Cai Rang (DIY grilled-pork rolls — Can Tho's signature; Thanh Van is the famous old house, confirm ahead) and banh cong. The night market is honestly half souvenir stalls — the food is the point; eat where locals sit on plastic stools.",
+   "reference_link": "https://en.wikipedia.org/wiki/C%E1%BA%A7n_Th%C6%A1",
+   "poi_ids": [
+    "mekong-ninh-kieu-pier"
+   ]
+  },
+  {
+   "activity_id": "r4-ride-cantho-dalat",
+   "name": "Ride day 1 north: Can Tho → Dalat (the monster day)",
+   "type": "outdoor",
+   "order_index": 5,
+   "lat": 10.0334,
+   "lng": 105.7886,
+   "time_window": "05:30–16:30",
+   "duration": "465 km, 10–11 hr",
+   "difficulty": "hard",
+   "description": "The wild pick's price of admission: QL1A across the delta, skirt Saigon on the ring road, then QL20 through Dau Giay and up the Bao Loc pass to Dalat at 1,500 m — the climb from sea level is the payoff. Leave by 05:30 or it becomes a night ride on QL20. If that's too much, split again at Bao Loc (~350 km in) and make it a 3-day approach; the coastal alternative (via Mui Ne, 2 days) trades the mountains for ocean road.",
+   "reference_link": "https://www.vietnamcoracle.com/saigon-to-dalat-the-back-way/",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "r4-ride-dalat-nhatrang-khanhle",
+   "name": "Ride day 2: Dalat → Nha Trang over Khanh Le (Omega) pass",
+   "type": "outdoor",
+   "order_index": 6,
+   "lat": 12.1863,
+   "lng": 108.715,
+   "time_window": "08:00–13:00",
+   "duration": "135 km, 3.5–4.5 hr + stops",
+   "difficulty": "hard",
+   "description": "One of Vietnam's great rides: QL27C over the 1,700 m Khanh Le pass — a ~33 km descent from pine forest into jungle with enormous valley views, mostly good tarmac. RIDE IT WITH RESPECT: a 16 Nov 2025 landslide here killed 6 and closed the pass (~100 slide points); it reopened with a 17:00–07:00 night closure and major slope repairs ran to Oct 2026. December IS landslide season — check QL27C status the day before, cross before 14:00, expect thick fog at the top, never after dark. Fallback if closed: QL27 via Phan Rang and Ngoan Muc pass (roughly twice as long).",
+   "reference_link": "https://dtinews.dantri.com.vn/vietnam-today/road-linking-nha-trang-and-dalat-closed-after-landslides-20251118104651056.htm",
+   "poi_ids": [
+    "nhatrang-khanh-le-summit"
+   ]
+  },
+  {
+   "activity_id": "nhatrang-po-nagar-hon-chong",
+   "name": "Po Nagar Cham towers + Hon Chong headland at opening",
+   "type": "historic",
+   "order_index": 7,
+   "lat": 12.2653,
+   "lng": 109.1956,
+   "time_window": "08:00–11:00",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "The real Nha Trang opener: 8th-century Cham towers on Cu Lao hill above the Cai river, still an active place of worship (incense, Cham dance, dress modestly) — this over VinWonders, no contest. Verified 08:00–18:00, ~30k VND; the quiet window is genuinely only the first hour before bus groups land ~09:00. Then 1 km up the coast to Hon Chong (30k), granite boulders shoved into the sea — December surf makes the outer rocks slippery; don't scramble them in swell.",
+   "reference_link": "https://en.wikipedia.org/wiki/Po_Nagar",
+   "poi_ids": [
+    "nhatrang-hon-chong"
+   ]
+  },
+  {
+   "activity_id": "nhatrang-bun-cha-ca-dam-market",
+   "name": "Bun cha ca breakfast + Dam Market crawl",
+   "type": "food",
+   "order_index": 8,
+   "lat": 12.2411,
+   "lng": 109.1882,
+   "time_window": "06:30–09:30",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Food-core morning: bun cha ca (fish-cake noodle soup, the city's signature) at Nguyen Loan, 123 Ngo Gia Tu — verified local institution, jellyfish option for the brave. Then the round Dam Market hall (daily ~05:00–18:30): ground-floor seafood chaos, dried squid, banh can griddle stalls around the edges. Go early — by 07:00 the boat produce is in and it's all locals. The souvenir aisles quote tourist prices; the food stalls are the honest part.",
+   "reference_link": "https://vietnamnomad.com/destinations/central-vietnam/nha-trang/dam-market/",
+   "poi_ids": [
+    "nhatrang-dam-market"
+   ]
+  },
+  {
+   "activity_id": "nhatrang-long-son-thap-ba-mud",
+   "name": "Long Son pagoda + Thap Ba mud bath (rain-day insurance)",
+   "type": "scenery",
+   "order_index": 9,
+   "lat": 12.2513,
+   "lng": 109.1806,
+   "time_window": "13:00–17:00",
+   "duration": "4 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Long Son pagoda (free, 07:00–17:00): 152 steps past the reclining Buddha to the 24 m white seated Buddha with the whole city below — December mist rolling over it is the good version. Watch for the verified 'free bracelet' hustlers on the steps claiming entry fees: entry is free, ignore anyone collecting before the gate. Then Thap Ba Hot Spring Center (07:00–19:00, communal mud ~300k): honest framing — concrete tubs and busloads, not a wild spring, but soaking in hot mineral mud while rain hammers the roof is the correct December afternoon. Locals' quiet window: 12:00–15:00.",
+   "reference_link": "https://en.wikipedia.org/wiki/Long_S%C6%A1n_Pagoda",
+   "poi_ids": [
+    "nhatrang-thap-ba-spa"
+   ]
+  },
+  {
+   "activity_id": "nhatrang-seafood-alley-dinner",
+   "name": "North-bank seafood BBQ + nem nuong dinner",
+   "type": "food",
+   "order_index": 10,
+   "lat": 12.2542,
+   "lng": 109.1937,
+   "time_window": "18:00–21:00",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Cross the Cai river to where locals actually eat: the quan nhau seafood strips on Thap Ba street below Po Nagar — tanks out front, plastic stools, pick your fish and they grill on the spot (verified practice: pricing is per 100 g and the scale is the negotiation — confirm price per kg AND the cooking fee before your pick hits the grill). Pair or substitute with the verified classic Nem Nuong Dang Van Quyen, 16A Lan Ong, 25+ years running: grill-your-own pork skewers rolled in rice paper with the secret sauce — the definitive Nha Trang dinner, dirt cheap.",
+   "reference_link": "https://www.travelfish.org/eatandmeet/vietnam/south_central_vietnam/khanh_hoa/nha_trang/eat",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "nhatrang-night-market-promenade",
+   "name": "Night market + Tran Phu beach promenade",
+   "type": "nightlife",
+   "order_index": 11,
+   "lat": 12.2459,
+   "lng": 109.1963,
+   "time_window": "19:00–21:30",
+   "duration": "2.5 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "The night market at 46 Tran Phu (daily 17:00–23:00, 100+ stalls) sits in the heart of the tourist strip — honest framing: this IS the Russian-holiday quarter, Cyrillic menus and all; treat it as people-watching theatre, eat the grilled squid and banh trang nuong (prices run 2–3x local), skip the souvenirs. Then the beachfront promenade: December surf booming in the dark, locals doing aerobics, the Vinpearl cable-car lights across the bay — which is exactly as much VinWonders as you need (skip the 880k theme park). Known pattern of bag-snatching from walkers after 22:00 — nothing dangling, phone in the front pocket.",
+   "reference_link": "https://nhatrangbeach.vn/dia-diem/nha-trang-food-night-market-guide/",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "r4-honba-summit-ride",
+   "name": "Hon Ba summit road — the wild half-day (verify day-of)",
+   "type": "outdoor",
+   "order_index": 12,
+   "lat": 12.1186,
+   "lng": 108.9483,
+   "time_window": "07:30–12:30",
+   "duration": "120 km round trip, 4–5 hr",
+   "difficulty": "hard",
+   "description": "The 'Dalat of the coast': ~23 km south on QL1 then a verified 37 km summit road past Suoi Dau lake climbing to 1,578 m and Yersin's restored research house — empty, jungly, cloud-forest cold at the top. December honesty: the upper road closes after heavy rain and Oct–Dec is closure-prone with degraded surface — advanced riders only, VERIFY at ranger level the day you go (the default December answer after rain is 'closed above the waterfall'; Suoi Nguon falls is the consolation stop). Morning only, never after lunch in monsoon season.",
+   "reference_link": "https://vi.wikipedia.org/wiki/H%C3%B2n_B%C3%A0_(Kh%C3%A1nh_H%C3%B2a)",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "r4-ride-nhatrang-quynhon",
+   "name": "Coast ride day 1: Nha Trang → Quy Nhon (nem nuong at the source)",
+   "type": "outdoor",
+   "order_index": 13,
+   "lat": 12.2524,
+   "lng": 109.1966,
+   "time_window": "07:00–13:30",
+   "duration": "230 km, 5–6 hr",
+   "difficulty": "moderate",
+   "description": "QL1A north with the QL1D coastal section from Song Cau into Quy Nhon hugging the sea — the best tarmac-with-a-view of the day. Mandatory lunch stop: Ninh Hoa town, 35 km in, birthplace of nem nuong Ninh Hoa — eat it at source, not in Nha Trang. Optional Phu Yen coastal detours (DT639, Ganh Da Dia) add 1–2 hr. Truck traffic is relentless between Ninh Hoa and Tuy Hoa, and December showers make the painted lane lines slick — budget daylight margin. Quy Nhon overnight: a real, untouristy beach city with great seafood.",
+   "reference_link": "https://vinpearl.com/en/nha-trang-to-quy-nhon",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "r4-ride-quynhon-hoian",
+   "name": "Coast ride day 2: Quy Nhon → Hoi An",
+   "type": "outdoor",
+   "order_index": 14,
+   "lat": 15.8768,
+   "lng": 108.3313,
+   "time_window": "07:00–14:30",
+   "duration": "290 km, 6–7 hr",
+   "difficulty": "moderate",
+   "description": "The workhorse day, mostly QL1 with trucks, broken by the Sa Huynh coastal stretch (the prettiest beach between Quy Nhon and Quang Ngai — the lunch stop). The My Lai memorial (Son My) near Quang Ngai is the one worthwhile detour if you're making time. After Quang Ngai, peel off via Tra Kieu/Duy Xuyen to arrive in Hoi An on quiet roads rather than QL1 into Da Nang. Longest riding day of the trip in December's short daylight — leave by 07:00, or split again at Quang Ngai if the weather is filthy.",
+   "reference_link": "https://goodmorning-hoian.com/en/hoi-an-to-quy-nhon/",
+   "poi_ids": [
+    "hoianhue-central-market"
+   ]
+  },
+  {
+   "activity_id": "r4-haivan-pass-ride",
+   "name": "The Hai Van Pass: Da Nang → Hue over the Sea Clouds",
+   "type": "outdoor",
+   "order_index": 15,
+   "lat": 16.1877,
+   "lng": 108.1313,
+   "time_window": "09:00–14:00",
+   "duration": "100 km, 3.5–4.5 hr with stops",
+   "difficulty": "moderate",
+   "description": "The finale: the ~21 km pass road crests at 496 m at the Hai Van Quan gate — French and Nguyen-era fortifications, recently restored, free to wander. Motorbikes are banned from the tunnel, so the pass IS the motorbike route. The north side drops to Lang Co lagoon — classic sand-spit viewpoint on the descent, seafood on the lagoon stilts, then the quieter Phu Loc backroads to Hue. 'Hai Van' means sea clouds: December fog banks and drizzle are common — ride after 08:00–09:00, headlights on, and keep a flex day to skip it in heavy rain. The view is the point.",
+   "reference_link": "https://en.wikipedia.org/wiki/H%E1%BA%A3i_V%C3%A2n_Pass",
+   "poi_ids": [
+    "hoianhue-haivan-quan"
+   ]
+  },
+  {
+   "activity_id": "hoianhue-hue-citadel-morning",
+   "name": "Hue Imperial Citadel at opening",
+   "type": "historic",
+   "order_index": 16,
+   "lat": 16.4697,
+   "lng": 107.5778,
+   "time_window": "06:30–09:30",
+   "duration": "2–3 hr",
+   "difficulty": "easy",
+   "description": "The Nguyen dynasty's walled Imperial City. Gates open 06:30 daily (to 17:30, 200k VND) — at Ngo Mon Gate early you get Thai Hoa Palace, To Mieu and the Nine Dynastic Urns in grey morning quiet before tour buses. December's overcast light suits the place — moss, brooding walls, puddled courtyards. Mostly open-air: spend the umbrella here.",
+   "reference_link": "https://en.wikipedia.org/wiki/Imperial_City_of_Hu%E1%BA%BF",
+   "poi_ids": [
+    "hoianhue-ngo-mon-gate"
+   ]
+  },
+  {
+   "activity_id": "hoianhue-my-son-dawn",
+   "name": "My Son sanctuary at gate-opening",
+   "type": "historic",
+   "order_index": 17,
+   "lat": 15.767,
+   "lng": 108.117,
+   "time_window": "06:00–10:00",
+   "duration": "4 hr incl. the ride",
+   "difficulty": "easy",
+   "description": "Cham Hindu temple ruins in a jungle valley 40 km southwest of Hoi An — an easy hour on quiet rice-country roads. Gates 06:00 (some sources say 07:30 low season); 150k incl. shuttle and Cham dance. Arrive 06:00–06:30 and walk the B-C-D tower groups in mist with almost nobody — buses land 09:00 onward. Return via the Duy Xuyen back-lanes.",
+   "reference_link": "https://en.wikipedia.org/wiki/M%E1%BB%B9_S%C6%A1n",
+   "poi_ids": [
+    "hoianhue-my-son"
+   ]
+  },
+  {
+   "activity_id": "hoianhue-tombs-thienmu-loop",
+   "name": "Royal tombs + Thien Mu loop by motorbike",
+   "type": "historic",
+   "order_index": 18,
+   "lat": 16.3989,
+   "lng": 107.5903,
+   "time_window": "13:00–17:30",
+   "duration": "4.5 hr",
+   "difficulty": "easy",
+   "description": "Moto afternoon south of the Perfume River: Khai Dinh's tomb first (150k) — the most jaw-dropping glass-mosaic interior of any Nguyen mausoleum, and indoors: December-proof. Then Tu Duc's (150k) — the poetic one, open-air and muddy in rain; if you pay for only one in December, it's Khai Dinh. Finish at Thien Mu Pagoda (free), the seven-storey tower over the river at dusk. The 530k combo only pays if you'll genuinely do three tombs.",
+   "reference_link": "https://en.wikipedia.org/wiki/Tomb_of_Kh%E1%BA%A3i_%C4%90%E1%BB%8Bnh",
+   "poi_ids": [
+    "hoianhue-khai-dinh-tomb",
+    "hoianhue-tu-duc-tomb",
+    "hoianhue-thien-mu-pagoda"
+   ]
+  },
+  {
+   "activity_id": "hoianhue-hoian-food-afternoon",
+   "name": "Hoi An central market food court + the banh mi debate",
+   "type": "food",
+   "order_index": 19,
+   "lat": 15.8768,
+   "lng": 108.3313,
+   "time_window": "13:00–16:00",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Skip the riverfront tourist row: the central-market food court serves cao lau and mi quang at 30–50k with posted prices — the honest lunch, and cao lau is the town's dish. Then the sandwich argument: Banh Mi Phuong (Bourdain shrine, permanent queue) vs Madam Khanh 'The Banh Mi Queen' (20–30k, no queue theater) — do both 90 minutes apart; the profile answer is Madam Khanh. If the sky clears, An Bang beach is a storm-watching coffee in December, NOT a swim — rough surf and real currents.",
+   "reference_link": "https://en.wikipedia.org/wiki/H%E1%BB%99i_An",
+   "poi_ids": [
+    "hoianhue-central-market",
+    "hoianhue-banh-mi-phuong",
+    "hoianhue-an-bang-beach"
+   ]
+  },
+  {
+   "activity_id": "hoianhue-lantern-old-town-night",
+   "name": "Lantern-lit old town + Japanese Bridge after dark",
+   "type": "nightlife",
+   "order_index": 20,
+   "lat": 15.8771,
+   "lng": 108.326,
+   "time_window": "17:30–20:30",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "description": "From ~17:30 the old town goes car-free-ish and the silk lanterns come on along Tran Phu and the An Hoi riverfront. Ticket honesty: the 120k ticket is officially compulsory, inconsistently enforced at street entrances, checked at the 22 heritage buildings including the Japanese Covered Bridge — buy it; under $5, funds restoration, and you want inside the merchant houses. Walk the back streets off Phan Chau Trinh where lanterns hang without the crowd; a lantern-making workshop (~$9–15) is verified good value and rain-proof. Flood reality: the riverfront blocks go under first when the Thu Bon rises — book accommodation away from the river.",
+   "reference_link": "https://en.wikipedia.org/wiki/H%E1%BB%99i_An",
+   "poi_ids": [
+    "hoianhue-japanese-bridge",
+    "hoianhue-central-market"
+   ]
+  },
+  {
+   "activity_id": "hoianhue-hue-night-food",
+   "name": "Hue night food crawl: bun bo, com hen, Dong Ba after dark",
+   "type": "food",
+   "order_index": 21,
+   "lat": 16.4724,
+   "lng": 107.5886,
+   "time_window": "18:00–21:00",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Hue's imperial food is street food eaten low to the ground: proper bun bo Hue (order it whole, blood cube included); com hen — cold rice under tiny Perfume River clams — best from the family stalls on Con Hen islet, the dish's namesake home; finish at Dong Ba Market's night side, from ~18:00 ringed with banh beo, banh loc and grilled nem. Grey drizzly December evenings are exactly what this scalding chili-heavy food is for. If Con Hen is dark, Dong Ba carries com hen too.",
+   "reference_link": "https://en.wikipedia.org/wiki/B%C3%BAn_b%C3%B2_Hu%E1%BA%BF",
+   "poi_ids": [
+    "hoianhue-dong-ba-market"
+   ]
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "mekong-ninh-kieu-pier",
+   "type": "outdoor",
+   "name": "Ninh Kieu wharf & pier",
+   "lat": 10.0334,
+   "lng": 105.7886,
+   "description": "Dawn departure point for Cai Rang boats, and the heart of the lit-up evening riverfront.",
+   "reference_link": "https://en.wikipedia.org/wiki/C%E1%BA%A7n_Th%C6%A1"
+  },
+  {
+   "poi_id": "nhatrang-khanh-le-summit",
+   "type": "scenery",
+   "name": "Khanh Le (Omega) pass summit (~1,700 m)",
+   "lat": 12.1863,
+   "lng": 108.715,
+   "description": "Crest of one of Vietnam's great rides — pine forest one side, a 33 km jungle descent the other. December fog at the top; check pass status before riding.",
+   "reference_link": "https://www.vietnamcoracle.com/the-greatest-riding-roads-in-vietnam/"
+  },
+  {
+   "poi_id": "nhatrang-hon-chong",
+   "type": "scenery",
+   "name": "Hon Chong promontory",
+   "lat": 12.272,
+   "lng": 109.206,
+   "description": "Granite boulders shoved into the sea, 1 km up the coast from Po Nagar; 30k. Slippery outer rocks in December swell.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "nhatrang-dam-market",
+   "type": "food",
+   "name": "Dam Market (Cho Dam)",
+   "lat": 12.255,
+   "lng": 109.1918,
+   "description": "The round market hall, ~05:00–18:30 daily: seafood chaos, dried squid, banh can griddles at the edges. Food stalls honest, souvenir aisles not.",
+   "reference_link": "https://vietnamnomad.com/destinations/central-vietnam/nha-trang/dam-market/"
+  },
+  {
+   "poi_id": "nhatrang-thap-ba-spa",
+   "type": "outdoor",
+   "name": "Thap Ba Hot Spring Center",
+   "lat": 12.2706,
+   "lng": 109.1771,
+   "description": "Concrete tubs and busloads, honestly — but hot mineral mud in December rain is the correct call. 07:00–19:00; quiet window 12:00–15:00.",
+   "reference_link": "https://guidevietnam.org/thap-ba-hot-springs-centre-in-nha-trang.html"
+  },
+  {
+   "poi_id": "hoianhue-haivan-quan",
+   "type": "historic",
+   "name": "Hai Van Quan gate (496 m)",
+   "lat": 16.1877,
+   "lng": 108.1313,
+   "description": "French and Nguyen-era fortifications at the pass crest, recently restored, free to wander.",
+   "reference_link": "https://en.wikipedia.org/wiki/H%E1%BA%A3i_V%C3%A2n_Pass"
+  },
+  {
+   "poi_id": "hoianhue-ngo-mon-gate",
+   "type": "historic",
+   "name": "Imperial City of Hue (Ngo Mon Gate)",
+   "lat": 16.4697,
+   "lng": 107.5778,
+   "description": "Main gate of the walled Imperial City; 06:30–17:30 daily, 200k VND.",
+   "reference_link": "https://en.wikipedia.org/wiki/Imperial_City_of_Hu%E1%BA%BF"
+  },
+  {
+   "poi_id": "hoianhue-my-son",
+   "type": "historic",
+   "name": "My Son Sanctuary",
+   "lat": 15.767,
+   "lng": 108.117,
+   "description": "Cham Hindu temple ruins in a jungle valley; 150k incl. shuttle; buses land from 09:00 — go at opening.",
+   "reference_link": "https://en.wikipedia.org/wiki/M%E1%BB%B9_S%C6%A1n"
+  },
+  {
+   "poi_id": "hoianhue-khai-dinh-tomb",
+   "type": "historic",
+   "name": "Tomb of Khai Dinh",
+   "lat": 16.3989,
+   "lng": 107.5903,
+   "description": "Concrete-gothic outside, jaw-dropping glass-mosaic interior — indoors, so December-proof. 150k, 07:00–17:30.",
+   "reference_link": "https://en.wikipedia.org/wiki/Tomb_of_Kh%E1%BA%A3i_%C4%90%E1%BB%8Bnh"
+  },
+  {
+   "poi_id": "hoianhue-tu-duc-tomb",
+   "type": "historic",
+   "name": "Tomb of Tu Duc",
+   "lat": 16.4325,
+   "lng": 107.566,
+   "description": "The poetic one — pine hills and lake pavilions; open-air and muddy in rain. 150k.",
+   "reference_link": "https://en.wikipedia.org/wiki/Tomb_of_T%E1%BB%B1_%C4%90%E1%BB%A9c"
+  },
+  {
+   "poi_id": "hoianhue-thien-mu-pagoda",
+   "type": "historic",
+   "name": "Thien Mu Pagoda",
+   "lat": 16.4536,
+   "lng": 107.5448,
+   "description": "Seven-storey Phuoc Duyen tower over the Perfume River — free, best at dusk.",
+   "reference_link": "https://en.wikipedia.org/wiki/Thi%C3%AAn_M%E1%BB%A5_Pagoda"
+  },
+  {
+   "poi_id": "hoianhue-central-market",
+   "type": "food",
+   "name": "Hoi An Central Market food court",
+   "lat": 15.8768,
+   "lng": 108.3313,
+   "description": "Cao lau and mi quang at 30–50k with posted prices — the honest cheap lunch; the An Hoi lantern riverfront starts here.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "hoianhue-banh-mi-phuong",
+   "type": "food",
+   "name": "Banh Mi Phuong",
+   "lat": 15.8785,
+   "lng": 108.332,
+   "description": "The Bourdain-shrine banh mi with the permanent queue; Madam Khanh at 115 Tran Cao Van is the no-queue rival — the profile pick.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "hoianhue-an-bang-beach",
+   "type": "scenery",
+   "name": "An Bang Beach",
+   "lat": 15.913,
+   "lng": 108.34,
+   "description": "In December NOT a swimming beach — rough surf, strong currents; go for moody storm-watching coffee.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "hoianhue-japanese-bridge",
+   "type": "historic",
+   "name": "Japanese Covered Bridge (Chua Cau)",
+   "lat": 15.8771,
+   "lng": 108.326,
+   "description": "The old town's icon — one of the 22 heritage stops where the 120k ticket is actually checked.",
+   "reference_link": "https://en.wikipedia.org/wiki/Japanese_Bridge,_H%E1%BB%99i_An"
+  },
+  {
+   "poi_id": "hoianhue-dong-ba-market",
+   "type": "food",
+   "name": "Dong Ba Market (night stalls)",
+   "lat": 16.4724,
+   "lng": 107.5886,
+   "description": "Hue's central market; from ~18:00 the entrance rings with banh beo, banh loc, grilled nem — and com hen when Con Hen islet is dark.",
+   "reference_link": "https://en.wikipedia.org/wiki/%C4%90%C3%B4ng_Ba_Market"
+  }
+ ],
+ "transit": []
+}

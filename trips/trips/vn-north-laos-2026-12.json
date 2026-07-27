@@ -1,0 +1,628 @@
+{
+ "trip_id": "vn-north-laos-2026-12",
+ "name": "Vietnam Moto - Laos Link",
+ "region": "Northern Vietnam (Sapa, Cat Ba) & Luang Prabang, Laos",
+ "date_range": "2026-12-18 – 2026-12-30",
+ "duration_days": 12,
+ "summary": "Motorcycle route 1: Cat Ba's karst and Lan Ha Bay, the Sapa high country, then across the Tay Trang border into Laos for Nong Khiaw and Luang Prabang. RIDE-TIME REALITY: bikes are banned from the expressways (old QL5 to Hai Phong, ~4.5–5.5h door-to-door with ferry; QL32 to Sapa is a 2-day mountain ride or send the bike by freight/bus — the night train no longer carries bikes). BORDER VERDICT (verified 2026): Vietnamese RENTAL bikes effectively cannot enter Laos — Laos requires a pre-arranged permit plus a licensed Lao guide booked ~2 weeks ahead, and rental blue cards fail the ownership test; the honest plan is ride to Dien Bien Phu (split the 275km at Lai Chau or Muong Lay), store the bike, take the 06:00 bus through Tay Trang (Laos visa IN ADVANCE from the Hanoi embassy — no visa-on-arrival at this gate), and re-rent in Luang Prabang. December: near-freezing nights up high, misty mornings, Laos in peak dry season — book Christmas/NYE lodging early.",
+ "activities": [
+  {
+   "activity_id": "r1-ride-hanoi-catba",
+   "name": "Ride day: Hanoi → Cat Ba (old QL5 + sea bridge + vehicle ferry)",
+   "type": "outdoor",
+   "order_index": 1,
+   "lat": 20.8139,
+   "lng": 106.8949,
+   "time_window": "07:00–13:00",
+   "duration": "4.5–5.5 hr incl. ferry",
+   "difficulty": "moderate",
+   "description": "~150 km: old QL5/AH14 to Hai Phong (the CT.04 expressway BANS motorbikes — 4–6M VND fines), over the 5.4 km Tan Vu–Lach Huyen sea bridge (bikes in the slow lane; re-check locally), vehicle ferry Dong Bai→Cai Vieng (~44k VND + 14k/passenger, cash at pier, no booking), then the best 45 minutes of the day: 23 km of near-empty jungle-karst road into Cat Ba town. December: low-season sailings thin out (reports conflict between every 30–60 min and 6–8/day) — cross before mid-afternoon. Note: Hanoi's inner-city petrol-bike zone starts July 2026 — arrange rental pickup outside Ring Road 1.",
+   "reference_link": "https://catbaexpress.com/ticket-and-schedule-of-ferry-from-got-to-cai-vieng.html",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "catba-ngu-lam-peak",
+   "name": "Cat Ba National Park — Ngu Lam peak + Hospital Cave",
+   "type": "outdoor",
+   "order_index": 2,
+   "lat": 20.7945,
+   "lng": 106.9954,
+   "time_window": "08:00–11:30",
+   "duration": "3.5 hr",
+   "difficulty": "moderate",
+   "cash_only": true,
+   "description": "Pay the Kim Giao–Ngu Lam ticket at the park HQ (reports conflict: 80k vs 120k VND — carry small notes) and climb through kim giao forest to the bare karst summit: 30–45 min up, steep rocky final scramble, 360° over the island's jungle spine. Dry, cool December is ideal here. On the ride back stop at Hospital Cave (08:00–17:00, ~80k) — a 3-storey concrete field hospital built inside the karst, used 1963–75, genuinely eerie. The longer Viet Hai traverse (~160k, 4–6 hr) is the full hard option.",
+   "reference_link": "https://backpackersintheworld.com/cat-ba-national-park-ngu-lam-peak/",
+   "poi_ids": [
+    "catba-park-hq",
+    "catba-ngu-lam-summit",
+    "catba-trung-trang-cave",
+    "catba-hospital-cave",
+    "catba-butterfly-valley"
+   ]
+  },
+  {
+   "activity_id": "catba-lanha-boat-kayak",
+   "name": "Lan Ha Bay small-boat day + kayak from Ben Beo",
+   "type": "outdoor",
+   "order_index": 3,
+   "lat": 20.7321,
+   "lng": 107.0589,
+   "time_window": "08:00–16:30",
+   "duration": "full day",
+   "difficulty": "moderate",
+   "description": "The authentic alternative to the Ha Long tourist fleet: small-boat trips out of Ben Beo pier into Lan Ha Bay — ~2 hr kayaking through rock arches into enclosed lagoons, the 7,000-year-old (and still working) Cai Beo floating village, fish-farm rafts, empty beaches. Verified December operators: Cat Ba Ventures, Captain Jack, Cat Ba Local (~US$45–85 with lunch). December is misty, moody and nearly empty; swimming is off (15–20°C), kayaking is on. Book 1–2 days ahead IN TOWN — low-season departures consolidate or cancel on thin bookings.",
+   "reference_link": "https://www.catbaventures.com/cat-ba-tours/lan-ha-bay-ha-long-bay-bai-tu-long-bay-boat-trip-kayaking-2-days-1-night.html",
+   "poi_ids": [
+    "catba-ben-beo-pier",
+    "catba-cai-beo-village",
+    "catba-monkey-island"
+   ]
+  },
+  {
+   "activity_id": "catba-catco-cannon-fort",
+   "name": "Cat Co cliff walkway + Cannon Fort sunset",
+   "type": "scenery",
+   "order_index": 4,
+   "lat": 20.7231,
+   "lng": 107.0528,
+   "time_window": "14:30–17:45",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "December honesty: the Cat Co coves are for walking, not swimming — but the cliffside boardwalk linking Cat Co 1→2 hugs the karst above the sea and is arguably better empty (sections occasionally roped off for storm repairs; detour by road). Then ride up to Cannon Fort (~40–80k, reports conflict): WWII/French-era gun emplacements and a 360° terrace over Lan Ha Bay. December golden hour is 16:15–17:30 and it's drive-up — no trail-in-the-dark risk. Gates close ~18:00; some visitors report partial military closures — ask your hotel that day.",
+   "reference_link": "https://catbagreentrail.com/cat-ba-cannon-fort/",
+   "poi_ids": [
+    "catba-cat-co-1",
+    "catba-cat-co-2",
+    "catba-cat-co-3"
+   ]
+  },
+  {
+   "activity_id": "catba-floating-seafood-dinner",
+   "name": "Floating-restaurant seafood dinner off Ben Beo — eyes open",
+   "type": "food",
+   "order_index": 5,
+   "lat": 20.7375,
+   "lng": 107.0621,
+   "time_window": "18:00–20:30",
+   "duration": "2.5 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Boat-taxi 5 minutes from Ben Beo to a floating restaurant among the fish cages — pick your fish, mantis shrimp or clams live from the pens. Real Cat Ba, but also the island's best-known tourist-trap vector: agree the per-kg price AND the weight before anything hits the grill, photograph the menu, confirm what's included. 250–500k VND/head done carefully, plus ~100–200k boat per group. In December go at 18:00 — shuttles stop earlier in low season.",
+   "reference_link": "https://www.vietnamtourism.com/en/fishing-village-cat-ba-the-complete-guide-to-cai-beo-and-lan-ha-bay-s-floating-communities",
+   "poi_ids": [
+    "catba-ben-beo-pier",
+    "catba-cai-beo-village"
+   ]
+  },
+  {
+   "activity_id": "catba-night-food-strip",
+   "name": "Cat Ba night market & 1/4 Street food strip",
+   "type": "nightlife",
+   "order_index": 6,
+   "lat": 20.7266,
+   "lng": 107.048,
+   "time_window": "18:30–21:30",
+   "duration": "2 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "The town's evening ritual along the 1/4 Street waterfront: pick-your-own grilled seafood (150–500k VND/kg by species — same rule as the rafts, fix price and weight first), cha muc squid cake, steamed clams, grilled rice paper, fruit shakes. December low season means a shorter, quieter strip with locals outnumbering tourists — the good version. Eat by 21:00; stalls shut early in winter. Finish on the harbour promenade past the squid boats' green lights.",
+   "reference_link": "https://catbagreentrail.com/cat-ba-night-market/",
+   "poi_ids": [
+    "catba-cho-catba"
+   ]
+  },
+  {
+   "activity_id": "r1-ride-hanoi-sapa",
+   "name": "Ride days: Hanoi → Sapa the riders' way (QL32, 2 days)",
+   "type": "outdoor",
+   "order_index": 7,
+   "lat": 22.4918,
+   "lng": 103.9781,
+   "time_window": "06:00–17:00",
+   "duration": "2 days (~350 km)",
+   "difficulty": "hard",
+   "description": "The riding route north: QL32 through Nghia Lo, over Khau Pha pass and Mu Cang Chai's terraces, then Than Uyen toward Sapa — sealed but slow mountain highway, and with December daylight ending before 18:00 it is a 2-day ride (overnight Nghia Lo or Mu Cang Chai), not a sprint. Bikes are banned from the CT05 expressway, so there is no fast option on two wheels. Alternatives: the night train no longer carries motorbikes — send the bike via the rail freight kiosk at 120 Le Duan (it may arrive a day later) or a Sao Viet-type sleeper bus that takes the bike (~700k VND) — CONFIRM IN PERSON at Hanoi station, this policy has flip-flopped.",
+   "reference_link": "https://www.vietnamcoracle.com/the-fanxipan-express-hanoi-to-lao-cai-by-train-passengers-motorbikes/",
+   "poi_ids": [
+    "sapa-lao-cai-station"
+   ]
+  },
+  {
+   "activity_id": "sapa-muong-hoa-valley-trek",
+   "name": "Muong Hoa valley trek: Y Linh Ho – Lao Chai – Ta Van",
+   "type": "outdoor",
+   "order_index": 8,
+   "lat": 22.31,
+   "lng": 103.8762,
+   "time_window": "08:00–15:00",
+   "duration": "6–7 hr (10–12 km)",
+   "difficulty": "moderate",
+   "cash_only": true,
+   "description": "Drop off the ridge below Sapa through the Black Hmong hamlets of Y Linh Ho and Lao Chai, cross the Muong Hoa river and finish among the Giay houses of Ta Van — the real-village answer to the turnstiled Cat Cat theme-village. Hire a Black Hmong guide in town (Sapa O'Chau or the independent village women); lunch on the valley floor; moto-taxi back up. December: the buffalo-track descents turn to greasy clay in fog-drizzle and the terraces are brown stubble — grip soles are non-negotiable. No ATMs in the valley; carry cash.",
+   "reference_link": "https://trekkingtoursapa.com/muong-hoa-valley-guide.html",
+   "poi_ids": [
+    "sapa-lao-chai-village",
+    "sapa-ta-van-village",
+    "sapa-town-market"
+   ]
+  },
+  {
+   "activity_id": "sapa-bac-ha-sunday-market",
+   "name": "Bac Ha Sunday market ride (Dec 20 or 27 only)",
+   "type": "outdoor",
+   "order_index": 9,
+   "lat": 22.5356,
+   "lng": 104.2918,
+   "time_window": "05:30–13:00",
+   "duration": "full morning, 2.5–3.5 hr ride each way",
+   "difficulty": "moderate",
+   "cash_only": true,
+   "description": "The biggest minority market in the northwest — Flower Hmong, Dao, Tay, Nung and Phu La trading buffalo, horses, plum wine and cloth. Sundays ONLY: on this trip that means December 20 or 27, 2026 — build the Sapa days around it. Winter market runs ~06:00–12:00; the 07:00–09:00 window is the real thing before day-trip buses land ~09:30. The pre-dawn plateau ride is bitterly cold (0–5°C) — or ride out Saturday afternoon and sleep in Bac Ha.",
+   "reference_link": "https://wander-lush.org/bac-ha-market-sapa-vietnam/",
+   "poi_ids": [
+    "sapa-bac-ha-market",
+    "sapa-hoang-a-tuong-palace",
+    "sapa-lao-cai-station"
+   ]
+  },
+  {
+   "activity_id": "sapa-o-quy-ho-pass-waterfalls",
+   "name": "O Quy Ho pass ride: Silver Waterfall + Love Waterfall trek",
+   "type": "scenery",
+   "order_index": 10,
+   "lat": 22.3724,
+   "lng": 103.7571,
+   "time_window": "12:00–16:30",
+   "duration": "4–5 hr (34 km ride + 3 km walk)",
+   "difficulty": "moderate",
+   "cash_only": true,
+   "description": "Ride QL4D to the ~2,000 m summit of one of Vietnam's four great passes, stopping at Silver Waterfall (20k VND, roadside stairs — the spray freezes fingers in December) and walking the 1.5 km forest trail from the Tram Ton ranger gate to the 100 m Love Waterfall inside Hoang Lien NP (70k, to 17:00). Strictly a midday outing: Oct–Dec is cloud-hunting season, and the same fog that makes the photos can erase the road in seconds; black ice is possible on cold snaps. Be off the pass well before dark.",
+   "reference_link": "https://www.vietnamcoracle.com/the-extreme-northwest-motorbike-guide/",
+   "poi_ids": [
+    "sapa-silver-waterfall",
+    "sapa-tram-ton-love-waterfall",
+    "sapa-o-quy-ho-summit"
+   ]
+  },
+  {
+   "activity_id": "sapa-fansipan-honest",
+   "name": "Fansipan — honestly framed",
+   "type": "scenery",
+   "order_index": 11,
+   "lat": 22.3347,
+   "lng": 103.8406,
+   "time_window": "07:30–13:00",
+   "duration": "half day (cable car) or 2 days (trek)",
+   "difficulty": "easy",
+   "description": "Straight talk: the 'Roof of Indochina' (3,143 m) is now a Sun World theme park — funicular, 15-minute cable car, pagodas, escalators, crowds, ~US$45 all-in for a mountain you don't climb. The on-profile alternative is the 2-day guided trek from Tram Ton with a camp night — but in late December expect near or below 0°C, ice at altitude, and a real chance the summit sits inside cloud either way. First cars on a clear morning, or spend the money on petrol.",
+   "reference_link": "https://vmtravel.com/fansipan-cable-car/",
+   "poi_ids": [
+    "sapa-fansipan-summit"
+   ]
+  },
+  {
+   "activity_id": "sapa-night-market-food-street",
+   "name": "Sapa night market & highland grill stalls",
+   "type": "food",
+   "order_index": 12,
+   "lat": 22.3383,
+   "lng": 103.852,
+   "time_window": "18:00–22:00",
+   "duration": "2–3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Cold-night eating built for this climate: charcoal grills of pork skewers, black chicken, com lam bamboo rice, dried buffalo, salmon hotpot, wild-apple wine and Hmong corn wine by the shot. The night market proper reportedly runs Fri–Sun ~16:00–22:00 in the cool season, with grill stalls around the market and church square nightly — December schedule is a confirm-ahead. Tourist-row skewers are priced per stick; check before you point.",
+   "reference_link": "https://www.thestreetfoodguy.com/street-food-sapa-sapa-night-market-2/",
+   "poi_ids": [
+    "sapa-town-market",
+    "sapa-xuan-vien-grills"
+   ]
+  },
+  {
+   "activity_id": "sapa-a-quynh-thang-co",
+   "name": "Thang co & salmon hotpot dinner at A Quynh",
+   "type": "food",
+   "order_index": 13,
+   "lat": 22.3365,
+   "lng": 103.847,
+   "time_window": "18:00–21:30",
+   "duration": "1.5–2 hr",
+   "difficulty": "easy",
+   "description": "Long-standing local house at 15 Thach Son street doing the Hmong classics properly: thang co (the peppery horse stew — traditionally with offal, know what you're ordering), lon cap nach 'armpit pork', com lam, and Sapa-farmed salmon or sturgeon hotpot — exactly what a near-zero night calls for. Hotpot between two riders plus a jug of apple wine; weekend tables fill early. Hours/cash unverified — carry cash and confirm ahead.",
+   "reference_link": "https://www.tripadvisor.com/Restaurant_Review-g311304-d12951605-Reviews-Thang_Co_A_Quynh_Restaurant-Sapa_Lao_Cai_Province.html",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "r1-ride-sapa-dbp",
+   "name": "Ride days: Sapa → Dien Bien Phu (bike's last Vietnamese leg)",
+   "type": "outdoor",
+   "order_index": 14,
+   "lat": 22.3724,
+   "lng": 103.7571,
+   "time_window": "07:30–17:00",
+   "duration": "275 km — split over 2 days",
+   "difficulty": "hard",
+   "description": "Over O Quy Ho, down to Tam Duong and Lai Chau (~70 km), then QL12 south along the Nam Na river through Muong Lay (~200 km more) — decent sealed road with landslide scars, gravel patches and roadworks. Too long for one December day with pass fog and 17:30 darkness: split at Lai Chau or the atmospheric stilt-house town of Muong Lay. In Dien Bien Phu, store or hand back the bike — RENTALS CANNOT CROSS INTO LAOS (see trip summary) — and catch the 06:00 bus through Tay Trang to Muang Khua (~12:30 arrival). Laos visa must already be in your passport.",
+   "reference_link": "https://cuongs-motorbike-adventure.com/latest-regulations-for-crossing-from-vietnam-into-laos-with-a-motorbike-2024-update/",
+   "poi_ids": [
+    "sapa-o-quy-ho-summit"
+   ]
+  },
+  {
+   "activity_id": "laos-phadeng-peak-sunrise",
+   "name": "Pha Daeng Peak sunrise hike, Nong Khiaw",
+   "type": "outdoor",
+   "order_index": 15,
+   "lat": 20.5662,
+   "lng": 102.6184,
+   "time_window": "05:00–08:30",
+   "duration": "3.5 hr",
+   "difficulty": "hard",
+   "cash_only": true,
+   "description": "The definitive Nam Ou karst panorama: 1–1.5 hr of steep, rooty, dusty climbing to a ridgetop hut with 360° views over the river bend and limestone walls — December mornings bring the famous sea of mist below the peak. Start ~05:00 with a headlamp to be up for first light. The trail is genuinely steep and slippery with bamboo-handrail sections; the fee has crept repeatedly (now 40–50k LAK) — small notes, confirm current price at your guesthouse.",
+   "reference_link": "https://www.nongkhiaw.com/",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "laos-phousi-dawn-alms-market",
+   "name": "Mount Phousi at dawn, tak bat respectfully, morning market khao soi",
+   "type": "historic",
+   "order_index": 16,
+   "lat": 19.8903,
+   "lng": 102.1369,
+   "time_window": "05:30–08:30",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Phousi at sunset in late December is a scrum; at dawn (~05:30 gate, 30k LAK) you get mist over two rivers and near-solitude. Descend by 06:15 for the alms round (06:00–07:00 in winter): stand ACROSS the road, silent, shoulders and knees covered, no flash, buy nothing from the rice-vendor touts — watch, never join a packaged 'participation'. The quieter stretch is Sakkaline Rd toward Wat Xieng Thong. Then the morning market lanes (05:00–10:00): riverweed, grilled frogs, sticky rice — and Luang Prabang khao soi (clear pork-tomato broth, nothing like the Thai dish) at Ban Wat Sene Khao Soi Noodle Shop, 07:30 until sold out before 11.",
+   "reference_link": "https://en.wikipedia.org/wiki/Mount_Phousi",
+   "poi_ids": [
+    "laos-wat-xieng-thong",
+    "laos-sisavangvong-road"
+   ]
+  },
+  {
+   "activity_id": "laos-pak-ou-caves-boat",
+   "name": "Pak Ou caves by shared slow boat up the Mekong",
+   "type": "scenery",
+   "order_index": 17,
+   "lat": 20.0487,
+   "lng": 102.2105,
+   "time_window": "08:30–13:30",
+   "duration": "5 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Skip the minivan-and-speedboat packages: the shared slow boat from the old-town Mekong dock (departs ~08:30, ~100–150k LAK — confirm at the dock the evening before) is the local-pace version. Two hours upstream past fishing skiffs and limestone bluffs to the two caves — Tham Ting lower, Tham Theung upper via stairs, bring a headlamp — stuffed with thousands of retired Buddha figures deposited over centuries (entry 20–30k). Most trips add a hard-sell stop at the Ban Xang Hai whisky village you can politely sit out.",
+   "reference_link": "https://en.wikipedia.org/wiki/Pak_Ou_Caves",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "laos-kuang-si-upper-falls",
+   "name": "Kuang Si Falls — past the pools to the upper cascades + bear rescue",
+   "type": "outdoor",
+   "order_index": 18,
+   "lat": 19.7492,
+   "lng": 101.9917,
+   "time_window": "13:30–17:30",
+   "duration": "4.5 hr incl. ~30 km each way",
+   "difficulty": "moderate",
+   "cash_only": true,
+   "description": "The turquoise travertine tiers are real, and December is peak water clarity. Beat the 10:00–14:00 tour-bus crush by arriving ~14:30 as groups drain away — warm light on the pools, and the steep muddy staircase left of the main fall (15–20 min) leads to quiet upper pools and the spring source most visitors never see. Entry 60k LAK includes the shuttle and the Free the Bears moon-bear rescue centre — worth 20 unhurried minutes on the way in. Shoes, not flip-flops; the park closes 17:30 sharp — no 'sunset' visits.",
+   "reference_link": "https://en.wikipedia.org/wiki/Kuang_Si_Falls",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "laos-royal-palace-museum",
+   "name": "Royal Palace Museum (closed Tuesdays)",
+   "type": "historic",
+   "order_index": 19,
+   "lat": 19.8921,
+   "lng": 102.1356,
+   "time_window": "13:30–16:00",
+   "duration": "1.5–2 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "The 1904 royal residence turned national museum — throne hall, the Prabang Buddha the city is named for, and the strange time-capsule of the last king's apartments. Verified: 08:30–11:30 & 13:30–16:00, CLOSED TUESDAYS, 30k LAK, strict dress code (real sleeves and below-knee bottoms; sarong rental on site), bags and shoes checked, no photos inside.",
+   "reference_link": "https://en.wikipedia.org/wiki/Royal_Palace,_Luang_Prabang",
+   "poi_ids": [
+    "laos-sisavangvong-road"
+   ]
+  },
+  {
+   "activity_id": "laos-night-market-food-alley",
+   "name": "Luang Prabang night market + the food alley",
+   "type": "nightlife",
+   "order_index": 20,
+   "lat": 19.8921,
+   "lng": 102.1356,
+   "time_window": "17:00–21:30",
+   "duration": "2.5 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "From ~17:00 Sisavangvong Rd closes to traffic and fills with Hmong textile and handicraft stalls until ~22:00 — low-pressure haggling by Southeast Asian standards. The food alley behind the Tourism Office is the budget-authentic move: fill-your-bowl buffet stalls (20–25k LAK), charcoal-grilled sai oua lemongrass sausage, Mekong river fish, khao niaw everywhere. Lao food ≠ Thai: laap here is herb-bitter and often raw-ish — order it 'suk' (cooked) if unsure. Late-December peak doubles the crowds; carry small kip notes.",
+   "reference_link": "https://en.wikipedia.org/wiki/Luang_Prabang",
+   "poi_ids": [
+    "laos-sisavangvong-road",
+    "laos-utopia-bar"
+   ]
+  },
+  {
+   "activity_id": "laos-mekong-sunset-utopia",
+   "name": "Mekong-bank sunset beer, then Utopia on the Nam Khan",
+   "type": "nightlife",
+   "order_index": 21,
+   "lat": 19.888,
+   "lng": 102.14,
+   "time_window": "17:00–22:30",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "December sunsets over the Mekong (~17:30) are the town's free show — grab any bamboo-platform bar along the Mekong-side road at the peninsula's west end rather than fighting for Phousi's terrace. After dark, ten minutes' walk to Utopia, the cushion-and-deck garden bar hanging over the Nam Khan — the one backpacker institution that's actually pleasant, since curfew-era Luang Prabang shuts quiet by ~23:30. Nights drop to 12–15°C — bring a layer; decks occasionally close for private NYE events, confirm ahead.",
+   "reference_link": "https://en.wikipedia.org/wiki/Luang_Prabang",
+   "poi_ids": [
+    "laos-utopia-bar"
+   ]
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "catba-park-hq",
+   "type": "outdoor",
+   "name": "Cat Ba National Park HQ (Ngu Lam trailhead)",
+   "lat": 20.7945,
+   "lng": 106.9954,
+   "description": "Park gate and ticket office on the cross-island road; opens ~08:00.",
+   "reference_link": "https://backpackersintheworld.com/cat-ba-national-park-ngu-lam-peak/"
+  },
+  {
+   "poi_id": "catba-ngu-lam-summit",
+   "type": "outdoor",
+   "name": "Ngu Lam Peak",
+   "lat": 20.7934,
+   "lng": 106.9989,
+   "description": "Bare karst summit, 30–45 min up with a steep rocky final scramble; 360° over the island's jungle spine.",
+   "reference_link": "https://backpackersintheworld.com/cat-ba-national-park-ngu-lam-peak/"
+  },
+  {
+   "poi_id": "catba-trung-trang-cave",
+   "type": "outdoor",
+   "name": "Trung Trang Cave",
+   "lat": 20.7888,
+   "lng": 106.9974,
+   "description": "Karst cave near the park HQ — quick third stop on the same road.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "catba-hospital-cave",
+   "type": "historic",
+   "name": "Hospital Cave (Quan Y)",
+   "lat": 20.7704,
+   "lng": 107.0206,
+   "description": "Three-storey concrete field hospital built inside the karst, used 1963–75. 08:00–17:00, ~80k VND, guide 100–150k/group.",
+   "reference_link": "https://sunparadiseland.com/en/tin-tuc/cat-ba-military-hospital-cave-guide-history-ticket-prices-opening-hours-3171"
+  },
+  {
+   "poi_id": "catba-butterfly-valley",
+   "type": "outdoor",
+   "name": "Butterfly Valley climbing (Lien Minh)",
+   "lat": 20.7711,
+   "lng": 106.9955,
+   "description": "~60 sport routes on tufa limestone; day pass ~50k via The Hive or Asia Outdoors in town. Oct–Apr is prime and the valley's reed flowers peak in December — confirm low-season guiding.",
+   "reference_link": "https://www.mountainproject.com/area/107070263/butterfly-valley"
+  },
+  {
+   "poi_id": "catba-ben-beo-pier",
+   "type": "outdoor",
+   "name": "Ben Beo pier",
+   "lat": 20.7321,
+   "lng": 107.0589,
+   "description": "Departure point for Lan Ha Bay boats and the floating-restaurant boat-taxis.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "catba-cai-beo-village",
+   "type": "scenery",
+   "name": "Cai Beo floating village",
+   "lat": 20.7375,
+   "lng": 107.0621,
+   "description": "A 7,000-year-old, still-working floating fishing community — not a reconstruction. Restaurant rafts cluster here.",
+   "reference_link": "https://www.vietnamtourism.com/en/fishing-village-cat-ba-the-complete-guide-to-cai-beo-and-lan-ha-bay-s-floating-communities"
+  },
+  {
+   "poi_id": "catba-monkey-island",
+   "type": "outdoor",
+   "name": "Monkey Island summit viewpoint (Cat Dua)",
+   "lat": 20.73,
+   "lng": 107.0784,
+   "description": "Short sharp scramble to a ridge viewpoint over Lan Ha Bay; the macaques steal — hold your things.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "catba-cat-co-1",
+   "type": "scenery",
+   "name": "Cat Co 1 beach",
+   "lat": 20.7181,
+   "lng": 107.053,
+   "description": "Town cove; start of the cliffside boardwalk toward Cat Co 2.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "catba-cat-co-2",
+   "type": "scenery",
+   "name": "Cat Co 2 beach",
+   "lat": 20.7193,
+   "lng": 107.0555,
+   "description": "Quieter cove at the far end of the cliff walkway.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "catba-cat-co-3",
+   "type": "scenery",
+   "name": "Cat Co 3 beach",
+   "lat": 20.7154,
+   "lng": 107.0499,
+   "description": "Third cove, nearest the Cannon Fort road.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "catba-cho-catba",
+   "type": "food",
+   "name": "Cat Ba market (Cho Cat Ba)",
+   "lat": 20.7276,
+   "lng": 107.047,
+   "description": "Town market anchoring the 1/4 Street night-food strip along the waterfront.",
+   "reference_link": "https://catbagreentrail.com/cat-ba-night-market/"
+  },
+  {
+   "poi_id": "sapa-lao-chai-village",
+   "type": "outdoor",
+   "name": "Lao Chai village",
+   "lat": 22.31,
+   "lng": 103.8762,
+   "description": "Largest Black Hmong village on the valley route, ~6 km from Sapa; suspension bridge and the first honest lunch stops.",
+   "reference_link": "https://trekkingtoursapa.com/muong-hoa-valley-guide.html"
+  },
+  {
+   "poi_id": "sapa-ta-van-village",
+   "type": "outdoor",
+   "name": "Ta Van village",
+   "lat": 22.3043,
+   "lng": 103.8904,
+   "description": "Giay-minority village and homestay hub at the trek's end; moto-taxis run back up to Sapa town.",
+   "reference_link": "https://www.vietnamcoracle.com/riding-the-great-north-9-motorbike-routes/"
+  },
+  {
+   "poi_id": "sapa-town-market",
+   "type": "food",
+   "name": "Sapa Market (Cho Sa Pa)",
+   "lat": 22.3383,
+   "lng": 103.852,
+   "description": "Working town market by the bus station — meet a guide, buy ponchos, stock trail snacks; the night-market pitches set up here after dark.",
+   "reference_link": "https://www.travelfish.org/location/vietnam/hanoi_and_surrounds/lao_cai/sapa"
+  },
+  {
+   "poi_id": "sapa-bac-ha-market",
+   "type": "food",
+   "name": "Bac Ha Market",
+   "lat": 22.5356,
+   "lng": 104.2918,
+   "description": "Sunday-only market; the livestock yard and the thang co pots at the food rows are the authentic core — skip the souvenir fringe.",
+   "reference_link": "https://wander-lush.org/bac-ha-market-sapa-vietnam/"
+  },
+  {
+   "poi_id": "sapa-hoang-a-tuong-palace",
+   "type": "historic",
+   "name": "Hoang A Tuong Palace",
+   "lat": 22.5412,
+   "lng": 104.2954,
+   "description": "Oddball 1914–1921 Franco-Chinese mansion of the Hmong 'king' of Bac Ha, ten minutes from the market.",
+   "reference_link": "https://www.vietnamairlines.com/us/en/plan-book/travel/travel-guide/bac-ha-market"
+  },
+  {
+   "poi_id": "sapa-lao-cai-station",
+   "type": "outdoor",
+   "name": "Lao Cai railway station (fuel/coffee waypoint)",
+   "lat": 22.4918,
+   "lng": 103.9781,
+   "description": "Where the Hanoi night train lands at dawn, and the natural halfway break between Sapa and Bac Ha, by the border town's fuel stations.",
+   "reference_link": "https://www.vietnamcoracle.com/the-fanxipan-express-hanoi-to-lao-cai-by-train-passengers-motorbikes/"
+  },
+  {
+   "poi_id": "sapa-silver-waterfall",
+   "type": "scenery",
+   "name": "Silver Waterfall (Thac Bac)",
+   "lat": 22.3632,
+   "lng": 103.7768,
+   "description": "200 m roadside cascade 12 km from Sapa; 20k VND and a quick stair climb.",
+   "reference_link": "https://sapanomad.com/silver-waterfall-sapa/"
+  },
+  {
+   "poi_id": "sapa-tram-ton-love-waterfall",
+   "type": "outdoor",
+   "name": "Tram Ton gate / Love Waterfall trail",
+   "lat": 22.3551,
+   "lng": 103.7607,
+   "description": "Hoang Lien NP entrance near the pass top; easy 1.5 km stone path to the 100 m Love Waterfall (70k). Also the start of the classic 2-day Fansipan trek.",
+   "reference_link": "https://www.yourvietnamtravel.com/love-waterfall-sapa"
+  },
+  {
+   "poi_id": "sapa-o-quy-ho-summit",
+   "type": "scenery",
+   "name": "O Quy Ho pass summit (~2,000 m)",
+   "lat": 22.3724,
+   "lng": 103.7571,
+   "description": "Lao Cai/Lai Chau border crest — cloud-sea views and corn-wine-and-grilled-egg shacks; ignore the glass bridge unless you like queues.",
+   "reference_link": "https://sapanomad.com/o-quy-ho-pass/"
+  },
+  {
+   "poi_id": "sapa-fansipan-summit",
+   "type": "outdoor",
+   "name": "Fansipan summit (3,143 m)",
+   "lat": 22.3031,
+   "lng": 103.7754,
+   "description": "Highest point in Indochina; short stair climb from the top cable station, frequently iced and fog-bound in December.",
+   "reference_link": "https://en.wikipedia.org/wiki/Fansipan"
+  },
+  {
+   "poi_id": "sapa-xuan-vien-grills",
+   "type": "food",
+   "name": "Town-centre grill stalls (Xuan Vien street)",
+   "lat": 22.3395,
+   "lng": 103.8473,
+   "description": "Evening barbecue smoke around the stone-church square — the fallback on nights the official night market is quiet.",
+   "reference_link": "https://asiamystika.com/blog/market-in-sapa"
+  },
+  {
+   "poi_id": "laos-wat-xieng-thong",
+   "type": "historic",
+   "name": "Wat Xieng Thong",
+   "lat": 19.8975,
+   "lng": 102.1431,
+   "description": "The city's masterpiece temple at the peninsula tip — and the quieter end of the alms route at dawn.",
+   "reference_link": "https://en.wikipedia.org/wiki/Wat_Xieng_Thong"
+  },
+  {
+   "poi_id": "laos-sisavangvong-road",
+   "type": "historic",
+   "name": "Sisavangvong Rd — Royal Palace, morning & night markets",
+   "lat": 19.8921,
+   "lng": 102.1356,
+   "description": "The old town's spine: morning-market lanes at dawn (05:00–10:00), the Royal Palace Museum by day, and the closed-to-traffic night market from 17:00.",
+   "reference_link": "https://en.wikipedia.org/wiki/Luang_Prabang"
+  },
+  {
+   "poi_id": "laos-utopia-bar",
+   "type": "nightlife",
+   "name": "Utopia (Nam Khan riverbank)",
+   "lat": 19.888,
+   "lng": 102.14,
+   "description": "Garden decks over the Nam Khan, 08:00–23:30 — the town's one genuinely pleasant institution; chilly December nights, bring a layer.",
+   "reference_link": ""
+  }
+ ],
+ "transit": [
+  {
+   "name": "Dong Bai vehicle-ferry pier (Cat Hai)",
+   "lat": 20.8139,
+   "lng": 106.8949,
+   "description": "The ONLY motorbike ferry to Cat Ba now (Got/Dinh Vu closed): Dong Bai→Cai Vieng, bike ~44–45k + 14k/pax, cash at pier, no booking. December sailings thin — cross before mid-afternoon.",
+   "reference_link": "https://catbaexpress.com/ticket-and-schedule-of-ferry-from-got-to-cai-vieng.html"
+  },
+  {
+   "name": "Cai Vieng pier (Cat Ba side)",
+   "lat": 20.8178,
+   "lng": 106.914,
+   "description": "Ferry arrival; 23 km cross-island road to town — greasy shaded bends on misty December mornings, ride it in daylight.",
+   "reference_link": ""
+  },
+  {
+   "name": "Hanoi station — bike freight kiosk (120 Le Duan)",
+   "lat": 21.0245,
+   "lng": 105.8412,
+   "description": "Pin is Hanoi railway station; the rail door-to-door freight kiosk at 120 Le Duan is beside it. Where to ship the bike to Lao Cai since the night train stopped carrying motorbikes — it may arrive a day after you; confirm in person, policy has flip-flopped.",
+   "reference_link": "https://www.vietnamcoracle.com/the-fanxipan-express-hanoi-to-lao-cai-by-train-passengers-motorbikes/"
+  }
+ ]
+}

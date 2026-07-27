@@ -1,0 +1,409 @@
+{
+ "trip_id": "sapporo-snowboard-2027-01",
+ "name": "Sapporo - Powder Week",
+ "region": "Sapporo & Hokkaido, Japan",
+ "date_range": "2027-01/02",
+ "duration_days": 9,
+ "theme": "snowboard-resort",
+ "summary": "A city-based powder week: sleep in Sapporo, ride Sapporo Teine Monday–Friday, and spend both weekends on food, Otaru, and the 1972 Olympic legacy. Teine wins the resort call over Sapporo Kokusai because it delivers 683 m of vertical on the actual 1972 Olympic slalom mountain with Ishikari Bay and city views, night riding until 20:00 in the Olympia zone, and a ~40-minute door-to-lift commute (JR to Teine Station ¥360 + JR Hokkaido Bus ¥1,000) — Kokusai gets Niseko-class snowfall but sits 90 minutes away by reserved bus with mostly mellow terrain and no night skiing. The Mon–Fri cadence dodges the local weekend crowds that swamp both hills; expect first lifts around 09:00, sea-effect storms that periodically shut upper lifts (that is where the refills come from), and marked off-piste zones ridden strictly at your own risk with rescue at your expense. Evenings are for miso ramen, jingisukan, Susukino, and a natural-spring soak; mornings before travel days are for market kaisendon and kaitenzushi. Late January timing avoids Snow Festival crowds and hotel surcharges while sitting in the statistical heart of JaPow season.",
+ "activities": [
+  {
+   "activity_id": "sapporo-ganso-ramen-yokocho-night",
+   "name": "First-Night Miso Ramen at Ganso Ramen Yokocho",
+   "type": "food",
+   "order_index": 1,
+   "lat": 43.0546,
+   "lng": 141.3543,
+   "time_window": "19:00–21:00",
+   "duration": "1.5 hours",
+   "difficulty": "easy",
+   "description": "Land, drop bags, and walk into Susukino's original ramen alley — 17 tiny counters, most slinging Sapporo's signature miso ramen, ideal for a solo arrival dinner. Order the butter-corn miso once, then argue about it forever. Caveat: each shop sets its own hours and days off within the alley's rough 11:00–03:00 spread, so a specific shop you researched may be shuttered — pick whichever counter has locals on stools.",
+   "reference_link": "https://www.sapporo.travel/en/gourmet/shop/ganso-ramen-yokocho/",
+   "poi_ids": [
+    "sapporo-ganso-ramen-yokocho",
+    "sapporo-susukino"
+   ]
+  },
+  {
+   "activity_id": "sapporo-otaru-sankaku-market",
+   "name": "Sankaku Market Seafood Breakfast, Otaru",
+   "type": "food",
+   "order_index": 2,
+   "lat": 43.1985,
+   "lng": 140.9939,
+   "time_window": "09:00–10:30",
+   "duration": "1.5 hours",
+   "difficulty": "easy",
+   "description": "Ride the JR Hakodate Line to Otaru (~30 min by rapid) and climb the stairs left of the station into this triangular-roofed market of about 20 stalls — uni, ikura, and crab kaisendon at counter shops like Takeda. Cheaper and less polished than Sapporo's tourist rows, which is the point. Caveat: stalls open from roughly 6:00 and restaurants from 7:00 but keep individual, irregular holidays — if a listed shop is dark, the neighboring counters serve near-identical bowls.",
+   "reference_link": "https://www.visit-hokkaido.jp/en/spot/detail_10111.html",
+   "poi_ids": [
+    "otaru-sankaku-market"
+   ]
+  },
+  {
+   "activity_id": "sapporo-otaru-canal-stroll",
+   "name": "Otaru Canal & Sakaimachi Street Snow Walk",
+   "type": "scenery",
+   "order_index": 3,
+   "lat": 43.202,
+   "lng": 141.0006,
+   "time_window": "10:30–15:30",
+   "duration": "5 hours",
+   "difficulty": "easy",
+   "description": "Walk off breakfast along the preserved 1923 canal and its gas-lamped stone warehouses, then loop through the old merchant district toward Sakaimachi's glassworks and music-box shops. In January the canal under falling snow is the postcard Hokkaido shot, no filter needed. Caveat: rapid trains back to Sapporo take ~30 minutes but locals take ~45 and the two alternate — check the departure board at Otaru Station rather than assuming the next train is fast.",
+   "reference_link": "https://www.jrhokkaido.co.jp/global/english/travel/airport_otaru.html",
+   "poi_ids": [
+    "otaru-canal"
+   ]
+  },
+  {
+   "activity_id": "sapporo-teine-ride-day-1",
+   "name": "Ride Day 1 — Teine Highland Zone Orientation",
+   "type": "outdoor",
+   "order_index": 4,
+   "lat": 43.0843,
+   "lng": 141.2053,
+   "time_window": "08:30–16:00",
+   "duration": "7.5 hours",
+   "difficulty": "hard",
+   "description": "Monday commute with the locals: JR rapid to Teine Station (11–18 min, ¥360), then the JR Hokkaido Bus up to Highland Ski Center (~27 min) for first lifts. Spend day one learning the Highland zone — the steeper upper mountain that hosted the 1972 Olympic slalom and giant slalom — and clocking where the marked off-piste zones sit. Caveat: the Highland bus is a flat ¥1,000 in exact change (no credit cards, SAPICA/Kitaca IC excepted), so break a ¥10,000 note before Monday morning.",
+   "reference_link": "https://sapporo-teine.com/snow/lang/en/access/",
+   "poi_ids": [
+    "sapporo-teine-highland"
+   ]
+  },
+  {
+   "activity_id": "sapporo-daruma-jingisukan",
+   "name": "Jingisukan at Daruma Honten",
+   "type": "food",
+   "order_index": 5,
+   "lat": 43.0538,
+   "lng": 141.3525,
+   "time_window": "18:30–20:00",
+   "duration": "1.5 hours",
+   "difficulty": "easy",
+   "description": "Post-ride protein at the 1954 Susukino institution: fresh mutton hand-cut daily, grilled on a dome over charcoal, dipped in the house sauce — leave the jacket in the hostel because you will smell like lamb. This is the definitive first-timer jingisukan counter. Caveat: Daruma takes no reservations and queues form before opening; hit the honten early or walk to one of its nearby annex branches when the line wraps the block.",
+   "reference_link": "https://tabelog.com/en/hokkaido/A0101/A010103/1000007/",
+   "poi_ids": [
+    "sapporo-daruma-honten",
+    "sapporo-susukino"
+   ]
+  },
+  {
+   "activity_id": "sapporo-teine-ride-day-2",
+   "name": "Ride Day 2 — Olympia Zone & Full-Mountain Laps",
+   "type": "outdoor",
+   "order_index": 6,
+   "lat": 43.0843,
+   "lng": 141.2053,
+   "time_window": "08:30–16:00",
+   "duration": "7.5 hours",
+   "difficulty": "hard",
+   "description": "Link the mellower Olympia zone with Highland's upper pistes for full 683 m top-to-bottom runs — on clear days the view runs over Sapporo to Ishikari Bay, one of the few resorts anywhere where you ride toward a sea horizon. Buy the 1-day pass online (¥8,400 regular season vs ¥9,400 at the counter). Caveat: your 1-day IC-card ticket is strictly personal and valid until night skiing ends, so keep it for tonight's session rather than buying twice.",
+   "reference_link": "https://sapporo-teine.com/snow/lang/en/tickets/",
+   "poi_ids": [
+    "sapporo-teine-highland"
+   ]
+  },
+  {
+   "activity_id": "sapporo-teine-night-session",
+   "name": "Night Riding Under Lights, Olympia Zone",
+   "type": "outdoor",
+   "order_index": 7,
+   "lat": 43.0843,
+   "lng": 141.2053,
+   "time_window": "16:00–19:30",
+   "duration": "3.5 hours",
+   "difficulty": "moderate",
+   "description": "Teine verifiably runs night operations 16:00–20:00 from early December to late March — floodlit corduroy with the city glittering below, and a standalone night pass at ¥2,800 online if you rested during the day. Crowds thin dramatically after the day trippers leave. Caveat: night skiing runs on select lifts in the Olympia zone only, and storm or wind holds are decided day-of — check the resort's lift status page before committing to the evening.",
+   "reference_link": "https://sapporo-teine.com/snow/lang/en/tickets/",
+   "poi_ids": [
+    "sapporo-teine-highland"
+   ]
+  },
+  {
+   "activity_id": "sapporo-teine-ride-day-3",
+   "name": "Ride Day 3 — Powder Protocol & Marked Off-Piste",
+   "type": "outdoor",
+   "order_index": 8,
+   "lat": 43.0843,
+   "lng": 141.2053,
+   "time_window": "08:30–16:00",
+   "duration": "7.5 hours",
+   "difficulty": "hard",
+   "description": "Midweek is your best storm-refill odds: when it dumps, lap Highland's designated off-piste and tree zones, which the resort permits with standard warnings rather than a Niseko-style gate system. Ride with a partner and keep the mountain honesty — this is lift-accessed sidecountry, not managed backcountry. Caveat: per the resort's own rules, ducking ropes out of bounds is strictly prohibited and any search or rescue outside the boundary is billed entirely to the rider; patrol does not operate out there.",
+   "reference_link": "https://sapporo-teine.com/snow/lang/en/resortrules/",
+   "poi_ids": [
+    "sapporo-teine-highland"
+   ]
+  },
+  {
+   "activity_id": "sapporo-jasmac-onsen-soak",
+   "name": "Natural Onsen Soak at Jasmac Plaza (Yuka Kyo)",
+   "type": "nightlife",
+   "order_index": 9,
+   "lat": 43.0517,
+   "lng": 141.3555,
+   "time_window": "19:30–22:00",
+   "duration": "2.5 hours",
+   "difficulty": "easy",
+   "description": "Three ride days in, boil the legs back to life: Jasmac Plaza pumps genuine natural hot-spring water in the middle of Susukino, with day-use bathing for ¥2,750 and last admission at 23:00 — no bus to a mountain town required. It is a proper Japanese bathhouse: wash seated first, towels stay out of the water. Caveat: published day-use opening hours differ between sources (10:00 vs 11:00 start), so confirm ahead if you plan an early soak; tattoo policy is unpublished in English — confirm ahead.",
+   "reference_link": "https://www.gltjp.com/en/directory/item/15152/",
+   "poi_ids": [
+    "sapporo-jasmac-plaza-onsen"
+   ]
+  },
+  {
+   "activity_id": "sapporo-teine-ride-day-4",
+   "name": "Ride Day 4 — Storm Day Flex / Kokusai Contingency",
+   "type": "outdoor",
+   "order_index": 10,
+   "lat": 43.0843,
+   "lng": 141.2053,
+   "time_window": "08:30–16:00",
+   "duration": "7.5 hours",
+   "difficulty": "hard",
+   "description": "Thursday is the built-in flex day: if wind holds shut Teine's upper lifts, this is when a budget-conscious rider either laps the sheltered Olympia zone or accepts the 90-minute Chuo Bus to deeper-snow Sapporo Kokusai (¥8,800 bus-plus-lift package, reservation required). If Teine is running, just ride — a fourth day on one mountain is when it starts giving up its secrets. Caveat: the Kokusai bus package must be reserved in advance through Chuo Bus and sells out on powder mornings, so decide the night before, not at breakfast.",
+   "reference_link": "https://www.sapporo-kokusai.jp/en/access/",
+   "poi_ids": [
+    "sapporo-teine-highland"
+   ]
+  },
+  {
+   "activity_id": "sapporo-moiwa-night-view",
+   "name": "Mt. Moiwa Ropeway Night View",
+   "type": "nightlife",
+   "order_index": 11,
+   "lat": 43.0316,
+   "lng": 141.3331,
+   "time_window": "19:00–21:00",
+   "duration": "2 hours",
+   "difficulty": "easy",
+   "description": "One of Japan's officially designated 'New Three Major Night Views': ropeway plus mini cable car (¥2,100 round trip) to the 531 m summit deck, where the snowbound grid of Sapporo burns orange below the mountain you have been riding all week. Winter operations run 11:00–22:00 with last ascent 21:30. Caveat: the ropeway suspends without prior announcement in high wind or storms — exactly the weather that makes the powder — so check mt-moiwa.jp the same evening before crossing town.",
+   "reference_link": "https://www.sapporo.travel/en/spot/facility/mount_moiwayama/",
+   "poi_ids": [
+    "sapporo-moiwa-ropeway"
+   ]
+  },
+  {
+   "activity_id": "sapporo-teine-ride-day-5",
+   "name": "Ride Day 5 — Last Laps, Olympic Fall Line",
+   "type": "outdoor",
+   "order_index": 12,
+   "lat": 43.0843,
+   "lng": 141.2053,
+   "time_window": "08:30–16:00",
+   "duration": "7.5 hours",
+   "difficulty": "hard",
+   "description": "Final Friday: farewell laps down the Olympic fall line where the 1972 slalom medals were decided, with a long last top-to-bottom using every meter of the 683 m vertical from the 1,023 m summit. If your legs are gone by 14:00, quit while it is still fun — you have already ridden more this week than most visitors manage. Caveat: 5-hour passes (¥6,200 online, consecutive hours) exist in regular season and beat the 1-day price if you genuinely plan a short day.",
+   "reference_link": "https://sapporo-teine.com/snow/lang/en/",
+   "poi_ids": [
+    "sapporo-teine-highland"
+   ]
+  },
+  {
+   "activity_id": "sapporo-jogai-market-breakfast",
+   "name": "Kaisendon Breakfast at Sapporo Jogai Market",
+   "type": "food",
+   "order_index": 13,
+   "lat": 43.071,
+   "lng": 141.3201,
+   "time_window": "07:30–09:00",
+   "duration": "1.5 hours",
+   "difficulty": "easy",
+   "description": "The Curb Market — roughly 60 shops flanking the Central Wholesale Market — is where restaurateurs actually buy: crab tanks steaming in the cold, and market diners ladling out kaisendon from 7:00. Come hungry and early; this out-earns any hotel buffet at half the price. Caveat: shops open from 6:00 but the market winds down around 17:00 and the best restaurant stock is gone after the 6:00–11:00 window, so this only works as a morning.",
+   "reference_link": "https://www.japan-guide.com/e/e5317.html",
+   "poi_ids": [
+    "sapporo-jogai-market"
+   ]
+  },
+  {
+   "activity_id": "sapporo-okurayama-olympic-museum",
+   "name": "Okurayama Ski Jump & Sapporo Olympic Museum",
+   "type": "historic",
+   "order_index": 14,
+   "lat": 43.0515,
+   "lng": 141.2899,
+   "time_window": "10:30–13:30",
+   "duration": "3 hours",
+   "difficulty": "moderate",
+   "description": "Close the loop on the mountain you rode all week: the 1972 Games' large-hill jump still looms over the city, with a two-person chairlift (¥1,000 round trip, winter 9:00–17:00) up to the start-gate viewpoint and the Olympic Museum (¥600, winter 9:30–17:00) with jump and bobsled simulators at the base. Standing at the inrun gate recalibrates your respect for ski jumpers permanently. Caveat: the chairlift and observation deck close during jump competitions and events, which cluster in winter — confirm ahead on the stadium's schedule page.",
+   "reference_link": "https://visit.sapporo.travel/discover/art-culture/sapporo-okurayama-ski-jump-stadium/",
+   "poi_ids": [
+    "sapporo-okurayama-ski-jump"
+   ]
+  },
+  {
+   "activity_id": "sapporo-beer-museum-garden",
+   "name": "Sapporo Beer Museum & Beer Garden Jingisukan",
+   "type": "food",
+   "order_index": 15,
+   "lat": 43.0714,
+   "lng": 141.369,
+   "time_window": "17:00–20:30",
+   "duration": "3.5 hours",
+   "difficulty": "easy",
+   "description": "Last full evening: the red-brick 1890 brewery museum (exhibits to 18:00, Star Hall tastings ¥450–550 a glass, three-beer set ¥1,200), then jingisukan round two in the cavernous Beer Garden halls next door (11:30–21:00, last order 20:40) where all-you-can-eat lamb meets all-you-can-drink Black Label. Touristy, yes — also genuinely the birthplace of Japanese beer. Caveat: museum admission became paid from July 2026 after decades free, and it closes Mondays — check the current fee and book Beer Garden tables ahead on winter Saturdays.",
+   "reference_link": "https://www.sapporobeer.jp/english/brewery/s_museum/",
+   "poi_ids": [
+    "sapporo-beer-museum"
+   ]
+  },
+  {
+   "activity_id": "sapporo-hanamaru-farewell-sushi",
+   "name": "Farewell Kaitenzushi at Nemuro Hanamaru, JR Tower",
+   "type": "food",
+   "order_index": 16,
+   "lat": 43.0686,
+   "lng": 141.3509,
+   "time_window": "11:00–12:30",
+   "duration": "1.5 hours",
+   "difficulty": "easy",
+   "description": "Before the Rapid Airport train, join the queue at Sapporo's most-loved conveyor sushi — Nemuro Hanamaru sources from its namesake east-Hokkaido port, and plates start in the low hundreds of yen, so a blowout still reads like a budget lunch. Grab a numbered ticket from the machine the moment you arrive, then browse Stellar Place while you wait. Caveat: no reservations are taken and waits average ~30 groups, spiking to 90 at peak — arrive at the 11:00 opening or budget a full extra hour before your airport train.",
+   "reference_link": "https://www.gltjp.com/en/directory/item/15317/",
+   "poi_ids": [
+    "sapporo-nemuro-hanamaru"
+   ]
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "sapporo-teine-highland",
+   "type": "outdoor",
+   "name": "Sapporo Teine (Highland Ski Center)",
+   "lat": 43.0843,
+   "lng": 141.2053,
+   "description": "Two-zone resort on Mt. Teine, alpine venue of the 1972 Winter Olympics: 683 m vertical from a 1,023 m summit, steep Highland pistes, permitted off-piste zones, and night skiing 16:00–20:00 (early Dec–late Mar) in the Olympia zone, ~40 minutes from central Sapporo.",
+   "reference_link": "https://sapporo-teine.com/snow/lang/en/"
+  },
+  {
+   "poi_id": "sapporo-ganso-ramen-yokocho",
+   "type": "food",
+   "name": "Ganso Sapporo Ramen Yokocho",
+   "lat": 43.0546,
+   "lng": 141.3543,
+   "description": "The original Susukino ramen alley: 17 counter shops in one narrow lane, birthplace territory of Sapporo miso ramen, open roughly 11:00–03:00 with hours varying shop by shop.",
+   "reference_link": "https://www.sapporo.travel/en/gourmet/shop/ganso-ramen-yokocho/"
+  },
+  {
+   "poi_id": "sapporo-susukino",
+   "type": "nightlife",
+   "name": "Susukino",
+   "lat": 43.0554,
+   "lng": 141.3534,
+   "description": "Northern Japan's largest entertainment district — thousands of bars, izakaya, and restaurants packed around the Susukino subway crossing; the natural evening base for this trip.",
+   "reference_link": "https://en.wikipedia.org/wiki/Susukino"
+  },
+  {
+   "poi_id": "sapporo-daruma-honten",
+   "type": "food",
+   "name": "Jingisukan Daruma Honten",
+   "lat": 43.0538,
+   "lng": 141.3525,
+   "description": "Sapporo's defining jingisukan counter since 1954: fresh mutton cut daily, charcoal dome grills, house dipping sauce, no reservations, 3 minutes from Susukino Station.",
+   "reference_link": "https://tabelog.com/en/hokkaido/A0101/A010103/1000007/"
+  },
+  {
+   "poi_id": "sapporo-jogai-market",
+   "type": "food",
+   "name": "Sapporo Jogai (Curb) Market",
+   "lat": 43.071,
+   "lng": 141.3201,
+   "description": "About 60 shops and market diners alongside the Central Wholesale Market; stalls from 6:00, restaurants from 7:00, best crab and kaisendon before 11:00.",
+   "reference_link": "https://www.japan-guide.com/e/e5317.html"
+  },
+  {
+   "poi_id": "sapporo-nemuro-hanamaru",
+   "type": "food",
+   "name": "Kaiten-zushi Nemuro Hanamaru, JR Tower Stellar Place",
+   "lat": 43.0686,
+   "lng": 141.3509,
+   "description": "Famed conveyor-belt sushi on the 6th floor of Stellar Place at Sapporo Station, open 11:00–23:00; ticket-machine queue, no phone reservations, sourcing from Nemuro's fishing port.",
+   "reference_link": "https://www.gltjp.com/en/directory/item/15317/"
+  },
+  {
+   "poi_id": "sapporo-jasmac-plaza-onsen",
+   "type": "nightlife",
+   "name": "Jasmac Plaza Hotel Onsen (Yuka Kyo)",
+   "lat": 43.0517,
+   "lng": 141.3555,
+   "description": "Natural hot-spring bathhouse inside a Susukino hotel; day-use ¥2,750 for adults with last admission 23:00 — the rare genuine onsen soak reachable on foot from downtown.",
+   "reference_link": "https://www.gltjp.com/en/directory/item/15152/"
+  },
+  {
+   "poi_id": "sapporo-moiwa-ropeway",
+   "type": "scenery",
+   "name": "Mt. Moiwa Ropeway (Sanroku Base Station)",
+   "lat": 43.0316,
+   "lng": 141.3331,
+   "description": "Ropeway and mini cable car to the 531 m Moiwa summit observatory, one of Japan's 'New Three Major Night Views'; winter hours 11:00–22:00, last ascent 21:30, ¥2,100 round trip.",
+   "reference_link": "https://www.sapporo.travel/en/spot/facility/mount_moiwayama/"
+  },
+  {
+   "poi_id": "sapporo-beer-museum",
+   "type": "historic",
+   "name": "Sapporo Beer Museum & Beer Garden",
+   "lat": 43.0714,
+   "lng": 141.369,
+   "description": "Red-brick 1890 brewery housing Japan's only beer museum (11:00–18:00, closed Mondays; paid admission from July 2026) with Star Hall tastings, adjoining the Beer Garden jingisukan halls (11:30–21:00).",
+   "reference_link": "https://www.sapporobeer.jp/english/brewery/s_museum/"
+  },
+  {
+   "poi_id": "sapporo-okurayama-ski-jump",
+   "type": "historic",
+   "name": "Okurayama Ski Jump Stadium & Sapporo Olympic Museum",
+   "lat": 43.0515,
+   "lng": 141.2899,
+   "description": "The 1972 Olympics large-hill jump, still an active competition venue; winter chairlift 9:00–17:00 (¥1,000 round trip) to the start-gate viewpoint and Olympic Museum (¥600, winter 9:30–17:00) at the base.",
+   "reference_link": "https://visit.sapporo.travel/discover/art-culture/sapporo-okurayama-ski-jump-stadium/"
+  },
+  {
+   "poi_id": "otaru-sankaku-market",
+   "type": "food",
+   "name": "Otaru Sankaku Market",
+   "lat": 43.1985,
+   "lng": 140.9939,
+   "description": "Triangular-roofed seafood market of ~20 stalls beside JR Otaru Station; shops from about 6:00, restaurants from 7:00, known for uni, ikura, and crab kaisendon.",
+   "reference_link": "https://www.visit-hokkaido.jp/en/spot/detail_10111.html"
+  },
+  {
+   "poi_id": "otaru-canal",
+   "type": "scenery",
+   "name": "Otaru Canal",
+   "lat": 43.202,
+   "lng": 141.0006,
+   "description": "Preserved 1923 harbor canal lined with stone warehouses and gas lamps — Otaru's signature snow-season promenade, a 10-minute walk from the station.",
+   "reference_link": "https://en.wikipedia.org/wiki/Otaru_Canal"
+  }
+ ],
+ "transit": [
+  {
+   "name": "New Chitose Airport (CTS)",
+   "lat": 42.7868,
+   "lng": 141.683,
+   "description": "Hokkaido's main gateway; JR Rapid Airport trains run direct to Sapporo Station (~33–40 min) and through to Otaru (as little as 73 min, ¥2,040 non-reserved). Snowboard bags travel fine in the luggage racks by the doors.",
+   "reference_link": "https://www.jrhokkaido.co.jp/global/english/travel/airport_otaru.html"
+  },
+  {
+   "name": "JR Sapporo Station",
+   "lat": 43.0686,
+   "lng": 141.3509,
+   "description": "The trip's daily hub: rapid/local trains to Teine (11–18 min, ¥360) and Otaru (~30 min by rapid), airport trains, and the Stellar Place mall above the concourse. Chuo Bus terminal for the Sapporo Kokusai contingency sits in front of the station.",
+   "reference_link": "https://www.sapporostation.com/rapid-airport-service-new-chitose-airport-sapporo-otaru/"
+  },
+  {
+   "name": "JR Teine Station (South Exit bus stop)",
+   "lat": 43.1203,
+   "lng": 141.2436,
+   "description": "Transfer point for the mountain: JR Hokkaido Bus from the South Exit to Olympia (~15 min) or Highland Ski Center (~27 min, flat ¥1,000 adult, exact change or Kitaca/SAPICA — no credit cards). Weekend and weekday timetables differ; check the resort's PDF timetables.",
+   "reference_link": "https://sapporo-teine.com/snow/lang/en/access/"
+  },
+  {
+   "name": "JR Otaru Station",
+   "lat": 43.1975,
+   "lng": 140.9941,
+   "description": "Terminus for the Sunday day trip; Sankaku Market is up the stairs immediately left of the exit and the canal is a 10-minute downhill walk. Rapid Airport trains back to Sapporo take ~30 minutes, locals ~45.",
+   "reference_link": "https://www.jrhokkaido.co.jp/global/english/travel/airport_otaru.html"
+  }
+ ]
+}

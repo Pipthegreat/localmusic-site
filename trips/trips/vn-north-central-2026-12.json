@@ -1,0 +1,646 @@
+{
+ "trip_id": "vn-north-central-2026-12",
+ "name": "Vietnam Moto - N + Central",
+ "region": "Ha Giang loop, Cat Ba Island & Hoi An/Hue, Vietnam",
+ "date_range": "2026-12-18 – 2026-12-30",
+ "duration_days": 12,
+ "summary": "Motorcycle route 2: the Ha Giang loop (3–4 riding days on the karst plateau), Cat Ba's Lan Ha Bay, then Hoi An/Hue with the Hai Van Pass as the marquee ride. RIDE-TIME REALITY: Hanoi→Ha Giang is a night sleeper bus or ~7–8h truck-heavy self-ride (some shops bus the bike); the loop's mountain km take DOUBLE what maps suggest; getting south means flying or the SE1 train to Da Nang while a shop ships the bike (2–3 days) — riding the whole way would eat the trip. LEGAL: Vietnam only honors a 1968-Convention IDP with an A motorcycle rating — 1949 IDPs (USA/AUS/CAN) are invalid; 2025 rules mean 6–8M VND fines + 7-day impound at the loop's documented checkpoints, and the easy-rider option is the honest fallback, not a defeat. December: dry roads but near-freezing plateau nights and valley fog until mid-morning up north; grey drizzle and the tail of flood season in Hue/Hoi An — keep a flex day for the Hai Van crossing (bikes are banned from the tunnel; the pass IS the route). Sunday markets (Dong Van, Bac Ha): Dec 20 & 27.",
+ "activities": [
+  {
+   "activity_id": "hagiang-heaven-gate-ride",
+   "name": "Loop day 1: Ha Giang → Yen Minh over Quan Ba Heaven Gate",
+   "type": "outdoor",
+   "order_index": 1,
+   "lat": 23.0736,
+   "lng": 104.9614,
+   "time_window": "08:30–13:00",
+   "duration": "98 km — 4–5 hr with stops",
+   "difficulty": "moderate",
+   "description": "The loop opens hard: QL4C climbs the Bac Sum hairpins to Quan Ba Heaven Gate at ~1,500 m, where the Tam Son valley and the Twin Mountains spread out below — free, with locals selling hot corn and sugarcane. Checkpoints leaving Ha Giang city and near Quan Ba are documented and real: without a 1968-IDP + A license, take an easy-rider. December fog blankets the pass until mid-morning — start after 08:30, not at dawn.",
+   "reference_link": "https://looptrails.com/guide/quan-ba-heaven-gate-guide/",
+   "poi_ids": [
+    "hagiang-quanba-heaven-gate"
+   ]
+  },
+  {
+   "activity_id": "hagiang-dongvan-sunday-market",
+   "name": "Dong Van Sunday market (Dec 20 or 27) + Vuong Palace & Lung Cu spur",
+   "type": "food",
+   "order_index": 2,
+   "lat": 23.2897,
+   "lng": 105.3581,
+   "time_window": "06:00–09:30",
+   "duration": "2.5–3.5 hr + spur",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Sundays only — Dec 20 or 27, 2026: build the loop around it. Hmong, Tay, Dao and Lo Lo traders pour in from 04:30; peak livestock-and-textiles chaos runs 06:00–09:30 and it's packed up by noon. Eat where the locals eat: thang co (real highland horse stew) with a shot of corn wine — and go easy, you're riding. Afterward spur to the Hmong king's Vuong Palace (07:30–17:00, 20–25k) and the Lung Cu flag tower (25k cash; start the ~50 km round-trip spur by early afternoon — winter fog can erase the view).",
+   "reference_link": "https://yesd.org/dong-van-sunday-market/",
+   "poi_ids": [
+    "hagiang-vuong-palace",
+    "hagiang-lungcu-flag-tower",
+    "hagiang-dongvan-old-quarter"
+   ]
+  },
+  {
+   "activity_id": "hagiang-mapileng-skywalk",
+   "name": "Ma Pi Leng pass + the Sky Path cliff walk",
+   "type": "outdoor",
+   "order_index": 3,
+   "lat": 23.2408,
+   "lng": 105.4108,
+   "time_window": "08:30–12:30",
+   "duration": "22 km ride + 2–3 hr walk",
+   "difficulty": "hard",
+   "description": "The reason you came: 20 km of road hand-cut into cliffs 800 m above the Nho Que river. Park at Ma Pi Leng Homestay and walk the Sky Path — the villagers' cliff footpath below the road past the White Cliffs — ~2.5 km one way, free, no guide needed; the wild default over the drive-by photo stop. NO guardrails and serious exposure: never in rain, strong wind or the thick fog December regularly brings — and never on a motorbike. The pass itself is the loop's windiest winter section; skip it entirely in fog rather than creeping through.",
+   "reference_link": "https://www.vietnamcoracle.com/sky-path-hike-ha-giang/",
+   "poi_ids": [
+    "hagiang-mapileng-viewpoint",
+    "hagiang-sky-path-trailhead",
+    "hagiang-meovac-town"
+   ]
+  },
+  {
+   "activity_id": "hagiang-nhoque-boat",
+   "name": "Nho Que river boat through Tu San canyon",
+   "type": "scenery",
+   "order_index": 4,
+   "lat": 23.222,
+   "lng": 105.443,
+   "time_window": "13:00–16:00",
+   "duration": "60–90 min afloat, ~3 hr door-to-door",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "From the jade-green river floor, Tu San — billed as Southeast Asia's deepest canyon — closes 700–900 m overhead. Group boat ~120k VND, boats leave when full, no advance booking. Reach it off the Ma Pi Leng road via road 193A past Pa Vi: ~30 min of steep hairpins down, then an electric buggy to the marina. Weekday afternoons dodge the karaoke-speaker crowds. Boats don't run in storms; be back up the hairpins before dark (~17:30).",
+   "reference_link": "https://www.vietnamcoracle.com/tu-san-canyon-boat-trip-ha-giang/",
+   "poi_ids": [
+    "hagiang-nhoque-wharf"
+   ]
+  },
+  {
+   "activity_id": "hagiang-dugia-homestay-dinner",
+   "name": "Du Gia homestay family dinner and corn wine",
+   "type": "food",
+   "order_index": 5,
+   "lat": 22.9244,
+   "lng": 105.2,
+   "time_window": "18:30–21:30",
+   "duration": "2–3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Du Gia is the loop's quiet ending — a Tay stilt-house village the 3-day tours skip, which is exactly why you stay. Homestay dinners are communal by design: bamboo shoots, mountain greens, grilled pork passed around the floor mat, and rounds of 'happy water' corn wine poured until the family stops. Authenticity over comfort: rooms are wooden, shared, unheated, and December valley nights drop near freezing. The wine runs ~40% and toasts are relentless — never ride after.",
+   "reference_link": "https://thelooptours.com/news/du-gia-homestay-a-peaceful-stop-on-the-ha-giang-loop",
+   "poi_ids": [
+    "hagiang-dugia-village"
+   ]
+  },
+  {
+   "activity_id": "hagiang-dongvan-old-quarter-evening",
+   "name": "Dong Van old quarter evening: hotpot among 100-year houses",
+   "type": "food",
+   "order_index": 6,
+   "lat": 23.2897,
+   "lng": 105.3581,
+   "time_window": "18:00–21:30",
+   "duration": "2–3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "After the pass, Dong Van's stone old quarter — 40-odd earth-walled houses, the oldest from 1890 — is where the loop slows down. Evenings mean hotpot or grilled skewers at family kitchens around the market square and coffee inside a century-old Hmong house; in winter the vendors huddle around charcoal braziers and you should too. Eat local rather than the backpacker spots on the main drag. Dong Van sits at 1,000–1,600 m: December nights hit 5°C or below and guesthouses are minimally heated — ask for extra blankets.",
+   "reference_link": "https://vietpowertravel.com/blog/dong-van-old-quarter.html",
+   "poi_ids": [
+    "hagiang-dongvan-old-quarter"
+   ]
+  },
+  {
+   "activity_id": "r2-ride-hanoi-catba",
+   "name": "Ride day: Hanoi → Cat Ba (old QL5 + sea bridge + vehicle ferry)",
+   "type": "outdoor",
+   "order_index": 7,
+   "lat": 20.8139,
+   "lng": 106.8949,
+   "time_window": "07:00–13:00",
+   "duration": "4.5–5.5 hr incl. ferry",
+   "difficulty": "moderate",
+   "description": "~150 km: old QL5/AH14 to Hai Phong (the CT.04 expressway BANS motorbikes — 4–6M VND fines), over the 5.4 km Tan Vu–Lach Huyen sea bridge (bikes in the slow lane; re-check locally), vehicle ferry Dong Bai→Cai Vieng (~44k VND + 14k/passenger, cash at pier, no booking), then 23 km of near-empty jungle-karst road into Cat Ba town. December low-season sailings thin out — cross before mid-afternoon. Hanoi's inner-city petrol-bike zone starts July 2026 — arrange rental pickup outside Ring Road 1.",
+   "reference_link": "https://catbaexpress.com/ticket-and-schedule-of-ferry-from-got-to-cai-vieng.html",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "catba-ngu-lam-peak",
+   "name": "Cat Ba National Park — Ngu Lam peak + Hospital Cave",
+   "type": "outdoor",
+   "order_index": 8,
+   "lat": 20.7945,
+   "lng": 106.9954,
+   "time_window": "08:00–11:30",
+   "duration": "3.5 hr",
+   "difficulty": "moderate",
+   "cash_only": true,
+   "description": "Pay the Kim Giao–Ngu Lam ticket at the park HQ (reports conflict: 80k vs 120k VND — carry small notes) and climb through kim giao forest to the bare karst summit: 30–45 min up, steep rocky final scramble, 360° over the island's jungle spine. On the ride back stop at Hospital Cave (08:00–17:00, ~80k) — a 3-storey concrete field hospital built inside the karst, used 1963–75. The longer Viet Hai traverse (~160k, 4–6 hr) is the full hard option.",
+   "reference_link": "https://backpackersintheworld.com/cat-ba-national-park-ngu-lam-peak/",
+   "poi_ids": [
+    "catba-park-hq",
+    "catba-ngu-lam-summit",
+    "catba-trung-trang-cave",
+    "catba-hospital-cave",
+    "catba-butterfly-valley"
+   ]
+  },
+  {
+   "activity_id": "catba-lanha-boat-kayak",
+   "name": "Lan Ha Bay small-boat day + kayak from Ben Beo",
+   "type": "outdoor",
+   "order_index": 9,
+   "lat": 20.7321,
+   "lng": 107.0589,
+   "time_window": "08:00–16:30",
+   "duration": "full day",
+   "difficulty": "moderate",
+   "description": "The authentic alternative to the Ha Long tourist fleet: small-boat trips out of Ben Beo pier into Lan Ha Bay — ~2 hr kayaking through rock arches into enclosed lagoons, the 7,000-year-old working Cai Beo floating village, fish-farm rafts, empty beaches. Verified December operators: Cat Ba Ventures, Captain Jack, Cat Ba Local (~US$45–85 with lunch). Misty, moody, nearly empty; swimming off, kayaking on. Book 1–2 days ahead IN TOWN — low-season departures consolidate or cancel.",
+   "reference_link": "https://www.catbaventures.com/cat-ba-tours/lan-ha-bay-ha-long-bay-bai-tu-long-bay-boat-trip-kayaking-2-days-1-night.html",
+   "poi_ids": [
+    "catba-ben-beo-pier",
+    "catba-cai-beo-village",
+    "catba-monkey-island"
+   ]
+  },
+  {
+   "activity_id": "catba-catco-cannon-fort",
+   "name": "Cat Co cliff walkway + Cannon Fort sunset",
+   "type": "scenery",
+   "order_index": 10,
+   "lat": 20.7231,
+   "lng": 107.0528,
+   "time_window": "14:30–17:45",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "December honesty: the Cat Co coves are for walking, not swimming — but the cliffside boardwalk linking Cat Co 1→2 hugs the karst above the sea and is arguably better empty (sections occasionally roped off for storm repairs). Then ride up to Cannon Fort (~40–80k): WWII/French-era gun emplacements and a 360° terrace over Lan Ha Bay. Golden hour 16:15–17:30, drive-up, gates close ~18:00; some visitors report partial military closures — ask your hotel that day.",
+   "reference_link": "https://catbagreentrail.com/cat-ba-cannon-fort/",
+   "poi_ids": [
+    "catba-cat-co-1",
+    "catba-cat-co-2",
+    "catba-cat-co-3"
+   ]
+  },
+  {
+   "activity_id": "catba-floating-seafood-dinner",
+   "name": "Floating-restaurant seafood dinner off Ben Beo — eyes open",
+   "type": "food",
+   "order_index": 11,
+   "lat": 20.7375,
+   "lng": 107.0621,
+   "time_window": "18:00–20:30",
+   "duration": "2.5 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Boat-taxi 5 minutes from Ben Beo to a floating restaurant among the fish cages — pick your fish, mantis shrimp or clams live from the pens. Real Cat Ba, but also the island's best-known tourist-trap vector: agree the per-kg price AND the weight before anything hits the grill, photograph the menu, confirm what's included. 250–500k VND/head done carefully. In December go at 18:00 — shuttles stop earlier in low season.",
+   "reference_link": "https://www.vietnamtourism.com/en/fishing-village-cat-ba-the-complete-guide-to-cai-beo-and-lan-ha-bay-s-floating-communities",
+   "poi_ids": [
+    "catba-ben-beo-pier",
+    "catba-cai-beo-village"
+   ]
+  },
+  {
+   "activity_id": "catba-night-food-strip",
+   "name": "Cat Ba night market & 1/4 Street food strip",
+   "type": "nightlife",
+   "order_index": 12,
+   "lat": 20.7266,
+   "lng": 107.048,
+   "time_window": "18:30–21:30",
+   "duration": "2 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "The town's evening ritual along the 1/4 Street waterfront: pick-your-own grilled seafood (150–500k/kg by species — fix price and weight first), cha muc squid cake, steamed clams, grilled rice paper. December low season means a shorter, quieter strip with locals outnumbering tourists — the good version. Eat by 21:00; finish on the harbour promenade past the squid boats' green lights.",
+   "reference_link": "https://catbagreentrail.com/cat-ba-night-market/",
+   "poi_ids": [
+    "catba-cho-catba"
+   ]
+  },
+  {
+   "activity_id": "r2-haivan-pass-ride",
+   "name": "The Hai Van Pass: Da Nang → Hue over the Sea Clouds",
+   "type": "outdoor",
+   "order_index": 13,
+   "lat": 16.1877,
+   "lng": 108.1313,
+   "time_window": "09:00–14:00",
+   "duration": "100 km — 3.5–4.5 hr with stops",
+   "difficulty": "moderate",
+   "description": "The marquee leg: the ~21 km pass road crests at 496 m at the Hai Van Quan gate — French and Nguyen-era fortifications, recently restored, free to wander. Motorbikes are banned from the tunnel, so the pass IS the motorbike route. The north side drops to Lang Co lagoon — the classic sand-spit viewpoint is on the descent; stop for seafood on the lagoon stilts, then cut the quieter Phu Loc backroads past Cau Hai lagoon to Hue. 'Hai Van' means sea clouds: December brings fog banks and drizzle — ride after 08:00–09:00 when the morning fog lifts, headlights on, and skip it entirely in heavy rain (keep a flex day). The view is the point, and there won't be one.",
+   "reference_link": "https://en.wikipedia.org/wiki/H%E1%BA%A3i_V%C3%A2n_Pass",
+   "poi_ids": [
+    "hoianhue-haivan-quan"
+   ]
+  },
+  {
+   "activity_id": "hoianhue-hue-citadel-morning",
+   "name": "Hue Imperial Citadel at opening",
+   "type": "historic",
+   "order_index": 14,
+   "lat": 16.4697,
+   "lng": 107.5778,
+   "time_window": "06:30–09:30",
+   "duration": "2–3 hr",
+   "difficulty": "easy",
+   "description": "The Nguyen dynasty's walled Imperial City. Gates open 06:30 daily (to 17:30, 200k VND; 530k 2-day combo with three tombs) — at Ngo Mon Gate early you get Thai Hoa Palace, To Mieu and the Nine Dynastic Urns in grey morning quiet before the tour buses. December's overcast light actually suits the place — moss, brooding walls, puddled courtyards. Mostly open-air: this is the slot to spend an umbrella on. Never start after 15:00.",
+   "reference_link": "https://en.wikipedia.org/wiki/Imperial_City_of_Hu%E1%BA%BF",
+   "poi_ids": [
+    "hoianhue-ngo-mon-gate"
+   ]
+  },
+  {
+   "activity_id": "hoianhue-my-son-dawn",
+   "name": "My Son sanctuary at gate-opening",
+   "type": "historic",
+   "order_index": 15,
+   "lat": 15.767,
+   "lng": 108.117,
+   "time_window": "06:00–10:00",
+   "duration": "4 hr incl. the ride",
+   "difficulty": "easy",
+   "description": "Cham Hindu temple ruins in a jungle valley 40 km southwest of Hoi An — an easy 1-hour ride on quiet rice-country roads. Gates open 06:00 (some sources say 07:30 in low season — if it's shut, the coffee stall opposite opens first); 150k VND including the electric shuttle and Cham dance. Arrive 06:00–06:30 and you walk the B-C-D tower groups in mist with almost nobody — the day-trip buses land 09:00 onward. Ride back via the Duy Xuyen back-lanes.",
+   "reference_link": "https://en.wikipedia.org/wiki/M%E1%BB%B9_S%C6%A1n",
+   "poi_ids": [
+    "hoianhue-my-son"
+   ]
+  },
+  {
+   "activity_id": "hoianhue-tombs-thienmu-loop",
+   "name": "Royal tombs + Thien Mu loop by motorbike",
+   "type": "historic",
+   "order_index": 16,
+   "lat": 16.3989,
+   "lng": 107.5903,
+   "time_window": "13:00–17:30",
+   "duration": "4.5 hr",
+   "difficulty": "easy",
+   "description": "Classic Hue moto afternoon south of the Perfume River: Khai Dinh's tomb first (150k) — concrete-gothic outside, and the most jaw-dropping glass-mosaic interior of any Nguyen mausoleum; crucially indoors, so December-proof. Then Tu Duc's tomb (150k) — the poetic one, pine hills and lake pavilions, open-air and muddy in rain. If you only pay for one in December: Khai Dinh. Finish at Thien Mu Pagoda (free, to ~18:00), the seven-storey tower over the Perfume River at dusk. Tombs 07:00–17:30; the 530k combo only pays if you'll genuinely do three.",
+   "reference_link": "https://en.wikipedia.org/wiki/Tomb_of_Kh%E1%BA%A3i_%C4%90%E1%BB%8Bnh",
+   "poi_ids": [
+    "hoianhue-khai-dinh-tomb",
+    "hoianhue-tu-duc-tomb",
+    "hoianhue-thien-mu-pagoda"
+   ]
+  },
+  {
+   "activity_id": "hoianhue-hoian-food-afternoon",
+   "name": "Hoi An central market food court + the banh mi debate",
+   "type": "food",
+   "order_index": 17,
+   "lat": 15.8768,
+   "lng": 108.3313,
+   "time_window": "13:00–16:00",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Skip the riverfront tourist row: the food court inside Hoi An central market serves cao lau and mi quang at 30–50k with posted prices — the honest lunch, and cao lau (smoky pork, lye-water noodles tied to old-town well water) is the town's dish. Then settle the sandwich argument: Banh Mi Phuong (Bourdain shrine, permanent queue) vs Madam Khanh 'The Banh Mi Queen' (20–30k, no queue theater, arguably fresher bread) — do both 90 minutes apart; the profile answer is Madam Khanh. If the sky clears, roll 4 km to An Bang: in December it is NOT a swimming beach (rough surf, real currents, grey) — go for storm-watching coffee with the Cham Islands ghosting in and out.",
+   "reference_link": "https://en.wikipedia.org/wiki/H%E1%BB%99i_An",
+   "poi_ids": [
+    "hoianhue-central-market",
+    "hoianhue-banh-mi-phuong",
+    "hoianhue-an-bang-beach"
+   ]
+  },
+  {
+   "activity_id": "hoianhue-lantern-old-town-night",
+   "name": "Lantern-lit old town + Japanese Bridge after dark",
+   "type": "nightlife",
+   "order_index": 18,
+   "lat": 15.8771,
+   "lng": 108.326,
+   "time_window": "17:30–20:30",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "description": "From ~17:30 the old town goes car-free-ish and the silk lanterns come on along Tran Phu and the An Hoi riverfront. Ticket honesty: the 120k old-town ticket is officially compulsory, inconsistently enforced at street entrances, but checked at the 22 heritage buildings including the Japanese Covered Bridge — buy it; it's under $5, funds restoration, and you want inside the merchant houses anyway. Walk the back streets off Phan Chau Trinh where lanterns hang without the crowd; a lantern-making workshop (~2 hr, $9–15) is verified good value and rain-proof. Flood reality: the riverfront blocks go under first when the Thu Bon rises — peak risk is Oct–Nov but mid-December events happen; book accommodation away from the river.",
+   "reference_link": "https://en.wikipedia.org/wiki/H%E1%BB%99i_An",
+   "poi_ids": [
+    "hoianhue-japanese-bridge",
+    "hoianhue-central-market"
+   ]
+  },
+  {
+   "activity_id": "hoianhue-hue-night-food",
+   "name": "Hue night food crawl: bun bo, com hen, Dong Ba after dark",
+   "type": "food",
+   "order_index": 19,
+   "lat": 16.4724,
+   "lng": 107.5886,
+   "time_window": "18:00–21:00",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Hue's imperial food is street food eaten low to the ground. The crawl: proper bun bo Hue (lemongrass-chili beef broth — order it whole, blood cube included); com hen, the definitive Hue dish of cold rice under tiny Perfume River clams, best from the family stalls on Con Hen islet, the dish's namesake home; finish at Dong Ba Market's night side, where from ~18:00 stalls ring the entrance with banh beo, banh loc and grilled nem. Grey drizzly December evenings are exactly what this scalding chili-heavy food is for. Con Hen houses keep loose family hours — if the islet is dark, Dong Ba carries com hen too.",
+   "reference_link": "https://en.wikipedia.org/wiki/B%C3%BAn_b%C3%B2_Hu%E1%BA%BF",
+   "poi_ids": [
+    "hoianhue-dong-ba-market"
+   ]
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "hagiang-quanba-heaven-gate",
+   "type": "scenery",
+   "name": "Quan Ba Heaven Gate",
+   "lat": 23.0736,
+   "lng": 104.9614,
+   "description": "Pass-top viewpoint at ~1,500 m over Tam Son and the Twin Mountains; free, roadside pull-offs either side.",
+   "reference_link": "https://localhagiang.com/quan-ba-twin-mountain/"
+  },
+  {
+   "poi_id": "hagiang-vuong-palace",
+   "type": "historic",
+   "name": "Vuong Palace (Hmong King's Palace), Sa Phin",
+   "lat": 23.2564,
+   "lng": 105.262,
+   "description": "Early-1900s fortified mansion of Hmong ruler Vuong Chinh Duc; open ~07:30–17:00, 20–25k VND, cash — Sa Phin runs on cash.",
+   "reference_link": "https://localhagiang.com/hmong-king-palace/"
+  },
+  {
+   "poi_id": "hagiang-lungcu-flag-tower",
+   "type": "historic",
+   "name": "Lung Cu Flag Tower",
+   "lat": 23.3637,
+   "lng": 105.3162,
+   "description": "30 m tower on Dragon Mountain marking Vietnam's symbolic northernmost point. 25k VND cash only; long stone stairways; winter fog can erase the view.",
+   "reference_link": "https://en.wikipedia.org/wiki/Lung_Cu_Flag_Tower"
+  },
+  {
+   "poi_id": "hagiang-dongvan-old-quarter",
+   "type": "historic",
+   "name": "Dong Van old quarter",
+   "lat": 23.2897,
+   "lng": 105.3581,
+   "description": "National architectural relic: stone-and-earth trading houses (oldest 1890) beside the market square; cafes in original 1900s houses.",
+   "reference_link": "https://www.vietnam.vn/en/pho-co-dong-van-cho-da-va-nha-trinh-tuong"
+  },
+  {
+   "poi_id": "hagiang-mapileng-viewpoint",
+   "type": "scenery",
+   "name": "Ma Pi Leng Pass viewpoint",
+   "lat": 23.2408,
+   "lng": 105.4108,
+   "description": "Main viewpoint (~1,500 m) over the Tu San gorge; the Happiness Road museum and cafe stops are on the same stretch.",
+   "reference_link": "https://en.wikipedia.org/wiki/M%C3%A3_P%C3%AD_L%C3%A8ng_Pass"
+  },
+  {
+   "poi_id": "hagiang-sky-path-trailhead",
+   "type": "outdoor",
+   "name": "Sky Path trailhead (Ma Pi Leng Homestay)",
+   "lat": 23.243,
+   "lng": 105.409,
+   "description": "Start of the cliff footpath (coords approximate — confirm on the ground); the longer route starts at the Youth Monument/museum. Severely exposed, no guardrails.",
+   "reference_link": "https://www.vietnamcoracle.com/sky-path-hike-ha-giang/"
+  },
+  {
+   "poi_id": "hagiang-meovac-town",
+   "type": "outdoor",
+   "name": "Meo Vac",
+   "lat": 23.1525,
+   "lng": 105.4058,
+   "description": "Market town at the far end of the pass; homestays in nearby Pa Vi Hmong village, fuel and pho before the wilder Du Gia leg — fill up here.",
+   "reference_link": "https://rentabikevn.com/dong-van-to-meo-vac/"
+  },
+  {
+   "poi_id": "hagiang-nhoque-wharf",
+   "type": "outdoor",
+   "name": "Nho Que boat visitor center",
+   "lat": 23.222,
+   "lng": 105.443,
+   "description": "Ticket office and buggy transfer to the Tu San canyon marina below Ma Pi Leng (coords approximate — confirm ahead).",
+   "reference_link": "https://www.vietnamcoracle.com/tu-san-canyon-boat-trip-ha-giang/"
+  },
+  {
+   "poi_id": "hagiang-dugia-village",
+   "type": "outdoor",
+   "name": "Du Gia village",
+   "lat": 22.9244,
+   "lng": 105.2,
+   "description": "Tay ethnic village in a rice-terrace bowl ~70 km from Ha Giang city; established homestays with family dinners. The waterfall swim is a summer thing — skip in December.",
+   "reference_link": "https://localvietnam.com/ha-giang/du-gia/"
+  },
+  {
+   "poi_id": "catba-park-hq",
+   "type": "outdoor",
+   "name": "Cat Ba National Park HQ (Ngu Lam trailhead)",
+   "lat": 20.7945,
+   "lng": 106.9954,
+   "description": "Park gate and ticket office on the cross-island road; opens ~08:00.",
+   "reference_link": "https://backpackersintheworld.com/cat-ba-national-park-ngu-lam-peak/"
+  },
+  {
+   "poi_id": "catba-ngu-lam-summit",
+   "type": "outdoor",
+   "name": "Ngu Lam Peak",
+   "lat": 20.7934,
+   "lng": 106.9989,
+   "description": "Bare karst summit, 30–45 min up with a steep rocky final scramble; 360° over the island's jungle spine.",
+   "reference_link": "https://backpackersintheworld.com/cat-ba-national-park-ngu-lam-peak/"
+  },
+  {
+   "poi_id": "catba-trung-trang-cave",
+   "type": "outdoor",
+   "name": "Trung Trang Cave",
+   "lat": 20.7888,
+   "lng": 106.9974,
+   "description": "Karst cave near the park HQ — quick third stop on the same road.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "catba-hospital-cave",
+   "type": "historic",
+   "name": "Hospital Cave (Quan Y)",
+   "lat": 20.7704,
+   "lng": 107.0206,
+   "description": "Three-storey concrete field hospital built inside the karst, used 1963–75. 08:00–17:00, ~80k VND.",
+   "reference_link": "https://sunparadiseland.com/en/tin-tuc/cat-ba-military-hospital-cave-guide-history-ticket-prices-opening-hours-3171"
+  },
+  {
+   "poi_id": "catba-butterfly-valley",
+   "type": "outdoor",
+   "name": "Butterfly Valley climbing (Lien Minh)",
+   "lat": 20.7711,
+   "lng": 106.9955,
+   "description": "~60 sport routes on tufa limestone; day pass ~50k via The Hive or Asia Outdoors. Oct–Apr prime; reed flowers peak in December — confirm low-season guiding.",
+   "reference_link": "https://www.mountainproject.com/area/107070263/butterfly-valley"
+  },
+  {
+   "poi_id": "catba-ben-beo-pier",
+   "type": "outdoor",
+   "name": "Ben Beo pier",
+   "lat": 20.7321,
+   "lng": 107.0589,
+   "description": "Departure point for Lan Ha Bay boats and the floating-restaurant boat-taxis.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "catba-cai-beo-village",
+   "type": "scenery",
+   "name": "Cai Beo floating village",
+   "lat": 20.7375,
+   "lng": 107.0621,
+   "description": "A 7,000-year-old, still-working floating fishing community — not a reconstruction.",
+   "reference_link": "https://www.vietnamtourism.com/en/fishing-village-cat-ba-the-complete-guide-to-cai-beo-and-lan-ha-bay-s-floating-communities"
+  },
+  {
+   "poi_id": "catba-monkey-island",
+   "type": "outdoor",
+   "name": "Monkey Island summit viewpoint (Cat Dua)",
+   "lat": 20.73,
+   "lng": 107.0784,
+   "description": "Short sharp scramble to a ridge viewpoint over Lan Ha Bay; the macaques steal — hold your things.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "catba-cat-co-1",
+   "type": "scenery",
+   "name": "Cat Co 1 beach",
+   "lat": 20.7181,
+   "lng": 107.053,
+   "description": "Town cove; start of the cliffside boardwalk toward Cat Co 2.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "catba-cat-co-2",
+   "type": "scenery",
+   "name": "Cat Co 2 beach",
+   "lat": 20.7193,
+   "lng": 107.0555,
+   "description": "Quieter cove at the far end of the cliff walkway.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "catba-cat-co-3",
+   "type": "scenery",
+   "name": "Cat Co 3 beach",
+   "lat": 20.7154,
+   "lng": 107.0499,
+   "description": "Third cove, nearest the Cannon Fort road.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "catba-cho-catba",
+   "type": "food",
+   "name": "Cat Ba market (Cho Cat Ba)",
+   "lat": 20.7276,
+   "lng": 107.047,
+   "description": "Town market anchoring the 1/4 Street night-food strip along the waterfront.",
+   "reference_link": "https://catbagreentrail.com/cat-ba-night-market/"
+  },
+  {
+   "poi_id": "hoianhue-haivan-quan",
+   "type": "historic",
+   "name": "Hai Van Quan gate (496 m)",
+   "lat": 16.1877,
+   "lng": 108.1313,
+   "description": "French and Nguyen-era fortifications at the pass crest, recently restored, free to wander — the summit stop of the ride.",
+   "reference_link": "https://en.wikipedia.org/wiki/H%E1%BA%A3i_V%C3%A2n_Pass"
+  },
+  {
+   "poi_id": "hoianhue-ngo-mon-gate",
+   "type": "historic",
+   "name": "Imperial City of Hue (Ngo Mon Gate)",
+   "lat": 16.4697,
+   "lng": 107.5778,
+   "description": "Main gate of the walled Imperial City; 06:30–17:30 daily, 200k VND.",
+   "reference_link": "https://en.wikipedia.org/wiki/Imperial_City_of_Hu%E1%BA%BF"
+  },
+  {
+   "poi_id": "hoianhue-my-son",
+   "type": "historic",
+   "name": "My Son Sanctuary",
+   "lat": 15.767,
+   "lng": 108.117,
+   "description": "Cham Hindu temple ruins in a jungle valley; 150k VND incl. shuttle and Cham dance; buses land from 09:00 — go at the gate's opening.",
+   "reference_link": "https://en.wikipedia.org/wiki/M%E1%BB%B9_S%C6%A1n"
+  },
+  {
+   "poi_id": "hoianhue-khai-dinh-tomb",
+   "type": "historic",
+   "name": "Tomb of Khai Dinh",
+   "lat": 16.3989,
+   "lng": 107.5903,
+   "description": "Concrete-gothic outside, jaw-dropping glass-mosaic interior — and indoors: the December-proof tomb. 150k, 07:00–17:30.",
+   "reference_link": "https://en.wikipedia.org/wiki/Tomb_of_Kh%E1%BA%A3i_%C4%90%E1%BB%8Bnh"
+  },
+  {
+   "poi_id": "hoianhue-tu-duc-tomb",
+   "type": "historic",
+   "name": "Tomb of Tu Duc",
+   "lat": 16.4325,
+   "lng": 107.566,
+   "description": "The poetic one — pine hills and lake pavilions; gorgeous but open-air and muddy in rain. 150k.",
+   "reference_link": "https://en.wikipedia.org/wiki/Tomb_of_T%E1%BB%B1_%C4%90%E1%BB%A9c"
+  },
+  {
+   "poi_id": "hoianhue-thien-mu-pagoda",
+   "type": "historic",
+   "name": "Thien Mu Pagoda",
+   "lat": 16.4536,
+   "lng": 107.5448,
+   "description": "Seven-storey Phuoc Duyen tower over the Perfume River — free, best at dusk on the ride back.",
+   "reference_link": "https://en.wikipedia.org/wiki/Thi%C3%AAn_M%E1%BB%A5_Pagoda"
+  },
+  {
+   "poi_id": "hoianhue-central-market",
+   "type": "food",
+   "name": "Hoi An Central Market food court",
+   "lat": 15.8768,
+   "lng": 108.3313,
+   "description": "Cao lau and mi quang at 30–50k with posted prices — the honest cheap lunch in the old town; the An Hoi lantern riverfront starts here.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "hoianhue-banh-mi-phuong",
+   "type": "food",
+   "name": "Banh Mi Phuong",
+   "lat": 15.8785,
+   "lng": 108.332,
+   "description": "The Bourdain-shrine banh mi with the permanent queue; Madam Khanh at 115 Tran Cao Van is the no-queue rival — the profile pick.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "hoianhue-an-bang-beach",
+   "type": "scenery",
+   "name": "An Bang Beach",
+   "lat": 15.913,
+   "lng": 108.34,
+   "description": "In December NOT a swimming beach — rough surf, strong currents, grey; go for moody storm-watching coffee.",
+   "reference_link": ""
+  },
+  {
+   "poi_id": "hoianhue-japanese-bridge",
+   "type": "historic",
+   "name": "Japanese Covered Bridge (Chua Cau)",
+   "lat": 15.8771,
+   "lng": 108.326,
+   "description": "The old town's icon — one of the 22 heritage stops where the 120k ticket is actually checked.",
+   "reference_link": "https://en.wikipedia.org/wiki/Japanese_Bridge,_H%E1%BB%99i_An"
+  },
+  {
+   "poi_id": "hoianhue-dong-ba-market",
+   "type": "food",
+   "name": "Dong Ba Market (night stalls)",
+   "lat": 16.4724,
+   "lng": 107.5886,
+   "description": "Hue's central market; from ~18:00 food stalls ring the entrance — banh beo, banh loc, grilled nem, and com hen when Con Hen islet is dark.",
+   "reference_link": "https://en.wikipedia.org/wiki/%C4%90%C3%B4ng_Ba_Market"
+  }
+ ],
+ "transit": [
+  {
+   "name": "Dong Bai vehicle-ferry pier (Cat Hai)",
+   "lat": 20.8139,
+   "lng": 106.8949,
+   "description": "The ONLY motorbike ferry to Cat Ba (Got/Dinh Vu closed): Dong Bai→Cai Vieng, bike ~44–45k + 14k/pax, cash, no booking; December sailings thin — cross before mid-afternoon.",
+   "reference_link": "https://catbaexpress.com/ticket-and-schedule-of-ferry-from-got-to-cai-vieng.html"
+  },
+  {
+   "name": "Cai Vieng pier (Cat Ba side)",
+   "lat": 20.8178,
+   "lng": 106.914,
+   "description": "Ferry arrival; 23 km cross-island road to town — greasy shaded bends on misty December mornings.",
+   "reference_link": ""
+  }
+ ]
+}

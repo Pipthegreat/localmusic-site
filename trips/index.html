@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Trips — customprojects.info</title>
+<meta name="description" content="An interactive world map of eighteen planned trips — treks, rail epics, moto loops, and powder weeks — with day-by-day itineraries, filters, and Google Maps hand-off.">
+<link rel="canonical" href="https://customprojects.info/trips/">
+<link href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css" rel="stylesheet" />
+<!-- bump ?v= on css/js when deploying changes so cached copies refresh -->
+<link href="css/style.css?v=27" rel="stylesheet" />
+<script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
+<script src="https://unpkg.com/pmtiles@3.2.0/dist/pmtiles.js"></script>
+</head>
+<body>
+<div id="map"></div>
+<div id="errbar"></div>
+
+<!-- top chrome: brand · mode · filters · clear -->
+<header class="topbar">
+  <a class="brand" href="../" title="Back to customprojects.info" style="color:inherit;text-decoration:none;">Trips<em>.</em></a>
+  <div class="modes" id="modes">
+    <button data-mode="itinerary" class="on">Itinerary</button>
+    <button data-mode="explore">Explore</button>
+  </div>
+  <button id="filterBtn" class="iconbtn" title="Filters">Filters</button>
+  <button id="clearAll" class="iconbtn subtle" title="Reset every filter, selection, and pin">Clear all</button>
+</header>
+
+<!-- one-tap trip switching -->
+<nav class="triprail" id="tripRail"></nav>
+
+<!-- filters popover (hidden until Filters is tapped) -->
+<div class="filters hidden" id="filters">
+  <div class="f-row"><span class="f-lbl">Type <span class="allnone"><a id="typeAll">all</a> · <a id="typeNone">none</a></span></span>
+    <div class="chips" id="typeChips"></div></div>
+  <div class="f-row"><span class="f-lbl">Time of day</span>
+    <select id="timeSel">
+      <option value="*">Any time</option>
+      <option value="morning">Morning (before 12)</option>
+      <option value="afternoon">Afternoon (12–17)</option>
+      <option value="evening">Evening (after 17)</option>
+    </select></div>
+  <div class="f-row switchrow"><span class="f-lbl">Show all POIs</span>
+    <button id="poiToggle" class="switch" role="switch" aria-checked="false"><i></i></button></div>
+  <div class="f-row"><button id="kmlBtn" class="kml">⬇ Export KML (Google My Maps)</button></div>
+</div>
+
+<!-- journey sheet: trip header + horizontal activity rail (itinerary),
+     or the near-me controls (explore) -->
+<section class="sheet" id="sheet">
+  <div class="sh-head" id="shHead"></div>
+  <div class="rail" id="rail"></div>
+  <div class="explorebox hidden" id="exploreBox">
+    <div class="e-line"><span class="f-lbl">Near-me radius</span>
+      <input type="range" id="radius" min="2" max="25" value="8" step="1" />
+      <span class="e-val"><b id="radiusVal">8</b> km · <span id="locState">no origin</span></span></div>
+    <div class="e-line"><button id="locBtn" class="ebtn">Use my location</button>
+      <button id="pinBtn" class="ebtn">Drop a pin</button>
+      <span class="e-count" id="visCount"></span></div>
+  </div>
+</section>
+
+<script type="module" src="js/app.js?v=27"></script>
+</body>
+</html>

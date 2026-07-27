@@ -1,0 +1,287 @@
+{
+ "trip_id": "lost-coast-trail",
+ "name": "Lost Coast - Tide Trek",
+ "region": "King Range, Northern California",
+ "date_range": "2027-05/10",
+ "duration_days": 4,
+ "theme": "backpacking",
+ "summary": "The classic 24.6-mile southbound thru-hike of California's wildest shoreline: Mattole Beach to Black Sands Beach at Shelter Cove, 3–4 days on black sand, boulder gardens, and marine-terrace bench trail below the King Range. Three hard limiters run this trip: a BLM wilderness permit from recreation.gov ($6 reservation + $12/person, daily entry quota of 60 people May 15–Sep 15, 30 off-season, max 3 per permit); a hard-sided bear canister — required by BLM rule, one per person, hangs not allowed; and the tide table. BLM marks three timed zones — Punta Gorda (passable under ~6 ft), Sea Lion Gulch to Randall Creek (4 mi, under ~2.5 ft), and Miller Flat to Gitchell Creek (4.5 mi, under ~3 ft) — each entered only on a falling tide, planned off NOAA Shelter Cove predictions (station 9418024) before you even pick permit dates. This is life-safety planning, not trivia: on some days the low tide never gets low enough in daylight. Hike southbound so the prevailing NW wind is at your back. Expect ~1 mph in soft sand, ankle work on cobbles, rattlesnakes in the driftwood, poison oak and ticks on the flats; creeks are frequent for filtered water. May–October is the season — spring and fall bring the clearest weather, summer means fog more often than sun, and winter storms make creeks and surf genuinely dangerous.",
+ "activities": [
+  {
+   "activity_id": "lostcoast-shuttle-permit-day",
+   "name": "Shuttle day — car drop at Black Sands, ride to Mattole",
+   "type": "outdoor",
+   "order_index": 1,
+   "lat": 40.0453,
+   "lng": -124.0786,
+   "time_window": "07:00–12:30",
+   "duration": "half day",
+   "difficulty": "easy",
+   "description": "Leave your car at Black Sands Beach Trailhead in Shelter Cove and ride the shuttle ~2 hours of mountain road to Mattole — the standard one-car solution for a point-to-point beach. Lost Coast Adventure Tours (the local operator out of Shelter Cove) runs scheduled shuttles including a 7:00 AM departure, verified at $95/person plus card fee, season March 15–October 31; Mendo Insider Tours also runs the Black Sands–Mattole leg. Print your recreation.gov permit beforehand and carry it; hard-sided bear canisters are mandatory, one per person — local canister rentals exist but confirm ahead. Book shuttle seats well before permit-season weekends.",
+   "reference_link": "https://lostcoastadventures.com/book-now/",
+   "poi_ids": [
+    "lostcoast-poi-gyppo-ale-mill"
+   ]
+  },
+  {
+   "activity_id": "lostcoast-mattole-camp-evening",
+   "name": "Mattole Beach camp — sunset and the tide-table briefing",
+   "type": "scenery",
+   "order_index": 2,
+   "lat": 40.289,
+   "lng": -124.356,
+   "time_window": "18:00–21:00",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "description": "Camp the night before at BLM's Mattole Recreation Site at the river mouth — dunes, harbor seals, and a Pacific sunset with zero structures in sight. This is the evening you sit down with the NOAA Shelter Cove tide predictions and write tomorrow's departure time on your hand: every stage on this trail starts when the tide says, not when you feel like it. Verified caveat: the trailhead has vault toilets but the campground charges a per-night fee and fills on permit-season weekends — confirm ahead.",
+   "reference_link": "https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=9418024",
+   "poi_ids": [
+    "lostcoast-poi-punta-gorda-point"
+   ]
+  },
+  {
+   "activity_id": "lostcoast-stage-1-mattole-to-cooskie",
+   "name": "Stage 1 — Mattole to Cooskie Creek through the first two tide gates",
+   "type": "outdoor",
+   "order_index": 3,
+   "lat": 40.289,
+   "lng": -124.356,
+   "time_window": "12:30–18:00",
+   "duration": "5–6 hr, ~6.5 mi",
+   "difficulty": "hard",
+   "description": "The start time here is set by the tide window, not the clock — this stage clears BLM Zone 1 at Punta Gorda (passable under ~6 ft) and enters Zone 2 at Sea Lion Gulch (passable under ~2.5 ft), and BLM's rule is to enter each zone only on a falling tide; a typical itinerary launches off the midday high as it recedes. Expect the black-sand truth immediately: soft sand that halves your pace to ~1 mph, then cobble and boulder-hopping past the lighthouse. Camp at Cooskie Creek's reliable water. Verified caveat: on some dates the tide never drops low enough in daylight — check NOAA before booking the permit, not after.",
+   "reference_link": "https://www.blm.gov/sites/blm.gov/files/docs/2021-02/TIDE%20GUIDE%20WEB_Active%20Links%20(1).pdf",
+   "poi_ids": [
+    "lostcoast-poi-punta-gorda-point",
+    "lostcoast-poi-punta-gorda-lighthouse",
+    "lostcoast-poi-sea-lion-gulch",
+    "lostcoast-poi-cooskie-creek-camp"
+   ]
+  },
+  {
+   "activity_id": "lostcoast-lighthouse-sea-lions",
+   "name": "Punta Gorda Lighthouse and the sea lion haul-out",
+   "type": "historic",
+   "order_index": 4,
+   "lat": 40.2494,
+   "lng": -124.3502,
+   "time_window": "09:00–10:30",
+   "duration": "1–1.5 hr",
+   "difficulty": "easy",
+   "description": "The 27-ft reinforced-concrete tower of 1911 — first lit 1912, deactivated 1951, nicknamed the 'Alcatraz of lighthouses' because supplies came in by horse — now stands empty on the bluff, National Register-listed and yours to climb into. The rocks and beach just north are a major sea lion and elephant seal haul-out; the barking carries for a mile. Verified caveat: the lens is gone (it lives at the Humboldt Bay Maritime Museum) — this is a shell, not a museum, and marine mammals require a wide berth, especially pups in spring.",
+   "reference_link": "https://en.wikipedia.org/wiki/Punta_Gorda_Light",
+   "poi_ids": [
+    "lostcoast-poi-punta-gorda-point",
+    "lostcoast-poi-sea-lion-gulch"
+   ]
+  },
+  {
+   "activity_id": "lostcoast-stage-2-cooskie-to-big-flat",
+   "name": "Stage 2 — Cooskie Creek to Big Flat on the morning low",
+   "type": "outdoor",
+   "order_index": 5,
+   "lat": 40.2193,
+   "lng": -124.3095,
+   "time_window": "08:00–15:00",
+   "duration": "6–7 hr, ~10 mi",
+   "difficulty": "hard",
+   "description": "Away on the morning falling tide to finish Zone 2's boulder-and-shelf miles to Randall Creek — the longest committed stretch on the trail, 4 miles where a rising tide meets vertical bluff. Past Randall the route climbs onto marine-terrace bench trail through Spanish Flat: firm ground at last, wildflowers in May, and the King Range crest 4,000 ft overhead. Roll into Big Flat, the trail's most coveted camp. Verified caveat per BLM: plan 1 mph inside the timed zone and enter only on a receding tide — rangers attribute most rescues here to tide misreads.",
+   "reference_link": "https://www.blm.gov/visit/lost-coast-trail",
+   "poi_ids": [
+    "lostcoast-poi-randall-creek-camp",
+    "lostcoast-poi-spanish-flat-camp",
+    "lostcoast-poi-big-flat-camp"
+   ]
+  },
+  {
+   "activity_id": "lostcoast-big-flat-evening",
+   "name": "Big Flat golden hour — driftwood camp under Kings Peak country",
+   "type": "scenery",
+   "order_index": 6,
+   "lat": 40.128,
+   "lng": -124.1749,
+   "time_window": "17:30–20:30",
+   "duration": "3 hr",
+   "difficulty": "easy",
+   "description": "Big Flat is the Lost Coast's living room: a broad creek-mouth terrace where surfers occasionally fly a bush plane onto the private airstrip to ride one of California's most remote point breaks while backpackers cook against driftwood windbreaks. Fill and filter from Big Flat Creek, stow every scented item in the canister — this is the drainage where bears have learned the most. Verified caveats: the flat's scrub carries poison oak and ticks, rattlesnakes den in warm driftwood, and the airstrip parcel is private inholding — camp on the public side of the creek.",
+   "reference_link": "https://www.blm.gov/visit/lost-coast-trail",
+   "poi_ids": [
+    "lostcoast-poi-big-flat-camp"
+   ]
+  },
+  {
+   "activity_id": "lostcoast-stage-3-big-flat-to-gitchell",
+   "name": "Stage 3 — Big Flat through the Miller Flat tide gate to Gitchell Creek",
+   "type": "outdoor",
+   "order_index": 7,
+   "lat": 40.128,
+   "lng": -124.1749,
+   "time_window": "12:00–17:00",
+   "duration": "4–5 hr, ~5 mi",
+   "difficulty": "hard",
+   "description": "Start time tied to the tide again: Zone 3 runs 4.5 miles from Miller Flat (Big Flat's south end) to Gitchell Creek and is passable only under ~3 ft — launch on the falling tide and keep moving, because Shipman and Buck creeks sit inside the gate, not beyond it. This is the ankle-work stage: steep black sand shelving into the surf, bowling-ball cobbles, and no bailout until Gitchell. Camp at Gitchell Creek's driftwood benches, the last legal-feeling night with the finish in sight. Verified caveat: BLM's guidance is explicit that this zone, like Zone 2, traps hikers against bluff on a rising tide — no shortcuts over the headlands exist.",
+   "reference_link": "https://www.blm.gov/sites/blm.gov/files/docs/2021-02/TIDE%20GUIDE%20WEB_Active%20Links%20(1).pdf",
+   "poi_ids": [
+    "lostcoast-poi-shipman-creek-camp",
+    "lostcoast-poi-buck-creek-camp",
+    "lostcoast-poi-gitchell-creek-camp"
+   ]
+  },
+  {
+   "activity_id": "lostcoast-stage-4-gitchell-to-black-sands",
+   "name": "Stage 4 — Gitchell Creek to Black Sands Beach finish",
+   "type": "outdoor",
+   "order_index": 8,
+   "lat": 40.0944,
+   "lng": -124.1018,
+   "time_window": "08:30–12:00",
+   "duration": "3–3.5 hr, ~3.5 mi",
+   "difficulty": "moderate",
+   "description": "The victory lap that still makes you earn it: no tide gate south of Gitchell, but the final miles are the softest, blackest sand of the whole route, with Shelter Cove's houses teasing on the headland long before the trailhead arrives. Cross Telegraph Creek and grind up the paved ramp to the Black Sands Beach lot where your car waits. Verified caveat per BLM: camping is prohibited at Black Sands Beach itself — your last legal camp is north of Telegraph Creek, so don't plan a lazy final half-mile bivy.",
+   "reference_link": "https://www.blm.gov/visit/lost-coast-trail",
+   "poi_ids": [
+    "lostcoast-poi-gitchell-creek-camp"
+   ]
+  },
+  {
+   "activity_id": "lostcoast-gyppo-finish",
+   "name": "Gyppo Ale Mill — the finish-line burger and beer",
+   "type": "food",
+   "order_index": 9,
+   "lat": 40.0249,
+   "lng": -124.0689,
+   "time_window": "13:00–16:00",
+   "duration": "1.5–2 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "The traditional thru-hike closer: Shelter Cove's own brewery on Upper Pacific Drive, five minutes' drive from the Black Sands lot, pouring house ales with a proper food menu and an outdoor yard that tolerates trail smell. Hours verified July 2026: roughly 12:00–20:00 most days, 12:00–19:00 weekends. Verified caveat: Tuesdays it doesn't open until 16:00 — a Tuesday finisher walking off the beach at noon goes hungry, so check the day of week when you set your itinerary.",
+   "reference_link": "https://www.gyppo.com/location/gyppo-ale-mill/",
+   "poi_ids": [
+    "lostcoast-poi-gyppo-ale-mill"
+   ]
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "lostcoast-poi-punta-gorda-point",
+   "type": "scenery",
+   "name": "Punta Gorda — tide Zone 1",
+   "lat": 40.262,
+   "lng": -124.3629,
+   "difficulty": "moderate",
+   "description": "The 'massive point' the Spanish named: a quarter-mile pinch that BLM marks as the first timed zone, passable under a ~6 ft tide — the gentlest of the three gates, but your first rehearsal at reading water against rock.",
+   "reference_link": "https://www.blm.gov/visit/lost-coast-trail"
+  },
+  {
+   "poi_id": "lostcoast-poi-punta-gorda-lighthouse",
+   "type": "historic",
+   "name": "Punta Gorda Lighthouse (1911)",
+   "lat": 40.2494,
+   "lng": -124.3502,
+   "description": "Abandoned 27-ft concrete light tower, lit 1912–1951, National Register-listed and open to wander — the loneliest lighthouse posting on the West Coast, once supplied only by horse. The Fresnel lens now sits in the Humboldt Bay Maritime Museum.",
+   "reference_link": "https://en.wikipedia.org/wiki/Punta_Gorda_Light"
+  },
+  {
+   "poi_id": "lostcoast-poi-sea-lion-gulch",
+   "type": "outdoor",
+   "name": "Sea Lion Gulch — Zone 2 north gate",
+   "lat": 40.24,
+   "lng": -124.332,
+   "difficulty": "hard",
+   "description": "Small bluff camp above a raucous sea lion haul-out, and the northern boundary of the trail's most serious tide zone: the next 4 miles to Randall Creek go only under ~2.5 ft of tide, entered on a falling tide. Camp here if the window has closed for the day.",
+   "reference_link": "https://www.blm.gov/sites/blm.gov/files/docs/2021-02/TIDE%20GUIDE%20WEB_Active%20Links%20(1).pdf"
+  },
+  {
+   "poi_id": "lostcoast-poi-cooskie-creek-camp",
+   "type": "outdoor",
+   "name": "Cooskie Creek camp",
+   "lat": 40.2193,
+   "lng": -124.3095,
+   "description": "Reliable creek-mouth water and sheltered flats mid-way through Zone 2 — the standard first night for a midday Mattole start. Filter all water; stash the canister 100 ft from the tent.",
+   "reference_link": "https://www.blm.gov/visit/lost-coast-trail"
+  },
+  {
+   "poi_id": "lostcoast-poi-randall-creek-camp",
+   "type": "outdoor",
+   "name": "Randall Creek — Zone 2 south exit",
+   "lat": 40.2007,
+   "lng": -124.2822,
+   "description": "Creek-mouth camp marking the southern end of the 4-mile Sea Lion Gulch tide zone — clear this point and the trail climbs onto safe bench terrace. A relief camp when the tide window ran tight.",
+   "reference_link": "https://www.blm.gov/sites/blm.gov/files/docs/2021-02/TIDE%20GUIDE%20WEB_Active%20Links%20(1).pdf"
+  },
+  {
+   "poi_id": "lostcoast-poi-spanish-flat-camp",
+   "type": "scenery",
+   "name": "Spanish Flat",
+   "lat": 40.1864,
+   "lng": -124.2583,
+   "description": "The longest marine terrace on the route — miles of firm, flower-covered bench trail with the surf below and the King Range crest above; the fastest, kindest walking of the whole trip and a fine open camp in settled weather (exposed to NW wind).",
+   "reference_link": "https://www.blm.gov/visit/lost-coast-trail"
+  },
+  {
+   "poi_id": "lostcoast-poi-big-flat-camp",
+   "type": "outdoor",
+   "name": "Big Flat camp",
+   "lat": 40.128,
+   "lng": -124.1749,
+   "description": "The trail's marquee camp: a wide creek-mouth terrace with dependable water, driftwood windbreaks, a remote surf break, and a private airstrip inholding — respect the private parcel and camp on the public side of Big Flat Creek. Heavy bear activity; canisters non-negotiable here.",
+   "reference_link": "https://www.blm.gov/visit/lost-coast-trail"
+  },
+  {
+   "poi_id": "lostcoast-poi-shipman-creek-camp",
+   "type": "outdoor",
+   "name": "Shipman Creek camp (inside Zone 3)",
+   "lat": 40.1179,
+   "lng": -124.1449,
+   "difficulty": "hard",
+   "description": "Creek-mouth camp that sits inside the Miller Flat–Gitchell tide zone — a legitimate overnight, but arriving or leaving still requires a falling-tide window under ~3 ft. Know your morning tide before you commit to sleeping here.",
+   "reference_link": "https://www.blm.gov/sites/blm.gov/files/docs/2021-02/TIDE%20GUIDE%20WEB_Active%20Links%20(1).pdf"
+  },
+  {
+   "poi_id": "lostcoast-poi-buck-creek-camp",
+   "type": "outdoor",
+   "name": "Buck Creek camp (inside Zone 3)",
+   "lat": 40.1088,
+   "lng": -124.121,
+   "difficulty": "hard",
+   "description": "Strong-flowing creek and driftwood camps beneath the steepest wall of the King Range — Buck Creek falls ~3,000 ft off the crest in about a mile. Like Shipman, it lies within the timed zone, so tide math governs both arrival and departure.",
+   "reference_link": "https://www.blm.gov/visit/lost-coast-trail"
+  },
+  {
+   "poi_id": "lostcoast-poi-gitchell-creek-camp",
+   "type": "outdoor",
+   "name": "Gitchell Creek — Zone 3 south exit",
+   "lat": 40.0944,
+   "lng": -124.1018,
+   "description": "The southern gate of the last tide zone and the classic final night: good water, big driftwood, and only untimed (if soft) sand between you and the car. Last comfortable camp — remember camping ends north of Telegraph Creek.",
+   "reference_link": "https://www.blm.gov/sites/blm.gov/files/docs/2021-02/TIDE%20GUIDE%20WEB_Active%20Links%20(1).pdf"
+  },
+  {
+   "poi_id": "lostcoast-poi-gyppo-ale-mill",
+   "type": "food",
+   "name": "Gyppo Ale Mill",
+   "lat": 40.0249,
+   "lng": -124.0689,
+   "time_window": "12:00–20:00",
+   "cash_only": false,
+   "description": "Shelter Cove's brewery and the accepted end-of-trail ritual — house-brewed ales, burgers, and a hiker-friendly beer garden minutes from Black Sands Beach. Hours verified July 2026 (12:00–20:00 most days, to 19:00 weekends) but note the 16:00 Tuesday opening — confirm ahead for a 2027 trip.",
+   "reference_link": "https://www.gyppo.com/location/gyppo-ale-mill/"
+  }
+ ],
+ "transit": [
+  {
+   "name": "Mattole Beach Trailhead (northern terminus)",
+   "lat": 40.289,
+   "lng": -124.356,
+   "description": "End of Lighthouse Road, 45+ minutes of narrow pavement-and-gravel from Petrolia; BLM Mattole Recreation Site with vault toilets and fee campground. Northern start of the southbound thru-hike; shuttle drop-off point.",
+   "reference_link": "https://www.blm.gov/visit/lost-coast-trail"
+  },
+  {
+   "name": "Black Sands Beach Trailhead, Shelter Cove (southern terminus)",
+   "lat": 40.0453,
+   "lng": -124.0786,
+   "description": "Paved lot above the beach at the north edge of Shelter Cove — leave the car here for the duration and meet the shuttle here on day one. No overnight camping at the beach itself.",
+   "reference_link": "https://www.blm.gov/visit/lost-coast-trail"
+  }
+ ]
+}

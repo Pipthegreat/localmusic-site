@@ -1,0 +1,356 @@
+{
+ "trip_id": "auyuittuq-akshayuk",
+ "name": "Auyuittuq - Arctic Traverse",
+ "region": "Nunavut, Canada",
+ "date_range": "2027-07/08",
+ "duration_days": 11,
+ "summary": "The hardest, most committing trip in this catalog — a 97 km unmarked Arctic traverse of Akshayuk Pass through Auyuittuq National Park, under the biggest vertical rock walls on Earth. Parks Canada budgets about 8 hiking days for the full Overlord–North Pangnirtung Fiord line; add the mandatory Pangnirtung registration/orientation day, two tide-and-weather-dependent boat transfers, and a buffer day for storms or high water, and the honest number is 11 — the commonly quoted ~9 days counts walking only. Season is late July–August, when river levels and sea ice cooperate best. There is no trail, no cell coverage, and evacuation is helicopter-only and weather-dependent. The hazard that kills here is unbridged glacial river crossings — meltwater peaks in the afternoon, so every stage starts early and crossings happen roughly 04:00–08:00 at low flow. Polar bears patrol both coastal ends (most active August onward as sea ice goes); carry deterrents and camp by the protocol taught at orientation. Registration, the orientation, and deregistration at the far end are all mandatory. Backcountry fee is $37.00/person/night — the $259 Northern Parks annual pass breaks even at 7 nights. Evenings don't exist as itinerary items on the tundra: camp chores under 24-hour Arctic light are the program, and this theme-paced expedition is honest about that.",
+ "activities": [
+  {
+   "activity_id": "auyuittuq-registration-orientation",
+   "name": "Parks Canada Registration & Mandatory Orientation, Pangnirtung",
+   "type": "historic",
+   "order_index": 1,
+   "lat": 66.148779,
+   "lng": -65.7032856,
+   "time_window": "09:00–11:30",
+   "duration": "2–3 hr",
+   "difficulty": "easy",
+   "description": "Fly Canadian North via Iqaluit into Pangnirtung, then report to the Parks Canada office at the Angmarlik Visitor Centre near the harbour. Registration, the safety orientation (hazards, river-crossing protocol, bear procedures, shelter radios), and fee payment are mandatory before entry, and you must deregister after exiting — an overdue deregistration triggers a search. Book the orientation time when you book flights: 867-473-2500. Backcountry fee $37.00/person/night; the $259 Northern Parks pass is cheaper for 7+ nights.",
+   "reference_link": "https://parks.canada.ca/pn-np/nu/auyuittuq/visit/tarifs-fees",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "auyuittuq-pangnirtung-layover",
+   "name": "Pangnirtung Layover — Co-op Resupply & Uqqurmiut Arts Centre",
+   "type": "food",
+   "order_index": 2,
+   "lat": 66.1467568,
+   "lng": -65.7101421,
+   "time_window": "12:30–17:00",
+   "duration": "half day",
+   "difficulty": "easy",
+   "description": "Final resupply afternoon: white gas/canister fuel cannot fly with you, so buy stove fuel here — confirm stock with the park office ahead, selection is thin and prices are Arctic. The Co-op and Northern Store cover food gaps. Then the Uqqurmiut Centre for Arts & Crafts, the famous weave shop behind Pangnirtung tapestries and the crocheted Pang hat — hours vary, confirm ahead. Sort your boat charter for tomorrow through a licensed outfitter via the Angmarlik Centre.",
+   "reference_link": "https://travelnunavut.ca/package/auyuittuq-national-park",
+   "poi_ids": [
+    "pang-coop",
+    "uqqurmiut-centre"
+   ]
+  },
+  {
+   "activity_id": "auyuittuq-boat-overlord-stage1",
+   "name": "Boat to Overlord & Stage 1 — Pangnirtung Fiord to Windy Lake",
+   "type": "outdoor",
+   "order_index": 3,
+   "lat": 66.3917063,
+   "lng": -65.4754975,
+   "time_window": "07:00–17:00",
+   "duration": "full day",
+   "difficulty": "hard",
+   "description": "Departure rides the tide: a licensed Inuit outfitter runs you ~30 km up Pangnirtung Fiord to the Overlord landing, about 45 minutes when ice and wind allow. Guided full-traverse packages run about CAD 9,295 (Black Feather 2026); independent charter rates weren't verifiable — budget several hundred dollars per person each way and confirm ahead through the Angmarlik Centre. Then Stage 1: ~14.6 km up the Weasel River valley past Ulu Peak to the Windy Lake shelter. A suspension bridge is reported at the Weasel River here — park bridges have been lost to floods before, so confirm current status at orientation.",
+   "reference_link": "https://parks.canada.ca/pn-np/nu/auyuittuq/visit",
+   "poi_ids": [
+    "overlord-shelter",
+    "ulu-shelter",
+    "windy-lake-shelter"
+   ]
+  },
+  {
+   "activity_id": "auyuittuq-stage2-thor",
+   "name": "Stage 2 — Windy Lake to the Foot of Mount Thor",
+   "type": "outdoor",
+   "order_index": 4,
+   "lat": 66.5555272,
+   "lng": -65.3331191,
+   "time_window": "05:00–12:00",
+   "duration": "5–7 hr",
+   "difficulty": "hard",
+   "description": "~9 km, started at dawn on purpose: glacial tributaries braid across this stretch and meltwater roughly doubles by afternoon — cross unbridged channels in the 04:00–08:00 low-flow window, unbuckled hip belts, facing upstream, poles out. Camp at the Thor shelter directly beneath Mount Thor's 1,250 m overhanging west face, the greatest vertical drop on Earth. Short mileage is the point; the ground is boulder and moraine, not trail.",
+   "reference_link": "https://parks.canada.ca/pn-np/nu/auyuittuq/activ/randonnee-hiking",
+   "poi_ids": [
+    "thor-shelter",
+    "mount-thor"
+   ]
+  },
+  {
+   "activity_id": "auyuittuq-stage3-arctic-circle-summit-lake",
+   "name": "Stage 3 — Across the Arctic Circle to Summit Lake",
+   "type": "outdoor",
+   "order_index": 5,
+   "lat": 66.6147963,
+   "lng": -65.2295108,
+   "time_window": "05:00–13:00",
+   "duration": "6–8 hr",
+   "difficulty": "hard",
+   "description": "~8.6 km through what Parks Canada calls the most rugged section of the pass — glacier moraines stacked one after another between Thor and Glacier Lake. Minutes north of the Thor shelter you cross 66°33′ N: the Arctic Circle, marked by an inukshuk reported in trip accounts. From here to the far fiord you are inside the circle under a sun that does not set in July. Camp at the Summit Lake shelter on the pass's height of land, south of the Caribou Glacier moraine.",
+   "reference_link": "https://parks.canada.ca/pn-np/nu/auyuittuq/activ/randonnee-hiking",
+   "poi_ids": [
+    "arctic-circle-crossing",
+    "summit-lake-shelter"
+   ]
+  },
+  {
+   "activity_id": "auyuittuq-asgard-viewpoint-day",
+   "name": "Summit Lake Day — Mount Asgard Viewpoint Side Trip",
+   "type": "scenery",
+   "order_index": 6,
+   "lat": 66.6722,
+   "lng": -65.2744,
+   "time_window": "08:00–16:00",
+   "duration": "6–8 hr",
+   "difficulty": "hard",
+   "description": "Layover day at Summit Lake, doubling as your built-in weather margin. If it's clear, day-hike up-moraine toward the Turner Glacier basin for the view of Mount Asgard's twin flat-topped granite towers (2,015 m) — the peak Rick Sylvester skied off with a Union Jack parachute for The Spy Who Loved Me's opening jump. Viewpoint only: anything onto glacier ice needs rope, crampons and crevasse training. Confirm the current side-trip line at orientation; if weather already cost you a day, this is the day you spend.",
+   "reference_link": "https://en.wikipedia.org/wiki/Mount_Asgard",
+   "poi_ids": [
+    "mount-asgard",
+    "summit-lake-shelter"
+   ]
+  },
+  {
+   "activity_id": "auyuittuq-stage4-glacier-lake",
+   "name": "Stage 4 — Summit Lake to Glacier Lake",
+   "type": "outdoor",
+   "order_index": 7,
+   "lat": 66.6907151,
+   "lng": -64.9757295,
+   "time_window": "05:00–15:00",
+   "duration": "8–10 hr",
+   "difficulty": "hard",
+   "description": "~19.6 km, the first big day, over the watershed divide and down into the Owl River drainage. Early start again — the day is long and the crossings multiply as glaciers feed in from both walls. Navigation is on you: no markers, no trail, just cairns where previous parties agreed. The Glacier Lake shelter (relocated by Parks Canada after flood risk assessment) has the same plywood bunks and emergency radio as the rest of the chain — shelters are for emergencies and radio checks; you sleep in your tent.",
+   "reference_link": "https://parks.canada.ca/pn-np/nu/auyuittuq/activ/randonnee-hiking",
+   "poi_ids": [
+    "glacier-lake-shelter"
+   ]
+  },
+  {
+   "activity_id": "auyuittuq-stage5-june-valley",
+   "name": "Stage 5 — Glacier Lake to June Valley",
+   "type": "outdoor",
+   "order_index": 8,
+   "lat": 66.7647398,
+   "lng": -64.6916883,
+   "time_window": "05:00–15:00",
+   "duration": "8–10 hr",
+   "difficulty": "hard",
+   "description": "~19.7 km down the widening Owl River valley — the longest stage. The Owl braids across a gravel outwash plain, and you will be in and out of channels all day; commit to the morning window for the deep ones and accept wet feet for the rest. Katabatic winds funnel down-valley without warning and have flattened tents here — guy out everything, every night. Camp near the June Valley shelter.",
+   "reference_link": "https://parks.canada.ca/pn-np/nu/auyuittuq/activ/randonnee-hiking",
+   "poi_ids": [
+    "june-valley-shelter"
+   ]
+  },
+  {
+   "activity_id": "auyuittuq-stage6-owl-river",
+   "name": "Stage 6 — June Valley to Owl River",
+   "type": "outdoor",
+   "order_index": 9,
+   "lat": 66.8911108,
+   "lng": -64.680941,
+   "time_window": "06:00–14:00",
+   "duration": "6–8 hr",
+   "difficulty": "hard",
+   "description": "~14.7 km of tundra benches and river flats as the pass opens toward the coast. Easier angles than the moraine days but the ground stays trailless and ankle-testing. From here on you are entering the zone where polar bears range inland from Davis Strait — start posting a bear watch at camp, cook well away from tents, and keep deterrents (spray warm enough to atomize, bangers, air horn) on your body, not in your pack. Camp at the Owl River shelter.",
+   "reference_link": "https://parks.canada.ca/pn-np/nu/auyuittuq/securite-safety/ours-bears",
+   "poi_ids": [
+    "owl-river-shelter"
+   ]
+  },
+  {
+   "activity_id": "auyuittuq-stage7-north-pang-fiord",
+   "name": "Stage 7 — Owl River to North Pangnirtung Fiord",
+   "type": "outdoor",
+   "order_index": 10,
+   "lat": 67.2105822,
+   "lng": -64.0389435,
+   "time_window": "06:00–14:00",
+   "duration": "6–8 hr",
+   "difficulty": "hard",
+   "description": "Final ~15 km to the shelter at the mouth of North Pangnirtung Fiord, where the pass meets the sea. This coastal strip is the highest polar-bear-probability terrain of the entire route — bears concentrate along the Davis Strait coast, especially once the sea ice is gone in August. Tight camp protocol, radio check on the shelter set, and confirm your boat pickup window. Then you wait on weather and tide like everyone before you — this is why the itinerary carries a buffer.",
+   "reference_link": "https://parks.canada.ca/pn-np/nu/auyuittuq/securite-safety/ours-bears",
+   "poi_ids": [
+    "north-pang-shelter"
+   ]
+  },
+  {
+   "activity_id": "auyuittuq-boat-qikiqtarjuaq-deregister",
+   "name": "Boat Pickup to Qikiqtarjuaq & Deregistration",
+   "type": "scenery",
+   "order_index": 11,
+   "lat": 67.5465605,
+   "lng": -64.0315516,
+   "time_window": "12:00–17:00",
+   "duration": "half day",
+   "difficulty": "easy",
+   "description": "Your pre-arranged outfitter runs the ~82 km of fiord and Davis Strait coast to Qikiqtarjuaq — a long, cold, spectacular ride past bergs and bird cliffs; pack storm layers for the open boat. Sea ice or wind can push this a day either way, which the buffer absorbs. In town, deregister at the Parks Canada office (867-927-8834) immediately — it is mandatory, and skipping it launches a search at your expense. Charter cost unverified: confirm rates when booking, months ahead.",
+   "reference_link": "https://parks.canada.ca/pn-np/nu/auyuittuq/securite-safety/comportements-guidelines",
+   "poi_ids": [
+    "north-pang-shelter"
+   ]
+  },
+  {
+   "activity_id": "auyuittuq-qikiqtarjuaq-icebergs",
+   "name": "Qikiqtarjuaq Buffer Morning — Iceberg Shoreline Walk",
+   "type": "scenery",
+   "order_index": 12,
+   "lat": 67.5465605,
+   "lng": -64.0315516,
+   "time_window": "09:00–12:00",
+   "duration": "2–3 hr",
+   "difficulty": "easy",
+   "description": "Built-in slack day before the Canadian North flight out via Iqaluit — if the boat ran on time you get a free morning in the community Travel Nunavut bills as Nunavut's iceberg capital, watching bergs drift the Davis Strait from the shoreline near town. Do not wander the coast alone or far: this is active polar bear country year-round. If weather ate your buffer days instead, this is the margin that just saved your flight.",
+   "reference_link": "https://travelnunavut.ca/package/auyuittuq-national-park",
+   "poi_ids": []
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "overlord-shelter",
+   "type": "outdoor",
+   "name": "Overlord Emergency Shelter (park entrance)",
+   "lat": 66.3917063,
+   "lng": -65.4754975,
+   "description": "Boat landing and southern gateway shelter below Overlord Peak, ~30 km up-fiord from Pangnirtung. First of nine Parks Canada emergency shelters spaced roughly a day apart — plywood bunks and a two-way emergency radio, for shelter in extremis, not accommodation.",
+   "reference_link": "https://www.openstreetmap.org/#map=15/66.39171/-65.47550"
+  },
+  {
+   "poi_id": "ulu-shelter",
+   "type": "outdoor",
+   "name": "Ulu Emergency Shelter",
+   "lat": 66.4108683,
+   "lng": -65.4936892,
+   "description": "Shelter a short way into the valley beneath Ulu Peak — passed on Stage 1, and the fallback if the boat lands you late.",
+   "reference_link": "https://www.openstreetmap.org/#map=15/66.41087/-65.49369"
+  },
+  {
+   "poi_id": "windy-lake-shelter",
+   "type": "outdoor",
+   "name": "Windy Emergency Shelter (Windy Lake)",
+   "lat": 66.5049335,
+   "lng": -65.4882501,
+   "description": "Stage 1 camp at Windy Lake on the Weasel River. The Windy Lake suspension bridge is reported here — verify current bridge status at orientation before counting on any bridge in this park.",
+   "reference_link": "https://www.openstreetmap.org/#map=15/66.50493/-65.48825"
+  },
+  {
+   "poi_id": "thor-shelter",
+   "type": "outdoor",
+   "name": "Thor Emergency Shelter",
+   "lat": 66.5555272,
+   "lng": -65.3331191,
+   "description": "Shelter and camp flats directly under Mount Thor's west face — the standard Stage 2 camp and the most photographed pitch site in the park.",
+   "reference_link": "https://www.openstreetmap.org/#map=15/66.55553/-65.33312"
+  },
+  {
+   "poi_id": "mount-thor",
+   "type": "scenery",
+   "name": "Mount Thor (1,675 m)",
+   "lat": 66.533,
+   "lng": -65.317,
+   "description": "Earth's greatest vertical drop: a 1,250 m granite face overhanging at an average 105 degrees. You walk beneath it for the better part of a day; the summit is a serious technical climb, not part of this trek.",
+   "reference_link": "https://en.wikipedia.org/wiki/Mount_Thor"
+  },
+  {
+   "poi_id": "arctic-circle-crossing",
+   "type": "scenery",
+   "name": "Arctic Circle crossing (66°33′ N)",
+   "lat": 66.5622,
+   "lng": -65.3214,
+   "description": "Where the route crosses the Arctic Circle, just north of the Thor shelter — trip reports describe an inukshuk marking it. Latitude is the circle itself; the longitude here is interpolated onto the route line between the Thor and Summit Lake shelters, so treat the pin as approximate and enjoy the crossing wherever the marker actually stands.",
+   "reference_link": "https://en.wikipedia.org/wiki/Arctic_Circle"
+  },
+  {
+   "poi_id": "summit-lake-shelter",
+   "type": "outdoor",
+   "name": "Summit Lake Emergency Shelter",
+   "lat": 66.6147963,
+   "lng": -65.2295108,
+   "description": "Height-of-land shelter just south of the Caribou Glacier moraine field — Stage 3 camp, Asgard side-trip base, and the watershed divide between the Weasel and Owl rivers.",
+   "reference_link": "https://www.openstreetmap.org/#map=15/66.61480/-65.22951"
+  },
+  {
+   "poi_id": "mount-asgard",
+   "type": "scenery",
+   "name": "Mount Asgard (2,015 m)",
+   "lat": 66.6722,
+   "lng": -65.2744,
+   "description": "Twin flat-topped granite towers separated by a saddle, first climbed 1953 — and the real location of the 1976 James Bond ski-BASE opening in The Spy Who Loved Me. Seen from the Turner Glacier basin viewpoint on the Summit Lake layover day; climbing it is an expedition of its own.",
+   "reference_link": "https://en.wikipedia.org/wiki/Mount_Asgard"
+  },
+  {
+   "poi_id": "glacier-lake-shelter",
+   "type": "outdoor",
+   "name": "Glacier Lake Emergency Shelter",
+   "lat": 66.6907151,
+   "lng": -64.9757295,
+   "description": "Stage 4 camp on the Owl River side of the divide — this shelter was formally relocated by Parks Canada after environmental assessment, a reminder that flood dynamics reshape this valley.",
+   "reference_link": "https://www.openstreetmap.org/#map=15/66.69072/-64.97573"
+  },
+  {
+   "poi_id": "june-valley-shelter",
+   "type": "outdoor",
+   "name": "June Valley Emergency Shelter",
+   "lat": 66.7647398,
+   "lng": -64.6916883,
+   "description": "Stage 5 camp in the braided Owl River outwash — the windiest camps of the trip tend to be along this reach; anchor tents accordingly.",
+   "reference_link": "https://www.openstreetmap.org/#map=15/66.76474/-64.69169"
+  },
+  {
+   "poi_id": "owl-river-shelter",
+   "type": "outdoor",
+   "name": "Owl River Emergency Shelter",
+   "lat": 66.8911108,
+   "lng": -64.680941,
+   "description": "Stage 6 camp where the valley opens toward Davis Strait. Bear-watch protocol starts in earnest from this camp northward.",
+   "reference_link": "https://www.openstreetmap.org/#map=15/66.89111/-64.68094"
+  },
+  {
+   "poi_id": "north-pang-shelter",
+   "type": "outdoor",
+   "name": "Mouth of North Pangnirtung Emergency Shelter",
+   "lat": 67.2105822,
+   "lng": -64.0389435,
+   "description": "The northern terminus shelter at tidewater, where boats from Qikiqtarjuaq land and collect hikers. Highest polar-bear likelihood of the route — bears concentrate along this coast, especially August onward. Radio here reaches over 100 km.",
+   "reference_link": "https://www.openstreetmap.org/#map=15/67.21058/-64.03894"
+  },
+  {
+   "poi_id": "pang-coop",
+   "type": "food",
+   "name": "Pangnirtung Co-op",
+   "lat": 66.1467568,
+   "lng": -65.7101421,
+   "description": "Main resupply in Pangnirtung: groceries and, critically, stove fuel you couldn't fly with. A Northern Store sits across the hamlet as backup. Arctic prices — bring most food from the south and top up here.",
+   "reference_link": "https://www.openstreetmap.org/#map=18/66.14676/-65.71014"
+  },
+  {
+   "poi_id": "uqqurmiut-centre",
+   "type": "historic",
+   "name": "Uqqurmiut Centre for Arts & Crafts",
+   "lat": 66.1469029,
+   "lng": -65.7086868,
+   "description": "The weave shop and print studio behind the famous Pangnirtung tapestries and the crocheted Pang hat — one of Nunavut's great community art institutions, minutes from the Co-op. Hours couldn't be verified — confirm ahead or knock while you're resupplying.",
+   "reference_link": "https://www.openstreetmap.org/#map=18/66.14690/-65.70869"
+  }
+ ],
+ "transit": [
+  {
+   "name": "Pangnirtung Airport (YXP)",
+   "lat": 66.1449145,
+   "lng": -65.7136823,
+   "description": "Canadian North turboprops from Iqaluit — the only way in. Schedules shift and weather cancellations are routine; book flexible tickets and pad both ends of the trip.",
+   "reference_link": "https://canadiannorth.com/plan_your_trip/route-map/"
+  },
+  {
+   "name": "Pangnirtung harbour (boat charters to Overlord)",
+   "lat": 66.148779,
+   "lng": -65.7032856,
+   "description": "Departure pier for licensed outfitter boats up Pangnirtung Fiord to the Overlord landing (~45 min, tide-dependent). Arrange through the Angmarlik Visitor Centre / park office, 867-473-2500; confirm rates when booking.",
+   "reference_link": "https://parks.canada.ca/pn-np/nu/auyuittuq/visit"
+  },
+  {
+   "name": "Qikiqtarjuaq Airport (YVM)",
+   "lat": 67.5465605,
+   "lng": -64.0315516,
+   "description": "Exit airport after the North Pangnirtung Fiord boat pickup — Canadian North back to Iqaluit. Deregister with Parks Canada in town (867-927-8834) before you fly.",
+   "reference_link": "https://canadiannorth.com/plan_your_trip/route-map/"
+  }
+ ],
+ "theme": "backpacking"
+}

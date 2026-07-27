@@ -1,0 +1,421 @@
+{
+ "trip_id": "silk-road-rail",
+ "name": "Silk Road - Rail Journey",
+ "region": "Uzbekistan",
+ "date_range": "spring or autumn (see summary)",
+ "duration_days": 9,
+ "theme": "rail-journey",
+ "summary": "Nine days riding the modern Silk Road: Tashkent to Samarkand and Bukhara on the 210 km/h Afrosiyob (Talgo) trains, then across the Kyzylkum to Khiva on the new Jaloliddin Manguberdi fast service — the practical, actually-ridable rail version of the Silk Road. Go mid-April to May or September to early October; summer regularly tops 38°C in the lowland desert cities. Book trains yourself on eticket.railway.uz or the Uzbekistan Railways app: tickets open roughly 45 days out and Afrosiyob seats genuinely sell out, so lock in the three long segments before you fly. Entry is easy — some 90+ nationalities (EU, UK, Japan, Korea, and US citizens from 1 January 2026) get 30 days visa-free; others use the e-visa portal. Budget expectations: economy-class rail, guesthouse-level comfort, bazaar lunches, and som cash in small notes for tickets and stalls; bring your passport to enter stations and arrive 30 minutes early for security checks.",
+ "activities": [
+  {
+   "activity_id": "silkroad-tashkent-metro-chorsu",
+   "name": "Tashkent metro art crawl to Chorsu Bazaar",
+   "type": "historic",
+   "order_index": 1,
+   "lat": 41.305,
+   "lng": 69.2653,
+   "time_window": "09:00–12:30",
+   "duration": "3.5 hours",
+   "difficulty": "easy",
+   "cash_only": true,
+   "description": "Day 1. Ride the Soviet-built Tashkent Metro station-hopping past the chandeliers and cosmonaut ceramics of Kosmonavtlar, then surface at Chorsu for the blue-domed bazaar's spice, bread and dried-fruit halls. Verified caveat: photographing the metro was banned until June 2018 — it is now officially allowed, but be discreet around staff booths. Fares are a few thousand som and bazaar stallholders deal in cash som; current metro fare, confirm ahead.",
+   "reference_link": "https://en.wikipedia.org/wiki/Tashkent_Metro",
+   "poi_ids": [
+    "silkroad-poi-kosmonavtlar",
+    "silkroad-poi-chorsu"
+   ]
+  },
+  {
+   "activity_id": "silkroad-plov-lunch",
+   "name": "Plov pilgrimage at the Central Asian Plov Centre (Besh Qozon)",
+   "type": "food",
+   "order_index": 2,
+   "lat": 41.3474,
+   "lng": 69.285,
+   "time_window": "12:30–14:30",
+   "duration": "1.5 hours",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Day 1. Tashkent's famous plov hangar by the TV Tower turns out thousands of portions a day from giant kazan cauldrons — watch the cooks work, then eat wedding-style plov with quail egg and horse sausage for a few dollars. Verified caveat: it opens 09:00–23:00 but plov varieties sell out as the day goes on — arrive by early lunch to see the cauldrons full. Card acceptance at the tills: confirm ahead.",
+   "reference_link": "https://www.tripadvisor.com/Restaurant_Review-g293968-d1128331-Reviews-Beshqozon_Central_Asian_Plov_Centre-Tashkent_Tashkent_Province.html",
+   "poi_ids": [
+    "silkroad-poi-besh-qozon"
+   ]
+  },
+  {
+   "activity_id": "silkroad-rail-tashkent-samarkand",
+   "name": "Rail: Afrosiyob high-speed, Tashkent to Samarkand",
+   "type": "scenery",
+   "order_index": 3,
+   "lat": 41.2933,
+   "lng": 69.2877,
+   "time_window": "07:30–09:45",
+   "duration": "2.25 hours",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Day 2. The Talgo 250 hits 210 km/h across the steppe; economy (2+2) is perfectly comfortable and the cheapest way to do this in style, with tea service included. Verified caveat: tickets are released about 45 days before travel on eticket.railway.uz / the Uzbekistan Railways app and morning Afrosiyob departures sell out — book the day sales open. The slower Sharq day train is the budget fallback if seats are gone.",
+   "reference_link": "https://www.seat61.com/Uzbekistan.htm",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "silkroad-registan",
+   "name": "Registan Square and its three madrasahs",
+   "type": "historic",
+   "order_index": 4,
+   "lat": 39.6547,
+   "lng": 66.9756,
+   "time_window": "15:00–18:00",
+   "duration": "3 hours",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Day 2. The set-piece of the whole journey: Ulugh Beg, Sher-Dor and Tilya-Kori madrasahs around one plaza, with the gold-leafed Tilya-Kori dome the interior highlight. Afternoon light hits the main facades best. Verified caveat: the foreigner ticket is now 100,000 som (~$8) and hours run roughly 08:00–19:00 in summer, 09:00–17:00 November–March — the square itself is viewable from outside at any hour. Souvenir hard-sell inside the cells is constant; haggle or walk on.",
+   "reference_link": "https://hittheroadket.com/how-to-visit-registan-heart-of-uzbekistan/",
+   "poi_ids": [
+    "silkroad-poi-registan"
+   ]
+  },
+  {
+   "activity_id": "silkroad-registan-light-show",
+   "name": "Registan evening light-and-laser show",
+   "type": "nightlife",
+   "order_index": 5,
+   "lat": 39.6547,
+   "lng": 66.9756,
+   "time_window": "20:00–21:30",
+   "duration": "1.5 hours",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Day 2, evening. Verified: the show still runs — 2025 reports describe a music-and-light projection around 20:00 and a 3D laser show around 21:00, watchable free from the amphitheatre benches outside the fence (no ticket needed). Verified caveat: start times shift seasonally and aren't formally published — ask your guesthouse the exact time that week. Budget move: skip paid evening entry, the outside benches are the local way.",
+   "reference_link": "https://indyguide.com/question/is-there-a-light-show-at-the-registan-in-the-evening",
+   "poi_ids": [
+    "silkroad-poi-registan"
+   ]
+  },
+  {
+   "activity_id": "silkroad-shah-i-zinda",
+   "name": "Shah-i-Zinda necropolis, Bibi-Khanym and Siyob Bazaar",
+   "type": "historic",
+   "order_index": 6,
+   "lat": 39.6631,
+   "lng": 66.9878,
+   "time_window": "08:00–12:30",
+   "duration": "4.5 hours",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "Day 3. Climb the avenue of turquoise-tiled Timurid mausoleums at Shah-i-Zinda first thing — it opens 07:00 and tour buses land mid-morning — then walk down past the giant Bibi-Khanym Mosque to Siyob Bazaar for non and melon among locals. Verified caveat: Shah-i-Zinda's foreigner ticket rose to 40,000–50,000 som after Samarkand's 2024–25 fee hikes; it's an active pilgrimage site, so cover shoulders and knees. Bibi-Khanym entry fee: confirm ahead.",
+   "reference_link": "https://en.wikipedia.org/wiki/Shah-i-Zinda",
+   "poi_ids": [
+    "silkroad-poi-shah-i-zinda",
+    "silkroad-poi-bibi-khanym",
+    "silkroad-poi-siyob-bazaar"
+   ]
+  },
+  {
+   "activity_id": "silkroad-gur-e-amir",
+   "name": "Gur-e-Amir, tomb of Tamerlane",
+   "type": "historic",
+   "order_index": 7,
+   "lat": 39.6483,
+   "lng": 66.9689,
+   "time_window": "16:00–17:30",
+   "duration": "1.5 hours",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Day 3. Timur's own mausoleum — the fluted azure dome and gilded interior that prototyped the Taj Mahal's lineage, and a calmer counterpoint to the Registan crowds. Verified caveat: Samarkand raised entry here to 65,000 som in the 2025 round of price increases (up from 50,000), so carry som. Evening exterior illumination is pretty if you pass by after dinner; interior evening hours, confirm ahead.",
+   "reference_link": "https://www.saigatours.com/article/samarkand-increases-entry-fees",
+   "poi_ids": [
+    "silkroad-poi-gur-e-amir"
+   ]
+  },
+  {
+   "activity_id": "silkroad-rail-samarkand-bukhara",
+   "name": "Rail: Afrosiyob, Samarkand to Bukhara",
+   "type": "scenery",
+   "order_index": 8,
+   "lat": 39.6855,
+   "lng": 66.929,
+   "time_window": "09:30–11:15",
+   "duration": "1.75 hours",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Day 4. A short 1h40 hop through cotton fields and desert fringe — grab a right-side window seat for the Zarafshan valley. Verified caveat: Bukhara's station is actually Bukhara-1 in Kagan, about 12 km from the old town — shared taxis and Yandex Go rides wait outside; agree the price or use the app before getting in. Economy class is all you need at this length.",
+   "reference_link": "https://www.seat61.com/Uzbekistan.htm",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "silkroad-lyab-i-hauz-evening",
+   "name": "Shashlik and tea around Lyab-i Hauz",
+   "type": "food",
+   "order_index": 9,
+   "lat": 39.7731,
+   "lng": 64.4203,
+   "time_window": "18:30–21:30",
+   "duration": "3 hours",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Day 4, evening. Bukhara's social heart since 1620: a stone pool ringed by mulberry trees, chaikhanas and the Nadir Divan-Begi madrasah. Order skewers of lamb shashlik, samsa and green tea on a tapchan platform as the lights come on. Verified caveat: the poolside restaurants are the most tourist-priced tables in Bukhara — check the menu (and whether service is added) before sitting; cheaper shashlik stands are a couple of lanes back. Evening folklore shows in the madrasah courtyard: confirm ahead.",
+   "reference_link": "https://en.wikipedia.org/wiki/Lab-i_Hauz",
+   "poi_ids": [
+    "silkroad-poi-lyab-i-hauz"
+   ]
+  },
+  {
+   "activity_id": "silkroad-ark-bukhara",
+   "name": "The Ark fortress and Bolo Hauz Mosque",
+   "type": "historic",
+   "order_index": 10,
+   "lat": 39.7778,
+   "lng": 64.4103,
+   "time_window": "09:00–12:00",
+   "duration": "3 hours",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "Day 5. The emirs' royal citadel — a raised mud-brick town whose ramparts give the best free-ish views over Bukhara's domes; the small museums inside cover the khanate and the 1920 Red Army bombardment that flattened much of it. Verified caveat: most of the interior is reconstruction (roughly 80% was destroyed in 1920), and 2025 visitors report the foreigner ticket at around 60,000 som, hours about 09:00–18:00 — confirm ahead at the booth. Cross the road after for the 20-columned Bolo Hauz Mosque.",
+   "reference_link": "https://en.wikipedia.org/wiki/Ark_of_Bukhara",
+   "poi_ids": [
+    "silkroad-poi-ark"
+   ]
+  },
+  {
+   "activity_id": "silkroad-kalyan-sunset",
+   "name": "Po-i-Kalyan complex at golden hour",
+   "type": "historic",
+   "order_index": 11,
+   "lat": 39.7758,
+   "lng": 64.4142,
+   "time_window": "15:30–18:30",
+   "duration": "3 hours",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Day 5. The 47 m Kalyan Minaret — the 1127 'Tower of Death' that Genghis Khan spared — with the vast Kalyan Mosque courtyard and the still-working Mir-i-Arab madrasah facing off across the square. Late afternoon light on the brickwork is the photo of the trip. Verified caveat: climbing the minaret is not permitted; the square is free to wander and only the mosque courtyard charges a small fee (around 10,000–15,000 som — confirm ahead). Walk back through the trading domes for haggle-friendly souvenirs.",
+   "reference_link": "https://en.wikipedia.org/wiki/Po-i-Kalyan",
+   "poi_ids": [
+    "silkroad-poi-poi-kalyan"
+   ]
+  },
+  {
+   "activity_id": "silkroad-rail-bukhara-khiva",
+   "name": "Rail: across the Kyzylkum, Bukhara to Khiva",
+   "type": "scenery",
+   "order_index": 12,
+   "lat": 39.7225,
+   "lng": 64.5484,
+   "time_window": "11:15–14:35",
+   "duration": "3.5 hours",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Day 6. The desert leg the Afrosiyob doesn't do: the new Jaloliddin Manguberdi fast train (No. 752) crosses the Kyzylkum and the Amu Darya fringe to Khiva's own station in about 3h20 — red sand, saxaul scrub and camels from the window. Verified caveat: per the current timetable it runs only Tuesday/Thursday/Saturday (11:14 from Bukhara-1); on other days the daily conventional trains take about 5.5 hours — check the eticket.railway.uz calendar and shape your week around it. Bring water and snacks; catering is minimal.",
+   "reference_link": "https://www.advantour.com/uzbekistan/trains/bukhara-khiva.htm",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "silkroad-itchan-kala",
+   "name": "Itchan Kala walled city, full day",
+   "type": "historic",
+   "order_index": 13,
+   "lat": 41.3783,
+   "lng": 60.3639,
+   "time_window": "08:00–17:00",
+   "duration": "9 hours",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "Day 7. Khiva's intact walled khanate city — UNESCO's first Uzbek listing — anchored by the stub of the turquoise Kalta Minor minaret and the Kuhna Ark citadel, with madrasahs, harem courtyards and the Juma Mosque's 200-plus carved wooden columns. Verified caveat: the combined pass is 250,000 som (~$20), valid 48 hours and covers 16–18 museums/sites, but it excludes the Islam Khodja minaret climb, the Ak Sheikh Bobo watchtower and the city-wall walk, which are ticketed separately; wandering the streets themselves is free. Wear real shoes — it's cobbles and sun all day.",
+   "reference_link": "https://wander-lush.org/khiva-itinerary/",
+   "poi_ids": [
+    "silkroad-poi-itchan-kala",
+    "silkroad-poi-kalta-minor"
+   ]
+  },
+  {
+   "activity_id": "silkroad-islam-khodja-sunset",
+   "name": "Islam Khodja minaret climb and city-wall sunset",
+   "type": "outdoor",
+   "order_index": 14,
+   "lat": 41.3766,
+   "lng": 60.3601,
+   "time_window": "15:30–18:30",
+   "duration": "3 hours",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "Day 8. Climb Khiva's tallest minaret (57 m, 1910) for the definitive over-the-rooftops panorama of Itchan Kala, then catch sunset from the mud-brick ramparts as the desert light turns the whole town amber. Verified caveat: the climb is a separate 100,000 som ticket outside the Itchan Kala pass, and the staircase is steep, narrow and unlit — genuinely not for claustrophobes; take a phone light. Wall-walk access points and their 40,000 som ticket: confirm ahead, they've moved between seasons.",
+   "reference_link": "https://taleof2backpackers.com/things-to-do-in-khiva/",
+   "poi_ids": [
+    "silkroad-poi-islam-khodja",
+    "silkroad-poi-itchan-kala"
+   ]
+  },
+  {
+   "activity_id": "silkroad-rail-khiva-tashkent",
+   "name": "Rail: the long ride home, Khiva to Tashkent",
+   "type": "scenery",
+   "order_index": 15,
+   "lat": 41.3772,
+   "lng": 60.3766,
+   "time_window": "09:00–16:30",
+   "duration": "7.5 hours",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Day 9. Close the loop in one shot: the Jaloliddin Manguberdi fast service links Khiva and Tashkent in around 7 hours (economy and VIP classes, Afrosiyob-style stock), replaying the whole desert-and-oasis transect in a day. Verified caveat: the classic budget alternative — the ~14-hour overnight sleeper — still runs, and kupe berths (roughly $25–35) sell out well ahead in season, so book either option the day sales open ~45 days out. If the fast train isn't running your date, fly Urgench–Tashkent or take the sleeper; confirm ahead on the eticket app.",
+   "reference_link": "https://www.advantour.com/uzbekistan/trains/night-tashkent-khiva.htm",
+   "poi_ids": []
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "silkroad-poi-kosmonavtlar",
+   "type": "scenery",
+   "name": "Kosmonavtlar Metro Station",
+   "lat": 41.305,
+   "lng": 69.2653,
+   "description": "Tashkent's cosmonaut-themed showpiece metro station (1984), with deep-blue ceramic medallions of Gagarin and Tereshkova — the anchor stop of any metro art crawl.",
+   "reference_link": "https://en.wikipedia.org/wiki/Kosmonavtlar_(Tashkent_Metro)"
+  },
+  {
+   "poi_id": "silkroad-poi-chorsu",
+   "type": "food",
+   "name": "Chorsu Bazaar",
+   "lat": 41.3267,
+   "lng": 69.235,
+   "description": "Tashkent's centuries-old market under a giant turquoise Soviet dome: spices, dried fruit, kurt cheese balls, non bread ovens and butchers' rows. Cash som territory.",
+   "reference_link": "https://en.wikipedia.org/wiki/Chorsu_Bazaar"
+  },
+  {
+   "poi_id": "silkroad-poi-besh-qozon",
+   "type": "food",
+   "name": "Besh Qozon — Central Asian Plov Centre",
+   "lat": 41.3474,
+   "lng": 69.285,
+   "description": "The city's plov mothership beside the TV Tower (Iftixor 1), open 09:00–23:00, where rows of giant kazans feed thousands daily. Come at lunch before varieties sell out.",
+   "reference_link": "https://www.tripadvisor.com/Restaurant_Review-g293968-d1128331-Reviews-Beshqozon_Central_Asian_Plov_Centre-Tashkent_Tashkent_Province.html"
+  },
+  {
+   "poi_id": "silkroad-poi-registan",
+   "type": "historic",
+   "name": "Registan Square",
+   "lat": 39.6547,
+   "lng": 66.9756,
+   "description": "Samarkand's ensemble of three madrasahs (15th–17th c.) — Ulugh Beg, Sher-Dor and Tilya-Kori — the defining image of the Silk Road. Ticketed interior; free nightly light show viewable from outside.",
+   "reference_link": "https://en.wikipedia.org/wiki/Registan"
+  },
+  {
+   "poi_id": "silkroad-poi-shah-i-zinda",
+   "type": "historic",
+   "name": "Shah-i-Zinda Necropolis",
+   "lat": 39.6631,
+   "lng": 66.9878,
+   "description": "An avenue of intensely tiled Timurid mausoleums climbing Afrasiyab hill, still an active pilgrimage site. Open from 07:00 — go early, dress modestly.",
+   "reference_link": "https://en.wikipedia.org/wiki/Shah-i-Zinda"
+  },
+  {
+   "poi_id": "silkroad-poi-bibi-khanym",
+   "type": "historic",
+   "name": "Bibi-Khanym Mosque",
+   "lat": 39.6606,
+   "lng": 66.9792,
+   "description": "Timur's colossal congregational mosque (1404), once among the Islamic world's largest, heavily restored in the Soviet era. Impressive even from the street.",
+   "reference_link": "https://en.wikipedia.org/wiki/Bibi-Khanym_Mosque"
+  },
+  {
+   "poi_id": "silkroad-poi-siyob-bazaar",
+   "type": "food",
+   "name": "Siyob Bazaar",
+   "lat": 39.666,
+   "lng": 66.9795,
+   "description": "Samarkand's main farmers' market beside Bibi-Khanym: non bread stamped with city patterns, melons, halva and dried apricots — the cheap authentic lunch stop.",
+   "reference_link": "https://www.openstreetmap.org/#map=18/39.66601/66.97954"
+  },
+  {
+   "poi_id": "silkroad-poi-gur-e-amir",
+   "type": "historic",
+   "name": "Gur-e-Amir Mausoleum",
+   "lat": 39.6483,
+   "lng": 66.9689,
+   "description": "The ribbed azure-domed tomb of Tamerlane and his dynasty (1404), architectural ancestor of Humayun's Tomb and the Taj Mahal. Beautifully lit after dark.",
+   "reference_link": "https://en.wikipedia.org/wiki/Gur-e-Amir"
+  },
+  {
+   "poi_id": "silkroad-poi-ark",
+   "type": "historic",
+   "name": "Ark of Bukhara",
+   "lat": 39.7778,
+   "lng": 64.4103,
+   "description": "The emirs' fortified citadel, occupied from the 5th century until 1920, when Red Army bombardment destroyed most of it. Ramparts, coronation court and small museums.",
+   "reference_link": "https://en.wikipedia.org/wiki/Ark_of_Bukhara"
+  },
+  {
+   "poi_id": "silkroad-poi-poi-kalyan",
+   "type": "historic",
+   "name": "Po-i-Kalyan Complex (Kalyan Minaret, Mosque, Mir-i-Arab)",
+   "lat": 39.7758,
+   "lng": 64.4142,
+   "description": "Bukhara's signature ensemble: the 47 m Kalyan Minaret of 1127, the vast Friday mosque and the working Mir-i-Arab madrasah. The square is free; minaret climbing is not permitted.",
+   "reference_link": "https://en.wikipedia.org/wiki/Po-i-Kalyan"
+  },
+  {
+   "poi_id": "silkroad-poi-lyab-i-hauz",
+   "type": "scenery",
+   "name": "Lyab-i Hauz",
+   "lat": 39.7731,
+   "lng": 64.4203,
+   "description": "Bukhara's 1620 pool-plaza ringed by mulberry trees, madrasahs and chaikhanas — the evening gathering spot for shashlik, tea and people-watching.",
+   "reference_link": "https://en.wikipedia.org/wiki/Lab-i_Hauz"
+  },
+  {
+   "poi_id": "silkroad-poi-itchan-kala",
+   "type": "historic",
+   "name": "Itchan Kala",
+   "lat": 41.3783,
+   "lng": 60.3639,
+   "description": "Khiva's walled inner city, a complete khanate-era townscape and UNESCO World Heritage site. Streets are free to roam; a 48-hour combined pass covers most interiors.",
+   "reference_link": "https://en.wikipedia.org/wiki/Itchan_Kala"
+  },
+  {
+   "poi_id": "silkroad-poi-kalta-minor",
+   "type": "historic",
+   "name": "Kalta Minor Minaret",
+   "lat": 41.3783,
+   "lng": 60.358,
+   "description": "The famously unfinished 'short minaret' (1855), a fat turquoise-banded drum that has become Khiva's emblem, beside the Muhammad Amin Khan madrasah.",
+   "reference_link": "https://www.openstreetmap.org/#map=19/41.37835/60.35798"
+  },
+  {
+   "poi_id": "silkroad-poi-islam-khodja",
+   "type": "scenery",
+   "name": "Islam Khodja Minaret",
+   "lat": 41.3766,
+   "lng": 60.3601,
+   "description": "Khiva's tallest minaret (57 m, 1910) with banded tilework; the steep, dark internal staircase leads to the best panorama over Itchan Kala. Separate 100,000 som ticket.",
+   "reference_link": "https://www.openstreetmap.org/#map=19/41.37658/60.36012"
+  }
+ ],
+ "transit": [
+  {
+   "name": "Tashkent Central Railway Station (Toshkent)",
+   "lat": 41.2933,
+   "lng": 69.2877,
+   "description": "Departure point for Afrosiyob services west and the Khiva trains. Passport plus ticket needed to enter; arrive 30 minutes early for security screening.",
+   "reference_link": "https://www.seat61.com/Uzbekistan.htm"
+  },
+  {
+   "name": "Samarkand Railway Station",
+   "lat": 39.6855,
+   "lng": 66.929,
+   "description": "On Rudaki Avenue about 4–5 km northwest of the Registan; cheap Yandex Go rides or bus into the old town. All Afrosiyob and Sharq services call here.",
+   "reference_link": "https://www.openstreetmap.org/#map=17/39.68547/66.92897"
+  },
+  {
+   "name": "Bukhara-1 Railway Station (Kagan)",
+   "lat": 39.7225,
+   "lng": 64.5484,
+   "description": "Bukhara's mainline station sits in Kagan, roughly 12 km southeast of the old town — budget 25–35 minutes by shared taxi or ride-hail app to Lyab-i Hauz.",
+   "reference_link": "https://www.openstreetmap.org/#map=17/39.72249/64.54841"
+  },
+  {
+   "name": "Khiva Railway Station",
+   "lat": 41.3772,
+   "lng": 60.3766,
+   "description": "Opened 2018 at the end of the Urgench branch, a short 1.5 km walk or 2-minute taxi east of Itchan Kala's gates — no more long transfer from Urgench required.",
+   "reference_link": "https://www.openstreetmap.org/#map=17/41.37715/60.37660"
+  }
+ ]
+}

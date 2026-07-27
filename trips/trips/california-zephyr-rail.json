@@ -1,0 +1,353 @@
+{
+ "trip_id": "california-zephyr-rail",
+ "name": "California Zephyr - Rail",
+ "region": "USA — Chicago to San Francisco Bay",
+ "date_range": "May–Oct best (see summary)",
+ "duration_days": 4,
+ "theme": "rail-journey",
+ "summary": "Amtrak train #5, daily at 2:00 PM out of Chicago Union Station: 2,438 miles and ~51 scheduled hours over the Rockies and the Sierra to Emeryville (4:57 PM two days later), with an Amtrak-ticketed bus across the Bay Bridge to San Francisco. Ridden as 4 days with one 24-hour hop-off — Denver or Glenwood Springs both work because the train is daily, but you must book the trip as two separate legs (a through ticket doesn't allow overnight breaks). Budget honesty: coach typically $250–420 one-way (reclining seat, café food, dining car only if space); a roomette commonly $700–1,500 for the room including all dining-car meals — split it two ways and it can be worth it, otherwise coach is the authentic move. May–Oct is best: you need long daylight to see Ruby Canyon at sunset and the evening Bay arrival. Expectations: 12-month customer on-time performance ran ~56–67% with an average delay of ~116 minutes when late (freight interference) — treat the schedule as a guideline, pad every onward plan by 2–3 hours, and never book a same-evening flight out of SFO. The overnight Salt Lake City stop (11:15 PM–11:40 PM) is 25 minutes in a dark parking lot — not usable; sleep through it. Reno is an 11-minute fresh-air stop only.",
+ "activities": [
+  {
+   "activity_id": "zephyr-billy-goat-sendoff",
+   "name": "Night-before send-off at the Billy Goat Tavern",
+   "type": "food",
+   "order_index": 1,
+   "lat": 41.8903,
+   "lng": -87.6248,
+   "time_window": "18:00–21:00",
+   "duration": "1.5–2 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Sleep in Chicago the night before — #5 leaves at 2:00 PM sharp and you don't want to gamble a morning flight against it. Dinner is the 1934 newspapermen's dive under Michigan Avenue: double cheezborger, chips (no fries), a cheap beer, walls of yellowed columns. Pure Chicago authenticity for under $15. Verified caveat: the original is on subterranean Lower Michigan Avenue at 430 N Michigan — street level walks right past it; take the stairs down at Hubbard.",
+   "reference_link": "https://www.billygoattavern.com/locations/michigan/",
+   "poi_ids": [
+    "billy-goat-tavern"
+   ]
+  },
+  {
+   "activity_id": "zephyr-great-hall-boarding",
+   "name": "Union Station Great Hall + boarding train #5",
+   "type": "historic",
+   "order_index": 2,
+   "lat": 41.8786,
+   "lng": -87.6402,
+   "time_window": "11:30–14:00",
+   "duration": "2–2.5 hr",
+   "difficulty": "easy",
+   "description": "Arrive by noon and give yourself an hour under the 1925 Beaux-Arts skylight of D.H. Burnham & Co.'s Great Hall — one of America's last grand rail waiting rooms, and your journey genuinely starts here. Check a bag (free allowance), buy lounge snacks and a water bottle at the food hall (café-car prices onboard are steep), then board. Sleeper passengers get the Metropolitan Lounge; coach waits in the hall, which is the better room anyway. Verified caveat: departure is 2:00 PM Central daily on the current timetable (valid into March 2027) — schedules shift, recheck your date on amtrak.com.",
+   "reference_link": "https://en.wikipedia.org/wiki/Union_Station_(Chicago)",
+   "poi_ids": [
+    "chicago-great-hall"
+   ]
+  },
+  {
+   "activity_id": "zephyr-sightseer-mississippi",
+   "name": "Sightseer Lounge claim + Mississippi River crossing",
+   "type": "scenery",
+   "order_index": 3,
+   "lat": 40.8056,
+   "lng": -91.1017,
+   "time_window": "15:00–18:00",
+   "duration": "2–3 hr",
+   "difficulty": "easy",
+   "description": "First hours out of Chicago, learn the train's real social hall: the Sightseer Lounge, floor-to-ceiling curved glass, seats unreserved and free to coach and sleeper alike — this is where the trip's conversations happen. The café below sells snacks and beer; you're allowed to bring your own food to the upper-level seats. Payoff at 5:34 PM: the train rolls across the Mississippi at Burlington, Iowa — golden light on the big river in summer. Verified caveat: lounge seats fill fast before marquee scenery and there's no rationing; stake your spot early and don't leave bags to hold seats all day.",
+   "reference_link": "https://www.amtrak.com/onboard-the-train-meals-dining",
+   "poi_ids": [
+    "burlington-mississippi-crossing"
+   ]
+  },
+  {
+   "activity_id": "zephyr-diner-first-dinner",
+   "name": "First dinner call in the dining car (coach strategy)",
+   "type": "food",
+   "order_index": 4,
+   "lat": 41.0186,
+   "lng": -92.4148,
+   "time_window": "17:30–20:00",
+   "duration": "1–1.5 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "The Zephyr still runs traditional dining: chef-prepared three-course dinners, white-ish tablecloths, communal seating over the Iowa cornfields — half the stories you'll tell come from who lands at your table. Sleeper fares include every meal and the attendant takes reservations. Verified caveat: coach passengers are seated first-come only if space remains after sleeper reservations, at a fixed price (dinner runs roughly $45 — confirm aboard); the budget alternative is café-car fare or the picnic bag you packed in Chicago.",
+   "reference_link": "https://www.amtrak.com/onboard-the-train-meals-dining",
+   "poi_ids": [
+    "burlington-mississippi-crossing"
+   ]
+  },
+  {
+   "activity_id": "zephyr-denver-stopover-morning",
+   "name": "Denver hop-off: Union Station morning (optional stopover day)",
+   "type": "historic",
+   "order_index": 5,
+   "lat": 39.7531,
+   "lng": -105.0,
+   "time_window": "08:00–12:00",
+   "duration": "half day",
+   "difficulty": "easy",
+   "description": "Westbound #5 hits Denver at 7:56 AM on day 2 — the stopover play is to get off here, take the full day and night in the city, and board the next morning's train at 8:46 AM (~25 hours). Start in the 1914 Great Hall, reborn in 2014 as a free public living room: breakfast counters, leather sofas under chandeliers, the Crawford Hotel upstairs. Then walk LoDo and the Platte riverfront on your own legs — you'll have been sitting for 18 hours. Verified caveat: you must book Chicago→Denver and Denver→Emeryville as two separate one-way legs (multi-city); a through ticket does not permit an overnight break, and splitting sometimes costs more — price both before committing.",
+   "reference_link": "https://en.wikipedia.org/wiki/Denver_Union_Station",
+   "poi_ids": [
+    "denver-great-hall"
+   ]
+  },
+  {
+   "activity_id": "zephyr-denver-union-evening",
+   "name": "Denver stopover night: Terminal Bar + LoDo",
+   "type": "nightlife",
+   "order_index": 6,
+   "lat": 39.7531,
+   "lng": -105.0001,
+   "time_window": "17:00–22:00",
+   "duration": "3–4 hr",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Stopover evening done cheap and well: beers at the Terminal Bar, built into Union Station's old ticket windows with a long Colorado tap list, then drift into LoDo — the blocks around Wynkoop and Larimer are wall-to-wall brewpubs and happy hours, all walkable from the station door. Skip the Crawford Hotel unless you're flush; budget beds mean a hostel or a motel a transit ride out — confirm ahead. Verified caveat: tomorrow's train boards at 8:46 AM and it's the only one that day — set the alarm, because missing it costs you 24 hours.",
+   "reference_link": "https://en.wikipedia.org/wiki/Denver_Union_Station",
+   "poi_ids": [
+    "terminal-bar-denver",
+    "denver-great-hall"
+   ]
+  },
+  {
+   "activity_id": "zephyr-front-range-moffat",
+   "name": "The Front Range climb + Moffat Tunnel",
+   "type": "scenery",
+   "order_index": 7,
+   "lat": 39.9024,
+   "lng": -105.6461,
+   "time_window": "08:46–11:00",
+   "duration": "2 hr",
+   "difficulty": "easy",
+   "description": "Be in the Sightseer Lounge with coffee when #5 pulls out of Denver at 8:46 AM — the next two hours are the most dramatic railroading east of the Sierra. The train hairpins up the Front Range through nearly 30 short tunnels, the plains and Denver skyline falling away below the Big Ten Curve, then bores through the 6.2-mile Moffat Tunnel under the Continental Divide — at 9,239 ft, the highest point on the entire Amtrak network — and pops out at the base of Winter Park's ski runs before the 10:48 AM Fraser–Winter Park stop. Verified caveat: the tunnel takes about ten minutes of total darkness and the lounge empties fast afterward — hold your seat through it, the Colorado River canyons come next.",
+   "reference_link": "https://en.wikipedia.org/wiki/Moffat_Tunnel",
+   "poi_ids": [
+    "moffat-east-portal"
+   ]
+  },
+  {
+   "activity_id": "zephyr-colorado-river-canyons",
+   "name": "Byers, Gore & Glenwood Canyons — riding the Colorado River",
+   "type": "scenery",
+   "order_index": 8,
+   "lat": 39.9906,
+   "lng": -106.5078,
+   "time_window": "11:00–14:30",
+   "duration": "3.5 hr",
+   "difficulty": "easy",
+   "description": "From Granby the tracks lock onto the young Colorado River and follow it for hours through country you cannot drive: Byers Canyon, then Gore Canyon — three roadless miles under 1,000-ft walls shared only with whitewater rafts — and finally 12.5-mile Glenwood Canyon, walls to 1,300 ft above the water. Summer tradition: rafters 'salute' the passing Zephyr, frequently with bare backsides; the lounge crowd salutes back. Eat lunch in the diner or lounge during this stretch — best dining view in America. Verified caveat: Gore Canyon is genuinely roadless (rail and boats only), which is exactly why this segment exists nowhere on a road trip — but it also means zero cell coverage for long stretches; download maps beforehand.",
+   "reference_link": "https://en.wikipedia.org/wiki/Gore_Canyon",
+   "poi_ids": [
+    "glenwood-canyon"
+   ]
+  },
+  {
+   "activity_id": "zephyr-glenwood-stopover",
+   "name": "Glenwood Springs hop-off: hot springs stopover",
+   "type": "outdoor",
+   "order_index": 9,
+   "lat": 39.5481,
+   "lng": -107.3231,
+   "time_window": "14:36–20:00",
+   "duration": "24 hr (overnight)",
+   "difficulty": "easy",
+   "description": "The classic Zephyr stopover, and the easiest logistics on the route: step off at the 1904 depot at 2:36 PM, and the world's largest mineral hot springs pool is a short walk over the pedestrian bridge — soak off two train days in 90–104°F water where the Utes soaked first. Day passes roughly $32–55 depending on season; quieter, adults-leaning Iron Mountain Hot Springs (16 riverside pools, open to 10 PM) is a half-mile stroll along the Colorado. Overnight in town, reboard tomorrow's #5 at 2:43 PM having missed nothing — the Ruby Canyon segment repeats daily. Verified caveat: like Denver, this requires booking two separate legs; and pool hours/rates are seasonal (9 AM–9 PM core, later peak summer) — confirm ahead.",
+   "reference_link": "https://hotspringspool.com/hot_springs/rates/",
+   "poi_ids": [
+    "glenwood-hot-springs-pool",
+    "iron-mountain-hot-springs"
+   ]
+  },
+  {
+   "activity_id": "zephyr-ruby-canyon",
+   "name": "Ruby Canyon at golden hour",
+   "type": "scenery",
+   "order_index": 10,
+   "lat": 39.1175,
+   "lng": -109.0708,
+   "time_window": "16:45–18:30",
+   "duration": "1.5 hr",
+   "difficulty": "easy",
+   "description": "After the 13-minute leg-stretch on the Grand Junction platform (4:30–4:43 PM — last fresh air until night), the train slips into Ruby Canyon: roughly 25 miles of red sandstone walls along the Colorado River on the Utah line, reachable only by raft or these rails — no road, no overlook, no other way to see it. In May–October light the sandstone goes ember-orange; watch for the painted Colorado/Utah state line on the canyon wall. Verified caveat: this is strictly a long-daylight show — outside roughly April–September the canyon passes near or after dark, which is half the reason to ride in season.",
+   "reference_link": "https://en.wikipedia.org/wiki/Ruby_Canyon",
+   "poi_ids": [
+    "grand-junction-station"
+   ]
+  },
+  {
+   "activity_id": "zephyr-reno-truckee-donner",
+   "name": "Reno stop, Truckee River canyon & the Donner Pass crossing",
+   "type": "scenery",
+   "order_index": 11,
+   "lat": 39.3144,
+   "lng": -120.3269,
+   "time_window": "09:13–12:50",
+   "duration": "3.5 hr",
+   "difficulty": "easy",
+   "description": "Day 3 headliner. Reno, 9:13 AM, is an 11-minute crew stop in the sunken downtown trench — step onto the platform for air but stay within sight of the door. Then the train climbs the Truckee River canyon to the 1868 railroad town of Truckee (10:33 AM) and takes on Donner Pass the way the Central Pacific's builders did: over the 7,000-ft Sierra crest through the 10,322-ft Tunnel 41 under Mount Judah, with Donner Lake glinting more than 1,000 feet below on the right side of the train — pioneer hard-luck history in every mile down to Colfax. Verified caveat: it's 11 minutes at Reno, not a smoke-break suggestion — the Zephyr will leave without you; unverified but common May–Oct, volunteer rail docents narrate this stretch in the lounge — confirm ahead.",
+   "reference_link": "https://en.wikipedia.org/wiki/Donner_Pass",
+   "poi_ids": [
+    "donner-lake-view"
+   ]
+  },
+  {
+   "activity_id": "zephyr-emeryville-sf-finale",
+   "name": "Bay-shore finale: Emeryville arrival + bus into San Francisco",
+   "type": "scenery",
+   "order_index": 12,
+   "lat": 37.8407,
+   "lng": -122.2925,
+   "time_window": "15:31–17:45",
+   "duration": "2 hr",
+   "difficulty": "easy",
+   "description": "The last act runs from Sacramento down the Carquinez Strait and right along the San Pablo Bay shoreline — water outside the left windows from Martinez to Richmond — into Emeryville at 4:57 PM scheduled. Your ticket includes the Route 99 Thruway bus (5:15 PM) over the Bay Bridge to the Salesforce Transit Center street stop, due 5:45 PM; from there the Ferry Building is a 10-minute walk for a celebratory dinner among 50-odd food stalls and Bay views. Verified caveat: the Zephyr's 12-month customer on-time performance ran roughly 56–67% with ~2-hour average delays when late — buses meet all trains, but plan nothing hard-timed tonight; if the train is very late, bailing at Richmond for BART into the city is the locals' backup.",
+   "reference_link": "https://railrat.net/routes/CaliforniaZephyr/",
+   "poi_ids": [
+    "ferry-building-sf"
+   ]
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "billy-goat-tavern",
+   "type": "food",
+   "name": "Billy Goat Tavern (original, Lower Michigan Ave)",
+   "lat": 41.8903,
+   "lng": -87.6248,
+   "cash_only": false,
+   "description": "1934 subterranean newspaper bar of Cubs-curse and 'cheezborger' fame; burgers under $10. Open from 7 AM weekdays — verified hours run to midnight or later, but confirm holiday hours ahead.",
+   "reference_link": "https://www.billygoattavern.com/locations/michigan/"
+  },
+  {
+   "poi_id": "chicago-great-hall",
+   "type": "historic",
+   "name": "Union Station Great Hall",
+   "lat": 41.8786,
+   "lng": -87.6402,
+   "description": "1925 Beaux-Arts waiting room with a five-story barrel-vault skylight; boarding for #5 is called from here. Free to sit — the Metropolitan Lounge beyond is sleeper-ticket only.",
+   "reference_link": "https://en.wikipedia.org/wiki/Union_Station_(Chicago)"
+  },
+  {
+   "poi_id": "burlington-mississippi-crossing",
+   "type": "scenery",
+   "name": "Mississippi River crossing at Burlington, IA",
+   "lat": 40.8056,
+   "lng": -91.1017,
+   "description": "The Zephyr crosses the Mississippi on the rail bridge at Burlington (scheduled 5:34 PM westbound) — first of the trip's big water. Get to the lounge glass a few minutes early; the crossing itself is quick.",
+   "reference_link": "https://en.wikipedia.org/wiki/Burlington_station_(Iowa)"
+  },
+  {
+   "poi_id": "denver-great-hall",
+   "type": "historic",
+   "name": "Denver Union Station Great Hall",
+   "lat": 39.7531,
+   "lng": -105.0,
+   "description": "1914 station house reopened 2014: 12,000 sq ft public hall with restaurants and the Crawford Hotel above. Free to linger all day — individual counters keep their own hours, confirm ahead.",
+   "reference_link": "https://en.wikipedia.org/wiki/Denver_Union_Station"
+  },
+  {
+   "poi_id": "terminal-bar-denver",
+   "type": "nightlife",
+   "name": "Terminal Bar",
+   "lat": 39.7531,
+   "lng": -105.0001,
+   "cash_only": false,
+   "description": "Bar built into Union Station's original ticket windows at 1701 Wynkoop, heavy on Colorado drafts. Verified location inside the Great Hall; happy-hour times unverified — confirm ahead.",
+   "reference_link": "https://en.wikipedia.org/wiki/Denver_Union_Station"
+  },
+  {
+   "poi_id": "moffat-east-portal",
+   "type": "scenery",
+   "name": "Moffat Tunnel East Portal (9,239 ft apex)",
+   "lat": 39.9024,
+   "lng": -105.6461,
+   "description": "Entrance to the 6.2-mile bore under the Continental Divide — the highest point on the Amtrak network. About ten minutes of darkness, then Winter Park's slopes at the West Portal.",
+   "reference_link": "https://en.wikipedia.org/wiki/Moffat_Tunnel"
+  },
+  {
+   "poi_id": "glenwood-canyon",
+   "type": "scenery",
+   "name": "Glenwood Canyon",
+   "lat": 39.575,
+   "lng": -107.223,
+   "description": "12.5 miles of 1,300-ft walls above the Colorado River; the rails ride the quiet bank opposite I-70's stacked viaducts. Best watched from the lounge in the hour before Glenwood Springs.",
+   "reference_link": "https://en.wikipedia.org/wiki/Glenwood_Canyon"
+  },
+  {
+   "poi_id": "glenwood-hot-springs-pool",
+   "type": "outdoor",
+   "name": "Glenwood Hot Springs Pool",
+   "lat": 39.5496,
+   "lng": -107.3237,
+   "cash_only": false,
+   "description": "The world's largest mineral hot springs pool, a short walk over the pedestrian bridge from the depot; Grand Pool ~90°F, Therapy Pool 104°F. Day passes ~$32–55 by season, core hours 9 AM–9 PM — confirm current rates ahead.",
+   "reference_link": "https://hotspringspool.com/hot_springs/rates/"
+  },
+  {
+   "poi_id": "iron-mountain-hot-springs",
+   "type": "outdoor",
+   "name": "Iron Mountain Hot Springs",
+   "lat": 39.5553,
+   "lng": -107.3363,
+   "cash_only": false,
+   "description": "16 small mineral pools terraced on the Colorado riverbank, quieter and more adult than the big pool; open daily to 10 PM. Verified: booking online saves $5 and beats sell-outs on summer weekends.",
+   "reference_link": "https://www.ironmountainhotsprings.com/pricing"
+  },
+  {
+   "poi_id": "grand-junction-station",
+   "type": "historic",
+   "name": "Grand Junction station (13-min platform break)",
+   "lat": 39.0646,
+   "lng": -108.5705,
+   "description": "Scheduled 4:30–4:43 PM westbound service stop — the last real leg-stretch before Ruby Canyon and the Utah night. Stay on the platform; the historic 1906 depot next door is not the Amtrak building.",
+   "reference_link": "https://en.wikipedia.org/wiki/Grand_Junction_station"
+  },
+  {
+   "poi_id": "donner-lake-view",
+   "type": "scenery",
+   "name": "Donner Lake overlook (from the grade)",
+   "lat": 39.3228,
+   "lng": -120.2644,
+   "description": "From the shelf on Schallenberger Ridge the whole lake (elev. 5,936 ft) spreads out 1,000+ ft below the train — right side of the train heading west, roughly between Truckee and the summit tunnels.",
+   "reference_link": "https://en.wikipedia.org/wiki/Donner_Lake"
+  },
+  {
+   "poi_id": "ferry-building-sf",
+   "type": "food",
+   "name": "San Francisco Ferry Building Marketplace",
+   "lat": 37.7955,
+   "lng": -122.3937,
+   "cash_only": false,
+   "description": "About 50 restaurants, oyster bars and food purveyors under the 1898 clock tower, a 10-minute walk from the Amtrak bus stop — the arrival dinner. Most stalls open daily, but many close by early evening — confirm ahead if the train runs late.",
+   "reference_link": "https://en.wikipedia.org/wiki/San_Francisco_Ferry_Building"
+  }
+ ],
+ "transit": [
+  {
+   "name": "Chicago Union Station (train #5 origin)",
+   "lat": 41.8786,
+   "lng": -87.6402,
+   "description": "California Zephyr #5 departs 2:00 PM CT daily (timetable valid into March 2027 — recheck your date). Free checked-bag allowance; arrive an hour early, buy provisions in the food hall.",
+   "reference_link": "https://www.amtrak.com/california-zephyr-train"
+  },
+  {
+   "name": "Denver Union Station",
+   "lat": 39.7531,
+   "lng": -105.0,
+   "description": "Westbound arrival 7:56 AM / departure 8:46 AM — a 50-minute crew-and-fuel stop even if you ride through, and the stopover hop-off point. RTD A Line trains run direct to Denver airport if plans change.",
+   "reference_link": "https://en.wikipedia.org/wiki/Denver_Union_Station"
+  },
+  {
+   "name": "Emeryville station (EMY)",
+   "lat": 37.8407,
+   "lng": -122.2925,
+   "description": "Scheduled arrival 4:57 PM day 3 — the Bay Area's Amtrak hub. Delays of 1–3 hours are routine (56–67% customer OTP); Thruway buses meet all trains, so don't panic-book a rideshare.",
+   "reference_link": "https://en.wikipedia.org/wiki/Emeryville_station"
+  },
+  {
+   "name": "SF Thruway bus stop — Salesforce Transit Center (Route 99)",
+   "lat": 37.7897,
+   "lng": -122.3966,
+   "description": "Amtrak-ticketed Route 99 bus, Emeryville 5:15 PM → downtown SF 5:45 PM scheduled; street-level stop on Mission St near Fremont, not inside the terminal. Included with your rail ticket — keep it handy.",
+   "reference_link": "https://en.wikipedia.org/wiki/Salesforce_Transit_Center"
+  }
+ ]
+}

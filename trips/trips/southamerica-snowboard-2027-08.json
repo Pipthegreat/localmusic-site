@@ -1,0 +1,511 @@
+{
+ "trip_id": "southamerica-snowboard-2027-08",
+ "name": "Andes - Snowboard Fortnight",
+ "region": "Chilean Andes & Argentine Patagonia (Santiago / Bariloche)",
+ "date_range": "2027-07/08",
+ "duration_days": 14,
+ "theme": "snowboard-resort",
+ "summary": "Two weeks, two Andes, two snow cultures: seven nights high and dry at Valle Nevado (base 3,000 m, ~900 ha, and the Tres Valles interconnect with La Parva under Mountain Capital Partners — the biggest lift-served terrain in the Southern Hemisphere, 46 km above Santiago), then a direct winter flight to Bariloche for Cerro Catedral (Argentina's largest resort: ~600 ha, 1,070 m vertical, lake views, and a real town with craft beer, asado and chocolate at the bottom). Why this pairing over the rivals: Las Leñas was operating as of the 2025 season (opened June 28) but remains a single-village, wind-hold-prone outpost with US$130 peak-day tickets; Portillo is a superb but small lodge-week resort better suited to a package stay; Nevados de Chillán has great trees and hot springs but a 5–6 h transfer and unconfirmed pricing; Cerro Castor is reliable but small-vertical and very far south. Expect: July–August is absolute peak (Chilean and Argentine school holidays) — crowds midday, book everything early. Andes storm cycles are real: Ruta G-21 to Valle Nevado runs a winter scheme (uphill-only 08:00–13:00, chains mandatory when declared, closures evaluated in heavy snowfall), and Catedral's low base (1,030 m) can mean rain low while it dumps high. 2027 prices were unpublished at research time — 2026 references: Valle Nevado ~US$105/day, Catedral ARS 160,000 (~US$115); confirm all ahead. Budget style: sleep in Farellones village rather than slope-side, ride 09:00 bells, spend evenings on completos, cerveza artesanal and parrilla.",
+ "activities": [
+  {
+   "activity_id": "sa-mercado-central-seafood",
+   "name": "Mercado Central seafood lunch",
+   "type": "food",
+   "order_index": 1,
+   "lat": -33.4341,
+   "lng": -70.6481,
+   "time_window": "12:30–14:30",
+   "duration": "2h",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Land in Santiago and go straight for jet-lag-killing seafood in the 1872 cast-iron market hall: caldillo de congrio, machas a la parmesana, a pisco sour. Skip the hawker-heavy centre-floor restaurants and eat at the smaller perimeter counters for better prices. Caveat (verified): the building runs roughly 07:30–17:00 Sun–Thu (later Fri/Sat) and stalls wind down earlier — this is a lunch stop, not a dinner one.",
+   "reference_link": "https://www.santiagoturismo.cl/en/mercado-central-de-santiago-2/",
+   "poi_ids": [
+    "poi-mercado-central"
+   ]
+  },
+  {
+   "activity_id": "sa-antigua-fuente-completo",
+   "name": "Completo and lomito night at La Antigua Fuente",
+   "type": "food",
+   "order_index": 2,
+   "lat": -33.4377,
+   "lng": -70.636,
+   "time_window": "19:00–21:00",
+   "duration": "2h",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Chile's sandwich institution on the Alameda near Plaza Baquedano: monster lomito with palta and sauerkraut, or a completo italiano, elbow-to-elbow at the horseshoe counter. Caveat (verified): the original Fuente Alemana here closed in 2020 and the Alameda 58 room reopened under new management as 'La Antigua Fuente' — sources conflict on its weekly closing day, so confirm hours ahead (the surviving Fuente Alemana branch is in Providencia if this one is shut).",
+   "reference_link": "https://www.yelp.com/biz/fuente-alemana-santiago-2",
+   "poi_ids": [
+    "poi-antigua-fuente"
+   ]
+  },
+  {
+   "activity_id": "sa-andes-switchback-ascent",
+   "name": "Ruta G-21 switchback transfer to Farellones",
+   "type": "scenery",
+   "order_index": 3,
+   "lat": -33.3508,
+   "lng": -70.3129,
+   "time_window": "08:00–10:30",
+   "duration": "2.5h",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Pre-booked van up the famous ~40 numbered curves of Camino a Farellones, climbing from 700 m to ~2,400 m with Santiago smog dissolving below. Drop bags in Farellones village — the budget-authentic base for the Tres Valles. Caveat (verified): the winter traffic scheme runs uphill-only 08:00–13:00 and downhill 15:00–20:00 on control days, and Carabineros make chains mandatory whenever an alert is declared — leave early and don't fight the windows.",
+   "reference_link": "https://www.transporteinforma.cl/noticias/horarios-de-subida-y-bajada-a-centros-invernales-en-farellones/",
+   "poi_ids": [
+    "poi-farellones",
+    "poi-valle-nevado"
+   ]
+  },
+  {
+   "activity_id": "sa-farellones-altitude-stroll",
+   "name": "Farellones village acclimatization stroll",
+   "type": "scenery",
+   "order_index": 4,
+   "lat": -33.3508,
+   "lng": -70.3129,
+   "time_window": "15:00–17:00",
+   "duration": "2h",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Easy afternoon wander through Chile's original 1930s ski village: wooden refugios, condor-spotting over the valley rim, empanadas and an early night before first lifts. Sleeping here instead of slope-side is the budget move that keeps you in the culture. Caveat (verified): all classes of buses are banned from Ruta G-21 from June 1 to Sept 30, so there is no cheap coach option — arrange van transfers or a suitable rental with chains.",
+   "reference_link": "https://www.transporteinforma.cl/noticias/parten-medidas-de-transito-en-camino-farellones-por-temporada-invernal/",
+   "poi_ids": [
+    "poi-farellones"
+   ]
+  },
+  {
+   "activity_id": "sa-valle-nevado-first-tracks-day",
+   "name": "Valle Nevado ride day 1 — high-altitude warm-up",
+   "type": "outdoor",
+   "order_index": 5,
+   "lat": -33.3567,
+   "lng": -70.2495,
+   "time_window": "09:00–16:00",
+   "duration": "7h",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "First bell at Chile's flagship: 34 marked runs across ~900 ha of treeless alpine, famously dry Andean chalk underfoot and El Plomo's glacier on the horizon. Keep it to flowy groomers off the main chairs today. Caveat (verified): the base village sits at 3,000 m — altitude hits hard on day one, so hydrate, ride half-throttle and skip the summit lifts until you've slept a night high.",
+   "reference_link": "https://en.wikipedia.org/wiki/Valle_Nevado",
+   "poi_ids": [
+    "poi-valle-nevado"
+   ]
+  },
+  {
+   "activity_id": "sa-valle-nevado-upper-mountain-day",
+   "name": "Valle Nevado ride day 2 — upper-mountain bowls",
+   "type": "outdoor",
+   "order_index": 6,
+   "lat": -33.3567,
+   "lng": -70.2495,
+   "time_window": "09:00–16:00",
+   "duration": "7h",
+   "difficulty": "hard",
+   "cash_only": false,
+   "description": "Push to the top of the lift network (~3,670 m) for the advanced and expert lines — 14 advanced and 5 expert runs on the trail map, wide wind-buffed bowls and natural hits everywhere on a bluebird day. Caveat (verified): wind holds on upper lifts are routine during storm cycles at this elevation — check the resort's daily mountain report before committing to a summit plan.",
+   "reference_link": "https://www.vallenevado.com/en/mountain-report/",
+   "poi_ids": [
+    "poi-valle-nevado"
+   ]
+  },
+  {
+   "activity_id": "sa-tres-valles-interconnect-day",
+   "name": "Tres Valles interconnect day — Valle Nevado to La Parva",
+   "type": "outdoor",
+   "order_index": 7,
+   "lat": -33.3371,
+   "lng": -70.2886,
+   "time_window": "09:00–16:00",
+   "duration": "7h",
+   "difficulty": "hard",
+   "cash_only": false,
+   "description": "The Southern Hemisphere's biggest lift-served day: cross the ridgeline gates into La Parva's steeper, quieter chutes and lap back, covering two of the three Tres Valles resorts on one interconnected ticket now that both sit under Mountain Capital Partners. Caveat (verified): interconnected Valle Nevado–La Parva tickets and Power Pass days existed for the 2026 season, but MCP's purchase of El Colorado was still awaiting regulatory approval — confirm 2027 interconnect products and gate openings (weather-dependent) ahead.",
+   "reference_link": "https://www.vallenevado.com/en/power-pass/",
+   "poi_ids": [
+    "poi-valle-nevado",
+    "poi-la-parva"
+   ]
+  },
+  {
+   "activity_id": "sa-valle-nevado-powder-day",
+   "name": "Valle Nevado ride day 4 — storm-cycle powder",
+   "type": "outdoor",
+   "order_index": 8,
+   "lat": -33.3567,
+   "lng": -70.2495,
+   "time_window": "09:00–16:00",
+   "duration": "7h",
+   "difficulty": "hard",
+   "cash_only": false,
+   "description": "When an Andes storm pulse clears, this is the payoff: light, dry, high-altitude powder in the bowls with almost no trees to dodge and long fall-lines back toward the base. Ride with a partner and carry avy gear beyond the markers. Caveat (verified): the same storms that fill the bowls shut the access road — authorities evaluated closing Ruta G-21 during June 2025 snowfalls — so on storm days be already on the mountain rather than commuting up.",
+   "reference_link": "https://www.emol.com/noticias/Nacional/2025/06/12/1169138/caida-nieve-centros-ski-ruta.html",
+   "poi_ids": [
+    "poi-valle-nevado"
+   ]
+  },
+  {
+   "activity_id": "sa-valle-nevado-park-farewell-day",
+   "name": "Valle Nevado ride day 5 — park laps and farewell",
+   "type": "outdoor",
+   "order_index": 9,
+   "lat": -33.3567,
+   "lng": -70.2495,
+   "time_window": "09:00–16:00",
+   "duration": "7h",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "Last Chilean day: morning corduroy, midday snowpark laps and a slow final run soaking in the 3,000 m panorama before packing for Patagonia. Caveat (verified): 2026 adult day tickets ran about US$105 / CLP 93,000 with dynamic 'Fix' (fixed-date) vs pricier 'Flex' products — 2027 pricing was unpublished at research time, so confirm ahead and buy the cheaper fixed-date tickets online early.",
+   "reference_link": "https://powderquest.com/south-america-ski-resort-lift-ticket-prices/",
+   "poi_ids": [
+    "poi-valle-nevado"
+   ]
+  },
+  {
+   "activity_id": "sa-parque-farellones-weather-day",
+   "name": "Weather-day alternative — Parque Farellones village day",
+   "type": "outdoor",
+   "order_index": 10,
+   "lat": -33.3508,
+   "lng": -70.3129,
+   "time_window": "10:00–15:00",
+   "duration": "5h",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Swap-in for a lift-hold or road-alert day: Farellones' snow-play park (tubing lanes, sledding, canopy line) plus a long lunch in the village — low-commitment fun at walking distance when the upper mountain is shut; confirm the park's operating days ahead. Caveat (verified): the G-21 winter traffic windows (uphill 08:00–13:00, downhill 15:00–20:00 on control days) also constrain any mid-day repositioning, so treat a weather day as a stay-put day.",
+   "reference_link": "https://chiletourfun.com/parque-farellones/",
+   "poi_ids": [
+    "poi-farellones"
+   ]
+  },
+  {
+   "activity_id": "sa-descent-to-santiago",
+   "name": "Dawn descent of the forty curves",
+   "type": "scenery",
+   "order_index": 11,
+   "lat": -33.3508,
+   "lng": -70.3129,
+   "time_window": "07:30–09:30",
+   "duration": "2h",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Roll down the switchbacks at first light with the Santiago basin filling with morning sun — the counterpart bookend to the ascent, and the connection to the airport for the Patagonia leg. Caveat (verified): two-way traffic on the mountain road is only guaranteed 20:00–08:00 on control days, with the formal downhill window at 15:00–20:00 — an early start is the reliable way to make a same-day flight.",
+   "reference_link": "https://www.transporteinforma.cl/noticias/horarios-de-subida-y-bajada-a-centros-invernales-en-farellones/",
+   "poi_ids": [
+    "poi-farellones"
+   ]
+  },
+  {
+   "activity_id": "sa-scl-brc-andes-flight",
+   "name": "Andes crossing — Santiago to Bariloche flight",
+   "type": "scenery",
+   "order_index": 12,
+   "lat": -33.3928,
+   "lng": -70.7856,
+   "time_window": "13:30–16:00",
+   "duration": "2.5h",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "The inter-resort transfer is itself a scenic event: roughly two hours over the spine of the Andes and the Patagonian lake district into Bariloche. Grab a window seat for volcano and cordillera views the whole way. Caveat (verified): nonstop SCL–BRC service exists in winter (Sky Airline flies it nonstop; JetSMART and LATAM itineraries mostly connect via Buenos Aires), but frequencies are seasonal and limited — book early and confirm the 2027 winter schedule ahead.",
+   "reference_link": "https://www.flightsfrom.com/SCL-BRC",
+   "poi_ids": []
+  },
+  {
+   "activity_id": "sa-manush-welcome-pints",
+   "name": "Bariloche welcome — Manush craft beer session",
+   "type": "nightlife",
+   "order_index": 13,
+   "lat": -41.1358,
+   "lng": -71.3104,
+   "time_window": "17:30–20:00",
+   "duration": "2.5h",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "First night in Argentina's craft-beer capital: Manush's corner brewpub pours around 23 taps of its own and local beer alongside burgers and picadas, packed with locals straight off the hill. Caveat (verified): happy hour runs about 17:30–20:00 and the room fills fast right at opening — arrive on the hour or expect a wait on the sidewalk.",
+   "reference_link": "https://www.yelp.com/biz/manush-san-carlos-de-bariloche",
+   "poi_ids": [
+    "poi-manush",
+    "poi-centro-civico"
+   ]
+  },
+  {
+   "activity_id": "sa-catedral-warmup-groomers",
+   "name": "Cerro Catedral ride day 1 — warm-up groomers",
+   "type": "outdoor",
+   "order_index": 14,
+   "lat": -41.1652,
+   "lng": -71.4395,
+   "time_window": "09:00–16:00",
+   "duration": "7h",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "First laps at Argentina's biggest resort: ~600 ha and a genuine 1,070 m vertical served by a huge lift network, with Nahuel Huapi's blue sprawl in view from almost every run. Learn the two base cable-lift arteries today and find your lap zones. Caveat (verified): the 2026 adult day pass was ARS 160,000 (~US$115) with peak-period increases in July–August — 2027 prices were unpublished, so confirm ahead and buy online to skip base-area queues.",
+   "reference_link": "https://www.interpatagonia.com/catedral/tarifas_i.html",
+   "poi_ids": [
+    "poi-villa-catedral"
+   ]
+  },
+  {
+   "activity_id": "sa-catedral-nubes-steeps",
+   "name": "Cerro Catedral ride day 2 — upper-mountain steeps",
+   "type": "outdoor",
+   "order_index": 15,
+   "lat": -41.1652,
+   "lng": -71.4395,
+   "time_window": "09:00–16:00",
+   "duration": "7h",
+   "difficulty": "hard",
+   "cash_only": false,
+   "description": "Head for the ridgeline sectors around the top of the mountain (the Nubes side is the classic steep zone — confirm which upper lifts are spinning each morning) for rock-lined chutes and wind-lip hits above the clouds. Caveat (verified): the base sits at just 1,030 m against a 2,100 m summit, so mid-winter rain at the bottom while the top stays cold and snowy is a real pattern — read the freezing level, not just the snowfall total.",
+   "reference_link": "https://en.wikipedia.org/wiki/Cerro_Catedral",
+   "poi_ids": [
+    "poi-villa-catedral"
+   ]
+  },
+  {
+   "activity_id": "sa-alto-el-fuego-asado",
+   "name": "Parrilla night at Alto el Fuego",
+   "type": "food",
+   "order_index": 16,
+   "lat": -41.1355,
+   "lng": -71.3115,
+   "time_window": "20:15–23:00",
+   "duration": "2.5h",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "The Bariloche asado ritual done properly: a small, wood-fired parrilla on 20 de Febrero grilling bife de chorizo, provoleta and Patagonian lamb, with Malbec by the copa — Argentine dinner hours, so go late like the locals. Caveat (verified): closed Sundays, with lunch service only Tuesday–Saturday and dinner from 20:00 — reserve ahead, the room is tiny.",
+   "reference_link": "https://www.interpatagonia.com/bariloche/alto-el-fuego_i.html",
+   "poi_ids": [
+    "poi-alto-el-fuego"
+   ]
+  },
+  {
+   "activity_id": "sa-catedral-laguna-sidecountry",
+   "name": "Cerro Catedral ride day 3 — freeride and sidecountry",
+   "type": "outdoor",
+   "order_index": 17,
+   "lat": -41.1652,
+   "lng": -71.4395,
+   "time_window": "09:00–16:00",
+   "duration": "7h",
+   "difficulty": "hard",
+   "cash_only": false,
+   "description": "Catedral's freeride reputation lives beyond the markers: short hikes off the top ridge open bowls and couloirs rolling toward the backcountry refugios (Refugio Frey territory in summer). Hire a local guide for the off-piste — it is unpatrolled and terrain-trap-rich, and current access policy should be confirmed ahead. Caveat (verified): everything outside marked runs is outside patrol coverage at this resort — partner, transceiver, probe and shovel are non-negotiable.",
+   "reference_link": "https://en.wikipedia.org/wiki/Cerro_Catedral",
+   "poi_ids": [
+    "poi-villa-catedral"
+   ]
+  },
+  {
+   "activity_id": "sa-catedral-lake-view-carving",
+   "name": "Cerro Catedral ride day 4 — long lake-view descents",
+   "type": "outdoor",
+   "order_index": 18,
+   "lat": -41.1652,
+   "lng": -71.4395,
+   "time_window": "09:00–16:00",
+   "duration": "7h",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "Cruiser day: string together the full vertical top-to-bottom, carving panoramic reds with Nahuel Huapi dead ahead, and take a proper mid-mountain café stop. Legs will feel week two — that's the point of the groomer day. Caveat (verified): the longest marked descent runs about 9 km, and lower-mountain snow can go slushy or thin by afternoon at this base elevation — ride the long lines in the morning and stay high after lunch.",
+   "reference_link": "https://en.wikipedia.org/wiki/Cerro_Catedral",
+   "poi_ids": [
+    "poi-villa-catedral"
+   ]
+  },
+  {
+   "activity_id": "sa-catedral-farewell-laps",
+   "name": "Cerro Catedral ride day 5 — farewell laps",
+   "type": "outdoor",
+   "order_index": 19,
+   "lat": -41.1652,
+   "lng": -71.4395,
+   "time_window": "09:00–16:00",
+   "duration": "7h",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "Final riding day of the fortnight: chase whatever the mountain gives — a last storm refill up top or hero groomers — and end with a slow bottom-to-top-to-bottom victory lap. Caveat (verified): July through mid-August is peak high season across Argentine resorts (school-holiday weeks), so expect the busiest lift lines of the trip midday — ride the 09:00–11:00 and post-lunch windows.",
+   "reference_link": "https://powderquest.com/south-america-ski-resort-lift-ticket-prices/",
+   "poi_ids": [
+    "poi-villa-catedral"
+   ]
+  },
+  {
+   "activity_id": "sa-circuito-chico-campanario",
+   "name": "Circuito Chico + Cerro Campanario viewpoint",
+   "type": "scenery",
+   "order_index": 20,
+   "lat": -41.0758,
+   "lng": -71.4764,
+   "time_window": "09:30–14:30",
+   "duration": "5h",
+   "difficulty": "moderate",
+   "cash_only": false,
+   "description": "Departure-day (and weather-day alternative) classic: the ~27 km Circuito Chico loop along Nahuel Huapi's shore past Llao Llao's landmark hotel, with the Cerro Campanario chairlift to the 360-degree lookout — the panorama National Geographic ranked among the world's top ten views; a 30–40 min walking trail up is the free option if the lift queue is long (confirm trail conditions ahead in snow). Caveat (verified): the Campanario chairlift is a separately ticketed attraction, not covered by any ski pass.",
+   "reference_link": "https://barilocheturismo.gob.ar/en/mount-campanario",
+   "poi_ids": [
+    "poi-cerro-campanario",
+    "poi-llao-llao"
+   ]
+  },
+  {
+   "activity_id": "sa-rapanui-chocolate-nightcap",
+   "name": "Rapa Nui chocolate and helado nightcap",
+   "type": "food",
+   "order_index": 21,
+   "lat": -41.1338,
+   "lng": -71.3067,
+   "time_window": "20:30–22:00",
+   "duration": "1.5h",
+   "difficulty": "easy",
+   "cash_only": false,
+   "description": "Bariloche's other religion: post-dinner hot chocolate, franui (chocolate-dipped raspberries) and ice cream at the Rapa Nui flagship café on Mitre — the Swiss-Argentine chocolate strip in miniature. Caveat (verified): the café runs to about 22:00 most nights while other sources list later hours for pick-up service only — confirm ahead if you're arriving late.",
+   "reference_link": "https://www.yelp.com/biz/rapanui-san-carlos-de-bariloche",
+   "poi_ids": [
+    "poi-rapanui",
+    "poi-centro-civico"
+   ]
+  }
+ ],
+ "pois": [
+  {
+   "poi_id": "poi-valle-nevado",
+   "type": "outdoor",
+   "name": "Valle Nevado",
+   "lat": -33.3567,
+   "lng": -70.2495,
+   "description": "Chile's flagship purpose-built resort (est. 1988, inspired by Les Arcs): base at 3,000 m, ~900 ha, 34 runs, gondola plus chair and surface lifts, famously dry Andean snow, 46 km east of Santiago.",
+   "reference_link": "https://en.wikipedia.org/wiki/Valle_Nevado"
+  },
+  {
+   "poi_id": "poi-la-parva",
+   "type": "outdoor",
+   "name": "La Parva",
+   "lat": -33.3371,
+   "lng": -70.2886,
+   "description": "Neighboring Tres Valles resort now under Mountain Capital Partners, interconnected with Valle Nevado by ridgeline gates — steeper, quieter terrain and the second half of the Southern Hemisphere's largest linked ski domain.",
+   "reference_link": "https://laparva.cl/en/"
+  },
+  {
+   "poi_id": "poi-farellones",
+   "type": "outdoor",
+   "name": "Farellones village",
+   "lat": -33.3508,
+   "lng": -70.3129,
+   "description": "Chile's original 1930s mountain village at the top of the forty switchbacks — the budget-authentic sleeping base for the Tres Valles, with refugio lodging, empanada kitchens and a family snow park.",
+   "reference_link": "https://en.wikipedia.org/wiki/Farellones"
+  },
+  {
+   "poi_id": "poi-mercado-central",
+   "type": "food",
+   "name": "Mercado Central de Santiago",
+   "lat": -33.4341,
+   "lng": -70.6481,
+   "description": "Santiago's 1872 cast-iron central market: working fish stalls ringed by seafood lunch counters — congrio chowder, razor clams with parmesan, pisco sours. Daytime venue; stalls close before evening.",
+   "reference_link": "https://www.santiagoturismo.cl/en/mercado-central-de-santiago-2/"
+  },
+  {
+   "poi_id": "poi-antigua-fuente",
+   "type": "food",
+   "name": "La Antigua Fuente (ex Fuente Alemana, Alameda 58)",
+   "lat": -33.4377,
+   "lng": -70.636,
+   "description": "Historic counter-service sandwich hall on the Alameda serving lomitos and completos; reopened under new management after the original Fuente Alemana closed this location in 2020 — confirm current hours ahead.",
+   "reference_link": "https://www.yelp.com/biz/fuente-alemana-santiago-2"
+  },
+  {
+   "poi_id": "poi-villa-catedral",
+   "type": "outdoor",
+   "name": "Cerro Catedral base (Villa Catedral)",
+   "lat": -41.1652,
+   "lng": -71.4395,
+   "description": "Base village of Argentina's largest ski resort: ~600 ha, 1,070 m vertical (1,030–2,100 m), a very large lift network and panoramic runs over Lago Nahuel Huapi, 19 km from downtown Bariloche.",
+   "reference_link": "https://en.wikipedia.org/wiki/Cerro_Catedral"
+  },
+  {
+   "poi_id": "poi-manush",
+   "type": "nightlife",
+   "name": "Cervecería Manush",
+   "lat": -41.1358,
+   "lng": -71.3104,
+   "description": "Bariloche's benchmark brewpub at Neumeyer 20: ~23 taps of house and local craft beer, burgers and picadas, verified happy hour 17:30–20:00, reliably packed at opening.",
+   "reference_link": "https://www.yelp.com/biz/manush-san-carlos-de-bariloche"
+  },
+  {
+   "poi_id": "poi-alto-el-fuego",
+   "type": "food",
+   "name": "Alto el Fuego parrilla",
+   "lat": -41.1355,
+   "lng": -71.3115,
+   "description": "Small wood-fired parrilla at 20 de Febrero 451 — bife de chorizo, provoleta, Patagonian lamb and Malbec. Dinner from 20:00, closed Sundays; reservations recommended.",
+   "reference_link": "https://www.interpatagonia.com/bariloche/alto-el-fuego_i.html"
+  },
+  {
+   "poi_id": "poi-rapanui",
+   "type": "food",
+   "name": "Rapa Nui chocolate café (Mitre 202)",
+   "lat": -41.1338,
+   "lng": -71.3067,
+   "description": "Flagship café of Bariloche's famous chocolatier: hot chocolate, franui raspberries and helado on the Mitre chocolate strip; café service to about 22:00 — confirm late hours ahead.",
+   "reference_link": "https://www.yelp.com/biz/rapanui-san-carlos-de-bariloche"
+  },
+  {
+   "poi_id": "poi-cerro-campanario",
+   "type": "scenery",
+   "name": "Cerro Campanario",
+   "lat": -41.0758,
+   "lng": -71.4764,
+   "description": "Chairlift-served 1,050 m lookout at km 17.5 of Av. Bustillo with a 360-degree panorama of Nahuel Huapi, Moreno and Llao Llao — cited by National Geographic among the world's top ten views; separate lift ticket.",
+   "reference_link": "https://barilocheturismo.gob.ar/en/mount-campanario"
+  },
+  {
+   "poi_id": "poi-llao-llao",
+   "type": "historic",
+   "name": "Llao Llao Hotel & Península",
+   "lat": -41.0577,
+   "lng": -71.5314,
+   "description": "Iconic 1940 log-and-stone grand hotel on the Circuito Chico between Lagos Moreno and Nahuel Huapi — worth the photo stop and the chapel viewpoint even if you're not staying.",
+   "reference_link": "https://en.wikipedia.org/wiki/Llao_Llao_Hotel"
+  },
+  {
+   "poi_id": "poi-centro-civico",
+   "type": "historic",
+   "name": "Centro Cívico de Bariloche",
+   "lat": -41.1337,
+   "lng": -71.3103,
+   "description": "Bariloche's 1940 alpine-stone civic square above the lake — the town's architectural heart and the natural meeting point before beer, asado and chocolate crawls.",
+   "reference_link": "https://barilocheturismo.gob.ar/en"
+  }
+ ],
+ "transit": [
+  {
+   "name": "Santiago Arturo Merino Benítez International Airport (SCL)",
+   "lat": -33.3928,
+   "lng": -70.7856,
+   "description": "Chile's main international gateway and trip entry point; ~1.5–2 h by van from Farellones/Valle Nevado outside restricted road windows, and departure point for the Andes crossing to Bariloche.",
+   "reference_link": "https://en.wikipedia.org/wiki/Arturo_Merino_Ben%C3%ADtez_International_Airport"
+  },
+  {
+   "name": "Bariloche Airport — Teniente Luis Candelaria (BRC)",
+   "lat": -41.1514,
+   "lng": -71.1575,
+   "description": "Patagonia's ski gateway, ~14 km east of downtown Bariloche; served in winter by Aerolíneas Argentinas, JetSMART, LATAM and nonstop Sky Airline service from Santiago — taxis and transfer vans into town.",
+   "reference_link": "https://en.wikipedia.org/wiki/San_Carlos_de_Bariloche_Airport"
+  },
+  {
+   "name": "Ruta G-21 Camino a Farellones (winter traffic scheme)",
+   "lat": -33.3508,
+   "lng": -70.3129,
+   "description": "The forty-switchback mountain road linking Santiago to Farellones and Valle Nevado: uphill-only 08:00–13:00 and downhill 15:00–20:00 on control days, mandatory chains when declared, buses banned June 1–Sept 30, full closures evaluated in heavy snowfall.",
+   "reference_link": "https://www.transporteinforma.cl/noticias/parten-medidas-de-transito-en-camino-farellones-por-temporada-invernal/"
+  },
+  {
+   "name": "Villa Catedral shuttle and bus terminus",
+   "lat": -41.1652,
+   "lng": -71.4395,
+   "description": "Road end at the Catedral base village, 19 km from downtown Bariloche — served by local buses, ski shuttles and taxis from the town center; allow extra time on peak July mornings.",
+   "reference_link": "https://en.wikipedia.org/wiki/Cerro_Catedral"
+  }
+ ]
+}
