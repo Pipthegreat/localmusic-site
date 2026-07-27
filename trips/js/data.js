@@ -9,7 +9,7 @@
    features; it is computed at selection time (see app.js) because a shared POI
    has no fixed position — its number depends on which activity is selected.
    ============================================================================= */
-import { CONFIG } from "./config.js?v=27";
+import { CONFIG } from "./config.js?v=28";
 
 /* ---- validation: fail loudly, don't render blank cards ---- */
 function validateTrip(trip, tripFile) {

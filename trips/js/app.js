@@ -9,11 +9,11 @@
    scroll-synced with the map; filters live in a popover.
    ============================================================================= */
 // the ?v= on every import must match index.html's — bump all together on deploy
-import { CONFIG } from "./config.js?v=27";
-import { loadCatalog } from "./data.js?v=27";
-import { initMap } from "./map.js?v=27";
-import { baseImage, resolveImage, placeholderFor } from "./images.js?v=27";
-import { gmapsUrl, tripKML, downloadKML } from "./export.js?v=27";
+import { CONFIG } from "./config.js?v=28";
+import { loadCatalog } from "./data.js?v=28";
+import { initMap } from "./map.js?v=28";
+import { baseImage, resolveImage, placeholderFor } from "./images.js?v=28";
+import { gmapsUrl, tripKML, downloadKML } from "./export.js?v=28";
 
 const $ = sel => document.querySelector(sel);
 const errbar = $("#errbar");
@@ -370,24 +370,35 @@ function buildTripRail() {
   // reach the anchor (a left-edge mask on .marquee). The track holds TWO copies
   // so the CSS translateX(-50%) loop is seamless; hover pauses it so a chip can
   // be clicked (the dropdown is the no-fuss path).
+  // On mobile there is no hover to pause and a moving target under a thumb is
+  // hostile — the rail becomes a single-copy, natively swipeable strip
+  // (.marquee.static) and the chips ARE the primary selector, not decoration.
+  const mobile = window.matchMedia("(max-width: 640px)").matches;
   const marq = document.createElement("div");
-  marq.className = "marquee";
+  marq.className = "marquee" + (mobile ? " static" : "");
   const track = document.createElement("div");
   track.className = "marquee-track";
   const chip = t => {
     const b = document.createElement("button");
     b.className = "tchip" + (state.trip === t.trip_id ? " on" : "");
     b.dataset.id = t.trip_id;
-    b.setAttribute("aria-hidden", "true");   // decorative; dropdown is the a11y path
+    if (!mobile) b.setAttribute("aria-hidden", "true");   // desktop: decorative; dropdown is the a11y path
     b.innerHTML = (t.name || t.trip_id) + (t.duration_days ? `<small>${t.duration_days}d</small>` : "");
     b.onclick = () => pickTrip(t.trip_id);
     return b;
   };
-  for (let copy = 0; copy < 2; copy++) META.forEach(t => track.appendChild(chip(t)));
+  for (let copy = 0, copies = mobile ? 1 : 2; copy < copies; copy++)
+    META.forEach(t => track.appendChild(chip(t)));
   if (!META.length) marq.classList.add("hidden");
   marq.appendChild(track);
   railEl.appendChild(marq);
 }
+
+// the marquee/static fork is decided at build time — rebuild the rail when the
+// layout crosses the mobile breakpoint (rotation, split-screen, window resize)
+const railMQ = window.matchMedia("(max-width: 640px)");
+if (railMQ.addEventListener) railMQ.addEventListener("change", () => buildTripRail());
+else if (railMQ.addListener) railMQ.addListener(() => buildTripRail());
 
 function buildSheetHead() {
   const h = $("#shHead");

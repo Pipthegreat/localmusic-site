@@ -6,7 +6,7 @@
    build step). @protomaps/basemaps ships no UMD/global build, so it is imported
    here as an ES module straight from the CDN (its ESM bundle has no bare
    imports). ================================================================== */
-import { CONFIG } from "./config.js?v=27";
+import { CONFIG } from "./config.js?v=28";
 import { layers, namedFlavor } from "https://unpkg.com/@protomaps/basemaps@5.7.2/dist/esm/index.js";
 
 // LOCAL DEV / DEMO basemap: OpenFreeMap — full-planet vector tiles, MapLibre

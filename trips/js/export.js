@@ -9,7 +9,7 @@
    reference link — the "data on each pin".
    Per-pin deep links (single place, no import) live here too.
    ============================================================================= */
-import { CONFIG } from "./config.js?v=27";
+import { CONFIG } from "./config.js?v=28";
 
 /* Single-pin deep link. Searching the NAME (biased to the coords via the /@
    viewport) snaps to Google's own place listing — hours, photos, reviews —

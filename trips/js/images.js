@@ -13,8 +13,8 @@
    pulling full originals. Lookups run lazily when a card opens; results
    (including misses) are cached in-memory and in sessionStorage.
    ============================================================================= */
-import { CONFIG } from "./config.js?v=27";
-import { placeholderFor } from "./placeholders.js?v=27";
+import { CONFIG } from "./config.js?v=28";
+import { placeholderFor } from "./placeholders.js?v=28";
 export { placeholderFor };
 
 const THUMB_W = 854;   // ≈480p wide
