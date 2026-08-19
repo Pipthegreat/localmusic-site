@@ -163,6 +163,28 @@ ul.checklist { list-style: none; }
 .burst { position: fixed; pointer-events: none; width: 60px; height: 60px; border-radius: 50%; animation: burst 0.6s ease-out forwards; z-index: 999; }
 .empty { text-align: center; padding: 40px 20px; }
 
+/* ---------- columns (single list, or split into two) ---------- */
+.cols { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
+.cols.two { grid-template-columns: 1fr 1fr; }
+.col { min-width: 0; }
+.col-head {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px; padding: 4px 4px 10px;
+  animation: slideIn 0.5s ease-out backwards;
+}
+.col-title {
+  flex: 1; text-align: left;
+  text-transform: uppercase; letter-spacing: 3px; font-size: 12px;
+  user-select: none; -webkit-user-select: none;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cols .col-head .action-btn { padding: 6px 14px; margin: 0; flex-shrink: 0; }
+.cols .col-head .del-btn { position: static; flex-shrink: 0; }
+.cols.two .item { min-height: 64px; }
+@media (max-width: 719px) {
+  .cols.two { grid-template-columns: 1fr; row-gap: 8px; }
+}
+
 /* ---------- modal ---------- */
 .add-modal {
   position: fixed; inset: 0; z-index: 9000;
@@ -1381,6 +1403,31 @@ body[data-theme="studio"] .victory-dismiss:active {
 }
 body[data-theme="studio"] .victory-ring { border-color: #fa0f00 !important; opacity: 0.4; }
 
+/* ============================================================
+   TWO-COLUMN CHROME — column headers, per theme
+   ============================================================ */
+body[data-theme="tubular"] .col-head { border-bottom: 1px solid rgba(255,90,31,0.4); }
+body[data-theme="tubular"] .col-title { font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 4px; color: var(--persimmon-glow); text-shadow: 0 0 8px rgba(255,90,31,0.5); }
+body[data-theme="arcade"] .col-head { border-bottom: 2px solid var(--acid); }
+body[data-theme="arcade"] .col-title { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--acid); text-shadow: 0 0 6px var(--acid); }
+body[data-theme="buzzbin"] .col-head { border-bottom: 3px solid #111; }
+body[data-theme="buzzbin"] .col-title { font-family: 'Anton', 'Impact', sans-serif; font-size: 15px; letter-spacing: 2px; color: #111; }
+body[data-theme="vapor"] .col-head { border-bottom: 1px solid rgba(255,255,255,0.7); }
+body[data-theme="vapor"] .col-title { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 4px; color: #fff; text-shadow: 0 0 10px rgba(255,180,255,0.9); }
+body[data-theme="press"] .col-head { border-bottom: 4px double #0a0a0a; }
+body[data-theme="press"] .col-title { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; color: #0a0a0a; }
+body[data-theme="matrix"] .col-head { border-bottom: 1px solid rgba(0,255,65,0.6); }
+body[data-theme="matrix"] .col-title { font-family: 'Share Tech Mono', monospace; font-size: 12px; letter-spacing: 2px; color: #00ff41; text-shadow: 0 0 4px rgba(0,255,65,0.55); }
+body[data-theme="matrix"] .col-title::before { content: '~/'; opacity: 0.6; }
+body[data-theme="blueprint"] .col-head { border-bottom: 1px dashed #7cc4ff; }
+body[data-theme="blueprint"] .col-title { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; color: #7cc4ff; }
+body[data-theme="blueprint"] .col-title::before { content: 'ZONE '; opacity: 0.7; }
+body[data-theme="chalkboard"] .col-head { border-bottom: 2px dashed rgba(254,253,250,0.5); }
+body[data-theme="chalkboard"] .col-title { font-family: 'Caveat', cursive; font-size: 20px; font-weight: 700; letter-spacing: 1px; text-transform: none; color: #ffeb6e; text-shadow: 0 0 2px #ffeb6e; }
+body[data-theme="studio"] .col-head { border-bottom: 3px solid #1f1f1f; }
+body[data-theme="studio"] .col-title { font-family: 'Source Code Pro', monospace; font-weight: 700; font-size: 12px; letter-spacing: 2.5px; color: #1f1f1f; }
+body[data-theme="studio"] .col-title::before { content: '▪ '; color: #fa0f00; }
+
 </style>
 </head>
 <body data-theme="tubular">
@@ -1393,10 +1440,11 @@ body[data-theme="studio"] .victory-ring { border-color: #fa0f00 !important; opac
     </div>
   </header>
 
-  <ul class="checklist" id="checklist"></ul>
+  <div class="cols" id="cols"></div>
 
   <div class="action-row">
     <button class="action-btn add-btn" id="addBtn">+ add item</button>
+    <button class="action-btn palette-btn" id="colBtn">◫ split list</button>
     <button class="action-btn palette-btn" id="paletteBtn">↻ shift theme</button>
   </div>
 </div>
@@ -1433,23 +1481,45 @@ body[data-theme="studio"] .victory-ring { border-color: #fa0f00 !important; opac
 <script>
 /* ============================================================ */
 const STORAGE_KEY = 'checklist_supreme_v1';
+const MAX_COLS = 2;
+const COL_TITLES = ['LIST A', 'LIST B'];
+
+function normalizeCols(parsed) {
+  let cols = Array.isArray(parsed.cols) ? parsed.cols : null;
+  if (!cols) cols = Array.isArray(parsed.items) ? [{ items: parsed.items }] : [{ items: [] }];
+  cols = cols.map(c => ({ items: (c && Array.isArray(c.items)) ? c.items : [] }));
+  if (cols.length === 0) cols = [{ items: [] }];
+  if (cols.length > MAX_COLS) {
+    const kept = cols.slice(0, MAX_COLS);
+    cols.slice(MAX_COLS).forEach(c => { kept[MAX_COLS - 1].items = kept[MAX_COLS - 1].items.concat(c.items); });
+    cols = kept;
+  }
+  return cols;
+}
 
 function loadData() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return { items: [], paletteOffset: 0 };
-    const data = JSON.parse(raw);
-    if (!Array.isArray(data.items)) data.items = [];
-    if (typeof data.paletteOffset !== 'number') data.paletteOffset = 0;
-    return data;
-  } catch (e) {
-    return { items: [], paletteOffset: 0 };
-  }
+  let parsed = null;
+  try { parsed = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (e) {}
+  if (!parsed || typeof parsed !== 'object') parsed = {};
+  return {
+    cols: normalizeCols(parsed),
+    paletteOffset: typeof parsed.paletteOffset === 'number' ? parsed.paletteOffset : 0
+  };
 }
 
 function saveData(data) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
-  catch (e) {}
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      cols: data.cols,
+      // legacy mirror: an older cached build reads .items and still sees column one
+      items: data.cols[0].items,
+      paletteOffset: data.paletteOffset
+    }));
+  } catch (e) {}
+}
+
+function allItems() {
+  return data.cols.reduce((acc, c) => acc.concat(c.items), []);
 }
 
 let data = loadData();
@@ -1585,68 +1655,117 @@ document.getElementById('tagline').textContent = '— ' + TAGLINES[dayOfYear() %
 /* ============================================================
    RENDER
    ============================================================ */
-const checklist = document.getElementById('checklist');
+const colsWrap = document.getElementById('cols');
 const countEl = document.getElementById('count');
 const countBadge = document.getElementById('countBadge');
+const addBtn = document.getElementById('addBtn');
+const colBtn = document.getElementById('colBtn');
+
+function buildItem(item, index) {
+  const li = document.createElement('li');
+  li.className = 'item' + (item.done ? ' done' : '');
+  li.dataset.id = item.id;
+  li.addEventListener('click', () => {
+    toggleItem(item.id, li);
+  });
+
+  const idx = document.createElement('span');
+  idx.className = 'idx';
+  idx.textContent = String(index + 1).padStart(2, '0');
+  li.appendChild(idx);
+
+  const del = document.createElement('button');
+  del.className = 'del-btn';
+  del.textContent = '×';
+  del.setAttribute('aria-label', 'delete');
+  del.addEventListener('click', (e) => {
+    e.stopPropagation();
+    deleteItem(item.id, li);
+  });
+  li.appendChild(del);
+
+  const box = document.createElement('button');
+  box.className = 'checkbox';
+  box.setAttribute('aria-label', 'toggle done');
+  box.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleItem(item.id, li);
+  });
+  li.appendChild(box);
+
+  const label = document.createElement('div');
+  label.className = 'label';
+  label.textContent = item.label;
+  li.appendChild(label);
+
+  return li;
+}
 
 function render() {
-  checklist.innerHTML = '';
+  colsWrap.innerHTML = '';
+  const two = data.cols.length === MAX_COLS;
+  colsWrap.classList.toggle('two', two);
 
-  if (data.items.length === 0) {
-    const empty = document.createElement('div');
-    empty.className = 'empty';
-    empty.textContent = 'list is empty — tap +add';
-    checklist.appendChild(empty);
-    updateCount();
-    return;
-  }
+  data.cols.forEach((col, colIdx) => {
+    const section = document.createElement('section');
+    section.className = 'col';
 
-  data.items.forEach((item, index) => {
-    const li = document.createElement('li');
-    li.className = 'item' + (item.done ? ' done' : '');
-    li.dataset.id = item.id;
-    li.addEventListener('click', () => {
-      toggleItem(item.id, li);
+    if (two) {
+      const head = document.createElement('div');
+      head.className = 'col-head';
+
+      const title = document.createElement('span');
+      title.className = 'col-title';
+      title.textContent = COL_TITLES[colIdx] || ('LIST ' + (colIdx + 1));
+      head.appendChild(title);
+
+      const colAdd = document.createElement('button');
+      colAdd.className = 'action-btn add-btn col-add';
+      colAdd.textContent = '+ add';
+      colAdd.setAttribute('aria-label', 'add items to ' + title.textContent);
+      colAdd.addEventListener('click', () => openAddModal(colIdx));
+      head.appendChild(colAdd);
+
+      if (colIdx === 1) {
+        const colRemove = document.createElement('button');
+        colRemove.className = 'del-btn col-remove';
+        colRemove.textContent = '×';
+        colRemove.setAttribute('aria-label', 'remove this list (its items merge into list a)');
+        colRemove.addEventListener('click', removeColumn);
+        head.appendChild(colRemove);
+      }
+
+      section.appendChild(head);
+    }
+
+    const ul = document.createElement('ul');
+    ul.className = 'checklist';
+
+    if (col.items.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'empty';
+      empty.textContent = two ? 'empty — tap + add' : 'list is empty — tap +add';
+      ul.appendChild(empty);
+    }
+
+    col.items.forEach((item, index) => {
+      ul.appendChild(buildItem(item, index));
     });
 
-    const idx = document.createElement('span');
-    idx.className = 'idx';
-    idx.textContent = String(index + 1).padStart(2, '0');
-    li.appendChild(idx);
-
-    const del = document.createElement('button');
-    del.className = 'del-btn';
-    del.textContent = '×';
-    del.setAttribute('aria-label', 'delete');
-    del.addEventListener('click', (e) => {
-      e.stopPropagation();
-      deleteItem(item.id, li);
-    });
-    li.appendChild(del);
-
-    const box = document.createElement('button');
-    box.className = 'checkbox';
-    box.setAttribute('aria-label', 'toggle done');
-    box.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleItem(item.id, li);
-    });
-    li.appendChild(box);
-
-    const label = document.createElement('div');
-    label.className = 'label';
-    label.textContent = item.label;
-    li.appendChild(label);
-
-    checklist.appendChild(li);
+    section.appendChild(ul);
+    colsWrap.appendChild(section);
   });
+
+  addBtn.style.display = two ? 'none' : '';
+  colBtn.textContent = two ? '▭ merge lists' : '◫ split list';
 
   updateCount();
 }
 
 function updateCount() {
-  const done = data.items.filter(i => i.done).length;
-  const total = data.items.length;
+  const items = allItems();
+  const done = items.filter(i => i.done).length;
+  const total = items.length;
   countEl.textContent = done + ' / ' + total;
   if (done === total && total > 0) countBadge.classList.add('complete');
   else countBadge.classList.remove('complete');
@@ -1654,7 +1773,7 @@ function updateCount() {
 
 function toggleItem(id, liEl) {
   if (victoryActive) return;
-  const item = data.items.find(i => i.id === id);
+  const item = allItems().find(i => i.id === id);
   if (!item) return;
   const wasDone = item.done;
   item.done = !item.done;
@@ -1663,8 +1782,9 @@ function toggleItem(id, liEl) {
   if (!wasDone) spawnBurst(liEl);
   updateCount();
 
-  const total = data.items.length;
-  const done = data.items.filter(i => i.done).length;
+  const items = allItems();
+  const total = items.length;
+  const done = items.filter(i => i.done).length;
   if (total > 0 && done === total && !wasDone) {
     setTimeout(triggerCompletion, 500);
   }
@@ -1673,16 +1793,46 @@ function toggleItem(id, liEl) {
 function deleteItem(id, liEl) {
   liEl.classList.add('removing');
   setTimeout(() => {
-    data.items = data.items.filter(i => i.id !== id);
+    data.cols.forEach(c => { c.items = c.items.filter(i => i.id !== id); });
     saveData(data);
     render();
   }, 350);
 }
 
-function openAddModal() {
+/* ============================================================
+   COLUMNS — add / remove the secondary list
+   ============================================================ */
+function addColumn() {
+  if (data.cols.length >= MAX_COLS) return;
+  data.cols.push({ items: [] });
+  saveData(data);
+  render();
+}
+
+function removeColumn() {
+  if (data.cols.length < 2) return;
+  const gone = data.cols.pop();
+  // merge, never destroy: the removed list's items rejoin column one
+  data.cols[0].items = data.cols[0].items.concat(gone.items);
+  saveData(data);
+  render();
+}
+
+function toggleColumns() {
+  if (victoryActive) return;
+  if (data.cols.length >= MAX_COLS) removeColumn();
+  else addColumn();
+}
+
+let addTargetCol = 0;
+
+function openAddModal(colIdx) {
   if (victoryActive) dismissVictory();
+  addTargetCol = (typeof colIdx === 'number' && colIdx >= 0 && colIdx < data.cols.length) ? colIdx : 0;
   const modal = document.getElementById('addModal');
   const textarea = document.getElementById('addTextarea');
+  const titleEl = modal.querySelector('.add-modal-title');
+  titleEl.textContent = data.cols.length === MAX_COLS ? 'ADD · ' + (addTargetCol === 1 ? 'B' : 'A') : 'ADD';
   textarea.value = '';
   updateAddCount();
   modal.classList.add('active');
@@ -1713,9 +1863,10 @@ function commitAddModal() {
     closeAddModal();
     return;
   }
+  const col = data.cols[Math.min(addTargetCol, data.cols.length - 1)];
   lines.forEach((line, i) => {
     const id = 'item_' + Date.now() + '_' + i + '_' + Math.random().toString(36).slice(2, 7);
-    data.items.push({ id, label: line, done: false });
+    col.items.push({ id, label: line, done: false });
   });
   saveData(data);
   render();
@@ -1912,12 +2063,13 @@ function dismissVictory() {
     document.querySelectorAll('.confetti').forEach(c => c.remove());
   }, 500);
 
-  data.items = [];
+  data.cols.forEach(c => { c.items = []; });
   saveData(data);
   render();
 }
 
-document.getElementById('addBtn').addEventListener('click', openAddModal);
+addBtn.addEventListener('click', () => openAddModal(0));
+colBtn.addEventListener('click', toggleColumns);
 document.getElementById('paletteBtn').addEventListener('click', shiftPalette);
 document.getElementById('victoryDismiss').addEventListener('click', dismissVictory);
 
@@ -1946,8 +2098,8 @@ document.getElementById('victory').addEventListener('click', (e) => {
 
 render();
 
-const initDone = data.items.filter(i => i.done).length;
-if (data.items.length > 0 && initDone === data.items.length) {
+const initItems = allItems();
+if (initItems.length > 0 && initItems.every(i => i.done)) {
   setTimeout(triggerCompletion, 800);
 }
 </script>
