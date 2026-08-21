@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#12120f" />
+<meta name="robots" content="noindex" />
+<title>Nov 2026 — Santiago · Madrid · Thailand</title>
+<meta name="description" content="Four weeks, three cities: two in Santiago, one in Madrid, one in Chiang Mai for the Yi Peng lanterns. Nov 1 – Nov 29, 2026." />
+<link rel="canonical" href="https://customprojects.info/trips/nov2026/" />
+<style>
+/* ============================================================================
+   nov2026 — single-trip mobile page. self-contained; no external deps.
+   palette borrows the parent site's ink/acc so it still feels like Trips.
+   ============================================================================ */
+:root{
+  --bg:#0f0f0d; --bg2:#181815; --panel:#1c1c18; --panel2:#242420;
+  --ink:#ECEAE3; --dim:#A8A392; --dimmer:#6f6d63; --line:rgba(255,255,255,.08);
+  --acc:#E8B84B;                 /* site gold */
+  --scl:#C64B27;                 /* santiago  — cordillera clay */
+  --mad:#B8892B;                 /* madrid    — old-gold ochre  */
+  --bkk:#2E7D6B;                 /* thailand  — jade            */
+  --danger:#c47a5f;
+  --radius:14px;
+  --shadow:0 10px 32px rgba(0,0,0,.42);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.5 ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{padding-bottom:env(safe-area-inset-bottom)}
+img,svg{max-width:100%;display:block}
+a{color:var(--acc);text-decoration:none}
+a:active{opacity:.6}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+/* ---------- top chrome ---------- */
+.topbar{position:sticky;top:0;z-index:10;
+  padding:calc(env(safe-area-inset-top) + 10px) 14px 8px;
+  background:linear-gradient(180deg,rgba(15,15,13,.96) 0%,rgba(15,15,13,.86) 78%,rgba(15,15,13,0));
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.crumb{font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--dim);font-weight:700;display:flex;gap:8px;align-items:center}
+.crumb a{color:var(--dim)}
+.crumb .sep{color:var(--dimmer)}
+.crumb em{color:var(--acc);font-style:normal}
+.legnav{display:flex;gap:6px;margin-top:9px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.legnav::-webkit-scrollbar{display:none}
+.legnav a{flex:0 0 auto;font-size:12px;font-weight:700;letter-spacing:.02em;padding:8px 12px;
+  border-radius:22px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);
+  display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.legnav a[data-leg="scl"] .dot{background:var(--scl)}
+.legnav a[data-leg="mad"] .dot{background:var(--mad)}
+.legnav a[data-leg="bkk"] .dot{background:var(--bkk)}
+.legnav .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.legnav a.on{background:var(--panel2);border-color:rgba(232,184,75,.35);color:var(--acc)}
+
+/* ---------- hero ---------- */
+.hero{padding:22px 18px 26px;background:radial-gradient(120% 100% at 100% 0,rgba(232,184,75,.10),transparent 60%),
+  linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);border-bottom:1px solid var(--line)}
+.hero h1{margin:8px 0 6px;font-size:34px;line-height:1.05;letter-spacing:-.02em;font-weight:800}
+.hero h1 span{color:var(--acc)}
+.hero .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);font-weight:700}
+.hero .lead{margin:10px 0 16px;color:var(--dim);font-size:15px;line-height:1.55;max-width:44ch}
+.hero .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}
+.hero .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 11px}
+.hero .stat b{display:block;font-size:20px;font-weight:800;color:var(--ink);line-height:1}
+.hero .stat small{display:block;color:var(--dim);font-size:10px;letter-spacing:.09em;text-transform:uppercase;margin-top:5px;font-weight:700}
+
+/* ---------- leg containers ---------- */
+.leg{padding:26px 0 8px;scroll-margin-top:112px}
+.leg-head{padding:0 18px 14px;position:relative}
+.leg-head::before{content:"";display:block;width:44px;height:4px;border-radius:2px;margin-bottom:14px;background:var(--c)}
+.leg[data-leg="scl"]{--c:var(--scl)}
+.leg[data-leg="mad"]{--c:var(--mad)}
+.leg[data-leg="bkk"]{--c:var(--bkk)}
+.leg-head .tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--c);font-weight:800}
+.leg-head h2{margin:6px 0 4px;font-size:26px;letter-spacing:-.015em;font-weight:800}
+.leg-head .when{color:var(--dim);font-size:13px}
+.leg-head .lede{color:var(--ink);margin-top:12px;font-size:15px;line-height:1.55}
+.leg-head .lede em{color:var(--acc);font-style:italic;font-weight:600}
+
+/* ---------- essentials chips ---------- */
+.essentials{padding:0 18px;margin:14px 0 6px}
+.essentials h3{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 8px;font-weight:700}
+.essentials ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.essentials li{background:var(--panel);border:1px solid var(--line);color:var(--ink);
+  font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:18px;line-height:1.2}
+.essentials li b{color:var(--c);margin-right:4px}
+
+/* ---------- day-by-day ---------- */
+.days{padding:16px 14px 6px}
+.day{display:grid;grid-template-columns:48px 1fr;gap:12px;padding:14px 4px;border-bottom:1px dashed var(--line)}
+.day:last-child{border-bottom:0}
+.day .dnum{width:48px;text-align:right;padding-right:4px;padding-top:2px}
+.day .dnum b{display:block;font-size:22px;font-weight:800;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums}
+.day .dnum small{display:block;color:var(--dim);font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-top:5px;font-weight:700}
+.day .dbody h4{margin:1px 0 4px;font-size:15.5px;font-weight:700;letter-spacing:-.005em}
+.day .dbody h4 .flag{display:inline-block;padding:2px 7px;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:#14140f;background:var(--acc);border-radius:4px;font-weight:800;vertical-align:2px;margin-left:6px}
+.day .dbody h4 .flag.q{background:var(--danger);color:#14140f}
+.day .dbody p{margin:2px 0 4px;color:var(--dim);font-size:13.5px;line-height:1.5}
+.day .dbody .pins{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.day .dbody .pin{font-size:11px;color:var(--ink);background:var(--panel2);border:1px solid var(--line);
+  padding:3px 8px;border-radius:12px;font-weight:600}
+.day .dbody .pin::before{content:"•";color:var(--c);margin-right:5px;font-weight:900}
+
+/* ---------- flights strip ---------- */
+.flights{margin:22px 14px 12px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.flights h3{margin:0;padding:12px 14px 8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:700;border-bottom:1px solid var(--line)}
+.fli{display:grid;grid-template-columns:auto 1fr auto;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);align-items:center}
+.fli:last-child{border-bottom:0}
+.fli .code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:var(--acc);font-weight:700}
+.fli .code i{color:var(--dim);font-style:normal;margin:0 4px}
+.fli .desc{color:var(--dim);font-size:12.5px;line-height:1.35}
+.fli .desc b{color:var(--ink);font-weight:600}
+.fli .when{font-size:11px;color:var(--dim);letter-spacing:.06em;text-transform:uppercase;font-weight:700;text-align:right;white-space:nowrap}
+
+/* ---------- practical notes ---------- */
+.notes{margin:22px 14px 24px;padding:14px 14px 6px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+.notes h3{margin:0 0 8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:700}
+.notes .n{padding:10px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start}
+.notes .n:last-child{border-bottom:0}
+.notes .n span{color:var(--acc);font-weight:800;font-size:12px;letter-spacing:.08em}
+.notes .n b{color:var(--ink);font-weight:700;display:block;font-size:14px}
+.notes .n small{color:var(--dim);font-size:12.5px;line-height:1.45;display:block;margin-top:2px}
+
+/* ---------- footer ---------- */
+footer{padding:20px 18px calc(28px + env(safe-area-inset-bottom));color:var(--dimmer);font-size:11.5px;text-align:center;letter-spacing:.02em}
+footer a{color:var(--dim)}
+
+/* ---------- utilities ---------- */
+@media (min-width:640px){
+  .hero h1{font-size:42px}
+  .leg-head h2{font-size:30px}
+  .day{grid-template-columns:64px 1fr;gap:16px}
+  .day .dnum b{font-size:26px}
+  .hero,.leg-head,.days,.flights,.notes{max-width:640px;margin-left:auto;margin-right:auto}
+}
+@media (prefers-reduced-motion:no-preference){
+  html{scroll-behavior:smooth}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================== TOP CHROME ============================== -->
+<header class="topbar">
+  <div class="crumb"><a href="../">← Trips</a><span class="sep">/</span><em>Nov 2026</em></div>
+  <nav class="legnav" id="legnav">
+    <a href="#scl" data-leg="scl"><span class="dot"></span>Santiago · 14d</a>
+    <a href="#mad" data-leg="mad"><span class="dot"></span>Madrid · 7d</a>
+    <a href="#bkk" data-leg="bkk"><span class="dot"></span>Thailand · 7d</a>
+  </nav>
+</header>
+
+<!-- ============================== HERO ============================== -->
+<section class="hero">
+  <div class="kick">Nov 1 — Nov 29, 2026</div>
+  <h1>Four weeks,<br/><span>three cities.</span></h1>
+  <p class="lead">Two weeks in Santiago through late spring in the Andes; one week in Madrid at the tail of autumn with the museums empty and dinner served at 10; and Thanksgiving week in Thailand, timed for the Yi Peng lantern release in Chiang Mai on Nov 24–25.</p>
+  <div class="stats">
+    <div class="stat"><b>29</b><small>days</small></div>
+    <div class="stat"><b>3</b><small>countries</small></div>
+    <div class="stat"><b>~26k</b><small>flight km</small></div>
+  </div>
+</section>
+
+<!-- ============================== SANTIAGO ============================== -->
+<section class="leg" id="scl" data-leg="scl">
+  <div class="leg-head">
+    <div class="tag">Leg 01 · Santiago de Chile</div>
+    <h2>The Andean spring</h2>
+    <div class="when">Sun Nov 1 → Sat Nov 14 · 14 nights · base in Lastarria / Bellavista</div>
+    <p class="lede">Two weeks is the right amount of time here — enough to work the city slowly (three museum days, two neighborhoods you learn by name, a market you go back to twice) and still take four day trips out. Late spring means <em>the vineyards are budding, the pre-cordillera is running with snowmelt, and beach weather is starting on the coast</em>. Base in Lastarria for the walk-everywhere first week, then move to Bellavista for the second when the nights get later.</p>
+  </div>
+
+  <div class="essentials">
+    <h3>Essentials</h3>
+    <ul>
+      <li><b>Do:</b> Valparaíso ascensores</li>
+      <li><b>Eat:</b> Mercado Central corvina</li>
+      <li><b>Drink:</b> Bocanáriz wine flight</li>
+      <li><b>Walk:</b> Cerro San Cristóbal</li>
+      <li><b>See:</b> La Chascona (Neruda)</li>
+      <li><b>Sit:</b> Museo de la Memoria</li>
+      <li><b>Day trip:</b> Colchagua wine</li>
+      <li><b>Day trip:</b> Embalse El Yeso</li>
+    </ul>
+  </div>
+
+  <div class="days">
+    <div class="day"><div class="dnum"><b>01</b><small>Sun</small></div><div class="dbody">
+      <h4>Land at SCL, unwind in Lastarria <span class="flag">arrive</span></h4>
+      <p>Morning arrival on the overnight from LAX/DFW. Airport express bus to Los Héroes (CLP 1,900), Metro to Universidad Católica, walk 8 min to the hotel. Nap, then Cerro Santa Lucía at golden hour for the first look at the cordillera.</p>
+      <div class="pins"><span class="pin">Cerro Santa Lucía</span><span class="pin">Bocanáriz</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>02</b><small>Mon</small></div><div class="dbody">
+      <h4>Centro walking day + Pre-Columbian Art</h4>
+      <p>Plaza de Armas at open, the cathedral, then the Museo Chileno de Arte Precolombino (small, world-class, closed Mondays some months — verify). Lunch at Mercado Central: corvina a la mantequilla, not the tourist tables in the middle.</p>
+      <div class="pins"><span class="pin">Plaza de Armas</span><span class="pin">Museo Precolombino</span><span class="pin">Mercado Central</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>03</b><small>Tue</small></div><div class="dbody">
+      <h4>Bellavista + Cerro San Cristóbal</h4>
+      <p>Morning at La Chascona, Neruda's Bellavista house with the boat-shaped dining room. Funicular up San Cristóbal, walk down through the park. Dinner on Constitución street.</p>
+      <div class="pins"><span class="pin">La Chascona</span><span class="pin">Funicular</span><span class="pin">Patio Bellavista</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>04</b><small>Wed</small></div><div class="dbody">
+      <h4>Valparaíso day trip</h4>
+      <p>Bus from Pajaritos (Turbus, ~1h45), straight to Cerro Alegre. Walk the ascensor loop (Concepción, El Peral), lunch at Fauna, La Sebastiana in the afternoon (the wildest of Neruda's three houses). Late-afternoon bus back beats the traffic.</p>
+      <div class="pins"><span class="pin">Cerro Concepción</span><span class="pin">La Sebastiana</span><span class="pin">Ascensor Reina Victoria</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>05</b><small>Thu</small></div><div class="dbody">
+      <h4>Slow day — Bellas Artes + Lastarria café work</h4>
+      <p>Museo Nacional de Bellas Artes and the adjacent MAC (both in the same beautiful building). Long lunch at Liguria. Café hours at Colmado or Wonderland to reset.</p>
+      <div class="pins"><span class="pin">MNBA</span><span class="pin">Liguria Lastarria</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>06</b><small>Fri</small></div><div class="dbody">
+      <h4>Colchagua Valley — a real wine day <span class="flag">book ahead</span></h4>
+      <p>Drive south ~2.5h to Santa Cruz. Three tastings paced across the day: Viu Manent (malbec, horse-drawn tour), Montes (Apalta amphitheater architecture), Lapostolle (Clos Apalta, the icon). Lunch at Vino Bello. Overnight at Hotel Santa Cruz or drive back.</p>
+      <div class="pins"><span class="pin">Viu Manent</span><span class="pin">Montes</span><span class="pin">Lapostolle</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>07</b><small>Sat</small></div><div class="dbody">
+      <h4>Providencia + Sky Costanera at sunset</h4>
+      <p>Providencia for cafés and Parque de las Esculturas along the Mapocho. Barrio Italia in the afternoon (design shops, mid-century furniture). Up Sky Costanera for the 6:30pm light. Dinner at Peumayen — indigenous Chilean tasting menu.</p>
+      <div class="pins"><span class="pin">Barrio Italia</span><span class="pin">Sky Costanera</span><span class="pin">Peumayen</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>08</b><small>Sun</small></div><div class="dbody">
+      <h4>Cajón del Maipo — Embalse El Yeso <span class="flag q">verify road</span></h4>
+      <p>Full day in the pre-cordillera. Drive up to Embalse El Yeso — turquoise reservoir at 2,500m, one of the great Andes views. Road past Baños Morales can be dodgy after storms; confirm with hotel. Empanadas de pino at San José de Maipo on the way back.</p>
+      <div class="pins"><span class="pin">Embalse El Yeso</span><span class="pin">Baños Morales</span><span class="pin">San José de Maipo</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>09</b><small>Mon</small></div><div class="dbody">
+      <h4>Museo de la Memoria + Barrio Yungay</h4>
+      <p>Morning at the Museo de la Memoria y los Derechos Humanos — Pinochet-era history, essential context, will sit heavy. Walk to Barrio Yungay for lunch at Peluquería Francesa. La Vega market afternoon for fruit and the mote con huesillo stand.</p>
+      <div class="pins"><span class="pin">Museo de la Memoria</span><span class="pin">Peluquería Francesa</span><span class="pin">La Vega</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>10</b><small>Tue</small></div><div class="dbody">
+      <h4>Coast overnight — Casablanca + Zapallar</h4>
+      <p>Move base for two nights. Casablanca Valley on the way: Emiliana (biodynamic, book the tour) and Matetic if there is time. Push to Zapallar in the afternoon and check into the coastal hotel. Sunset walk on the cove.</p>
+      <div class="pins"><span class="pin">Emiliana</span><span class="pin">Matetic</span><span class="pin">Zapallar cove</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>11</b><small>Wed</small></div><div class="dbody">
+      <h4>Zapallar / Cachagua beach day</h4>
+      <p>Slow morning at El Chiringuito on the rocks — machas parmesana, sea urchins, chilled sauvignon blanc. Walk over to Cachagua and its penguin island (Isla de los Pingüinos, offshore). Drive back to Santiago late.</p>
+      <div class="pins"><span class="pin">El Chiringuito</span><span class="pin">Isla de los Pingüinos</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>12</b><small>Thu</small></div><div class="dbody">
+      <h4>Concha y Toro half-day + Barrio Italia dinner</h4>
+      <p>Concha y Toro in Pirque is 45 min from center and does a proper Casillero del Diablo cellar tour. Back for a leisurely dinner and cocktails at Chipe Libre in Lastarria (a pisco bar dedicated to litigating the Chile vs. Peru pisco question).</p>
+      <div class="pins"><span class="pin">Concha y Toro</span><span class="pin">Chipe Libre</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>13</b><small>Fri</small></div><div class="dbody">
+      <h4>Maipo horseback OR Farellones lookout</h4>
+      <p>Cascada de las Ánimas in Cajón del Maipo runs half-day horseback rides through the reserve. Alternative: drive up the 40+ switchbacks to Farellones for the view (the ski runs won't be open yet in November). Return for a last big Bellavista dinner.</p>
+      <div class="pins"><span class="pin">Cascada de las Ánimas</span><span class="pin">Farellones lookout</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>14</b><small>Sat</small></div><div class="dbody">
+      <h4>Slow morning, evening flight to Madrid <span class="flag">travel</span></h4>
+      <p>Brunch at Colmado. Pack. Airport express by 5pm; LATAM/Iberia direct to MAD leaves around 10–11pm, arriving Madrid ~4pm the next day.</p>
+      <div class="pins"><span class="pin">SCL → MAD</span></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============================== MADRID ============================== -->
+<section class="leg" id="mad" data-leg="mad">
+  <div class="leg-head">
+    <div class="tag">Leg 02 · Madrid</div>
+    <h2>Late autumn, empty museums</h2>
+    <div class="when">Sun Nov 15 → Sat Nov 21 · 6 nights · base in Barrio de las Letras</div>
+    <p class="lede">Madrid in November is the one you dream about: <em>cool days in the mid-teens, no lines at the Prado, and every terrace tucks a heater under an awning</em>. Six nights is enough for the three great museums, two long day trips (Toledo and Segovia are both under 40 min by AVE), and enough tapas nights on Cava Baja to develop a favorite bar. Land Sunday early enough to still catch El Rastro flea market.</p>
+  </div>
+
+  <div class="essentials">
+    <h3>Essentials</h3>
+    <ul>
+      <li><b>See:</b> Prado (Bosch · Velázquez · Goya)</li>
+      <li><b>See:</b> Reina Sofía (Guernica)</li>
+      <li><b>Eat:</b> Cava Baja crawl</li>
+      <li><b>Drink:</b> Salmón Guru</li>
+      <li><b>Do:</b> Toledo day trip</li>
+      <li><b>Do:</b> Segovia + cochinillo</li>
+      <li><b>Sit:</b> Retiro + Crystal Palace</li>
+      <li><b>See:</b> Flamenco at Corral de la Morería</li>
+    </ul>
+  </div>
+
+  <div class="days">
+    <div class="day"><div class="dnum"><b>15</b><small>Sun</small></div><div class="dbody">
+      <h4>Arrive MAD, El Rastro, Retiro <span class="flag">arrive</span></h4>
+      <p>Land ~4pm (SCL overnight is a 12h flight; brutal but direct). Metro Line 8 into center. Drop bags, walk El Rastro's tail end in La Latina if any stalls are still up. Retiro Park at dusk. Easy first dinner at Casa Lucio (huevos rotos) or a bar in Barrio de las Letras.</p>
+      <div class="pins"><span class="pin">El Rastro</span><span class="pin">Parque del Retiro</span><span class="pin">Casa Lucio</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>16</b><small>Mon</small></div><div class="dbody">
+      <h4>Prado + Cava Baja tapas crawl</h4>
+      <p>Book the 10am Prado slot. Three hours max — Bosch's Garden of Earthly Delights, Velázquez's Las Meninas, the black Goyas. Lunch at Estado Puro (Ferran-Adrià-adjacent tapas). Cava Baja crawl at night: Casa Lucas, La Concha, Txirimiri, ending at Casa Revuelta for the bacalao.</p>
+      <div class="pins"><span class="pin">Prado</span><span class="pin">Cava Baja</span><span class="pin">Casa Revuelta</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>17</b><small>Tue</small></div><div class="dbody">
+      <h4>Reina Sofía + Lavapiés</h4>
+      <p>Reina Sofía in the morning — Guernica, the Miró rooms, Dalí's Girl at the Window. Walk into Lavapiés for lunch at Baobab (Senegalese) or Nuevo Café Barbieri. Cocktail at Salmón Guru in Barrio de las Letras before dinner at Sala de Despiece (Ponzano — chef's counter, book ahead).</p>
+      <div class="pins"><span class="pin">Reina Sofía</span><span class="pin">Salmón Guru</span><span class="pin">Sala de Despiece</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>18</b><small>Wed</small></div><div class="dbody">
+      <h4>Toledo day trip</h4>
+      <p>AVE from Atocha, 33 minutes. Cathedral (one of the great Gothic buildings of Europe) → El Greco house → Santo Tomé for The Burial of the Count of Orgaz → Sinagoga del Tránsito. Marzipan from Santo Tomé, mazapán proper. Back by 6pm for tapas dinner in Madrid.</p>
+      <div class="pins"><span class="pin">Toledo cathedral</span><span class="pin">El Greco house</span><span class="pin">Santo Tomé</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>19</b><small>Thu</small></div><div class="dbody">
+      <h4>Thyssen + Salamanca + Flamenco</h4>
+      <p>Thyssen-Bornemisza (impressionist and 20th-century filling the Prado's gaps) in the morning. Lunch at Platea Madrid in Salamanca (gourmet food hall in an old cinema). Flamenco at Corral de la Morería for the late set — the tablao where Camarón and Paco used to play; book weeks ahead.</p>
+      <div class="pins"><span class="pin">Thyssen-Bornemisza</span><span class="pin">Platea</span><span class="pin">Corral de la Morería</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>20</b><small>Fri</small></div><div class="dbody">
+      <h4>Segovia — aqueduct + cochinillo</h4>
+      <p>AVE from Chamartín, 27 minutes. Roman aqueduct → Alcázar (the fairy-tale castle Disney based Cinderella's on) → cochinillo asado at Mesón de Cándido, the ceremonial one where they cut the roast suckling pig with a plate. Back late afternoon.</p>
+      <div class="pins"><span class="pin">Aqueduct</span><span class="pin">Alcázar</span><span class="pin">Mesón de Cándido</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>21</b><small>Sat</small></div><div class="dbody">
+      <h4>Slow morning, evening flight to BKK <span class="flag">travel</span></h4>
+      <p>Chocolate con churros at San Ginés. Last walk through Plaza Mayor. Airport by 5pm; Qatar/Emirates via DOH or DXB gets to BKK Sunday mid-morning. Bring an eye mask and a real neck pillow — this is the longest single travel day of the trip.</p>
+      <div class="pins"><span class="pin">MAD → BKK</span></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============================== THAILAND ============================== -->
+<section class="leg" id="bkk" data-leg="bkk">
+  <div class="leg-head">
+    <div class="tag">Leg 03 · Thailand · Bangkok + Chiang Mai</div>
+    <h2>Thanksgiving under the lanterns</h2>
+    <div class="when">Sun Nov 22 → Sat Nov 28 · 6 nights · 2 in Bangkok, 4 in Chiang Mai</div>
+    <p class="lede">The week is planned entirely around one thing: <em>Yi Peng and Loy Krathong fall on Nov 24–25</em>, which is Tuesday–Wednesday, which is Thanksgiving week. Two nights to get bearings in Bangkok, then fly up to Chiang Mai for the lanterns, temples, an elephant sanctuary day, and a Thai Thanksgiving dinner on Nov 26. End of monsoon, start of cool season — the best week of the year to be here.</p>
+  </div>
+
+  <div class="essentials">
+    <h3>Essentials</h3>
+    <ul>
+      <li><b>Peak:</b> Yi Peng lantern release (Nov 24–25)</li>
+      <li><b>See:</b> Wat Arun at sunset</li>
+      <li><b>See:</b> Grand Palace + Wat Pho</li>
+      <li><b>Eat:</b> Yaowarat street food</li>
+      <li><b>Do:</b> Elephant Nature Park (ethical)</li>
+      <li><b>Do:</b> Thai cooking class</li>
+      <li><b>See:</b> Doi Suthep temple</li>
+      <li><b>Eat:</b> Khao soi at Khao Soi Khun Yai</li>
+    </ul>
+  </div>
+
+  <div class="days">
+    <div class="day"><div class="dnum"><b>22</b><small>Sun</small></div><div class="dbody">
+      <h4>Land BKK, Wat Arun sunset, Yaowarat <span class="flag">arrive</span></h4>
+      <p>Land mid-morning after the long Madrid–Doha–Bangkok flight. Check in riverside (Sala Rattanakosin or Sala Arun for Wat Arun views). Nap. River taxi to Wat Arun for sunset — climb the central prang if legs allow. Dinner in Yaowarat (Chinatown): T&K Seafood for the grilled prawns, Jek Pui for street curry, Odean for wonton noodles.</p>
+      <div class="pins"><span class="pin">Wat Arun</span><span class="pin">Yaowarat</span><span class="pin">T&K Seafood</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>23</b><small>Mon</small></div><div class="dbody">
+      <h4>Grand Palace, Wat Pho, klong boat, flight to CNX <span class="flag">travel</span></h4>
+      <p>Grand Palace and Wat Phra Kaew at open (long trousers, shoulders covered). Cross the road to Wat Pho for the reclining Buddha and a proper Thai massage at the on-site school — no cheaper or more legit place to have your first one. Longtail klong tour in the afternoon. Evening flight BKK → CNX (Thai/AirAsia, ~70 min).</p>
+      <div class="pins"><span class="pin">Grand Palace</span><span class="pin">Wat Pho</span><span class="pin">Klong Bangkok Yai</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>24</b><small>Tue</small></div><div class="dbody">
+      <h4>Chiang Mai temples + Yi Peng night 1 <span class="flag">peak</span></h4>
+      <p>Old city temple loop: Wat Phra Singh → Wat Chedi Luang (the 15th-c stupa) → Wat Phan Tao (teakwood, best photographed at dusk). Loy Krathong build-up in the streets all day. First night of Yi Peng — floating a krathong on the Ping River from Nawarat Bridge, sky lanterns going up over the old city. The mass CAD ticketed release is a separate ticketed event outside town (Nov 24 — sold out months ahead).</p>
+      <div class="pins"><span class="pin">Wat Phra Singh</span><span class="pin">Wat Chedi Luang</span><span class="pin">Nawarat Bridge</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>25</b><small>Wed</small></div><div class="dbody">
+      <h4>Loy Krathong peak night <span class="flag">peak</span></h4>
+      <p>Slow morning — the city was up late. Late lunch: khao soi at Khao Soi Khun Yai (small, north of the moat, opens ~10am until sold out). Afternoon at Wat Suan Dok (the white chedis). Loy Krathong parade down Tha Phae Road in the evening; float a krathong at midnight on the full moon.</p>
+      <div class="pins"><span class="pin">Khao Soi Khun Yai</span><span class="pin">Wat Suan Dok</span><span class="pin">Tha Phae Gate</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>26</b><small>Thu</small></div><div class="dbody">
+      <h4>Elephant Nature Park + Thai Thanksgiving <span class="flag">Thanksgiving</span></h4>
+      <p>Full day at Elephant Nature Park — the sanctuary Lek Chailert built for rescued elephants, no riding, no bathing shows, just feeding and being around them. Book weeks ahead. Back in town by 5pm. Thanksgiving dinner at David's Kitchen (French–Thai, Michelin) or Ginger & Kafe — pumpkin curry as a wink to the day.</p>
+      <div class="pins"><span class="pin">Elephant Nature Park</span><span class="pin">David's Kitchen</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>27</b><small>Fri</small></div><div class="dbody">
+      <h4>Doi Suthep + Thai cooking class</h4>
+      <p>Songthaew up the mountain to Wat Phra That Doi Suthep at open (before the tour buses). 306 steps to the temple. Back by noon. Afternoon Thai cooking class at Thai Farm Cooking School (they drive you to their organic farm 30 min out — six dishes across the afternoon).</p>
+      <div class="pins"><span class="pin">Doi Suthep</span><span class="pin">Thai Farm Cooking</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>28</b><small>Sat</small></div><div class="dbody">
+      <h4>Wat Umong + Saturday Walking Street, back to BKK</h4>
+      <p>Morning at Wat Umong — the forest temple southwest of the old city with meditation tunnels underneath. Late lunch, then Saturday Walking Street (Wualai Road) for a last round of street food and craft. Evening flight CNX → BKK for the connection home.</p>
+      <div class="pins"><span class="pin">Wat Umong</span><span class="pin">Wualai Walking Street</span><span class="pin">CNX → BKK</span></div>
+    </div></div>
+
+    <div class="day"><div class="dnum"><b>29</b><small>Sun</small></div><div class="dbody">
+      <h4>BKK → home <span class="flag">depart</span></h4>
+      <p>Overnight layover in Bangkok (or straight-through if the connection worked out). Long flight home. Sleep on the plane, sort photos on the ground.</p>
+      <div class="pins"><span class="pin">BKK → home</span></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============================== FLIGHTS ============================== -->
+<section class="flights">
+  <h3>Flight backbone</h3>
+  <div class="fli">
+    <div class="code">HOME<i>→</i>SCL</div>
+    <div class="desc"><b>Home → Santiago.</b> LATAM/American via LAX or DFW. ~13–17h door-to-door.</div>
+    <div class="when">Sat Oct 31 pm</div>
+  </div>
+  <div class="fli">
+    <div class="code">SCL<i>→</i>MAD</div>
+    <div class="desc"><b>Santiago → Madrid.</b> LATAM/Iberia/Air Europa direct, ~12h30. Overnight, red-eye east.</div>
+    <div class="when">Sat Nov 14 pm</div>
+  </div>
+  <div class="fli">
+    <div class="code">MAD<i>→</i>BKK</div>
+    <div class="desc"><b>Madrid → Bangkok.</b> Qatar via DOH or Emirates via DXB. ~15–17h with layover.</div>
+    <div class="when">Sat Nov 21 pm</div>
+  </div>
+  <div class="fli">
+    <div class="code">BKK<i>→</i>CNX</div>
+    <div class="desc"><b>Bangkok → Chiang Mai.</b> Thai / AirAsia / Bangkok Airways, ~70 min. Book before Yi Peng fills.</div>
+    <div class="when">Mon Nov 23 pm</div>
+  </div>
+  <div class="fli">
+    <div class="code">CNX<i>→</i>BKK</div>
+    <div class="desc"><b>Chiang Mai → Bangkok.</b> Return leg for the intercontinental connection.</div>
+    <div class="when">Sat Nov 28 pm</div>
+  </div>
+  <div class="fli">
+    <div class="code">BKK<i>→</i>HOME</div>
+    <div class="desc"><b>Bangkok → Home.</b> Multiple routings (via HKG, ICN, NRT, DOH). ~20h door-to-door.</div>
+    <div class="when">Sun Nov 29</div>
+  </div>
+</section>
+
+<!-- ============================== NOTES ============================== -->
+<section class="notes">
+  <h3>Practical, in one place</h3>
+  <div class="n"><span>01</span><div><b>Yi Peng is the whole reason for the week timing.</b><small>The mass CAD ticketed lantern release (Chiang Mai Dara Academy) sells out 6–9 months out — buy in Feb/Mar 2026. The city-wide festival is free and, in some ways, better.</small></div></div>
+  <div class="n"><span>02</span><div><b>Book restaurants ahead of arrival.</b><small>Peumayen (Santiago), Sala de Despiece + Corral de la Morería (Madrid), David's Kitchen (Chiang Mai) all take reservations weeks out.</small></div></div>
+  <div class="n"><span>03</span><div><b>Vaccinations & meds.</b><small>Nothing exotic required for any leg. Standard Hep A/typhoid update before Thailand. Consider a short Cipro course for the road.</small></div></div>
+  <div class="n"><span>04</span><div><b>Cash.</b><small>Chile: CLP, cards work almost everywhere. Spain: euro, cards fine. Thailand: baht, cards fine in cities but street food and songthaews are cash — small notes.</small></div></div>
+  <div class="n"><span>05</span><div><b>Adapter.</b><small>Chile is Type L (3-round-pin, unusual); Spain is Type F/C; Thailand is Type A/B/C. A universal adapter with USB-C PD covers all three.</small></div></div>
+  <div class="n"><span>06</span><div><b>SIM/eSIM.</b><small>Airalo regional eSIMs for each leg. Chile plan works across Argentina if a Mendoza side trip creeps in.</small></div></div>
+  <div class="n"><span>07</span><div><b>Insurance.</b><small>4-week policy with medical evacuation. Elephants and Andes reservoirs are the two moments to actually have it.</small></div></div>
+  <div class="n"><span>08</span><div><b>What could kill the plan.</b><small>SCL–MAD is direct on multiple carriers; low cancellation risk. MAD–BKK is a single-connection long-haul — a missed DOH connection wipes a full day. Build a 4h+ layover, not 90 min.</small></div></div>
+</section>
+
+<footer>
+  <div>Nov 2026 · <a href="../">back to trips</a> · <a href="https://customprojects.info/">customprojects.info</a></div>
+</footer>
+
+<script>
+/* small: highlight the current leg in the sticky nav */
+(function(){
+  var nav = document.querySelectorAll('#legnav a');
+  var legs = document.querySelectorAll('.leg');
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var id = e.target.id;
+      nav.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + id); });
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+  legs.forEach(function(l){ io.observe(l); });
+})();
+</script>
+</body>
+</html>
