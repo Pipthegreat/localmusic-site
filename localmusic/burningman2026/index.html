@@ -1046,6 +1046,28 @@ let curWidget = null;
 const LOAD_TIMEOUT_MS = 15000;
 let loadTimer = null;
 
+// Zero interviews extends into the stream itself: DJs park podcasts,
+// interviews and panel audio on their profiles. Any track whose title
+// reads as talk gets skipped; if the rest of the profile is all talk,
+// roll to the next artist.
+const TALK_RE = /\binterviews?\b|\bpodcast\b|\bq\s*&\s*a\b|in\s+conversation|\btalks?\s+(?:with|to|about)\b|\bspoken\s+word\b|\bpanel\b|\baudiobook\b|\bdocumentary\b/i;
+function skipTalkTracks(widget) {
+  widget.getCurrentSound(s => {
+    if (!s || !TALK_RE.test(s.title || '')) return;
+    widget.getSounds(list => widget.getCurrentSoundIndex(i => {
+      let j = -1;
+      for (let k = (i == null ? 0 : i + 1); k < (list || []).length; k++) {
+        const t = list[k] && list[k].title;
+        // unloaded entries have no title yet — let them play; this same
+        // check runs again the moment they actually start
+        if (!t || !TALK_RE.test(t)) { j = k; break; }
+      }
+      if (j >= 0) widget.skip(j);
+      else if (btnNext && !btnNext.disabled) btnNext.click();
+    }));
+  });
+}
+
 function loadSoundCloud(handle, artist) {
   if (loadTimer) { clearTimeout(loadTimer); loadTimer = null; }
   curWidget = null;
@@ -1064,6 +1086,7 @@ function loadSoundCloud(handle, artist) {
       widget.bind(SC.Widget.Events.PLAY, () => {
         settle();
         if (nowPlayingRow) nowPlayingRow.classList.add('playing');
+        skipTalkTracks(widget);
       });
       widget.bind(SC.Widget.Events.PAUSE, () => {
         if (nowPlayingRow) nowPlayingRow.classList.remove('playing');
