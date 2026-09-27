@@ -1,395 +1,323 @@
 {
   "page_title": "SF + Oakland Live Music",
-  "total_duration": 1286.38,
-  "track_count": 43,
-  "built_at": 1790147107,
+  "total_duration": 1047.27,
+  "track_count": 35,
+  "built_at": 1790503845,
   "tracks": [
     {
-      "artist": "alejandro meola",
-      "title": "viejo teléfono",
-      "spotify_uri": "spotify:track:65lXj7DuoHwaTlPjTASE9r",
+      "artist": "alex acosta",
+      "title": "piano drums",
+      "spotify_uri": "spotify:track:6pnWaflXVGCRQoLqPbkRm8",
       "audio_source": "itunes",
-      "duration": 29.95,
+      "duration": 29.87,
       "start": 0.0,
-      "end": 29.95
+      "end": 29.87
     },
     {
-      "artist": "alejandro meola",
-      "title": "mataderos",
-      "spotify_uri": "spotify:track:5dom6nKcYx7282LLGkfqKj",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 29.95,
-      "end": 59.9
-    },
-    {
-      "artist": "alejandro meola",
-      "title": "gente rota",
-      "spotify_uri": "spotify:track:6LEWiWxvmkAj6uRIi4njiE",
+      "artist": "alex acosta",
+      "title": "bongo",
+      "spotify_uri": "spotify:track:22YLhfumbiJrB0nRPEm5QG",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 59.9,
-      "end": 89.77
+      "start": 29.87,
+      "end": 59.74
     },
     {
-      "artist": "archer oh",
-      "title": "mosquito",
-      "spotify_uri": "spotify:track:03tRDJ6wIa9sZ0ovay7bHq",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 89.77,
-      "end": 119.72
-    },
-    {
-      "artist": "archer oh",
-      "title": "dianthus",
-      "spotify_uri": "spotify:track:07MPaFoRW1ySjDskV1rQ9a",
+      "artist": "alex acosta",
+      "title": "zum zum bella - edit",
+      "spotify_uri": "spotify:track:4wCry9ir4xboGl7bszPXzo",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 119.72,
-      "end": 149.59
+      "start": 59.74,
+      "end": 89.61
     },
     {
-      "artist": "archer oh",
-      "title": "rotary",
-      "spotify_uri": "spotify:track:6kLhVxWGlfKEsfXfQQBBoP",
+      "artist": "amy grant",
+      "title": "baby, baby",
+      "spotify_uri": "spotify:track:3IDsegNBHC4pjGCOMTQYlU",
+      "audio_source": "itunes",
+      "duration": 29.96,
+      "start": 89.61,
+      "end": 119.57
+    },
+    {
+      "artist": "amy grant",
+      "title": "river lullaby",
+      "spotify_uri": "spotify:track:5jsQqMxW1EhBfr700ahC1v",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 119.57,
+      "end": 149.52
+    },
+    {
+      "artist": "amy grant",
+      "title": "every heartbeat",
+      "spotify_uri": "spotify:track:55lX3vm1G35mUpawXHK5Te",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 149.52,
+      "end": 179.47
+    },
+    {
+      "artist": "another human red",
+      "title": "fvck me like a slvt",
+      "spotify_uri": "spotify:track:5spjWUD65kXtOcSeZJfc4f",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 179.47,
+      "end": 209.42
+    },
+    {
+      "artist": "another human red",
+      "title": "2 by red",
+      "spotify_uri": "spotify:track:3qwW6PgyiJeIapc7JzjaXR",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 209.42,
+      "end": 239.37
+    },
+    {
+      "artist": "another human red",
+      "title": "0 by red",
+      "spotify_uri": "spotify:track:5I51uCV5dEiYqxLM5M5I6O",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 239.37,
+      "end": 269.32
+    },
+    {
+      "artist": "art garfunkel",
+      "title": "waters of march",
+      "spotify_uri": "spotify:track:0bgtlqjzKW4KXufOlzGsKT",
+      "audio_source": "itunes",
+      "duration": 29.96,
+      "start": 269.32,
+      "end": 299.28
+    },
+    {
+      "artist": "art garfunkel",
+      "title": "bright eyes",
+      "spotify_uri": "spotify:track:3Jy0dWV5AnnfyTvHK6UWof",
+      "audio_source": "itunes",
+      "duration": 29.96,
+      "start": 299.28,
+      "end": 329.24
+    },
+    {
+      "artist": "art garfunkel",
+      "title": "all i know",
+      "spotify_uri": "spotify:track:5VAw5AYO7FAPCdaRvAmiTY",
+      "audio_source": "itunes",
+      "duration": 29.96,
+      "start": 329.24,
+      "end": 359.2
+    },
+    {
+      "artist": "azzecca",
+      "title": "other side",
+      "spotify_uri": "spotify:track:6gLDnzjpM0AwOeh9NmmHE0",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 359.2,
+      "end": 389.15
+    },
+    {
+      "artist": "azzecca",
+      "title": "find a reason",
+      "spotify_uri": "spotify:track:69Pi3PmvFx9jJFy07vf4KU",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 389.15,
+      "end": 419.1
+    },
+    {
+      "artist": "azzecca",
+      "title": "i've been waiting﻿﻿",
+      "spotify_uri": "spotify:track:25xGCpAKWRUth9UbxC1TOl",
+      "audio_source": "itunes",
+      "duration": 29.7,
+      "start": 419.1,
+      "end": 448.8
+    },
+    {
+      "artist": "blumoon",
+      "title": "get it",
+      "spotify_uri": "spotify:track:5aR554rwi3q0mzMQXSsuqe",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 149.59,
-      "end": 179.46
+      "start": 448.8,
+      "end": 478.67
     },
     {
-      "artist": "artificial go",
-      "title": "circles",
-      "spotify_uri": "spotify:track:03KTzjY6pvYaY1V20BEjCQ",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 179.46,
-      "end": 209.41
-    },
-    {
-      "artist": "artificial go",
-      "title": "jane ate the apple seed",
-      "spotify_uri": "spotify:track:6RijF0WY5gYZ8VnWUGVqes",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 209.41,
-      "end": 239.36
-    },
-    {
-      "artist": "artificial go",
-      "title": "triple ones",
-      "spotify_uri": "spotify:track:0ZoQXeHgykfqmTufOq9kIv",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 239.36,
-      "end": 269.31
-    },
-    {
-      "artist": "beafsteek",
-      "title": "last to know",
-      "spotify_uri": "spotify:track:0eRBQXI8mFqEWskcYBhXC1",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 269.31,
-      "end": 299.26
-    },
-    {
-      "artist": "beafsteek",
-      "title": "bummer country",
-      "spotify_uri": "spotify:track:3rWaPLq9wXsBjVnqv6mz72",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 299.26,
-      "end": 329.21
-    },
-    {
-      "artist": "beafsteek",
-      "title": "bitch boy boogaloo",
-      "spotify_uri": "spotify:track:50ckaswFHpSHTv7QKnx2Za",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 329.21,
-      "end": 359.16
-    },
-    {
-      "artist": "boz scaggs",
-      "title": "lido shuffle (2023 remaster)",
-      "spotify_uri": "spotify:track:7pG7odMa9PQ7ME0ZfnyR8d",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 359.16,
-      "end": 389.12
-    },
-    {
-      "artist": "boz scaggs",
-      "title": "lowdown (2023 remaster)",
-      "spotify_uri": "spotify:track:5QhikAUv91oMAaFnfKz22u",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 389.12,
-      "end": 419.08
-    },
-    {
-      "artist": "boz scaggs",
-      "title": "georgia (2023 remaster)",
-      "spotify_uri": "spotify:track:4wD26eXkRWjtldvPhjAEgx",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 419.08,
-      "end": 449.04
-    },
-    {
-      "artist": "cazeaux o.s.l.o",
-      "title": "love is",
-      "spotify_uri": "spotify:track:5exxrzkNEBP3cxOhtvn4ii",
+      "artist": "blumoon",
+      "title": "soul",
+      "spotify_uri": "spotify:track:13xMe3vhwP29DeSBS2vTj6",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 449.04,
-      "end": 478.91
+      "start": 478.67,
+      "end": 508.54
     },
     {
-      "artist": "cazeaux o.s.l.o",
-      "title": "spin cycle",
-      "spotify_uri": "spotify:track:20R1N5dxretghTLewdQzdt",
+      "artist": "buck wilson",
+      "title": "tmnt - manao remix",
+      "spotify_uri": "spotify:track:0JAJfdxef2llgTs2IUNxt3",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 478.91,
-      "end": 508.86
+      "start": 508.54,
+      "end": 538.49
     },
     {
-      "artist": "cazeaux o.s.l.o",
-      "title": "what can we do",
-      "spotify_uri": "spotify:track:3L1a6gNvyYCOSlGeXBcxyZ",
+      "artist": "buck wilson",
+      "title": "tmnt - phasmid remix",
+      "spotify_uri": "spotify:track:5V5Uzok501mcj9kJ2n3biQ",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 508.86,
-      "end": 538.81
+      "start": 538.49,
+      "end": 568.44
     },
     {
-      "artist": "cola",
-      "title": "water table",
-      "spotify_uri": "spotify:track:5KLMheJDladX9Rt5gNULKh",
-      "audio_source": "itunes",
-      "duration": 29.72,
-      "start": 538.81,
-      "end": 568.53
-    },
-    {
-      "artist": "cola",
-      "title": "hedgesitting",
-      "spotify_uri": "spotify:track:3HMQX9nnhNTLy34b0rEO5u",
+      "artist": "buck wilson",
+      "title": "lurker",
+      "spotify_uri": "spotify:track:5UKmP58YLCh36z2mdh2MZJ",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 568.53,
-      "end": 598.48
+      "start": 568.44,
+      "end": 598.39
     },
     {
-      "artist": "dj moon",
-      "title": "ousmane ballon d'or",
-      "spotify_uri": "spotify:track:2UnPxziCO0cfOYuvjylxTa",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 598.48,
-      "end": 628.44
-    },
-    {
-      "artist": "dj moon",
-      "title": "dior (afro house remix)",
-      "spotify_uri": "spotify:track:7hWlpUHDSlWfWljlp9MGs2",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 628.44,
-      "end": 658.39
-    },
-    {
-      "artist": "dj moon",
-      "title": "baila conmigo (afro twerk remix)",
-      "spotify_uri": "spotify:track:4dn4A9Ar8AUDYNolGyONxx",
+      "artist": "cali rose",
+      "title": "big feet",
+      "spotify_uri": "spotify:track:7HfQLgjm8n6MpVA0E3VfgC",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 658.39,
-      "end": 688.26
+      "start": 598.39,
+      "end": 628.26
     },
     {
-      "artist": "ghostly kisses",
-      "title": "strangers",
-      "spotify_uri": "spotify:track:5ligHUBfOzXx0kv8QXRbQ0",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 688.26,
-      "end": 718.22
-    },
-    {
-      "artist": "ghostly kisses",
-      "title": "ordinary, extraordinary",
-      "spotify_uri": "spotify:track:6NWc5cS7mmwRqSy9fviIMd",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 718.22,
-      "end": 748.18
-    },
-    {
-      "artist": "ghostly kisses",
-      "title": "stay",
-      "spotify_uri": "spotify:track:5fFQBL8Pnvnc9uszdadT7i",
-      "audio_source": "itunes",
-      "duration": 29.82,
-      "start": 748.18,
-      "end": 778.0
-    },
-    {
-      "artist": "jack white",
-      "title": "dollar bill",
-      "spotify_uri": "spotify:track:2sLeS5vOP2tl2TbF37FaLD",
-      "audio_source": "itunes",
-      "duration": 29.2,
-      "start": 778.0,
-      "end": 807.2
-    },
-    {
-      "artist": "jack white",
-      "title": "g.o.d. and the broken ribs",
-      "spotify_uri": "spotify:track:21UKOMGmKw9bqoHq7p9woU",
-      "audio_source": "itunes",
-      "duration": 29.94,
-      "start": 807.2,
-      "end": 837.14
-    },
-    {
-      "artist": "jack white",
-      "title": "archbishop harold holmes",
-      "spotify_uri": "spotify:track:0hIYrRFTLlG8pRjAn9tW4P",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 837.14,
-      "end": 867.1
-    },
-    {
-      "artist": "ken carson",
-      "title": "ss",
-      "spotify_uri": "spotify:track:26QJuQfM8PVAWkIm1JRyqq",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 867.1,
-      "end": 897.05
-    },
-    {
-      "artist": "ken carson",
-      "title": "ghost (with lil uzi vert)",
-      "spotify_uri": "spotify:track:5l2JiMegRp9HTtnlVDDdJb",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 897.05,
-      "end": 927.01
-    },
-    {
-      "artist": "ken carson",
-      "title": "yale",
-      "spotify_uri": "spotify:track:66yPalPs9DrhbGb9gR3vD9",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 927.01,
-      "end": 956.96
-    },
-    {
-      "artist": "lily allen",
-      "title": "smile",
-      "spotify_uri": "spotify:track:4aR9bPMAOFySBuQSbVWF3d",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 956.96,
-      "end": 986.92
-    },
-    {
-      "artist": "lily allen",
-      "title": "ldn",
-      "spotify_uri": "spotify:track:48T3AtfhOgz3euMEO2Z4hS",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 986.92,
-      "end": 1016.87
-    },
-    {
-      "artist": "lily allen",
-      "title": "tennis",
-      "spotify_uri": "spotify:track:6WQsY2YMdIQWoOm9MyZMWR",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1016.87,
-      "end": 1046.82
-    },
-    {
-      "artist": "nai palm",
-      "title": "atoll",
-      "spotify_uri": "spotify:track:2zXfpzLG8YDA6JX3RJ0gEF",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 1046.82,
-      "end": 1076.78
-    },
-    {
-      "artist": "nai palm",
-      "title": "crossfire / so into you",
-      "spotify_uri": "spotify:track:2VsKJODsXzU1NtoFYIh9FM",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 1076.78,
-      "end": 1106.74
-    },
-    {
-      "artist": "nai palm",
-      "title": "haiku",
-      "spotify_uri": "spotify:track:45aEOl5I6WS7xIPMl5EOfF",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 1106.74,
-      "end": 1136.7
-    },
-    {
-      "artist": "sébastien tellier",
-      "title": "thrill of the night - david guetta remix",
-      "spotify_uri": "spotify:track:4tAfe5NsVbdq8a0cUgtKrv",
-      "audio_source": "itunes",
-      "duration": 29.96,
-      "start": 1136.7,
-      "end": 1166.66
-    },
-    {
-      "artist": "sébastien tellier",
-      "title": "look",
-      "spotify_uri": "spotify:track:5nCBrG27BP2p0RW0gqhUdV",
-      "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1166.66,
-      "end": 1196.61
-    },
-    {
-      "artist": "the frights",
-      "title": "tungs",
-      "spotify_uri": "spotify:track:3CFAV5iVk6veUqfe1OSydI",
+      "artist": "cali rose",
+      "title": "are you having any fun?",
+      "spotify_uri": "spotify:track:0efq1w1ljz8GD0zR5KjTvC",
       "audio_source": "itunes",
       "duration": 29.87,
-      "start": 1196.61,
-      "end": 1226.48
+      "start": 628.26,
+      "end": 658.13
     },
     {
-      "artist": "the frights",
-      "title": "all i need",
-      "spotify_uri": "spotify:track:2ZLAn4na9Y96pNYANqzhhl",
+      "artist": "dean turnley",
+      "title": "actin' tough",
+      "spotify_uri": "spotify:track:507j66jaEEUU11uFSTOHFM",
       "audio_source": "itunes",
-      "duration": 29.95,
-      "start": 1226.48,
-      "end": 1256.43
+      "duration": 29.96,
+      "start": 658.13,
+      "end": 688.09
     },
     {
-      "artist": "xaviersobased",
-      "title": "worth it",
-      "spotify_uri": "spotify:track:5VIxdjYPJVHfSARcoRXHrl",
+      "artist": "dean turnley",
+      "title": "late night drive",
+      "spotify_uri": "spotify:track:5KTYGiYNx0y1LAKOJiCMVl",
       "audio_source": "itunes",
       "duration": 29.95,
-      "start": 1256.43,
-      "end": 1286.38
+      "start": 688.09,
+      "end": 718.04
+    },
+    {
+      "artist": "despacio",
+      "title": "dice",
+      "spotify_uri": "spotify:track:4u1X74ZhxqrwB55YE2tzcn",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 718.04,
+      "end": 747.91
+    },
+    {
+      "artist": "dj croptop",
+      "title": "leave a message...",
+      "spotify_uri": "spotify:track:5eNBktZ3bNFXefHni2gKsN",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 747.91,
+      "end": 777.86
+    },
+    {
+      "artist": "dj croptop",
+      "title": "black star",
+      "spotify_uri": "spotify:track:5bO5uIeNJjgRQKejWQqTbf",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 777.86,
+      "end": 807.81
+    },
+    {
+      "artist": "dj paulo",
+      "title": "this is why you're here - paulo's d-e-e-p mix",
+      "spotify_uri": "spotify:track:0sCuM5wgCsWAhU2cwxjkXp",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 807.81,
+      "end": 837.76
+    },
+    {
+      "artist": "dj paulo",
+      "title": "not myself tonight - dj paulo radio remix",
+      "spotify_uri": "spotify:track:60FOCVmL0DUA32papjTe8q",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 837.76,
+      "end": 867.63
+    },
+    {
+      "artist": "dog blood",
+      "title": "break law",
+      "spotify_uri": "spotify:track:223t7TwvWm5PuE1IuWpRZM",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 867.63,
+      "end": 897.58
+    },
+    {
+      "artist": "earth angel",
+      "title": "easy to miss",
+      "spotify_uri": "spotify:track:4FUZrfQLPg4Urk9sAjGjIO",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 897.58,
+      "end": 927.53
+    },
+    {
+      "artist": "earth angel",
+      "title": "blue hour",
+      "spotify_uri": "spotify:track:2Y5vklVckeocQBXGv5eLJf",
+      "audio_source": "itunes",
+      "duration": 29.97,
+      "start": 927.53,
+      "end": 957.5
+    },
+    {
+      "artist": "erykah badu",
+      "title": "didn't cha know",
+      "spotify_uri": "spotify:track:7pv80uUHfocFqfTytu1MVi",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 957.5,
+      "end": 987.45
+    },
+    {
+      "artist": "erykah badu",
+      "title": "on & on",
+      "spotify_uri": "spotify:track:0tNuJpBgtE65diL6Q8Q7fI",
+      "audio_source": "itunes",
+      "duration": 29.87,
+      "start": 987.45,
+      "end": 1017.32
+    },
+    {
+      "artist": "eslabon armado",
+      "title": "con tus besos",
+      "spotify_uri": "spotify:track:6WYB1odDfMPVMyp1QxFInT",
+      "audio_source": "itunes",
+      "duration": 29.95,
+      "start": 1017.32,
+      "end": 1047.27
     }
   ]
 }
